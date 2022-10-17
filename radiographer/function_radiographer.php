@@ -634,9 +634,9 @@ function inputorder($postorder)
 	$username = $row['username'];
 	// -----------
 	$dokterid = $postorder['dokterid'];
-	$namedluar = $postorder['namedluar'];
+	@$namedluar = $postorder['namedluar'];
 	$lastnamedluar = $postorder['lastnamedluar'];
-	$emailluar = $postorder['emailluar'];
+	@$emailluar = $postorder['emailluar'];
 
 	$dokter = mysqli_query($conn, "SELECT * FROM xray_dokter WHERE dokterid = '$dokterid'");
 	$row_dokter = mysqli_fetch_assoc($dokter);

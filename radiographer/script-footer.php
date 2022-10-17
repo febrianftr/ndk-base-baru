@@ -75,10 +75,10 @@
 <script>
     // untuk menampilkan data popup
     $(function() {
-        $(document).on('click', '.edit-record1', function(e) {
+        $(document).on('click', '.hasil-all', function(e) {
             e.preventDefault();
-            $("#myModal1").modal('show');
-            $.post('hasil1.php', {
+            $("#modal-all").modal('show');
+            $.post('../hasil-all.php', {
                     uid: $(this).attr('data-id')
                 },
                 function(html) {

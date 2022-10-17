@@ -1,4 +1,7 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "efotoadmin", "intimedika_bandung");
-$conn_mppsio = mysqli_connect("localhost", "root", "efotoadmin", "mppsio");
-$conn_pacs = mysqli_connect("localhost", "root", "efotoadmin", "pacsio");
+$database_ris = 'intimedika_base';
+$database_pacsio = 'pacsio';
+$database_mppsio = 'mppsio';
+$conn = mysqli_connect("localhost", "root", "efotoadmin", $database_ris);
+$conn_mppsio = mysqli_connect("localhost", "root", "efotoadmin", $database_mppsio);
+$conn_pacsio = mysqli_connect("localhost", "root", "efotoadmin", $database_pacsio);

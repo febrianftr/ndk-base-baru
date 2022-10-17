@@ -31,7 +31,7 @@ $query = mysqli_query(
     mwl_item.sps_id, 
     mwl_item.study_iuid AS study_iuid_mppsio,
     study.study_iuid AS study_iuid_pacsio
-    FROM intimedika.xray_order AS xray_order
+    FROM $database_ris.xray_order AS xray_order
     LEFT JOIN mppsio.mwl_item AS mwl_item
     ON xray_order.uid = mwl_item.study_iuid
     LEFT JOIN pacsio.study AS study

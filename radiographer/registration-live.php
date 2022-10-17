@@ -7,10 +7,7 @@ $username = $_SESSION['username'];
 if (isset($_POST["submit"])) {
   if (inputorder($_POST)) {
     echo "
-<script>
-  alert('Berhasil menambahkan data');
-  document.location.href= 'order2.php';
-</script>
+
 ";
   } else {
     echo "
