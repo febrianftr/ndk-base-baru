@@ -2,7 +2,6 @@
 <script src="js/jquery.easing.1.3.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script type="text/javascript" src="js/sketch.min.js"></script>
-<script src="ckeditor/ckeditor.js"></script>
 <script src="js/3.1.1/jquery.min.js"></script>
 <!-- <script src="js/bootstrap.js"></script> -->
 <script type="text/javascript" src="../js/popper.min.js"></script>
@@ -11,7 +10,6 @@
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="../js/mdb.min.js"></script>
 <script src="js/script.js"></script>
-<script src="navbar.js"></script>
 <script src="js/chart.js"></script>
 <script src="js/jquery-ui.js"></script>
 <script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
@@ -24,7 +22,6 @@
 <script src="../js/datetime-moment.js" />
 </script>
 <script src="../js/inobitec.js"></script>
-<?php include('../script-chat.php'); ?>
 
 <!-- =======menghapus border pada div======== -->
 <script>
@@ -214,9 +211,8 @@
     }
     let sidebarnew = document.querySelector(".sidebarnew");
     let sidebarBtn = document.querySelector(".fa-stream");
-    console.log(sidebarBtn);
-    sidebarBtn.addEventListener("click", () => {
-        sidebarnew.classList.toggle("closenew");
-    });
+    // sidebarBtn.addEventListener("click", () => {
+    //     sidebarnew.classList.toggle("closenew");
+    // });
 </script>
 <!-- ---------END SIDE BAR NEW--------------------- -->
