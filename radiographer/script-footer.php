@@ -92,6 +92,23 @@
 <script>
     // untuk menampilkan data popup
     $(function() {
+        $(document).on('click', '.hasil-series', function(e) {
+            e.preventDefault();
+            $("#modal-series").modal('show');
+            $.post('../hasil-series.php', {
+                    uid: $(this).attr('data-id')
+                },
+                function(html) {
+                    $(".modal-body").html(html);
+                }
+            );
+        });
+    });
+    // end untuk menampilkan data popup
+</script>
+<script>
+    // untuk menampilkan data popup
+    $(function() {
         $(document).on('click', '.edit-record', function(e) {
             e.preventDefault();
             $("#myModal").modal('show');

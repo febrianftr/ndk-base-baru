@@ -26,6 +26,7 @@
           <th>Umur</th>
           <th>Jenis <br /> Kelamin</th>
           <th>Pemeriksaan <br /> Utama</th>
+          <th>Pemeriksaan <br /> Detail</th>
           <th>Modality</th>
           <th>Dokter <br /> Pengirim</th>
           <th>Poli</th>
@@ -37,8 +38,31 @@
         </tr>
       </thead>
     </table>
+    <!-- pop up hasil semua -->
     <!-- The Modal -->
     <div class="modal" id="modal-all">
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <!-- <h1 class="modal-title">Modal Heading</h1> -->
+            <button type="button" class="close" data-dismiss="modal">×</button>
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+          </div>
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End The Modal -->
+
+    <!-- pop up hasil series -->
+    <!-- The Modal -->
+    <div class="modal" id="modal-series">
       <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
           <!-- Modal Header -->
@@ -93,6 +117,9 @@
         },
         {
           "data": "study_desc"
+        },
+        {
+          "data": "series_desc"
         },
         {
           "data": "mods_in_study"

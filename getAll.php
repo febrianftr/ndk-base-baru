@@ -82,11 +82,13 @@ while ($row = mysqli_fetch_array($query)) {
                     </span>
                 </a>';
 
+    $series_desc = '<a href="#" class="hasil-series penawaran-a" data-id="' . $study_iuid . '">Read More</a>';
+
     $data[] = [
         "no" => $i,
         "report" =>
-        $detail .
-            PDFFIRST . $study_iuid . PDFLAST .
+        // $detail .
+        PDFFIRST . $study_iuid . PDFLAST .
             RADIANTFIRST . $study_iuid . RADIANTLAST .
             DICOMFIRST . $study_iuid . DICOMLAST,
         "status" => $status,
@@ -96,6 +98,7 @@ while ($row = mysqli_fetch_array($query)) {
         "pat_birthdate" => $pat_birthdate,
         "pat_sex" => $pat_sex,
         "study_desc" => $study_desc,
+        "series_desc" => $series_desc,
         "num_series" => $num_series . ' / ' . $num_instances,
         "mods_in_study" => $mods_in_study,
         "named" => $named,
