@@ -5,7 +5,7 @@ $date2 = date('d-m-Y 23:59');
 <form action="#" method="post">
     <div class="container-fluid search-workload">
         <div class="row">
-            <div style="padding: 0px;" class="col-sm-3 input-date">
+            <div style="padding: 0px;" class="col-lg-3 input-date">
                 <label class="work-1"><?= $lang['search_date'] ?></label><br>
                 <div class="wrap-search">
                     <span class="date-icon">
@@ -15,7 +15,7 @@ $date2 = date('d-m-Y 23:59');
                         <input type="text" name="to" id="to" class="form-control" placeholder="To Date" value="<?= $date2 ?>" autocomplete="off" /><br></span>
                 </div>
             </div>
-            <div style="padding: 0px;" class="col-sm-4 input-checkbox">
+            <div style="padding: 0px;" class="col-lg-4 input-checkbox">
                 <label class="work-1"><?= $lang['search_mod'] ?>
                     <div style="float: right; cursor: pointer;">
                         <input type="checkbox" class="cboxtombol" style="margin-top: 0px;" checked> <?= $lang['check_all'] ?>
@@ -36,7 +36,7 @@ $date2 = date('d-m-Y 23:59');
                     <?php } ?>
                 </div>
             </div>
-            <div style="padding: 0px;" s class="col-sm-5 input-name">
+            <div style="padding: 0px;" s class="col-lg-5 input-name">
                 <label class="work-1"><?= $lang['search_patient'] ?></label><br>
                 <div class="wrap-search">
                     <span class="search-icon">
