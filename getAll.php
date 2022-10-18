@@ -61,7 +61,7 @@ while ($row = mysqli_fetch_array($query)) {
     $num_series = defaultValue($row['num_series']);
     $num_instances = defaultValue($row['num_instances']);
     $updated_time = defaultValueDateTime($row['updated_time']);
-    $mrn = defaultValue($row['mrn']);
+    $pat_id = defaultValue($row['pat_id']);
     $no_foto = defaultValue($row['no_foto']);
     $address = defaultValue($row['address']);
     $name_dep = defaultValue($row['name_dep']);
@@ -93,7 +93,7 @@ while ($row = mysqli_fetch_array($query)) {
             DICOMFIRST . $study_iuid . DICOMLAST,
         "status" => $status,
         "no_foto" => $no_foto,
-        "mrn" => $mrn,
+        "mrn" => $pat_id,
         "pat_name" => removeCharacter($pat_name),
         "pat_birthdate" => $pat_birthdate,
         "pat_sex" => $pat_sex,
