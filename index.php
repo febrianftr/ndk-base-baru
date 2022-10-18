@@ -102,9 +102,9 @@ if (!($_SESSION['username'] = $data['username'])) {
     <div class="container-fluid">
       <div class="row">
 
-        <div class="main-login" style="">
+        <div class="main-login">
           <div class="login-all">
-            
+
             <div class="form_login">
               <form class="login" method="post" action="">
                 <div class="form1">
@@ -144,7 +144,7 @@ if (!($_SESSION['username'] = $data['username'])) {
                 <p style="position:absolute; bottom:0; right:0; padding:5px; color: #fff; font-weight:bold;">Intiwid RISPACS V.3.0</p>
               </div>
             </div>
-            
+
           </div>
         </div>
       </div>

@@ -57,3 +57,37 @@ define('IPIVIEWLAST', '" target="_blank"><span class="btn rgba-stylish-slight bt
 define('INOBITECFIRST', '<a href="#" class="ahref-edit" onclick="inobitec(');
 define('INOBITECLAST', ')"id="inobitec" data-ip="' . $_SERVER['SERVER_NAME'] . '"><span class="btn btn-warning btn-inti"><i class="fas fa-eye" data-toggle="tooltip" title="Web Viewer"></i></span></a>');
 // inobitec
+
+// DELETE
+define('DELETEFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="deleteworkload.php?uid=');
+define('DELETELAST', '"onclick=\'return confirm("Delete data?");\'><span class="btn red lighten-1 btn-intiwid1"><i class="fas fa-trash-alt" data-toggle="tooltip" title="Delete"></i></span></a>');
+// DELETE
+
+// EDIT PASIEN
+define('EDITPASIENFIRST', '<a href="update_workload.php?uid=');
+define('EDITPASIENLAST', '"<span class="btn text-primary rgba-stylish-slight btn-inti2"><img src="../image/redo.svg" data-toggle="tooltip" title="Update" style="width: 100%;"></span></a>');
+// EDIT PASIEN
+
+// EDIT WORKLOAD
+define('EDITWORKLOADFIRST', '<a href="workload-edit.php?uid=');
+define('EDITWORKLOADLAST', '"><span class="btn text-info rgba-stylish-slight btn-inti2"><img src="../image/edit.svg" data-toggle="tooltip" title="Edit Report" style="width: 100%;"></span></a>');
+// EDIT WORKLOAD
+
+// telegram dokter pengirim
+define('TELEDOKTERPENGIRIMFIRST', '<a style="text-decoration: none;" href="../radiology/telenotif.php?uid=');
+define('TELEDOKTERPENGIRIMLAST', '" target="_blank"><span class="btn deep-orange-text rgba-stylish-slight btn-inti2"><img src="../image/telegram2.svg" data-toggle="tooltip" title="Telegram" style="width: 100%;"></span></a>');
+// telegram dokter pengirim
+
+// telegram signature
+define('TELEGRAMSIGNATUREFIRST', '<a style="text-decoration:none;" href="otp.php?uid=');
+define('TELEGRAMSIGNATURELAST', '"><span class="btn text-secondary rgba-stylish-slight btn-inti2"><img src="../image/signature.svg" data-toggle="tooltip" title="Signature" style="width: 100%;"></span></a>');
+// telegram signature
+
+// pop up read more series
+define('READMORESERIESFIRST', '<a href="#" class="hasil-series penawaran-a" data-id="');
+define('READMORESERIESLAST', '">Read More</a>');
+// pop up read more series
+
+// pop up read more info
+define('READMOREINFOFIRST', '<a href="#" class="hasil-all penawaran-a" data-id=');
+define('READMOREINFOLAST', '"><span class="btn blue lighten-1 btn-intiwid1"><i class="fas fa-info" data-toggle="tooltip" title="Delete"></i></span></a>');

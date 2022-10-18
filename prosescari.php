@@ -8,7 +8,7 @@ $username = $_SESSION['username'];
 // kolom untuk order by 
 $columns = array('pk', 'pk', 'status', 'patientid', 'mrn', 'pat_name', 'pat_birthdate', 'pat_sex', 'study_desc', 'series_desc', 'mods_in_study',  'named', 'name_dep', 'dokrad_name', 'radiographer_name', 'updated_time', 'approved_at', 'pk');
 
-$query = "SELECT patient.pat_id, 
+$query_base = "SELECT patient.pat_id, 
           patient.pat_name, 
           patient.pat_birthdate, 
           patient.pat_sex,
@@ -42,15 +42,18 @@ $query = "SELECT patient.pat_id,
           LEFT JOIN intimedika_base.xray_order AS xray_order
           ON xray_order.uid = study.study_iuid
           LEFT JOIN intimedika_base.xray_workload AS xray_workload
-          ON study.study_iuid = xray_workload.uid WHERE ";
+          ON study.study_iuid = xray_workload.uid";
+
+$query = $query_base . ' WHERE ';
 
 if ($_POST["is_date_search"] == "yes") {
-  $From = date_create($_POST["From"]);
-  $dateFrom = date_format($From, "Y-m-d H:i");
+  $from = date_create($_POST["from_updated_time"]);
+  $from_updated_time = date_format($from, "Y-m-d H:i");
 
-  $to = date_create($_POST["to"]);
-  $dateto = date_format($to, "Y-m-d H:i");
-  $query .= 'study.updated_time BETWEEN "' . $dateFrom . '" AND "' . $dateto . '" AND ';
+  $to = date_create($_POST["to_updated_time"]);
+  $to_updated_time = date_format($to, "Y-m-d H:i");
+
+  $query .= 'study.updated_time BETWEEN "' . $from_updated_time . '" AND "' . $to_updated_time . '" AND ';
 }
 
 // kolom untuk mencari LIKE masing2 kolom (SEARCHING)
@@ -73,20 +76,22 @@ if (isset($_POST["search"]["value"])) {
 // jika modality disearch
 if (isset($_POST['mods_in_study']) && $_POST['mods_in_study'] != "") {
   $mods_in_study = implode("','", $_POST['mods_in_study']);
-  $mods_in_study = strtoupper($mods_in_study);
+  $mods_in_study = str_replace('\SR', '\\\SR', $mods_in_study);
   $query .= "AND mods_in_study IN('" . $mods_in_study . "')
  ";
 }
 
 // jika keyword nama diketik
-if (isset($_POST['keyword']) && $_POST['keyword'] != "") {
-  $query .= 'AND pat_name LIKE "%' . $_POST['keyword'] . '%"
+if (isset($_POST['pat_name']) && $_POST['pat_name'] != "") {
+  $pat_name = strtoupper($_POST['pat_name']);
+  $query .= 'AND pat_name LIKE "%' . $pat_name . '%"
  ';
 }
 
 // jika mrn diketik
-if (isset($_POST['keyword_mrn']) && $_POST['keyword_mrn'] != "") {
-  $query .= 'AND pat_id LIKE "%' . $_POST['keyword_mrn'] . '%"
+if (isset($_POST['mrn']) && $_POST['mrn'] != "") {
+  $mrn = $_POST['mrn'];
+  $query .= 'AND pat_id LIKE "%' . $mrn . '%"
  ';
 }
 
@@ -114,26 +119,6 @@ $result = mysqli_query($conn_pacsio, $query . $query1);
 $data = array();
 $i = 1;
 while ($row = mysqli_fetch_array($result)) {
-  // if ($row['status'] == 'APPROVED') {
-  //   $btnStatus = '<a class="" href="update_workload.php?uid=' . $uid . ' "><span class="btn text-primary rgba-stylish-slight btn-inti2"><img src="../image/redo.svg" data-toggle="tooltip" title="Update" style="width: 100%;"></span></a>';
-  // } else {
-  //   $btnStatus = '<a class="" href="update_workload_before.php?uid=' . $uid . ' "><span class="btn text-primary rgba-stylish-slight btn-inti2"><img src="../image/redo.svg" data-toggle="tooltip" title="Update" style="width: 100%;"></span></a>';
-  // }
-  // if ($username == 'rafdi') {
-  //   $btnHamzah = '<a style="text-decoration:none;" class="ahref-edit" href="deleteworkload.php?uid=' . $uid . '" 
-  //   onclick=\'return confirm("Delete data?");\'>
-  //   <span class="btn red lighten-1 btn-intiwid1">
-  //   <i class="fas fa-trash-alt" data-toggle="tooltip" title="Delete"></i></span></a>' . CHANGEDOCTORFIRST . $uid . CHANGEDOCTORLAST;
-  // } else {
-  //   $btnHamzah = '';
-  // }
-
-  // if ($row['fromorder'] == "manual" or $row['fromorder'] == NULL) {
-  //   $btnSend = '<a href="sendsimrs-sumedang.php?acc=' . $row['acc'] . '&mrn=' . $row['mrn'] . ' "><span class="btn default-color darken-1 btn-intiwid1"><i class="fas fa-share"></i></span></a>';
-  // } else {
-  //   $btnSend = '';
-  // }
-
   $pat_name = defaultValue($row['pat_name']);
   $pat_sex = styleSex($row['pat_sex']);
   $pat_birthdate = diffDate($row['pat_birthdate']);
@@ -160,14 +145,35 @@ while ($row = mysqli_fetch_array($result)) {
   $status = styleStatus($row['status']);
   $approved_at = defaultValueDateTime($row['approved_at']);
   $spendtime = spendTime($updated_time, $approved_at, $row['status']);
-  $series_desc = '<a href="#" class="hasil-series penawaran-a" data-id="' . $study_iuid . '">Read More</a>';
+
+  $level = $_SESSION['level'];
+
+  if ($level == 'radiology') {
+    $level =
+      CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORLAST .
+      EDITPASIENFIRST . $study_iuid . EDITPASIENLAST .
+      EDITWORKLOADFIRST . $study_iuid . EDITWORKLOADLAST .
+      TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST .
+      TELEGRAMSIGNATUREFIRST . $study_iuid . TELEGRAMSIGNATURELAST .
+      RADIANTFIRST . $study_iuid . RADIANTLAST .
+      DICOMFIRST . $study_iuid . DICOMLAST;
+  } else if ($level == 'radiographer') {
+    $level = HTMLFIRST . $study_iuid . HTMLLAST .
+      EDITPASIENFIRST . $study_iuid . EDITPASIENLAST .
+      CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORLAST .
+      TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST .
+      DELETEFIRST . $study_iuid . DELETELAST;
+  } else if ($level == 'refferal') {
+    $level = DICOMFIRST . $study_iuid . DICOMLAST;
+  } else {
+    $level = '-';
+  }
 
   $sub_array = array();
   $sub_array[] = $i;
   $sub_array[] =
     PDFFIRST . $study_iuid . PDFLAST .
-    RADIANTFIRST . $study_iuid . RADIANTLAST .
-    DICOMFIRST . $study_iuid . DICOMLAST;
+    $level;
   $sub_array[] = $status;
   $sub_array[] = $no_foto;
   $sub_array[] = $pat_id;
@@ -175,7 +181,7 @@ while ($row = mysqli_fetch_array($result)) {
   $sub_array[] = $pat_birthdate;
   $sub_array[] = $pat_sex;
   $sub_array[] = $study_desc;
-  $sub_array[] = $series_desc;
+  $sub_array[] = READMORESERIESFIRST . $study_iuid . READMORESERIESLAST;
   $sub_array[] = $mods_in_study;
   $sub_array[] = $named;
   $sub_array[] = $name_dep;
@@ -188,50 +194,15 @@ while ($row = mysqli_fetch_array($result)) {
   $data[] = $sub_array;
 }
 
-function get_all_data($conn_pacsio)
+function get_all_data($val_con, $val_query)
 {
-  $query = "SELECT patient.pat_id, 
-  patient.pat_name, 
-  patient.pat_birthdate, 
-  patient.pat_sex,
-  study.study_iuid,
-  study.study_datetime,
-  study.accession_no,
-  study.ref_physician,
-  study.study_desc,
-  study.mods_in_study,
-  study.num_series,
-  study.num_instances,
-  study.retrieve_aets,
-  study.updated_time,
-  xray_order.mrn,
-  xray_order.address,
-  xray_order.name_dep,
-  xray_order.named,
-  xray_order.radiographer_name,
-  xray_order.dokrad_name,
-  xray_order.create_time,
-  xray_order.pat_state,
-  xray_order.spc_needs,
-  xray_order.payment,
-  xray_order.examed_at,
-  xray_order.patientid AS no_foto,
-  xray_workload.status,
-  xray_workload.approved_at
-  FROM pacsio.patient AS patient
-  JOIN pacsio.study AS study
-  ON patient.pk = study.patient_fk
-  LEFT JOIN intimedika_base.xray_order AS xray_order
-  ON xray_order.uid = study.study_iuid
-  LEFT JOIN intimedika_base.xray_workload AS xray_workload
-  ON study.study_iuid = xray_workload.uid";
-  $result = mysqli_query($conn_pacsio, $query);
+  $result = mysqli_query($val_con, $val_query);
   return mysqli_num_rows($result);
 }
 
 $output = array(
   "draw"    => intval($_POST["draw"]),
-  "recordsTotal"  =>  get_all_data($conn_pacsio),
+  "recordsTotal"  =>  get_all_data($conn_pacsio, $query_base),
   "recordsFiltered" => $number_filter_row,
   "data"    => $data
 );

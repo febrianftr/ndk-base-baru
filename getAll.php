@@ -76,18 +76,9 @@ while ($row = mysqli_fetch_array($query)) {
     $approved_at = defaultValueDateTime($row['approved_at']);
     $spendtime = spendTime($updated_time, $approved_at, $row['status']);
 
-    $detail = '<a href="#" class="hasil-all penawaran-a" data-id="' . $study_iuid . '">
-                    <span class="btn blue lighten-1 btn-intiwid1">
-                        <i class="fas fa-info" data-toggle="tooltip" title="Delete"></i>
-                    </span>
-                </a>';
-
-    $series_desc = '<a href="#" class="hasil-series penawaran-a" data-id="' . $study_iuid . '">Read More</a>';
-
     $data[] = [
         "no" => $i,
         "report" =>
-        // $detail .
         PDFFIRST . $study_iuid . PDFLAST .
             RADIANTFIRST . $study_iuid . RADIANTLAST .
             DICOMFIRST . $study_iuid . DICOMLAST,
@@ -98,7 +89,7 @@ while ($row = mysqli_fetch_array($query)) {
         "pat_birthdate" => $pat_birthdate,
         "pat_sex" => $pat_sex,
         "study_desc" => $study_desc,
-        "series_desc" => $series_desc,
+        "series_desc" => READMORESERIESFIRST . $study_iuid . READMORESERIESLAST,
         "num_series" => $num_series . ' / ' . $num_instances,
         "mods_in_study" => $mods_in_study,
         "named" => $named,

@@ -9,10 +9,10 @@ $date2 = date('d-m-Y 23:59');
                 <label class="work-1"><?= $lang['search_date'] ?></label><br>
                 <div class="wrap-search">
                     <span class="date-icon">
-                        <input type="text" name="From" id="From" class="form-control" placeholder="From Date" value="<?= $date ?>" autocomplete="off" />
+                        <input type="text" name="from_updated_time" id="from_updated_time" class="form-control" placeholder="From Date" value="<?= $date ?>" autocomplete="off" />
                     </span>
                     <span class="date-icon">
-                        <input type="text" name="to" id="to" class="form-control" placeholder="To Date" value="<?= $date2 ?>" autocomplete="off" /><br></span>
+                        <input type="text" name="to_updated_time" id="to_updated_time" class="form-control" placeholder="To Date" value="<?= $date2 ?>" autocomplete="off" /><br></span>
                 </div>
             </div>
             <div style="padding: 0px;" class="col-sm-4 input-checkbox">
@@ -41,11 +41,11 @@ $date2 = date('d-m-Y 23:59');
                 <div class="wrap-search">
                     <span class="search-icon">
                         <i class="ic-search2 fas fa-search"></i>
-                        <input class="search-input-workload" style="color: black; width: 33%;" type="text" name="keyword" id="keyword" placeholder="<?= $lang['input_name'] ?>">
+                        <input class="search-input-workload" style="color: black; width: 33%;" type="text" name="pat_name" id="pat_name" placeholder="<?= $lang['input_name'] ?>">
                     </span>
                     <span class="search-icon">
                         <i class="ic-search2 fas fa-search"></i>
-                        <input class="search-input-workload" style="color: black; width: 33%;" type="text" name="keyword_mrn" id="keyword_mrn" placeholder="<?= $lang['input_mrn'] ?>">
+                        <input class="search-input-workload" style="color: black; width: 33%;" type="text" name="mrn" id="mrn" placeholder="<?= $lang['input_mrn'] ?>">
                     </span>
                 </div>
             </div>

@@ -17,7 +17,7 @@
 	</div>
 </div>
 <!-- The Modal -->
-<div class="modal" id="myModal1">
+<div class="modal" id="modal-series">
 	<div class="modal-dialog modal-dialog-scrollable">
 		<div class="modal-content">
 			<!-- Modal Header -->
@@ -27,8 +27,6 @@
 			</div>
 			<!-- Modal body -->
 			<div class="modal-body">
-				<h3>Specification</h3>
-				<p><?php echo $row1['uid']; ?></p>
 			</div>
 			<!-- Modal footer -->
 			<div class="modal-footer">
@@ -150,7 +148,7 @@
 			return filter;
 		}
 		$('.common_selector').click(function() {
-			purchase_order();
+			$('#purchase_order');
 		});
 	});
 </script>
