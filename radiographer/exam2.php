@@ -142,6 +142,7 @@ if ($_SESSION['level'] == "radiographer") {
 									<thead>
 										<tr bgcolor=#CCCCCC>
 											<th>No</th>
+											<th>Aksi</th>
 											<th>Nama</th>
 											<th>ID Pasien</th>
 											<th>accession no</th>
@@ -150,7 +151,6 @@ if ($_SESSION['level'] == "radiographer") {
 											<th>modality</th>
 											<th>Waktu Pemeriksaan</th>
 											<th>waktu order</th>
-											<th><?= $lang['action'] ?></th>
 										</tr>
 									</thead>
 								</table>
@@ -312,6 +312,9 @@ if ($_SESSION['level'] == "radiographer") {
 							"data": "no"
 						},
 						{
+							"data": "action"
+						},
+						{
 							"data": "pat_name"
 						},
 						{
@@ -338,9 +341,6 @@ if ($_SESSION['level'] == "radiographer") {
 						// {
 						// 	"data": "qrcode"
 						// },
-						{
-							"data": "action"
-						}
 					]
 				});
 			});

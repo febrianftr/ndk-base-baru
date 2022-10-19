@@ -38,11 +38,7 @@ while ($row = mysqli_fetch_array($query)) {
         $pat_sex = '-';
     }
 
-    $detail = '<a href="#" class="exam-room penawaran-a" data-id="' . $row['study_iuid'] . '">
-                    <span class="btn blue lighten-1 btn-intiwid1">
-                        <i class="fas fa-info" data-toggle="tooltip" title="Delete"></i>
-                    </span>
-                </a>';
+    $detail = '<a href="#" class="exam-room penawaran-a" data-id="' . $row['study_iuid'] . '">' . $pat_name . '</a>';
 
     $delete = '<a style="text-decoration:none;" 
                     class="ahref-edit" href="deleteexam.php?study_iuid=' . $row['study_iuid'] . '&pat_name=' . $pat_name . '" 
@@ -54,15 +50,15 @@ while ($row = mysqli_fetch_array($query)) {
 
     $data[] = [
         "no" => $i,
-        "pat_name" => $pat_name,
+        "action" => $delete,
+        "pat_name" => $detail,
         "pat_id" => defaultValue($row['pat_id']),
         "accession_no" => defaultValue($row['accession_no']),
         "pat_birthdate" => defaultValueDate($row['pat_birthdate']),
         "pat_sex" => $pat_sex,
         "modality" => defaultValue($row['modality']),
         "start_datetime" => defaultValueDateTime($row['start_datetime']),
-        "created_time" => defaultValueDateTime($row['created_time']),
-        "action" => $detail . $delete
+        "created_time" => defaultValueDateTime($row['created_time'])
     ];
     $i++;
 }

@@ -40,8 +40,9 @@ if ($_SESSION['level'] == "radiographer") {
 									<thead>
 										<tr bgcolor=#CCCCCC>
 											<th>No</th>
-											<th>MRN</th>
+											<th>aksi</th>
 											<th>Nama</th>
+											<th>MRN</th>
 											<th>accession no</th>
 											<th>tanggal lahir</th>
 											<th>Jenis Kelamin</th>
@@ -50,7 +51,6 @@ if ($_SESSION['level'] == "radiographer") {
 											<th>Waktu Pemeriksaan</th>
 											<th>waktu order</th>
 											<th>Label</th>
-											<th>aksi</th>
 										</tr>
 									</thead>
 
@@ -122,10 +122,13 @@ if ($_SESSION['level'] == "radiographer") {
 							"data": "no"
 						},
 						{
-							"data": "mrn"
+							"data": "action"
 						},
 						{
 							"data": "name"
+						},
+						{
+							"data": "mrn"
 						},
 						{
 							"data": "acc"
@@ -150,9 +153,6 @@ if ($_SESSION['level'] == "radiographer") {
 						},
 						{
 							"data": "label"
-						},
-						{
-							"data": "action"
 						}
 					]
 				});
