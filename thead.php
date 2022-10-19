@@ -2,9 +2,9 @@
     <th>No</th>
     <th>Aksi</th>
     <th>Status</th>
-    <th>No Foto</th>
-    <th>MRN</th>
     <th>Nama</th>
+    <th>MRN</th>
+    <th>No Foto</th>
     <th>Umur</th>
     <th>Jenis <br /> Kelamin</th>
     <th>Pemeriksaan <br /> Utama</th>

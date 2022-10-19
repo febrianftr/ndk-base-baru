@@ -33,9 +33,9 @@
           <div class="modal-body">
           </div>
           <!-- Modal footer -->
-          <div class="modal-footer">
+          <!-- <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -82,13 +82,13 @@
           "data": "status"
         },
         {
+          "data": "pat_name"
+        },
+        {
           "data": "no_foto"
         },
         {
           "data": "mrn"
-        },
-        {
-          "data": "pat_name"
         },
         {
           "data": "pat_birthdate"

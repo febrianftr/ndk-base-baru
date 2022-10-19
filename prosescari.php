@@ -33,6 +33,7 @@ $query_base = "SELECT patient.pat_id,
           xray_order.spc_needs,
           xray_order.payment,
           xray_order.examed_at,
+          xray_order.fromorder,
           xray_order.patientid AS no_foto,
           xray_workload.status,
           xray_workload.approved_at
@@ -143,11 +144,12 @@ while ($row = mysqli_fetch_array($result)) {
   $spc_needs = defaultValue($row['spc_needs']);
   $payment = defaultValue($row['payment']);
   $status = styleStatus($row['status']);
+  $fromorder = $row['fromorder'];
   $approved_at = defaultValueDateTime($row['approved_at']);
   $spendtime = spendTime($updated_time, $approved_at, $row['status']);
 
+  // kondisi session level ketika login
   $level = $_SESSION['level'];
-
   if ($level == 'radiology') {
     $level =
       CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORLAST .
@@ -169,15 +171,24 @@ while ($row = mysqli_fetch_array($result)) {
     $level = '-';
   }
 
+  // kondisi ketika data dari simrs
+  if ($fromorder == 'SIMRS' || $fromorder == 'simrs') {
+    $badge = SIMRS;
+  } else {
+    $badge = '';
+  }
+
+  $detail = '<a href="#" class="hasil-all penawaran-a" data-id="' . $row['study_iuid'] . '">' . removeCharacter($pat_name) . '</a>';
+
   $sub_array = array();
   $sub_array[] = $i;
   $sub_array[] =
     PDFFIRST . $study_iuid . PDFLAST .
     $level;
-  $sub_array[] = $status;
-  $sub_array[] = $no_foto;
+  $sub_array[] = $status . '&nbsp;' . $badge;
+  $sub_array[] = $detail;
   $sub_array[] = $pat_id;
-  $sub_array[] = removeCharacter($pat_name);
+  $sub_array[] = $no_foto;
   $sub_array[] = $pat_birthdate;
   $sub_array[] = $pat_sex;
   $sub_array[] = $study_desc;

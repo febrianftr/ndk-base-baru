@@ -33,6 +33,7 @@ $query = mysqli_query(
     xray_order.spc_needs,
     xray_order.payment,
     xray_order.examed_at,
+    xray_order.fromorder,
     xray_order.patientid AS no_foto,
     xray_workload.status,
     xray_workload.approved_at
@@ -72,9 +73,18 @@ while ($row = mysqli_fetch_array($query)) {
     $pat_state = defaultValue($row['pat_state']);
     $spc_needs = defaultValue($row['spc_needs']);
     $payment = defaultValue($row['payment']);
+    $fromorder = $row['fromorder'];
     $status = styleStatus($row['status']);
     $approved_at = defaultValueDateTime($row['approved_at']);
     $spendtime = spendTime($updated_time, $approved_at, $row['status']);
+
+    $detail = '<a href="#" class="hasil-all penawaran-a" data-id="' . $row['study_iuid'] . '">' . removeCharacter($pat_name) . '</a>';
+
+    if ($fromorder == 'SIMRS' || $fromorder == 'simrs') {
+        $badge = SIMRS;
+    } else {
+        $badge = '';
+    }
 
     $data[] = [
         "no" => $i,
@@ -82,10 +92,10 @@ while ($row = mysqli_fetch_array($query)) {
         PDFFIRST . $study_iuid . PDFLAST .
             RADIANTFIRST . $study_iuid . RADIANTLAST .
             DICOMFIRST . $study_iuid . DICOMLAST,
-        "status" => $status,
-        "no_foto" => $no_foto,
+        "status" => $status . '&nbsp;' . $badge,
+        "pat_name" => $detail,
         "mrn" => $pat_id,
-        "pat_name" => removeCharacter($pat_name),
+        "no_foto" => $no_foto,
         "pat_birthdate" => $pat_birthdate,
         "pat_sex" => $pat_sex,
         "study_desc" => $study_desc,

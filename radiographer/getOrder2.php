@@ -70,13 +70,13 @@ while ($row = mysqli_fetch_array($query)) {
     //     $label = "<div class='alert alert-danger' role='alert'>GAGAL DIPERIKSA</div>";
     //     $aksi = "<form id=order  name=order method=post action='exam.php'>
     //                 <input name='uid' type='hidden' id='uid' value='" . $uid . "'>
-    //                 <button class ='btn-worklist' type='submit' name='button' id='button' value='Create Order'>KIRIM ULANG</button>
+    //                 <button class ='btn-worklist' type='submit' name='button' id='button' value='RESEND'>KIRIM ULANG</button>
     //             </form>";
     // } else if ($study_iuid_mppsio == null && $study_iuid_pacsio == null && $fromorder != 'TERKIRIM') {
     //     $label = "<div class='alert alert-primary' role='alert'>BARU</div>";
     //     $aksi = "<form id=order  name=order method=post action='exam.php'>
     //                 <input name='uid' type='hidden' id='uid' value='" . $uid . "'>
-    //                 <button class ='btn-worklist' type='submit' name='button' id='button' value='Create Order'>KIRIM</button>
+    //                 <button class ='btn-worklist' type='submit' name='button' id='button' value='SEND'>KIRIM</button>
     //             </form>";
     // } else if ($study_iuid_mppsio != null && $study_iuid_pacsio == null) {
     //     $label = "<div class='alert alert-info' role='alert'>SEDANG DIPERIKSA</div>";
@@ -86,7 +86,11 @@ while ($row = mysqli_fetch_array($query)) {
     //     $aksi = '&nbsp;';
     // } else if ($study_iuid_mppsio != null && $study_iuid_pacsio != null) {
     //     $label = "<div class='alert alert-success' role='alert'>SELESAI DIPERIKSA</div>";
-    //     $aksi = "<a class='btn btn-sm btn-danger text-white' href='deleteexam.php?study_iuid=$uid&pat_name=$row[name]'>HAPUS&nbsp;WORKLIST</a>";
+    //     $aksi = "<a style='text-decoration:none;' class='ahref-edit' href='deleteexam.php?study_iuid=$uid&pat_name=$row[name]'>
+    //     <span class='btn red lighten-1 btn-intiwid1'>
+    //     <i class='fas fa-trash-alt' data-toggle='tooltip' title='Delete WORKLIST'></i>
+    //     </span>
+    //     </a>";
     // } else {
     //     $label = "-";
     //     $aksi = "-";
@@ -97,7 +101,7 @@ while ($row = mysqli_fetch_array($query)) {
         $label = "<div class='alert alert-danger' role='alert'>GAGAL DIPERIKSA</div>";
         $aksi = "<a href='http://$server_name:8000/api/create-xml/$uid' class='text-black'>
                     <span class='btn yellow lighten-1 btn-intiwid1'>
-                        <i class='fas fa-share' data-toggle='tooltip' title='Send'></i>
+                        <i class='fas fa-share' data-toggle='tooltip' title='ReSend'></i>
                     </span>
                 </a>";
     } else if ($study_iuid_mppsio == null && $study_iuid_pacsio == null && $fromorder != 'SIMRS') {
@@ -115,7 +119,11 @@ while ($row = mysqli_fetch_array($query)) {
         $aksi = '&nbsp;';
     } else if ($study_iuid_mppsio != null && $study_iuid_pacsio != null) {
         $label = "<div class='alert alert-success' role='alert'>SELESAI DIPERIKSA</div>";
-        $aksi = "<a class='btn btn-sm btn-danger text-white' href='deleteexam.php?study_iuid=$uid&pat_name=$row[name]'>HAPUS&nbsp;WORKLIST</a>";
+        $aksi = "<a style='text-decoration:none;' class='ahref-edit' href='deleteexam.php?study_iuid=$uid&pat_name=$row[name]'>
+                    <span class='btn red lighten-1 btn-intiwid1'>
+                        <i class='fas fa-trash-alt' data-toggle='tooltip' title='Delete Worklist'></i>
+                    </span>
+                </a>";
     } else {
         $label = "-";
         $aksi = "-";
@@ -125,6 +133,7 @@ while ($row = mysqli_fetch_array($query)) {
 
     $data[] = [
         "no" => $i,
+        "action" => $aksi,
         "mrn" => defaultValue($row['mrn']),
         "name" => $detail,
         "acc" => defaultValue($row['acc']),
@@ -135,7 +144,6 @@ while ($row = mysqli_fetch_array($query)) {
         "schedule_date" => defaultValueDateTime($row['schedule_date'] . ' ' . $row['schedule_time']),
         "create_time" => defaultValueDateTime($row['create_time']),
         "label" => $label,
-        "action" => $aksi
     ];
     $i++;
 }
