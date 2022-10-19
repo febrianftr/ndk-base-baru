@@ -6,6 +6,31 @@ require 'viewer-all.php';
 
 require 'default-value.php';
 
+session_start();
+
+$username = $_SESSION['username'];
+
+// kondisi jika ada di dicom.php
+$row_dokrad = mysqli_fetch_assoc(mysqli_query(
+    $conn,
+    "SELECT * FROM xray_dokter_radiology WHERE username = '$username'"
+));
+$dokradid = $row_dokrad['dokradid'];
+$http_referer = $_SERVER['HTTP_REFERER'] ?? '';
+$explode = explode('/radiology', $http_referer);
+$dicom = $explode[1] ?? '';
+if ($dicom == '/dicom.php') {
+    // (dicom.php) kondisi ketika dokradid is null (tidak integrasi simrs) dan ketika login dokter radiologi. berdasarkan priority CITO, updated_time DESC
+    $kondisi = "WHERE xray_workload.status = 'waiting' 
+                AND xray_order.dokradid = '$dokradid' 
+                OR xray_order.dokradid IS NULL 
+                ORDER BY xray_order.priority IS NULL, xray_order.priority ASC, study.updated_time DESC 
+                LIMIT 3000";
+} else {
+    // (getAll.php) kondisi
+    $kondisi = 'ORDER BY study.updated_time DESC LIMIT 1000';
+}
+
 $query = mysqli_query(
     $conn_pacsio,
     "SELECT patient.pat_id, 
@@ -29,6 +54,7 @@ $query = mysqli_query(
     xray_order.radiographer_name,
     xray_order.dokrad_name,
     xray_order.create_time,
+    xray_order.priority,
     xray_order.pat_state,
     xray_order.spc_needs,
     xray_order.payment,
@@ -36,6 +62,7 @@ $query = mysqli_query(
     xray_order.fromorder,
     xray_order.patientid AS no_foto,
     xray_workload.status,
+    xray_workload.fill,
     xray_workload.approved_at
     FROM $database_pacsio.patient AS patient
     JOIN $database_pacsio.study AS study
@@ -44,8 +71,7 @@ $query = mysqli_query(
     ON xray_order.uid = study.study_iuid
     LEFT JOIN $database_ris.xray_workload AS xray_workload
     ON study.study_iuid = xray_workload.uid
-    ORDER BY study.updated_time DESC 
-    LIMIT 1000"
+    $kondisi"
 );
 $data = [];
 $i = 1;
@@ -71,10 +97,12 @@ while ($row = mysqli_fetch_array($query)) {
     $dokrad_name = defaultValue($row['dokrad_name']);
     $create_time = defaultValueDateTime($row['create_time']);
     $pat_state = defaultValue($row['pat_state']);
+    $priority = defaultValue($row['priority']);
     $spc_needs = defaultValue($row['spc_needs']);
     $payment = defaultValue($row['payment']);
     $fromorder = $row['fromorder'];
     $status = styleStatus($row['status']);
+    $fill = $row['fill'];
     $approved_at = defaultValueDateTime($row['approved_at']);
     $spendtime = spendTime($updated_time, $approved_at, $row['status']);
 
@@ -86,14 +114,37 @@ while ($row = mysqli_fetch_array($query)) {
         $badge = '';
     }
 
+    // kondisi aksi jika ada dihalaman dicom.php
+    if ($dicom == '/dicom.php') {
+        // ketika fill kosong muncul worklist, dan ketika worklist sudah dibaca muncul draft
+        if (!$fill || $fill == null) {
+            $worklist = WORKLISTFIRST . $study_iuid . WORKLISTLAST;
+        } else {
+            $worklist = DRAFTFIRST . $study_iuid . DRAFTLAST;
+        }
+
+        $aksi = $worklist .
+            CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORLAST;
+    } else {
+        $aksi = PDFFIRST . $study_iuid . PDFLAST .
+            RADIANTFIRST . $study_iuid . RADIANTLAST .
+            DICOMFIRST . $study_iuid . DICOMLAST;
+    }
+
+    // kondisi jika prioriry normal dan CITO
+    if ($priority == 'Normal' || $priority == 'NORMAL' || $priority == 'normal') {
+        $priority_style = PRIORITYNORMAL;
+    } else if ($priority == 'Cito' || $priority == 'CITO' || $priority == 'cito') {
+        $priority_style = PRIORITYCITO;
+    } else {
+        $priority_style = '';
+    }
+
     $data[] = [
         "no" => $i,
-        "report" =>
-        PDFFIRST . $study_iuid . PDFLAST .
-            RADIANTFIRST . $study_iuid . RADIANTLAST .
-            DICOMFIRST . $study_iuid . DICOMLAST,
+        "report" => $aksi,
         "status" => $status . '&nbsp;' . $badge,
-        "pat_name" => $detail,
+        "pat_name" => $detail . '&nbsp;' . $priority_style,
         "mrn" => $pat_id,
         "no_foto" => $no_foto,
         "pat_birthdate" => $pat_birthdate,

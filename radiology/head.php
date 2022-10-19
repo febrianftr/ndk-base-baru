@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="../css/bootstrap4.min.css">
 <link href="../css/mdb.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="../css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" href="css/loading.css">
+<!-- <link rel="stylesheet" href="css/loading.css"> -->
 <link rel="stylesheet" href="css/ionicons.min.css">
 <link rel="stylesheet" href="css/jquery-ui.css">
 <link rel="icon" href="../image/ipi-icon3.png" type="image/png">

@@ -8,8 +8,9 @@ $row = mysqli_fetch_assoc(mysqli_query(
 	"SELECT patient.pat_name,
 	patient.pat_id,
 	patient.pat_sex,
-	study.pk
-	FROM patient	JOIN study
+	study.pk,
+	study.study_desc
+	FROM patient JOIN study
 	ON patient.pk = study.patient_fk 
 	WHERE study_iuid = '$uid'"
 ));
@@ -19,9 +20,10 @@ $row = mysqli_fetch_assoc(mysqli_query(
 		padding: 50px;
 	}
 </style>
-
 <div class="fill">
 	<div class="table-responsive-sm">
+		<h5 class="text-center font-weight-bold">Pemeriksaan Detail</h5>
+		<br>
 		<table class="" id="example" style="margin-top: 3px;" cellpadding="8" cellspacing="0">
 			<thead class="thead1">
 				<tr>
@@ -35,26 +37,28 @@ $row = mysqli_fetch_assoc(mysqli_query(
 					<td align="left">&nbsp; <?= defaultValue($row['pat_id']); ?></td>
 				</tr>
 				<tr>
-					<td>Sex</td>
+					<td>Jenis Kelamin</td>
 					<td>&nbsp;: </td>
 					<td align="left">&nbsp; <?= defaultValue($row['pat_sex']); ?></td>
+				</tr>
+				<tr>
+					<td>Pemeriksaan Utama</td>
+					<td>&nbsp;: </td>
+					<td align="left" class="font-weight-bold">&nbsp; <?= defaultValue($row['study_desc']); ?></td>
 				</tr>
 			</thead>
 		</table>
 	</div>
-	<h4>
-		<strong>
-			<label>SERIES DESC </label>&nbsp;
-			<label></label>
-		</strong>
-	</h4>
+	<br>
 	<h4>
 		<strong>
 			<table class="table-dicom" id="example" style="margin-top: 3px;" cellpadding="8" cellspacing="0">
 				<thead class="thead1">
 					<tr>
-						<th>viewer</th>
-						<th>series</th>
+						<th>Series</th>
+						<th>Body Part</th>
+						<th>Src Aet</th>
+						<th>Modality</th>
 						<th>#i</th>
 						<th>Create Time</th>
 					</tr>
@@ -67,12 +71,12 @@ $row = mysqli_fetch_assoc(mysqli_query(
 					while ($row1 = mysqli_fetch_assoc($query)) {
 					?>
 						<tr>
-							<td align="left">
-								<?= MOBILEFIRST . $row1['series_iuid'] . MOBILELAST; ?>
-							</td>
-							<td align="left"><?= $row1['series_desc']; ?></td>
-							<td align="left"><?= $row1['num_instances']; ?></td>
-							<td align="left"><?= $row1['created_time']; ?></td>
+							<td align="left"><?= defaultValue($row1['series_desc']) ?></td>
+							<td align="left"><?= defaultValue($row1['body_part']); ?></td>
+							<td align="left"><?= defaultValue($row1['src_aet']); ?></td>
+							<td align="left"><?= defaultValue($row1['modality']); ?></td>
+							<td align="left"><?= defaultValue($row1['num_instances']); ?></td>
+							<td align="left"><?= defaultValueDateTime($row1['created_time']); ?></td>
 						</tr>
 					<?php
 					}

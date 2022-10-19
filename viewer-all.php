@@ -93,4 +93,18 @@ define('READMOREINFOFIRST', '<a href="#" class="hasil-all penawaran-a" data-id='
 define('READMOREINFOLAST', '"><span class="btn blue lighten-1 btn-intiwid1"><i class="fas fa-info" data-toggle="tooltip" title="Delete"></i></span></a>');
 
 // integrasi simrs
-define('SIMRS', '<i class="fas fa-exchange-alt text-info" font-size:0.5rem;" title="terintegrasi dengan SIMRS"></i>');
+define('SIMRS', '<i class="fas fa-exchange-alt text-info" style="font-size:0.5rem;" title="terintegrasi dengan SIMRS"></i>');
+
+// priority NORMAL
+define('PRIORITYNORMAL', '<i style="color: #2d2; font-size:0.4rem;" class="fas fa-circle"></i>');
+
+// PIORITY CITO
+define('PRIORITYCITO', '<i style="color: red; font-size:0.4rem;" class="fas fa-circle"></i>');
+
+// WORKLIST DOKTER BELUM DIBACA
+define('WORKLISTFIRST', '<a href="worklist.php?uid=');
+define('WORKLISTLAST', '"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/write2.svg" data-toggle="tooltip" title="Go to Expertise" style="width: 110%;"></span></a>');
+
+// DRAFT DOKTER 
+define('DRAFTFIRST', '<a href="worklist.php?uid=');
+define('DRAFTLAST', '"><span class="btn btn-warning btn-inti"><i class="fas fa-edit" data-toggle="tooltip" title="Go to expertise"></i></span></a>');

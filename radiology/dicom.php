@@ -1,5 +1,4 @@
 <?php
-require '../koneksi/koneksi.php';
 session_start();
 
 $username = $_SESSION['username'];
@@ -16,9 +15,9 @@ if ($_SESSION['level'] == "radiology") {
 	</head>
 
 	<body>
-	<?php include('sidebar.php'); ?>
-    <div class="container-fluid" id="main">
-        <div class="row">
+		<?php include('sidebar.php'); ?>
+		<div class="container-fluid" id="main">
+			<div class="row">
 
 				<div id="content1">
 					<div class="body">
@@ -40,27 +39,7 @@ if ($_SESSION['level'] == "radiology") {
 											<input type="text" class="form-control" style="width: 115px; float: right;" id="mrn" placeholder="search MRN">
 											<input type="text" class="form-control" style="width: 115px; float: right; margin-right: 6px;" id="name" placeholder="search Name">
 										</div>
-										<tr>
-											<th>NO</th>
-											<th><?= $lang['action'] ?></th>
-											<th>MRN/NO FOTO</th>
-											<!-- <th>Radiology Physician</th> -->
-											<th><?= $lang['name'] ?></th>
-											<th><?= $lang['age'] ?></th>
-											<th><?= $lang['sex'] ?></th>
-											<th><?= $lang['modality'] ?></th>
-											<th>Main Prosedur</th>
-											<th><?= $lang['procedure'] ?></th>
-											<th><?= $lang['referral_physician'] ?></th>
-											<th>Status</th>
-											<th><?= $lang['name_radiographer'] ?></th>
-											<th><?= $lang['departmen'] ?></th>
-											
-											<th><?= $lang['arrive_date'] ?></th>
-											<th><?= $lang['exam_date'] ?></th>
-											<th>PDC</th>
-											<th><?= $lang['spc_needs'] ?></th>
-										</tr>
+										<?php include '../thead.php'; ?>
 									</thead>
 									<tbody>
 
@@ -70,111 +49,87 @@ if ($_SESSION['level'] == "radiology") {
 						</div>
 					</div>
 				</div>
-				<!-- The Modal -->
-				<div class="modal" id="myModal1">
-					<div class="modal-dialog modal-dialog-scrollable">
-						<div class="modal-content">
+				<?php require '../modal.php'; ?>
+			</div>
+		</div>
 
-							<!-- Modal Header -->
-							<div class="modal-header">
-								<!-- <h1 class="modal-title">Modal Heading</h1> -->
-								<button type="button" class="close" data-dismiss="modal">×</button>
-							</div>
-
-							<!-- Modal body -->
-							<div class="modal-body">
-								<h3>Specification</h3>
-								<p><?php echo $row1['uid']; ?></p>
-							</div>
-
-							<!-- Modal footer -->
-							<div class="modal-footer">
-								<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-							</div>
-
-						</div>
-					</div>
-				</div>
-				<!-- End The Modal -->
-
-		</div>       
-    </div>
-
-    <div class="footerindex">
-        <div class="">
-          <?php include('footer-itw.php'); ?>
-        </div>
-    </div>
+		<div class="footerindex">
+			<div class="">
+				<?php include('footer-itw.php'); ?>
+			</div>
+		</div>
 		<?php include('script-footer.php'); ?>
 		<script>
-			$(document).ready(function(){
+			$(document).ready(function() {
 				$("li[id='worklist1']").addClass("active");
-				});
+			});
 		</script>
 		<script>
 			$(document).ready(function() {
 				var table = $('#example').DataTable({
 					"ajax": {
-						"url": "getDicom.php",
+						"url": "../getAll.php",
 						"dataSrc": ""
 					},
 					"columns": [{
 							"data": "no"
 						},
 						{
-							"data": "action"
+							"data": "report"
+						},
+						{
+							"data": "status"
+						},
+						{
+							"data": "pat_name"
 						},
 						{
 							"data": "mrn"
 						},
 						{
-							"data": "name"
+							"data": "no_foto"
 						},
 						{
-							"data": "birth_date"
+							"data": "pat_birthdate"
 						},
 						{
-							"data": "sex"
+							"data": "pat_sex"
 						},
 						{
-							"data": "xray_type_code"
-						},
-						{
-							"data": "prosedur"
+							"data": "study_desc"
 						},
 						{
 							"data": "series_desc"
 						},
 						{
+							"data": "mods_in_study"
+						},
+						{
 							"data": "named"
 						},
 						{
-							"data": "priority"
+							"data": "name_dep"
+						},
+						{
+							"data": "dokrad_name"
 						},
 						{
 							"data": "radiographer_name"
 						},
 						{
-							"data": "name_dep"
-						},
-						
-						{
-							"data": "arrive_date"
-						},
-						{
-							"data": "complete_date"
-						},
-						{
 							"data": "updated_time"
 						},
 						{
-							"data": "spc_needs"
+							"data": "approve_date"
+						},
+						{
+							"data": "spendtime"
 						}
 					]
 				});
 				$('#mrn').on('keyup', function() {
 					table
-						.columns(2)
+						.columns(4)
 						.search(this.value)
 						.draw();
 				});

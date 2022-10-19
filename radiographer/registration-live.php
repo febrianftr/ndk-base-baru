@@ -218,10 +218,8 @@ if ($_SESSION['level'] == "radiographer") {
                         </label><br><br>
                         <label for="priority"><b><?= $lang['priority'] ?></b></label><br>
                         <select name="priority">
-                          <option value="4Low">Low</option>
-                          <option value="3Medium">Medium</option>
-                          <option value="2high">High</option>
-                          <option value="1Critical">Critical</option>
+                          <option value="normal">normal</option>
+                          <option value="cito">cito</option>
                         </select><br>
                         <br>
                         <label for="pat_state"><b><?= $lang['patient_state'] ?></b></label><br>

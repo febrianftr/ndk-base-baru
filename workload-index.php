@@ -16,47 +16,7 @@
 		</table>
 	</div>
 </div>
-<!-- The Modal -->
-<div class="modal" id="modal-series">
-	<div class="modal-dialog modal-dialog-scrollable">
-		<div class="modal-content">
-			<!-- Modal Header -->
-			<div class="modal-header">
-				<!-- <h1 class="modal-title">Modal Heading</h1> -->
-				<button type="button" class="close" data-dismiss="modal">×</button>
-			</div>
-			<!-- Modal body -->
-			<div class="modal-body">
-			</div>
-			<!-- Modal footer -->
-			<!-- <div class="modal-footer">
-				<button type="button" class="btn btn-danger" data-dismiss="modal" style="cursor:not-allowed">Close</button>
-			</div> -->
-		</div>
-	</div>
-</div>
-<!-- End The Modal -->
-
-<!-- The Modal -->
-<div class="modal" id="modal-all">
-	<div class="modal-dialog modal-dialog-scrollable">
-		<div class="modal-content">
-			<!-- Modal Header -->
-			<div class="modal-header">
-				<!-- <h1 class="modal-title">Modal Heading</h1> -->
-				<button type="button" class="close" data-dismiss="modal">×</button>
-			</div>
-			<!-- Modal body -->
-			<div class="modal-body">
-			</div>
-			<!-- Modal footer -->
-			<!-- <div class="modal-footer">
-				<button type="button" class="btn btn-danger" data-dismiss="modal" style="cursor:not-allowed">Close</button>
-			</div> -->
-		</div>
-	</div>
-</div>
-<!-- End The Modal -->
+<?php require 'modal.php'; ?>
 <script src="js/3.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery.datetimepicker.full.js"></script>
 <script>

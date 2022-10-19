@@ -8,7 +8,7 @@
 <script src="../js/bootstrap4.min.js"></script>
 <script type="text/javascript" src="../js/mdb.min.js"></script>
 <script src="js/script.js"></script>
-<script src="navbar.js"></script>
+<!-- <script src="navbar.js"></script> -->
 <script src="js/jquery-ui.js"></script>
 <script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="../js/dataTables.bootstrap4.min.js"></script>
@@ -81,6 +81,23 @@
             e.preventDefault();
             $("#myModal").modal('show');
             $.post('hasil2.php', {
+                    uid: $(this).attr('data-id')
+                },
+                function(html) {
+                    $(".modal-body").html(html);
+                }
+            );
+        });
+    });
+    // end untuk menampilkan data popup
+</script>
+<script>
+    // untuk menampilkan data popup
+    $(function() {
+        $(document).on('click', '.hasil-all', function(e) {
+            e.preventDefault();
+            $("#modal-all").modal('show');
+            $.post('../hasil-all.php', {
                     uid: $(this).attr('data-id')
                 },
                 function(html) {

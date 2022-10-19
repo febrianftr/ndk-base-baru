@@ -6,7 +6,7 @@ require 'default-value.php';
 $username = $_SESSION['username'];
 
 // kolom untuk order by 
-$columns = array('pk', 'pk', 'status', 'patientid', 'mrn', 'pat_name', 'pat_birthdate', 'pat_sex', 'study_desc', 'series_desc', 'mods_in_study',  'named', 'name_dep', 'dokrad_name', 'radiographer_name', 'updated_time', 'approved_at', 'pk');
+$columns = array('pk', 'pk', 'status', 'pat_name', 'pat_id', 'patientid', 'pat_birthdate', 'pat_sex', 'study_desc', 'pk', 'mods_in_study', 'named', 'name_dep', 'dokrad_name', 'radiographer_name', 'updated_time', 'approved_at', 'pk');
 
 $query_base = "SELECT patient.pat_id, 
           patient.pat_name, 
@@ -91,7 +91,7 @@ if (isset($_POST['pat_name']) && $_POST['pat_name'] != "") {
 
 // jika mrn diketik
 if (isset($_POST['mrn']) && $_POST['mrn'] != "") {
-  $mrn = $_POST['mrn'];
+  $mrn = strtoupper($_POST['mrn']);
   $query .= 'AND pat_id LIKE "%' . $mrn . '%"
  ';
 }
