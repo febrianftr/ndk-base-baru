@@ -5,7 +5,7 @@ include '../contract-service.php';
 <!-- ------loader------ -->
 <div class="disokin">
     <div class="spinner">
-        <div><img src="../image/intiwid-logo-new-putih-2.png" style="width: 200px;margin-left: -75px; margin-bottom: 9px;"></div>
+        <div><img src="../image/intiwid-logo-new-putih-2.png" style="width: 201px;margin-left: -75px; margin-bottom: 9px;"></div>
         <div class="back-loader">
             <span class="ball-1"></span>
             <span class="ball-2"></span>

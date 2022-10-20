@@ -570,6 +570,8 @@ table.dataTable.no-footer {
   padding: 3px;
 }
 
+
+
 .buttonsearch {
   background-color: #68B399;
   color: #fff;
@@ -1852,6 +1854,8 @@ textarea {
   -webkit-transition: 0.5s;
   transition: 0.5s;
   outline: none;
+  font-size: 0.6vw;
+  height: 34px;
 }
 
 .wrap-search input[type=text]:focus {
@@ -3673,5 +3677,8 @@ table.dataTable > thead .sorting::before, table.dataTable > thead .sorting::afte
   @media (max-width: 960px) {
     .img3 {
         width: 100%;
+    }
+    .wrap-search input[type=text]{
+      font-size: 10px;
     }
 }
