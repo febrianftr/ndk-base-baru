@@ -1,13 +1,52 @@
 <?php
 require 'function_radiology.php';
+require '../default-value.php';
 session_start();
-// menampilkan data xray exam
-@$uid = $_GET['uid'];
+
+$uid = $_GET['uid'];
 $username = $_SESSION['username'];
-$query = "SELECT *
-		FROM xray_exam2
-		WHERE uid = '$uid'";
-$data_dicom = mysqli_query($conn, $query);
+$data_dicom = mysqli_query(
+	$conn,
+	"SELECT patient.pat_id, 
+    patient.pat_name, 
+    patient.pat_birthdate, 
+    patient.pat_sex,
+    study.study_iuid,
+    study.study_datetime,
+    study.accession_no,
+    study.ref_physician,
+    study.study_desc,
+    study.mods_in_study,
+    study.num_series,
+    study.num_instances,
+    study.retrieve_aets,
+    study.updated_time,
+    xray_order.mrn,
+    xray_order.address,
+    xray_order.name_dep,
+    xray_order.named,
+    xray_order.radiographer_name,
+    xray_order.dokrad_name,
+    xray_order.create_time,
+    xray_order.priority,
+    xray_order.pat_state,
+    xray_order.spc_needs,
+    xray_order.payment,
+    xray_order.examed_at,
+    xray_order.fromorder,
+    xray_order.patientid AS no_foto,
+    xray_workload.status,
+    xray_workload.fill,
+    xray_workload.approved_at
+    FROM $database_pacsio.patient AS patient
+    JOIN $database_pacsio.study AS study
+    ON patient.pk = study.patient_fk
+    LEFT JOIN $database_ris.xray_order AS xray_order
+    ON xray_order.uid = study.study_iuid
+    LEFT JOIN $database_ris.xray_workload AS xray_workload
+    ON study.study_iuid = xray_workload.uid
+	WHERE study_iuid = '$uid'"
+);
 // tutup menampilkan data xray exam
 // menampilkan data xray template
 $query_tampil = "SELECT MAX(template_id) as user_id3 FROM xray_template";
@@ -145,17 +184,11 @@ if ($_SESSION['level'] == "radiology") {
 
 									</div>
 									<?php
-									$result = mysqli_query($conn, "SELECT * FROM xray_exam2 WHERE uid = '$uid'");
-									$row = mysqli_fetch_assoc($result);
-									$mrn = $row['mrn'];
-									$dokterradiology = mysqli_query($conn, "SELECT * FROM xray_dokter_radiology WHERE username = '$username'");
-									$row2 = mysqli_fetch_assoc($dokterradiology);
-									$dokradid = $row2['dokradid'];
-									$result1 = mysqli_query($conn, "SELECT * FROM xray_workload_radiographer WHERE mrn = '$mrn'");
+									$result1 = mysqli_query(
+										$conn,
+										"SELECT * FROM xray_order WHERE uid = '$mrn'"
+									);
 									?>
-
-
-
 									<!-- Modal -->
 									<div class="modal fade" id="mobile-viewer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 										<div class="modal-dialog" role="document">
@@ -248,87 +281,81 @@ if ($_SESSION['level'] == "radiology") {
 											</div>
 										</div>
 									</div>
-
-
-
-
-									<?php $row = mysqli_fetch_assoc($data_dicom);
-									$birth_date = $row['birth_date'];
-									$uid5 = $row['uid'];
-									$query2 = mysqli_query($conn, "SELECT * FROM xray_series WHERE uid = '$uid'");
-									$row2 = mysqli_fetch_assoc($query2);
-									$body_part_series = $row2['body_part'];
-									$prosedur = $row['prosedur'];
-									if ($prosedur == '') {
-										$prosedur1 = $body_part_series;
-									} else {
-										$prosedur1 = $prosedur;
-									}
-									$bday = new DateTime($birth_date);
-									$today = new DateTime(date('y-m-d'));
-									$diff = $today->diff($bday);
-									$uid2 = $row['uid'];
-									$dokradid = $row['dokradid'];
+									<?php
+									$row = mysqli_fetch_assoc($data_dicom);
+									$pat_name = defaultValue($row['pat_name']);
+									$pat_sex = styleSex($row['pat_sex']);
+									$pat_birthdate = diffDate($row['pat_birthdate']);
+									$study_iuid = defaultValue($row['study_iuid']);
+									$study_datetime = defaultValue($row['study_datetime']);
+									$accession_no = defaultValue($row['accession_no']);
+									$ref_physician = defaultValue($row['ref_physician']);
+									$study_desc = defaultValue($row['study_desc']);
+									$mods_in_study = defaultValue($row['mods_in_study']);
+									$num_series = defaultValue($row['num_series']);
+									$num_instances = defaultValue($row['num_instances']);
+									$updated_time = defaultValueDateTime($row['updated_time']);
+									$pat_id = defaultValue($row['pat_id']);
+									$no_foto = defaultValue($row['no_foto']);
+									$address = defaultValue($row['address']);
+									$name_dep = defaultValue($row['name_dep']);
+									$named = defaultValue($row['named']);
+									$radiographer_name = defaultValue($row['radiographer_name']);
+									$dokrad_name = defaultValue($row['dokrad_name']);
+									$create_time = defaultValueDateTime($row['create_time']);
+									$pat_state = defaultValue($row['pat_state']);
+									$priority = defaultValue($row['priority']);
+									$spc_needs = defaultValue($row['spc_needs']);
+									$payment = defaultValue($row['payment']);
+									$fromorder = $row['fromorder'];
+									$status = styleStatus($row['status']);
+									$fill = $row['fill'];
+									$approved_at = defaultValueDateTime($row['approved_at']);
+									$spendtime = spendTime($updated_time, $approved_at, $row['status']);
 									?>
 									<div class="info-patient">
 										<div class="info-patient2">
 											<div class="row justify-content-center">
 												<div class="info-left col-sm-12">
 													<?php if (isset($_GET['uid'])) { ?>
-														<table class="infopatientworklist table-left" border="0">
+														<table class="infopatientworklist table-left">
 															<tr>
 																<td><span class="table-left">Name</span></td>
-
 															</tr>
 															<tr>
-																<td><?php echo $row['name'] . ' ' . $row['lastname']; ?></td>
-
+																<td><?= removeCharacter($pat_name); ?></td>
 															</tr>
 															<tr>
 																<td><span class="table-left">MRN</span></td>
 															</tr>
 															<tr>
-																<td><?php echo $row['mrn']; ?></td>
-
+																<td><?= $mrn; ?></td>
 															</tr>
 															<tr>
 																<td><span class="table-left">Sex</span></td>
 															</tr>
 															<tr>
-																<td><?php echo $row['sex']; ?></td>
-
+																<td><?= $pat_sex; ?></td>
 															</tr>
 															<tr>
 																<td><span class="table-left">Age</span></td>
 															</tr>
 															<tr>
-																<td><?php echo $diff->y . 'Y' . ' ' . $diff->m . 'M' . ' ' . $diff->d . 'D'; ?></td>
-
+																<td><?= $pat_birthdate; ?></td>
 															</tr>
 															<tr>
 																<td><span class="table-left">Special Needs</span></td>
 															</tr>
 															<tr>
 																<td>
-																	<?php
-																	$text = "";
-																	if ($row['spc_needs'] == "" or $row['spc_needs'] == NULL) {
-																		$text = "-";
-																	} else {
-																		$text = $row['spc_needs'];
-																	}
-																	echo $text;
-																	?>
+																	<?= $spc_needs; ?>
 																</td>
-
 															</tr>
-
 															<tr>
 																<td><span class="table-left">Procedure</span></td>
 															</tr>
 															<tr>
-																<td><?php echo $prosedur1; ?></td>
-
+																<td><?= $study_desc; ?></td>
 															</tr>
 															<tr>
 																<?php
@@ -338,7 +365,6 @@ if ($_SESSION['level'] == "radiology") {
 															</tr>
 															<tr>
 																<td><?php echo $sd; ?></td>
-
 															</tr>
 															<tr>
 																<td><span class="table-left">Department</span></td>
@@ -376,15 +402,10 @@ if ($_SESSION['level'] == "radiology") {
 														echo "404 Not Found";
 													} ?>
 														</table>
-
 												</div>
-
 											</div>
-
 										</div>
-
 									</div>
-
 									<div class="data-order">
 										<b class="title-history">History Patient</b><br>
 										<?php while ($row1 = mysqli_fetch_assoc($result1)) { ?>
@@ -406,14 +427,14 @@ if ($_SESSION['level'] == "radiology") {
 													<a href="<?php echo "radiant://?n=paet&v=dcmPACS&n=pstv&v=0020000D&v=%22$uid%22" ?>" class="button8 delete1"><img src="../image/radiAnt.png" style="width: 29px;"></a>
 													<a style="text-decoration:none;" href="<?php echo "radiant://?n=paet&v=dcmPACS&n=pstv&v=0020000D&v=%22" . $row1['uid'] . "%22"; ?>"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/eye22.svg" data-toggle="tooltip" title="Dicom Viewer" style="width: 100%;"></span></a>
 													<a style="text-decoration:none;" class="ahref-edit" href="http://<?php echo $_SERVER['SERVER_NAME']; ?>:82/viewer/" target="_blank"> <span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/eye11.svg" data-toggle="tooltip" title="Web Viewer" style="width: 100%;"></span></a> -->
-												<?php 
+													<?php
 													echo PDFFIRST . $row1['uid'] . PDFLAST .
-													RADIANTFIRST . $row1['uid'] . RADIANTLAST .
-													DICOMFIRST . $row1['uid'] . DICOMLAST .
-													// OHIFMOBILEFIRST . $row1['uid'] . OHIFMOBILELAST .
-													OHIFFIRST . $row1['uid'] . OHIFLAST .
-													HTMLFIRST . $row1['uid'] . HTMLLAST;
-												?>
+														RADIANTFIRST . $row1['uid'] . RADIANTLAST .
+														DICOMFIRST . $row1['uid'] . DICOMLAST .
+														// OHIFMOBILEFIRST . $row1['uid'] . OHIFMOBILELAST .
+														OHIFFIRST . $row1['uid'] . OHIFLAST .
+														HTMLFIRST . $row1['uid'] . HTMLLAST;
+													?>
 												</p>
 											</table>
 											<hr>
@@ -664,9 +685,6 @@ if ($_SESSION['level'] == "radiology") {
 						</div>
 					</div>
 					<!-- Modal -->
-
-
-
 				</div>
 			</div>
 
@@ -701,10 +719,7 @@ if ($_SESSION['level'] == "radiology") {
 			</script>
 			<script>
 				CKEDITOR.replace('ckeditor', {
-					// Pressing Enter will create a new <BR> element.
-					enterMode: CKEDITOR.ENTER_BR,
-					// Pressing Shift+Enter will create a new <BR> element.
-					// shiftEnterMode: CKEDITOR.ENTER_BR
+					enterMode: CKEDITOR.ENTER_BR
 				});
 			</script>
 
@@ -714,30 +729,6 @@ if ($_SESSION['level'] == "radiology") {
 					$scope.textarea_template = "";
 				});
 			</script>
-			<!--- SCRIPT AUTO SAVE TEXTAREA FILL-->
-			<!-- <script type="text/javascript">
-					$(document).ready(function(){
-			autosave();
-		});
-		function autosave()
-		{
-			var t = setTimeout("autosave()", 2000); // Jalankan fungsi autosave setiap 20 detik sekali
-							
-			var fill = $("#txt_fill").val();
-				
-			if (fill.length > 0)
-			{
-				$.ajax(
-				{
-					type: "POST",
-					url: "autosave.php",
-					data: "&fill=" + fill,
-					cache: false,
-				});
-			}
-		}
-		</script>	 -->
-			<!--- PENUTUP SCRIPT AUTO SAVE TEXTAREA FILL-->
 			<!--  SCRIPT AJAX CRUD   -->
 			<script type="text/javascript">
 				$(document).ready(function() {
@@ -783,10 +774,6 @@ if ($_SESSION['level'] == "radiology") {
 				}
 			</script>
 			<script>
-				// function myFunction() {
-				//   var x = document.getElementById("myInput").value;
-				//   document.getElementById("demo").innerHTML = "You wrote: " + x;
-				// }
 				function myFunction1() {
 					window.open("pdf/testpdf.php?uid=<?php echo $row['uid']; ?> ", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=1200,height=800");
 				}
@@ -808,7 +795,6 @@ if ($_SESSION['level'] == "radiology") {
 					});
 				});
 			</script>
-			<!-- --------------------------script search liv end------------------------ -->
 			<!-- -------------------javascript select temlate-------------- -->
 			<script>
 				$(document).ready(function() {
@@ -827,7 +813,6 @@ if ($_SESSION['level'] == "radiology") {
 					});
 				});
 				$(document).ready(function() {
-
 					$(".button-work-patient").click(function() {
 						$(".work-patient").css("background", "#68b399");
 						$(".work-order").css("background", "#f1f1f1");
@@ -838,25 +823,17 @@ if ($_SESSION['level'] == "radiology") {
 					});
 				});
 			</script>
+			<script>
+				$(document).ready(function() {
+					$(".dokteravail").toggle();
+					$(".btn-info").click(function() {
+						$(".dokteravail").hide();
+					});
+				});
+			</script>
 	</body>
 
 	</html>
 <?php } else {
 	header("location:../index.php");
 } ?>
-<!-- ------------------------script----------------------- -->
-
-
-
-
-<script>
-	$(document).ready(function() {
-		$(".dokteravail").toggle();
-		$(".btn-info").click(function() {
-			$(".dokteravail").hide();
-		});
-	});
-</script>
-
-//backup radiant
-<!-- <a href="<?php echo "radiant://?n=paet&v=dcmPACS&n=pstv&v=0020000D&v=%22" . $uid . "%22" ?> " class="button8 delete1"><img src="../image/radiAnt.png" style="width: 50px;"><br> <span> Radiant Viewer</span></a> -->
