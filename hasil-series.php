@@ -66,7 +66,7 @@ $row = mysqli_fetch_assoc(mysqli_query(
 					$pk_study = $row['pk'];
 					$query = mysqli_query(
 						$conn_pacsio,
-						"SELECT * FROM series WHERE study_fk = '$pk_study'"
+						"SELECT series_desc, body_part, src_aet, modality, num_instances, created_time FROM series WHERE study_fk = '$pk_study'"
 					);
 					while ($row1 = mysqli_fetch_assoc($query)) {
 					?>

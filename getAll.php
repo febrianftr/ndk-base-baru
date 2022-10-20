@@ -21,9 +21,8 @@ $explode = explode('/radiology', $http_referer);
 $dicom = $explode[1] ?? '';
 if ($dicom == '/dicom.php') {
     // (dicom.php) kondisi ketika dokradid is null (tidak integrasi simrs) dan ketika login dokter radiologi. berdasarkan priority CITO, updated_time DESC
-    $kondisi = "WHERE xray_workload.status = 'waiting' 
-                AND xray_order.dokradid = '$dokradid' 
-                OR xray_order.dokradid IS NULL 
+    $kondisi = "WHERE (xray_workload.status = 'waiting' AND xray_order.dokradid = '$dokradid')
+                OR xray_order.uid IS NULL
                 ORDER BY xray_order.priority IS NULL, xray_order.priority ASC, study.updated_time DESC 
                 LIMIT 3000";
 } else {
@@ -80,7 +79,7 @@ while ($row = mysqli_fetch_array($query)) {
     $pat_sex = styleSex($row['pat_sex']);
     $pat_birthdate = diffDate($row['pat_birthdate']);
     $study_iuid = defaultValue($row['study_iuid']);
-    $study_datetime = defaultValue($row['study_datetime']);
+    $study_datetime = defaultValueDateTime($row['study_datetime']);
     $accession_no = defaultValue($row['accession_no']);
     $ref_physician = defaultValue($row['ref_physician']);
     $study_desc = defaultValue($row['study_desc']);
@@ -116,15 +115,19 @@ while ($row = mysqli_fetch_array($query)) {
 
     // kondisi aksi jika ada dihalaman dicom.php
     if ($dicom == '/dicom.php') {
-        // ketika fill kosong muncul worklist, dan ketika worklist sudah dibaca muncul draft
-        if (!$fill || $fill == null) {
-            $worklist = WORKLISTFIRST . $study_iuid . WORKLISTLAST;
+        //    kondisi ketika xray_workload tidak masuk dari trigger xray_workload
+        if ($status != '-') {
+            // ketika fill kosong muncul worklist, dan ketika worklist sudah dibaca muncul draft
+            if (!$fill || $fill == null) {
+                $worklist = WORKLISTFIRST . $study_iuid . WORKLISTLAST;
+            } else {
+                $worklist = DRAFTFIRST . $study_iuid . DRAFTLAST;
+            }
+            $aksi = $worklist .
+                CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORLAST;
         } else {
-            $worklist = DRAFTFIRST . $study_iuid . DRAFTLAST;
+            $aksi = '-';
         }
-
-        $aksi = $worklist .
-            CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORLAST;
     } else {
         $aksi = PDFFIRST . $study_iuid . PDFLAST .
             RADIANTFIRST . $study_iuid . RADIANTLAST .
