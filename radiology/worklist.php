@@ -542,34 +542,26 @@ if ($_SESSION['level'] == "radiology") {
 													<!-- Button to Open the Modal -->
 													<button class="btn btn-worklist1 btn-expertise button-popup" type="button" data-toggle="modal" data-target="#myModal2"><i class="fas fa-file-export"></i> Save Template
 													</button>
+
 													<!-- Modal -->
 													<div class="modal fade" id="myModal2" role="dialog">
 														<div class="modal-dialog">
-
-															<!-- Modal content-->
 															<div class="modal-content">
-																<!-- Modal Header -->
 																<div class="modal-header">
 																	<h4 class="modal-title">Insert Tittle</h4><br />
-																	<input class="form-control" type="text" name="title" value="" placeholder="Insert Tittle">
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																</div>
-
-																<!-- Modal body -->
-																<!-- <div class="modal-body">
-																			<textarea style="width: 100%;" class="textarea-worklist" id="ckeditor" name="fill"></textarea>
-																	</div> -->
-
-																<!-- Modal footer -->
+																<div class="modal-body">
+																	<input class="form-control" type="text" name="title" value="" placeholder="Insert Tittle">
+																</div>
 																<div class="modal-footer">
 																	<button type="button" class="btn btn-close" data-dismiss="modal">Close</button>
 																	<button style="border-radius: 5px; font-weight: bold; margin-bottom:4px;" class=" btn btn-success" name="savetemp">Save</button>
 																</div>
-
 															</div>
-
 														</div>
 													</div>
+
 												</div>
 												<!-- END OF POP UP -->
 
@@ -671,8 +663,9 @@ if ($_SESSION['level'] == "radiology") {
 							<!-- Modal content-->
 							<div class="modal-content">
 								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal">&times;</button>
 									<h4 class="modal-title">Report</h4>
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+
 								</div>
 								<div class="modal-body">
 									<textarea style="width: 100%; height: 320px;"><?= $row10['template_id'];  ?></textarea>

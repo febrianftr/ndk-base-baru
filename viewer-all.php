@@ -40,7 +40,7 @@ define('MOBILELAST', '"target="_blank"><span class="btn btn-warning btn-inti"><i
 // Change doctor
 
 define('CHANGEDOCTORFIRST', '<a style="text-decoration: none;" href="changedoctorworklist.php?uid=');
-define('CHANGEDOCTORLAST', '" onclick=\'return confirm("Ubah dokter radiology yang membaca?");\'><span class="btn yellow darken-1 btn-intiwid1"><i class="fas fa-user-md"></i></span></a>');
+define('CHANGEDOCTORLAST', '" onclick=\'return confirm("Ubah dokter radiology yang membaca?");\'><span class="btn rgba-stylish-slight darken-1 btn-inti2"><i class="fas fa-user-md fa-lg"></i></span></a>');
 // http://36.92.153.227:19898/dwv-viewer/index.html?type=manifest&input=%2Fweasis-pacs-connector%2Fmanifest%3FstudyUID%3D1.3.51.0.7.11564725948.34074.16711.35059.47502.2920.19866
 
 //radiant
