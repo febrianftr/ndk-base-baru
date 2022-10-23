@@ -1,7 +1,7 @@
 <?php
 
 // PDF
-define('PDFFIRST', '<a style="text-decoration:none;" class="" href="../radiology/pdf/testpdf4.php?uid=');
+define('PDFFIRST', '<a style="text-decoration:none;" class="" href="../radiology/pdf/expertise.php?uid=');
 define('PDFLAST', '"target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/file.svg" data-toggle="tooltip" title="PDF" style="width: 100%;"></span></a>');
 
 // DICOM

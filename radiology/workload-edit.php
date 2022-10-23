@@ -64,7 +64,7 @@ if (isset($_POST["savedraft"])) {
 		echo "
 <script>
 	document.location.href= 'workload.php';
-	win = window.open('pdf/testpdf4.php?uid=$uid', '_blank');
+	win = window.open('pdf/expertise.php?uid=$uid', '_blank');
 	win.focus();
 </script>
 ";
@@ -276,7 +276,7 @@ if ($_SESSION['level'] == "radiology") {
 												<?= HTMLFIRST . $row1['uid'] . HTMLLAST; ?>
 												<span>
 													<a style="text-decoration:none;" href="<?php echo "jnlp://" . $_SERVER['SERVER_NAME']; ?>:19898/weasis-pacs-connector/DCM_viewer.jnlp?studyUID=<?php echo $row1['uid']; ?>"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/eye22.png" data-toggle="tooltip" title="Dicom Viewer" style="width: 100%;"></span></a></span>
-												<a style="text-decoration:none;" class="" href="pdf/testpdf4.php?uid=<?= $row1['uid']; ?>" target="_blank">
+												<a style="text-decoration:none;" class="" href="pdf/expertise.php?uid=<?= $row1['uid']; ?>" target="_blank">
 													<span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/file.png" data-toggle="tooltip" title="PDF" style="width: 100%;"></span>
 												</a>
 											</p>

@@ -98,7 +98,7 @@ if (isset($_POST["save_approve"])) {
 		echo "
 			<script>
 				document.location.href= 'dicom.php';
-				win = window.open('pdf/testpdf4.php?uid=$uid', '_blank');
+				win = window.open('pdf/expertise.php?uid=$uid', '_blank');
 				win.focus();
 			</script>";
 	} else {
