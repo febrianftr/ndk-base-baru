@@ -35,7 +35,7 @@ define('MOBILELAST', '"target="_blank"><span class="btn btn-warning btn-inti"><i
 
 // Change doctor
 define('CHANGEDOCTORFIRST', '<a style="text-decoration: none;" href="changedoctorworklist.php?uid=');
-define('CHANGEDOCTORLAST', '" onclick=\'return confirm("Ubah dokter radiology yang membaca?");\'><span class="btn yellow darken-1 btn-intiwid1"><i class="fas fa-user-md"></i></span></a>');
+define('CHANGEDOCTORLAST', '" onclick=\'return confirm("Ubah dokter radiology yang membaca?");\'><span class="btn rgba-stylish-slight darken-1 btn-inti2"><i class="fas fa-user-md fa-lg"></i></span></a>');
 
 //radiant
 define('RADIANTFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="radiant://?n=paet&v=dcmPACS&n=pstv&v=0020000D&v=%22');

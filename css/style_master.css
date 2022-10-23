@@ -1229,7 +1229,7 @@ select {
   padding: 5px 2px;
   width: 20px;
   /*margin-right: 3px;*/
-  color: #fff;
+  /* color: #fff; */
   /*margin-bottom: 5px;*/
   font-size: 12px;
   height: 29px;
@@ -1845,7 +1845,7 @@ textarea {
 
 .wrap-search input[type=text] {
   width: 49%;
-  padding: 5px 25px;
+  padding: 5px 5px 5px 25px;
   margin: 2px 0;
   display: inline-block;
   border: 2px solid #d2c8c8;;
@@ -1854,7 +1854,7 @@ textarea {
   -webkit-transition: 0.5s;
   transition: 0.5s;
   outline: none;
-  font-size: 0.6vw;
+  font-size: 0.7vw;
   height: 34px;
 }
 

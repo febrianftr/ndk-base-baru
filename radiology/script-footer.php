@@ -154,3 +154,9 @@
         $(".disokin").fadeOut();
     })
 </script>
+
+<script>
+    if ($(window).width() < 1115) {
+        $('#logout2').removeClass('logout1');
+    }
+</script>
