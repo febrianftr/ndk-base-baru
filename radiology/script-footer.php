@@ -77,10 +77,10 @@
 <script>
     // untuk menampilkan data popup
     $(function() {
-        $(document).on('click', '.edit-record', function(e) {
+        $(document).on('click', '.edit-record2', function(e) {
             e.preventDefault();
-            $("#myModal").modal('show');
-            $.post('hasil2.php', {
+            $("#myModal2").modal('show');
+            $.post('hasil3.php', {
                     uid: $(this).attr('data-id')
                 },
                 function(html) {
@@ -115,23 +115,6 @@
             e.preventDefault();
             $("#modal-series").modal('show');
             $.post('../hasil-series.php', {
-                    uid: $(this).attr('data-id')
-                },
-                function(html) {
-                    $(".modal-body").html(html);
-                }
-            );
-        });
-    });
-    // end untuk menampilkan data popup
-</script>
-<script>
-    // untuk menampilkan data popup
-    $(function() {
-        $(document).on('click', '.edit-record2', function(e) {
-            e.preventDefault();
-            $("#myModal2").modal('show');
-            $.post('hasil3.php', {
                     uid: $(this).attr('data-id')
                 },
                 function(html) {

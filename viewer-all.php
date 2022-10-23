@@ -73,10 +73,6 @@ define('TELEGRAMSIGNATURELAST', '"><span class="btn text-secondary rgba-stylish-
 define('READMORESERIESFIRST', '<a href="#" class="hasil-series penawaran-a" data-id="');
 define('READMORESERIESLAST', '">Read More</a>');
 
-// pop up read more info
-define('READMOREINFOFIRST', '<a href="#" class="hasil-all penawaran-a" data-id=');
-define('READMOREINFOLAST', '"><span class="btn blue lighten-1 btn-intiwid1"><i class="fas fa-info" data-toggle="tooltip" title="Delete"></i></span></a>');
-
 // integrasi simrs
 define('SIMRS', '<i class="fas fa-exchange-alt text-info" style="font-size:0.5rem;" title="terintegrasi dengan SIMRS"></i>');
 

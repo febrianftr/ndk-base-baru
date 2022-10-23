@@ -2,7 +2,6 @@
 require 'function_radiology.php';
 require '../viewer-all.php';
 require '../default-value.php';
-require '../modal.php';
 session_start();
 
 $uid = $_GET['uid'];
@@ -159,7 +158,8 @@ if ($_SESSION['level'] == "radiology") { ?>
 	</style>
 
 	<body>
-		<?php include('sidebar.php'); ?>
+		<?php include('sidebar.php');
+		require '../modal.php'; ?>
 		<div class="container-fluid" id="main">
 			<div class="row">
 				<div id="content1">
@@ -377,10 +377,10 @@ if ($_SESSION['level'] == "radiology") { ?>
 													<div class="modal-dialog">
 														<div class="modal-content">
 															<div class="modal-header">
-																<h4 class="modal-title">Insert Tittle</h4><br />
+																<h4 class="modal-title">Insert Title</h4><br />
 																<button type="button" class="close" data-dismiss="modal">&times;</button>
 															</div>
-															<div class="modal-body">
+															<div class="modal-body-template">
 																<input class="form-control" type="text" name="title" value="" placeholder="Insert Tittle">
 															</div>
 															<div class="modal-footer">
@@ -390,49 +390,48 @@ if ($_SESSION['level'] == "radiology") { ?>
 														</div>
 													</div>
 												</div>
-
 											</div>
+											<!-- END OF POP UP -->
+											<div class="btn-bar-1">
+												<button class="btn btn-worklist3 btn-expertise" name="save_draft" onclick="return confirm('Are you sure save draft?');"><i class="fas fa-save"></i> Save Draft</button>
+											</div>
+											</form>
 										</div>
-										<!-- END OF POP UP -->
-										<div class="btn-bar-1">
-											<button class="btn btn-worklist3 btn-expertise" name="save_draft" onclick="return confirm('Are you sure save draft?');"><i class="fas fa-save"></i> Save Draft</button>
-										</div>
-										</form>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-lg-3">
-							<div class="div-right">
-								<div class="">
-									<input type="text" class="form-control" placeholder="search by tittle.. " id="myInput" style="margin: 9px 0px; width: 100%;">
-								</div>
-								<div class="template-save1">
-									Template Name
-								</div>
-								<div class="template-save" id="container-template">
-									<!-- <div id="content"></div> -->
-									<table border="1" id="mytemplate" class="type-choice mytemplate" style="width: 100%;">
-										<?php
-										$query_template = mysqli_query($conn, "SELECT * FROM xray_template WHERE username = '$username'");
-										while ($template = mysqli_fetch_assoc($query_template)) { ?>
-											<thead class="myTable">
-												<td class="td1">
-													<a href="worklist.php?uid=<?= $uid; ?>&template_id=<?= $template['template_id']; ?>"><?= $template['title']; ?></a>
-												</td>
-												<td style="text-align: center;">
-													<a href="#" class="view-template" data-id="<?= $template['template_id'];  ?>">
-														<i data-toggle="tooltip" title="View Template" class="fas fa-eye fa-lg"></i>
-													</a>
-												</td>
-												<td style="text-align: center;">
-													<a href="hapustemplate.php?uid=<?= $uid; ?>&amp;template_id=<?= $template['template_id']; ?>" data-id="<?= $template['template_id'];  ?>" onclick="return confirm('Teruskan Menghapus Data?');">
-														<i data-toggle="tooltip" title="Delete Template" class="fas fa-trash fa-lg"></i>
-													</a>
-												</td>
-											<?php } ?>
-											</thead>
-									</table>
+							<div class="col-lg-3">
+								<div class="div-right">
+									<div class="">
+										<input type="text" class="form-control" placeholder="search by tittle.. " id="myInput" style="margin: 9px 0px; width: 100%;">
+									</div>
+									<div class="template-save1">
+										Template Name
+									</div>
+									<div class="template-save" id="container-template">
+										<!-- <div id="content"></div> -->
+										<table border="1" id="mytemplate" class="type-choice mytemplate" style="width: 100%;">
+											<?php
+											$query_template = mysqli_query($conn, "SELECT * FROM xray_template WHERE username = '$username'");
+											while ($template = mysqli_fetch_assoc($query_template)) { ?>
+												<thead class="myTable">
+													<td class="td1">
+														<a href="worklist.php?uid=<?= $uid; ?>&template_id=<?= $template['template_id']; ?>"><?= $template['title']; ?></a>
+													</td>
+													<td style="text-align: center;">
+														<a href="#" class="view-template" data-id="<?= $template['template_id'];  ?>">
+															<i data-toggle="tooltip" title="View Template" class="fas fa-eye fa-lg"></i>
+														</a>
+													</td>
+													<td style="text-align: center;">
+														<a href="hapustemplate.php?uid=<?= $uid; ?>&amp;template_id=<?= $template['template_id']; ?>" data-id="<?= $template['template_id'];  ?>" onclick="return confirm('Teruskan Menghapus Data?');">
+															<i data-toggle="tooltip" title="Delete Template" class="fas fa-trash fa-lg"></i>
+														</a>
+													</td>
+												<?php } ?>
+												</thead>
+										</table>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -446,7 +445,6 @@ if ($_SESSION['level'] == "radiology") { ?>
 							<div class="modal-header">
 								<h4 class="modal-title">Report</h4>
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
-
 							</div>
 							<div class="modal-body">
 								<textarea style="width: 100%; height: 320px;"><?= $template['template_id'];  ?></textarea>
@@ -457,9 +455,8 @@ if ($_SESSION['level'] == "radiology") { ?>
 						</div>
 					</div>
 				</div>
+				<!-- Modal -->
 			</div>
-			<!-- Modal -->
-		</div>
 		</div>
 		<div class="footerindex">
 			<div class="">

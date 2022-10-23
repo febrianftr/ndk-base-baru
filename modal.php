@@ -1,4 +1,4 @@
-<!-- pop up hasil semua diget all -->
+<!-- pop up hasil semua (klik nama) -->
 <div class="modal" id="modal-all">
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
