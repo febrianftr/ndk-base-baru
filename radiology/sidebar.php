@@ -65,7 +65,6 @@ if (isset($_SESSION["username"])) {
             <ul class="sub-menu1 collapse" id="service">
                 <li id="workload1"><a href="workload.php">Expertise Approved</a></li>
                 <li id="report1"><a href="report.php"><?= $lang['download_excel'] ?></a></li>
-                <li id="query1"><a href="workload.php">Query Search</a></li>
             </ul>
 
             <li data-toggle="collapse" data-target="#template" class="collapsed">
