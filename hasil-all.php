@@ -1,51 +1,27 @@
 <?php
 require 'koneksi/koneksi.php';
 require 'default-value.php';
+require 'model/query-base-workload.php';
+require 'model/query-base-order.php';
+require 'model/query-base-study.php';
+require 'model/query-base-patient.php';
 
 $uid = $_POST['uid'];
 $row = mysqli_fetch_assoc(mysqli_query(
     $conn_pacsio,
-    "SELECT patient.pat_id, 
-    patient.pat_name, 
-    patient.pat_birthdate, 
-    patient.pat_sex,
-    study.study_iuid,
-    study.study_datetime,
-    study.accession_no,
-    study.ref_physician,
-    study.study_desc,
-    study.mods_in_study,
-    study.num_series,
-    study.num_instances,
-    study.retrieve_aets,
-    study.updated_time,
-    xray_order.mrn,
-    xray_order.address,
-    xray_order.name_dep,
-    xray_order.priority,
-    xray_order.named,
-    xray_order.contrast,
-    xray_order.radiographer_name,
-    xray_order.weight,
-    xray_order.dokrad_name,
-    xray_order.create_time,
-    xray_order.pat_state,
-    xray_order.spc_needs,
-    xray_order.payment,
-    xray_order.examed_at,
-    xray_order.fromorder,
-    xray_order.patientid AS no_foto,
-    xray_workload.priority_doctor,
-    xray_workload.status,
-    xray_workload.approved_at
-    FROM $database_pacsio.patient AS patient
-    JOIN $database_pacsio.study AS study
+    "SELECT 
+    $select_patient,
+    $select_study,
+    $select_order,
+    $select_workload
+    FROM $table_patient
+    JOIN $table_study
     ON patient.pk = study.patient_fk
-    LEFT JOIN $database_ris.xray_order AS xray_order
+    LEFT JOIN $table_order
     ON xray_order.uid = study.study_iuid
-    LEFT JOIN $database_ris.xray_workload AS xray_workload
+    LEFT JOIN $table_workload
     ON study.study_iuid = xray_workload.uid
-	WHERE study.study_iuid = '$uid'
+    WHERE study.study_iuid = '$uid'
     ORDER BY study.updated_time DESC"
 ));
 $pat_name = defaultValue($row['pat_name']);
@@ -61,7 +37,7 @@ $mods_in_study = defaultValue($row['mods_in_study']);
 $num_series = defaultValue($row['num_series']);
 $num_instances = defaultValue($row['num_instances']);
 $updated_time = defaultValueDateTime($row['updated_time']);
-$mrn = defaultValue($row['mrn']);
+$pat_id = defaultValue($row['pat_id']);
 $weight = defaultValue($row['weight']);
 $no_foto = defaultValue($row['no_foto']);
 $address = defaultValue($row['address']);
@@ -121,7 +97,7 @@ $fromorder = $row['fromorder'];
                 <tr>
                     <td>MRN</td>
                     <td>&nbsp;: </td>
-                    <td align="left">&nbsp; <?= $mrn; ?></td>
+                    <td align="left">&nbsp; <?= $pat_id; ?></td>
                 </tr>
                 <tr>
                     <td>No Foto</td>

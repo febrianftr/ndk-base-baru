@@ -3,49 +3,51 @@ session_start();
 require 'koneksi/koneksi.php';
 require 'viewer-all.php';
 require 'default-value.php';
+require 'model/query-base-workload.php';
+require 'model/query-base-order.php';
+require 'model/query-base-study.php';
+require 'model/query-base-patient.php';
+require 'model/query-base-dokter-radiology.php';
+
 $username = $_SESSION['username'];
+$level = $_SESSION['level'];
 
 // kolom untuk order by 
 $columns = array('pk', 'pk', 'status', 'pat_name', 'pat_id', 'patientid', 'pat_birthdate', 'pat_sex', 'study_desc', 'pk', 'mods_in_study', 'named', 'name_dep', 'dokrad_name', 'radiographer_name', 'updated_time', 'approved_at', 'pk');
 
-$query_base = "SELECT patient.pat_id, 
-          patient.pat_name, 
-          patient.pat_birthdate, 
-          patient.pat_sex,
-          study.study_iuid,
-          study.study_datetime,
-          study.accession_no,
-          study.ref_physician,
-          study.study_desc,
-          study.mods_in_study,
-          study.num_series,
-          study.num_instances,
-          study.retrieve_aets,
-          study.updated_time,
-          xray_order.mrn,
-          xray_order.address,
-          xray_order.name_dep,
-          xray_order.named,
-          xray_order.radiographer_name,
-          xray_order.dokrad_name,
-          xray_order.create_time,
-          xray_order.pat_state,
-          xray_order.spc_needs,
-          xray_order.payment,
-          xray_order.examed_at,
-          xray_order.fromorder,
-          xray_order.patientid AS no_foto,
-          xray_workload.status,
-          xray_workload.approved_at
-          FROM pacsio.patient AS patient
-          JOIN pacsio.study AS study
-          ON patient.pk = study.patient_fk
-          LEFT JOIN intimedika_base.xray_order AS xray_order
-          ON xray_order.uid = study.study_iuid
-          LEFT JOIN intimedika_base.xray_workload AS xray_workload
-          ON study.study_iuid = xray_workload.uid";
+$row_dokrad = mysqli_fetch_assoc(mysqli_query(
+  $conn,
+  "SELECT $select_dokter_radiology 
+  FROM $table_dokter_radiology 
+  WHERE username = '$username'"
+));
+$pk = $row_dokrad['pk'];
 
-$query = $query_base . ' WHERE ';
+// query ketika login radiologi
+$kondisi = " WHERE xray_workload.status = 'approved'
+AND xray_workload.pk_dokter_radiology = '$pk'";
+
+$query_base = "SELECT 
+              $select_patient,
+              $select_study,
+              $select_order,
+              $select_workload
+              FROM $table_patient
+              JOIN $table_study
+              ON patient.pk = study.patient_fk
+              LEFT JOIN $table_order
+              ON xray_order.uid = study.study_iuid
+              LEFT JOIN $table_workload
+              ON study.study_iuid = xray_workload.uid";
+
+// kondisi jika login radiology
+if ($level == 'radiology') {
+  $query =  $query_base . $kondisi . ' AND ';
+} else {
+  // kondisi jika login selain radiology
+  $query = $query_base . ' WHERE ';
+  $kondisi = '';
+}
 
 if ($_POST["is_date_search"] == "yes") {
   $from = date_create($_POST["from_updated_time"]);
@@ -60,7 +62,7 @@ if ($_POST["is_date_search"] == "yes") {
 // kolom untuk mencari LIKE masing2 kolom (SEARCHING)
 if (isset($_POST["search"]["value"])) {
   $query .= '
-  (mrn LIKE "%' . $_POST["search"]["value"] . '%" 
+  (pat_id LIKE "%' . $_POST["search"]["value"] . '%" 
   OR patientid LIKE "%' . $_POST["search"]["value"] . '%" 
   OR pat_name LIKE "%' . $_POST["search"]["value"] . '%" 
   OR pat_birthdate LIKE "%' . $_POST["search"]["value"] . '%"
@@ -147,6 +149,7 @@ while ($row = mysqli_fetch_array($result)) {
   $fromorder = $row['fromorder'];
   $approved_at = defaultValueDateTime($row['approved_at']);
   $spendtime = spendTime($updated_time, $approved_at, $row['status']);
+  $pk_dokter_radiology = $row['pk_dokter_radiology'];
 
   // kondisi session level ketika login
   $level = $_SESSION['level'];
@@ -180,6 +183,17 @@ while ($row = mysqli_fetch_array($result)) {
 
   $detail = '<a href="#" class="hasil-all penawaran-a" data-id="' . $row['study_iuid'] . '">' . removeCharacter($pat_name) . '</a>';
 
+
+  // kondisi mencari ditabel dokter radiology
+  $row_dokrad = mysqli_fetch_assoc(mysqli_query(
+    $conn,
+    "SELECT $select_dokter_radiology 
+      FROM $table_dokter_radiology 
+      WHERE pk = '$pk_dokter_radiology'"
+  ));
+
+  $dokrad_fullname = defaultValue($row_dokrad['dokrad_fullname']);
+
   $sub_array = array();
   $sub_array[] = $i;
   $sub_array[] =
@@ -196,7 +210,7 @@ while ($row = mysqli_fetch_array($result)) {
   $sub_array[] = $mods_in_study;
   $sub_array[] = $named;
   $sub_array[] = $name_dep;
-  $sub_array[] = $dokrad_name;
+  $sub_array[] = $dokrad_fullname;
   $sub_array[] = $radiographer_name;
   $sub_array[] = $updated_time;
   $sub_array[] = $approved_at;
@@ -213,7 +227,7 @@ function get_all_data($val_con, $val_query)
 
 $output = array(
   "draw"    => intval($_POST["draw"]),
-  "recordsTotal"  =>  get_all_data($conn_pacsio, $query_base),
+  "recordsTotal"  =>  get_all_data($conn_pacsio, $query_base . $kondisi),
   "recordsFiltered" => $number_filter_row,
   "data"    => $data
 );

@@ -2,39 +2,20 @@
 
 require '../koneksi/koneksi.php';
 require '../default-value.php';
+require '../model/query-base-order.php';
+require '../model/query-base-study.php';
+require '../model/query-base-mwl-item.php';
 
 $query = mysqli_query(
     $conn,
-    "SELECT xray_order.uid, 
-    xray_order.acc, 
-    xray_order.patientid, 
-    xray_order.mrn,
-    xray_order.name,
-    xray_order.address,
-    xray_order.weight,
-    xray_order.named,
-    xray_order.dokrad_name,
-    xray_order.priority,
-    xray_order.pat_state,
-    xray_order.spc_needs,
-    xray_order.payment,
-    xray_order.sex,
-    xray_order.birth_date,
-    xray_order.xray_type_code,
-    xray_order.radiographer_name,
-    xray_order.prosedur,
-    xray_order.create_time,
-    xray_order.schedule_date,
-    xray_order.schedule_time,
-    xray_order.fromorder,
-    xray_order.deleted_at,
-    mwl_item.sps_id, 
-    mwl_item.study_iuid AS study_iuid_mppsio,
+    "SELECT 
+    $select_order,
+    $select_mwl_item,
     study.study_iuid AS study_iuid_pacsio
-    FROM $database_ris.xray_order AS xray_order
-    LEFT JOIN mppsio.mwl_item AS mwl_item
+    FROM $table_order
+    LEFT JOIN $table_mwl_item
     ON xray_order.uid = mwl_item.study_iuid
-    LEFT JOIN pacsio.study AS study
+    LEFT JOIN $table_study
     ON study.study_iuid = xray_order.uid
     ORDER BY xray_order.create_time DESC
     LIMIT 1000"

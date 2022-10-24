@@ -2,6 +2,7 @@
 
 require '../koneksi/koneksi.php';
 require '../default-value.php';
+require '../model/query-base-mwl-item.php';
 
 $query = mysqli_query(
     $conn_mppsio,
@@ -12,9 +13,9 @@ $query = mysqli_query(
     accession_no, 
     modality, 
     start_datetime, 
-    mwl_item.created_time,
-    study_iuid
-    FROM mwl_item JOIN patient
+    $select_mwl_item
+    FROM $table_mwl_item
+    JOIN patient
     ON mwl_item.patient_fk = patient.pk
     ORDER BY mwl_item.created_time DESC"
 );
@@ -38,10 +39,10 @@ while ($row = mysqli_fetch_array($query)) {
         $pat_sex = '-';
     }
 
-    $detail = '<a href="#" class="exam-room penawaran-a" data-id="' . $row['study_iuid'] . '">' . $pat_name . '</a>';
+    $detail = '<a href="#" class="exam-room penawaran-a" data-id="' . $row['study_iuid_mppsio'] . '">' . $pat_name . '</a>';
 
     $delete = '<a style="text-decoration:none;" 
-                    class="ahref-edit" href="deleteexam.php?study_iuid=' . $row['study_iuid'] . '&pat_name=' . $pat_name . '" 
+                    class="ahref-edit" href="deleteexam.php?study_iuid=' . $row['study_iuid_mppsio'] . '&pat_name=' . $pat_name . '" 
                     onclick=\'return confirm("Delete data?");\'>
                     <span class="btn red lighten-1 btn-intiwid1">
                         <i class="fas fa-trash-alt" data-toggle="tooltip" title="Delete"></i>

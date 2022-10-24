@@ -29,6 +29,57 @@ function update_draft($value)
 	return mysqli_affected_rows($conn);
 }
 
+function insert_template_workload($post_exam_temp)
+{
+	global $conn;
+	$title = $post_exam_temp['title'];
+	$fill = $post_exam_temp['fill'];
+	$username = $_SESSION['username'];
+	if (empty($title)) {
+		echo "<script>alert('Title belum diisi!');</script>";
+	} else {
+		$q2 = mysqli_query($conn, 'SELECT MAX(template_id) as pdf from xray_template');
+		$row2 = mysqli_fetch_assoc($q2);
+		$ai2 = $row2['pdf'] + 1;
+		$query = "INSERT INTO xray_template
+				VALUES 
+				('$ai2','$title','$fill','$username')
+				";
+		mysqli_query($conn, $query);
+
+		return mysqli_affected_rows($conn);
+	}
+}
+
+function insert_workload($value)
+{
+	global $conn;
+	$uid = $value['uid'];
+	$fill = addslashes($value['fill']);
+	$username = $value['username'];
+	$priority_doctor = $value['priority_doctor'];
+
+	$dokter_radiologi = mysqli_fetch_assoc(mysqli_query(
+		$conn,
+		"SELECT * FROM xray_dokter_radiology WHERE username = '$username'"
+	));
+	$pk = $dokter_radiologi['pk'];
+
+	mysqli_query(
+		$conn,
+		"UPDATE xray_workload 
+		SET pk_dokter_radiology = '$pk',
+		xray_workload.status = 'approved', 
+		fill = '$fill',
+		approved_at = NOW(),
+		priority_doctor = '$priority_doctor'
+		WHERE uid = '$uid'
+		"
+	);
+
+	return mysqli_affected_rows($conn);
+}
+
 function ubahdokter($uid)
 {
 	global $conn;
@@ -140,57 +191,6 @@ function ubahdokterworklist($post)
 	WHERE uid = '$uid'
 	";
 	mysqli_query($conn, $query1);
-
-	return mysqli_affected_rows($conn);
-}
-
-function insert_template_workload($post_exam_temp)
-{
-	global $conn;
-	$title = $post_exam_temp['title'];
-	$fill = $post_exam_temp['fill'];
-	$username = $_SESSION['username'];
-	if (empty($title)) {
-		echo "<script>alert('Title belum diisi!');</script>";
-	} else {
-		$q2 = mysqli_query($conn, 'SELECT MAX(template_id) as pdf from xray_template');
-		$row2 = mysqli_fetch_assoc($q2);
-		$ai2 = $row2['pdf'] + 1;
-		$query = "INSERT INTO xray_template
-				VALUES 
-				('$ai2','$title','$fill','$username')
-				";
-		mysqli_query($conn, $query);
-
-		return mysqli_affected_rows($conn);
-	}
-}
-
-function insert_workload($value)
-{
-	global $conn;
-	$uid = $value['uid'];
-	$fill = addslashes($value['fill']);
-	$username = $value['username'];
-	$priority_doctor = $value['priority_doctor'];
-
-	$dokter_radiologi = mysqli_fetch_assoc(mysqli_query(
-		$conn,
-		"SELECT * FROM xray_dokter_radiology WHERE username = '$username'"
-	));
-	$dokradid = $dokter_radiologi['dokradid'];
-
-	mysqli_query(
-		$conn,
-		"UPDATE xray_workload 
-		SET dokradid = '$dokradid',
-		xray_workload.status = 'approved', 
-		fill = '$fill',
-		approved_at = NOW(),
-		priority_doctor = '$priority_doctor'
-		WHERE uid = '$uid'
-		"
-	);
 
 	return mysqli_affected_rows($conn);
 }

@@ -1,11 +1,13 @@
 <?php
 
 require 'koneksi/koneksi.php';
-
 require 'viewer-all.php';
-
 require 'default-value.php';
-
+require 'model/query-base-workload.php';
+require 'model/query-base-order.php';
+require 'model/query-base-study.php';
+require 'model/query-base-patient.php';
+require 'model/query-base-dokter-radiology.php';
 session_start();
 
 $username = $_SESSION['username'];
@@ -13,7 +15,9 @@ $username = $_SESSION['username'];
 // kondisi jika ada di dicom.php
 $row_dokrad = mysqli_fetch_assoc(mysqli_query(
     $conn,
-    "SELECT * FROM xray_dokter_radiology WHERE username = '$username'"
+    "SELECT $select_dokter_radiology 
+    FROM $table_dokter_radiology 
+    WHERE username = '$username'"
 ));
 $dokradid = $row_dokrad['dokradid'];
 $http_referer = $_SERVER['HTTP_REFERER'] ?? '';
@@ -22,7 +26,7 @@ $dicom = $explode[1] ?? '';
 if ($dicom == '/dicom.php') {
     // (dicom.php) kondisi ketika dokradid is null (tidak integrasi simrs) dan ketika login dokter radiologi. berdasarkan priority CITO, updated_time DESC
     $kondisi = "WHERE (xray_workload.status = 'waiting' AND xray_order.dokradid = '$dokradid')
-                OR xray_order.uid IS NULL
+                OR (xray_workload.status = 'waiting' AND xray_order.uid IS NULL)
                 ORDER BY xray_order.priority IS NULL, xray_order.priority ASC, study.updated_time DESC 
                 LIMIT 3000";
 } else {
@@ -32,43 +36,17 @@ if ($dicom == '/dicom.php') {
 
 $query = mysqli_query(
     $conn_pacsio,
-    "SELECT patient.pat_id, 
-    patient.pat_name, 
-    patient.pat_birthdate, 
-    patient.pat_sex,
-    study.study_iuid,
-    study.study_datetime,
-    study.accession_no,
-    study.ref_physician,
-    study.study_desc,
-    study.mods_in_study,
-    study.num_series,
-    study.num_instances,
-    study.retrieve_aets,
-    study.updated_time,
-    xray_order.mrn,
-    xray_order.address,
-    xray_order.name_dep,
-    xray_order.named,
-    xray_order.radiographer_name,
-    xray_order.dokrad_name,
-    xray_order.create_time,
-    xray_order.priority,
-    xray_order.pat_state,
-    xray_order.spc_needs,
-    xray_order.payment,
-    xray_order.examed_at,
-    xray_order.fromorder,
-    xray_order.patientid AS no_foto,
-    xray_workload.status,
-    xray_workload.fill,
-    xray_workload.approved_at
-    FROM $database_pacsio.patient AS patient
-    JOIN $database_pacsio.study AS study
+    "SELECT 
+    $select_patient,
+    $select_study,
+    $select_order,
+    $select_workload
+    FROM $table_patient
+    JOIN $table_study
     ON patient.pk = study.patient_fk
-    LEFT JOIN $database_ris.xray_order AS xray_order
+    LEFT JOIN $table_order
     ON xray_order.uid = study.study_iuid
-    LEFT JOIN $database_ris.xray_workload AS xray_workload
+    LEFT JOIN $table_workload
     ON study.study_iuid = xray_workload.uid
     $kondisi"
 );
@@ -104,6 +82,7 @@ while ($row = mysqli_fetch_array($query)) {
     $fill = $row['fill'];
     $approved_at = defaultValueDateTime($row['approved_at']);
     $spendtime = spendTime($updated_time, $approved_at, $row['status']);
+    $pk_dokter_radiology = $row['pk_dokter_radiology'];
 
     $detail = '<a href="#" class="hasil-all penawaran-a" data-id="' . $row['study_iuid'] . '">' . removeCharacter($pat_name) . '</a>';
 
@@ -143,6 +122,16 @@ while ($row = mysqli_fetch_array($query)) {
         $priority_style = '';
     }
 
+    // kondisi mencari ditabel dokter radiology
+    $row_dokrad = mysqli_fetch_assoc(mysqli_query(
+        $conn,
+        "SELECT $select_dokter_radiology 
+        FROM $table_dokter_radiology 
+        WHERE pk = '$pk_dokter_radiology'"
+    ));
+
+    $dokrad_fullname = defaultValue($row_dokrad['dokrad_fullname']);
+
     $data[] = [
         "no" => $i,
         "report" => $aksi,
@@ -158,7 +147,7 @@ while ($row = mysqli_fetch_array($query)) {
         "mods_in_study" => $mods_in_study,
         "named" => $named,
         "name_dep" => $name_dep,
-        "dokrad_name" => $dokrad_name,
+        "dokrad_name" => $dokrad_fullname,
         "radiographer_name" => $radiographer_name,
         "updated_time" => $updated_time,
         "approve_date" => $approved_at,

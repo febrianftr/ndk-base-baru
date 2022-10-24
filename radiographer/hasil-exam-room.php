@@ -1,6 +1,7 @@
 <?php
 require '../koneksi/koneksi.php';
 require '../default-value.php';
+require '../model/query-base-mwl-item.php';
 
 $uid = $_POST['uid'];
 $row = mysqli_fetch_assoc(mysqli_query(
@@ -12,13 +13,9 @@ $row = mysqli_fetch_assoc(mysqli_query(
     accession_no, 
     modality, 
     start_datetime, 
-    mwl_item.created_time,
-    study_iuid,
-    sps_id,
-    station_aet,
-    perf_physician,
-    req_proc_id
-    FROM mwl_item JOIN patient
+    $select_mwl_item
+    FROM $table_mwl_item
+    JOIN patient
     ON mwl_item.patient_fk = patient.pk
     WHERE mwl_item.study_iuid = '$uid'
     ORDER BY patient.created_time DESC"
@@ -38,7 +35,7 @@ $row = mysqli_fetch_assoc(mysqli_query(
                 <tr>
                     <td>study iuid</td>
                     <td>&nbsp;: </td>
-                    <td align="left">&nbsp; <?= defaultValue($row['study_iuid']); ?></td>
+                    <td align="left">&nbsp; <?= defaultValue($row['study_iuid_mppsio']); ?></td>
                 </tr>
                 <tr>
                     <td>Nama</td>

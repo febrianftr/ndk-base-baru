@@ -2,50 +2,28 @@
 require 'function_radiology.php';
 require '../viewer-all.php';
 require '../default-value.php';
+require '../model/query-base-study.php';
+require '../model/query-base-patient.php';
+require '../model/query-base-order.php';
+require '../model/query-base-workload.php';
+require '../model/query-base-template.php';
+
 session_start();
 
 $uid = $_GET['uid'];
 $username = $_SESSION['username'];
 $row = mysqli_fetch_assoc(mysqli_query(
 	$conn,
-	"SELECT patient.pat_id, 
-    patient.pat_name, 
-    patient.pat_birthdate, 
-    patient.pat_sex,
-	study.pk,
-    study.study_iuid,
-    study.study_datetime,
-    study.accession_no,
-    study.ref_physician,
-    study.study_desc,
-    study.mods_in_study,
-    study.num_series,
-    study.num_instances,
-    study.retrieve_aets,
-    study.updated_time,
-    xray_order.mrn,
-    xray_order.address,
-    xray_order.name_dep,
-    xray_order.named,
-    xray_order.radiographer_name,
-    xray_order.dokrad_name,
-    xray_order.create_time,
-    xray_order.priority,
-    xray_order.pat_state,
-    xray_order.spc_needs,
-    xray_order.payment,
-    xray_order.examed_at,
-    xray_order.fromorder,
-    xray_order.patientid AS no_foto,
-    xray_workload.status,
-    xray_workload.fill,
-    xray_workload.approved_at
-    FROM $database_pacsio.patient AS patient
-    JOIN $database_pacsio.study AS study
+	"SELECT $select_patient,
+	$select_study,
+    $select_order,
+    $select_workload
+    FROM $table_patient
+    JOIN $table_study
     ON patient.pk = study.patient_fk
-    LEFT JOIN $database_ris.xray_order AS xray_order
+    LEFT JOIN $table_order
     ON xray_order.uid = study.study_iuid
-    LEFT JOIN $database_ris.xray_workload AS xray_workload
+    LEFT JOIN $table_workload
     ON study.study_iuid = xray_workload.uid
 	WHERE study_iuid = '$uid'"
 ));
@@ -78,14 +56,16 @@ $status = styleStatus($row['status']);
 $fill = $row['fill'];
 $approved_at = defaultValueDateTime($row['approved_at']);
 $spendtime = spendTime($updated_time, $approved_at, $row['status']);
-$pk_study = $row['pk'];
+$pk_study = $row['pk_study'];
 $detail_uid = '<a href="#" class="hasil-all penawaran-a" data-id="' . $uid . '">' . removeCharacter($pat_name) . '</a>';
 
 // query mencari berdasarkan pat_id (mrn)
 $query_mrn = mysqli_query(
 	$conn,
-	"SELECT * FROM $database_pacsio.patient AS patient
-	JOIN $database_pacsio.study AS study
+	"SELECT $select_patient,
+	$select_study 
+	FROM $table_patient
+	JOIN $table_study
 	ON patient.pk = study.patient_fk 
 	WHERE pat_id = '$row[pat_id]'
 	AND study.study_iuid != '$uid'
@@ -351,7 +331,9 @@ if ($_SESSION['level'] == "radiology") { ?>
 										@$template_id = $_GET['template_id'];
 										$template = mysqli_fetch_assoc(mysqli_query(
 											$conn,
-											"SELECT * FROM xray_template WHERE template_id = '$template_id'"
+											"SELECT $select_template 
+											FROM $table_template
+											WHERE template_id = '$template_id'"
 										));
 										if ($template_id == "") {
 											$fill = $row['fill'];
@@ -412,7 +394,12 @@ if ($_SESSION['level'] == "radiology") { ?>
 										<!-- <div id="content"></div> -->
 										<table border="1" id="mytemplate" class="type-choice mytemplate" style="width: 100%;">
 											<?php
-											$query_template = mysqli_query($conn, "SELECT * FROM xray_template WHERE username = '$username'");
+											$query_template = mysqli_query(
+												$conn,
+												"SELECT $select_template 
+												FROM $table_template 
+												WHERE username = '$username'"
+											);
 											while ($template = mysqli_fetch_assoc($query_template)) { ?>
 												<thead class="myTable">
 													<td class="td1">

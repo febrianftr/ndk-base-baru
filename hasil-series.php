@@ -2,15 +2,17 @@
 require 'koneksi/koneksi.php';
 require 'viewer-all.php';
 require 'default-value.php';
+require 'model/query-base-patient.php';
+require 'model/query-base-study.php';
+require 'model/query-base-series.php';
+
 $uid = $_POST['uid'];
 $row = mysqli_fetch_assoc(mysqli_query(
 	$conn_pacsio,
-	"SELECT patient.pat_name,
-	patient.pat_id,
-	patient.pat_sex,
-	study.pk,
-	study.study_desc
-	FROM patient JOIN study
+	"SELECT $select_patient,
+	$select_study
+	FROM $table_patient
+	JOIN $table_study
 	ON patient.pk = study.patient_fk 
 	WHERE study_iuid = '$uid'"
 ));
@@ -63,10 +65,13 @@ $row = mysqli_fetch_assoc(mysqli_query(
 						<th>Create Time</th>
 					</tr>
 					<?php
-					$pk_study = $row['pk'];
+					$pk_study = $row['pk_study'];
 					$query = mysqli_query(
 						$conn_pacsio,
-						"SELECT series_desc, body_part, src_aet, modality, num_instances, created_time FROM series WHERE study_fk = '$pk_study'"
+						"SELECT
+						$select_series 
+						FROM $table_series
+						WHERE study_fk = '$pk_study'"
 					);
 					while ($row1 = mysqli_fetch_assoc($query)) {
 					?>
