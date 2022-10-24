@@ -130,7 +130,13 @@ while ($row = mysqli_fetch_array($query)) {
         WHERE pk = '$pk_dokter_radiology'"
     ));
 
-    $dokrad_fullname = defaultValue($row_dokrad['dokrad_fullname']);
+    if ($row['status'] == 'waiting') {
+        // jika status waiting kalo ada dokradid di xray_order tampilkan di xray_order
+        $dokrad_name = defaultValue($row['dokrad_name']);
+    } else if ($row['status'] == 'approved') {
+        // jika status approved ambil data dari pk_dokter_radiology tabel xray_dokter_radiology
+        $dokrad_name = defaultValue($row_dokrad['dokrad_fullname']);
+    }
 
     $data[] = [
         "no" => $i,
@@ -147,7 +153,7 @@ while ($row = mysqli_fetch_array($query)) {
         "mods_in_study" => $mods_in_study,
         "named" => $named,
         "name_dep" => $name_dep,
-        "dokrad_name" => $dokrad_fullname,
+        "dokrad_name" => $dokrad_name,
         "radiographer_name" => $radiographer_name,
         "updated_time" => $updated_time,
         "approve_date" => $approved_at,

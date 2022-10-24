@@ -5,6 +5,7 @@ require 'model/query-base-workload.php';
 require 'model/query-base-order.php';
 require 'model/query-base-study.php';
 require 'model/query-base-patient.php';
+require 'model/query-base-dokter-radiology.php';
 
 $uid = $_POST['uid'];
 $row = mysqli_fetch_assoc(mysqli_query(
@@ -47,7 +48,6 @@ $contrast = defaultValue($row['contrast']);
 $priority = defaultValue($row['priority']);
 $priority_doctor = defaultValue($row['priority_doctor']);
 $radiographer_name = defaultValue($row['radiographer_name']);
-$dokrad_name = defaultValue($row['dokrad_name']);
 $create_time = defaultValueDateTime($row['create_time']);
 $pat_state = defaultValue($row['pat_state']);
 $spc_needs = defaultValue($row['spc_needs']);
@@ -56,6 +56,24 @@ $status = styleStatus($row['status']);
 $approved_at = defaultValueDateTime($row['approved_at']);
 $spendtime = spendTime($updated_time, $approved_at, $row['status']);
 $fromorder = $row['fromorder'];
+$pk_dokter_radiology = $row['pk_dokter_radiology'];
+
+// kondisi mencari ditabel dokter radiology
+$row_dokrad = mysqli_fetch_assoc(mysqli_query(
+    $conn,
+    "SELECT $select_dokter_radiology 
+    FROM $table_dokter_radiology 
+    WHERE pk = '$pk_dokter_radiology'"
+));
+
+if ($row['status'] == 'waiting') {
+    // jika status waiting kalo ada dokradid di xray_order tampilkan di xray_order
+    $dokrad_name = defaultValue($row['dokrad_name']);
+} else if ($row['status'] == 'approved') {
+    // jika status approved ambil data dari pk_dokter_radiology tabel xray_dokter_radiology
+    $dokrad_name = defaultValue($row_dokrad['dokrad_fullname']);
+}
+
 ?>
 <style>
     .fill {
