@@ -192,7 +192,7 @@ while ($row = mysqli_fetch_array($result)) {
       WHERE pk = '$pk_dokter_radiology'"
   ));
 
-  if ($row['status'] == 'waiting') {
+  if ($row['status'] == 'waiting' || $row['status'] == '') {
     // jika status waiting kalo ada dokradid di xray_order tampilkan di xray_order
     $dokrad_name = defaultValue($row['dokrad_name']);
   } else if ($row['status'] == 'approved') {
