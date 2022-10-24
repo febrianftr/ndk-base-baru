@@ -388,12 +388,12 @@
             </ul>
         </li>
         <li id="settings1">
-            <a href="password.php">
+            <a href="settings.php">
                 <i class="fa fa-wrench fa-lg"></i>
                 <span class="link_name"><?= $lang['settings'] ?></span>
             </a>
             <ul class="sub-menu blank">
-                <li><a class="link_name" href="password.php"><?= $lang['settings'] ?></a></li>
+                <li><a class="link_name" href="settings.php"><?= $lang['settings'] ?></a></li>
             </ul>
         </li>
 

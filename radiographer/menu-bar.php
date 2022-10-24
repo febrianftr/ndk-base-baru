@@ -103,7 +103,7 @@ $radiographer_name = $row10['radiographer_name'] . ' ' . $row10['radiographer_la
 
 
             <!-- <li><span class="center-menu"><a href="about.php"><img style="width: 30px;" src="../icon-menubar/new_icon/about.png"><br class="br-menu"><?= $lang['about'] ?></a></span></li> -->
-            <li><span class="center-menu"><a href="password.php"><img style="width: 30px;" src="../icon-menubar/new_icon/settings.png"><br class="br-menu"><?= $lang['settings'] ?></a></span></li>
+            <li><span class="center-menu"><a href="settings.php"><img style="width: 30px;" src="../icon-menubar/new_icon/settings.png"><br class="br-menu"><?= $lang['settings'] ?></a></span></li>
 
 
             <?php

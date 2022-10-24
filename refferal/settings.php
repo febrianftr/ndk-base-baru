@@ -11,7 +11,7 @@ if (isset($_POST['submit'])) {
   if ($password == $passwordulang) {
     password($_POST);
     echo "<script>alert('Password Changed');
-document.location.href='password.php';
+document.location.href='settings.php';
 </script>";
   } else {
     echo "<script>alert('password tidak sama');</script>";
@@ -46,16 +46,14 @@ if ($_SESSION['level'] == "refferal") {
           <div class="container-fluid">
             <div class="about-inti">
               <div class="row">
-                <?php if ($username != "demo2") { ?>
-                  <div class="col-xs-1 settingclass">
-                    <a href="#" data-toggle="modal" data-target="#changePw" style="text-decoration: none;">
-                      <div class="thumbnail">
-                        <img src="../icon-menubar/password.svg">
-                        <center><?= $lang['change_pw'] ?></center>
-                      </div>
-                    </a>
-                  </div>
-                <?php } ?>
+                <!-- <div class="col-xs-1 settingclass">
+                  <a href="#" data-toggle="modal" data-target="#changePw" style="text-decoration: none;">
+                    <div class="thumbnail">
+                      <img src="../icon-menubar/password.svg">
+                      <center><?= $lang['change_pw'] ?></center>
+                    </div>
+                  </a>
+                </div> -->
                 <div class="col-xs-1 settingclass">
                   <a href="#" data-toggle="modal" data-target="#changeLanguage" style="text-decoration: none;">
                     <div class="thumbnail">
@@ -64,17 +62,7 @@ if ($_SESSION['level'] == "refferal") {
                     </div>
                   </a>
                 </div>
-                <!-- <div class="col-xs-1 settingclass">
-                    <a href="recyclebinindex.php" style="text-decoration: none;">
-                      <div class="thumbnail">
-                        <img src="../icon-menubar/recyclebin.svg">
-                        <center>Recycle Bin</center>
-                      </div>
-                    </a>
-                  </div> -->
               </div>
-
-
               <!-- Modal -->
               <div class="modal fade" id="changeLanguage" role="dialog">
                 <div class="modal-dialog">
@@ -86,8 +74,6 @@ if ($_SESSION['level'] == "refferal") {
                       <h4 class="modal-title"><?= $lang['change_language'] ?></h4>
                     </div>
                     <div class="modal-body">
-
-
                       <div class="btn-group btn-group-justified" role="group" aria-label="...">
                         <div class="btn-group" role="group">
                           <a style="text-decoration: none;" href="?lang=en"><button type="button" class="btn btn-primary"><img style="width: 20px;" src="../image/usa.png"> English&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></a>

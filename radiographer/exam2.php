@@ -345,25 +345,6 @@ if ($_SESSION['level'] == "radiographer") {
 				});
 			});
 		</script>
-
-		<script>
-			// untuk menampilkan data popup
-			$(function() {
-				$(document).on('click', '.edit-record2', function(e) {
-					e.preventDefault();
-					$("#myModal").modal('show');
-					$.post('hasil11.php', {
-							pk: $(this).attr('data-id')
-						},
-						function(html) {
-							$(".detail-targeting2").html(html);
-						}
-					);
-				});
-			});
-			// end untuk menampilkan data popup
-		</script>
-
 	</body>
 
 	</html>

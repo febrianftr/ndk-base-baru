@@ -67,12 +67,6 @@ $name = $row10['ad_name'] . ' ' . $row10['ad_lastname'];
                     <li><a href="?lang=id"><img style="width: 20px;" src="../image/indonesia.png"> Bahasa&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
                   </ul>
                 </li>
-
-                <!-- <li><center class="center-menu"><a href="query-search.php"><img style="width: 30px;" src="../icon-menubar/medical-file.png"><br class="br-menu">Query</a></center></li> -->
-
-
-
-
                 <li>
                   <center><a href="logout.php"><img style="width: 30px;" src="../icon-menubar/new_icon/logout.png"><br><?= $lang['logout'] ?></a></center>
                 </li>

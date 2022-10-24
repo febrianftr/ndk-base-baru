@@ -22,12 +22,12 @@ if ($_SESSION['username'] == 'rafdi') {
 
 
         <div id="content1">
-          
+
           <div class="col-12" style="padding-left: 0;">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                <li class="breadcrumb-item"><a href="password.php">Settings</a></li>
+                <li class="breadcrumb-item"><a href="settings.php">Settings</a></li>
                 <li class="breadcrumb-item active">
                   View Complaint
                 </li>
@@ -37,50 +37,50 @@ if ($_SESSION['username'] == 'rafdi') {
           <div class="container-fluid">
 
             <div class="about-inti back-search" style="padding: 10px;">
-            <?php
-          $date = date('d-m-Y', strtotime("-30 days"));
-          $date2 = date('d-m-Y');
-          ?>
-          <form action="prosesexportexcelcomplaint.php" method="post">
-            <div class="container-fluid">
-              <div class="row">
-                <div style="padding: 0px;" class="col-sm-3 input-date">  
-                  <div class="wrap-search">
-                    <span class="date-icon">
-                      <input type="text" name="From" id="From" class="form-control" placeholder="From Date" value="<?= $date ?>" autocomplete="off" />
-                    </span>
-                    <span class="date-icon">
-                      <input type="text" name="to" id="to" class="form-control" placeholder="To Date" value="<?= $date2 ?>" autocomplete="off" /><br></span>
+              <?php
+              $date = date('d-m-Y', strtotime("-30 days"));
+              $date2 = date('d-m-Y');
+              ?>
+              <form action="prosesexportexcelcomplaint.php" method="post">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div style="padding: 0px;" class="col-sm-3 input-date">
+                      <div class="wrap-search">
+                        <span class="date-icon">
+                          <input type="text" name="From" id="From" class="form-control" placeholder="From Date" value="<?= $date ?>" autocomplete="off" />
+                        </span>
+                        <span class="date-icon">
+                          <input type="text" name="to" id="to" class="form-control" placeholder="To Date" value="<?= $date2 ?>" autocomplete="off" /><br></span>
+                      </div>
+                    </div>
+                    <div style="padding: 0px; margin-top:6px;" class="col-sm-9 input-date">
+                      <button class="btn-worklist btn-sm" type="button" name="range" id="range"><i class="fas fa-search"></i> <?= $lang['search'] ?></button>
+                      <button class="btn-worklist1 btn-sm" type="submit" name="export" id="export"><i class="fas fa-file-excel"></i> Export To Excel</button>
+                      <button class="btn-worklist2 btn-sm" type="reset" name="range" id="range"><i class="fas fa-redo"></i> Reset</button><br><br>
+                    </div>
                   </div>
                 </div>
-                <div style="padding: 0px; margin-top:6px;" class="col-sm-9 input-date">
-                <button class="btn-worklist btn-sm" type="button" name="range" id="range"><i class="fas fa-search"></i> <?= $lang['search'] ?></button>
-                <button class="btn-worklist1 btn-sm" type="submit" name="export" id="export"><i class="fas fa-file-excel"></i> Export To Excel</button>
-                <button class="btn-worklist2 btn-sm" type="reset" name="range" id="range"><i class="fas fa-redo"></i> Reset</button><br><br>
-              </div>
-              </div>
-            </div>
-            
-             
-          
-          </form>
+
+
+
+              </form>
 
               <h1>View Complaint</h1>
               <div style="overflow-x: scroll;">
-                
-              <table id="purchase_order" class="table-dicom" cellpadding="8" cellspacing="0" style="margin-top: 3px;">
-                <thead>
-                  <tr>
-                    <th>No</th>
-                    <th>Action</th>
-                    <th>Complaint Date & Time</th>
-                    <th>Person Call</th>
-                    <th>Problem</th>
-                    <th>Solve Date & Time from/to</th>
-                    <th>Explanation</th>
-                  </tr>
-                </thead>
-              </table>
+
+                <table id="purchase_order" class="table-dicom" cellpadding="8" cellspacing="0" style="margin-top: 3px;">
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>Action</th>
+                      <th>Complaint Date & Time</th>
+                      <th>Person Call</th>
+                      <th>Problem</th>
+                      <th>Solve Date & Time from/to</th>
+                      <th>Explanation</th>
+                    </tr>
+                  </thead>
+                </table>
               </div>
 
             </div>

@@ -87,7 +87,7 @@ include '../contract-service.php';
                 </div>
             <?php } ?>
             <li id="settings1">
-                <a href="password.php">
+                <a href="settings.php">
                     <i class="fa fa-wrench fa-lg"></i> <?= $lang['settings'] ?>
                 </a>
             </li>

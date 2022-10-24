@@ -15,27 +15,27 @@ if ($_SESSION['level'] == "refferal") {
 
   <body>
 
-  <?php include('sidebar.php'); ?>
+    <?php include('sidebar.php'); ?>
     <div class="container-fluid" id="main">
-        <div class="row">
+      <div class="row">
 
-          <!-- //////content home/////////////// -->
-          <?php include('../query.php'); ?>
-          <!-- //////end content home/////////////// -->
+        <!-- //////content home/////////////// -->
+        <?php include('../workload-index.php'); ?>
+        <!-- //////end content home/////////////// -->
 
-        </div>       
+      </div>
     </div>
 
     <div class="footerindex">
-        <div class="">
-          <?php include('footer-itw.php'); ?>
-        </div>
+      <div class="">
+        <?php include('footer-itw.php'); ?>
+      </div>
     </div>
     <?php include('script-footer.php'); ?>
     <script>
-      $(document).ready(function(){
-          $("li[id='query1']").addClass("active");
-        });
+      $(document).ready(function() {
+        $("li[id='query1']").addClass("active");
+      });
     </script>
 
 
