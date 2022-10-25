@@ -13,7 +13,7 @@ if (isset($_POST['submit'])) {
   if ($password == $passwordulang) {
     password($_POST);
     echo "<script>alert('Password Changed');
-document.location.href='password.php';
+document.location.href='settings.php';
 </script>";
   } else {
     echo "<script>alert('password tidak sama');</script>";

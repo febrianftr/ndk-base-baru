@@ -411,7 +411,7 @@ if ($_SESSION['level'] == "radiology") { ?>
 														</a>
 													</td>
 													<td style="text-align: center;">
-														<a href="hapustemplate.php?uid=<?= $uid; ?>&amp;template_id=<?= $template['template_id']; ?>" data-id="<?= $template['template_id'];  ?>" onclick="return confirm('Teruskan Menghapus Data?');">
+														<a href="hapustemplate.php?uid=<?= $uid; ?>&template_id=<?= $template['template_id']; ?>&halaman=worklist" data-id="<?= $template['template_id'];  ?>" onclick="return confirm('Teruskan Menghapus Data?');">
 															<i data-toggle="tooltip" title="Delete Template" class="fas fa-trash fa-lg"></i>
 														</a>
 													</td>

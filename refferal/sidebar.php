@@ -54,13 +54,13 @@ if (isset($_SESSION["username"])) {
             </li>
 
             <li id="query1">
-                <a href="query-search.php">
+                <a href="workload.php">
                     <i class="fa fa-file-alt fa-lg"></i> Query
                 </a>
             </li>
 
             <li id="settings1">
-                <a href="password.php">
+                <a href="settings.php">
                     <i class="fa fa-wrench fa-lg"></i> <?= $lang['settings'] ?>
                 </a>
             </li>

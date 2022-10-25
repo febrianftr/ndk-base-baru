@@ -65,7 +65,6 @@ if (isset($_SESSION["username"])) {
             <ul class="sub-menu1 collapse" id="service">
                 <li id="workload1"><a href="workload.php">Expertise Approved</a></li>
                 <li id="report1"><a href="report.php"><?= $lang['download_excel'] ?></a></li>
-                <li id="query1"><a href="query-search.php">Query Search</a></li>
             </ul>
 
             <li data-toggle="collapse" data-target="#template" class="collapsed">
@@ -78,7 +77,7 @@ if (isset($_SESSION["username"])) {
 
 
             <li id="settings1">
-                <a href="password.php">
+                <a href="settings.php">
                     <i class="fa fa-wrench fa-lg"></i> <?= $lang['settings'] ?>
                 </a>
             </li>

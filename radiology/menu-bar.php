@@ -82,7 +82,7 @@ $name = $row10['dokrad_name'] . ' ' . $row10['dokrad_lastname'];
               <ul class="dropdown-menu drpdwn-menu">
                 <li><a style="width: 160px; margin-left: 0px; border-radius:0%;" href="report.php">Report Excel&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
                 <li><a style="width: 160px; margin-left: 0px; border-radius:0%;" href="workload.php"><?= $lang['expertise'] ?>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                <li><a style="width: 160px; margin-left: 0px; border-radius:0%;" href="query-search.php">Query&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                <li><a style="width: 160px; margin-left: 0px; border-radius:0%;" href="workload.php">Query&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
               </ul>
             </li>
 
@@ -100,13 +100,13 @@ $name = $row10['dokrad_name'] . ' ' . $row10['dokrad_lastname'];
             </li> -->
 
             <!-- <li>
-              <center class="center-menu"><a href="query-search.php"><img style="width: 30px;" src="../icon-menubar/new_icon/query.png"><br class="br-menu">Query</a></center>
+              <center class="center-menu"><a href="workload.php"><img style="width: 30px;" src="../icon-menubar/new_icon/query.png"><br class="br-menu">Query</a></center>
             </li> -->
             <!-- <li><span class="center-menu"><a href="about.php"><img style="width: 30px;" src="../icon-menubar/new_icon/about.png"><br class="br-menu"><?= $lang['about'] ?></a></span></li> -->
 
 
 
-            <li><span class="center-menu"><a href="password.php"><img style="width: 30px;" src="../icon-menubar/new_icon/settings.png"><br class="br-menu"><?= $lang['settings'] ?></a></span></li>
+            <li><span class="center-menu"><a href="settings.php"><img style="width: 30px;" src="../icon-menubar/new_icon/settings.png"><br class="br-menu"><?= $lang['settings'] ?></a></span></li>
 
             <?php if ($exp >= -30) {
             ?>

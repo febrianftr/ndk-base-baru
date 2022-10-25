@@ -1,132 +1,150 @@
 <?php
 require 'function_radiology.php';
+require '../viewer-all.php';
+require '../default-value.php';
+require '../model/query-base-study.php';
+require '../model/query-base-patient.php';
+require '../model/query-base-order.php';
+require '../model/query-base-workload.php';
+require '../model/query-base-template.php';
+
 session_start();
 // menampilkan data xray exam
-@$uid = $_GET['uid'];
+$uid = $_GET['uid'];
 $username = $_SESSION['username'];
-$query = "SELECT *
-		FROM xray_workload
-		WHERE uid = '$uid' ORDER BY schedule_time";
-$data_dicom = mysqli_query($conn, $query);
-// tutup menampilkan data xray exam
-// menampilkan data xray template
-$query_tampil = "SELECT MAX(template_id) as user_id3 FROM xray_template";
-$result_tampil = mysqli_query($conn, $query_tampil);
-$row_tampil = mysqli_fetch_assoc($result_tampil);
-// tutup menampilkan data xray exam
-if (isset($_POST['saveas'])) {
-	// Insert TEXTAREA POSTINGAN DOKTER
-	$pk = $row_tampil['user_id3'] + 1;
-	$title = $_POST['title'];
-	$fill = $_POST['fill'];
-	$typemod = $_POST['typemod'];
-	$level = $_POST['level'];
-	$username = $_SESSION['username'];
-	$query_insert = "INSERT INTO xray_template (template_id, title, fill, typemod, level, username) VALUES ('$pk', ' $title', ' $fill', ' $typemod', ' $level', '$username')";
-	$result = mysqli_query($conn, $query_insert);
-	// Tutup Insert TEXTAREA POSTINGAN DOKTER
-}
-// penutup insert TEXTAREA POSTINGAN DOKTER
-// if(isset($_SESSION["username"]))
-//       {
-//            if((time() - $_SESSION['last_login_timestamp']) > 60) //  60 = 1 * 60
-//            {
-//                 header("location:logout.php");
-//            }
-//            else
-//            {
-//                 $_SESSION['last_login_timestamp'] = time();
-//            }
-//       }
-//       else
-//       {
-//            header('location:../index.php');
-//       }
+$row = mysqli_fetch_assoc(mysqli_query(
+	$conn,
+	"SELECT $select_patient,
+	$select_study,
+    $select_order,
+    $select_workload
+    FROM $table_patient
+    JOIN $table_study
+    ON patient.pk = study.patient_fk
+    LEFT JOIN $table_order
+    ON xray_order.uid = study.study_iuid
+    LEFT JOIN $table_workload
+    ON study.study_iuid = xray_workload.uid
+	WHERE study_iuid = '$uid'"
+));
+$pat_name = defaultValue($row['pat_name']);
+$pat_sex = styleSex($row['pat_sex']);
+$pat_birthdate = diffDate($row['pat_birthdate']);
+$study_iuid = defaultValue($row['study_iuid']);
+$study_datetime = defaultValueDateTime($row['study_datetime']);
+$accession_no = defaultValue($row['accession_no']);
+$ref_physician = defaultValue($row['ref_physician']);
+$study_desc = defaultValue($row['study_desc']);
+$mods_in_study = defaultValue($row['mods_in_study']);
+$num_series = defaultValue($row['num_series']);
+$num_instances = defaultValue($row['num_instances']);
+$updated_time = defaultValueDateTime($row['updated_time']);
+$pat_id = defaultValue($row['pat_id']);
+$no_foto = defaultValue($row['no_foto']);
+$address = defaultValue($row['address']);
+$name_dep = defaultValue($row['name_dep']);
+$named = defaultValue($row['named']);
+$radiographer_name = defaultValue($row['radiographer_name']);
+$dokrad_name = defaultValue($row['dokrad_name']);
+$create_time = defaultValueDateTime($row['create_time']);
+$pat_state = defaultValue($row['pat_state']);
+$priority = defaultValue($row['priority']);
+$priority_doctor = $row['priority_doctor'];
+$spc_needs = defaultValue($row['spc_needs']);
+$payment = defaultValue($row['payment']);
+$fromorder = $row['fromorder'];
+$status = styleStatus($row['status']);
+$fill = $row['fill'];
+$approved_at = defaultValueDateTime($row['approved_at']);
+$spendtime = spendTime($updated_time, $approved_at, $row['status']);
+$pk_study = $row['pk_study'];
+$detail_uid = '<a href="#" class="hasil-all penawaran-a" data-id="' . $uid . '">' . removeCharacter($pat_name) . '</a>';
 
-if (isset($_POST["savetemp"])) {
-	if (savetempworkload($_POST)) {
+// query mencari berdasarkan pat_id (mrn)
+$query_mrn = mysqli_query(
+	$conn,
+	"SELECT $select_patient,
+	$select_study 
+	FROM $table_patient
+	JOIN $table_study
+	ON patient.pk = study.patient_fk 
+	WHERE pat_id = '$row[pat_id]'
+	AND study.study_iuid != '$uid'
+	ORDER BY study.updated_time DESC"
+);
+
+if (isset($_POST["save_template"])) {
+	if (insert_template_workload($_POST)) {
 		echo "
-<script>
-	alert('Report Telah Di Simpan ke template');
-	document.location.href= 'workload-edit.php?uid=$uid';
-</script>
-";
+			<script>
+				alert('Report Telah Di Simpan ke template');
+				document.location.href= 'workload-edit.php?uid=$uid';
+			</script>";
 	} else {
 		echo "
-<script>
-	alert('Report Gagal Di Simpan ke template');
-	document.location.href= 'workload-edit.php?uid=$uid';
-</script>";
+			<script>
+				alert('Report Gagal Di Simpan ke template');
+				document.location.href= 'workload-edit.php?uid=$uid';
+			</script>";
 	}
 }
-if (isset($_POST["savedraft"])) {
-	if (savedraftworkload($_POST)) {
+if (isset($_POST["save_edit"])) {
+	if (update_workload($_POST)) {
 		echo "
-<script>
-	document.location.href= 'workload.php';
-	win = window.open('pdf/expertise.php?uid=$uid', '_blank');
-	win.focus();
-</script>
-";
+			<script>
+				document.location.href= 'workload.php';
+				win = window.open('pdf/expertise.php?uid=$uid', '_blank');
+				win.focus();
+			</script>";
 	} else {
 		echo "
-<script>
-	alert('Report Gagal Di Simpan ke Draft');
-	document.location.href= 'workload-edit.php?uid=$uid';
-</script>";
+			<script>
+				alert('Report Gagal Di Simpan ke Draft');
+				document.location.href= 'workload-edit.php?uid=$uid';
+			</script>";
 	}
 }
-// if( isset($_POST["showpdf"]) ) {
-// if ( bgst($_POST)){
-// echo "
-// <script>
-// 	window.open('pdf/testpdf.php?uid=$uid', '_blank', 'toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=1200,height=800');
-// </script>";
-// // header("location:http://192.168.2.91/project3/radiology/pdf/testpdf3.php?uid=$uid", "_blank");
-// }else {
-// echo "
-// <script>
-// 	alert('Report Gagal Di Simpan ke Draft');
-// 	document.location.href= 'pdf/testpdf.php';
-// </script>";
-// }
-// }
-if ($_SESSION['level'] == "radiology") {
-?>
+
+if ($_SESSION['level'] == "radiology") { ?>
 	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 	<html xmlns="http://www.w3.org/1999/xhtml">
 
 	<head>
 		<?php include('head.php'); ?>
-		<title>Edit Expertise | Radiology</title>
+		<title>Expertise | Radiology Physician</title>
 		<script type="text/javascript" src="js/jquery1.10.2.js"></script>
 	</head>
+	<style>
+		.fill {
+			padding: 50px;
+		}
+	</style>
 
 	<body>
-		<?php include('sidebar.php'); ?>
+		<?php include('sidebar.php');
+		require '../modal.php'; ?>
 		<div class="container-fluid" id="main">
 			<div class="row">
-
 				<div id="content1">
 					<div class="container-fluid">
-						<div class="col-12" style="padding-left: 0;">
-							<nav aria-label="breadcrumb">
-								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="index.php">Home</a></li>
-									<li class="breadcrumb-item"><a href="workload.php">Workload</a></li>
-									<li class="breadcrumb-item active">Edit Expertise</li>
-								</ol>
-							</nav>
-						</div>
 						<div class="row">
-							<div class="col-md-2 padding-rl-less-media">
+							<div class="col-12" style="padding-left: 0;">
+								<nav aria-label="breadcrumb">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="index.php">Home</a></li>
+										<li class="breadcrumb-item"><a href="dicom.php">Worklist</a></li>
+										<li class="breadcrumb-item active">Expertise</li>
+									</ol>
+								</nav>
+							</div>
+							<div class="col-lg-2">
 								<div class="div-left">
 									<div class="left-top">
 										<div style="width: 50%; padding: 3px;">
 											<div class="work-order">
 												<ul>
 													<a class="button-work-order" href="#">
-														<li class="li-work patient-work"> History</li>
+														<li class="li-work patient-work">History</li>
 													</a>
 												</ul>
 											</div>
@@ -135,481 +153,287 @@ if ($_SESSION['level'] == "radiology") {
 											<div class="work-patient">
 												<ul>
 													<a class="button-work-patient" href="#">
-														<li class="li-work patient-work"> viewer</li>
+														<li class="li-work patient-work">viewer</li>
 													</a>
 												</ul>
 											</div>
 										</div>
 									</div>
-
-									<?php
-									// $result = mysqli_query($conn, "SELECT * FROM xray_exam2 WHERE uid = '$uid'");
-									// $row = mysqli_fetch_assoc($result);
-									// $mrn = $row['mrn'];
-									// $dokterradiology = mysqli_query($conn, "SELECT * FROM xray_dokter_radiology WHERE username = '$username'");
-									// $row2 = mysqli_fetch_assoc($dokterradiology);
-									// $dokradid = $row2['dokradid'];
-									// $result1 = mysqli_query($conn, "SELECT * FROM xray_workload WHERE mrn = '$mrn'");
-									?>
-
-									<!-- Modal -->
-									<div class="modal fade" id="mobile-viewer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-										<div class="modal-dialog" role="document">
-											<div class="modal-content">
-												<div class="modal-header">
-													<h5 class="modal-title" id="exampleModalLabel">Series Desc</h5>
-													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-														<span aria-hidden="true">&times;</span>
-													</button>
-												</div>
-												<div class="modal-body">
-
-													<?php
-													require '../koneksi/koneksi.php';
-													require '../viewer-all.php';
-
-													$query = "SELECT * FROM xray_series INNER JOIN xray_workload_radiographer ON xray_workload_radiographer.uid = xray_series.uid WHERE xray_series.uid = '$uid'";
-													$value = mysqli_query($conn, $query);
-													$row2 = mysqli_fetch_assoc($value);
-
-
-													$query1 = "SELECT * FROM xray_series WHERE uid = '$uid'";
-													$value1 = mysqli_query($conn, $query1);
-													?>
-													<style>
-														.fill {
-															padding: 50px;
-														}
-													</style>
-
-
-													<div class="fill">
-														<table class="table" id="example" style="margin-top: 3px;" cellpadding="8" cellspacing="0">
-															<thead class="thead1">
-																<tr>
-																	<th>Name :</th>
-																	<th>MRN :</th>
-																	<th>Sex :</th>
-																	<th>Department :</th>
-																	<th>Referral Physician :</th>
-																</tr>
-																<tr>
-																	<td align="left"><?= $row2['name']; ?></td>
-																	<td align="left"><?= $row2['mrn']; ?></td>
-																	<td align="left"><?= $row2['sex']; ?></td>
-																	<td align="left"><?= $row2['name_dep']; ?></td>
-																	<td align="left"><?= $row2['named'] . ' ' . $row2['lastnamed']; ?></td>
-																</tr>
-															</thead>
-														</table>
-														</strong></h4>
-														<center>
-															<h4><strong><label>SERIES DESC </label>&nbsp;<label></label></strong></h4>
-															<h4><strong>
-														</center>
-														<table class="table-dicom" id="example" style="margin-top: 3px;" cellpadding="8" cellspacing="0">
-															<thead class="thead1">
-																<tr>
-																	<th>viewer</th>
-																	<th>series</th>
-																	<th>#i</th>
-																	<th>Create Time</th>
-																</tr>
-
-
-																<?php
-																while ($row1 = mysqli_fetch_assoc($value1)) {
-
-																?>
-																	<tr>
-																		<td align="left">
-																			<?= MOBILEFIRST . $row1['series_iuid'] . MOBILELAST; ?>
-																		</td>
-																		<td align="left"><?= $row1['series_desc']; ?></td>
-																		<td align="left"><?= $row1['num_instances']; ?></td>
-																		<td align="left"><?= $row1['created_time']; ?></td>
-																	</tr>
-
-																<?php } ?>
-															</thead>
-														</table>
-														</strong></h4>
-														<br>
-														<p>
-													</div>
-
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-												</div>
-											</div>
-										</div>
-									</div>
-
-
-
-
-									<?php
-									$result = mysqli_query($conn, "SELECT * FROM xray_workload WHERE uid = '$uid'");
-									$row = mysqli_fetch_assoc($result);
-									$mrn = $row['mrn'];
-									$result1 = mysqli_query($conn, "SELECT * FROM xray_workload WHERE mrn = '$mrn' AND uid <> '$uid'");
-									?>
-									<div class="data-order">
-										<b class="title-history">History Patient</b><br>
-										<?php while ($row1 = mysqli_fetch_assoc($result1)) { ?>
-											<table>
-												<tr>
-													<td>MRN</td>
-													<td>&nbsp;:&nbsp;</td>
-													<td><b><?= $row1['mrn']; ?></b></td>
-												</tr>
-												<tr>
-													<td>Name</td>
-													<td>&nbsp;:&nbsp;</td>
-													<td><b><?= $row1['name'] . '' . $row1['lastname']  ?></b></td>
-												</tr>
-											</table>
-											<p><strong style="color: #a4a4a4;"><?= $row1['complete_date']; ?>&nbsp;/&nbsp;<?= $row1['complete_time']; ?></strong></p>
-											<p></p>
-											<p><strong><?= $row1['prosedur']; ?></strong> : <br>
-												<?= HTMLFIRST . $row1['uid'] . HTMLLAST; ?>
-												<span>
-													<a style="text-decoration:none;" href="<?php echo "jnlp://" . $_SERVER['SERVER_NAME']; ?>:19898/weasis-pacs-connector/DCM_viewer.jnlp?studyUID=<?php echo $row1['uid']; ?>"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/eye22.png" data-toggle="tooltip" title="Dicom Viewer" style="width: 100%;"></span></a></span>
-												<a style="text-decoration:none;" class="" href="pdf/expertise.php?uid=<?= $row1['uid']; ?>" target="_blank">
-													<span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/file.png" data-toggle="tooltip" title="PDF" style="width: 100%;"></span>
-												</a>
-											</p>
-
-											<hr>
-										<?php } ?>
-									</div>
-
-
-									<div class="data-patient">
-										<?php
-										$query123 = "SELECT *
-									FROM xray_exam2
-									WHERE uid = '$uid'";
-										$data_dicom123 = mysqli_query($conn, $query123);
-										$row1 = mysqli_fetch_assoc($data_dicom123);
-										$xray_type_code1 = $row1['xray_type_code'];
-
-										$result = mysqli_query($conn, "SELECT *
-																FROM xray_modalitas
-																WHERE xray_type_code = '$xray_type_code1' ");
-										$row = mysqli_fetch_assoc($result);
-										?>
-
-										<div class="content2-adm li-adm">
-											<h3 style="margin: 0px;">Intiwid Viewer</h3>
-											<hr style="margin: 10px 0px;">
-
-											<div class="buttons1">
-												<a href="<?php echo "radiant://?n=paet&v=dcmPACS&n=pstv&v=0020000D&v=%22$uid%22" ?>" class="button8 delete1"><img src="../image/radiAnt.png" style="width: 50px;"><br> <span> Dicom Viewer</span></a><?php if ($_SERVER['SERVER_NAME'] == '103.111.207.70') { ?><a href="<?php echo "http://" . $_SERVER['SERVER_NAME']; ?>:82/viewer?StudyInstanceUIDs=<?php echo $uid; ?>" class="button8 delete1" target="_blank"><img src="../image/web.svg" style="width: 50px;"> <br><span> Mobile Viewer</span></a><?php } else { ?><a target="_blank" href="<?php echo "http://" . $_SERVER['SERVER_NAME']; ?>:81/viewer?StudyInstanceUIDs=<?php echo $uid; ?>" class="button8 delete1"><img src="../image/web.svg" style="width: 50px;"> <br><span> Mobile Viewer</span></a>
-												<?php } ?>
-
-
-												<?php if ($_SERVER['SERVER_NAME'] == '103.111.207.70') { ?><a href="<?php echo "http://" . $_SERVER['SERVER_NAME'] . ":92/viewer/" . $uid ?> " class="button8 delete1" target="_blank"><img src="../image/web2.svg" style="width: 50px;"><br> <span> WEB Viewer</span></a><?php } else { ?><a href="<?php echo "http://" . $_SERVER['SERVER_NAME'] . ":91/viewer/" . $uid ?> " class="button8 delete1" target="_blank"><img src="../image/web2.svg" style="width: 50px;"><br><span> WEB Viewer</span></a><?php } ?><a href="<?php echo "http://" . $_SERVER['SERVER_NAME']; ?>:19898/intiwid/viewer.html?studyUID=<?php echo $uid; ?>" class="button8 delete1" target="_blank"><img src="../image/html.svg" style="width: 50px;"><br> <span> HTML Viewer</span></a>
-
-
-											</div>
-
-										</div>
-									</div>
-
-									<?php $row = mysqli_fetch_assoc($data_dicom);
-									$birth_date = $row['birth_date'];
-									$bday = new DateTime($birth_date);
-									$today = new DateTime(date('y-m-d'));
-									$diff = $today->diff($bday);
-									$name = $row['name'];
-									$name1 = str_replace('^', ' ', $name);
-									$radiographer_name = $row['radiographer_name'];
-									$radiographer_name1 = str_replace('^', ' ', $radiographer_name);
-									$dokradid = $row['dokradid'];
-									$uid2 = $row['uid'];
-									?>
 									<div class="info-patient">
 										<div class="info-patient2">
 											<div class="row justify-content-center">
 												<div class="info-left col-sm-12">
-													<?php if (isset($_GET['uid'])) { ?>
-														<table class="infopatientworklist" border="0">
-															<tr>
-																<td><b>Name</b></td>
-
-															</tr>
-															<tr>
-																<td><?php echo $row['name'] . ' ' . $row['lastname']; ?></td>
-
-															</tr>
-															<tr>
-																<td><b>MRN</b></td>
-															</tr>
-															<tr>
-																<td><?php echo $row['mrn']; ?></td>
-
-															</tr>
-															<tr>
-																<td><b>Sex</b></td>
-															</tr>
-															<tr>
-																<td><?php echo $row['sex']; ?></td>
-
-															</tr>
-															<tr>
-																<td><b>Age</b></td>
-															</tr>
-															<tr>
-																<td><?php echo $diff->y . 'Y' . ' ' . $diff->m . 'M' . ' ' . $diff->d . 'D'; ?></td>
-
-															</tr>
-															<tr>
-																<td><b>Special Needs</b></td>
-															</tr>
-															<tr>
-																<td><?php
-																	$text = "";
-																	if ($row['spc_needs'] == "" or $row['spc_needs'] == NULL) {
-																		$text = "-";
-																	} else {
-																		$text = $row['spc_needs'];
-																	}
-																	echo $text;
-																	?></td>
-
-															</tr>
-
-															<tr>
-																<td><b>Procedure</b></td>
-															</tr>
-															<tr>
-																<td><?php echo $row['prosedur']; ?></td>
-
-															</tr>
-															<tr>
-																<?php
-																$schedule_date = $row['schedule_date'];
-																$sd = date("d F Y", strtotime($schedule_date)) ?>
-																<td><b>Schedule Date</b></td>
-															</tr>
-															<tr>
-																<td><?php echo $sd; ?></td>
-
-															</tr>
-															<tr>
-																<td><b>Department</b></td>
-															</tr>
-															<tr>
-																<td><?php echo $row['name_dep']; ?></td>
-
-															</tr>
-															<tr>
-																<td><b>Refferal Physician</b></td>
-															</tr>
-															<tr>
-																<td><?php echo $row['named'] . ' ' . $row['lastnamed']; ?></td>
-
-															</tr>
-														<?php } else {
-														echo "404 Not Found";
-													} ?>
-														</table>
+													<table class="infopatientworklist table-left">
+														<tr>
+															<td><span class="table-left">Name</span></td>
+														</tr>
+														<tr>
+															<td><?= $detail_uid; ?></td>
+														</tr>
+														<tr>
+															<td><span class="table-left">MRN</span></td>
+														</tr>
+														<tr>
+															<td><?= $pat_id; ?></td>
+														</tr>
+														<tr>
+															<td><span class="table-left">Sex</span></td>
+														</tr>
+														<tr>
+															<td><?= $pat_sex; ?></td>
+														</tr>
+														<tr>
+															<td><span class="table-left">Age</span></td>
+														</tr>
+														<tr>
+															<td><?= $pat_birthdate; ?></td>
+														</tr>
+														<tr>
+															<td><span class="table-left">Special Needs</span></td>
+														</tr>
+														<tr>
+															<td><?= $spc_needs; ?></td>
+														</tr>
+														<tr>
+															<td><span class="table-left">Procedure</span></td>
+														</tr>
+														<tr>
+															<td><?= $study_desc; ?></td>
+														</tr>
+														<tr>
+															<td><span class="table-left">Schedule Date</span></td>
+														</tr>
+														<tr>
+															<td><?= $study_datetime; ?></td>
+														</tr>
+														<tr>
+															<td><span class="table-left">Department</span></td>
+														</tr>
+														<tr>
+															<td><?= $name_dep; ?></td>
+														</tr>
+														<tr>
+															<td><span class="table-left">Refferal Physician</span></td>
+														</tr>
+														<tr>
+															<td><?= $named; ?></td>
+														</tr>
+													</table>
 												</div>
 											</div>
 										</div>
-
 									</div>
-
+									<!-- history pasien berdasarkan mrn pat_iid-->
+									<div class="data-order">
+										<b class="title-history">History Patient</b><br>
+										<?php
+										$i = 1;
+										while ($mrn = mysqli_fetch_assoc($query_mrn)) {
+											$study_iuid = $mrn['study_iuid'];
+											$detail_mrn = '<a href="#" class="hasil-all penawaran-a" data-id="' . $study_iuid . '">' . removeCharacter($pat_name) . '</a>';
+										?>
+											<table>
+												<tbody>
+													<p class="text-center"><?= $i; ?></p>
+													<tr>
+														<td><span class="table-left">Name</span></td>
+													</tr>
+													<tr>
+														<td><?= $detail_mrn; ?></td>
+													</tr>
+													<tr>
+														<td><span class="table-left">MRN</span></td>
+													</tr>
+													<tr>
+														<td><?= $pat_id; ?></td>
+													</tr>
+													<tr>
+														<td><span class="table-left">Pemeriksaan</span></td>
+													</tr>
+													<tr>
+														<td><?= defaultValue($mrn['study_desc']); ?></td>
+													</tr>
+													<tr>
+														<td><span class="table-left">Waktu Pemeriksaan</span></td>
+													</tr>
+													<tr>
+														<td><strong class="text-dark text-center"><?= defaultValueDateTime($mrn['updated_time']); ?></strong></td>
+													</tr>
+													<tr>
+														<td>
+															<?= PDFFIRST . $study_iuid . PDFLAST .
+																RADIANTFIRST . $study_iuid . RADIANTLAST .
+																DICOMFIRST . $study_iuid . DICOMLAST .
+																OHIFFIRST . $study_iuid . OHIFLAST .
+																HTMLFIRST . $study_iuid . HTMLLAST;
+															?>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+											<hr>
+										<?php $i++;
+										} ?>
+									</div>
+									<!-- intiwid viewer -->
+									<div class="data-patient">
+										<div class="content2-adm li-adm">
+											<h4 style="margin: 0px;">Intiwid Viewer</h4>
+											<hr style="margin: 10px 0px;">
+											<div class="buttons1">
+												<?= DICOMWORKLISTFIRST . $uid . DICOMWORKLISTLAST .
+													RADIANTWORKLISTFIRST . $uid . RADIANTWORKLISTLAST .
+													OHIFWORKLISTFIRST . $uid . OHIFWORKLISTLAST .
+													HTMLWORKLISTFIRST . $uid . HTMLWORKLISTLAST; ?>
+											</div>
+										</div>
+									</div>
 									<form action="" method="post">
 										<div class="tambahan1">
-											<label for="patienttype">
+
+											<label for="priority_doctor">
 												<h5 style="margin-top: 0px; margin-bottom:-6px; font-weight:bold;"><?= $lang['information'] ?></h5>
 											</label><br>
 											<label class="radio-admin">
-												<?php
-												$kritis = "kritis";
-												if ($row['patienttype'] == "kritis") {
-													echo $kritis;
-												} ?>
-												<input type="radio" checked name="patienttype" value="normal" required> Normal
+												<input type="radio" name="priority_doctor" value="normal" <?= $priority_doctor == 'normal' ? 'checked' : '' ?>> Normal
 												<span class="checkmark"></span>
-											</label><br>
+											</label>
+											<br>
 											<label class="radio-admin">
-												<?php
-												$kritis = "kritis";
-												if ($row['patienttype'] == "kritis") {
-													echo $kritis;
-												} ?>
-												<input type="radio" name="patienttype" value="<?php $kritis ?>" required> Kritis
+												<input type="radio" name="priority_doctor" value="cito" <?= $priority_doctor == 'cito' ? 'checked' : '' ?>> Cito
 												<span class="checkmark"></span>
 											</label>
 										</div>
-
 								</div>
+								<br>
 							</div>
-
-							<div class="col-md-7 padding-rl-less">
-								<div class="div-mid" style="padding-top:10px;">
-									<div class="kotak">
-										<div class="work-patient6">
-											<input type="hidden" name="uid" value="<?= $row['uid']; ?>">
-											<div ng-app="myApp" ng-controller="myCtrl">
-												<?php
-												@$template_id = $_GET['template_id'];
-												$query = "SELECT * 
-											  FROM xray_template 
-											  WHERE template_id = '$template_id'
-											  ";
-												$result = mysqli_query($conn, $query);
-												$row10 = mysqli_fetch_assoc($result);
-
-												if ($template_id == "") {
-													$fill = $row['fill'];
-												} else {
-													$fill = $row10['fill'];
-												}
-												?>
-												<h3 class="h3-template"></h3>
-												<div class="textarea-ckeditor">
-													<textarea class="ckeditor" name="fill" style="width: 10%; height: 250px;" id="ckeditor">
-											<?= $fill ?>
-										</textarea>
-												</div><br />
-												<!---POP UP -->
-												<div class="container">
-													<!-- Button to Open the Modal -->
-													<button class="btn btn-worklist1 btn-expertise button-popup" type="button" data-toggle="modal" data-target="#modal-saveT" style="margin-left: -10px;"><i class="fas fa-file-export"></i> Save Template
-													</button>
-													<!-- The Modal -->
-													<div class="modal" id="modal-saveT">
-														<div class="modal-dialog">
-															<div class="modal-content">
-
-																<!-- Modal Header -->
-																<div class="modal-header">
-																	<h4 class="modal-title">Title</h4> <br />
-																	<input type="text" name="title" value="" placeholder="Insert Tittle">
-																	<button type="button" class="close" data-dismiss="modal">&times;</button>
-																</div>
-
-																<!-- Modal body -->
-																<!-- <div class="modal-body">
-														<textarea style="width: 100%;" class="textarea-worklist" id="ckeditor" name="fill"></textarea>
-													</div> -->
-
-																<!-- Modal footer -->
-																<div class="modal-footer">
-																	<button type="button" class="btn btn-close" data-dismiss="modal">Close</button>
-																	<button class=" btn btn-save-worklist" name="savetemp">Save</button>
-																</div>
-
+							<div class="col-lg-7 padding-rl-less">
+								<div class="div-mid">
+									<div class="work-patient6">
+										<input type="hidden" name="uid" value="<?= $uid; ?>">
+										<input type="hidden" name="username" value="<?= $username; ?>">
+										<?php
+										@$template_id = $_GET['template_id'];
+										$template = mysqli_fetch_assoc(mysqli_query(
+											$conn,
+											"SELECT $select_template 
+											FROM $table_template
+											WHERE template_id = '$template_id'"
+										));
+										if ($template_id == "") {
+											$fill = $row['fill'];
+										} else {
+											$fill = $template['fill'];
+										}
+										?>
+										<br>
+										<div class="textarea-ckeditor">
+											<textarea class="ckeditor" name="fill" style="width: 100%; height: 320px;" id="ckeditor">
+											<?= $fill; ?>
+											</textarea>
+										</div>
+										<div class="kotak">
+											<!---POP UP -->
+											<div class="container">
+												<!-- Button to Open the Modal -->
+												<button class="btn btn-worklist1 btn-expertise button-popup" type="button" data-toggle="modal" data-target="#modal-insert-template" style="margin-left: -10px;"><i class="fas fa-file-export"></i> Save Template
+												</button>
+												<!-- Modal -->
+												<div class="modal fade" id="modal-insert-template" role="dialog">
+													<div class="modal-dialog">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h4 class="modal-title">Insert Title</h4><br />
+																<button type="button" class="close" data-dismiss="modal">&times;</button>
+															</div>
+															<div class="modal-body-template">
+																<input class="form-control" type="text" name="title" value="" placeholder="Insert Tittle">
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-close" data-dismiss="modal">Close</button>
+																<button style="border-radius: 5px; font-weight: bold; margin-bottom:4px;" class=" btn btn-success" name="save_template">Save</button>
 															</div>
 														</div>
 													</div>
-
 												</div>
-												<!-- END OF POP UP -->
 											</div>
+											<!-- END OF POP UP -->
 											<div class="btn-bar-1">
-												<button class="btn btn-worklist btn-expertise button-popup-approve waves-effect waves-light" name="savedraft"><i class="fas fa-save"></i> Save Edit</button>
-												<!-- <button class="btn btn-worklist" name="showpdf">Show Preview Pdf</button> -->
-
-											</div>
-											<div class="btn-bar-2">
-												<!-- 
-									<button class="btn btn-worklist" name="xml">XML</button>
-									
-									<button type="button" class="btn btn-worklist" name="send_mail" data-toggle="modal" data-target="#myModal2">Send Mail</button> -->
-
+												<button class="btn btn-worklist btn-expertise button-popup-approve waves-effect waves-light" name="save_edit"><i class="fas fa-save"></i> Save Edit</button>
 											</div>
 											</form>
-											</li>
-											</ul>
 										</div>
-
-
-
-
-
 									</div>
 								</div>
 							</div>
-							<!-- ========== END MODALS ========== -->
-							<div class="col-md-3 padding-rl-less-media">
+							<div class="col-lg-3">
 								<div class="div-right">
 									<div class="">
 										<input type="text" class="form-control" placeholder="search by tittle.. " id="myInput" style="margin: 9px 0px; width: 100%;">
 									</div>
-									<a href="test-table2.php?uid=<?= $uid; ?>">
-										<div class="template-save1">
-											Template Name
-										</div>
-									</a>
-									<?php if ($username != 'drwawan') { ?>
-										<div class="template-save" id="container-template">
-
-											<table border="1" id="mytemplate" class="type-choice mytemplate" style="width: 100%;">
-												<?php
-
-												$result = mysqli_query($conn, "SELECT * FROM xray_template WHERE username = '$username'");
-												while ($row1 = mysqli_fetch_assoc($result)) { ?>
-													<thead class="myTable">
-														<td class="td1">
-															<a href="workload-edit.php?uid=<?= $uid; ?>&amp;template_id=<?= $row1['template_id']; ?>" onclick="return confirm('Change template?');"><?= $row1['title']; ?></a>
-														</td>
-														<td style="text-align: center;">
-															<a href="#" class="edit-record" data-id="<?= $row1['template_id'];  ?>">
-																<i data-toggle="tooltip" title="View Template" class="fas fa-eye fa-lg"></i>
-															</a>
-														</td>
-														<td style="text-align: center;">
-															<a href="hapustemplateworkload.php?uid=<?= $uid; ?>&amp;template_id=<?= $row1['template_id']; ?>" data-id="<?= $row1['template_id'];  ?>" onclick="return confirm('Teruskan Menghapus Data?');">
-																<i data-toggle="tooltip" title="Delete Template" class="fas fa-trash fa-lg"></i>
-															</a>
-														</td>
-												<?php }
-											} ?>
-													</thead>
-											</table>
-										</div>
+									<div class="template-save1">
+										Template Name
+									</div>
+									<div class="template-save" id="container-template">
+										<!-- <div id="content"></div> -->
+										<table border="1" id="mytemplate" class="type-choice mytemplate" style="width: 100%;">
+											<?php
+											$query_template = mysqli_query(
+												$conn,
+												"SELECT $select_template 
+												FROM $table_template 
+												WHERE username = '$username'"
+											);
+											while ($template = mysqli_fetch_assoc($query_template)) { ?>
+												<thead class="myTable">
+													<td class="td1">
+														<a href="workload-edit.php?uid=<?= $uid; ?>&template_id=<?= $template['template_id']; ?>"><?= $template['title']; ?></a>
+													</td>
+													<td style="text-align: center;">
+														<a href="#" class="view-template" data-id="<?= $template['template_id'];  ?>">
+															<i data-toggle="tooltip" title="View Template" class="fas fa-eye fa-lg"></i>
+														</a>
+													</td>
+													<td style="text-align: center;">
+														<a href="hapustemplate.php?uid=<?= $uid; ?>&template_id=<?= $template['template_id']; ?>&halaman=workload-edit" data-id="<?= $template['template_id'];  ?>" onclick="return confirm('Teruskan Menghapus Data?');">
+															<i data-toggle="tooltip" title="Delete Template" class="fas fa-trash fa-lg"></i>
+														</a>
+													</td>
+												<?php } ?>
+												</thead>
+										</table>
+									</div>
 								</div>
 							</div>
-
-						</div>
-					</div>
-					<!-- Modal buat show fill template -->
-					<div class="modal fade" id="myModal5" role="dialog">
-						<div class="modal-dialog">
-
-							<!-- Modal content-->
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal">&times;</button>
-									<h4 class="modal-title">Report</h4>
-								</div>
-								<div class="modal-body">
-									<textarea style="width: 100%; height: 320px;"><?= $row10['template_id'];  ?></textarea>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								</div>
-							</div>
-
 						</div>
 					</div>
 				</div>
-				<!-- modal -->
+				<!-- Modal -->
+				<div class="modal fade" id="view-template" role="dialog">
+					<div class="modal-dialog modal-lg">
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title">Report</h4>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+							<div class="modal-body">
+								<textarea style="width: 100%; height: 320px;"><?= $template['template_id'];  ?></textarea>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Modal -->
 			</div>
 		</div>
-
 		<div class="footerindex">
 			<div class="">
 				<?php include('footer-itw.php'); ?>
 			</div>
 		</div>
-
 		<!-- SCRIPT -->
 		<?php include('script-footer.php'); ?>
 		<script>
@@ -618,14 +442,13 @@ if ($_SESSION['level'] == "radiology") {
 				$("ul[id='service'] li[id='workload1']").addClass("active");
 			});
 		</script>
-
 		<script>
 			// untuk menampilkan data popup
 			$(function() {
-				$(document).on('click', '.edit-record', function(e) {
+				$(document).on('click', '.view-template', function(e) {
 					e.preventDefault();
-					$("#myModal5").modal('show');
-					$.post('hasil.php', {
+					$("#view-template").modal('show');
+					$.post('hasil-template.php', {
 							template_id: $(this).attr('data-id')
 						},
 						function(html) {
@@ -636,79 +459,12 @@ if ($_SESSION['level'] == "radiology") {
 			});
 			// end untuk menampilkan data popup
 		</script>
-
 		<script>
 			CKEDITOR.replace('ckeditor', {
-				// Pressing Enter will create a new <BR> element.
-				enterMode: CKEDITOR.ENTER_BR,
-				// Pressing Shift+Enter will create a new <BR> element.
-				// shiftEnterMode: CKEDITOR.ENTER_BR
+				enterMode: CKEDITOR.ENTER_BR
 			});
 		</script>
-
-
-		<!--- PENUTUP SCRIPT AUTO SAVE TEXTAREA FILL-->
-		<!--  SCRIPT AJAX CRUD   -->
-		<script type="text/javascript">
-			$(document).ready(function() {
-				loadData();
-				$('form69').on('submit37', function(e) {
-					e.preventDefault();
-					$.ajax({
-						type: $(this).attr('method'),
-						url: $(this).attr('action'),
-						data: $(this).serialize(),
-						success: function() {
-							loadData();
-							resetForm();
-						}
-					});
-				})
-			})
-
-			function loadData() {
-				$.get('data-workload.php', function(data) {
-					$('#content').html(data);
-					$('.hapusData').click(function(e) {
-						e.preventDefault();
-						$.ajax({
-							type: 'get',
-							url: $(this).attr('href'),
-							success: function() {
-								loadData();
-
-							}
-						});
-					});
-
-					$('.updateData').click(function(e) {
-						e.preventDefault();
-						$('.ckeditor').val($(this).attr('fill'));
-						$('form').attr('action', $(this).attr('href'));
-					});
-				})
-			}
-
-			function resetForm() {
-				$('[textarea]').val();
-				$('[name=fill]').focus();
-			}
-		</script>
-		<script>
-			// function myFunction() {
-			//   var x = document.getElementById("myInput").value;
-			//   document.getElementById("demo").innerHTML = "You wrote: " + x;
-			// }
-			function myFunction1() {
-				window.open("pdf/testpdf.php?uid=<?php echo $row['uid']; ?> ", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=1200,height=800");
-			}
-
-			function myFunction3() {
-				window.open("pdf/testpdf.php?uid=<?php echo $row['uid']; ?> ", 'popup', 'width=600,height=600');
-				return false;
-			}
-		</script>
-		<!-- javascript select template -->
+		<!-- -------------------javascript select template-------------- -->
 		<script>
 			$(document).ready(function() {
 				$(".type-choice").show();
@@ -720,34 +476,7 @@ if ($_SESSION['level'] == "radiology") {
 				});
 			});
 		</script>
-		<!-- script search live -->
-		<script>
-			var keyword = document.getElementById('keyword-template');
-			var tombolCari = document.getElementById('tombol-cari');
-			var containerTemplate = document.getElementById('container-template');
-			// tambahkan event ketika keyword ditulis
-			keyword.addEventListener('keyup', function() {
-				// buat object ajax
-				var xhr = new XMLHttpRequest();
-				// cek kesiapan ajax
-				xhr.onreadystatechange = function() {
-					if (xhr.readyState == 4 && xhr.status == 200) {
-						containerTemplate.innerHTML = xhr.responseText;
-					}
-					$('.showData').click(function(e) {
-						e.preventDefault();
-						$('[name=fill]').val($(this).attr('fill'));
-						$('form').attr('action', $(this).attr('href'));
-					});
-
-				}
-				// eksekusi ajax
-				xhr.open('GET', 'data-workload.php?keyword=' + keyword.value, true);
-				xhr.send();
-			});
-		</script>
-		<!-- script search liv end -->
-		<!-- javascript select temlate -->
+		<!-- -------------------javascript select temlate-------------- -->
 		<script>
 			$(document).ready(function() {
 				$(".data-order").hide();
@@ -765,7 +494,6 @@ if ($_SESSION['level'] == "radiology") {
 				});
 			});
 			$(document).ready(function() {
-
 				$(".button-work-patient").click(function() {
 					$(".work-patient").css("background", "#68b399");
 					$(".work-order").css("background", "#f1f1f1");
@@ -776,11 +504,17 @@ if ($_SESSION['level'] == "radiology") {
 				});
 			});
 		</script>
-
+		<script>
+			$(document).ready(function() {
+				$(".dokteravail").toggle();
+				$(".btn-info").click(function() {
+					$(".dokteravail").hide();
+				});
+			});
+		</script>
 	</body>
 
 	</html>
 <?php } else {
 	header("location:../index.php");
 } ?>
-<!-- script- -->

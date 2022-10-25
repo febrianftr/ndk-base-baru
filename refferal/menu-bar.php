@@ -73,7 +73,7 @@ $name = $row10['named'] . ' ' . $row10['lastnamed'];
                   <center><a href="index.php"><img style="width: 30px;" src="../icon-menubar/new_icon/home.png"><br><?= $lang['home'] ?></a></center>
                 </li>
                 <li>
-                  <center class="center-menu"><a href="query-search.php"><img style="width: 30px;" src="../icon-menubar/new_icon/query.png"><br class="br-menu">Query</a></center>
+                  <center class="center-menu"><a href="workload.php"><img style="width: 30px;" src="../icon-menubar/new_icon/query.png"><br class="br-menu">Query</a></center>
                 </li>
                 <li>
                   <center><a href="about.php"><img style="width: 30px;" src="../icon-menubar/new_icon/about.png"><br><?= $lang['about'] ?></a></center>
@@ -86,7 +86,7 @@ $name = $row10['named'] . ' ' . $row10['lastnamed'];
 
                 <?php if ($exp >= -30) {
                 ?>
-                  <li class="blinking-bg">  
+                  <li class="blinking-bg">
                     <span class="center-menu"><a href="#"><img style="width: 30px;" src="../icon-menubar/new_icon/warningcontract.png"></i><br class="br-menu">CONTRACT</a></span>
                   </li>
                 <?php } ?>

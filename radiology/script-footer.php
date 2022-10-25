@@ -77,23 +77,6 @@
 <script>
     // untuk menampilkan data popup
     $(function() {
-        $(document).on('click', '.edit-record2', function(e) {
-            e.preventDefault();
-            $("#myModal2").modal('show');
-            $.post('hasil3.php', {
-                    uid: $(this).attr('data-id')
-                },
-                function(html) {
-                    $(".modal-body").html(html);
-                }
-            );
-        });
-    });
-    // end untuk menampilkan data popup
-</script>
-<script>
-    // untuk menampilkan data popup
-    $(function() {
         $(document).on('click', '.hasil-all', function(e) {
             e.preventDefault();
             $("#modal-all").modal('show');

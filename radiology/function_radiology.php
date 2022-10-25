@@ -211,28 +211,22 @@ function ashiap($post_fill)
 
 // =================================Workload Edit================================
 
-function savedraftworkload($post_exam)
+function update_workload($value)
 {
 	global $conn;
-	$uid = $post_exam['uid'];
-	$fill = addslashes($post_exam['fill']);
-	$patienttype = $post_exam['patienttype'];
 
-	$query = "UPDATE xray_workload SET 
-				fill = '$fill',
-				approve_update = NOW(),
-				approve_uptime = NOW(),
-				patienttype = '$patienttype'
-				WHERE uid = '$uid'
-	";
-	mysqli_query($conn, $query);
+	$uid = $value['uid'];
+	$fill = addslashes($value['fill']);
+	$priority_doctor = $value['priority_doctor'];
 
-	$query = "UPDATE xray_workload_radiographer SET 
-				fill = '$fill',
-				patienttype = '$patienttype'
-				WHERE uid = '$uid'
-	";
-	mysqli_query($conn, $query);
+	mysqli_query(
+		$conn,
+		"UPDATE xray_workload SET 
+		fill = '$fill',
+		approve_updated_at = NOW(),
+		priority_doctor = '$priority_doctor'
+		WHERE uid = '$uid'"
+	);
 
 	return mysqli_affected_rows($conn);
 }
