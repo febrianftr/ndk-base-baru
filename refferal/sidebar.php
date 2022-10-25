@@ -39,7 +39,7 @@ if (isset($_SESSION["username"])) {
 <!-- ------loader------ -->
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <?php include "../bahasa.php"; ?>
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<!-- <link href="../css/all-sidebar.css" rel="stylesheet"> -->
 <div class="nav-side-menu">
     <div class="brand">
         <div style="width: 195px; padding: 0 0 0 15px; margin: 7px 0;"><img style="width: 100%;" src="../image/intiwid-logo-new-putih-2.png"></div>
