@@ -1,6 +1,15 @@
 <?php
 require '../koneksi/koneksi.php';
 session_start();
+
+$ip = $_SERVER['SERVER_NAME'];
+$from = date('Y-m-d H:i', strtotime($_POST['from-workload']));
+$to = date('Y-m-d H:i', strtotime($_POST['to-workload']));
+$mods_in_study = $_POST['mods_in_study'];
+$priority_doctor = $_POST['priority_doctor'];
+$radiographer_name = $_POST['radiographer_name'];
+$export_excel = "http://$_SERVER[SERVER_NAME]:8000/api/export-excel?from_updated_time=$from&to_updated_time=$to&xray_type_code=$mods_in_study&patienttype=$priority_doctor&radiographer_name=$radiographer_name";
+// http: //127.0.0.1:8000/api/export-excel?from_updated_time=2019-01-09%2000:00&to_updated_time=2022-09-09%2018:10&xray_type_code=CR,PX,CT,DX&patienttype=normal&radiographer_name=KS,%20RA
 if ($_SESSION['level'] == "radiographer") {
 ?>
 	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -53,106 +62,53 @@ if ($_SESSION['level'] == "radiographer") {
 									</div>
 								</div>
 							</div>
-							<form action="prosesexport-query.php" method="POST">
-								<div class="">
+							<form action="" method="POST">
+								<div>
 									<div class="row report-bg">
-										<div class="col-md-4">
-											<h5 style="margin-top: 16px; ">1.) Dr Radiology Workload (Approved) </h5>
-										</div>
-
-										<div style="height: 97px; padding-top: 20px;" class="col-md-2 report-input">
-											<div class="row">
-												<div class="col" style="padding: 0 2px 0 2px;">
-													<span class="date-icon2">
-														<input type="text" name="from-radiology-workload" id="from-radiology-workload" class="form-control" placeholder="From Date" autocomplete="off" />
-													</span>
-												</div>
-												<div class="col" style="padding: 0 2px 0 2px;">
-													<span class="date-icon2">
-														<input type="text" name="to-radiology-workload" id="to-radiology-workload" class="form-control" placeholder="To Date" autocomplete="off" /><br>
-													</span>
-												</div>
-											</div>
-										</div>
-
-										<div class="col-md-3" style="color: #000; padding-top: 2px;">
-											<label><input type="checkbox" class="cboxtombol1" style="margin-top: 0px;" checked> <?= $lang['check_all'] ?></label><br>
-											<?php $sql = mysqli_query($conn, "SELECT * FROM xray_modalitas");
-											while ($row = mysqli_fetch_assoc($sql)) : ?>
-												<tr>
-													<td><label class="c2"><input class="common_selector cbox1 search-input-workload" type="checkbox" id="checkbox" name="modality[]" value="<?= $row['xray_type_code']; ?>" checked><span class="checkmark2"></span></td>
-													<td><?= $row['xray_type_code']; ?></label></td>
-												<?php endwhile; ?>
-												</tr>
-										</div>
-
-										<div style="height: 97px; padding-top: 20px;" class="col-md-2 wrap-search report-input">
-											<select name="dokradid">
-												<?php
-												$result = mysqli_query($conn, "SELECT * FROM xray_dokter_radiology");
-												?>
-												<?php while ($row = mysqli_fetch_assoc($result)) { ?>
-													<option value="<?= $row['dokradid']; ?>"><?= $row['dokrad_name'] . ' ' . $row['dokrad_lastname']; ?></option>
-												<?php } ?>
-											</select>
-										</div> <br>
-										<div class="col-md-1">
-											<center>
-												<button style="margin: 10px 0px;" class="btn-excel" type="submit" name="radiologyworkload" id="radiologyworkload"><i class="fas fa-file-excel"></i> Excel</button>
-											</center>
-										</div>
-									</div>
-								</div>
-								<div class="">
-									<div class="row report-bg">
-										<div class="col-md-4">
-											<h5 style="margin-top: 25px;"> 2.) Radiographer Workload</h5>
-										</div>
 										<div style="height: 123px; padding-top: 20px;" class="col-md-2 report-input">
 											<div class="row">
 												<div class="col" style="padding: 0 2px 0 2px;">
 													<span class="date-icon2">
-														<input type="text" name="from-radiographer-workload" id="from-radiographer-workload" class="form-control" placeholder="From Date" autocomplete="off" />
+														<input type="text" name="from-workload" id="from-workload" class="form-control" placeholder="From Date" autocomplete="off" />
 													</span>
 												</div>
 												<div class="col" style="padding: 0 2px 0 2px;">
 													<span class="date-icon2">
-														<input type="text" name="to-radiographer-workload" id="to-radiographer-workload" class="form-control" placeholder="To Date" autocomplete="off" /><br>
+														<input type="text" name="to-workload" id="to-workload" class="form-control" placeholder="To Date" autocomplete="off" /><br>
 													</span>
 												</div>
 											</div>
 										</div>
 										<div class="col-md-3" style="border-right: 3px solid #cacaca; color: #000; padding-top: 2px; height: 123px;">
 											<label><input type="checkbox" class="cboxtombol" style="margin-top: 0px;" checked> <?= $lang['check_all'] ?></label><br>
-											<?php $sql = mysqli_query($conn, "SELECT * FROM xray_modalitas");
-											while ($row = mysqli_fetch_assoc($sql)) : ?>
+											<?php
+											$study = mysqli_query(
+												$conn_pacsio,
+												"SELECT mods_in_study FROM study GROUP BY mods_in_study LIMIT 15"
+											);
+											while ($row = mysqli_fetch_assoc($study)) { ?>
 												<tr>
-													<td><label class="c2"><input class="common_selector cbox search-input-workload" type="checkbox" id="checkbox" name="modality1[]" value="<?= $row['xray_type_code']; ?>" checked><span class="checkmark2"></span></td>
-													<td><?= $row['xray_type_code']; ?></label></td>
-												<?php endwhile; ?>
+													<td><label class="c2"><input class="common_selector cbox search-input-workload" type="checkbox" id="checkbox" name="modality1[]" value="<?= $row['mods_in_study']; ?>" checked><span class="checkmark2"></span></td>
+													<td><?= $row['mods_in_study']; ?></label></td>
+												<?php } ?>
 										</div>
 										<div style="height: 123px; padding-top: 0px; border-right: 3px solid #cacaca;" class="col-md-2 wrap-search">
 											<div class="" style="color: #000; padding-top: 2px; height: auto;">
-												<label>Condition :</label><br>
-												<?php $sql2 = mysqli_query($conn, "SELECT * FROM xray_patient_type");
-												while ($row2 = mysqli_fetch_assoc($sql2)) : ?>
-													<td><label class="c2"><input class="common_selector search-input-workload" type="checkbox" id="checkbox" name="patienttype[]" value="<?= $row2['typeofpatient']; ?>" checked><span class="checkmark2"></span></td>
-													<td><?= $row2['typeofpatient']; ?></td>
-												<?php endwhile; ?>
+												<label>Prioritas pasien (hasil) :</label><br>
+												<td><label class="c2"><input class="common_selector search-input-workload" type="checkbox" id="checkbox" name="priority_doctor" value="normal" checked><span class="checkmark2"></span></td>
+												<td>Normal</td>
+												<td><label class="c2"><input class="common_selector search-input-workload" type="checkbox" id="checkbox" name="priority_doctor" value="cito" checked><span class="checkmark2"></span></td>
+												<td>Cito</td>
 											</div>
 											<div class="form-group">
-												<label for="sel1">Select Radiographer:</label>
-												<select class="form-control select2" multiple="multiple" name="radiographer[]" style="width: 100%;">
-													<option value="all">ALL RADIOGRAPHER</option>
+												<label for="sel1">Pilih Radiografer:</label>
+												<select class="form-control select2" multiple="multiple" name="radiographer[]" style="width:100%;">
+													<option value="all">Semua</option>
 													<?php
-													$sql21 = "select * from xray_workload_radiographer group by radiographer_name";
-													$hasil21 = mysqli_query($conn, $sql21);
-													while ($data21 = mysqli_fetch_array($hasil21)) {
-													?>
-														<option value="<?php echo $data21['radiographer_name']; ?>"><?php echo $data21['radiographer_name'] . ' ' . $data21['radiographer_lastname']; ?></option>
-													<?php
-													}
-													?>
+													$query_radiografer = mysqli_query($conn, "SELECT * FROM xray_order WHERE radiographer_name IS NOT NULL GROUP BY radiographer_name LIMIT 30");
+													while ($radiografer = mysqli_fetch_array($query_radiografer)) { ?>
+														<option value="<?php echo $radiografer['radiographer_name']; ?>"><?php echo $radiografer['radiographer_name'] . ' ' . $radiografer['radiographer_lastname']; ?></option>
+													<?php } ?>
 												</select>
 											</div>
 										</div> <br>
@@ -195,7 +151,9 @@ if ($_SESSION['level'] == "radiographer") {
 		<script src="../js/select2.min.js"></script>
 		<script>
 			$(document).ready(function() {
-				$(".select2").select2({});
+				$(".select2").select2({
+					placeholder: 'Pilih Radiografer'
+				});
 			});
 		</script>
 		<script type="text/javascript" src="js/jquery.datetimepicker.full.js"></script>
@@ -205,29 +163,11 @@ if ($_SESSION['level'] == "radiographer") {
 				$('.cboxtombol').click(function() {
 					$('.cbox').prop('checked', this.checked);
 				});
-				$('.cboxtombol1').click(function() {
-					$('.cbox1').prop('checked', this.checked);
-				});
 				// --------------------
-				$('#from-radiology-workload').datetimepicker({
+				$('#from-workload').datetimepicker({
 					format: 'd-m-Y H:i'
 				});
-				$('#to-radiology-workload').datetimepicker({
-					format: 'd-m-Y H:i'
-				});
-				// --------------------
-				$('#from-refferal-workload').datetimepicker({
-					timepicker: false,
-					format: 'd-m-Y'
-				});
-				$('#to-refferal-workload').datetimepicker({
-					format: 'd-m-Y',
-				});
-				// --------------------
-				$('#from-radiographer-workload').datetimepicker({
-					format: 'd-m-Y H:i'
-				});
-				$('#to-radiographer-workload').datetimepicker({
+				$('#to-workload').datetimepicker({
 					format: 'd-m-Y H:i'
 				});
 			});
