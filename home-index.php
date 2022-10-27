@@ -77,9 +77,11 @@
   <div class="box-dashboard1">
     <div class="row">
       <div class="col-md-12">
-        <h2>
-          Daily Report
-        </h2>
+        <center>
+          <h2>
+            Daily Report
+          </h2>
+        </center>
       </div>
       <div class="col-md-4">
         <div class="info-box" style="background-color: #356395;">

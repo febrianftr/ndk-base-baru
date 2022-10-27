@@ -352,7 +352,7 @@ if ($_SESSION['level'] == "radiology") { ?>
 											<!---POP UP -->
 											<div class="container">
 												<!-- Button to Open the Modal -->
-												<button class="btn btn-worklist1 btn-expertise button-popup" type="button" data-toggle="modal" data-target="#modal-insert-template"><i class="fas fa-file-export"></i> Save Template
+												<button class="btn btn-worklist3 btn-expertise button-popup" type="button" data-toggle="modal" data-target="#modal-insert-template"><i class="fas fa-file-export"></i> Save Template
 												</button>
 												<!-- Modal -->
 												<div class="modal fade" id="modal-insert-template" role="dialog">
@@ -362,7 +362,7 @@ if ($_SESSION['level'] == "radiology") { ?>
 																<h4 class="modal-title">Insert Title</h4><br />
 																<button type="button" class="close" data-dismiss="modal">&times;</button>
 															</div>
-															<div class="modal-body-template">
+															<div class="modal-body-template" style="padding: 10px;">
 																<input class="form-control" type="text" name="title" value="" placeholder="Insert Tittle">
 															</div>
 															<div class="modal-footer">

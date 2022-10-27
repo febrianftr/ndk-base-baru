@@ -457,7 +457,7 @@ table.dataTable.no-footer {
 }
 
 .btn-worklist {
-  background-color: #6CCAAA;
+  background-color: #55B997;
   color: #fff;
   display: inline-block;
   border-width: 1px;
@@ -672,7 +672,7 @@ table.dataTable.no-footer {
   border-width: 1px;
   border-style: solid;
   transition: 0.5s ease-in-out;
-  padding: 4px;
+  padding: 6px;
   font-weight: bold;
 }
 
