@@ -173,7 +173,7 @@ if ($_SESSION['level'] == "radiographer") {
                     <?php
                     $result5 = mysqli_query($conn, "SELECT * FROM xray_modalitas");
                     while ($row5 = mysqli_fetch_array($result5)) { ?>
-                      <option value="<?= $row5["xray_type_code"]; ?>" data-subtext="<?= $row5['typename']; ?>"><?= $row5['xray_type_code']; ?></option>
+                      <option value="<?= $row5["xray_type_code"]; ?>" data-subtext="<?= $row5['xray_type_code']; ?>"><?= $row5['xray_type_code']; ?></option>
                     <?php } ?>
                   </select>
 

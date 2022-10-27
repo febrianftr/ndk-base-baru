@@ -1,43 +1,86 @@
 <?php
 require 'function_radiographer.php';
+require '../default-value.php';
+require '../model/query-base-workload.php';
+require '../model/query-base-workload-bhp.php';
+require '../model/query-base-order.php';
+require '../model/query-base-study.php';
+require '../model/query-base-patient.php';
 session_start();
-//ambil data di url
+
 $uid = $_GET["uid"];
-$result = mysqli_query($conn, "SELECT * FROM xray_workload_radiographer WHERE uid = '$uid' ");
-$row111 = mysqli_fetch_array($result);
-
-$name = $row111["name"];
-$name1 = str_replace('^', ' ', $name);
-
 $username = $_SESSION['username'];
 
-$radiographer_name = $row111["radiographer_name"];
-$radiographer_name1 = str_replace('^', ' ', $radiographer_name);
+$row = mysqli_fetch_assoc(mysqli_query(
+	$conn_pacsio,
+	"SELECT 
+    $select_patient,
+    $select_study,
+    $select_order,
+    $select_workload,
+	$select_workload_bhp
+    FROM $table_patient
+    JOIN $table_study
+    ON patient.pk = study.patient_fk
+    LEFT JOIN $table_order
+    ON xray_order.uid = study.study_iuid
+    LEFT JOIN $table_workload
+    ON study.study_iuid = xray_workload.uid
+	LEFT JOIN $table_workload_bhp
+	ON xray_workload_bhp.uid = xray_workload.uid
+    WHERE study.study_iuid = '$uid'"
+));
 
-if (isset($_POST["submit"])) {
-	if (ubahworkload($_POST) > 0) {
-		echo "
-<script>
-	alert('Data Berhasil diubah');
-	document.location.href= 'workload.php';
-</script>
-";
-	} else {
-		echo "
-<script>
-	alert('Data Gagal diubah');
-	document.location.href= 'update_workload.php?uid=$uid';
-</script>";
-	}
-}
-function jin_date_str($date)
-{
-	$exp = explode('-', $date);
-	if (count($exp) == 3) {
-		$date = $exp[2] . '/' . $exp[1] . '/' . $exp[0];
-	}
-	return $date;
-}
+$pat_name = $row['pat_name'];
+$pat_sex = $row['pat_sex'];
+$pat_birthdate = $row['pat_birthdate'];
+$study_iuid = $row['study_iuid'];
+$accession_no = $row['accession_no'];
+$ref_physician = $row['ref_physician'];
+$study_desc = $row['study_desc'];
+$mods_in_study = $row['mods_in_study'];
+$num_series = $row['num_series'];
+$num_instances = $row['num_instances'];
+$pat_id = $row['pat_id'];
+$no_foto = $row['no_foto'];
+$address = $row['address'];
+$name_dep = $row['name_dep'];
+$named = $row['named'];
+$weight = $row['weight'];
+$contrast = $row['contrast'];
+$contrast_allergies = $row['contrast_allergies'];
+$radiographer_name = $row['radiographer_name'];
+$dokrad_name = $row['dokrad_name'];
+$pat_state = $row['pat_state'];
+$priority = $row['priority'];
+$spc_needs = $row['spc_needs'];
+$payment = $row['payment'];
+$film_small = $row['film_small'];
+$film_medium = $row['film_medium'];
+$film_large = $row['film_large'];
+$film_reject_small = $row['film_reject_small'];
+$film_reject_medium = $row['film_reject_medium'];
+$film_reject_large = $row['film_reject_large'];
+$re_photo = $row['re_photo'];
+$kv = $row['kv'];
+$mas = $row['mas'];
+
+// if (isset($_POST["submit"])) {
+// 	if (ubahworkload($_POST) > 0) {
+// 		echo "
+// <script>
+// 	alert('Data Berhasil diubah');
+// 	document.location.href= 'workload.php';
+// </script>
+// ";
+// 	} else {
+// 		echo "
+// <script>
+// 	alert('Data Gagal diubah');
+// 	document.location.href= 'update_workload.php?uid=$uid';
+// </script>";
+// 	}
+// }
 if ($_SESSION['level'] == "radiographer") {
 ?>
 	<!DOCTYPE html>
@@ -47,421 +90,348 @@ if ($_SESSION['level'] == "radiographer") {
 		<title>Update Workload</title>
 		<?php include('head.php'); ?>
 	</head>
+	<style>
+		.not-allowed {
+			cursor: not-allowed;
+		}
+
+		.invalid {
+			border: 1px solid red !important;
+		}
+
+		.invalid-text {
+			color: red;
+		}
+	</style>
 
 	<body>
 		<?php include('sidebar.php'); ?>
 		<div class="container" id="main">
 			<div class="row">
-
 				<div id="content1">
 					<div class="body">
-
 						<div class="container-fluid">
 							<center>
 								<h1>Edit Data</h1>
 							</center>
-
-							<form action="" method="post">
+							<form method="post" id="edit-workload">
 								<div style="margin: 0px 0px;" class="row back-search">
 									<div class="form-update-workload col-md-4">
-										<input type="hidden" name="uid" id="uid" value="<?= $row111["uid"]; ?>"></input>
+										<input type="hidden" name="study_iuid" id="study_iuid" value="<?= $uid; ?>"></input>
 										<ul>
 											<li>
-												<label for="acc">ACCESION NUMBER</label><br>
-												<input type="text" id="acc" value="<?= $row111["acc"]; ?>" name="acc">
+												<label for="accession_no">Accession Number</label><br>
+												<input type="text" id="accession_no" value="<?= $accession_no; ?>" name="accession_no">
 											</li>
 											<li>
-												<label for="patientid">ID Pasien</label><br>
-												<input type="text" id="patientid" value="<?= $row111["patientid"]; ?>" name="patientid">
+												<label for="no_foto">No Foto</label><br>
+												<input type="text" id="no_foto" value="<?= $no_foto; ?>" name="no_foto">
 											</li>
 											<li>
 												<label for="mrn">MRN</label><br>
-												<input type="text" name="mrn" id="mrn" value="<?= $row111["mrn"]; ?>">
+												<input class="not-allowed" type="text" name="mrn" id="mrn" value="<?= $pat_id; ?>" readonly>
 											</li>
 											<li>
-												<label for="name">Nama Depan</label><br>
-												<input type="text" id="name" value="<?= $name1; ?>" name="name">
+												<label for="pat_name">Nama</label><br>
+												<input class="not-allowed" type="text" id="pat_name" value="<?= removeCharacter($pat_name); ?>" name="pat_name" readonly>
 											</li>
 											<li>
-												<label for="lastname">Nama Belakang</label><br>
-												<input type="text" name="lastname" id="lastname" value="<?= $row111["lastname"]; ?>">
-											</li>
-											<li>
-												<label for="sex"><b>Jenis Kelamin</b></label><br>
-												<label class="radio-admin">
-													<input type="radio" checked="checked" name="sex" <?php if ($row111["sex"] == 'M') {
-																											echo 'checked';
-																										} ?> value="M" required> Laki - laki
-													<span class="checkmark"></span>
-												</label>
-												<label class="radio-admin">
-													<input type="radio" name="sex" <?php if ($row111["sex"] == 'F') {
-																						echo 'checked';
-																					} ?> value="F" required> Perempuan
-													<span class="checkmark"></span>
-												</label>
-												<label class="radio-admin">
-													<input type="radio" name="sex" <?php if ($row111["sex"] == 'O') {
-																						echo 'checked';
-																					} ?> value="O" required> Other
-													<span class="checkmark"></span>
-												</label>
+												<label for="pat_sex"><b>Jenis Kelamin</b></label><br>
+												<div class="status">
+													<label class="radio-admin">
+														<input type="radio" checked="checked" name="pat_sex" <?= strtoupper($pat_sex) == 'M' ? 'checked' : ''; ?> value="M"> Laki - laki
+														<span class="checkmark"></span>
+													</label>
+													<label class="radio-admin">
+														<input type="radio" name="pat_sex" <?= strtoupper($pat_sex) == 'F' ? 'checked' : ''; ?> value="F"> Perempuan
+														<span class="checkmark"></span>
+													</label>
+													<label class="radio-admin">
+														<input type="radio" name="pat_sex" <?= strtoupper($pat_sex) == 'O' ? 'checked' : ''; ?> value="O"> Other
+														<span class="checkmark"></span>
+													</label>
+												</div>
 											</li><br>
 											<li>
-												<label for="birth_date">Tanggal Lahir</label><br>
-												<?php $d = date('Y-m-d', strtotime($row111["birth_date"])); ?>
-												<input type="text" name="birth_date" id="birth_date" value="<?= $d; ?>">
+												<label for="pat_birthdate">Tanggal Lahir</label><br>
+												<input type="text" name="pat_birthdate" id="pat_birthdate" value="<?= $pat_birthdate; ?>">
 											</li>
-
 											<li>
 												<label for="address">Alamat</label><br>
-												<input type="text" name="address" id="address" value="<?= $row111["address"]; ?>">
+												<input type="text" name="address" id="address" value="<?= $address; ?>">
 											</li>
 											<li>
 												<label for="weight">Berat Badan</label><br>
-												<input type="text" name="weight" id="weight" value="<?= $row111["weight"]; ?>">
+												<input type="text" name="weight" id="weight" value="<?= $weight; ?>">
 											</li>
-
 											<li>
-												<label for="depid">Nama Departemen</label><br>
-												<input type="text" name="name_dep" id="name_dep" value="<?= $row111["name_dep"]; ?>">
-												<!-- <?php
-														// ------------data workload------------
-														$depid = $row111['depid'];
-														$name_dep = $row111['name_dep'];
-														// ------------data department-----------
-														$result = mysqli_query($conn, "SELECT * FROM xray_department ");
-
-														if ($name_dep) {
-															$selected = 'selected';
-														} else {
-															$selected = '';
-														}
-														?> 
-										<select name="depid" id="depid">
-											<option>--- Pilih Departement ---</option>
-											<option value="<?= $depid; ?>" <?php echo $selected; ?> style="color: #ee7423 ;"><?= $name_dep; ?></option>
-											<?php while ($row = mysqli_fetch_assoc($result)) { ?>
-											<option value="<?= $row['depid']; ?>" ><?= $row['name_dep']; ?></option>
-											<?php } ?>
-										</select> -->
-
+												<label for="name_dep">Nama Departemen</label><br>
+												<input type="text" name="name_dep" id="name_dep" value="<?= $name_dep; ?>">
 											</li>
-
 									</div>
 									<div class="form-update-workload col-md-4">
-
-
 										<li>
-											<label for="xray_type_code">Modality</label><br>
-											<input type="text" name="xray_type_code" id="xray_type_code" value="<?= $row111["xray_type_code"]; ?>">
-											<!-- <?php
-													// ------------data workload------------
-													$xray_type_code = $row111['xray_type_code'];
-													$typename = $row111['typename'];
-													// ------------data department-----------
-													$result = mysqli_query($conn, "SELECT * FROM xray_modalitas");
-
-													if ($xray_type_code) {
-														$selected = 'selected';
-													} else {
-														$selected = '';
-													}
-													?>
-										<select name="xray_type_code" id="xray_type_code">
-											<option>--- Pilih Departement ---</option>
-											<option value="<?= $xray_type_code; ?>" <?php echo $selected; ?> style="color: #ee7423 ;"><?= $xray_type_code; ?></option>
-											<?php while ($row = mysqli_fetch_assoc($result)) { ?>
-											<option value="<?= $row['xray_type_code']; ?>" ><?= $row['xray_type_code']; ?></option>
-											<?php } ?>
-										</select> -->
-
+											<label for="mods_in_study">Modality</label><br>
+											<input class="not-allowed" type="text" name="mods_in_study" id="mods_in_study" value="<?= $mods_in_study; ?>" readonly>
 										</li>
-										<li>
-											<input type="hidden" name="typename" id="typename" value="<?= $row111["typename"]; ?>">
-										</li>
-										<!-- 									<li>
-										<label for="prosedur">Prosedur</label><br>
-										<?php
-										$type = $row111['type'];
-										$prosedur = $row111['prosedur'];
-										$result = mysqli_query($conn, "SELECT * FROM xray_price");
-										if ($prosedur) {
-											$selected = 'selected';
-										} else {
-											$selected = '';
-										}
-										?>
-										<select name="prosedur" id="prosedur">
-											<option value="">--- Pilih Prosedur ---</option>
-											<option value="<?= $prosedur; ?>" <?php echo $selected; ?> style="color: #ee7423;"><?= $prosedur; ?></option>
-											<?php while ($row1 = mysqli_fetch_assoc($result)) { ?>
-											<option value="<?= $row1['prosedur']; ?>"><?= $row1['prosedur']; ?></option>
-											<?php } ?>
-										</select>
-									</li> -->
 										<li class="dokteravail">
-											<label for="named">Nama Dokter</label><br>
-											<input type="text" name="named" id="named" value="<?= $row111["named"]; ?>">
-											<!-- <?php
-													$dokterid = $row111['dokterid'];
-													$named = $row111['named'];
-													$lastnamed = $row111['lastnamed'];
-													$result = mysqli_query($conn, "SELECT * FROM xray_dokter");
-													if ($dokterid) {
-														$selected = 'selected';
-													} else {
-														$selected = '';
-													}
-													?>
-										<select name="dokterid" id="dokterid">
-											<option value="">--- Pilih Dokter ---</option>
-											<option value="<?= $dokterid; ?>" <?php echo $selected; ?> style="color: #ee7423;"><?= $named . ' ' . $lastnamed; ?></option>
-											<?php while ($row = mysqli_fetch_assoc($result)) { ?>
-											<option value="<?= $row['dokterid']; ?>"><?= $row['named'] . ' ' . $row['lastnamed']; ?></option>
-											<?php } ?>
-											<option  data-toggle="collapse" data-target="#demo" value="">Dokter Lainnya</option>
-										</select> -->
-
+											<label for="named">Nama Dokter Pengirim</label><br>
+											<input type="text" name="named" id="named" value="<?= $named; ?>">
 										</li>
-										<label class="klik-dokter">Klik kembali untuk menampilkan daftar dokter</label>
-
 										<li>
-											<div id="demo" class="collapse">
-												<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Hide input dokter</button>
-												<hr>
-												<label>Nama depan</label>
-
-												<input type="text" name="namedluar" placeholder="Masukan nama">
-												<label>Nama Belakang</label>
-												<input type="text" name="lastnamedluar" placeholder="Masukan nama terakhir">
-												<label>Email</label>
-												<input type="text" name="emailluar" placeholder="Masukan email"><br>
-												<hr>
+											<label for="contrast">Kontras</label><br>
+											<div class="status">
+												<label class="radio-admin">
+													<input type="radio" <?= strtolower($contrast) == 'perlu contrast' ? 'checked' : ''; ?> name="contrast" value="Perlu Kontras"> Perlu Kontras
+													<span class="checkmark"></span>
+												</label>
+												<label class="radio-admin">
+													<input type="radio" <?= strtolower($contrast) == 'tidak perlu contrast' ? 'checked' : ''; ?> name="contrast" value="Tidak perlu contrast"> Tidak perlu contrast
+													<span class="checkmark"></span>
+												</label>
 											</div>
 										</li>
+										<br>
 										<li>
-											<?php
-											// $result13 = mysqli_query($conn, "SELECT * FROM xray_workload WHERE uid = '$uid' ");
-											// $row13 = mysqli_fetch_assoc($result13);
-											// $radiographer_name2 = $row13['radiographer_name'];
-											// $radiographer_lastname2 = $row13['radiographer_lastname'];
-											?>
-											<label for="radiographer_name">Nama Radiographer CR</label><br>
-											<input type="text" name="radiographer_name" id="radiographer_name" value="<?= $row111["radiographer_name"] . ' ' . $row111["radiographer_lastname"]; ?>" readonly>
+											<label for="radiographer_name">Nama Radiographer</label><br>
+											<input type="text" name="radiographer_name" id="radiographer_name" value="<?= $radiographer_name; ?>">
 										</li>
-										<li>
-											<label for="radiographer_name">Nama Radiographer 2</label><br>
-											<input type="text" name="operator" id="operator" value="<?= $row111["operator"]; ?>" readonly>
-										</li>
-										<li>
-											<label for="dokrad_name">Nama Dokter Radiology</label><br>
-											<input type="text" id="dokrad_name" value="<?= $row111["dokrad_name"] . ' ' . $row111["dokrad_lastname"]; ?>" readonly>
-										</li>
-										<li>
-											<label for="payment">Pembayaran</label><br>
-											<input type="text" name="payment" id="payment" value="<?= $row111["payment"]; ?>">
-										</li>
-										<li>
-											<label for="contrast">Contrast</label><br>
-											<label class="radio-admin">
-												<input type="radio" <?php if ($row111['contrast'] == "Perlu Kontras") {
-																		echo "checked";
-																	} else {
-																		echo "unchecked";
-																	} ?> name="contrast" value="Perlu Kontras" required> Perlu Kontras
-												<span class="checkmark"></span>
-											</label>
-
-											<label class="radio-admin">
-												<input type="radio" <?php if ($row111['contrast'] == "Tidak perlu contrast") {
-																		echo "checked";
-																	} else {
-																		echo "unchecked";
-																	} ?> name="contrast" value="Tidak perlu contrast" required> Tidak perlu contrast
-												<span class="checkmark"></span>
-											</label><br>
-										</li><br>
 										<li>
 											<label for="priority">Prioritas</label><br>
-											<input type="text" name="priority" id="priority" value="<?= $row111["priority"]; ?>">
-											<!-- <select name="priority">
-											<option <?php if ($row111['priority'] == "4Low") {
-														echo "selected";
-													} ?> value="4Low">Low</option>
-											<option <?php if ($row111['priority'] == "3Medium") {
-														echo "selected";
-													} ?> value="3Medium">Medium</option>
-											<option <?php if ($row111['priority'] == "2high") {
-														echo "selected";
-													} ?> value="2high">High</option>
-											<option <?php if ($row111['priority'] == "1Critical") {
-														echo "selected";
-													} ?> value="1Critical">Critical</option>
-										</select> -->
+											<div class="status">
+												<label class="radio-admin">
+													<input type="radio" <?= strtolower($priority) == 'normal' ? 'checked' : ''; ?> name="priority" id="priority" value="normal"> Normal
+													<span class="checkmark"></span>
+												</label>
+												<label class="radio-admin">
+													<input type="radio" <?= strtolower($priority) == 'cito' ? 'checked' : ''; ?> name="priority" id="priority" value="cito"> Cito
+													<span class="checkmark"></span>
+												</label>
+											</div>
+										</li>
+										<br>
+										<li>
+											<label for="dokrad_name">Nama Dokter Radiology</label><br>
+											<input class="not-allowed" type="text" id="dokrad_name" value="<?= $dokrad_name; ?>" readonly>
 										</li>
 										<li>
 											<label for="pat_state">Keadaan Pasien</label><br>
-											<select name="pat_state">
-												<option <?php if ($row111['pat_state'] == " " or $row111['pat_state'] == NULL) {
-															echo "selected";
-														} ?> value=" "></option>
-												<option <?php if ($row111['pat_state'] == "RAWAT INAP" or $row111['pat_state'] == "Rawat Inap") {
-															echo "selected";
-														} ?> value="Rawat Inap">Rawat Inap</option>
-												<option <?php if ($row111['pat_state'] == "RAWAT JALAN" or $row111['pat_state'] == "Rawat Jalan") {
-															echo "selected";
-														} ?> value="Rawat Jalan">Rawat Jalan</option>
-											</select>
+											<label class="radio-admin">
+												<input type="radio" <?= strtolower($pat_state) == 'rawat jalan' ? 'checked' : ''; ?> name="pat_state" value="rawat jalan"> Rawat Jalan
+												<span class="checkmark"></span>
+											</label>
+											<label class="radio-admin">
+												<input type="radio" <?= strtolower($pat_state) == 'rawat inap' ? 'checked' : ''; ?> name="pat_state" value="rawat inap"> Rawat Inap
+												<span class="checkmark"></span>
+											</label>
+										</li>
+										<br>
+										<li>
+											<label for="payment">Pembayaran</label><br>
+											<input class="not-allowed" type="text" name="payment" id="payment" value="<?= $payment; ?>" readonly>
 										</li>
 										<li>
-											<label for="contrast_allergies">Alergi Kontras/Tidak</label><br>
-											<select name="contrast_allergies">
-												<option <?php if ($row111['contrast_allergies'] == " " or $row111['contrast_allergies'] == NULL) {
-															echo "selected";
-														} ?> value=" "></option>
-												<option <?php if ($row111['contrast_allergies'] == "Alergi Contrast") {
-															echo "selected";
-														} ?> value="Alergi Contrast">Alergi Contrast</option>
-												<option <?php if ($row111['contrast_allergies'] == "Tidak Alergi Contrast") {
-															echo "selected";
-														} ?> value="Tidak Alergi Contrast">Tidak Alergi Contrast</option>
-											</select>
+											<label for="contrast_allergies">Alergi Kontras</label><br>
+											<label class="radio-admin">
+												<input type="radio" <?= strtolower($contrast_allergies) == 'alergi contrast' ? 'checked' : ''; ?> name="contrast_allergies" value="alergi contrast"> Alergi Kontras
+												<span class="checkmark"></span>
+											</label>
+											<label class="radio-admin">
+												<input type="radio" <?= strtolower($contrast_allergies) == 'tidak alergi contrast' ? 'checked' : ''; ?> name="contrast_allergies" value="tidak alergi contrast"> Tidak Alergi Kontras
+												<span class="checkmark"></span>
+											</label>
 										</li>
-
+										<br>
+										<li>
+											<label for="spc_needs">Klinis</label><br>
+											<textarea rows="4" cols="50" type="text" name="spc_needs" id="spc_needs" value="<?= $spc_needs; ?>"><?= $spc_needs; ?></textarea>
+										</li>
 									</div>
-
 									<div class="form-update-workload col-md-4">
 										<li>
-											<label for="spc_needs">Catatan Tambahan</label><br>
-											<textarea rows="4" cols="50" type="text" name="spc_needs" id="spc_needs" value="<?= $row111["spc_needs"]; ?>"><?= $row111["spc_needs"]; ?></textarea>
+											<label for="film_small">Film Small</label><br>
+											<input type="text" name="film_small" id="film_small" value="<?= $film_small; ?>">
 										</li>
 										<li>
-											<label for="rephoto">Keterangan pengulangan foto</label><br>
-											<input type="text" name="rephoto" id="rephoto" value="<?= $row111["rephoto"]; ?>">
+											<label for="film_medium">Film Medium</label><br>
+											<input type="text" name="film_medium" id="film_medium" value="<?= $film_medium; ?>">
 										</li>
 										<li>
-											<label for="filmsize8">Film Small</label><br>
-											<input type="text" name="filmsize8" id="filmsize8" value="<?= $row111["filmsize8"]; ?>">
+											<label for="film_large">Film Large</label><br>
+											<input type="text" name="film_large" id="film_large" value="<?= $film_large; ?>">
 										</li>
 										<li>
-											<label for="filmsize10">Film Medium</label><br>
-											<input type="text" name="filmsize10" id="filmsize10" value="<?= $row111["filmsize10"]; ?>">
+											<label for="film_reject_small">Film Reject Small</label><br>
+											<input type="text" name="film_reject_small" id="film_reject_small" value="<?= $film_reject_small; ?>">
 										</li>
 										<li>
-											<label for="filmreject8">Film Reject Small</label><br>
-											<input type="text" name="filmreject8" id="filmreject8" value="<?= $row111["filmreject8"]; ?>">
+											<label for="film_reject_medium">Film Reject Medium </label><br>
+											<input type="text" name="film_reject_medium" id="film_reject_medium" value="<?= $film_reject_medium; ?>">
 										</li>
 										<li>
-											<label for="filmreject10">Film Reject Medium </label><br>
-											<input type="text" name="filmreject10" id="filmreject10" value="<?= $row111["filmreject10"]; ?>">
+											<label for="film_reject_large">Film Reject Large </label><br>
+											<input type="text" name="film_reject_large" id="film_reject_large" value="<?= $film_reject_large; ?>">
+										</li>
+										<li>
+											<label for="re_photo">Keterangan pengulangan foto</label><br>
+											<input type="text" name="re_photo" id="re_photo" value="<?= $re_photo; ?>">
 										</li>
 										<li>
 											<label for="kv">KV</label><br>
-											<input type="text" name="kv" id="kv" value="<?= $row111["kv"]; ?>">
+											<input type="text" name="kv" id="kv" value="<?= $kv; ?>">
 										</li>
 										<li>
 											<label for="mas">mAs</label><br>
-											<input type="text" name="mas" id="mas" value="<?= $row111["mas"]; ?>">
+											<input type="text" name="mas" id="mas" value="<?= $mas; ?>">
 										</li>
-										<!-- <li>
-										<label for="xraytype">Jenis Pesawat</label><br>
-										<select name="xraytype">
-											<option <?php if ($row111['xraytype'] == "shimadzu") {
-														echo "selected";
-													} ?> value="shimadzu">SHIMADZU</option>
-											<option <?php if ($row111['xraytype'] == "ge") {
-														echo "selected";
-													} ?> value="ge">GE</option>
-											<option <?php if ($row111['xraytype'] == "toshiba") {
-														echo "selected";
-													} ?> value="toshiba">THOSIBA</option>
-											<option <?php if ($row111['xraytype'] == "asahi") {
-														echo "selected";
-													} ?> value="asahi">ASAHI</option>
-											<option <?php if ($row111['xraytype'] == "pesawat baru") {
-														echo "selected";
-													} ?> value="pesawat baru">PESAWAT BARU</option>
-										</select>
-									</li> -->
-										<!-- <li>
 										<br>
-										<label for="formregistration">Kelengkapan Form</label><br>
-										<label class="radio-admin">
-											<input type="radio" checked <?php if ($row111['formregistration'] == "lengkap") {
-																			echo "checked";
-																		} ?> name="formregistration" value="lengkap" required> Lengkap
-											<span class="checkmark"></span>
-										</label><br><br>
-
-										<label class="radio-admin">
-											<input type="radio" <?php if ($row111['formregistration'] == "tidak lengkap") {
-																	echo "checked";
-																} ?> name="formregistration" value="tidak lengkap" required> Tidak Lengkap
-											<span class="checkmark"></span>
-										</label>
-									</li> -->
-										<br><br><br>
-										<?php if ($username != "demo") { ?>
-											<li>
-												<button class="btn buttonsearch2 waves-effect waves-light" type="submit" name="submit">Ubah Data</button>
-											</li>
-										<?php } else { ?>
-											<li>
-												<button class="btn buttonsearch2 waves-effect waves-light" type="submit" name="submit" disabled>Ubah Data</button>
-											</li><br>
-										<?php } ?>
+										<li>
+											<button class="btn buttonsearch2 waves-effect waves-light" type="submit" id="submit" name="submit">Ubah Data</button>
+										</li>
 										</ul>
 									</div>
 								</div>
 							</form>
-
 						</div>
 					</div>
 				</div>
-
-
 			</div>
 		</div>
-
 		<div class="footerindex">
 			<div class="">
 				<?php include('footer-itw.php'); ?>
 			</div>
 		</div>
-
-
 		<?php include('script-footer.php'); ?>
+		<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
 		<script>
 			$(document).ready(function() {
+				// class sidebar aktif
 				$("li[data-target='#service']").addClass("active");
 				$("ul[id='service'] li[id='workload1']").addClass("active");
-			});
-		</script>
 
-		<script>
-			$(document).ready(function() {
+				// dokter pengirim
 				$(".klik-dokter").hide();
 				$(".btn-info").click(function() {
 					// $(".dokteravail").hide();
 					$(".dokteravail").show();
 					$(".klik-dokter").hide();
 				});
-			});
-		</script>
 
-
-		<script type="text/javascript" src="js/jquery.datetimepicker.full.js"></script>
-		<link rel="stylesheet" type="text/css" media="screen" href="css/jquery.datetimepicker.min.css">
-		<script>
-			$(document).ready(function() {
-				$('#birth_date').datetimepicker({
+				// tanggal lahir
+				$('#pat_birthdate').datetimepicker({
 					timepicker: false,
-					format: 'Y-m-d'
+					format: 'd-m-Y'
+				});
+			});
+
+			$(document).ready(function() {
+				let study_iuid = $("#study_iuid").val();
+				let accession_no = $("#accession_no").val();
+				let no_foto = $("#no_foto").val();
+				let pat_id = $("#pat_id").val();
+				let pat_name = $("#pat_name").val();
+				let pat_birthdate = $("#pat_birthdate").val();
+				let address = $("#address").val();
+				let weight = $("#weight").val();
+				let name_dep = $("#name_dep").val();
+				let mods_in_study = $("#mods_in_study").val();
+				let named = $("#named").val();
+				let contrast = $("#contrast").val();
+				let radiographer_name = $("#radiographer_name").val();
+				let priority = $("#priority").val();
+				let pat_state = $("#pat_state").val();
+				let payment = $("#payment").val();
+				let contrast_allergies = $("#contrast_allergies").val();
+				let spc_needs = $("#spc_needs").val();
+				let kv = $("#kv").val();
+				let mas = $("#mas").val();
+
+				$("#edit-workload").validate({
+					rules: {
+						accession_no: "required",
+						no_foto: "required",
+						mrn: "required",
+						pat_name: "required",
+						pat_sex: "required",
+						pat_birthdate: "required",
+						address: "required",
+						name_dep: "required",
+						mods_in_study: "required",
+						named: "required",
+						radiographer_name: "required",
+						priority: "required",
+						pat_state: "required",
+						spc_needs: "required",
+						kv: "required",
+						mas: "required"
+					},
+					messages: {
+						required: "wajib diisi"
+					},
+					errorPlacement: function(error, element) {
+						if (element.is(":radio")) {
+							error.appendTo(element.parents('li'));
+						} else {
+							error.insertAfter(element)
+						}
+					},
+					highlight: function(element) {
+						$(element).closest('li').addClass('has-error');
+						$(element).addClass('invalid');
+
+					},
+					unhighlight: function(element) {
+						$(element).closest('li').removeClass('has-error');
+						$(element).removeClass('invalid');
+					},
+					errorClass: "invalid-text",
+					focusCleanup: true,
+					ignoreTitle: true,
+					submitHandler: function(form) {
+						$.ajax({
+							type: "POST",
+							url: "proses-update-workload.php",
+							data: $(form).serialize(),
+							success: function(response) {
+								console.log(response);
+							},
+							error: function(error) {
+								console.log(error);
+							}
+							// {
+							// 	accession_no: accession_no,
+							// 	no_foto: no_foto,
+							// 	pat_id: pat_id,
+							// 	pat_name: pat_name,
+							// 	pat_birthdate: pat_birthdate,
+							// 	address: address,
+							// 	weight: weight,
+							// 	name_dep: name_dep,
+							// 	mods_in_study: mods_in_study,
+							// 	named: named,
+							// 	contrast: contrast,
+							// 	radiographer_name: radiographer_name,
+							// 	priority: priority,
+							// 	pat_state: pat_state,
+							// 	payment: payment,
+							// 	contrast_allergies: contrast_allergies,
+							// 	spc_needs: spc_needs,
+							// 	film_small: film_small,
+							// 	film_medium: film_medium,
+							// 	film_large: film_large,
+							// 	film_reject_small: film_small,
+							// 	film_reject_medium: film_medium,
+							// 	film_reject_large: film_large,
+							// 	re_photo: re_photo,
+							// 	kv: kv,
+							// 	mas: mas
+							// },
+						})
+					}
 				});
 			});
 		</script>
-
 	</body>
 
 	</html>

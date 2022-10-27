@@ -28,9 +28,7 @@ $email = $row2['email'];
 $name_dep = $row3['name_dep'];
 $depid = $row3['depid'];
 $typemod = $row4['typemod'];
-$typename = $row4['typename'];
 $xray_type_code = $row4['xray_type_code'];
-$type = $row5['type'];
 $prosedur = $row5['prosedur'];
 $price = $row5['price'];
 $q5 = mysqli_query($conn, 'SELECT MAX(priceorderid) as user_id5 from xray_price_order');
@@ -59,19 +57,24 @@ mysqli_query($conn, $query);
 header("location:order.php");
 if ($_SESSION['level'] == "radiographer") {
 ?>
-<!DOCTYPE html>
-<html>
+  <!DOCTYPE html>
+  <html>
+
   <head>
   </head>
+
   <body>
     <?php
     $result6 = mysqli_query($conn, "SELECT * FROM xray_radiographer WHERE username = '$username' "); ?>
-        <?php while($row6 = mysqli_fetch_array($result6)) :?>
-          <form id=order  name=order method=post action="order.php ">
-            <input name="radiographer_id" type="hidden" id="radiographer_id" value="<?= $row6['radiographer_id'] ?>">
-            <button class ="btn-worklist" type="submit" name="button" id="button" value="SELECT">SELECT
-          </form>
-        <?php endwhile; ?>
-</body>
-</html>
-<?php } else {header("location:../index.php");} ?>
+    <?php while ($row6 = mysqli_fetch_array($result6)) : ?>
+      <form id=order name=order method=post action="order.php ">
+        <input name="radiographer_id" type="hidden" id="radiographer_id" value="<?= $row6['radiographer_id'] ?>">
+        <button class="btn-worklist" type="submit" name="button" id="button" value="SELECT">SELECT
+      </form>
+    <?php endwhile; ?>
+  </body>
+
+  </html>
+<?php } else {
+  header("location:../index.php");
+} ?>

@@ -44,10 +44,8 @@ $name_dep = $row3['name_dep'];
 $type_dep = $row3['type_dep'];
 $depid = $row3['depid'];
 $typemod = $row4['typemod'];
-$typename = $row4['typename'];
 $xray_type_code = $row4['xray_type_code'];
 $code_xray = $row5['code_xray'];
-$type = $row5['type'];
 $prosedur = $row5['prosedur'];
 $price = $row5['price'];
 $radiographer_id = $row6['radiographer_id'];
@@ -78,11 +76,10 @@ $text = preg_replace('/[^A-Za-z0-9\  ]/', '', $schedule_date);
 $uid = '1.2.40.0.13.1.'.$acc.'.'.$patientid.'.'.$text.'.'.$add;
 
 $query = "INSERT INTO xray_order
-        (uid,acc,patientid,mrn,name,lastname,sex,birth_date,weight,name_dep,xray_type_code,typename,type,prosedur,dokterid,named,lastnamed,email,create_time,schedule_date,schedule_time,contrast,priority,pat_state,contrast_allergies,spc_needs,payment)
+        (uid,acc,patientid,mrn,name,lastname,sex,birth_date,weight,name_dep,xray_type_code,prosedur,dokterid,named,lastnamed,email,create_time,schedule_date,schedule_time,contrast,priority,pat_state,contrast_allergies,spc_needs,payment)
         VALUES
-        ('$uid','$acc', '$patientid', '$mrn', '$name', '$lastname', '$sex', '$birth_date', '$weight', '$name_dep', '$xray_type_code', '$typename', '$type', '$prosedur','$dokterid', '$named', '$lastnamed','$email', NOW(), '$schedule_date', '$schedule_time', '$contrast', '$priority', '$pat_state', '$contrast_allergies', '$spc_needs', '$payment')";
+        ('$uid','$acc', '$patientid', '$mrn', '$name', '$lastname', '$sex', '$birth_date', '$weight', '$name_dep', '$xray_type_code', '$prosedur','$dokterid', '$named', '$lastnamed','$email', NOW(), '$schedule_date', '$schedule_time', '$contrast', '$priority', '$pat_state', '$contrast_allergies', '$spc_needs', '$payment')";
 
         mysqli_query($conn, $query);
   
         header("location:order2.php");
- ?>

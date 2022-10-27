@@ -96,8 +96,6 @@ function input_approve($get_approve)
 	$weight = $row3['weight'];
 	$name_dep = $row3['name_dep'];
 	$xray_type_code = $row3['xray_type_code'];
-	$typename = $row3['typename'];
-	$type = $row3['type'];
 	$prosedur = $row3['prosedur'];
 	$dokterid = $row3['dokterid'];
 	$named = $row3['named'];
@@ -121,7 +119,7 @@ function input_approve($get_approve)
 
 	$query4 = "INSERT INTO xray_workload
         VALUES
-        ('$uid', '$acc', '$patientid', '$mrn', '$name', '$lastname', '$sex', '$birth_date', '$weight', '$name_dep', '$xray_type_code', '$typename', '$type', '$prosedur','$dokterid', '$named', '$lastnamed','$radiographer_id','$radiographer_name','$radiographer_lastname','$dokradid','$dokrad_name','$dokrad_lastname', '$create_time', '$schedule_date', '$schedule_time', '$contrast', '$priority', '$pat_state', '$contrast_allergies', '$spc_needs', '$arrive_time','$fill','$complete_time',NOW(),NOW())";
+        ('$uid', '$acc', '$patientid', '$mrn', '$name', '$lastname', '$sex', '$birth_date', '$weight', '$name_dep', '$xray_type_code', '$prosedur','$dokterid', '$named', '$lastnamed','$radiographer_id','$radiographer_name','$radiographer_lastname','$dokradid','$dokrad_name','$dokrad_lastname', '$create_time', '$schedule_date', '$schedule_time', '$contrast', '$priority', '$pat_state', '$contrast_allergies', '$spc_needs', '$arrive_time','$fill','$complete_time',NOW(),NOW())";
 	mysqli_query($conn, $query4);
 
 
@@ -407,8 +405,6 @@ function hapus_workload($uid, $username)
 	$weight = $row3['weight'];
 	$name_dep = $row3['name_dep'];
 	$xray_type_code = $row3['xray_type_code'];
-	$typename = $row3['typename'];
-	$type = $row3['type'];
 	$prosedur = $row3['prosedur'];
 	$dokterid = $row3['dokterid'];
 	$named = $row3['named'];
@@ -448,8 +444,8 @@ function hapus_workload($uid, $username)
 	$status = $row3['status'];
 
 	mysqli_query($conn, "INSERT INTO xray_recyclebin
-    	(uid, acc, patientid, mrn, name, lastname, sex, birth_date, weight, name_dep, xray_type_code, typename, type, prosedur,dokterid, named, lastnamed,email,radiographer_id,radiographer_name, radiographer_lastname,dokradid,dokrad_name,dokrad_lastname,create_time, schedule_date, schedule_time, contrast, priority, pat_state, contrast_allergies, spc_needs, payment, arrive_date, arrive_time,complete_date,complete_time,approve_date,approve_time,fill,status,study_datetime,updated_time, num_instances, num_series, series_desc, src_aet, del) VALUES
-        ('$uid', '$acc', '$patientid', '$mrn', '$name', '$lastname', '$sex', '$birth_date', '$weight', '$name_dep', '$xray_type_code', '$typename', '$type', '$prosedur','$dokterid', '$named', '$lastnamed','$email','$radiographer_id','$radiographer_name','$radiographer_lastname','$dokradid','$dokrad_name','$dokrad_lastname','$create_time', '$schedule_date', '$schedule_time', '$contrast', '$priority', '$pat_state', '$contrast_allergies', '$spc_needs','$payment','$arrive_date', '$arrive_time','$complete_date','$complete_time',NOW(),NOW(),'$fill','$status','$study_datetime','$updated_time', '$num_instances', '$num_series', '$series_desc', '$src_aet', '$username') ");
+    	(uid, acc, patientid, mrn, name, lastname, sex, birth_date, weight, name_dep, xray_type_code, prosedur,dokterid, named, lastnamed,email,radiographer_id,radiographer_name, radiographer_lastname,dokradid,dokrad_name,dokrad_lastname,create_time, schedule_date, schedule_time, contrast, priority, pat_state, contrast_allergies, spc_needs, payment, arrive_date, arrive_time,complete_date,complete_time,approve_date,approve_time,fill,status,study_datetime,updated_time, num_instances, num_series, series_desc, src_aet, del) VALUES
+        ('$uid', '$acc', '$patientid', '$mrn', '$name', '$lastname', '$sex', '$birth_date', '$weight', '$name_dep', '$xray_type_code', '$prosedur','$dokterid', '$named', '$lastnamed','$email','$radiographer_id','$radiographer_name','$radiographer_lastname','$dokradid','$dokrad_name','$dokrad_lastname','$create_time', '$schedule_date', '$schedule_time', '$contrast', '$priority', '$pat_state', '$contrast_allergies', '$spc_needs','$payment','$arrive_date', '$arrive_time','$complete_date','$complete_time',NOW(),NOW(),'$fill','$status','$study_datetime','$updated_time', '$num_instances', '$num_series', '$series_desc', '$src_aet', '$username') ");
 	mysqli_query($conn, "DELETE FROM xray_workload WHERE uid = '$uid' ");
 	mysqli_query($conn, "DELETE FROM xray_exam2 WHERE uid = '$uid' ");
 	mysqli_query($conn, "DELETE FROM xray_workload_radiographer WHERE uid = '$uid' ");
@@ -474,8 +470,6 @@ function hapus_worklist($uid, $username)
 	$weight = $row3['weight'];
 	$name_dep = $row3['name_dep'];
 	$xray_type_code = $row3['xray_type_code'];
-	$typename = $row3['typename'];
-	$type = $row3['type'];
 	$prosedur = $row3['prosedur'];
 	$dokterid = $row3['dokterid'];
 	$named = $row3['named'];
@@ -514,8 +508,8 @@ function hapus_worklist($uid, $username)
 	$status = $row3['status'];
 
 	mysqli_query($conn, "INSERT INTO xray_recyclebin
-    	(uid, acc, patientid, mrn, name, lastname, sex, birth_date, weight, depid, name_dep, xray_type_code, typename, type, prosedur,dokterid, named, lastnamed,email,radiographer_id,radiographer_name, radiographer_lastname,create_time, schedule_date, schedule_time, contrast, priority, pat_state, contrast_allergies, spc_needs, payment, arrive_date, arrive_time,complete_date,complete_time, status, study_datetime, updated_time, num_instances, num_series, series_desc, src_aet, del) VALUES
-        ('$uid', '$acc', '$patientid', '$mrn', '$name', '$lastname', '$sex', '$birth_date', '$weight', '$depid', '$name_dep', '$xray_type_code', '$typename', '$type', '$prosedur','$dokterid', '$named', '$lastnamed','$email','$radiographer_id','$radiographer_name','$radiographer_lastname', '$create_time', '$schedule_date', '$schedule_time', '$contrast', '$priority', '$pat_state', '$contrast_allergies', '$spc_needs', '$payment', '$arrive_date', '$arrive_time', '$complete_date', '$complete_time','$status', '$study_datetime', '$updated_time', '$num_instances', '$num_series', '$series_desc', '$src_aet','$username') ");
+    	(uid, acc, patientid, mrn, name, lastname, sex, birth_date, weight, depid, name_dep, xray_type_code, prosedur,dokterid, named, lastnamed,email,radiographer_id,radiographer_name, radiographer_lastname,create_time, schedule_date, schedule_time, contrast, priority, pat_state, contrast_allergies, spc_needs, payment, arrive_date, arrive_time,complete_date,complete_time, status, study_datetime, updated_time, num_instances, num_series, series_desc, src_aet, del) VALUES
+        ('$uid', '$acc', '$patientid', '$mrn', '$name', '$lastname', '$sex', '$birth_date', '$weight', '$depid', '$name_dep', '$xray_type_code', '$prosedur','$dokterid', '$named', '$lastnamed','$email','$radiographer_id','$radiographer_name','$radiographer_lastname', '$create_time', '$schedule_date', '$schedule_time', '$contrast', '$priority', '$pat_state', '$contrast_allergies', '$spc_needs', '$payment', '$arrive_date', '$arrive_time', '$complete_date', '$complete_time','$status', '$study_datetime', '$updated_time', '$num_instances', '$num_series', '$series_desc', '$src_aet','$username') ");
 	mysqli_query($conn, "DELETE FROM xray_exam2 WHERE uid = '$uid' ");
 	mysqli_query($conn, "DELETE FROM xray_workload_radiographer WHERE uid = '$uid' ");
 	mysqli_query($conn_pacs, "UPDATE study SET del = 'DELETE' WHERE study_iuid = '$uid' ");
@@ -705,14 +699,14 @@ function inputorder($postorder)
 		$uid = '1.2.40.0.13.1.' . $acc . '.' . $add2 . '.' . $text . '.' . $add;
 
 		if (!$dokterid) {
-			$query = " INSERT INTO xray_order (uid ,acc ,patientid ,mrn ,name ,lastname ,sex ,birth_date ,weight ,name_dep ,xray_type_code ,typename ,type ,prosedur ,dokterid ,named ,lastnamed ,email ,create_time ,schedule_date , schedule_time ,contrast ,priority ,pat_state ,contrast_allergies ,spc_needs ,payment)
+			$query = " INSERT INTO xray_order (uid ,acc ,patientid ,mrn ,name ,lastname ,sex ,birth_date ,weight ,name_dep ,xray_type_code ,prosedur ,dokterid ,named ,lastnamed ,email ,create_time ,schedule_date , schedule_time ,contrast ,priority ,pat_state ,contrast_allergies ,spc_needs ,payment)
 			VALUES
-			('$uid' ,'$acc' ,'$patientid' ,'$mrn' ,'$name' ,'$lastname' ,'$sex' ,'$birth_date' ,'$weight' ,'$name_dep' ,'$xray_type_code' ,'$typename' ,'$type','$main_prosedur1' ,'','$namedluar' ,'$lastnamedluar' ,'$emailluar',NOW() ,'$schedule_date' ,'$schedule_time' ,'$contrast' ,'$priority' ,'$pat_state' ,'$contrast_allergies' ,'$spc_needs' ,'')";
+			('$uid' ,'$acc' ,'$patientid' ,'$mrn' ,'$name' ,'$lastname' ,'$sex' ,'$birth_date' ,'$weight' ,'$name_dep' ,'$xray_type_code' , '$main_prosedur1' ,'','$namedluar' ,'$lastnamedluar' ,'$emailluar',NOW() ,'$schedule_date' ,'$schedule_time' ,'$contrast' ,'$priority' ,'$pat_state' ,'$contrast_allergies' ,'$spc_needs' ,'')";
 			mysqli_query($conn, $query);
 		} else {
-			$query = " INSERT INTO xray_order (uid ,acc ,patientid ,mrn ,name ,lastname ,sex ,birth_date ,weight ,name_dep ,xray_type_code ,typename ,type ,prosedur ,dokterid ,named ,lastnamed ,email ,create_time ,schedule_date , schedule_time ,contrast ,priority ,pat_state ,contrast_allergies ,spc_needs ,payment)
+			$query = " INSERT INTO xray_order (uid ,acc ,patientid ,mrn ,name ,lastname ,sex ,birth_date ,weight ,name_dep ,xray_type_code ,prosedur ,dokterid ,named ,lastnamed ,email ,create_time ,schedule_date , schedule_time ,contrast ,priority ,pat_state ,contrast_allergies ,spc_needs ,payment)
 			VALUES
-			('$uid' ,'$acc' ,'$patientid' ,'$mrn' ,'$name' ,'$lastname' ,'$sex' ,'$birth_date' ,'$weight' ,'$name_dep' ,'$xray_type_code' ,'$typename' ,'$type','$main_prosedur1' ,'$dokterid','$named' ,'$lastnamed' ,'$email',NOW() ,'$schedule_date' ,'$schedule_time' ,'$contrast' ,'$priority' ,'$pat_state' ,'$contrast_allergies' ,'$spc_needs' ,'')";
+			('$uid' ,'$acc' ,'$patientid' ,'$mrn' ,'$name' ,'$lastname' ,'$sex' ,'$birth_date' ,'$weight' ,'$name_dep' ,'$xray_type_code' , '$main_prosedur1' ,'$dokterid','$named' ,'$lastnamed' ,'$email',NOW() ,'$schedule_date' ,'$schedule_time' ,'$contrast' ,'$priority' ,'$pat_state' ,'$contrast_allergies' ,'$spc_needs' ,'')";
 			mysqli_query($conn, $query);
 		}
 	}

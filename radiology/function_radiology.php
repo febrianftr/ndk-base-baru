@@ -114,8 +114,6 @@ function ubahdokter($uid)
 	$weight = $row3['weight'];
 	$name_dep = $row3['name_dep'];
 	$xray_type_code = $row3['xray_type_code'];
-	$typename = $row3['typename'];
-	$type = $row3['type'];
 	$prosedur = $row3['prosedur'];
 	$dokterid = $row3['dokterid'];
 	$named = $row3['named'];
@@ -155,8 +153,8 @@ function ubahdokter($uid)
 	$status = $row3['status'];
 
 	mysqli_query($conn, "INSERT INTO xray_exam2
-    	(uid, acc, patientid, mrn, name, lastname, address, sex, birth_date, weight, name_dep, xray_type_code, typename, type, prosedur,dokterid, named, lastnamed,email,radiographer_id,radiographer_name, radiographer_lastname,dokradid,dokrad_name,dokrad_lastname,create_time, schedule_date, schedule_time, contrast, priority, pat_state, contrast_allergies, spc_needs, payment, arrive_date, arrive_time,complete_date,complete_time,fill,study_datetime,updated_time, num_instances, num_series, series_desc, src_aet) VALUES
-        ('$uid', '$acc', '$patientid', '$mrn', '$name', '$lastname', '$address', '$sex', '$birth_date', '$weight', '$name_dep', '$xray_type_code', '$typename', '$type', '$prosedur','$dokterid', '$named', '$lastnamed','$email','$radiographer_id','$radiographer_name','$radiographer_lastname','$dokradid','$dokrad_name','$dokrad_lastname','$create_time', '$schedule_date', '$schedule_time', '$contrast', '$priority', '$pat_state', '$contrast_allergies', '$spc_needs','$payment','$arrive_date', '$arrive_time','$complete_date','$complete_time','$fill','$study_datetime','$updated_time', '$num_instances', '$num_series', '$series_desc', '$src_aet') ");
+    	(uid, acc, patientid, mrn, name, lastname, address, sex, birth_date, weight, name_dep, xray_type_code, prosedur,dokterid, named, lastnamed,email,radiographer_id,radiographer_name, radiographer_lastname,dokradid,dokrad_name,dokrad_lastname,create_time, schedule_date, schedule_time, contrast, priority, pat_state, contrast_allergies, spc_needs, payment, arrive_date, arrive_time,complete_date,complete_time,fill,study_datetime,updated_time, num_instances, num_series, series_desc, src_aet) VALUES
+        ('$uid', '$acc', '$patientid', '$mrn', '$name', '$lastname', '$address', '$sex', '$birth_date', '$weight', '$name_dep', '$xray_type_code', '$prosedur','$dokterid', '$named', '$lastnamed','$email','$radiographer_id','$radiographer_name','$radiographer_lastname','$dokradid','$dokrad_name','$dokrad_lastname','$create_time', '$schedule_date', '$schedule_time', '$contrast', '$priority', '$pat_state', '$contrast_allergies', '$spc_needs','$payment','$arrive_date', '$arrive_time','$complete_date','$complete_time','$fill','$study_datetime','$updated_time', '$num_instances', '$num_series', '$series_desc', '$src_aet') ");
 
 	return mysqli_affected_rows($conn);
 }
@@ -316,7 +314,6 @@ function ubahworkload($post_edit_workload)
 				depid = '$depid',
 				name_dep = '$name_dep',
 				xray_type_code = '$xray_type_code',
-				typename = '$typename',
 				dokterid = '',
 				named = '$namedluar',
 				lastnamed = '$lastnamedluar',
@@ -342,7 +339,6 @@ function ubahworkload($post_edit_workload)
 				depid = '$depid',
 				name_dep = '$name_dep',
 				xray_type_code = '$xray_type_code',
-				typename = '$typename',
 				dokterid = '$dokterid',
 				named = '$named',
 				lastnamed = '$lastnamed',
@@ -366,7 +362,6 @@ function ubahworkload($post_edit_workload)
 				depid = '$depid',
 				name_dep = '$name_dep',
 				xray_type_code = '$xray_type_code',
-				typename = '$typename',
 				dokterid = '$dokterid',
 				named = '$named',
 				lastnamed = '$lastnamed',
@@ -392,7 +387,6 @@ function ubahworkload($post_edit_workload)
 				depid = '$depid',
 				name_dep = '$name_dep',
 				xray_type_code = '$xray_type_code',
-				typename = '$typename',
 				dokterid = '$dokterid',
 				named = '$named',
 				lastnamed = '$lastnamed',
