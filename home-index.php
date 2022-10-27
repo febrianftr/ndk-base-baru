@@ -25,6 +25,13 @@
 </div>
 
 <style>
+  .box-dashboard1 {
+    background: #ececec;
+    padding: 13px;
+    border-radius: 10px;
+    margin-bottom: 100px;
+  }
+
   .info-box {
     background: #fff;
     height: 160px;
@@ -37,76 +44,85 @@
     margin: 5px 0;
   }
 
-  .info-box .box-icon svg {
+  .info-box .box-icon i {
     display: block;
     width: 48px;
     height: 48px;
+    font-size: 50px;
+    color: #fff;
   }
 
   .info-box .box-content {
-    padding-left: 1.25em;
+    padding-left: 3em;
     white-space: nowrap;
+    color: #d5d5d5;
+    font-size: 15px;
   }
 
   .info-box .box-content .big {
     display: block;
     font-size: 2em;
     line-height: 150%;
-    color: #1b253d;
+    color: #fff;
+    font-weight: bold;
   }
 
-  .info-box .box-icon svg path,
-  .content-wrap .info-boxes .info-box .box-icon svg circle {
+  .info-box .box-icon i,
+  .content-wrap .info-boxes .info-box .box-icon i {
     fill: #99a0b0;
   }
 </style>
 <div class="container-fluid">
   <br><br>
-  <div class="row">
-    <div class="col-md-12">
-      <h2>
-        Daily Report
-      </h2>
-    </div>
-    <div class="col-md-4">
-      <div class="info-box">
-        <div class="box-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path d="M21 20V4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1zm-2-1H5V5h14v14z"></path>
-            <path d="M10.381 12.309l3.172 1.586a1 1 0 0 0 1.305-.38l3-5-1.715-1.029-2.523 4.206-3.172-1.586a1.002 1.002 0 0 0-1.305.38l-3 5 1.715 1.029 2.523-4.206z"></path>
-          </svg>
-        </div>
-        <div class="box-content">
-          <span class="big">44.51</span>
-          Current price ($)
+  <div class="box-dashboard1">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>
+          Daily Report
+        </h2>
+      </div>
+      <div class="col-md-4">
+        <div class="info-box" style="background-color: #356395;">
+          <div class="box-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="box-content">
+            <span class="big">
+              <?php // echo $waitingtotal1;
+              ?>100
+            </span>
+            Today studies
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-4">
-      <div class="info-box">
-        <div class="box-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path d="M20 10H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V11a1 1 0 0 0-1-1zm-1 10H5v-8h14v8zM5 6h14v2H5zM7 2h10v2H7z"></path>
-          </svg>
-        </div>
+      <div class="col-md-4">
+        <div class="info-box" style="background-color: #10a085;">
+          <div class="box-icon">
+            <i class="fas fa-user-check"></i>
+          </div>
 
-        <div class="box-content">
-          <span class="big">132</span>
-          Related articles
+          <div class="box-content">
+            <span class="big">
+              <? // php  echo $approved1; 
+              ?>65
+            </span>
+            Approved Reports
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-4">
-      <div class="info-box">
-        <div class="box-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path d="M12 3C6.486 3 2 6.364 2 10.5c0 2.742 1.982 5.354 5 6.678V21a.999.999 0 0 0 1.707.707l3.714-3.714C17.74 17.827 22 14.529 22 10.5 22 6.364 17.514 3 12 3zm0 13a.996.996 0 0 0-.707.293L9 18.586V16.5a1 1 0 0 0-.663-.941C5.743 14.629 4 12.596 4 10.5 4 7.468 7.589 5 12 5s8 2.468 8 5.5-3.589 5.5-8 5.5z"></path>
-          </svg>
-        </div>
+      <div class="col-md-4">
+        <div class="info-box" style="background-color: #ce6c25;">
+          <div class="box-icon">
+            <i class="fas fa-user-clock"></i>
+          </div>
 
-        <div class="box-content">
-          <span class="big">24</span>
-          Conversations
+          <div class="box-content">
+            <span class="big">
+              <?php //echo $waitingapprove1; 
+              ?>35
+            </span>
+            Waiting Reports
+          </div>
         </div>
       </div>
     </div>
