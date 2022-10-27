@@ -1,18 +1,22 @@
 <?php
 
-require 'function_radiology.php';
+require 'function_radiographer.php';
 require '../model/query-base-dokter-radiology.php';
 
 session_start();
+
 $uid = $_GET['uid'];
-$dokradid = $_GET['dokradid'];
 
 $query = mysqli_query(
 	$conn,
 	"SELECT $select_dokter_radiology 
-	FROM $table_dokter_radiology WHERE dokradid NOT LIKE '$dokradid' "
+	FROM $table_dokter_radiology"
 );
-
+// while ($row = mysqli_fetch_assoc($query)) {
+// 	echo $row['dokradid'];
+// }
+// echo mysqli_num_rows($query);
+// die();
 if (isset($_POST["submit"])) {
 	if (ubahdokterworklist($_POST)) {
 		echo "

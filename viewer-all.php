@@ -35,6 +35,7 @@ define('MOBILELAST', '"target="_blank"><span class="btn btn-warning btn-inti"><i
 
 // Change doctor
 define('CHANGEDOCTORFIRST', '<a style="text-decoration: none;" href="changedoctorworklist.php?uid=');
+define('CHANGEDOCTORMID', '&dokradid=');
 define('CHANGEDOCTORLAST', '" onclick=\'return confirm("Ubah dokter radiology yang membaca?");\'><span class="btn rgba-stylish-slight darken-1 btn-inti2"><i class="fas fa-user-md fa-lg"></i></span></a>');
 
 //radiant

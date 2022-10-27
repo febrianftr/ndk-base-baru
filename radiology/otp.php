@@ -23,7 +23,7 @@ if (isset($_POST["login"])) {
             echo "
             <script>
                 alert('Your OTP is Correct');
-                document.location.href= 'testqrcode.php?uid=$uid&verify=verified';
+                document.location.href= 'qrcode.php?uid=$uid&verify=verified';
             </script>
             ";
         }
@@ -118,7 +118,7 @@ if (isset($_POST["login"])) {
                     <hr>
 
                     <p>Back to
-                        <a href="<?= "http://" . $_SERVER['SERVER_NAME']; ?>:8089/intiwid2022/radiology/workload.php">Expertise</a>
+                        <a href="<?= "http://" . $_SERVER['SERVER_NAME']; ?>/intiwid-native-base/radiology/workload.php">Expertise</a>
                     </p>
                 </form>
             </div>

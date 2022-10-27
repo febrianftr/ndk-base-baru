@@ -72,6 +72,7 @@ while ($row = mysqli_fetch_array($query)) {
     $named = defaultValue($row['named']);
     $radiographer_name = defaultValue($row['radiographer_name']);
     $dokrad_name = defaultValue($row['dokrad_name']);
+    $dokradid = defaultValue($row['dokradid']);
     $create_time = defaultValueDateTime($row['create_time']);
     $pat_state = defaultValue($row['pat_state']);
     $priority = defaultValue($row['priority']);
@@ -103,7 +104,7 @@ while ($row = mysqli_fetch_array($query)) {
                 $worklist = DRAFTFIRST . $study_iuid . DRAFTLAST;
             }
             $aksi = $worklist .
-                CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORLAST;
+                CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORLAST;
         } else {
             $aksi = '-';
         }
