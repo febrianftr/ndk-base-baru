@@ -141,6 +141,7 @@ while ($row = mysqli_fetch_array($result)) {
   $named = defaultValue($row['named']);
   $radiographer_name = defaultValue($row['radiographer_name']);
   $dokrad_name = defaultValue($row['dokrad_name']);
+  $dokradid = defaultValue($row['dokradid']);
   $create_time = defaultValueDateTime($row['create_time']);
   $pat_state = defaultValue($row['pat_state']);
   $spc_needs = defaultValue($row['spc_needs']);
@@ -155,7 +156,7 @@ while ($row = mysqli_fetch_array($result)) {
   $level = $_SESSION['level'];
   if ($level == 'radiology') {
     $level =
-      CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORLAST .
+      CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORLAST .
       EDITPASIENFIRST . $study_iuid . EDITPASIENLAST .
       EDITWORKLOADFIRST . $study_iuid . EDITWORKLOADLAST .
       TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST .
@@ -165,7 +166,7 @@ while ($row = mysqli_fetch_array($result)) {
   } else if ($level == 'radiographer') {
     $level = HTMLFIRST . $study_iuid . HTMLLAST .
       EDITPASIENFIRST . $study_iuid . EDITPASIENLAST .
-      CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORLAST .
+      CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORLAST .
       TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST .
       DELETEFIRST . $study_iuid . DELETELAST;
   } else if ($level == 'refferal') {

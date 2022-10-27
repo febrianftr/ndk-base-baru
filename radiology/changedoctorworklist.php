@@ -4,13 +4,13 @@ require 'function_radiology.php';
 require '../model/query-base-dokter-radiology.php';
 
 session_start();
-
 $uid = $_GET['uid'];
+$dokradid = $_GET['dokradid'];
 
 $query = mysqli_query(
 	$conn,
 	"SELECT $select_dokter_radiology 
-	FROM $table_dokter_radiology"
+	FROM $table_dokter_radiology WHERE dokradid NOT LIKE '$dokradid' "
 );
 
 if (isset($_POST["submit"])) {

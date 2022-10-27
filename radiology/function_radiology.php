@@ -468,27 +468,16 @@ function password($passwordid)
 function approvesignworkload($approvesign)
 {
 	global $conn;
-	$approvedsign = $approvesign['approvedsign'];
+	// $approvedsign = $approvesign['approvedsign'];
 	$uid = $approvesign['uid'];
 	$uid2 = $uid . '.png';
 
-	if (empty($approvedsign)) {
-		echo "<script>alert('APPROVED BELUM DI CENTANG');</script>";
-	} else {
-		$query = "UPDATE xray_workload_radiographer SET
+	$query2 = "UPDATE xray_workload SET
 				signature = '$uid2',
 				signature_datetime = NOW()
 				WHERE uid = '$uid'
 				";
-		mysqli_query($conn, $query);
+	mysqli_query($conn, $query2);
 
-		$query2 = "UPDATE xray_workload SET
-				signature = '$uid2',
-				signature_datetime = NOW()
-				WHERE uid = '$uid'
-				";
-		mysqli_query($conn, $query2);
-
-		return mysqli_affected_rows($conn);
-	}
+	return mysqli_affected_rows($conn);
 }
