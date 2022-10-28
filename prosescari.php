@@ -151,12 +151,18 @@ while ($row = mysqli_fetch_array($result)) {
   $approved_at = defaultValueDateTime($row['approved_at']);
   $spendtime = spendTime($updated_time, $approved_at, $row['status']);
   $pk_dokter_radiology = $row['pk_dokter_radiology'];
-
+  //kondisi status change doctor
+  if ($row['status'] == 'approved') {
+    $workloadstat = 'approved';
+  } else {
+    $workloadstat = 'waiting';
+  }
+  //kondisi status change doctor
   // kondisi session level ketika login
   $level = $_SESSION['level'];
   if ($level == 'radiology') {
     $level =
-      CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORLAST .
+      CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workloadstat . CHANGEDOCTORLAST .
       EDITPASIENFIRST . $study_iuid . EDITPASIENLAST .
       EDITWORKLOADFIRST . $study_iuid . EDITWORKLOADLAST .
       TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST .

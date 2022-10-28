@@ -6,6 +6,7 @@ require '../model/query-base-dokter-radiology.php';
 session_start();
 $uid = $_GET['uid'];
 $dokradid = $_GET['dokradid'];
+$status = $_GET['status'];
 
 $query = mysqli_query(
 	$conn,
@@ -13,19 +14,36 @@ $query = mysqli_query(
 	FROM $table_dokter_radiology WHERE dokradid NOT LIKE '$dokradid' "
 );
 
+
 if (isset($_POST["submit"])) {
-	if (ubahdokterworklist($_POST)) {
-		echo "
+	if ($_POST['status'] == 'waiting') {
+		if (ubahdokterworklist($_POST)) {
+			echo "
 			<script>
 				alert('Data berhasil dikirimkan');
 				document.location.href= 'dicom.php';
 			</script>";
-	} else {
-		echo "
+		} else {
+			echo "
 			<script>
 				alert('data gagal dikirimkan');
 				document.location.href= 'changedoctorworklist.php?dokradid=$dokradid';
 			</script>";
+		}
+	} else {
+		if (ubahdokterworkload($_POST)) {
+			echo "
+			<script>
+				alert('Data berhasil dikirimkan');
+				document.location.href= 'dicom.php';
+			</script>";
+		} else {
+			echo "
+			<script>
+				alert('data gagal dikirimkan');
+				document.location.href= 'changedoctorworklist.php?dokradid=$dokradid';
+			</script>";
+		}
 	}
 }
 
@@ -164,6 +182,7 @@ if ($_SESSION['level'] == "radiology" || $_SESSION['level'] == "radiographer") {
 							<form action="" method="post">
 								<?php while ($row = mysqli_fetch_assoc($query)) { ?>
 									<input type="hidden" name="uid" value="<?= $uid ?>">
+									<input type="hidden" name="status" value="<?= $status ?>">
 									<div class="radiobtn1">
 										<input type="radio" id="<?php echo $row['dokradid'] ?>" name="dokradid" value="<?= $row['dokradid'] ?>" required>
 										<label for="<?php echo $row['dokradid'] ?>"><?= ucwords($row['dokrad_fullname']); ?></label>

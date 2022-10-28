@@ -84,7 +84,13 @@ while ($row = mysqli_fetch_array($query)) {
     $approved_at = defaultValueDateTime($row['approved_at']);
     $spendtime = spendTime($updated_time, $approved_at, $row['status']);
     $pk_dokter_radiology = $row['pk_dokter_radiology'];
-
+    //kondisi status change doctor
+    if ($row['status'] == 'approved') {
+        $workloadstat = 'approved';
+    } else {
+        $workloadstat = 'waiting';
+    }
+    //kondisi status change doctor
     $detail = '<a href="#" class="hasil-all penawaran-a" data-id="' . $row['study_iuid'] . '">' . removeCharacter($pat_name) . '</a>';
 
     if ($fromorder == 'SIMRS' || $fromorder == 'simrs') {
@@ -104,7 +110,7 @@ while ($row = mysqli_fetch_array($query)) {
                 $worklist = DRAFTFIRST . $study_iuid . DRAFTLAST;
             }
             $aksi = $worklist .
-                CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORLAST;
+                CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workloadstat . CHANGEDOCTORLAST;
         } else {
             $aksi = '-';
         }
