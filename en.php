@@ -80,7 +80,7 @@ Contact us at (Office) +62-21-4532648</p>",
 
 
 	// Administrator
-	"referral_physician" => "Referral Physician",
+	"referral_physician" => "Ref. Physician",
 	"add" => "Add",
 	"view" => "View",
 	"radiology_physician" => "Radiology Physician",
@@ -175,11 +175,13 @@ Contact us at (Office) +62-21-4532648</p>",
 
 	//all order
 	"name" => "Name",
+	"patient_name" => "Patient Name",
 	"type" => "Type",
 	"order_time" => "Order Time",
 	// end of all order
 
 	// MODALITY WORKLIST
+	"bodypart" => "Body Part",
 	"modality_worklist" => "Modality Worklist",
 	"age" => "Age",
 	"start_date" => "Start Date Time",
@@ -274,6 +276,7 @@ Contact us at (Office) +62-21-4532648</p>",
 	"backup_excel" => "Backup Excel",
 
 	"read_more" => "Read More",
+	"study_date" => "Study Date",
 	"ris" => "Radiology Information System",
 	"patient_order" => "Patient Order",
 	"storage" => "Storage",
