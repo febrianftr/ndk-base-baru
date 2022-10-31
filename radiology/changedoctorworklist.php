@@ -185,7 +185,9 @@ if ($_SESSION['level'] == "radiology" || $_SESSION['level'] == "radiographer") {
 									<input type="hidden" name="status" value="<?= $status ?>">
 									<div class="radiobtn1">
 										<input type="radio" id="<?php echo $row['dokradid'] ?>" name="dokradid" value="<?= $row['dokradid'] ?>" required>
-										<label for="<?php echo $row['dokradid'] ?>"><?= ucwords($row['dokrad_fullname']); ?></label>
+										<label for="<?php echo $row['dokradid'] ?>">
+											<?= ucwords($row['dokrad_fullname']); ?>
+										</label>
 									</div>
 								<?php } ?>
 								<button type="submit" class="btn-worklist3 btn-lg" style="margin: 10px 0; float:right;" name="submit"><i class="fas fa-user-friends"></i> Change</button>

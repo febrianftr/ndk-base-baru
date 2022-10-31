@@ -173,11 +173,13 @@ Hubungi kami di (Kantor) + 62-21-4532648 </p>",
 
 	//all order
 	"name" => "Nama",
+	"patient_name" => "Nama pasien",
 	"type" => "Tipe",
 	"order_time" => "Waktu Order",
 	// end of all order
 
 	// MODALITY WORKLIST
+	"bodypart" => "Body Part",
 	"modality_worklist" => "Worklist Modaliti",
 	"age" => "Umur",
 	"start_date" => "Waktu Mulai",
@@ -272,7 +274,7 @@ Hubungi kami di (Kantor) + 62-21-4532648 </p>",
 	"backup_excel" => "Cadangkan Excel",
 
 	"read_more" => "Baca Lebih Banyak",
-
+	"study_date" => "Waktu Pemeriksaan",
 	"ris" => "Sistem Informasi Radiologi",
 	"patient_order" => "Order Pasien",
 	"storage" => "Penyimpanan",
