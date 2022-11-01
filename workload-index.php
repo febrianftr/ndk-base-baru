@@ -14,7 +14,7 @@
 				<?php require 'thead.php'; ?>
 			</thead>
 		</table>
-	</div>
+</div>
 </div>
 <?php require 'modal.php'; ?>
 <script src="js/3.1.1/jquery.min.js"></script>

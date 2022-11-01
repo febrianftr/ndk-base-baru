@@ -8,7 +8,7 @@ $uid = $_GET['uid'];
 $dokradid = $_GET['dokradid'];
 $status = $_GET['status'];
 
-$query = mysqli_query(
+$query_changedoctor = mysqli_query(
 	$conn,
 	"SELECT $select_dokter_radiology 
 	FROM $table_dokter_radiology WHERE dokradid NOT LIKE '$dokradid' "
@@ -21,13 +21,13 @@ if (isset($_POST["submit"])) {
 			echo "
 			<script>
 				alert('Data berhasil dikirimkan');
-				document.location.href= 'dicom.php';
+				document.location.href= 'workload.php';
 			</script>";
 		} else {
 			echo "
 			<script>
 				alert('data gagal dikirimkan');
-				document.location.href= 'changedoctorworklist.php?dokradid=$dokradid';
+				document.location.href= 'changedoctorworklist.php?uid=$uid&dokradid=$dokradid&status=$status';
 			</script>";
 		}
 	} else {
@@ -35,13 +35,13 @@ if (isset($_POST["submit"])) {
 			echo "
 			<script>
 				alert('Data berhasil dikirimkan');
-				document.location.href= 'dicom.php';
+				document.location.href= 'workload.php';
 			</script>";
 		} else {
 			echo "
 			<script>
 				alert('data gagal dikirimkan');
-				document.location.href= 'changedoctorworklist.php?dokradid=$dokradid';
+				document.location.href= 'changedoctorworklist.php?uid=$uid&dokradid=$dokradid&status=$status';
 			</script>";
 		}
 	}
@@ -180,13 +180,13 @@ if ($_SESSION['level'] == "radiology" || $_SESSION['level'] == "radiographer") {
 					<div class="d-flex justify-content-center align-items-center" style="height: 50vh;">
 						<div class="col-md-6 box-change-dokter">
 							<form action="" method="post">
-								<?php while ($row = mysqli_fetch_assoc($query)) { ?>
+								<?php while ($row_changedoctor = mysqli_fetch_assoc($query_changedoctor)) { ?>
 									<input type="hidden" name="uid" value="<?= $uid ?>">
 									<input type="hidden" name="status" value="<?= $status ?>">
 									<div class="radiobtn1">
-										<input type="radio" id="<?php echo $row['dokradid'] ?>" name="dokradid" value="<?= $row['dokradid'] ?>" required>
-										<label for="<?php echo $row['dokradid'] ?>">
-											<?= ucwords($row['dokrad_fullname']); ?>
+										<input type="radio" id="<?php echo $row_changedoctor['dokradid'] ?>" name="dokradid" value="<?= $row_changedoctor['dokradid'] ?>" required>
+										<label for="<?php echo $row_changedoctor['dokradid'] ?>">
+											<?= ucwords($row_changedoctor['dokrad_fullname']); ?>
 										</label>
 									</div>
 								<?php } ?>

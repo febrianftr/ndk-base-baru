@@ -176,8 +176,8 @@ function ubahdokterworklist($post)
 
 	$pk = $row4['pk'];
 	$dokradid1 = $row4['dokradid'];
-	$dokradname1 = $row4['dokrad_name'];
-	$dokradlastname1 = $row4['dokrad_lastname'];
+	$dokradname1 = $row4['dokrad_name'] . ' ' . $row4['dokrad_lastname'];
+
 
 	// echo $pk . ' ' . $dokradid1 . ' ' . $dokradname1 . ' ' . $dokradlastname1;
 	// die();

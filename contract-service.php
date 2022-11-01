@@ -22,8 +22,8 @@ if ($maintenance_date) {
 }
 
 // --- STORAGE ---
-$diskFree = disk_free_space('k:');
-$diskTotal = disk_total_space('k:');
+$diskFree = disk_free_space('d:');
+$diskTotal = disk_total_space('d:');
 $diskUsed = $diskTotal - $diskFree;
 
 
