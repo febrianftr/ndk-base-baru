@@ -13,11 +13,15 @@
 <script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="../js/dataTables.bootstrap4.min.js"></script>
 <script type="text/javascript" src="js/jquery.datetimepicker.full.js"></script>
-<script src="../js/moment.min.js" />
+<script type="text/javascript" src="../js/moment.min.js" />
 </script>
-<script src="../js/datetime-moment.js" />
+<script type="text/javascript" src="../js/jquery.validate.min.js" />
 </script>
-<script src="../js/inobitec.js"></script>
+<script type="text/javascript" src="../js/sweetalert.min.js" />
+</script>
+<script type="text/javascript" src="../js/datetime-moment.js" />
+</script>
+<script type="text/javascript" src="../js/inobitec.js"></script>
 
 
 <!-- =======menghapus border pada div======== -->

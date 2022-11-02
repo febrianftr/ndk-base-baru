@@ -22,6 +22,10 @@
 <script src="../js/datetime-moment.js" />
 </script>
 <script src="../js/inobitec.js"></script>
+<script type="text/javascript" src="../js/jquery.validate.min.js" />
+</script>
+<script type="text/javascript" src="../js/sweetalert.min.js" />
+</script>
 
 <!-- =======menghapus border pada div======== -->
 <script>

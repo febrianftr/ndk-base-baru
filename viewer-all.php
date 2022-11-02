@@ -56,7 +56,7 @@ define('DELETEFIRST', '<a style="text-decoration:none;" class="ahref-edit" href=
 define('DELETELAST', '"onclick=\'return confirm("Delete data?");\'><span class="btn red lighten-1 btn-intiwid1"><i class="fas fa-trash-alt" data-toggle="tooltip" title="Delete"></i></span></a>');
 
 // EDIT PASIEN
-define('EDITPASIENFIRST', '<a href="update_workload.php?uid=');
+define('EDITPASIENFIRST', '<a href="update-workload.php?uid=');
 define('EDITPASIENLAST', '"<span class="btn text-primary rgba-stylish-slight btn-inti2"><img src="../image/redo.svg" data-toggle="tooltip" title="Update" style="width: 100%;"></span></a>');
 
 // EDIT WORKLOAD

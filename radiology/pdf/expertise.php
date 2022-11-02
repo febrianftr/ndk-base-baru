@@ -61,7 +61,7 @@ if ($status == "waiting" || $status == '') {
         <script type='text/javascript'>
             setTimeout(function () { 
             swal({
-                    title: 'Pasien ini belum di approve',
+                    title: 'Pasien belum di expertise',
                     text:  '',
                     icon: 'error',
                     timer: 3000,
@@ -194,4 +194,4 @@ if (!empty($signature)) {
     );
 }
 
-$pdf->Output();
+$pdf->Output('I', $pat_name);
