@@ -33,7 +33,7 @@ $row = mysqli_fetch_assoc(mysqli_query(
 
 $pat_name = $row['pat_name'];
 $pat_sex = $row['pat_sex'];
-$pat_birthdate = $row['pat_birthdate'];
+$pat_birthdate = $row['pat_birthdate'] == null ? '' : date('d-m-Y', strtotime($row['pat_birthdate']));
 $study_iuid = $row['study_iuid'];
 $accession_no = $row['accession_no'];
 $ref_physician = $row['ref_physician'];
@@ -65,22 +65,6 @@ $re_photo = $row['re_photo'];
 $kv = $row['kv'];
 $mas = $row['mas'];
 
-// if (isset($_POST["submit"])) {
-// 	if (ubahworkload($_POST) > 0) {
-// 		echo "
-// <script>
-// 	alert('Data Berhasil diubah');
-// 	document.location.href= 'workload.php';
-// </script>
-// ";
-// 	} else {
-// 		echo "
-// <script>
-// 	alert('Data Gagal diubah');
-// 	document.location.href= 'update_workload.php?uid=$uid';
-// </script>";
-// 	}
-// }
 if ($_SESSION['level'] == "radiographer") {
 ?>
 	<!DOCTYPE html>
@@ -128,8 +112,8 @@ if ($_SESSION['level'] == "radiographer") {
 												<input type="text" id="no_foto" value="<?= $no_foto; ?>" name="no_foto">
 											</li>
 											<li>
-												<label for="mrn">MRN</label><br>
-												<input class="not-allowed" type="text" name="mrn" id="mrn" value="<?= $pat_id; ?>" readonly>
+												<label for="pat_id">MRN</label><br>
+												<input class="not-allowed" type="text" name="pat_id" id="pat_id" value="<?= $pat_id; ?>" readonly>
 											</li>
 											<li>
 												<label for="pat_name">Nama</label><br>
@@ -139,22 +123,22 @@ if ($_SESSION['level'] == "radiographer") {
 												<label for="pat_sex"><b>Jenis Kelamin</b></label><br>
 												<div class="status">
 													<label class="radio-admin">
-														<input type="radio" checked="checked" name="pat_sex" <?= strtoupper($pat_sex) == 'M' ? 'checked' : ''; ?> value="M"> Laki - laki
+														<input type="radio" checked="checked" name="pat_sex" id="pat_sex" <?= strtoupper($pat_sex) == 'M' ? 'checked' : ''; ?> value="M"> Laki - laki
 														<span class="checkmark"></span>
 													</label>
 													<label class="radio-admin">
-														<input type="radio" name="pat_sex" <?= strtoupper($pat_sex) == 'F' ? 'checked' : ''; ?> value="F"> Perempuan
+														<input type="radio" name="pat_sex" id="pat_sex" <?= strtoupper($pat_sex) == 'F' ? 'checked' : ''; ?> value="F"> Perempuan
 														<span class="checkmark"></span>
 													</label>
 													<label class="radio-admin">
-														<input type="radio" name="pat_sex" <?= strtoupper($pat_sex) == 'O' ? 'checked' : ''; ?> value="O"> Other
+														<input type="radio" name="pat_sex" id="pat_sex" <?= strtoupper($pat_sex) == 'O' ? 'checked' : ''; ?> value="O"> Other
 														<span class="checkmark"></span>
 													</label>
 												</div>
 											</li><br>
 											<li>
 												<label for="pat_birthdate">Tanggal Lahir</label><br>
-												<input type="text" name="pat_birthdate" id="pat_birthdate" value="<?= $pat_birthdate; ?>">
+												<input type="text" name="pat_birthdate" id="pat_birthdate" value="<?= $pat_birthdate; ?>" autocomplete="off">
 											</li>
 											<li>
 												<label for="address">Alamat</label><br>
@@ -167,6 +151,10 @@ if ($_SESSION['level'] == "radiographer") {
 											<li>
 												<label for="name_dep">Nama Departemen</label><br>
 												<input type="text" name="name_dep" id="name_dep" value="<?= $name_dep; ?>">
+											</li>
+											<li>
+												<label for="spc_needs">Klinis</label><br>
+												<textarea rows="4" cols="50" type="text" name="spc_needs" id="spc_needs" value="<?= $spc_needs; ?>"><?= $spc_needs; ?></textarea>
 											</li>
 									</div>
 									<div class="form-update-workload col-md-4">
@@ -182,11 +170,11 @@ if ($_SESSION['level'] == "radiographer") {
 											<label for="contrast">Kontras</label><br>
 											<div class="status">
 												<label class="radio-admin">
-													<input type="radio" <?= strtolower($contrast) == 'perlu contrast' ? 'checked' : ''; ?> name="contrast" value="Perlu Kontras"> Perlu Kontras
+													<input type="radio" <?= strtolower($contrast) == 'perlu kontras' ? 'checked' : ''; ?> name="contrast" id="contrast" value="Perlu Kontras"> Perlu Kontras
 													<span class="checkmark"></span>
 												</label>
 												<label class="radio-admin">
-													<input type="radio" <?= strtolower($contrast) == 'tidak perlu contrast' ? 'checked' : ''; ?> name="contrast" value="Tidak perlu contrast"> Tidak perlu contrast
+													<input type="radio" <?= strtolower($contrast) == 'tidak perlu kontras' ? 'checked' : ''; ?> name="contrast" id="contrast" value="Tidak perlu kontras"> Tidak perlu contrast
 													<span class="checkmark"></span>
 												</label>
 											</div>
@@ -228,7 +216,7 @@ if ($_SESSION['level'] == "radiographer") {
 										<br>
 										<li>
 											<label for="payment">Pembayaran</label><br>
-											<input class="not-allowed" type="text" name="payment" id="payment" value="<?= $payment; ?>" readonly>
+											<input type="text" name="payment" id="payment" value="<?= $payment; ?>">
 										</li>
 										<li>
 											<label for="contrast_allergies">Alergi Kontras</label><br>
@@ -243,8 +231,8 @@ if ($_SESSION['level'] == "radiographer") {
 										</li>
 										<br>
 										<li>
-											<label for="spc_needs">Klinis</label><br>
-											<textarea rows="4" cols="50" type="text" name="spc_needs" id="spc_needs" value="<?= $spc_needs; ?>"><?= $spc_needs; ?></textarea>
+											<label for="study">Study</label><br>
+											<input type="text" class="not-allowed" name="study_desc" id="study_desc" value="<?= $study_desc; ?>" readonly>
 										</li>
 									</div>
 									<div class="form-update-workload col-md-4">
@@ -274,7 +262,7 @@ if ($_SESSION['level'] == "radiographer") {
 										</li>
 										<li>
 											<label for="re_photo">Keterangan pengulangan foto</label><br>
-											<input type="text" name="re_photo" id="re_photo" value="<?= $re_photo; ?>">
+											<textarea rows="4" cols="50" type="text" name="re_photo" id="re_photo" value="<?= $re_photo; ?>"><?= $re_photo; ?></textarea>
 										</li>
 										<li>
 											<label for="kv">KV</label><br>
@@ -286,7 +274,18 @@ if ($_SESSION['level'] == "radiographer") {
 										</li>
 										<br>
 										<li>
-											<button class="btn buttonsearch2 waves-effect waves-light" type="submit" id="submit" name="submit">Ubah Data</button>
+											<!-- <button class="btn buttonsearch2 waves-effect waves-light" type="submit" id="submit" name="submit">
+												<div class="spinner-border text-primary" role="status">
+													<span class="sr-only">Loading...</span>
+												</div>
+												Ubah Data
+											</button> -->
+
+											<button class="btn buttonsearch2 waves-effect waves-light" type="submit" id="submit" name="submit">
+												<span class="spinner-grow spinner-grow-sm loading" role="status" aria-hidden="true"></span>
+												<p class="loading" style="display:inline;">Loading...</p>
+												<p class="ubah" style="display:inline;">Ubah Data</p>
+											</button>
 										</li>
 										</ul>
 									</div>
@@ -303,7 +302,7 @@ if ($_SESSION['level'] == "radiographer") {
 			</div>
 		</div>
 		<?php include('script-footer.php'); ?>
-		<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+		<script src="../js/proses/update-workload.js"></script>
 		<script>
 			$(document).ready(function() {
 				// class sidebar aktif
@@ -322,113 +321,6 @@ if ($_SESSION['level'] == "radiographer") {
 				$('#pat_birthdate').datetimepicker({
 					timepicker: false,
 					format: 'd-m-Y'
-				});
-			});
-
-			$(document).ready(function() {
-				let study_iuid = $("#study_iuid").val();
-				let accession_no = $("#accession_no").val();
-				let no_foto = $("#no_foto").val();
-				let pat_id = $("#pat_id").val();
-				let pat_name = $("#pat_name").val();
-				let pat_birthdate = $("#pat_birthdate").val();
-				let address = $("#address").val();
-				let weight = $("#weight").val();
-				let name_dep = $("#name_dep").val();
-				let mods_in_study = $("#mods_in_study").val();
-				let named = $("#named").val();
-				let contrast = $("#contrast").val();
-				let radiographer_name = $("#radiographer_name").val();
-				let priority = $("#priority").val();
-				let pat_state = $("#pat_state").val();
-				let payment = $("#payment").val();
-				let contrast_allergies = $("#contrast_allergies").val();
-				let spc_needs = $("#spc_needs").val();
-				let kv = $("#kv").val();
-				let mas = $("#mas").val();
-
-				$("#edit-workload").validate({
-					rules: {
-						accession_no: "required",
-						no_foto: "required",
-						mrn: "required",
-						pat_name: "required",
-						pat_sex: "required",
-						pat_birthdate: "required",
-						address: "required",
-						name_dep: "required",
-						mods_in_study: "required",
-						named: "required",
-						radiographer_name: "required",
-						priority: "required",
-						pat_state: "required",
-						spc_needs: "required",
-						kv: "required",
-						mas: "required"
-					},
-					messages: {
-						required: "wajib diisi"
-					},
-					errorPlacement: function(error, element) {
-						if (element.is(":radio")) {
-							error.appendTo(element.parents('li'));
-						} else {
-							error.insertAfter(element)
-						}
-					},
-					highlight: function(element) {
-						$(element).closest('li').addClass('has-error');
-						$(element).addClass('invalid');
-
-					},
-					unhighlight: function(element) {
-						$(element).closest('li').removeClass('has-error');
-						$(element).removeClass('invalid');
-					},
-					errorClass: "invalid-text",
-					focusCleanup: true,
-					ignoreTitle: true,
-					submitHandler: function(form) {
-						$.ajax({
-							type: "POST",
-							url: "proses-update-workload.php",
-							data: $(form).serialize(),
-							success: function(response) {
-								console.log(response);
-							},
-							error: function(error) {
-								console.log(error);
-							}
-							// {
-							// 	accession_no: accession_no,
-							// 	no_foto: no_foto,
-							// 	pat_id: pat_id,
-							// 	pat_name: pat_name,
-							// 	pat_birthdate: pat_birthdate,
-							// 	address: address,
-							// 	weight: weight,
-							// 	name_dep: name_dep,
-							// 	mods_in_study: mods_in_study,
-							// 	named: named,
-							// 	contrast: contrast,
-							// 	radiographer_name: radiographer_name,
-							// 	priority: priority,
-							// 	pat_state: pat_state,
-							// 	payment: payment,
-							// 	contrast_allergies: contrast_allergies,
-							// 	spc_needs: spc_needs,
-							// 	film_small: film_small,
-							// 	film_medium: film_medium,
-							// 	film_large: film_large,
-							// 	film_reject_small: film_small,
-							// 	film_reject_medium: film_medium,
-							// 	film_reject_large: film_large,
-							// 	re_photo: re_photo,
-							// 	kv: kv,
-							// 	mas: mas
-							// },
-						})
-					}
 				});
 			});
 		</script>
