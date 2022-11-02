@@ -134,33 +134,84 @@ function ubahdokterworklist($post)
 
 	$uid = $post['uid'];
 	$dokradid = $post['dokradid'];
+	// $status = $post['status'];
+
+
 
 	$query4 = "SELECT * FROM xray_dokter_radiology WHERE dokradid = '$dokradid'";
 	$data_exam1 = mysqli_query($conn, $query4);
 	$row4 = mysqli_fetch_assoc($data_exam1);
 
+	$pk = $row4['pk'];
 	$dokradid1 = $row4['dokradid'];
-	$dokradname1 = $row4['dokrad_name'];
-	$dokradlastname1 = $row4['dokrad_lastname'];
+	$dokradname1 = $row4['dokrad_name'] . ' ' . $row4['dokrad_lastname'];
 
-	$query = "UPDATE xray_exam2 SET 
+
+	// echo $pk . ' ' . $dokradid1 . ' ' . $dokradname1 . ' ' . $dokradlastname1;
+	// die();
+
+	$querydokter = "SELECT pk FROM xray_order WHERE uid = '$uid'";
+	$dataquerydokter = mysqli_query($conn, $querydokter);
+
+	if (mysqli_num_rows($dataquerydokter) == '0') {
+		$queryinsert = mysqli_query($conn, "INSERT INTO xray_order (uid, dokradid, dokrad_name) VALUES ('$uid','$dokradid1','$dokradname1')");
+		mysqli_query($conn, $queryinsert);
+	} else {
+		$query = "UPDATE xray_order SET 
 				dokradid = '$dokradid1',
-				dokrad_name = '$dokradname1',
-				dokrad_lastname = '$dokradlastname1'
+				dokrad_name = '$dokradname1'
 				WHERE uid = '$uid'
 	";
-	mysqli_query($conn, $query);
+		mysqli_query($conn, $query);
+	}
 
-	$query1 = "UPDATE xray_workload_radiographer SET 
-	dokradid = '$dokradid1',
-	dokrad_name = '$dokradname1',
-	dokrad_lastname = '$dokradlastname1'
+	$query1 = "UPDATE xray_workload SET 
+	pk_dokter_radiology = '$pk'
 	WHERE uid = '$uid'
 	";
 	mysqli_query($conn, $query1);
 
 	return mysqli_affected_rows($conn);
 }
+
+function ubahdokterworkload($post)
+{
+	global $conn;
+
+	$uid = $post['uid'];
+	$dokradid = $post['dokradid'];
+
+
+	$query4 = "SELECT * FROM xray_dokter_radiology WHERE dokradid = '$dokradid'";
+	$data_exam1 = mysqli_query($conn, $query4);
+	$row4 = mysqli_fetch_assoc($data_exam1);
+
+	$pk = $row4['pk'];
+	$dokradid1 = $row4['dokradid'];
+	$dokradname1 = $row4['dokrad_name'] . ' ' . $row4['dokrad_lastname'];
+
+	$query = "UPDATE xray_order SET 
+	dokradid = '$dokradid1',
+	dokrad_name = '$dokradname1'
+	WHERE uid = '$uid'
+";
+	mysqli_query($conn, $query);
+
+	$query1 = "UPDATE xray_workload SET 
+	pk_dokter_radiology = '$pk',
+	status = 'waiting',
+	fill = NULL,
+	approved_at = NULL,
+	approve_updated_at = NULL,
+	signature = NULL,
+	signature_datetime = NULL 
+	WHERE uid = '$uid'
+	";
+	mysqli_query($conn, $query1);
+
+	return mysqli_affected_rows($conn);
+}
+
 
 function ashiap($post_fill)
 {

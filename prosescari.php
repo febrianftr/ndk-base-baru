@@ -172,7 +172,7 @@ while ($row = mysqli_fetch_array($result)) {
   } else if ($level == 'radiographer') {
     $level = HTMLFIRST . $study_iuid . HTMLLAST .
       EDITPASIENFIRST . $study_iuid . EDITPASIENLAST .
-      CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORLAST .
+      CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workloadstat . CHANGEDOCTORLAST .
       TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST .
       DELETEFIRST . $study_iuid . DELETELAST;
   } else if ($level == 'refferal') {
