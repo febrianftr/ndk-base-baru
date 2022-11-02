@@ -21,10 +21,16 @@ if ($maintenance_date) {
     $exp2 = $interval2->format("%R%a");
 }
 
-// --- STORAGE ---
-$diskFree = disk_free_space('d:');
-$diskTotal = disk_total_space('d:');
-$diskUsed = $diskTotal - $diskFree;
-
-
-// --- END STORAGE ---
+// storage
+// jika storage data K ada tampilkan, tetapi jika tidak ada 0; (default storage server K)
+$dir = 'k:';
+$is_dir = is_dir($dir);
+if ($is_dir == true) {
+    $diskFree = disk_free_space($dir);
+    $diskTotal = disk_total_space($dir);
+    $diskUsed = $diskTotal - $diskFree;
+} else {
+    $diskFree = 0;
+    $diskTotal = 0;
+    $diskUsed = $diskTotal - $diskFree;
+}
