@@ -173,8 +173,8 @@ while ($row = mysqli_fetch_array($result)) {
     $level = HTMLFIRST . $study_iuid . HTMLLAST .
       EDITPASIENFIRST . $study_iuid . EDITPASIENLAST .
       CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workloadstat . CHANGEDOCTORLAST .
-      TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST .
-      DELETEFIRST . $study_iuid . DELETELAST;
+      TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST;
+    // DELETEFIRST . $study_iuid . DELETELAST;
   } else if ($level == 'refferal') {
     $level = DICOMFIRST . $study_iuid . DICOMLAST;
   } else {

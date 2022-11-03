@@ -1,3 +1,33 @@
+<?php
+require 'model/query-base-workload.php';
+require 'model/query-base-study.php';
+
+$query = "SELECT COUNT(*) AS total
+FROM $table_study
+JOIN $table_workload
+ON study.study_iuid = xray_workload.uid
+WHERE DATE(updated_time) = CURRENT_DATE()";
+
+// total studies
+$total = mysqli_fetch_assoc(mysqli_query(
+  $conn_pacsio,
+  $query
+));
+
+// total waiting
+$waiting = mysqli_fetch_assoc(mysqli_query(
+  $conn_pacsio,
+  $query . ' AND status = "waiting"'
+));
+
+// total approved
+$approved = mysqli_fetch_assoc(mysqli_query(
+  $conn_pacsio,
+  $query . ' AND status = "approved"'
+));
+
+
+?>
 <style type="text/css">
   .chart_index {
     background-color: #f7f7f7;
@@ -90,8 +120,7 @@
           </div>
           <div class="box-content">
             <span class="big">
-              <?php // echo $waitingtotal1;
-              ?>100
+              <?= $total['total'] ?>
             </span>
             Today studies
           </div>
@@ -105,8 +134,7 @@
 
           <div class="box-content">
             <span class="big">
-              <? // php  echo $approved1; 
-              ?>65
+              <?= $approved['total']; ?>
             </span>
             Approved Reports
           </div>
@@ -120,8 +148,7 @@
 
           <div class="box-content">
             <span class="big">
-              <?php //echo $waitingapprove1; 
-              ?>35
+              <?= $waiting['total']; ?>
             </span>
             Waiting Reports
           </div>
