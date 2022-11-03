@@ -14,3 +14,18 @@
 
 <link rel="stylesheet" type="text/css" href="../css/style_master.css" />
 <link rel="stylesheet" href="css/css_media.css">
+
+<!-- untuk validasi form -->
+<style>
+    .not-allowed {
+        cursor: not-allowed;
+    }
+
+    .invalid {
+        border: 1px solid red !important;
+    }
+
+    .invalid-text {
+        color: red;
+    }
+</style>

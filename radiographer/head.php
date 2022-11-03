@@ -11,3 +11,18 @@
 <link rel="stylesheet" href="css/bootstrap-select.min.css">
 <link rel="stylesheet" href="../css/style_master.css?v=1">
 <link rel="stylesheet" href="css/css_media.css">
+
+<!-- untuk validasi form -->
+<style>
+    .not-allowed {
+        cursor: not-allowed;
+    }
+
+    .invalid {
+        border: 1px solid red !important;
+    }
+
+    .invalid-text {
+        color: red;
+    }
+</style>

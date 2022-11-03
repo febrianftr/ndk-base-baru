@@ -74,19 +74,6 @@ if ($_SESSION['level'] == "radiographer") {
 		<title>Update Workload</title>
 		<?php include('head.php'); ?>
 	</head>
-	<style>
-		.not-allowed {
-			cursor: not-allowed;
-		}
-
-		.invalid {
-			border: 1px solid red !important;
-		}
-
-		.invalid-text {
-			color: red;
-		}
-	</style>
 
 	<body>
 		<?php include('sidebar.php'); ?>

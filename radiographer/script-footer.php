@@ -26,6 +26,7 @@
 </script>
 <script type="text/javascript" src="../js/sweetalert.min.js" />
 </script>
+<script type="text/javascript" src="../js/select2.min.js"></script>
 
 <!-- =======menghapus border pada div======== -->
 <script>

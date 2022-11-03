@@ -65,7 +65,7 @@ $(document).ready(function () {
     submitHandler: function (form) {
       $.ajax({
         type: "POST",
-        url: `http://127.0.0.1:8000/api/update-workload/${study_iuid}`,
+        url: `http://${location.hostname}:8000/api/update-workload/${study_iuid}`,
         data: $(form).serialize(),
         beforeSend: function () {
           $(".loading").show();
