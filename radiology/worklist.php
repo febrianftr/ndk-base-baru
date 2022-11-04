@@ -298,10 +298,10 @@ if ($_SESSION['level'] == "radiology") { ?>
 											<h4 style="margin: 0px;">Intiwid Viewer</h4>
 											<hr style="margin: 10px 0px;">
 											<div class="buttons1">
-												<?= DICOMWORKLISTFIRST . $uid . DICOMWORKLISTLAST .
-													RADIANTWORKLISTFIRST . $uid . RADIANTWORKLISTLAST .
-													OHIFWORKLISTFIRST . $uid . OHIFWORKLISTLAST .
-													HTMLWORKLISTFIRST . $uid . HTMLWORKLISTLAST; ?>
+												<?= RADIANTWORKLISTFIRST . $uid . RADIANTWORKLISTLAST .
+													DICOMWORKLISTFIRST . $uid . DICOMWORKLISTLAST .
+													HTMLWORKLISTFIRST . $uid . HTMLWORKLISTLAST .
+													OHIFWORKLISTFIRST . $uid . OHIFWORKLISTLAST; ?>
 											</div>
 										</div>
 									</div>

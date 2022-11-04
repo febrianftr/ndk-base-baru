@@ -162,15 +162,17 @@ while ($row = mysqli_fetch_array($result)) {
   $level = $_SESSION['level'];
   if ($level == 'radiology') {
     $level =
+      RADIANTFIRST . $study_iuid . RADIANTLAST .
+      HTMLFIRST . $study_iuid . HTMLLAST .
+      OHIFMOBILEFIRST . $study_iuid . OHIFMOBILELAST .
       CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workloadstat . CHANGEDOCTORLAST .
-      EDITPASIENFIRST . $study_iuid . EDITPASIENLAST .
       EDITWORKLOADFIRST . $study_iuid . EDITWORKLOADLAST .
       TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST .
-      TELEGRAMSIGNATUREFIRST . $study_iuid . TELEGRAMSIGNATURELAST .
-      RADIANTFIRST . $study_iuid . RADIANTLAST .
-      DICOMFIRST . $study_iuid . DICOMLAST;
+      TELEGRAMSIGNATUREFIRST . $study_iuid . TELEGRAMSIGNATURELAST;
   } else if ($level == 'radiographer') {
-    $level = HTMLFIRST . $study_iuid . HTMLLAST .
+    $level =  RADIANTFIRST . $study_iuid . RADIANTLAST .
+      HTMLFIRST . $study_iuid . HTMLLAST .
+      OHIFMOBILEFIRST . $study_iuid . OHIFMOBILELAST .
       EDITPASIENFIRST . $study_iuid . EDITPASIENLAST .
       CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workloadstat . CHANGEDOCTORLAST .
       TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST;
