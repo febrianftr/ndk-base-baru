@@ -163,7 +163,7 @@ while ($row = mysqli_fetch_array($result)) {
   if ($level == 'radiology') {
     $level =
       CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workloadstat . CHANGEDOCTORLAST .
-      EDITPASIENFIRST . $study_iuid . EDITPASIENLAST .
+      // EDITPASIENFIRST . $study_iuid . EDITPASIENLAST .
       EDITWORKLOADFIRST . $study_iuid . EDITWORKLOADLAST .
       TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST .
       TELEGRAMSIGNATUREFIRST . $study_iuid . TELEGRAMSIGNATURELAST .
