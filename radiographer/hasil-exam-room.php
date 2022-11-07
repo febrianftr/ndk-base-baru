@@ -2,6 +2,7 @@
 require '../koneksi/koneksi.php';
 require '../default-value.php';
 require '../model/query-base-mwl-item.php';
+require '../bahasa.php';
 
 $uid = $_POST['uid'];
 $row = mysqli_fetch_assoc(mysqli_query(
@@ -33,67 +34,67 @@ $row = mysqli_fetch_assoc(mysqli_query(
         <table class="" id="example" style="margin-top: 3px;" cellpadding="8" cellspacing="0">
             <thead class="thead1">
                 <tr>
-                    <td>study iuid</td>
+                    <td>Study Iuid</td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= defaultValue($row['study_iuid_mppsio']); ?></td>
                 </tr>
                 <tr>
-                    <td>Nama</td>
+                    <td><?= $lang['patient_name'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= str_replace('^^^^', '', defaultValue($row['pat_name'])); ?></td>
                 </tr>
                 <tr>
-                    <td>id pasien</td>
+                    <td>MRN</td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= defaultValue($row['pat_id']); ?></td>
                 </tr>
                 <tr>
-                    <td>accession no</td>
+                    <td>Accession No</td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= defaultValue($row['accession_no']); ?></td>
                 </tr>
                 <tr>
-                    <td>tanggal lahir</td>
+                    <td>Birth Date</td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= defaultValueDate($row['pat_birthdate']); ?></td>
                 </tr>
                 <tr>
-                    <td>Jenis Kelamin</td>
+                    <td><?= $lang['sex'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= defaultValue($row['pat_sex']); ?></td>
                 </tr>
                 <tr>
-                    <td>modality</td>
+                    <td><?= $lang['modality'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= defaultValue($row['modality']); ?></td>
                 </tr>
                 <tr>
-                    <td>sps id</td>
+                    <td>Sps Id</td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= defaultValue($row['sps_id']); ?></td>
                 </tr>
                 <tr>
-                    <td>req proc id</td>
+                    <td>Req Proc Id</td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= defaultValue($row['req_proc_id']); ?></td>
                 </tr>
                 <tr>
-                    <td>Waktu Pemeriksaan</td>
+                    <td>Exam Date</td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= defaultValueDateTime($row['start_datetime']); ?></td>
                 </tr>
                 <tr>
-                    <td>station aet</td>
+                    <td>Station Aet</td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= defaultValue($row['station_aet']); ?></td>
                 </tr>
                 <tr>
-                    <td>nama radiografer</td>
+                    <td><?= $lang['radiographer'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= $row['perf_physician'] == '^^^^' ? '-' : str_replace('^^^^', '', $row['perf_physician']); ?></td>
                 </tr>
                 <tr>
-                    <td>waktu order</td>
+                    <td>Order Date</td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= defaultValueDateTime($row['created_time']); ?></td>
                 </tr>

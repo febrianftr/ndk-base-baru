@@ -40,16 +40,16 @@ if ($_SESSION['level'] == "radiographer") {
 									<thead>
 										<tr bgcolor=#CCCCCC>
 											<th>No</th>
-											<th>aksi</th>
-											<th>Nama</th>
+											<th>Action</th>
+											<th><?= $lang['patient_name'] ?></th>
 											<th>MRN</th>
-											<th>accession no</th>
-											<th>tanggal lahir</th>
-											<th>Jenis Kelamin</th>
-											<th>modality</th>
-											<th>pemeriksaan utama</th>
-											<th>Waktu Pemeriksaan</th>
-											<th>waktu order</th>
+											<th>Accession No</th>
+											<th>Birth Date</th>
+											<th><?= $lang['sex'] ?></th>
+											<th><?= $lang['modality'] ?></th>
+											<th><?= $lang['study'] ?></th>
+											<th>Exam Date</th>
+											<th>Order Date</th>
 											<th>Label</th>
 										</tr>
 									</thead>

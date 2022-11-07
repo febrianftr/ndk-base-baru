@@ -50,7 +50,7 @@ include '../contract-service.php';
                 <li id="report1"><a href="report.php"><?= $lang['download_excel'] ?></a></li>
                 <li id="uploadexcel1"><a href="uploadexcel.php"><?= $lang['backup_excel'] ?></a></li>
                 <li id="downloadexcel1"><a href="downloadexcel.php">Storage Excel</a></li>
-                <li id="chart2"><a href="chart1.php"><?= $lang['chart'] ?></a></li>
+                <li id="chart2"><a href="chart.php"><?= $lang['chart'] ?></a></li>
             </ul>
 
             <!-- <li id="billing1">

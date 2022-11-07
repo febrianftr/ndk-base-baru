@@ -4,6 +4,7 @@ require '../default-value.php';
 require '../model/query-base-order.php';
 require '../model/query-base-study.php';
 require '../model/query-base-mwl-item.php';
+require '../bahasa.php';
 
 $uid = $_POST['uid'];
 $row = mysqli_fetch_assoc(mysqli_query(
@@ -38,7 +39,7 @@ $row = mysqli_fetch_assoc(mysqli_query(
                     <td align="left">&nbsp; <?= $row['uid']; ?></td>
                 </tr>
                 <tr>
-                    <td>Nama</td>
+                    <td><?= $lang['patient_name'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= defaultValue($row['name']) ?></td>
                 </tr>
@@ -48,42 +49,42 @@ $row = mysqli_fetch_assoc(mysqli_query(
                     <td align="left">&nbsp; <?= defaultValue($row['mrn']); ?></td>
                 </tr>
                 <tr>
-                    <td>id pasien</td>
+                    <td>No Foto</td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= defaultValue($row['patientid']); ?></td>
                 </tr>
                 <tr>
-                    <td>accession no</td>
+                    <td>Accession No</td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= defaultValue($row['acc']); ?></td>
                 </tr>
                 <tr>
-                    <td>tanggal lahir</td>
+                    <td>Birth Date</td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= defaultValueDate($row['birth_date']); ?></td>
                 </tr>
                 <tr>
-                    <td>Alamat</td>
+                    <td>Address</td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= defaultValue($row['address']); ?></td>
                 </tr>
                 <tr>
-                    <td>Berat Badan</td>
+                    <td>Weight</td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= defaultValue($row['weight']); ?></td>
                 </tr>
                 <tr>
-                    <td>Jenis Kelamin</td>
+                    <td><?= $lang['sex'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= defaultValue($row['sex']); ?></td>
                 </tr>
                 <tr>
-                    <td>Dokter Pengirim</td>
+                    <td><?= $lang['referral_physician'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= defaultValue($row['named']); ?></td>
                 </tr>
                 <tr>
-                    <td>Dokter Radiologi</td>
+                    <td><?= $lang['radiology_physician'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= defaultValue($row['dokrad_name']); ?></td>
                 </tr>
@@ -93,22 +94,22 @@ $row = mysqli_fetch_assoc(mysqli_query(
                     <td align="left">&nbsp; <?= defaultValue($row['priority']); ?></td>
                 </tr>
                 <tr>
-                    <td>Pelayanan Medis</td>
+                    <td>Medical Service</td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= defaultValue($row['pat_state']); ?></td>
                 </tr>
                 <tr>
-                    <td>modality</td>
+                    <td><?= $lang['modality'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= defaultValue($row['xray_type_code']); ?></td>
                 </tr>
                 <tr>
-                    <td>Waktu Pemeriksaan</td>
+                    <td>Exam Date</td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= defaultValueDateTime($row['schedule_date'] . ' ' . $row['schedule_time']); ?></td>
                 </tr>
                 <tr>
-                    <td>nama radiografer</td>
+                    <td><?= $lang['radiographer'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= defaultValue($row['radiographer_name']); ?></td>
                 </tr>
@@ -118,12 +119,12 @@ $row = mysqli_fetch_assoc(mysqli_query(
                     <td align="left">&nbsp; <?= defaultValue($row['spc_needs']); ?></td>
                 </tr>
                 <tr>
-                    <td>Pembayaran</td>
+                    <td>Payment</td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= defaultValue($row['payment']); ?></td>
                 </tr>
                 <tr>
-                    <td>waktu order</td>
+                    <td>Order Date</td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= defaultValueDateTime($row['create_time']); ?></td>
                 </tr>

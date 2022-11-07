@@ -88,7 +88,7 @@ $radiographer_name = $row10['radiographer_name'] . ' ' . $row10['radiographer_la
               </ul>
             </li>
 
-            <li><span class="center-menu"><a href="chart1.php"><img style="width: 30px;" src="../icon-menubar/new_icon/chart.png"><br class="br-menu"><?= $lang['chart'] ?></a></span></li>
+            <li><span class="center-menu"><a href="chart.php"><img style="width: 30px;" src="../icon-menubar/new_icon/chart.png"><br class="br-menu"><?= $lang['chart'] ?></a></span></li>
             <li><span class="center-menu"><a href="report.php"><img style="width: 30px;" src="../icon-menubar/new_icon/report.png"><br class="br-menu"></i>Report</a></span>
             </li>
 
