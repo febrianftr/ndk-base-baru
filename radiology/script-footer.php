@@ -22,6 +22,7 @@
 <script type="text/javascript" src="../js/datetime-moment.js" />
 </script>
 <script type="text/javascript" src="../js/inobitec.js"></script>
+<script type="text/javascript" src="../js/select2.min.js"></script>
 
 
 <!-- =======menghapus border pada div======== -->

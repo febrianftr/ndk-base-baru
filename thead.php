@@ -7,8 +7,8 @@
     <th>No Foto</th>
     <th><?= $lang['age'] ?></th>
     <th><?= $lang['sex'] ?></th>
-    <th><?= $lang['bodypart'] ?></th>
-    <th><?= $lang['bodypart'] ?> Detail</th>
+    <th><?= $lang['study'] ?></th>
+    <th><?= $lang['study'] ?> Detail</th>
     <th><?= $lang['modality'] ?></th>
     <th><?= $lang['referral_physician'] ?></th>
     <th><?= $lang['departmen'] ?></th>

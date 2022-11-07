@@ -273,6 +273,7 @@ Hubungi kami di (Kantor) + 62-21-4532648 </p>",
 	"report_excel" => "Laporan Excel",
 	"backup_excel" => "Cadangkan Excel",
 
+	"study" => "Pemeriksaan",
 	"read_more" => "Baca Lebih Banyak",
 	"study_date" => "Waktu Pemeriksaan",
 	"ris" => "Sistem Informasi Radiologi",

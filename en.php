@@ -275,6 +275,7 @@ Contact us at (Office) +62-21-4532648</p>",
 	"report_excel" => "Report Excel",
 	"backup_excel" => "Backup Excel",
 
+	"study" => "Study",
 	"read_more" => "Read More",
 	"study_date" => "Study Date",
 	"ris" => "Radiology Information System",

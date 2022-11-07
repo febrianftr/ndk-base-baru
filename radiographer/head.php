@@ -9,6 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" media="screen" href="css/jquery.datetimepicker.min.css">
 <link rel="stylesheet" href="css/bootstrap-select.min.css">
+<link href="../css/select2.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="../css/style_master.css?v=1">
 <link rel="stylesheet" href="css/css_media.css">
 

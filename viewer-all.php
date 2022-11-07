@@ -95,9 +95,9 @@ define('DRAFTLAST', '"><span class="btn btn-warning btn-inti"><i class="fas fa-e
 // VIEWER DI WORKLIST ICON LARGE
 define('DICOMWORKLISTFIRST', '<a href="jnlp://' . $_SERVER['SERVER_NAME'] . ':19898/weasis-pacs-connector/DCM_viewer.jnlp?studyUID=');
 define('DICOMWORKLISTLAST', '"class="button8 delete1"><img src="../image/desktop.svg" style="width: 50px;"><br> <span> Dicom Viewer</span></a>');
-define('OHIFWORKLISTFIRST', '<a href="http://' . $_SERVER['SERVER_NAME'] . ':3000/viewer/');
-define('OHIFWORKLISTLAST', '"class="button8 delete1" target="_blank"><img src="../image/web.svg" style="width: 50px;"><br> <span> WEB Viewer</span></a>');
+define('OHIFWORKLISTFIRST', '<a href="http://' . $_SERVER['SERVER_NAME'] . ':82/viewer?StudyInstanceUIDs=');
+define('OHIFWORKLISTLAST', '"class="button8 delete1" target="_blank"><img src="../image/smartphone.svg" style="width: 50px;"><br> <span> Mobile Viewer</span></a>');
 define('HTMLWORKLISTFIRST', '<a href="http://' . $_SERVER['SERVER_NAME'] . ':19898/intiwid/viewer.html?studyUID=');
 define('HTMLWORKLISTLAST', '" class="button8 delete1" target="_blank"><img src="../image/html.svg" style="width: 50px;"><br> <span> HTML Viewer</span></a>');
 define('RADIANTWORKLISTFIRST', '<a href="radiant://?n=paet&v=dcmPACS&n=pstv&v=0020000D&v=%22');
-define('RADIANTWORKLISTLAST', '%22" class="button8 delete1"><img src="../image/smartphone.svg" style="width: 50px;"><br><span> Mobile Viewer</span></a>');
+define('RADIANTWORKLISTLAST', '%22" class="button8 delete1"><img src="../image/radiAnt.png" style="width: 50px;"><br><span> Radiant</span></a>');
