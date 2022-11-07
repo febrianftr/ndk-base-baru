@@ -80,6 +80,7 @@ if ($row['status'] == 'waiting' || $row['status'] == '') {
         padding: 10px;
     }
 </style>
+<?php include "bahasa.php"; ?>
 <div class="col justify-content-center text-center">
     <div class="row-12">
         <?php
@@ -93,7 +94,7 @@ if ($row['status'] == 'waiting' || $row['status'] == '') {
         <table class="" id="example" style="margin-top: 3px;" cellpadding="8" cellspacing="0">
             <thead class="thead1">
                 <tr>
-                    <td>Study Iuid</td>
+                    <td><?= $lang['study'] ?> Iuid</td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= $study_iuid; ?></td>
                 </tr>
@@ -108,7 +109,7 @@ if ($row['status'] == 'waiting' || $row['status'] == '') {
                     <td align="left">&nbsp; <?= $status; ?></td>
                 </tr>
                 <tr>
-                    <td>Nama</td>
+                    <td><?= $lang['patient_name'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= removeCharacter($pat_name); ?></td>
                 </tr>
@@ -123,27 +124,27 @@ if ($row['status'] == 'waiting' || $row['status'] == '') {
                     <td align="left">&nbsp; <?= $no_foto; ?></td>
                 </tr>
                 <tr>
-                    <td>Tanggal Lahir</td>
+                    <td><?= $lang['date_birth'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= $pat_birthdate; ?></td>
                 </tr>
                 <tr>
-                    <td>Umur</td>
+                    <td><?= $lang['age'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= $age; ?></td>
                 </tr>
                 <tr>
-                    <td>Jenis Kelamin</td>
+                    <td><?= $lang['sex'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= $pat_sex; ?></td>
                 </tr>
                 <tr>
-                    <td>Berat Badan</td>
+                    <td><?= $lang['weight'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= $weight; ?></td>
                 </tr>
                 <tr>
-                    <td>Alamat</td>
+                    <td><?= $lang['address'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= $address; ?></td>
                 </tr>
@@ -153,22 +154,22 @@ if ($row['status'] == 'waiting' || $row['status'] == '') {
                     <td align="left">&nbsp; <?= $contrast; ?></td>
                 </tr>
                 <tr>
-                    <td>Prioritas Pasien (SIMRS)</td>
+                    <td><?= $lang['priority'] ?>(SIMRS)</td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= $priority; ?></td>
                 </tr>
                 <tr>
-                    <td>Prioritas Pasien (Hasil)</td>
+                    <td><?= $lang['priority'] ?> (Hasil)</td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= $priority_doctor; ?></td>
                 </tr>
                 <tr>
-                    <td>Pemeriksaan Utama</td>
+                    <td><?= $lang['study'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= $study_desc; ?></td>
                 </tr>
                 <tr>
-                    <td>Jumlah Series / Image</td>
+                    <td><?= $lang['series_image'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= $num_series . ' / ' . $num_instances; ?></td>
                 </tr>
@@ -178,62 +179,62 @@ if ($row['status'] == 'waiting' || $row['status'] == '') {
                     <td align="left">&nbsp; <?= $mods_in_study; ?></td>
                 </tr>
                 <tr>
-                    <td>Dokter Pengirim</td>
+                    <td><?= $lang['referral_physician'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= $named; ?></td>
                 </tr>
                 <tr>
-                    <td>Poli</td>
+                    <td><?= $lang['departmen'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= $name_dep; ?></td>
                 </tr>
                 <tr>
-                    <td>Pelayanan Medis</td>
+                    <td><?= $lang['patient_state'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= $pat_state; ?></td>
                 </tr>
                 <tr>
-                    <td>Dokter Radiologi</td>
+                    <td><?= $lang['radiology_physician'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= $dokrad_name; ?></td>
                 </tr>
                 <tr>
-                    <td>Nama Radiografer</td>
+                    <td><?= $lang['radiographer'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= $radiographer_name; ?></td>
                 </tr>
                 <tr>
-                    <td>Klinis</td>
+                    <td><?= $lang['spc_needs'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= $spc_needs; ?></td>
                 </tr>
                 <tr>
-                    <td>Pembayaran</td>
+                    <td><?= $lang['payment'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= $payment; ?></td>
                 </tr>
                 <tr>
-                    <td>Waktu Order</td>
+                    <td><?= $lang['patient_order'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= $create_time; ?></td>
                 </tr>
                 <tr>
-                    <td>Waktu Pemeriksaan</td>
+                    <td><?= $lang['exam_date'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= $study_datetime; ?></td>
                 </tr>
                 <tr>
-                    <td>Waktu Selesai Pemeriksaan</td>
+                    <td><?= $lang['study_date'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= $updated_time; ?></td>
                 </tr>
                 <tr>
-                    <td>Waktu Selesai Dibaca</td>
+                    <td><?= $lang['approve_date'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= $approved_at; ?></td>
                 </tr>
                 <tr>
-                    <td>Waktu Tunggu</td>
+                    <td><?= $lang['spend_time'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= $spendtime; ?></td>
                 </tr>
