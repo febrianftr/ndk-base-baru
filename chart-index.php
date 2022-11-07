@@ -88,7 +88,12 @@
     <br>
     <div id="result-chart" class="container-fluid">
         <center>
-            <h2><?= $lang['radiology_data'] ?><br /><?php echo $from ?? '-' ?> - <?php echo $to ?? '-' ?></h2>
+            <h4>
+                <?= $lang['radiology_data'] ?>
+            </h4>
+            <p>
+            <div class="tanggal"></div>
+            </p>
         </center>
         <div style="overflow-x:auto;">
             <div class="chart1" style="width: 800px;margin: 0px auto;">
@@ -99,7 +104,7 @@
         <br />
         <br />
         <!-- TABEL -->
-        <div class="back-search">
+        <!-- <div class="back-search">
             <?php
             ?>
             <table class="table-dicom table-paginate" border="1">
@@ -117,6 +122,6 @@
                 </tbody>
             </table>
             <?php  ?>
-        </div>
+        </div> -->
     </div>
 </div>

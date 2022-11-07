@@ -5,6 +5,7 @@ require 'default-value.php';
 require 'model/query-base-patient.php';
 require 'model/query-base-study.php';
 require 'model/query-base-series.php';
+require 'bahasa.php';
 
 $uid = $_POST['uid'];
 $row = mysqli_fetch_assoc(mysqli_query(
@@ -24,12 +25,12 @@ $row = mysqli_fetch_assoc(mysqli_query(
 </style>
 <div class="fill">
 	<div class="table-responsive-sm">
-		<h5 class="text-center font-weight-bold">Pemeriksaan Detail</h5>
+		<h5 class="text-center font-weight-bold"><?= $lang['study'] ?> Detail</h5>
 		<br>
 		<table class="" id="example" style="margin-top: 3px;" cellpadding="8" cellspacing="0">
 			<thead class="thead1">
 				<tr>
-					<td>Nama</td>
+					<td><?= $lang['patient_name'] ?></td>
 					<td>&nbsp;: </td>
 					<td align="left">&nbsp; <?= removeCharacter($row['pat_name']); ?></td>
 				</tr>
@@ -39,12 +40,12 @@ $row = mysqli_fetch_assoc(mysqli_query(
 					<td align="left">&nbsp; <?= defaultValue($row['pat_id']); ?></td>
 				</tr>
 				<tr>
-					<td>Jenis Kelamin</td>
+					<td><?= $lang['sex'] ?></td>
 					<td>&nbsp;: </td>
 					<td align="left">&nbsp; <?= defaultValue($row['pat_sex']); ?></td>
 				</tr>
 				<tr>
-					<td>Pemeriksaan Utama</td>
+					<td><?= $lang['study'] ?></td>
 					<td>&nbsp;: </td>
 					<td align="left" class="font-weight-bold">&nbsp; <?= defaultValue($row['study_desc']); ?></td>
 				</tr>
@@ -60,7 +61,7 @@ $row = mysqli_fetch_assoc(mysqli_query(
 						<th>Series</th>
 						<th>Body Part</th>
 						<th>Src Aet</th>
-						<th>Modality</th>
+						<th><?= $lang['modality'] ?></th>
 						<th>#i</th>
 						<th>Create Time</th>
 					</tr>

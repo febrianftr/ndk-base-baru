@@ -111,6 +111,8 @@ $(document).ready(function () {
       let mods_in_study = $("input[id='mods_in_study']:checked");
       let type_chart = $("input[id='type_chart']:checked").val();
 
+      $(".tanggal").text(`Periode tanggal ${from} - ${to}`);
+
       // mods_in_study
       let push_mods_in_study = [];
 
@@ -134,7 +136,6 @@ $(document).ready(function () {
           $(".ubah").show();
         },
         success: function (response) {
-          console.log(response);
           // jika data kosong
           if (response.length == 0) {
             swal({
