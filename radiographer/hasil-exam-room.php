@@ -54,7 +54,7 @@ $row = mysqli_fetch_assoc(mysqli_query(
                     <td align="left">&nbsp; <?= defaultValue($row['accession_no']); ?></td>
                 </tr>
                 <tr>
-                    <td>Birth Date</td>
+                    <td><?= $lang['date_birth'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= defaultValueDate($row['pat_birthdate']); ?></td>
                 </tr>
@@ -79,7 +79,7 @@ $row = mysqli_fetch_assoc(mysqli_query(
                     <td align="left">&nbsp; <?= defaultValue($row['req_proc_id']); ?></td>
                 </tr>
                 <tr>
-                    <td>Exam Date</td>
+                    <td><?= $lang['exam_date'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= defaultValueDateTime($row['start_datetime']); ?></td>
                 </tr>
@@ -94,7 +94,7 @@ $row = mysqli_fetch_assoc(mysqli_query(
                     <td align="left">&nbsp; <?= $row['perf_physician'] == '^^^^' ? '-' : str_replace('^^^^', '', $row['perf_physician']); ?></td>
                 </tr>
                 <tr>
-                    <td>Order Date</td>
+                    <td><?= $lang['patient_order'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= defaultValueDateTime($row['created_time']); ?></td>
                 </tr>

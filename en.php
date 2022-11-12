@@ -291,6 +291,9 @@ Contact us at (Office) +62-21-4532648</p>",
 	"waiting_report" => "Waiting Report",
 	"approved_report" => "Approved Report",
 
+	"patient_finished_order" => "Patient Finished Order",
+	"patient_being_examined" => "Patient Being Examined"
+
 
 
 

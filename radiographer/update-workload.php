@@ -117,10 +117,6 @@ if ($_SESSION['level'] == "radiographer") {
 														<input type="radio" name="pat_sex" id="pat_sex" <?= strtoupper($pat_sex) == 'F' ? 'checked' : ''; ?> value="F"> Perempuan
 														<span class="checkmark"></span>
 													</label>
-													<label class="radio-admin">
-														<input type="radio" name="pat_sex" id="pat_sex" <?= strtoupper($pat_sex) == 'O' ? 'checked' : ''; ?> value="O"> Other
-														<span class="checkmark"></span>
-													</label>
 												</div>
 											</li><br>
 											<li>

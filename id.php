@@ -289,6 +289,9 @@ Hubungi kami di (Kantor) + 62-21-4532648 </p>",
 	"waiting_report" => "Belum Terbaca",
 	"approved_report" => "Terbaca",
 
+	"patient_finished_order" => "pasien selesai order",
+	"patient_being_examined" => "pasien yang sedang diperiksa"
+
 
 
 

@@ -119,12 +119,14 @@ if ($_SESSION['level'] == "radiographer") {
 								<nav aria-label="breadcrumb">
 									<ol class="breadcrumb">
 										<li class="breadcrumb-item"><a href="index.php">Home</a></li>
-										<li class="breadcrumb-item active">Exam Order</li>
+										<li class="breadcrumb-item active"><?= $lang['patient_being_examined'] ?></li>
 									</ol>
 								</nav>
 							</div>
 							<div class="table-view col-md-12 table-box" style="overflow-x:auto;">
-								<h3 class="text-center">Daftar pasien yang sedang diperiksa</h3>
+								<h3 class="text-center">Worklist</h3>
+								<hr>
+								<h6 class="text-center"><?= $lang['patient_being_examined'] ?></h6>
 								<br>
 								<form class="form-inline" method="POST" action="deleteexamall.php">
 									<div class="form-group">
@@ -146,11 +148,11 @@ if ($_SESSION['level'] == "radiographer") {
 											<th><?= $lang['patient_name'] ?></th>
 											<th>MRN</th>
 											<th>Accession No</th>
-											<th>Birth Date</th>
+											<th><?= $lang['date_birth'] ?></th>
 											<th><?= $lang['sex'] ?></th>
 											<th><?= $lang['modality'] ?></th>
-											<th>Exam Date</th>
-											<th>Order Date</th>
+											<th><?= $lang['exam_date'] ?></th>
+											<th><?= $lang['patient_order'] ?></th>
 										</tr>
 									</thead>
 								</table>

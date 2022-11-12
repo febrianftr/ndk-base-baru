@@ -12,7 +12,7 @@ if ($_SESSION['level'] == "radiographer") {
 
 	<head>
 		<?php include('head.php'); ?>
-		<title>All Order | Radiographer</title>
+		<title>Patient Finished Order | Radiographer</title>
 	</head>
 
 	<body>
@@ -28,13 +28,15 @@ if ($_SESSION['level'] == "radiographer") {
 								<nav aria-label="breadcrumb">
 									<ol class="breadcrumb">
 										<li class="breadcrumb-item"><a href="index.php">Home</a></li>
-										<li class="breadcrumb-item active">All Order</li>
+										<li class="breadcrumb-item active"><?= $lang['patient_finished_order'] ?></li>
 									</ol>
 								</nav>
 							</div>
 							<div class="table-view col-md-12 back-search" id="content1" style="overflow-x:auto;">
 								<center>
-									<h3 class="textsearchnewpasien2">All Order</h3>
+									<h3 class="textsearchnewpasien2">Order</h3>
+									<hr>
+									<h6><?= $lang['patient_finished_order'] ?></h6>
 								</center>
 								<table class="table-dicom" id="example" border="1" cellpadding="8" cellspacing="0">
 									<thead>
@@ -44,12 +46,12 @@ if ($_SESSION['level'] == "radiographer") {
 											<th><?= $lang['patient_name'] ?></th>
 											<th>MRN</th>
 											<th>Accession No</th>
-											<th>Birth Date</th>
+											<th><?= $lang['date_birth'] ?></th>
 											<th><?= $lang['sex'] ?></th>
 											<th><?= $lang['modality'] ?></th>
 											<th><?= $lang['study'] ?></th>
-											<th>Exam Date</th>
-											<th>Order Date</th>
+											<th><?= $lang['exam_date'] ?></th>
+											<th><?= $lang['patient_order'] ?></th>
 											<th>Label</th>
 										</tr>
 									</thead>
