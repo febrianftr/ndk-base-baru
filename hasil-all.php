@@ -242,3 +242,6 @@ if ($row['status'] == 'waiting' || $row['status'] == '') {
         </table>
     </div>
 </div>
+
+<?php
+mysqli_close($conn);

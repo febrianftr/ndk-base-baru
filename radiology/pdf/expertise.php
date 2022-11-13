@@ -195,3 +195,5 @@ if (!empty($signature)) {
 }
 
 $pdf->Output('I', $pat_name);
+
+mysqli_close($conn);

@@ -80,12 +80,14 @@ if (isset($_POST["save_approve"])) {
 				win = window.open('pdf/expertise.php?uid=$uid', '_blank');
 				win.focus();
 			</script>";
+		mysqli_close($conn);
 	} else {
 		echo "
 			<script>
 				alert('approve gagal');
 				document.location.href= 'worklist.php?uid=$uid';
 			</script>";
+		mysqli_close($conn);
 	}
 }
 

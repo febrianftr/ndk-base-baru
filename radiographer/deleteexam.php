@@ -25,3 +25,5 @@ if (!$query) {
 			document.location.href= 'exam2.php';
 		</script>";
 }
+
+mysqli_close($conn);

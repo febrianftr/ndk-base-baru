@@ -459,3 +459,7 @@ while ($status = mysqli_fetch_array($statuses)) {
 </body>
 
 </html>
+
+<?php
+
+mysqli_close($conn);

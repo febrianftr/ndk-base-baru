@@ -65,3 +65,5 @@ while ($row = mysqli_fetch_array($query)) {
 }
 
 echo json_encode($data);
+
+mysqli_close($conn);

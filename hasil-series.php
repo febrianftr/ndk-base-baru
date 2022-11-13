@@ -94,3 +94,7 @@ $row = mysqli_fetch_assoc(mysqli_query(
 	<br>
 	<p>
 </div>
+
+<?php
+
+mysqli_close($conn);
