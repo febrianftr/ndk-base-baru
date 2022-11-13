@@ -6,6 +6,7 @@ require 'model/query-base-order.php';
 require 'model/query-base-study.php';
 require 'model/query-base-patient.php';
 require 'model/query-base-dokter-radiology.php';
+include "bahasa.php";
 
 $uid = $_POST['uid'];
 $row = mysqli_fetch_assoc(mysqli_query(
@@ -80,7 +81,6 @@ if ($row['status'] == 'waiting' || $row['status'] == '') {
         padding: 10px;
     }
 </style>
-<?php include "bahasa.php"; ?>
 <div class="col justify-content-center text-center">
     <div class="row-12">
         <?php

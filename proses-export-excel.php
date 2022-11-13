@@ -1,0 +1,461 @@
+<?php
+require 'koneksi/koneksi.php';
+require 'default-value.php';
+require 'model/query-base-workload.php';
+require 'model/query-base-order.php';
+require 'model/query-base-study.php';
+require 'model/query-base-patient.php';
+require 'model/query-base-workload-bhp.php';
+
+session_start();
+
+// Fungsi header dengan mengirimkan raw data excel
+header("Content-type: application/vnd-ms-excel");
+
+// Mendefinisikan nama file ekspor "hasil-export.xls"
+header("Content-Disposition: attachment; filename=DataPatient.xls");
+
+header('Cache-Control: max-age=0');
+
+// post dari form
+$fromUpdatedTime = $_POST['from_workload'];
+$fromUpdatedTime = $fromUpdatedTime != null ? date("Y-m-d H:i", strtotime($fromUpdatedTime)) : null;
+$toUpdatedTime = $_POST['to_workload'];
+$toUpdatedTime = $toUpdatedTime != null ? date("Y-m-d H:i", strtotime($toUpdatedTime)) : null;
+$modsInStudy = implode("','", $_POST['mods_in_study']);
+$priorityDoctor = implode("','", $_POST['priority_doctor']);
+$radiographerName = implode("','", $_POST['radiographer']);
+$radiographerAll = [];
+
+// jika radiografer dipilih all maka query semua radiographer name
+if ($radiographerName == 'all') {
+    $query_radiografer = mysqli_query(
+        $conn,
+        "SELECT * FROM xray_order WHERE radiographer_name IS NOT NULL GROUP BY radiographer_name LIMIT 30"
+    );
+    while ($radiographer = mysqli_fetch_assoc($query_radiografer)) {
+        $radiographerAll[] = $radiographer['radiographer_name'];
+    }
+    $radiographerName = implode("','", $radiographerAll);
+    // else jika dipilih query masing2 radiografer
+} else {
+    $radiographerName = implode("','", $_POST['radiographer']);
+}
+
+// kondisi form
+$kondisi = "study.updated_time BETWEEN '$fromUpdatedTime' AND '$toUpdatedTime'
+            AND mods_in_study IN('$modsInStudy')
+            AND priority_doctor IN('$priorityDoctor')
+            AND radiographer_name IN('$radiographerName')
+            ";
+
+// menampilkan detail pasien
+$patient = mysqli_query($conn_pacsio, "SELECT 
+            pat_name,
+            pat_birthdate,
+            pat_sex,
+            pat_id,
+            patientid AS no_foto,
+            radiographer_name,
+            name_dep,
+            payment,
+            create_time,
+            mods_in_study,
+            study_desc,
+            study.updated_time,
+            study_datetime,
+            film_small,
+            film_medium,
+            film_large,
+            film_reject_small,
+            film_reject_medium,
+            film_reject_large,
+            kv,
+            mas,
+            priority_doctor,
+            status,
+            approved_at
+            FROM $table_patient
+            JOIN $table_study
+            ON patient.pk = study.patient_fk
+            JOIN $table_order
+            ON xray_order.uid = study.study_iuid
+            JOIN $table_workload
+            ON study.study_iuid = xray_workload.uid
+            JOIN $table_workload_bhp
+            ON study.study_iuid = xray_workload_bhp.uid
+            WHERE $kondisi
+            ORDER BY study.updated_time DESC");
+
+// menampilkan jumlah film
+$sum = mysqli_fetch_array(mysqli_query(
+    $conn_pacsio,
+    "SELECT 
+    SUM(film_reject_small) AS film_reject_small, 
+    SUM(film_reject_medium) AS film_reject_medium, 
+    SUM(film_reject_large) AS film_reject_large,
+    SUM(film_small) AS film_small,
+    SUM(film_medium) AS film_medium, 
+    SUM(film_large) AS film_large
+    FROM $table_patient
+    JOIN $table_study
+    ON patient.pk = study.patient_fk
+    JOIN $table_order
+    ON xray_order.uid = study.study_iuid
+    JOIN $table_workload
+    ON study.study_iuid = xray_workload.uid
+    JOIN $table_workload_bhp
+    ON study.study_iuid = xray_workload_bhp.uid
+    WHERE $kondisi"
+));
+
+// menampilkan pemeriksaan
+$studies = mysqli_query(
+    $conn_pacsio,
+    "SELECT 
+    UPPER(study_desc) AS study_desc,
+    COUNT(*) AS jumlah
+    FROM $table_patient
+    JOIN $table_study
+    ON patient.pk = study.patient_fk
+    JOIN $table_order
+    ON xray_order.uid = study.study_iuid
+    JOIN $table_workload
+    ON study.study_iuid = xray_workload.uid
+    JOIN $table_workload_bhp
+    ON study.study_iuid = xray_workload_bhp.uid
+    WHERE $kondisi
+    GROUP BY UPPER(study_desc)
+    ORDER BY study_desc ASC"
+);
+
+// menampilkan total pemeriksaan
+$countStudies = mysqli_fetch_array(mysqli_query(
+    $conn_pacsio,
+    "SELECT 
+    COUNT(study_desc) AS count_studies
+    FROM $table_patient
+    JOIN $table_study
+    ON patient.pk = study.patient_fk
+    JOIN $table_order
+    ON xray_order.uid = study.study_iuid
+    JOIN $table_workload
+    ON study.study_iuid = xray_workload.uid
+    JOIN $table_workload_bhp
+    ON study.study_iuid = xray_workload_bhp.uid
+    WHERE $kondisi"
+));
+
+// menampilkan statistik bacaan dokter
+$totalApproved = mysqli_fetch_array(mysqli_query(
+    $conn_pacsio,
+    "SELECT 
+    COUNT(approved_at) AS count_approved_at
+    FROM $table_patient
+    JOIN $table_study
+    ON patient.pk = study.patient_fk
+    JOIN $table_order
+    ON xray_order.uid = study.study_iuid
+    JOIN $table_workload
+    ON study.study_iuid = xray_workload.uid
+    JOIN $table_workload_bhp
+    ON study.study_iuid = xray_workload_bhp.uid
+    WHERE $kondisi
+    AND status = 'approved'"
+));
+
+$totalStatus = mysqli_fetch_array(mysqli_query(
+    $conn_pacsio,
+    "SELECT 
+    COUNT(status) AS count_status
+    FROM $table_patient
+    JOIN $table_study
+    ON patient.pk = study.patient_fk
+    JOIN $table_order
+    ON xray_order.uid = study.study_iuid
+    JOIN $table_workload
+    ON study.study_iuid = xray_workload.uid
+    JOIN $table_workload_bhp
+    ON study.study_iuid = xray_workload_bhp.uid
+    WHERE $kondisi"
+));
+
+$approved = mysqli_fetch_array(mysqli_query(
+    $conn_pacsio,
+    "SELECT 
+    SUM((SELECT TIMESTAMPDIFF(MINUTE, study.updated_time, CONCAT(approved_at)) <= 180)) AS less_than_three_hour,
+    SUM((SELECT TIMESTAMPDIFF(MINUTE, study.updated_time, CONCAT(approved_at)) > 180)) AS greater_than_three_hour,
+    (SUM((SELECT TIMESTAMPDIFF(MINUTE, study.updated_time, CONCAT(approved_at)) <= 180)) /
+        ($totalApproved[count_approved_at])
+    ) * 100 AS persentase_less_than_three_hour,
+    (SUM((SELECT TIMESTAMPDIFF(MINUTE, study.updated_time, CONCAT(approved_at)) > 180)) /
+        ($totalApproved[count_approved_at])
+    ) * 100 AS persentase_greater_than_three_hour
+    FROM $table_patient
+    JOIN $table_study
+    ON patient.pk = study.patient_fk
+    JOIN $table_order
+    ON xray_order.uid = study.study_iuid
+    JOIN $table_workload
+    ON study.study_iuid = xray_workload.uid
+    JOIN $table_workload_bhp
+    ON study.study_iuid = xray_workload_bhp.uid
+    WHERE $kondisi
+    AND status = 'approved'"
+));
+
+$statuses = mysqli_query(
+    $conn_pacsio,
+    "SELECT 
+    status, 
+    COUNT(status) AS jumlah,
+    COUNT(status) /
+    ($totalStatus[count_status]) * 100 AS persentase
+    FROM $table_patient
+    JOIN $table_study
+    ON patient.pk = study.patient_fk
+    JOIN $table_order
+    ON xray_order.uid = study.study_iuid
+    JOIN $table_workload
+    ON study.study_iuid = xray_workload.uid
+    JOIN $table_workload_bhp
+    ON study.study_iuid = xray_workload_bhp.uid
+    WHERE $kondisi
+    GROUP BY status"
+);
+
+$sum_waiting = 0;
+$sum_approved = 0;
+$persentase_waiting = 0;
+$persentase_approved = 0;
+while ($status = mysqli_fetch_array($statuses)) {
+    if ($status[0] == 'approved') {
+        $sum_approved = $status['jumlah'];
+        $persentase_approved = $status['persentase'];
+    } else if ($status[0] == 'waiting') {
+        $sum_waiting = $status['jumlah'];
+        $persentase_waiting = $status['persentase'];
+    }
+}
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel</title>
+</head>
+
+<body>
+    <!-- detail penarikan -->
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead border="1" cellpadding="8" cellspacing="0">
+            <tr>
+                <td align="center">Tgl Periode: </td>
+                <td align="center"><?= date('d-m-Y H:i', strtotime($fromUpdatedTime)); ?> - <?= date('d-m-Y H:i', strtotime($toUpdatedTime)); ?></td>
+            </tr>
+            <tr>
+                <td align="center">Modality : </td>
+                <td align="center"><?= str_replace("'", "", $modsInStudy); ?></td>
+            </tr>
+            <tr>
+                <td align="center">Keadaan Pasien : </td>
+                <td align="center"><?= str_replace("'", "", $priorityDoctor); ?></td>
+            </tr>
+            <tr>
+                <td align="center">Tgl Penarikan : </td>
+                <td align="center"><?= date('d-m-Y H:i'); ?></td>
+            </tr>
+        </thead>
+    </table>
+    <br>
+    <!-- menampilkan statistik bacaan dokter -->
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr>
+                <th colspan="6">Waktu Tunggu</th>
+            </tr>
+            <tr>
+                <th colspan="3">Approved</th>
+                <th colspan="3">Waiting</th>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <th>Study</th>
+                <th>Persentase</th>
+                <th colspan="3">Study</th>
+            </tr>
+            <tr>
+                <td align="center">Kurang 3 Jam</td>
+                <td align="center"><?= $approved['less_than_three_hour']; ?></td>
+                <td align="center"><?= round($approved['persentase_less_than_three_hour'], 2); ?>%</td>
+                <td align="center" colspan="3" rowspan="2"><?= $sum_waiting ?></td>
+            </tr>
+            <tr>
+                <td align="center">Lebih 3 Jam</td>
+                <td align="center"><?= $approved['greater_than_three_hour']; ?></td>
+                <td align="center"><?= round($approved['persentase_greater_than_three_hour'], 2); ?>%</td>
+            </tr>
+            <tr>
+                <td align="center">Total Study</td>
+                <td align="center" colspan="1"><?= $sum_approved ?></td>
+                <td align="center" rowspan="2"></td>
+                <td align="center" colspan="3"><?= $sum_waiting ?></td>
+            </tr>
+            <tr>
+                <td align="center">Total Persentase</td>
+                <td align="center" colspan="1"><?= round($persentase_approved, 2) ?>%</td>
+                <td align="center" colspan="3"><?= round($persentase_waiting, 2) ?>%</td>
+            </tr>
+        </thead>
+    </table>
+    <br>
+    <!-- menampilkan pemeriksaan -->
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Pemeriksaan</th>
+                <th>Jumlah</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $no = 1;
+            while ($study = mysqli_fetch_array($studies)) { ?>
+                <tr>
+                    <td align="center"><?= $no ?></td>
+                    <td align="center"><?= $study['study_desc']; ?></td>
+                    <td align="center"><?= $study['jumlah']; ?></td>
+                </tr>
+            <?php
+                $no++;
+            } ?>
+            <tr>
+                <td align="center"></td>
+                <td align="center">Total Pemeriksaan</td>
+                <td align="center"><?= $countStudies['count_studies'] ?></td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <!-- menampilkan detail pasien -->
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr>
+                <th rowspan="3">No</th>
+                <th rowspan="3">Nama Pasien</th>
+                <th rowspan="3">Jenis <br /> Kelamin</th>
+                <th rowspan="3">No Foto</th>
+                <th rowspan="3">No Rekam <br /> Medis</th>
+                <th rowspan="3">Nama <br /> Radiografer</th>
+                <th rowspan="3">Tanggal <br /> Lahir</th>
+                <th rowspan="3">Ruangan</th>
+                <th rowspan="3">Modality</th>
+                <th rowspan="3">Pemeriksaan</th>
+                <th colspan="6">Film</th>
+                <th colspan="4" rowspan="2">Exposed</th>
+                <th rowspan="3">Status <br /> Pasien</th>
+                <th rowspan="3">Pembayaran</th>
+                <th rowspan="3">Waktu Pendaftaran <br /> Pasien</th>
+                <th rowspan="3">Waktu Mulai <br /> Pemeriksaan</th>
+                <th rowspan="3">Waktu Selesai <br /> Pemeriksaan</th>
+                <th rowspan="3">Waktu Baca <br /> Pasien</th>
+                <th rowspan="3">Menghabiskan <br /> Waktu</th>
+                <th rowspan="3">Status Baca</th>
+            </tr>
+            <tr>
+                <th colspan="3">Digunakan</th>
+                <th colspan="3">Gagal</th>
+            </tr>
+            <tr>
+                <th>Small</th>
+                <th>Medium</th>
+                <th>Large</th>
+                <th>Small</th>
+                <th>Medium</th>
+                <th>Large</th>
+                <th colspan="2">KV</th>
+                <th colspan="2">MAS</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $no = 1;
+            while ($row = mysqli_fetch_array($patient)) {
+                $pat_name = strtoupper(defaultValue($row['pat_name']));
+                $pat_sex = strtoupper(defaultValue($row['pat_sex']));
+                $pat_birthdate = strtoupper(diffDate($row['pat_birthdate']));
+                $study_datetime = strtoupper(defaultValueDateTime($row['study_datetime']));
+                $study_desc = strtoupper(defaultValue($row['study_desc']));
+                $mods_in_study = strtoupper(defaultValue($row['mods_in_study']));
+                $updated_time = strtoupper(defaultValueDateTime($row['updated_time']));
+                $pat_id = strtoupper(defaultValue($row['pat_id']));
+                $no_foto = strtoupper(defaultValue($row['no_foto']));
+                $name_dep = strtoupper(defaultValue($row['name_dep']));
+                $radiographer_name = strtoupper(defaultValue($row['radiographer_name']));
+                $create_time = defaultValueDateTime($row['create_time']);
+                $priority_doctor = strtoupper(defaultValue($row['priority_doctor']));
+                $payment = strtoupper(defaultValue($row['payment']));
+                $status = strtoupper(defaultValue($row['status']));
+                $film_small = strtoupper(defaultValue($row['film_small']));
+                $film_medium = strtoupper(defaultValue($row['film_medium']));
+                $film_large = strtoupper(defaultValue($row['film_large']));
+                $film_reject_small = strtoupper(defaultValue($row['film_reject_small']));
+                $film_reject_medium = strtoupper(defaultValue($row['film_reject_medium']));
+                $film_reject_large = strtoupper(defaultValue($row['film_reject_large']));
+                $kv = strtoupper(defaultValue($row['kv']));
+                $mas = strtoupper(defaultValue($row['mas']));
+                $approved_at = defaultValueDateTime($row['approved_at']);
+                $spendtime = spendTime($updated_time, $approved_at, $row['status']);
+            ?>
+                <tr>
+                    <td align="center"><?= $no; ?></td>
+                    <td align="center"><?= removeCharacter($pat_name); ?></td>
+                    <td align="center"><?= $pat_sex; ?></td>
+                    <td align="center"><?= $no_foto; ?></td>
+                    <td align="center"><?= $pat_id; ?></td>
+                    <td align="center"><?= $radiographer_name; ?></td>
+                    <td align="center"><?= $pat_birthdate; ?></td>
+                    <td align="center"><?= $name_dep; ?></td>
+                    <td align="center"><?= $mods_in_study; ?></td>
+                    <td align="center"><?= $study_desc; ?></td>
+                    <td align="center"><?= $film_small; ?></td>
+                    <td align="center"> <?= $film_medium; ?> </td>
+                    <td align="center"><?= $film_large; ?></td>
+                    <td align="center"><?= $film_reject_small; ?></td>
+                    <td align="center"> <?= $film_reject_medium; ?> </td>
+                    <td align="center"><?= $film_reject_large; ?></td>
+                    <td align="center" colspan="2"><?= $kv; ?></td>
+                    <td align="center" colspan="2"><?= $mas; ?></td>
+                    <td align="center"><?= $priority_doctor; ?></td>
+                    <td align="center"><?= $payment; ?></td>
+                    <td align="center"><?= $create_time; ?></td>
+                    <td align="center"><?= $study_datetime; ?></td>
+                    <td align="center"><?= $updated_time; ?></td>
+                    <td align="center"><?= $approved_at; ?></td>
+                    <td align="center"><?= $spendtime; ?></td>
+                    <td align="center"><?= $status; ?></td>
+                </tr>
+            <?php
+                $no++;
+            } ?>
+            <tr>
+                <td align="center" colspan="10">Jumlah</td>
+                <td align="center"><?= $sum['film_small']; ?></td>
+                <td align="center"><?= $sum['film_medium']; ?></td>
+                <td align="center"><?= $sum['film_large']; ?></td>
+                <td align="center"><?= $sum['film_reject_small']; ?></td>
+                <td align="center"><?= $sum['film_reject_medium']; ?></td>
+                <td align="center"><?= $sum['film_reject_large']; ?></td>
+                <td align="center" colspan="4"></td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+
+</html>

@@ -153,9 +153,9 @@ while ($row = mysqli_fetch_array($result)) {
   $pk_dokter_radiology = $row['pk_dokter_radiology'];
   //kondisi status change doctor
   if ($row['status'] == 'approved') {
-    $workloadstat = 'approved';
+    $workload_status = 'approved';
   } else {
-    $workloadstat = 'waiting';
+    $workload_status = 'waiting';
   }
   //kondisi status change doctor
   // kondisi session level ketika login
@@ -165,7 +165,7 @@ while ($row = mysqli_fetch_array($result)) {
       RADIANTFIRST . $study_iuid . RADIANTLAST .
       HTMLFIRST . $study_iuid . HTMLLAST .
       OHIFMOBILEFIRST . $study_iuid . OHIFMOBILELAST .
-      CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workloadstat . CHANGEDOCTORLAST .
+      CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workload_status . CHANGEDOCTORLAST .
       EDITWORKLOADFIRST . $study_iuid . EDITWORKLOADLAST .
       TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST .
       TELEGRAMSIGNATUREFIRST . $study_iuid . TELEGRAMSIGNATURELAST;
@@ -174,7 +174,7 @@ while ($row = mysqli_fetch_array($result)) {
       HTMLFIRST . $study_iuid . HTMLLAST .
       OHIFMOBILEFIRST . $study_iuid . OHIFMOBILELAST .
       EDITPASIENFIRST . $study_iuid . EDITPASIENLAST .
-      CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workloadstat . CHANGEDOCTORLAST .
+      CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workload_status . CHANGEDOCTORLAST .
       TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST;
     // DELETEFIRST . $study_iuid . DELETELAST;
   } else if ($level == 'refferal') {

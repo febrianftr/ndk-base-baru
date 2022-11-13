@@ -14,7 +14,7 @@
 					<div>
 						<h4>Excel Report</h4>
 					</div>
-					<form id="report-excel" method="get">
+					<form method="POST" action="../proses-export-excel.php">
 						<div class="row justify-content-center align-items-center" style="padding: 10px; border-radius: 5px; border: solid 2px #eff1f7;">
 
 							<div class="col-md-2" style="padding: 4px;">
@@ -38,21 +38,21 @@
 										"SELECT mods_in_study FROM study GROUP BY mods_in_study LIMIT 15"
 									);
 									while ($row = mysqli_fetch_assoc($study)) { ?>
-										<li><label><input class="common_selector cbox checkbox4 search-input-workload" type="checkbox" id="mods_in_study" name="mods_in_study" value="<?= $row['mods_in_study']; ?>" checked><span><?= $row['mods_in_study']; ?></span></label></li>
+										<li><label><input class="common_selector cbox checkbox4 search-input-workload" type="checkbox" id="mods_in_study" name="mods_in_study[]" value="<?= $row['mods_in_study']; ?>" checked><span><?= $row['mods_in_study']; ?></span></label></li>
 									<?php } ?>
 								</ul>
 							</div>
 							<div class="col-md-2">
 								Priority Doctor :
 								<ul class="ks-cboxtags">
-									<li><label><input class="common_selector cbox5 checkbox4 search-input-workload" type="checkbox" id="priority_doctor" name="priority_doctor" value="normal" checked><span>Normal</span></label></li>
-									<li><label><input class="common_selector cbox5 checkbox4 search-input-workload" type="checkbox" id="priority_doctor" name="priority_doctor" value="cito" checked><span>Cito</span></label></li>
+									<li><label><input class="common_selector cbox5 checkbox4 search-input-workload" type="checkbox" id="priority_doctor" name="priority_doctor[]" value="normal" checked><span>Normal</span></label></li>
+									<li><label><input class="common_selector cbox5 checkbox4 search-input-workload" type="checkbox" id="priority_doctor" name="priority_doctor[]" value="cito" checked><span>Cito</span></label></li>
 								</ul>
 							</div>
 							<div class="col-md-2">
 								<div class="form-group">
 									<label for="sel1">Select Radiographer:</label>
-									<select class="form-control select2" multiple="multiple" name="radiographer" id="radiographer" style="width: 100%;">
+									<select class="form-control select2" multiple="multiple" name="radiographer[]" id="radiographer" style="width: 100%;">
 										<option value="all">Semua</option>
 										<?php
 										$query_radiografer = mysqli_query($conn, "SELECT * FROM xray_order WHERE radiographer_name IS NOT NULL GROUP BY radiographer_name LIMIT 30");
