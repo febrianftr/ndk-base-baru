@@ -1,3 +1,5 @@
+<?php require '../date-time-zone.php'; ?>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="../css/bootstrap4.min.css" rel="stylesheet">
 <link href="../css/mdb.min.css" rel="stylesheet">

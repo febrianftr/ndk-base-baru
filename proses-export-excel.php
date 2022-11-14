@@ -6,6 +6,7 @@ require 'model/query-base-order.php';
 require 'model/query-base-study.php';
 require 'model/query-base-patient.php';
 require 'model/query-base-workload-bhp.php';
+require 'date-time-zone.php';
 
 session_start();
 
@@ -290,13 +291,13 @@ while ($status = mysqli_fetch_array($statuses)) {
             </tr>
             <tr>
                 <td align="center">Kurang 3 Jam</td>
-                <td align="center"><?= $approved['less_than_three_hour']; ?></td>
+                <td align="center"><?= $approved['less_than_three_hour'] ?? 0; ?></td>
                 <td align="center"><?= round($approved['persentase_less_than_three_hour'], 2); ?>%</td>
                 <td align="center" colspan="3" rowspan="2"><?= $sum_waiting ?></td>
             </tr>
             <tr>
                 <td align="center">Lebih 3 Jam</td>
-                <td align="center"><?= $approved['greater_than_three_hour']; ?></td>
+                <td align="center"><?= $approved['greater_than_three_hour'] ?? 0; ?></td>
                 <td align="center"><?= round($approved['persentase_greater_than_three_hour'], 2); ?>%</td>
             </tr>
             <tr>
