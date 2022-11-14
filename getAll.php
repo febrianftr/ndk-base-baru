@@ -24,9 +24,11 @@ $http_referer = $_SERVER['HTTP_REFERER'] ?? '';
 $explode = explode('/radiology', $http_referer);
 $dicom = $explode[1] ?? '';
 if ($dicom == '/dicom.php') {
-    // (dicom.php) kondisi ketika dokradid is null (tidak integrasi simrs) dan ketika login dokter radiologi. berdasarkan priority CITO, updated_time DESC
+    // (dicom.php) berdasarkan priority CITO, updated_time DESC
+    // kondisi ketika bridging simrs status waiting dan dokradid simrs (xray_order)
+    // OR kondisi pk_dokter_radiology is null (tidak integrasi simrs) dan ketika login dokter radiologi. 
     $kondisi = "WHERE (xray_workload.status = 'waiting' AND xray_order.dokradid = '$dokradid')
-                OR xray_order.uid IS NULL 
+                OR xray_order.uid IS NULL
                 ORDER BY xray_order.priority IS NULL, xray_order.priority ASC, study.updated_time DESC 
                 LIMIT 3000";
 } else {
@@ -50,6 +52,7 @@ $query = mysqli_query(
     ON study.study_iuid = xray_workload.uid
     $kondisi"
 );
+
 $data = [];
 $i = 1;
 while ($row = mysqli_fetch_array($query)) {
@@ -101,18 +104,26 @@ while ($row = mysqli_fetch_array($query)) {
 
     // kondisi aksi jika ada dihalaman dicom.php
     if ($dicom == '/dicom.php') {
-        //    kondisi ketika xray_workload tidak masuk dari trigger xray_workload
+        // kondisi ketika xray_workload masuk dari trigger
         if ($status != '-') {
-            // ketika fill kosong muncul worklist, dan ketika worklist sudah dibaca muncul draft
-            if (!$fill || $fill == null) {
-                $worklist = WORKLISTFIRST . $study_iuid . WORKLISTLAST;
+            // kondisi ketika pasien manual tetapi pk_dokter_radiologi null 
+            if ($fromorder == null && $pk_dokter_radiology == null) {
+                $aksi = '?';
             } else {
-                $worklist = DRAFTFIRST . $study_iuid . DRAFTLAST;
+                // kondisi ketika pasien manual tetapi pk_dokter_radiologi sudah ada 
+                if (!$fill || $fill == null) {
+                    // ketika fill kosong muncul worklist
+                    $worklist = WORKLISTFIRST . $study_iuid . WORKLISTLAST;
+                } else {
+                    // ketika worklist sudah dibaca muncul draft
+                    $worklist = DRAFTFIRST . $study_iuid . DRAFTLAST;
+                }
+                $aksi = $worklist .
+                    CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workloadstat . CHANGEDOCTORLAST;
             }
-            $aksi = $worklist .
-                CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workloadstat . CHANGEDOCTORLAST;
         } else {
-            $aksi = '?';
+            // kondisi ketika xray_workload TIDAK masuk dari trigger
+            $aksi = '!TRIGGER!';
         }
     } else {
         $aksi = PDFFIRST . $study_iuid . PDFLAST .

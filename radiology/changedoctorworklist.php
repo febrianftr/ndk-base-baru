@@ -35,7 +35,7 @@ if (isset($_POST["submit"])) {
 			echo "
 			<script>
 				alert('Data berhasil dikirimkan');
-				document.location.href= 'dicom.php';
+				document.location.href= 'workload.php';
 			</script>";
 		} else {
 			echo "

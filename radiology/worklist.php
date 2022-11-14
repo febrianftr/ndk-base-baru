@@ -115,11 +115,13 @@ if (isset($_POST["save_draft"])) {
 		echo "
 			<script>
 				alert('Report Telah Di Simpan ke Draft');
+				document.location.href= 'dicom.php';
 			</script>";
 	} else {
 		echo "
 			<script>
 				alert('Report Gagal Di Simpan ke Draft');
+				document.location.href= 'worklist.php?uid=$uid';
 			</script>";
 	}
 }

@@ -160,6 +160,7 @@ while ($row = mysqli_fetch_array($result)) {
   //kondisi status change doctor
   // kondisi session level ketika login
   $level = $_SESSION['level'];
+  // ketika login radiology
   if ($level == 'radiology') {
     $level =
       RADIANTFIRST . $study_iuid . RADIANTLAST .
@@ -169,14 +170,22 @@ while ($row = mysqli_fetch_array($result)) {
       EDITWORKLOADFIRST . $study_iuid . EDITWORKLOADLAST .
       TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST .
       TELEGRAMSIGNATUREFIRST . $study_iuid . TELEGRAMSIGNATURELAST;
+    // ketika login radiographer
   } else if ($level == 'radiographer') {
     $level =  RADIANTFIRST . $study_iuid . RADIANTLAST .
       HTMLFIRST . $study_iuid . HTMLLAST .
-      OHIFMOBILEFIRST . $study_iuid . OHIFMOBILELAST .
-      EDITPASIENFIRST . $study_iuid . EDITPASIENLAST .
-      CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workload_status . CHANGEDOCTORLAST .
-      TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST;
+      OHIFMOBILEFIRST . $study_iuid . OHIFMOBILELAST;
+    // kondisi ketika xray_workload masuk dari trigger
+    if ($status != '-') {
+      $level = EDITPASIENFIRST . $study_iuid . EDITPASIENLAST .
+        CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workload_status . CHANGEDOCTORLAST;
+    } else {
+      // kondisi ketika xray_workload tidak masuk dari trigger
+      $level = '';
+    }
+    TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST;
     // DELETEFIRST . $study_iuid . DELETELAST;
+    // ketika login refferal
   } else if ($level == 'refferal') {
     $level = DICOMFIRST . $study_iuid . DICOMLAST;
   } else {

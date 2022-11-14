@@ -62,7 +62,8 @@ function ubahdokterworkload($post)
 	approved_at = NULL,
 	approve_updated_at = NULL,
 	signature = NULL,
-	signature_datetime = NULL 
+	signature_datetime = NULL,
+    priority_doctor = 'normal' 
 	WHERE uid = '$uid'
 	";
     mysqli_query($conn, $query1);
