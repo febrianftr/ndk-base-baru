@@ -33,12 +33,14 @@ if ($_SERVER['SERVER_NAME'] == '103.111.207.70') {
 define('MOBILEFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="http://' . $_SERVER['SERVER_NAME'] . ':19898/dwv-viewer/index.html?type=manifest&input=%2Fweasis-pacs-connector%2Fmanifest%3FseriesUID%3D');
 define('MOBILELAST', '"target="_blank"><span class="btn btn-warning btn-inti"><i class="fas fa-eye" data-toggle="tooltip" title="Web Viewer"></i></span></a>');
 
+define('CHANGEDOCTORICONYES', '<i class="fas fa-user-md fa-lg"></i>');
+define('CHANGEDOCTORICONNO', '<i class="fas fa-user-times fa-lg text-warning"></i>');
 // Change doctor
 define('CHANGEDOCTORFIRST', '<a style="text-decoration: none;" href="changedoctorworklist.php?uid=');
 define('CHANGEDOCTORMID', '&dokradid=');
 define('CHANGEDOCTORSTAT', '&status=');
-define('CHANGEDOCTORLAST', '" onclick=\'return confirm("Ubah dokter radiology yang membaca?");\'><span class="btn rgba-stylish-slight darken-1 btn-inti2"><i class="fas fa-user-md fa-lg"></i></span></a>');
-
+define('CHANGEDOCTORLAST', '" onclick=\'return confirm("Ubah dokter radiology yang membaca?");\'><span class="btn rgba-stylish-slight darken-1 btn-inti2">');
+define('CHANGEDOCTORVERYLAST', '</span></a>');
 //radiant
 define('RADIANTFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="radiant://?n=paet&v=dcmPACS&n=pstv&v=0020000D&v=%22');
 define('RADIANTLAST', '%22" "target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/radiAnt.png" data-toggle="tooltip" title="Radiant Viewer" style="width: 100%;"></span></a>');

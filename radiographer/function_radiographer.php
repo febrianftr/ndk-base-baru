@@ -606,10 +606,10 @@ function inputorder($postorder)
 	$lastnamed = $row_dokter['lastnamed'];
 	$email = $row_dokter['email'];
 	// ------------
-	$depid = $postorder['depid'];
-	$result2 = mysqli_query($conn, "SELECT * FROM xray_department WHERE depid = '$depid' ");
+	$dep_id = $postorder['dep_id'];
+	$result2 = mysqli_query($conn, "SELECT * FROM xray_department WHERE dep_id = '$dep_id' ");
 	$row2 = mysqli_fetch_array($result2);
-	$depid = $row2['depid'];
+	$dep_id = $row2['dep_id'];
 	$name_dep = $row2['name_dep'];
 	// ------------
 	$xray_type_code = $postorder['xray_type_code'];
@@ -667,14 +667,14 @@ function inputorder($postorder)
 		$uid = '1.2.40.0.13.1.' . $acc . '.' . $add2 . '.' . $text . '.' . $add;
 
 		if (!$dokterid) {
-			$query = " INSERT INTO xray_order (uid ,acc ,patientid ,mrn ,name ,lastname ,sex ,birth_date ,weight ,name_dep ,xray_type_code ,prosedur ,dokterid ,named ,lastnamed ,email ,create_time ,schedule_date , schedule_time ,contrast ,priority ,pat_state ,contrast_allergies ,spc_needs ,payment)
+			$query = " INSERT INTO xray_order (uid ,acc ,patientid ,mrn ,name ,lastname ,sex ,birth_date ,weight ,name_dep ,xray_type_code ,prosedur ,dokterid ,named ,lastnamed ,email ,create_time ,schedule_date , schedule_time ,contrast ,priority ,pat_state ,contrast_allergies ,spc_needs ,payment, fromorder)
 			VALUES
-			('$uid' ,'$acc' ,'$patientid' ,'$mrn' ,'$name' ,'$lastname' ,'$sex' ,'$birth_date' ,'$weight' ,'$name_dep' ,'$xray_type_code' , '$main_prosedur1' ,'','$namedluar' ,'$lastnamedluar' ,'$emailluar',NOW() ,'$schedule_date' ,'$schedule_time' ,'$contrast' ,'$priority' ,'$pat_state' ,'$contrast_allergies' ,'$spc_needs' ,'')";
+			('$uid' ,'$acc' ,'$patientid' ,'$mrn' ,'$name' ,'$lastname' ,'$sex' ,'$birth_date' ,'$weight' ,'$name_dep' ,'$xray_type_code' , '$main_prosedur1' ,'','$namedluar' ,'$lastnamedluar' ,'$emailluar',NOW() ,'$schedule_date' ,'$schedule_time' ,'$contrast' ,'$priority' ,'$pat_state' ,'$contrast_allergies' ,'$spc_needs' ,'', 'RIS')";
 			mysqli_query($conn, $query);
 		} else {
-			$query = " INSERT INTO xray_order (uid ,acc ,patientid ,mrn ,name ,lastname ,sex ,birth_date ,weight ,name_dep ,xray_type_code ,prosedur ,dokterid ,named ,lastnamed ,email ,create_time ,schedule_date , schedule_time ,contrast ,priority ,pat_state ,contrast_allergies ,spc_needs ,payment)
+			$query = " INSERT INTO xray_order (uid ,acc ,patientid ,mrn ,name ,lastname ,sex ,birth_date ,weight ,name_dep ,xray_type_code ,prosedur ,dokterid ,named ,lastnamed ,email ,create_time ,schedule_date , schedule_time ,contrast ,priority ,pat_state ,contrast_allergies ,spc_needs ,payment, fromorder)
 			VALUES
-			('$uid' ,'$acc' ,'$patientid' ,'$mrn' ,'$name' ,'$lastname' ,'$sex' ,'$birth_date' ,'$weight' ,'$name_dep' ,'$xray_type_code' , '$main_prosedur1' ,'$dokterid','$named' ,'$lastnamed' ,'$email',NOW() ,'$schedule_date' ,'$schedule_time' ,'$contrast' ,'$priority' ,'$pat_state' ,'$contrast_allergies' ,'$spc_needs' ,'')";
+			('$uid' ,'$acc' ,'$patientid' ,'$mrn' ,'$name' ,'$lastname' ,'$sex' ,'$birth_date' ,'$weight' ,'$name_dep' ,'$xray_type_code' , '$main_prosedur1' ,'$dokterid','$named' ,'$lastnamed' ,'$email',NOW() ,'$schedule_date' ,'$schedule_time' ,'$contrast' ,'$priority' ,'$pat_state' ,'$contrast_allergies' ,'$spc_needs' ,'', 'RIS')";
 			mysqli_query($conn, $query);
 		}
 	}

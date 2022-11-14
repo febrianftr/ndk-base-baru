@@ -142,7 +142,7 @@ function ubahdokter($uid)
 	$query313 = "SELECT * FROM xray_department WHERE name_dep = '$name_dep'";
 	$data_exam313 = mysqli_query($conn, $query313);
 	$row313 = mysqli_fetch_assoc($data_exam313);
-	$depid = $row313['depid'];
+	$dep_id = $row313['dep_id'];
 	$fill = $row3['fill'];
 	$study_datetime = $row3['study_datetime'];
 	$updated_time = $row3['updated_time'];

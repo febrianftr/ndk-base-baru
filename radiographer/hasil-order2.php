@@ -21,6 +21,7 @@ $row = mysqli_fetch_assoc(mysqli_query(
     WHERE xray_order.uid = '$uid'
     LIMIT 1"
 ));
+$fromorder = $row['fromorder'];
 ?>
 <style>
     .fill {
@@ -28,8 +29,15 @@ $row = mysqli_fetch_assoc(mysqli_query(
     }
 </style>
 
+<div class="col justify-content-center text-center">
+    <div class="row-12">
+        <?php
+        if ($fromorder == 'SIMRS' || $fromorder == 'simrs') { ?>
+            <i class="fas fa-exchange-alt text-info" title="terintegrasi dengan SIMRS"></i>
+        <?php } ?>
+    </div>
+</div>
 <div class="fill">
-
     <div class="table-responsive-sm">
         <table class="" id="example" style="margin-top: 3px;" cellpadding="8" cellspacing="0">
             <thead class="thead1">

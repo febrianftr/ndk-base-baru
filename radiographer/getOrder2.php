@@ -5,6 +5,7 @@ require '../default-value.php';
 require '../model/query-base-order.php';
 require '../model/query-base-study.php';
 require '../model/query-base-mwl-item.php';
+require '../viewer-all.php';
 
 $query = mysqli_query(
     $conn,
@@ -17,6 +18,7 @@ $query = mysqli_query(
     ON xray_order.uid = mwl_item.study_iuid
     LEFT JOIN $table_study
     ON study.study_iuid = xray_order.uid
+    WHERE fromorder IN('SIMRS', 'RIS')
     ORDER BY xray_order.create_time DESC
     LIMIT 1000"
 );
@@ -28,6 +30,7 @@ while ($row = mysqli_fetch_array($query)) {
     $study_iuid_mppsio = $row['study_iuid_mppsio'];
     $study_iuid_pacsio = $row['study_iuid_pacsio'];
     $uid = $row['uid'];
+    $priority = defaultValue($row['priority']);
     $fromorder = strtoupper($row['fromorder']);
     $deleted_at = $row['deleted_at'];
 
@@ -112,11 +115,27 @@ while ($row = mysqli_fetch_array($query)) {
 
     $detail = '<a href="#" class="order2 penawaran-a" data-id="' . $uid . '">' . defaultValue($row['name']) . '</a>';
 
+    // kondisi ketika data dari simrs
+    if ($fromorder == 'SIMRS' || $fromorder == 'simrs') {
+        $badge = SIMRS;
+    } else {
+        $badge = '';
+    }
+
+    // kondisi jika prioriry normal dan CITO
+    if ($priority == 'Normal' || $priority == 'NORMAL' || $priority == 'normal') {
+        $priority_style = PRIORITYNORMAL;
+    } else if ($priority == 'Cito' || $priority == 'CITO' || $priority == 'cito') {
+        $priority_style = PRIORITYCITO;
+    } else {
+        $priority_style = '';
+    }
+
     $data[] = [
         "no" => $i,
-        "action" => $aksi,
+        "action" => $aksi . $badge,
         "mrn" => defaultValue($row['mrn']),
-        "name" => $detail,
+        "name" => $detail . '&nbsp;' . $priority_style,
         "acc" => defaultValue($row['acc']),
         "birth_date" => defaultValueDate($row['birth_date']),
         "sex" => $sex_icons,

@@ -28,7 +28,7 @@ if ($dicom == '/dicom.php') {
     // kondisi ketika bridging simrs status waiting dan dokradid simrs (xray_order)
     // OR kondisi pk_dokter_radiology is null (tidak integrasi simrs) dan ketika login dokter radiologi. 
     $kondisi = "WHERE (xray_workload.status = 'waiting' AND xray_order.dokradid = '$dokradid')
-                OR xray_order.uid IS NULL
+                OR (xray_order.dokradid IS NULL)
                 ORDER BY xray_order.priority IS NULL, xray_order.priority ASC, study.updated_time DESC 
                 LIMIT 3000";
 } else {
@@ -102,6 +102,13 @@ while ($row = mysqli_fetch_array($query)) {
         $badge = '';
     }
 
+    // kondisi ketika dokter belum ada menggunakan icon berbeda
+    if ($fromorder == null && $pk_dokter_radiology == null) {
+        $icon_change_doctor = CHANGEDOCTORICONNO;
+    } else {
+        $icon_change_doctor = CHANGEDOCTORICONYES;
+    }
+
     // kondisi aksi jika ada dihalaman dicom.php
     if ($dicom == '/dicom.php') {
         // kondisi ketika xray_workload masuk dari trigger
@@ -118,8 +125,9 @@ while ($row = mysqli_fetch_array($query)) {
                     // ketika worklist sudah dibaca muncul draft
                     $worklist = DRAFTFIRST . $study_iuid . DRAFTLAST;
                 }
+
                 $aksi = $worklist .
-                    CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workloadstat . CHANGEDOCTORLAST;
+                    CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workloadstat . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST;
             }
         } else {
             // kondisi ketika xray_workload TIDAK masuk dari trigger

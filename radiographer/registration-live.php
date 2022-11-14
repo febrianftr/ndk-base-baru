@@ -6,8 +6,10 @@ $username = $_SESSION['username'];
 
 if (isset($_POST["submit"])) {
   if (inputorder($_POST)) {
-    echo "
-
+    echo "<script>
+    alert('Berhasil menambahkan data');
+    document.location.href= 'order2.php';
+  </script>
 ";
   } else {
     echo "
@@ -158,11 +160,11 @@ if ($_SESSION['level'] == "radiographer") {
 
                   </div>
                   <label><?= $lang['select_poly'] ?> :</label> <br>
-                  <select class="selectpicker" data-size="10" data-live-search="true" data-width="100%" name="depid" data-style="btn-info">
+                  <select class="selectpicker" data-size="10" data-live-search="true" data-width="100%" name="dep_id" data-style="btn-info">
                     <?php
                     $result4 = mysqli_query($conn, "SELECT * FROM xray_department");
                     while ($row4 = mysqli_fetch_array($result4)) { ?>
-                      <option value="<?= $row4['depid']; ?>" data-tokens=""><?= $row4['name_dep']; ?></option>
+                      <option value="<?= $row4['dep_id']; ?>" data-tokens=""><?= $row4['name_dep']; ?></option>
                     <?php } ?>
                   </select><br>
 

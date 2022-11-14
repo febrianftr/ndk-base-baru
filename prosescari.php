@@ -158,6 +158,14 @@ while ($row = mysqli_fetch_array($result)) {
   } else {
     $workload_status = 'waiting';
   }
+
+  // kondisi ketika dokter belum ada menggunakan icon berbeda
+  if ($fromorder == null && $pk_dokter_radiology == null) {
+    $icon_change_doctor = CHANGEDOCTORICONNO;
+  } else {
+    $icon_change_doctor = CHANGEDOCTORICONYES;
+  }
+
   //kondisi status change doctor
   // kondisi session level ketika login
   $level = $_SESSION['level'];
@@ -167,7 +175,7 @@ while ($row = mysqli_fetch_array($result)) {
       RADIANTFIRST . $study_iuid . RADIANTLAST .
       HTMLFIRST . $study_iuid . HTMLLAST .
       OHIFMOBILEFIRST . $study_iuid . OHIFMOBILELAST .
-      CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workload_status . CHANGEDOCTORLAST .
+      CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workload_status . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
       EDITWORKLOADFIRST . $study_iuid . EDITWORKLOADLAST .
       TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST .
       TELEGRAMSIGNATUREFIRST . $study_iuid . TELEGRAMSIGNATURELAST;
@@ -179,7 +187,7 @@ while ($row = mysqli_fetch_array($result)) {
     // kondisi ketika xray_workload masuk dari trigger
     if ($status != '-') {
       $level = EDITPASIENFIRST . $study_iuid . EDITPASIENLAST .
-        CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workload_status . CHANGEDOCTORLAST;
+        CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workload_status . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST;
     } else {
       // kondisi ketika xray_workload tidak masuk dari trigger
       $level = '';
