@@ -1,6 +1,6 @@
 <?php
 
-require 'function_radiographer.php';
+require '../js/proses/function.php';
 require '../model/query-base-dokter-radiology.php';
 
 session_start();
