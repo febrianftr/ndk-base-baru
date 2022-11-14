@@ -131,11 +131,11 @@ if ($_SESSION['level'] == "radiographer") {
 								<form class="form-inline" method="POST" action="deleteexamall.php">
 									<div class="form-group">
 										<label class="sr-only" for="from">Dari Tanggal</label>
-										<input type="text" class="form-control input-sm" name="from" id="from" placeholder="dari tanggal" autocomplete="off" value="<?= $from ?>">
+										<input type="text" class="form-control input-sm form-control-sm" name="from" id="from" placeholder="dari tanggal" autocomplete="off" value="<?= $from ?>">
 									</div>
 									<div class="form-group">
 										<label class="sr-only" for="from">Sampai Tanggal</label>
-										<input type="text" class="form-control input-sm" name="to" id="to" placeholder="sampai tanggal" autocomplete="off" value="<?= $to ?>">
+										<input type="text" class="form-control input-sm form-control-sm" name="to" id="to" placeholder="sampai tanggal" autocomplete="off" value="<?= $to ?>">
 									</div>
 									<button type="submit" class="btn btn-default btn-sm">Hapus</button>
 								</form>
