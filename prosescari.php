@@ -144,6 +144,7 @@ while ($row = mysqli_fetch_array($result)) {
   $dokradid = defaultValue($row['dokradid']);
   $create_time = defaultValueDateTime($row['create_time']);
   $pat_state = defaultValue($row['pat_state']);
+  $priority = defaultValue($row['priority']);
   $spc_needs = defaultValue($row['spc_needs']);
   $payment = defaultValue($row['payment']);
   $status = styleStatus($row['status']);
@@ -199,8 +200,16 @@ while ($row = mysqli_fetch_array($result)) {
     $badge = '';
   }
 
-  $detail = '<a href="#" class="hasil-all penawaran-a" data-id="' . $row['study_iuid'] . '">' . removeCharacter($pat_name) . '</a>';
+  // kondisi jika prioriry normal dan CITO
+  if ($priority == 'Normal' || $priority == 'NORMAL' || $priority == 'normal') {
+    $priority_style = PRIORITYNORMAL;
+  } else if ($priority == 'Cito' || $priority == 'CITO' || $priority == 'cito') {
+    $priority_style = PRIORITYCITO;
+  } else {
+    $priority_style = '';
+  }
 
+  $detail = '<a href="#" class="hasil-all penawaran-a" data-id="' . $row['study_iuid'] . '">' . removeCharacter($pat_name) . '</a>';
 
   // kondisi mencari ditabel dokter radiology
   $row_dokrad = mysqli_fetch_assoc(mysqli_query(
@@ -224,7 +233,7 @@ while ($row = mysqli_fetch_array($result)) {
     PDFFIRST . $study_iuid . PDFLAST .
     $level;
   $sub_array[] = $status . '&nbsp;' . $badge;
-  $sub_array[] = $detail;
+  $sub_array[] = $detail . '&nbsp;' . $priority_style;
   $sub_array[] = $pat_id;
   $sub_array[] = $no_foto;
   $sub_array[] = $pat_birthdate;
