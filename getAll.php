@@ -26,7 +26,7 @@ $dicom = $explode[1] ?? '';
 if ($dicom == '/dicom.php') {
     // (dicom.php) kondisi ketika dokradid is null (tidak integrasi simrs) dan ketika login dokter radiologi. berdasarkan priority CITO, updated_time DESC
     $kondisi = "WHERE (xray_workload.status = 'waiting' AND xray_order.dokradid = '$dokradid')
-                OR (xray_workload.status = 'waiting' AND xray_order.uid IS NULL)
+                OR xray_order.uid IS NULL 
                 ORDER BY xray_order.priority IS NULL, xray_order.priority ASC, study.updated_time DESC 
                 LIMIT 3000";
 } else {
@@ -112,7 +112,7 @@ while ($row = mysqli_fetch_array($query)) {
             $aksi = $worklist .
                 CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workloadstat . CHANGEDOCTORLAST;
         } else {
-            $aksi = '-';
+            $aksi = '?';
         }
     } else {
         $aksi = PDFFIRST . $study_iuid . PDFLAST .
