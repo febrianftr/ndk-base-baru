@@ -73,24 +73,11 @@ if ($_SESSION['level'] == "admin") {
 								<li class="li-adm"><a href="new_price.php"><i class="fas fa-plus-square"></i> <?= $lang['add'] ?></a></li>
 								<li class="li-adm"><a href="view_price.php"><i class="fas fa-paper-plane"></i> <?= $lang['view'] ?></a></li>
 							</div>
-
-							<div class="col-sm-2">
-								<h4 class="h4">Admin</h4>
-								<li class="li-adm"><a href="new_admin.php"><i class="fas fa-plus-square"></i> <?= $lang['add'] ?></a></li>
-								<li class="li-adm"><a href="view_admin.php"><i class="fas fa-paper-plane"></i> <?= $lang['view'] ?></a></li>
-							</div>
 							<div class="col-sm-2">
 								<h4 class="h4">AET</h4>
 								<li class="li-adm"><a href="aetitle.php"><i class="fas fa-plus-square"></i> <?= $lang['add'] ?></a></li>
 								<li class="li-adm"><a href="view_aetitle.php"><i class="fas fa-paper-plane"></i> <?= $lang['view'] ?></a></li>
 							</div>
-							<?php if ($username == 'admin') { ?>
-								<div class="col-sm-2">
-									<h4 class="h4">SUPERADMIN</h4>
-									<li class="li-adm"><a href="new_superadmin.php"><i class="fas fa-plus-square"></i> ADD SUPERADMIN</a></li>
-									<li class="li-adm"><a href="view_superadmin.php"><i class="fas fa-paper-plane"></i> VIEW SUPERADMIN</a></li>
-								</div>
-							<?php } ?>
 						</div>
 					</div>
 				</div>
@@ -98,16 +85,13 @@ if ($_SESSION['level'] == "admin") {
 			<div class="footerindex">
 				<div class="footer-login col-sm-12"><br>
 					<center>
-						<p>&copy; Powered by Intiwid IT Solution 2019</a>.</p>
+						<p>&copy; Powered by Intiwid IT Solution 2022</a>.</p>
 					</center>
 				</div>
 			</div>
 		</div>
 		</div>
-
-
 		<?php include('script-footer.php'); ?>
-
 	</body>
 
 	</html>

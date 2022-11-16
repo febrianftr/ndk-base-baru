@@ -17,83 +17,73 @@ function query($query)
 ///////DOKTER PENGIRIM///////////////////////////////////////////////////////////////
 
 //untuk insert atau menambahkan
-function tambah($post_dokter)
+function new_dokter($value)
 {
 	global $conn;
-	$named = $post_dokter["named"];
-	$lastnamed = $post_dokter["lastnamed"];
-	$username = $post_dokter["username"];
-	$password = $post_dokter["password"];
-	$password_hash = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
+	$dokterid = $value["dokterid"];
+	$named = $value["named"];
+	$lastnamed = $value["lastnamed"];
+	$telp = $value["telp"];
+	$email = $value["email"];
+	// $username = $value["username"];
+	// $password = $value["password"];
+	// $password_hash = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
 
-	$q = mysqli_query($conn, 'SELECT MAX(dokterid) as user_id from xray_dokter');
-	$row = mysqli_fetch_assoc($q);
-	$ai = $row['user_id'] + 1;
+	mysqli_query(
+		$conn,
+		"INSERT INTO xray_dokter (dokterid, named, lastnamed, telp, email) 
+		VALUES ('$dokterid','$named', '$lastnamed', '$telp', '$email')"
+	);
 
-	$q4 = mysqli_query($conn, 'SELECT MAX(id_table) as user_id4 from xray_login');
-	$row4 = mysqli_fetch_assoc($q4);
-	$ai4 = $row4['user_id4'] + 1;
-	// ---------------- login backup -----------------------------
-	$q5 = mysqli_query($conn, 'SELECT MAX(id_table) as user_id5 from xray_login_backup');
-	$row5 = mysqli_fetch_assoc($q5);
-	$ai5 = $row5['user_id5'] + 1;
-
-
-	//query insert data
-	$query = "INSERT INTO xray_dokter
-				VALUES 
-				('$ai','$named', '$lastnamed', ' ',' ', '$username', ' ','$password_hash')
-				";
-
-	$query_login = "INSERT INTO xray_login
-VALUES 
-('$ai4', '$username', '$password_hash','refferal', NOW(), '')
-";
-	$query_login_backup = "INSERT INTO xray_login_backup
-VALUES 
-('$ai5', '$username', '$password_hash','refferal')
-";
-	mysqli_query($conn, $query);
-	mysqli_query($conn, $query_login);
-	mysqli_query($conn, $query_login_backup);
-
+	// mysqli_query(
+	// 	$conn,
+	// 	"INSERT INTO xray_login (username, password, level, date) 
+	// 	VALUES ('$username', '$password_hash','refferal', NOW())"
+	// );
 
 	return mysqli_affected_rows($conn);
 }
 
 //untuk menghapus
-function hapus($dokterid)
+function delete_dokter($id)
 {
 	global $conn;
-	mysqli_query($conn, "DELETE FROM xray_dokter WHERE dokterid = $dokterid");
+
+	mysqli_query(
+		$conn,
+		"DELETE FROM xray_dokter 
+		WHERE id = '$id'"
+	);
 
 	return mysqli_affected_rows($conn);
 }
 
 
 //untuk mengubah / edit
-function ubah($post_dokter)
+function update_dokter($value)
 {
 	global $conn;
-	$dokterid = $post_dokter["dokterid"];
-	$named = $post_dokter["named"];
-	$lastnamed = $post_dokter["lastnamed"];
 
+	$id = $value["id"];
+	$dokterid = $value["dokterid"];
+	$named = $value["named"];
+	$lastnamed = $value["lastnamed"];
+	$telp = $value["telp"];
+	$email = $value["email"];
 
-	//query insert data
-	$query = "UPDATE xray_dokter SET 
-				named = '$named',
-				lastnamed ='$lastnamed'
-				WHERE dokterid = $dokterid
-	";
-
-
-	mysqli_query($conn, $query);
+	mysqli_query(
+		$conn,
+		"UPDATE xray_dokter SET 
+		dokterid = '$dokterid',
+		named = '$named',
+		lastnamed ='$lastnamed',
+		telp ='$telp',
+		email ='$email'
+		WHERE id = '$id'"
+	);
 
 	return mysqli_affected_rows($conn);
 }
-/////end of DOKTER///////////////////////////////////////////////////////////////
-
 
 ///////DOKTER RADIOLOGY///////////////////////////////////////////////////////////////
 
@@ -130,11 +120,6 @@ function tambah_rad($post_dokter_radiology)
 	$q4 = mysqli_query($conn, 'SELECT MAX(id_table) as user_id4 from xray_login');
 	$row4 = mysqli_fetch_assoc($q4);
 	$ai4 = $row4['user_id4'] + 1;
-	// ---------------- login backup -----------------------------
-	$q5 = mysqli_query($conn, 'SELECT MAX(id_table) as user_id5 from xray_login_backup');
-	$row5 = mysqli_fetch_assoc($q5);
-	$ai5 = $row5['user_id5'] + 1;
-
 
 	//query insert data
 
@@ -146,13 +131,9 @@ function tambah_rad($post_dokter_radiology)
 				VALUES 
 				('$ai4', '$username', '$password_hash','radiology', NOW(), '')
 				";
-	$query_login_backup = "INSERT INTO xray_login_backup
-				VALUES 
-				('$ai5', '$username', '$password_hash','radiology')
-				";
+
 	mysqli_query($conn, $query);
 	mysqli_query($conn, $query_login);
-	mysqli_query($conn, $query_login_backup);
 
 	return mysqli_affected_rows($conn);
 }
@@ -264,10 +245,7 @@ function tambah_grapher($post_dokter_radiographer)
 	$q4 = mysqli_query($conn, 'SELECT MAX(id_table) as user_id4 from xray_login');
 	$row4 = mysqli_fetch_assoc($q4);
 	$ai4 = $row4['user_id4'] + 1;
-	// ---------------- login backup -----------------------------
-	$q5 = mysqli_query($conn, 'SELECT MAX(id_table) as user_id5 from xray_login_backup');
-	$row5 = mysqli_fetch_assoc($q5);
-	$ai5 = $row5['user_id5'] + 1;
+
 
 
 	//query insert data
@@ -279,13 +257,8 @@ function tambah_grapher($post_dokter_radiographer)
 				VALUES 
 				('$ai4', '$username', '$password_hash','radiographer', NOW(), '')
 				";
-	$query_login_backup = "INSERT INTO xray_login_backup
-				VALUES 
-				('$ai5', '$username', '$password_hash','radiographer')
-				";
 	mysqli_query($conn, $query);
 	mysqli_query($conn, $query_login);
-	mysqli_query($conn, $query_login_backup);
 
 	return mysqli_affected_rows($conn);
 }
@@ -541,10 +514,6 @@ function admin_tambah($post_admin)
 	$q4 = mysqli_query($conn, 'SELECT MAX(id_table) as user_id4 from xray_login');
 	$row4 = mysqli_fetch_assoc($q4);
 	$ai4 = $row4['user_id4'] + 1;
-	// ---------------- login backup -----------------------------
-	$q5 = mysqli_query($conn, 'SELECT MAX(id_table) as user_id5 from xray_login_backup');
-	$row5 = mysqli_fetch_assoc($q5);
-	$ai5 = $row5['user_id5'] + 1;
 
 
 	//query insert data
@@ -556,13 +525,8 @@ function admin_tambah($post_admin)
 				VALUES 
 				('$ai4', '$username', '$password_hash','admin', NOW(), '')
 				";
-	$query_login_backup = "INSERT INTO xray_login_backup
-				VALUES 
-				('$ai5', '$username', '$password_hash','admin')
-				";
 	mysqli_query($conn, $query);
 	mysqli_query($conn, $query_login);
-	mysqli_query($conn, $query_login_backup);
 
 	return mysqli_affected_rows($conn);
 }
@@ -621,10 +585,6 @@ function superadmin_tambah($post_superadmin)
 	$q4 = mysqli_query($conn, 'SELECT MAX(id_table) as user_id4 from xray_login');
 	$row4 = mysqli_fetch_assoc($q4);
 	$ai4 = $row4['user_id4'] + 1;
-	// ---------------- login backup -----------------------------
-	$q5 = mysqli_query($conn, 'SELECT MAX(id_table) as user_id5 from xray_login_backup');
-	$row5 = mysqli_fetch_assoc($q5);
-	$ai5 = $row5['user_id5'] + 1;
 
 
 	//query insert data
@@ -636,13 +596,8 @@ function superadmin_tambah($post_superadmin)
 				VALUES 
 				('$ai4', '$username', '$password_hash','superadmin', NOW(), '$password_hash_contract')
 				";
-	$query_login_backup = "INSERT INTO xray_login_backup
-				VALUES 
-				('$ai5', '$username', '$password_hash','superadmin')
-				";
 	mysqli_query($conn, $query);
 	mysqli_query($conn, $query_login);
-	mysqli_query($conn, $query_login_backup);
 
 	return mysqli_affected_rows($conn);
 }

@@ -1,33 +1,36 @@
 <?php
 require 'function_dokter.php';
 session_start();
-//ambil data di url
-$dokterid = $_GET["dokterid"];
-$dktr = query("SELECT * FROM xray_dokter WHERE dokterid=$dokterid")[0];
-if( isset($_POST["submit"]) ) {
-	if ( ubah($_POST) > 0 ){
-		echo "
-<script>
-	alert('Data Berhasil diubah');
-	document.location.href= 'view_dokter.php';
-</script>
-";
-}else {
-echo "
-<script>
-	alert('Data Gagal diubah');
-	document.location.href= 'view_dokter.php';
-</script>";
-}
+
+$id = $_GET["id"];
+$dokter = mysqli_fetch_assoc(mysqli_query(
+	$conn,
+	"SELECT * FROM xray_dokter WHERE id = '$id'"
+));
+
+if (isset($_POST["submit"])) {
+	if (update_dokter($_POST) > 0) {
+		echo "<script>
+				alert('Berhasil diubah!');
+				document.location.href= 'view_dokter.php';
+			</script>";
+	} else {
+		echo "<script>
+				alert('Gagal diubah');
+				document.location.href= 'update_dokter.php?id=$id';
+			</script>";
+	}
 }
 if ($_SESSION['level'] == "admin") {
 ?>
-<!DOCTYPE html>
-<html>
+	<!DOCTYPE html>
+	<html>
+
 	<head>
 		<title>Ubah Data Dokter</title>
 		<?php include('head.php'); ?>
 	</head>
+
 	<body>
 		<?php include('menu-bar.php'); ?><br>
 		<nav aria-label="breadcrumb">
@@ -37,50 +40,67 @@ if ($_SESSION['level'] == "admin") {
 				<li class="breadcrumb-item"><a href="view_dokter.php">Tabel Dokter</a></li>
 				<li class="breadcrumb-item active" aria-current="page">Edit Data Dokter</li>
 				<li style="float: right;">
-						<label>Zoom</label>
-						<a href="#" id="decfont"><i class="fas fa-minus-circle"></i></a>
-						<a href="#" id="incfont"><i class="fas fa-plus-circle"></i></a>
-					</li>
+					<label>Zoom</label>
+					<a href="#" id="decfont"><i class="fas fa-minus-circle"></i></a>
+					<a href="#" id="incfont"><i class="fas fa-plus-circle"></i></a>
+				</li>
 			</ol>
 		</nav>
-		
+
 		<div id="container1">
 			<div id="content1">
-	<div class="body">
-		<h1>Ubah Data Dokter</h1>
-		<div class="container-fluid">
-			<div class="row form-dokter">
-				<form action="" method="post">
-					<input type="hidden" name="dokterid" value="<?= $dktr["dokterid"]; ?>">
-					<ul>
-						<li>
-							<label for="named"><b>Nama Depan</b></label><br>
-							<input type="text" name="named" id="named" required value="<?= $dktr["named"]; ?>">
-						</li>
-						<li>
-							<label for="lastnamed"><b>Nama Belakang</b></label><br>
-							<input type="text" name="lastnamed" id="lastnamed" value="<?= $dktr["lastnamed"]; ?>">
-						</li>
-						<li>
-							<button class="button1" type="submit" name="submit">Ubah Data</button>
-						</li>
-					</ul>
-					
-				</form>
+				<div class="body">
+					<h1>Ubah Data Dokter</h1>
+					<div class="container-fluid">
+						<div class="row form-dokter">
+							<form action="" method="post">
+								<div class="col-md-5 col-md-offset-1">
+									<input type="hidden" name="id" value="<?= $dokter['id']; ?>" id="id" placeholder="Input Dokter ID" required>
+									<label for="dokterid"><b>Dokter ID</label>
+									<br>
+									<input type="text" name="dokterid" value="<?= $dokter['dokterid']; ?>" id="dokterid" placeholder="Input Dokter ID" required>
+									<label for="named"><b><?= $lang['f_name'] ?> </b></label>
+									<br>
+									<input type="text" name="named" value="<?= $dokter['named']; ?>" id="named" placeholder="<?= $lang['input_f_name'] ?>" required>
+									<label for="lastnamed"><b><?= $lang['l_name'] ?></b></label>
+									<br>
+									<input type="text" name="lastnamed" value="<?= $dokter['lastnamed']; ?>" id="lastnamed" placeholder="<?= $lang['input_l_name'] ?>" required>
+									<label for="telp"><b>Phone Number</label>
+									<br>
+									<input type="text" name="telp" value="<?= $dokter['telp']; ?>" id="telp" placeholder="Input Phone Number" required>
+									<label for="email"><b>Email</label>
+									<br>
+									<input type="text" name="email" value="<?= $dokter['email']; ?>" id="email" placeholder="Input Email" required>
+									<!-- <label for="username"><b>Username</b></label>
+									<br>
+									<input type="text" name="username" id="username" placeholder="input username..." required> -->
+									<!-- <label for="password"><b>Password</b></label>
+									<br>
+									<input type="password" name="password" id="password" placeholder="<?= $lang['input_pw'] ?>" required> -->
+									<br>
+									<br>
+									<button class="button1" type="submit" name="submit"><?= $lang['add_data'] ?></button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="footerindex">
+				<div class="">
+					<div class="footer-login col-sm-12"><br>
+						<center>
+							<p>&copy; Powered by Intiwid IT Solution 2022</a>.</p>
+						</center>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
-	<div class="footerindex">
-    <div class="">
-          <div class="footer-login col-sm-12"><br>
-            <center><p>&copy; Powered by Intiwid IT Solution 2019</a>.</p></center>
-          </div> 
-        </div>
-</div>
-</div>
-	<?php include('script-footer.php'); ?>
-	
-</body>
-</html>
-<?php } else {header("location:../index.php");} ?>
+		<?php include('script-footer.php'); ?>
+
+	</body>
+
+	</html>
+<?php } else {
+	header("location:../index.php");
+} ?>

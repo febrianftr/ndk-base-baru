@@ -4,8 +4,9 @@ session_start();
 
 if ($_SESSION['level'] == "admin") {
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+
   <head>
     <title>Home | Admin</title>
     <?php include('head.php'); ?>
@@ -19,30 +20,34 @@ if ($_SESSION['level'] == "admin") {
     }
     </style> -->
   </head>
+
   <body>
-    <?php include('menu-bar.php'); ?><br><br><br> <br><br><br>  
+    <?php include('menu-bar.php'); ?><br><br><br> <br><br><br>
     <!-- ---------------------------------chart--------------------- -->
-    
+
 
     <!-- //////content home/////////////// -->
-  <?php include('../home-index.php'); ?>
+    <?php include('../home-index.php'); ?>
     <!-- //////end content home/////////////// -->
 
 
-      <!-- <div class="footerindex">
+    <!-- <div class="footerindex">
         
           <div class="footer-login"><br>
-            <center><p style="margin-bottom: 0px;">&copy; Powered by Intiwid IT Solution 2019</a>.</p></center>
+            <center><p style="margin-bottom: 0px;">&copy; Powered by Intiwid IT Solution 2022</a>.</p></center>
           </div>
   
       </div> -->
 
-   
-      
-      
-  
-      <?php include('script-footer.php'); ?>
-      
-    </body>
+
+
+
+
+    <?php include('script-footer.php'); ?>
+
+  </body>
+
   </html>
-  <?php } else {header("location:../index.php");} ?>
+<?php } else {
+  header("location:../index.php");
+} ?>

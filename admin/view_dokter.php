@@ -59,7 +59,8 @@ if ($_SESSION['level'] == "admin") {
 											<th>No</th>
 											<th><?= $lang['id_doc'] ?></th>
 											<th><?= $lang['doc_name'] ?></th>
-
+											<th>Telp</th>
+											<th>Email</th>
 											<th><?= $lang['action'] ?></th>
 										</tr>
 									</thead>
@@ -70,9 +71,11 @@ if ($_SESSION['level'] == "admin") {
 											<td><?= $i; ?></td>
 											<td><?= $row["dokterid"]; ?></td>
 											<td><?= $row["named"] . " " . $row["lastnamed"]; ?></td>
+											<td><?= $row["telp"]; ?></td>
+											<td><?= $row["email"]; ?></td>
 											<td>
-												<a href="update_dokter.php?dokterid= <?= $row["dokterid"]; ?>"><img data-toggle="tooltip" title="Edit" class="iconbutton" src="../image/edit.png"></a>
-												<a href="delete_dokter.php?dokterid= <?= $row["dokterid"]; ?>" onclick="return confirm('Teruskan Menghapus Data?');"><img data-toggle="tooltip" title="Hapus" class="iconbutton" src="../image/delete.png"></a>
+												<a href="update_dokter.php?id=<?= $row["id"]; ?>"><img data-toggle="tooltip" title="Edit" class="iconbutton" src="../image/edit.png"></a>
+												<a href="delete_dokter.php?id=<?= $row["id"]; ?>" onclick="return confirm('Teruskan Menghapus Data?');"><img data-toggle="tooltip" title="Hapus" class="iconbutton" src="../image/delete.png"></a>
 											</td>
 										</tr>
 										<?php $i++; ?>
@@ -88,7 +91,7 @@ if ($_SESSION['level'] == "admin") {
 				<div class="">
 					<div class="footer-login col-sm-12"><br>
 						<center>
-							<p>&copy; Powered by Intiwid IT Solution 2019</a>.</p>
+							<p>&copy; Powered by Intiwid IT Solution 2022</a>.</p>
 						</center>
 					</div>
 				</div>

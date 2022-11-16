@@ -3,10 +3,17 @@ require 'function_dokter.php';
 session_start();
 
 if (isset($_POST["submit"])) {
-	tambah($_POST);
-	echo "<script>alert('Data berhasil dimasukkan');
-document.location.href='view_dokter.php';
-</script>";
+	if (new_dokter($_POST) > 0) {
+		echo "<script>
+			alert('Berhasil Ditambahkan!');
+			document.location.href='view_dokter.php';
+		</script>";
+	} else {
+		echo "<script>
+			alert('Gagal diubah');
+			document.location.href= 'view_dokter.php';
+		</script>";
+	}
 }
 if ($_SESSION['level'] == "admin") {
 ?>
@@ -14,7 +21,7 @@ if ($_SESSION['level'] == "admin") {
 	<html>
 
 	<head>
-		<title>Tambah Data Dokter</title>
+		<title>Tambah Data Dokter Rujukan</title>
 		<?php include('head.php'); ?>
 	</head>
 
@@ -32,7 +39,6 @@ if ($_SESSION['level'] == "admin") {
 				</li>
 			</ol>
 		</nav>
-
 		<div id="container1">
 			<div id="content1">
 				<div class="body">
@@ -40,25 +46,31 @@ if ($_SESSION['level'] == "admin") {
 					<div class="container-fluid">
 						<div class="row form-dokter">
 							<form action="" method="post">
-
 								<div class="col-md-5 col-md-offset-1">
-									<label for="named"><b><?= $lang['f_name'] ?> </b></label><br>
+									<label for="dokterid"><b>Dokter ID</label>
+									<br>
+									<input type="text" name="dokterid" id="dokterid" placeholder="Input Dokter ID" required>
+									<label for="named"><b><?= $lang['f_name'] ?> </b></label>
+									<br>
 									<input type="text" name="named" id="named" placeholder="<?= $lang['input_f_name'] ?>" required>
-
-
-									<label for="lastnamed"><b><?= $lang['l_name'] ?></b></label><br>
-									<input type="text" name="lastnamed" id="lastnamed" placeholder="<?= $lang['input_l_name'] ?>">
-
-									<label for="username"><b>Username</b></label><br>
-									<input type="text" name="username" id="username" placeholder="input username...">
-
-									<label for="password"><b>Password</b></label><br>
-									<input type="password" name="password" id="password" placeholder="<?= $lang['input_pw'] ?>" required>
-
-									<br><br>
+									<label for="lastnamed"><b><?= $lang['l_name'] ?></b></label>
+									<br>
+									<input type="text" name="lastnamed" id="lastnamed" placeholder="<?= $lang['input_l_name'] ?>" required>
+									<label for="telp"><b>Phone Number</label>
+									<br>
+									<input type="text" name="telp" id="telp" placeholder="Input Phone Number" required>
+									<label for="email"><b>Email</label>
+									<br>
+									<input type="text" name="email" id="email" placeholder="Input Email" required>
+									<!-- <label for="username"><b>Username</b></label>
+									<br>
+									<input type="text" name="username" id="username" placeholder="input username..." required> -->
+									<!-- <label for="password"><b>Password</b></label>
+									<br>
+									<input type="password" name="password" id="password" placeholder="<?= $lang['input_pw'] ?>" required> -->
+									<br>
+									<br>
 									<button class="button1" type="submit" name="submit"><?= $lang['add_data'] ?></button>
-
-
 								</div>
 							</form>
 						</div>
@@ -69,14 +81,13 @@ if ($_SESSION['level'] == "admin") {
 				<div class="">
 					<div class="footer-login col-sm-12"><br>
 						<center>
-							<p>&copy; Powered by Intiwid IT Solution 2019</a>.</p>
+							<p>&copy; Powered by Intiwid IT Solution 2022</a>.</p>
 						</center>
 					</div>
 				</div>
 			</div>
 		</div>
 		<?php include('script-footer.php'); ?>
-
 	</body>
 
 	</html>
