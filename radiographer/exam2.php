@@ -137,7 +137,7 @@ if ($_SESSION['level'] == "radiographer") {
 										<label class="sr-only" for="from">Sampai Tanggal</label>
 										<input type="text" class="form-control input-sm form-control-sm" name="to" id="to" placeholder="sampai tanggal" autocomplete="off" value="<?= $to ?>">
 									</div>
-									<button type="submit" class="btn btn-default btn-sm">Hapus</button>
+									<button type="submit" class="btn btn-default btn-sm" style="padding: 7px;">Hapus</button>
 								</form>
 								<br>
 								<table class="table-dicom" id="example" border="1" cellpadding="8" cellspacing="0">
