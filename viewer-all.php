@@ -12,50 +12,19 @@ define('DICOMLAST', '"><span class="btn rgba-stylish-slight btn-inti2" style="bo
 define('HTMLFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="http://' . $_SERVER['SERVER_NAME'] . ':19898/intiwid/viewer.html?studyUID=');
 define('HTMLLAST', '"target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/eyeyellow.svg" data-toggle="tooltip" title="HTML Viewer" style="width: 100%;"></span></a>');
 
-// OHIF (MOBILE)
-if ($_SERVER['SERVER_NAME'] == '103.111.207.70') {
-    define('OHIFMOBILEFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="http://' . $_SERVER['SERVER_NAME'] . ':82/viewer?StudyInstanceUIDs=');
-    define('OHIFMOBILELAST', '"target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/eyeblue.svg" data-toggle="tooltip" title="Web Viewer" style="width: 100%;"></span></a>');
-} else {
-    define('OHIFMOBILEFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="http://' . $_SERVER['SERVER_NAME'] . ':82/viewer?StudyInstanceUIDs=');
-    define('OHIFMOBILELAST', '"target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/eyeblue.svg" data-toggle="tooltip" title="Web Viewer" style="width: 100%;"></span></a>');
-}
-
-// OHIF LAMA
-if ($_SERVER['SERVER_NAME'] == '103.111.207.70') {
-    define('OHIFFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="http://' . $_SERVER['SERVER_NAME'] . ':92/viewer/');
-    define('OHIFLAST', '"target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/eyegreen.svg" data-toggle="tooltip" title="Tab Viewer" style="width: 100%;"></span></a>');
-} else {
-    define('OHIFFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="http://' . $_SERVER['SERVER_NAME'] . ':91/viewer/');
-    define('OHIFLAST', '"target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/eyegreen.svg" data-toggle="tooltip" title="Tab Viewer" style="width: 100%;"></span></a>');
-}
 // Mobile
 define('MOBILEFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="http://' . $_SERVER['SERVER_NAME'] . ':19898/dwv-viewer/index.html?type=manifest&input=%2Fweasis-pacs-connector%2Fmanifest%3FseriesUID%3D');
 define('MOBILELAST', '"target="_blank"><span class="btn btn-warning btn-inti"><i class="fas fa-eye" data-toggle="tooltip" title="Web Viewer"></i></span></a>');
 
 define('CHANGEDOCTORICONYES', '<i class="fas fa-user-md fa-lg"></i>');
 define('CHANGEDOCTORICONNO', '<i class="fas fa-user-times fa-lg text-warning"></i>');
+
 // Change doctor
 define('CHANGEDOCTORFIRST', '<a style="text-decoration: none;" href="changedoctorworklist.php?uid=');
 define('CHANGEDOCTORMID', '&dokradid=');
 define('CHANGEDOCTORSTAT', '&status=');
 define('CHANGEDOCTORLAST', '" onclick=\'return confirm("Ubah dokter radiology yang membaca?");\'><span class="btn rgba-stylish-slight darken-1 btn-inti2">');
 define('CHANGEDOCTORVERYLAST', '</span></a>');
-//radiant
-define('RADIANTFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="radiant://?n=paet&v=dcmPACS&n=pstv&v=0020000D&v=%22');
-define('RADIANTLAST', '%22" "target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/radiAnt.png" data-toggle="tooltip" title="Radiant Viewer" style="width: 100%;"></span></a>');
-
-// HOROS
-define('HOROSFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="Horos://?methodName=retrieve&serverName=INTIWID&then=open&retrieveOnlyIfNeeded=yes&filterKey=StudyInstanceUID&filterValue=');
-define('HOROSLAST', '"target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/horos.png" data-toggle="tooltip" title="Radiant Viewer" style="width: 100%;"></span></a>');
-
-//ipiview
-define('IPIVIEWFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="http://192.168.10.144:8089/ipiview/ipiview/html/start.html?StudyInstanceUID=');
-define('IPIVIEWLAST', '" target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/eyeyellow.svg" data-toggle="tooltip" title="IPI Viewer" style="width: 100%;"></span></a>');
-
-// inobitec
-define('INOBITECFIRST', '<a href="#" class="ahref-edit" onclick="inobitec(');
-define('INOBITECLAST', ')"id="inobitec" data-ip="' . $_SERVER['SERVER_NAME'] . '"><span class="btn btn-warning btn-inti"><i class="fas fa-eye" data-toggle="tooltip" title="Web Viewer"></i></span></a>');
 
 // DELETE
 define('DELETEFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="deleteworkload.php?uid=');
@@ -98,11 +67,65 @@ define('WORKLISTLAST', '"><span class="btn rgba-stylish-slight btn-inti2" style=
 define('DRAFTFIRST', '<a href="worklist.php?uid=');
 define('DRAFTLAST', '"><span class="btn btn-warning btn-inti"><i class="fas fa-edit" data-toggle="tooltip" title="Go to expertise"></i></span></a>');
 
+//radiant
+define('RADIANTFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="radiant://?n=paet&v=dcmPACS&n=pstv&v=0020000D&v=%22');
+define('RADIANTLAST', '%22" "target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/radiAnt.png" data-toggle="tooltip" title="Radiant Viewer" style="width: 100%;"></span></a>');
+
+// HOROS
+define('HOROSFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="Horos://?methodName=retrieve&serverName=INTIWID&then=open&retrieveOnlyIfNeeded=yes&filterKey=StudyInstanceUID&filterValue=');
+define('HOROSLAST', '"target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/horos.png" data-toggle="tooltip" title="Radiant Viewer" style="width: 100%;"></span></a>');
+
+//ipiview
+define('IPIVIEWFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="http://192.168.10.144:8089/ipiview/ipiview/html/start.html?StudyInstanceUID=');
+define('IPIVIEWLAST', '" target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/eyeyellow.svg" data-toggle="tooltip" title="IPI Viewer" style="width: 100%;"></span></a>');
+
+// inobitec
+define('INOBITECFIRST', '<a href="#" class="ahref-edit" onclick="inobitec(');
+define('INOBITECLAST', ')"id="inobitec" data-ip="' . $_SERVER['SERVER_NAME'] . '"><span class="btn btn-warning btn-inti"><i class="fas fa-eye" data-toggle="tooltip" title="Web Viewer"></i></span></a>');
+
+// untuk icon OHIF LARGE DI WORKLIST
+$ohif_large = '"class="button8 delete1" target="_blank"><img src="../image/smartphone.svg" style="width: 50px;"><br> <span> Mobile Viewer</span></a>';
+// untuk icon OHIF small DI WORKLIST
+$ohif_small = '"style="text-decoration:none;" class="ahref-edit" target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/eyegreen.svg" data-toggle="tooltip" title="Tab Viewer" style="width: 100%;"></span></a>';
+
+// OHIF TERBARU
+if ($_SERVER['SERVER_NAME'] == '103.111.207.70') {
+    // jika menggunakan ip publik
+    define('OHIFNEWFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="http://' . $_SERVER['SERVER_NAME'] . ':82/viewer?StudyInstanceUIDs=');
+    define('OHIFNEWLAST', "$ohif_small");
+    // jika menggunakan ohif baru icon(large)
+    define('OHIFNEWWORKLISTFIRST', '<a href="http://' . $_SERVER['SERVER_NAME'] . ':82/viewer?StudyInstanceUIDs=');
+    define('OHIFNEWWORKLISTLAST', "$ohif_large");
+} else {
+    define('OHIFNEWFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="http://' . $_SERVER['SERVER_NAME'] . ':81/viewer?StudyInstanceUIDs=');
+    define('OHIFNEWLAST', "$ohif_small");
+    // jika menggunakan ohif baru icon(large)
+    define('OHIFNEWWORKLISTFIRST', '<a href="http://' . $_SERVER['SERVER_NAME'] . ':81/viewer?StudyInstanceUIDs=');
+    define('OHIFNEWWORKLISTLAST', "$ohif_large");
+}
+
+// OHIF LAMA
+if ($_SERVER['SERVER_NAME'] == '103.111.207.70') {
+    // jika menggunakan ip publik
+    // jika menggunakan ohif lama icon (small)
+    define('OHIFOLDFIRST', '<a href="http://' . $_SERVER['SERVER_NAME'] . ':92/viewer/');
+    define('OHIFOLDLAST', "$ohif_small");
+    // jika menggunakan ohif lama icon(large)
+    define('OHIFOLDWORKLISTFIRST', '<a href="http://' . $_SERVER['SERVER_NAME'] . ':92/viewer/');
+    define('OHIFOLDWORKLISTLAST', "$ohif_large");
+} else {
+    // jika menggunakan ip lokal
+    // jika menggunakan ohif lama icon (small)
+    define('OHIFOLDFIRST', '<a href="http://' . $_SERVER['SERVER_NAME'] . ':91/viewer/');
+    define('OHIFOLDLAST', "$ohif_small");
+    // jika menggunakan ohif lama icon(large)
+    define('OHIFOLDWORKLISTFIRST', '<a href="http://' . $_SERVER['SERVER_NAME'] . ':91/viewer/');
+    define('OHIFOLDWORKLISTLAST', "$ohif_large");
+}
+
 // VIEWER DI WORKLIST ICON LARGE
 define('DICOMWORKLISTFIRST', '<a href="jnlp://' . $_SERVER['SERVER_NAME'] . ':19898/weasis-pacs-connector/DCM_viewer.jnlp?studyUID=');
 define('DICOMWORKLISTLAST', '"class="button8 delete1"><img src="../image/desktop.svg" style="width: 50px;"><br> <span> Dicom Viewer</span></a>');
-define('OHIFWORKLISTFIRST', '<a href="http://' . $_SERVER['SERVER_NAME'] . ':82/viewer?StudyInstanceUIDs=');
-define('OHIFWORKLISTLAST', '"class="button8 delete1" target="_blank"><img src="../image/smartphone.svg" style="width: 50px;"><br> <span> Mobile Viewer</span></a>');
 define('HTMLWORKLISTFIRST', '<a href="http://' . $_SERVER['SERVER_NAME'] . ':19898/intiwid/viewer.html?studyUID=');
 define('HTMLWORKLISTLAST', '" class="button8 delete1" target="_blank"><img src="../image/html.svg" style="width: 50px;"><br> <span> HTML Viewer</span></a>');
 define('RADIANTWORKLISTFIRST', '<a href="radiant://?n=paet&v=dcmPACS&n=pstv&v=0020000D&v=%22');

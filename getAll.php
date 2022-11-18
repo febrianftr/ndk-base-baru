@@ -135,8 +135,7 @@ while ($row = mysqli_fetch_array($query)) {
         }
     } else {
         $aksi = PDFFIRST . $study_iuid . PDFLAST .
-            OHIFFIRST . $study_iuid . OHIFLAST .
-            HTMLFIRST . $study_iuid . HTMLLAST;
+            OHIFOLDFIRST . $study_iuid . OHIFOLDLAST;
     }
 
     // kondisi jika prioriry normal dan CITO

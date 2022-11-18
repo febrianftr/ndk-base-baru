@@ -172,30 +172,28 @@ while ($row = mysqli_fetch_array($result)) {
   // ketika login radiology
   if ($level == 'radiology') {
     $level =
-      RADIANTFIRST . $study_iuid . RADIANTLAST .
-      HTMLFIRST . $study_iuid . HTMLLAST .
-      OHIFFIRST . $study_iuid . OHIFLAST .
+      HOROSFIRST . $study_iuid . HOROSLAST .
+      OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
       CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workload_status . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
-      EDITWORKLOADFIRST . $study_iuid . EDITWORKLOADLAST .
-      TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST .
-      TELEGRAMSIGNATUREFIRST . $study_iuid . TELEGRAMSIGNATURELAST;
+      EDITWORKLOADFIRST . $study_iuid . EDITWORKLOADLAST;
+    // TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST .
+    // TELEGRAMSIGNATUREFIRST . $study_iuid . TELEGRAMSIGNATURELAST;
     // ketika login radiographer
   } else if ($level == 'radiographer') {
     // kondisi ketika xray_workload masuk dari trigger
     if ($status != '-') {
       $level = EDITPASIENFIRST . $study_iuid . EDITPASIENLAST .
         CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workload_status . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
-        HTMLFIRST . $study_iuid . HTMLLAST .
-        OHIFFIRST . $study_iuid . OHIFLAST .
-        TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST;
+        OHIFOLDFIRST . $study_iuid . OHIFOLDLAST;
+      // TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST;
       // DELETEFIRST . $study_iuid . DELETELAST;
     } else {
       // kondisi ketika xray_workload tidak masuk dari trigger
-      $level = '';
+      $level = OHIFOLDFIRST . $study_iuid . OHIFOLDLAST;
     }
     // ketika login refferal
   } else if ($level == 'refferal') {
-    $level = DICOMFIRST . $study_iuid . DICOMLAST;
+    $level = OHIFOLDFIRST . $study_iuid . OHIFOLDLAST;
   } else {
     $level = '-';
   }

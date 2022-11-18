@@ -284,7 +284,7 @@ if ($_SESSION['level'] == "radiology") { ?>
 														<td>
 															<?= PDFFIRST . $study_iuid . PDFLAST .
 																HOROSFIRST . $study_iuid . HOROSLAST .
-																HTMLFIRST . $study_iuid . HTMLLAST;
+																OHIFOLDFIRST . $study_iuid . OHIFOLDLAST;
 															?>
 														</td>
 													</tr>
@@ -301,9 +301,7 @@ if ($_SESSION['level'] == "radiology") { ?>
 											<hr style="margin: 10px 0px;">
 											<div class="buttons1">
 												<?= HOROSWORKLISTFIRST . $uid . HOROSWORKLISTLAST .
-													// DICOMWORKLISTFIRST . $uid . DICOMWORKLISTLAST .
-													HTMLWORKLISTFIRST . $uid . HTMLWORKLISTLAST;
-												// OHIFWORKLISTFIRST . $uid . OHIFWORKLISTLAST; 
+													OHIFOLDWORKLISTFIRST . $uid . OHIFOLDWORKLISTLAST;
 												?>
 											</div>
 										</div>

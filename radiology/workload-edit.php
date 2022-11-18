@@ -262,10 +262,8 @@ if ($_SESSION['level'] == "radiology") { ?>
 													<tr>
 														<td>
 															<?= PDFFIRST . $study_iuid . PDFLAST .
-																RADIANTFIRST . $study_iuid . RADIANTLAST .
-																DICOMFIRST . $study_iuid . DICOMLAST .
-																OHIFFIRST . $study_iuid . OHIFLAST .
-																HTMLFIRST . $study_iuid . HTMLLAST;
+																HOROSFIRST . $study_iuid . HOROSLAST .
+																OHIFOLDFIRST . $study_iuid . OHIFOLDLAST;
 															?>
 														</td>
 													</tr>
@@ -281,10 +279,8 @@ if ($_SESSION['level'] == "radiology") { ?>
 											<h4 style="margin: 0px;">Intiwid Viewer</h4>
 											<hr style="margin: 10px 0px;">
 											<div class="buttons1">
-												<?= RADIANTWORKLISTFIRST . $uid . RADIANTWORKLISTLAST .
-													DICOMWORKLISTFIRST . $uid . DICOMWORKLISTLAST .
-													HTMLWORKLISTFIRST . $uid . HTMLWORKLISTLAST .
-													OHIFWORKLISTFIRST . $uid . OHIFWORKLISTLAST; ?>
+												<?= HOROSWORKLISTFIRST . $uid . HOROSWORKLISTLAST .
+													OHIFOLDWORKLISTFIRST . $uid . OHIFOLDWORKLISTLAST; ?>
 											</div>
 										</div>
 									</div>
