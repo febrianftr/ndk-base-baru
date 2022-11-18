@@ -181,18 +181,18 @@ while ($row = mysqli_fetch_array($result)) {
       TELEGRAMSIGNATUREFIRST . $study_iuid . TELEGRAMSIGNATURELAST;
     // ketika login radiographer
   } else if ($level == 'radiographer') {
-    $level = HTMLFIRST . $study_iuid . HTMLLAST .
-      OHIFMOBILEFIRST . $study_iuid . OHIFMOBILELAST;
     // kondisi ketika xray_workload masuk dari trigger
     if ($status != '-') {
       $level = EDITPASIENFIRST . $study_iuid . EDITPASIENLAST .
-        CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workload_status . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST;
+        CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workload_status . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
+        HTMLFIRST . $study_iuid . HTMLLAST .
+        OHIFMOBILEFIRST . $study_iuid . OHIFMOBILELAST .
+        TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST;
+      // DELETEFIRST . $study_iuid . DELETELAST;
     } else {
       // kondisi ketika xray_workload tidak masuk dari trigger
       $level = '';
     }
-    TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST;
-    // DELETEFIRST . $study_iuid . DELETELAST;
     // ketika login refferal
   } else if ($level == 'refferal') {
     $level = DICOMFIRST . $study_iuid . DICOMLAST;
