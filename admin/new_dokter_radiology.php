@@ -16,10 +16,10 @@ if (isset($_POST["submit"])) {
 		echo "<script>alert('Format Email salah');</script>";
 	} else {
 		if ($password == $passwordulang) {
-			tambah_rad($_POST);
+			new_dokter_radiology($_POST);
 			echo "<script>alert('Data berhasil dimasukkan');
-document.location.href='view_dokter_radiology.php';
-</script>";
+			document.location.href='view_dokter_radiology.php';
+			</script>";
 		} else {
 			echo "<script>alert('password tidak sama');</script>";
 		}
@@ -58,21 +58,15 @@ if ($_SESSION['level'] == "admin") {
 						<div class="row form-dokter">
 							<form action="" method="post" enctype="multipart/form-data">
 								<div class="col-md-5 col-md-offset-1">
-
 									<label for="dokradid"><b>Kode dokter radiology</b></label><br>
 									<input type="text" name="dokradid" id="dokradid" placeholder="Kode dokter radiology" required>
-
-
 									<label for="dokrad_name"><b><?= $lang['f_name'] ?> </b></label><br>
 									<input type="text" name="dokrad_name" id="dokrad_name" placeholder="<?= $lang['input_f_name'] ?>" required>
-
-
 									<label for="dokrad_lastname"><b><?= $lang['l_name'] ?></b></label><br>
 									<input type="text" name="dokrad_lastname" id="dokrad_lastname" placeholder="<?= $lang['input_l_name'] ?>">
 									<br>
 									<br>
 									<label for="dokrad_sex"><b><?= $lang['sex'] ?></b></label><br>
-
 									<label class="radio-admin">
 										<input type="radio" checked="checked" name="dokrad_sex" value="Laki-Laki" required> <?= $lang['male'] ?>
 										<span class="checkmark"></span>
@@ -86,54 +80,28 @@ if ($_SESSION['level'] == "admin") {
 										<span class="checkmark"></span>
 									</label>
 									<br>
-
 									<label for="dokrad_tlp"><b><?= $lang['no_telp'] ?></b></label><br>
-									<div class="input-group">
-										<div style="border: 0px; font-size: 13px;" class="input-group-addon select-input">
-											<select name="kodearea">
-												<option value="+62"> +62 | Indonesia</option>
-												<option value="+60">+60 | Malaysia</option>
-												<option value="+95">+95 | Myanmar</option>
-												<option value="+673">+673 | Brunei Darussalam</option>
-												<option value="+855">+855 | Kamboja</option>
-												<option value="+856">+856 | Laos</option>
-												<option value="+670">+670 | Timor Leste</option>
-												<option value="+65">+65 | Singapura</option>
-												<option value="+66">+66 | Thailand</option>
-												<option value="+63">+63 | Filipina</option>
-											</select>
-										</div>
-										<input type="text" name="dokrad_tlp" id="dokrad_tlp" placeholder="<?= $lang['input_telp'] ?>" required>
-									</div>
+									<input type="text" name="dokrad_tlp" id="dokrad_tlp" placeholder="<?= $lang['input_telp'] ?>" required>
 								</div>
 								<div class="col-md-5">
-
+									<label for="nip"><b>NIP</b></label><br>
+									<input type="text" name="nip" id="nip" placeholder="Input NIP"><br>
+									<label for="idtele"><b>ID Telegram</b></label><br>
+									<input type="text" name="idtele" id="idtele" placeholder="Input ID Telegram"><br>
 									<label for="dokrad_email"><b>Email</b></label><br>
 									<input type="text" name="dokrad_email" id="dokrad_email" placeholder="<?= $lang['input_email'] ?>" required><br>
-									<label for="dokrad_img"><b><?= $lang['input_photo'] ?></b></label><br>
+									<!-- <label for="dokrad_img"><b><?= $lang['input_photo'] ?></b></label><br>
 									<input type="file" name="file"><br>
 									<label for="dokrad_tempimg"><b><?= $lang['input_template'] ?></b></label><br>
-									<input type="file" name="filetemp"><br>
-
-
+									<input type="file" name="filetemp"><br> -->
 									<label for="username"><b>Username</b></label><br>
 									<input type="text" name="username" id="username" placeholder="Masukan username.." required>
-
-
 									<label for="password"><b><?= $lang['input_pw'] ?></b></label><br>
 									<input type="password" name="password" id="password" placeholder="<?= $lang['input_pw'] ?>.." required>
-
-
 									<label for="passwordulang"><b><?= $lang['input_pw2'] ?></b></label><br>
 									<input type="password" name="passwordulang" id="passwordulang" placeholder="<?= $lang['input_pw2'] ?>.." required>
-
-
 									<button class="button1" type="submit" name="submit"><?= $lang['add_data'] ?></button>
 								</div>
-
-
-
-
 							</form>
 						</div>
 					</div>
@@ -150,7 +118,6 @@ if ($_SESSION['level'] == "admin") {
 			</div>
 		</div>
 		<?php include('script-footer.php'); ?>
-
 	</body>
 
 	</html>

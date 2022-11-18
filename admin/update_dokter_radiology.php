@@ -3,22 +3,23 @@ require 'function_dokter.php';
 session_start();
 
 //ambil data di url
-$dokradid = $_GET["dokradid"];
-$dktr1 = query("SELECT * FROM xray_dokter_radiology WHERE dokradid=$dokradid")[0];
+$pk = $_GET["pk"];
+$dokter_radiology = mysqli_fetch_assoc(mysqli_query(
+	$conn,
+	"SELECT * FROM xray_dokter_radiology 
+	WHERE pk = '$pk'"
+));
 if (isset($_POST["submit"])) {
-	if (ubah_rad($_POST) > 0) {
-		echo "
-<script>
-	alert('Data Berhasil diubah');
-	document.location.href= 'view_dokter_radiology.php';
-</script>
-";
+	if (update_dokter_radiology($_POST) > 0) {
+		echo "<script>
+				alert('Data Berhasil diubah');
+				document.location.href= 'view_dokter_radiology.php';
+			</script>";
 	} else {
-		echo "
-<script>
-	alert('Data Gagal diubah');
-	document.location.href= 'update_dokter_radiology.php';
-</script>";
+		echo "<script>
+				alert('Data Gagal diubah');
+				document.location.href= 'update_dokter_radiology.php';
+			</script>";
 	}
 }
 if ($_SESSION['level'] == "admin") {
@@ -54,55 +55,55 @@ if ($_SESSION['level'] == "admin") {
 					<div class="container-fluid">
 						<div class="row form-dokter">
 							<form action="" method="post" enctype="multipart/form-data">
-								<input type="hidden" name="pk" value="<?= $dktr1["pk"]; ?>">
+								<input type="hidden" name="pk" value="<?= $dokter_radiology["pk"]; ?>">
 								<ul>
 									<li>
 										<label for="dokradid"><b>Kode Dokter Radiology</b></label><br>
-										<input type="text" name="dokradid" id="dokradid" required value="<?= $dktr1["dokradid"]; ?>">
+										<input type="text" name="dokradid" id="dokradid" required value="<?= $dokter_radiology["dokradid"]; ?>">
 									</li>
 									<li>
 										<label for="dokrad_name"><b>Nama Depan</b></label><br>
-										<input type="text" name="dokrad_name" id="dokrad_name" required value="<?= $dktr1["dokrad_name"]; ?>">
+										<input type="text" name="dokrad_name" id="dokrad_name" required value="<?= $dokter_radiology["dokrad_name"]; ?>">
 									</li>
 									<li>
 										<label for="dokrad_lastname"><b>Nama Belakang</b></label><br>
-										<input type="text" name="dokrad_lastname" id="dokrad_lastname" value="<?= $dktr1["dokrad_lastname"]; ?>">
+										<input type="text" name="dokrad_lastname" id="dokrad_lastname" value="<?= $dokter_radiology["dokrad_lastname"]; ?>">
 									</li>
 									<label for="dokrad_sex"><b>Jenis Kelamin</b></label><br>
 									<label class="radio-admin">
-										<input type="radio" name="dokrad_sex" <?php if ($dktr1["dokrad_sex"] == 'Laki-Laki') {
+										<input type="radio" name="dokrad_sex" <?php if ($dokter_radiology["dokrad_sex"] == 'Laki-Laki') {
 																					echo 'checked';
 																				} ?> value="Laki-Laki" required> Laki - laki
 										<span class="checkmark"></span>
 									</label><br>
 									<label class="radio-admin">
-										<input type="radio" name="dokrad_sex" <?php if ($dktr1["dokrad_sex"] == 'Perempuan') {
+										<input type="radio" name="dokrad_sex" <?php if ($dokter_radiology["dokrad_sex"] == 'Perempuan') {
 																					echo 'checked';
 																				} ?> value="Perempuan" required> Perempuan
 										<span class="checkmark"></span>
 									</label><br>
 									<label class="radio-admin">
-										<input type="radio" name="dokrad_sex" <?php if ($dktr1["dokrad_sex"] == 'Other') {
+										<input type="radio" name="dokrad_sex" <?php if ($dokter_radiology["dokrad_sex"] == 'Other') {
 																					echo 'checked';
 																				} ?> value="Other" required> Other
 										<span class="checkmark"></span>
 									</label>
-									<!--
-											<input type="radio" name="dokrad_sex"	value="Laki-Laki" required>laki-laki</input>
-						<input type="radio" name="dokrad_sex" value="Perempuan" required>perempuan</input><br> -->
 									<li><br>
 										<label for="dokrad_tlp"><b>Masukan tlp</b></label><br>
-										<input type="text" name="dokrad_tlp" id="dokrad_tlp" required value="<?= $dktr1["dokrad_tlp"]; ?>">
+										<input type="text" name="dokrad_tlp" id="dokrad_tlp" required value="<?= $dokter_radiology["dokrad_tlp"]; ?>">
+									</li>
+									<li><br>
+										<label for="nip"><b>Masukan NIP</b></label><br>
+										<input type="text" name="nip" id="nip" required value="<?= $dokter_radiology["nip"]; ?>">
+									</li>
+									<li><br>
+										<label for="idtele"><b>Masukan ID Telegram</b></label><br>
+										<input type="text" name="idtele" id="idtele" required value="<?= $dokter_radiology["idtele"]; ?>">
 									</li>
 									<li><br>
 										<label for="dokrad_email"><b>Masukan email</b></label><br>
-										<input type="text" name="dokrad_email" id="dokrad_email" required value="<?= $dktr1["dokrad_email"]; ?>">
+										<input type="text" name="dokrad_email" id="dokrad_email" required value="<?= $dokter_radiology["dokrad_email"]; ?>">
 									</li>
-									<!-- <li><br>
-							<label for="dokrad_img"><b>Masukan Image Profil</b></label><br>
-							<img style="width: 200px;" src="../image/<?= $dktr1['dokrad_img']; ?>">
-							<input type="file" name="file">
-						</li> -->
 									<li>
 										<button class="button1" type="submit" name="submit">Ubah Data</button>
 									</li>

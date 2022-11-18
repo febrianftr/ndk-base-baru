@@ -87,96 +87,77 @@ function update_dokter($value)
 
 ///////DOKTER RADIOLOGY///////////////////////////////////////////////////////////////
 
-//untuk insert atau menambahkan
-function tambah_rad($post_dokter_radiology)
+function new_dokter_radiology($value)
 {
 	global $conn;
-	$dokrad_name = $post_dokter_radiology["dokrad_name"];
-	$dokradid = $post_dokter_radiology["dokradid"];
-	$dokrad_lastname = $post_dokter_radiology["dokrad_lastname"];
-	$dokrad_sex = $post_dokter_radiology["dokrad_sex"];
-	$kodearea = $post_dokter_radiology["kodearea"];
-	$telp = $post_dokter_radiology["dokrad_tlp"];
-	$telpdoang = ltrim($telp, "0");
-	$dokrad_tlp = $kodearea . '' . $telpdoang;
-	$dokrad_email = $post_dokter_radiology["dokrad_email"];
-
-	$name = $_FILES["file"]["name"];
-	$file_tmp = $_FILES["file"]["tmp_name"];
-	move_uploaded_file($file_tmp, '../image/' . $name);
-
-	$nametemp = $_FILES["filetemp"]["name"];
-	$file_tmp = $_FILES["filetemp"]["tmp_name"];
-	move_uploaded_file($file_tmp, '../image/' . $nametemp);
-
-	$username = $post_dokter_radiology["username"];
-	$password = $post_dokter_radiology["password"];
+	$dokrad_name = $value["dokrad_name"];
+	$dokrad_lastname = $value["dokrad_lastname"];
+	@$dokrad_fullname = $dokrad_name . ' ' . $dokrad_lastname;
+	$dokradid = $value["dokradid"];
+	$dokrad_sex = $value["dokrad_sex"];
+	$dokrad_tlp = $value["dokrad_tlp"];
+	$nip = $value["nip"];
+	$idtele = $value["idtele"];
+	$dokrad_email = $value["dokrad_email"];
+	$username = $value["username"];
+	$password = $value["password"];
 	$password_hash = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
 
-	$q3 = mysqli_query($conn, 'SELECT MAX(dokradid) as user_id3 from xray_dokter_radiology');
-	$row3 = mysqli_fetch_assoc($q3);
-	$ai3 = $row3['user_id3'] + 1;
-
-	$q4 = mysqli_query($conn, 'SELECT MAX(id_table) as user_id4 from xray_login');
-	$row4 = mysqli_fetch_assoc($q4);
-	$ai4 = $row4['user_id4'] + 1;
-
-	//query insert data
-
-	$query = "INSERT INTO xray_dokter_radiology (dokradid, dokrad_name, dokrad_lastname, dokrad_sex, dokrad_tlp, dokrad_email, dokrad_img, imgtemp, username, password)
-				VALUES 
-				('$dokradid', '$dokrad_name', '$dokrad_lastname', '$dokrad_sex', '$dokrad_tlp', '$dokrad_email', '$name', '$nametemp', '$username', '$password_hash')
-				";
-	$query_login = "INSERT INTO xray_login
-				VALUES 
-				('$ai4', '$username', '$password_hash','radiology', NOW(), '')
-				";
-
-	mysqli_query($conn, $query);
-	mysqli_query($conn, $query_login);
+	mysqli_query(
+		$conn,
+		"INSERT INTO xray_dokter_radiology (dokradid, dokrad_name, dokrad_lastname, dokrad_sex, dokrad_tlp, dokrad_email, idtele, nip, username, password)
+		VALUES 
+		('$dokradid', '$dokrad_name', '$dokrad_lastname', '$dokrad_sex', '$dokrad_tlp', '$dokrad_email', '$idtele', '$nip', '$username', '$password_hash')"
+	);
+	mysqli_query(
+		$conn,
+		"INSERT INTO xray_login (username, password, level, date)
+		VALUES ('$username', '$password_hash', 'radiology', NOW())"
+	);
 
 	return mysqli_affected_rows($conn);
 }
 
 //untuk menghapus
-function hapus_rad($dokradid, $id_table)
+function delete_dokter_radiology($pk, $id_table)
 {
 	global $conn;
-	mysqli_query($conn, "DELETE FROM xray_dokter_radiology WHERE dokradid = $dokradid");
-	mysqli_query($conn, "DELETE FROM xray_login WHERE id_table = $id_table");
+	mysqli_query($conn, "DELETE FROM xray_dokter_radiology WHERE pk = '$pk'");
+	mysqli_query($conn, "DELETE FROM xray_login WHERE id_table = '$id_table'");
 
 	return mysqli_affected_rows($conn);
 }
 
 
 //untuk mengubah / edit
-function ubah_rad($ubah_dokter_radiology)
+function update_dokter_radiology($value)
 {
 	global $conn;
-	$pk = $ubah_dokter_radiology["pk"];
-	$dokradid = $ubah_dokter_radiology["dokradid"];
-	$dokrad_name = $ubah_dokter_radiology["dokrad_name"];
-	$dokrad_lastname = $ubah_dokter_radiology["dokrad_lastname"];
-	$dokrad_sex = $ubah_dokter_radiology["dokrad_sex"];
-	$dokrad_tlp = $ubah_dokter_radiology["dokrad_tlp"];
-	$dokrad_email = $ubah_dokter_radiology["dokrad_email"];
 
-	// $name = $_FILES["file"]["name"];
-	// $file_tmp = $_FILES["file"]["tmp_name"];
-	// move_uploaded_file($file_tmp, '../image/' . $name);
+	$pk = $value["pk"];
+	$dokradid = $value["dokradid"];
+	$dokrad_name = $value["dokrad_name"];
+	$dokrad_lastname = $value["dokrad_lastname"];
+	@$dokrad_fullname = $dokrad_name . ' ' . $dokrad_lastname;
+	$dokrad_sex = $value["dokrad_sex"];
+	$dokrad_tlp = $value["dokrad_tlp"];
+	$dokrad_email = $value["dokrad_email"];
+	$nip = $value["nip"];
+	$idtele = $value["idtele"];
 
-	//query insert data
-	$query = "UPDATE xray_dokter_radiology SET 
-				dokradid = '$dokradid',
-				dokrad_name = '$dokrad_name',
-				dokrad_lastname ='$dokrad_lastname',
-				dokrad_sex = '$dokrad_sex',
-				dokrad_tlp = '$dokrad_tlp',
-				dokrad_email = '$dokrad_email'
-				WHERE pk = $pk
-	";
-
-	mysqli_query($conn, $query);
+	mysqli_query(
+		$conn,
+		"UPDATE xray_dokter_radiology SET 
+		dokradid = '$dokradid',
+		dokrad_name = '$dokrad_name',
+		dokrad_lastname = '$dokrad_lastname',
+		dokrad_sex = '$dokrad_sex',
+		dokrad_tlp = '$dokrad_tlp',
+		dokrad_email = '$dokrad_email',
+		nip = '$nip',
+		idtele = '$idtele'
+		WHERE pk = '$pk'"
+	);
 
 	return mysqli_affected_rows($conn);
 }
