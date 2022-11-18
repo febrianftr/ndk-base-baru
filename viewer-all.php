@@ -89,7 +89,7 @@ $ohif_large = '"class="button8 delete1" target="_blank"><img src="../image/smart
 $ohif_small = '"style="text-decoration:none;" class="ahref-edit" target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/eyegreen.svg" data-toggle="tooltip" title="Tab Viewer" style="width: 100%;"></span></a>';
 
 // OHIF TERBARU
-if ($_SERVER['SERVER_NAME'] == '103.111.207.70') {
+if ($_SERVER['SERVER_NAME'] == '202.150.157.78') {
     // jika menggunakan ip publik
     define('OHIFNEWFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="http://' . $_SERVER['SERVER_NAME'] . ':82/viewer?StudyInstanceUIDs=');
     define('OHIFNEWLAST', "$ohif_small");
@@ -105,7 +105,7 @@ if ($_SERVER['SERVER_NAME'] == '103.111.207.70') {
 }
 
 // OHIF LAMA
-if ($_SERVER['SERVER_NAME'] == '103.111.207.70') {
+if ($_SERVER['SERVER_NAME'] == '202.150.157.78') {
     // jika menggunakan ip publik
     // jika menggunakan ohif lama icon (small)
     define('OHIFOLDFIRST', '<a href="http://' . $_SERVER['SERVER_NAME'] . ':92/viewer/');
