@@ -41,7 +41,7 @@ if ($_SESSION['level'] == "admin") {
                         <div class="">
 
                             <div class="col-md-12 table-box" style="overflow-x:auto;">
-                                <a class="ahref" href="new_dokter_radiographer.php"><i class="fas fa-plus"></i> <?= $lang['list_radiographer'] ?></a>
+                                <a class="ahref" href="new_radiographer.php"><i class="fas fa-plus"></i> <?= $lang['list_radiographer'] ?></a>
                                 <br><br>
                                 <table class="table-paginate table-dicom" border="1" cellpadding="8" cellspacing="0">
                                     <thead>
@@ -65,8 +65,8 @@ if ($_SESSION['level'] == "admin") {
                                             <td><?= $row["radiographer_email"]; ?></td>
                                             <td><?= $row["username"]; ?></td>
                                             <td>
-                                                <a href="update_dokter_radiographer.php?radiographer_id=<?= $row["radiographer_id"]; ?>"><img data-toggle="tooltip" title="Edit" class="iconbutton" src="../image/edit.png"></a>
-                                                <a href="delete_dokter_radiographer.php?radiographer_id=<?= $row["radiographer_id"]; ?>&amp;id_table=<?= $row['id_table']; ?>" onclick="return confirm('Teruskan Menghapus Data?');"><img data-toggle="tooltip" title="Hapus" class="iconbutton" src="../image/delete.png"></a>
+                                                <a href="update_radiographer.php?radiographer_id=<?= $row["radiographer_id"]; ?>"><img data-toggle="tooltip" title="Edit" class="iconbutton" src="../image/edit.png"></a>
+                                                <a href="delete_radiographer.php?radiographer_id=<?= $row["radiographer_id"]; ?>&amp;id_table=<?= $row['id_table']; ?>" onclick="return confirm('Teruskan Menghapus Data?');"><img data-toggle="tooltip" title="Hapus" class="iconbutton" src="../image/delete.png"></a>
                                             </td>
                                         </tr>
                                         <?php $i++; ?>

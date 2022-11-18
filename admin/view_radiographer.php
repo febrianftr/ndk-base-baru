@@ -2,11 +2,12 @@
 require 'function_dokter.php';
 session_start();
 
-$data_dokter = mysqli_query($conn, "SELECT *
-									FROM xray_radiographer
-									INNER JOIN xray_login
-									ON xray_radiographer.username = xray_login.username
-									");
+$data_dokter = mysqli_query(
+	$conn,
+	"SELECT *
+	FROM xray_radiographer
+	"
+);
 if ($_SESSION['level'] == "admin") {
 ?>
 	<!DOCTYPE html>
@@ -23,7 +24,7 @@ if ($_SESSION['level'] == "admin") {
 			<ol class="breadcrumb1 breadcrumb">
 				<li class="breadcrumb-item"><a href="index.php"><?= $lang['home'] ?></a></li>
 				<li class="breadcrumb-item"><a href="administrator.php"><?= $lang['administrator'] ?></a></li>
-				<li class="breadcrumb-item active" aria-current="page">Tabel Dokter Radiographer</li>
+				<li class="breadcrumb-item active" aria-current="page">List Radiographer</li>
 				<li style="float: right;">
 					<label>Zoom</label>
 					<a href="#" id="decfont"><i class="fas fa-minus-circle"></i></a>
@@ -41,36 +42,38 @@ if ($_SESSION['level'] == "admin") {
 						<div class="">
 
 							<div class="col-md-12 table-box" style="overflow-x:auto;">
-								<a class="ahref" href="new_dokter_radiographer.php"><i class="fas fa-plus"></i> <?= $lang['list_radiographer'] ?></a>
+								<a class="ahref" href="new_radiographer.php"><i class="fas fa-plus"></i> <?= $lang['new_radiographer'] ?></a>
 								<br><br>
 								<table class="table-paginate table-dicom" border="1" cellpadding="8" cellspacing="0">
 									<thead>
 										<tr>
 											<th>No</th>
+											<th>Radiographer ID</th>
 											<th><?= $lang['name_radiographer'] ?></th>
 											<th><?= $lang['sex'] ?></th>
 											<th><?= $lang['no_telp'] ?></th>
 											<th>Email</th>
-											<th>Username</th>
+											<!-- <th>Username</th> -->
 											<th><?= $lang['action'] ?></th>
 										</tr>
 									</thead>
 									<?php $i = 1; ?>
-									<?php foreach ($data_dokter as $row) : ?>
+									<?php foreach ($data_dokter as $row) { ?>
 										<tr>
 											<td><?= $i ?></td>
+											<td><?= $row["radiographer_id"]; ?></td>
 											<td><?= $row["radiographer_name"] . " " . $row["radiographer_lastname"]; ?></td>
 											<td><?= $row["radiographer_sex"]; ?></td>
 											<td><?= $row["radiographer_tlp"]; ?></td>
 											<td><?= $row["radiographer_email"]; ?></td>
-											<td><?= $row["username"]; ?></td>
+											<!-- <td><?= $row["username"]; ?></td> -->
 											<td>
-												<a href="update_dokter_radiographer.php?radiographer_id=<?= $row["radiographer_id"]; ?>"><img data-toggle="tooltip" title="Edit" class="iconbutton" src="../image/edit.png"></a>
-												<a href="delete_dokter_radiographer.php?radiographer_id=<?= $row["radiographer_id"]; ?>&amp;id_table=<?= $row['id_table']; ?>" onclick="return confirm('Teruskan Menghapus Data?');"><img data-toggle="tooltip" title="Hapus" class="iconbutton" src="../image/delete.png"></a>
+												<a href="update_radiographer.php?pk=<?= $row["pk"]; ?>"><img data-toggle="tooltip" title="Edit" class="iconbutton" src="../image/edit.png"></a>
+												<a href="delete_radiographer.php?pk=<?= $row["pk"]; ?>" onclick="return confirm('Teruskan Menghapus Data?');"><img data-toggle="tooltip" title="Hapus" class="iconbutton" src="../image/delete.png"></a>
 											</td>
 										</tr>
 										<?php $i++; ?>
-									<?php endforeach; ?>
+									<?php }; ?>
 								</table>
 							</div>
 						</div>

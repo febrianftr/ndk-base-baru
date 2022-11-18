@@ -2,23 +2,23 @@
 require 'function_dokter.php';
 session_start();
 
-//ambil data di url
-$radiographer_id = $_GET["radiographer_id"];
-$dktr = query("SELECT * FROM xray_radiographer WHERE radiographer_id=$radiographer_id")[0];
+$pk = $_GET["pk"];
+$radiographer = mysqli_fetch_assoc(mysqli_query(
+	$conn,
+	"SELECT * FROM xray_radiographer WHERE pk = '$pk'"
+));
+
 if (isset($_POST["submit"])) {
-	if (ubah_grapher($_POST) > 0) {
-		echo "
-<script>
-	alert('Data Berhasil diubah');
-	document.location.href= 'view_dokter_radiographer.php';
-</script>
-";
+	if (update_radiographer($_POST) > 0) {
+		echo "<script>
+				alert('Berhasil diubah!');
+				document.location.href= 'view_radiographer.php';
+			</script>";
 	} else {
-		echo "
-<script>
-	alert('Data Gagal diubah');
-	document.location.href= 'update_dokter_radiographer.php';
-</script>";
+		echo "<script>
+				alert('Gagal diubah!');
+				document.location.href= 'update_radiographer.php?pk=$pk';
+			</script>";
 	}
 }
 if ($_SESSION['level'] == "admin") {
@@ -27,7 +27,7 @@ if ($_SESSION['level'] == "admin") {
 	<html>
 
 	<head>
-		<title>Ubah Data Dokter</title>
+		<title>Ubah Data Radiographer</title>
 		<?php include('head.php'); ?>
 	</head>
 
@@ -37,8 +37,8 @@ if ($_SESSION['level'] == "admin") {
 			<ol class="breadcrumb1 breadcrumb">
 				<li class="breadcrumb-item"><a href="index.php">Home</a></li>
 				<li class="breadcrumb-item"><a href="administrator.php">Administrator</a></li>
-				<li class="breadcrumb-item"><a href="view_dokter_radiographer.php">Tabel Dokter Radiographer</a></li>
-				<li class="breadcrumb-item active" aria-current="page">Edit Data Dokter Radiographer</li>
+				<li class="breadcrumb-item"><a href="view_radiographer.php">Tabel Radiographer</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Edit Data Radiographer</li>
 				<li style="float: right;">
 					<label>Zoom</label>
 					<a href="#" id="decfont"><i class="fas fa-minus-circle"></i></a>
@@ -50,48 +50,50 @@ if ($_SESSION['level'] == "admin") {
 		<div id="container1">
 			<div id="content1">
 				<div class="body">
-					<h1>Ubah Data Dokter</h1>
+					<h1>Ubah Data Radiographer</h1>
 					<div class="container-fluid">
 						<div class="row form-dokter">
 							<form action="" method="post">
-								<input type="hidden" name="radiographer_id" value="<?= $dktr["radiographer_id"]; ?>">
+								<input type="hidden" name="pk" value="<?= $radiographer["pk"]; ?>">
 								<ul>
 									<li>
+										<label for="radiographer_id"><b>Radiographer ID</b></label><br>
+										<input type="text" name="radiographer_id" id="radiographer_id" required value="<?= $radiographer["radiographer_id"]; ?>">
+									</li>
+									<li>
 										<label for="radiographer_name"><b>Nama Depan</b></label><br>
-										<input type="text" name="radiographer_name" id="radiographer_name" required value="<?= $dktr["radiographer_name"]; ?>">
+										<input type="text" name="radiographer_name" id="radiographer_name" required value="<?= $radiographer["radiographer_name"]; ?>">
 									</li>
 									<li>
 										<label for="radiographer_lastname"><b>Nama Belakang</b></label><br>
-										<input type="text" name="radiographer_lastname" id="radiographer_lastname" value="<?= $dktr["radiographer_lastname"]; ?>">
+										<input type="text" name="radiographer_lastname" id="radiographer_lastname" value="<?= $radiographer["radiographer_lastname"]; ?>">
 									</li>
 									<label for="radiographer_sex"><b>Jenis Kelamin</b></label><br>
 									<label class="radio-admin">
-										<input type="radio" name="radiographer_sex" <?php if ($dktr["radiographer_sex"] == 'Laki-Laki') {
+										<input type="radio" name="radiographer_sex" <?php if ($radiographer["radiographer_sex"] == 'Laki-Laki') {
 																						echo 'checked';
 																					} ?> value="Laki-Laki" required> Laki - laki
 										<span class="checkmark"></span>
 									</label><br>
 									<label class="radio-admin">
-										<input type="radio" name="radiographer_sex" <?php if ($dktr["radiographer_sex"] == 'Perempuan') {
+										<input type="radio" name="radiographer_sex" <?php if ($radiographer["radiographer_sex"] == 'Perempuan') {
 																						echo 'checked';
 																					} ?> value="Perempuan" required> Perempuan
 										<span class="checkmark"></span>
 									</label><br>
 									<label class="radio-admin">
-										<input type="radio" name="radiographer_sex" <?php if ($dktr["radiographer_sex"] == 'Other') {
+										<input type="radio" name="radiographer_sex" <?php if ($radiographer["radiographer_sex"] == 'Other') {
 																						echo 'checked';
 																					} ?> value="Other" required> Other
 										<span class="checkmark"></span>
 									</label>
-									<!-- 	<input type="radio" name="radiographer_sex"	value="Laki-Laki" required>laki-laki</input>
-						<input type="radio" name="radiographer_sex" value="Perempuan" required>perempuan</input> --><br>
 									<li><br>
 										<label for="radiographer_tlp"><b>Masukan telepon</b></label><br>
-										<input type="text" name="radiographer_tlp" id="radiographer_tlp" required value="<?= $dktr["radiographer_tlp"]; ?>">
+										<input type="text" name="radiographer_tlp" id="radiographer_tlp" required value="<?= $radiographer["radiographer_tlp"]; ?>">
 									</li>
 									<li><br>
 										<label for="radiographer_email"><b>Masukan email</b></label><br>
-										<input type="text" name="radiographer_email" id="radiographer_email" required value="<?= $dktr["radiographer_email"]; ?>">
+										<input type="text" name="radiographer_email" id="radiographer_email" required value="<?= $radiographer["radiographer_email"]; ?>">
 									</li>
 									<li>
 										<button class="button1" type="submit" name="submit">Ubah Data</button>

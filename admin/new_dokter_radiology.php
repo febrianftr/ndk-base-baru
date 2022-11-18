@@ -16,10 +16,17 @@ if (isset($_POST["submit"])) {
 		echo "<script>alert('Format Email salah');</script>";
 	} else {
 		if ($password == $passwordulang) {
-			new_dokter_radiology($_POST);
-			echo "<script>alert('Data berhasil dimasukkan');
-			document.location.href='view_dokter_radiology.php';
-			</script>";
+			if (new_dokter_radiology($_POST) > 0) {
+				echo "<script>
+						alert('Berhasil dimasukkan');
+						document.location.href='view_dokter_radiology.php';
+					</script>";
+			} else {
+				echo "<script>
+						alert('Gagal dimasukkan');
+						document.location.href= 'view_dokter_radiology.php';
+					</script>";
+			};
 		} else {
 			echo "<script>alert('password tidak sama');</script>";
 		}

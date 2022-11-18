@@ -201,83 +201,61 @@ function ubah_radprofile($ubah_img)
 
 ///////DOKTER RADIOGRAPHER///////////////////////////////////////////////////////////////
 
-//untuk insert atau menambahkan
-function tambah_grapher($post_dokter_radiographer)
+function new_radiographer($value)
 {
 	global $conn;
-	$radiographer_name = $post_dokter_radiographer["radiographer_name"];
-	$radiographer_lastname = $post_dokter_radiographer["radiographer_lastname"];
-	$radiographer_sex = $post_dokter_radiographer["radiographer_sex"];
 
-	$kodearea = $post_dokter_radiographer["kodearea"];
-	$telp = $post_dokter_radiographer["radiographer_tlp"];
-	$telpdoang = ltrim($telp, "0");
-	$radiographer_tlp = $kodearea . '' . $telpdoang;
+	$radiographer_id = $value["radiographer_id"];
+	$radiographer_name = $value["radiographer_name"];
+	$radiographer_lastname = $value["radiographer_lastname"];
+	$radiographer_sex = $value["radiographer_sex"];
+	$radiographer_tlp = $value["radiographer_tlp"];
+	$radiographer_email = $value["radiographer_email"];
 
-	$radiographer_email = $post_dokter_radiographer["radiographer_email"];
-	$username = $post_dokter_radiographer["username"];
-	$password = $post_dokter_radiographer["password"];
-	$password_hash = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
-
-	$q4 = mysqli_query($conn, 'SELECT MAX(radiographer_id) as user_id4 from xray_radiographer');
-	$row4 = mysqli_fetch_assoc($q4);
-	$ai44 = $row4['user_id4'] + 1;
-
-	$q4 = mysqli_query($conn, 'SELECT MAX(id_table) as user_id4 from xray_login');
-	$row4 = mysqli_fetch_assoc($q4);
-	$ai4 = $row4['user_id4'] + 1;
-
-
-
-	//query insert data
-	$query = "INSERT INTO xray_radiographer
-				VALUES 
-				('$ai44', '$radiographer_name', '$radiographer_lastname', '$radiographer_sex', '$radiographer_tlp', '$username','$radiographer_email','$password_hash')
-				";
-	$query_login = "INSERT INTO xray_login
-				VALUES 
-				('$ai4', '$username', '$password_hash','radiographer', NOW(), '')
-				";
-	mysqli_query($conn, $query);
-	mysqli_query($conn, $query_login);
+	mysqli_query(
+		$conn,
+		"INSERT INTO xray_radiographer (radiographer_id, radiographer_name, radiographer_lastname, radiographer_sex, radiographer_tlp, radiographer_email)
+		VALUES ('$radiographer_id', '$radiographer_name', '$radiographer_lastname', '$radiographer_sex', '$radiographer_tlp', '$radiographer_email')
+	"
+	);
 
 	return mysqli_affected_rows($conn);
 }
 
 //untuk menghapus
-function hapus_grapher($radiographer_id, $id_table)
+function delete_radiographer($pk)
 {
 	global $conn;
-	mysqli_query($conn, "DELETE FROM xray_radiographer WHERE radiographer_id = $radiographer_id");
-	mysqli_query($conn, "DELETE FROM xray_login WHERE id_table = $id_table");
+	mysqli_query(
+		$conn,
+		"DELETE FROM xray_radiographer 
+		WHERE pk = '$pk'"
+	);
 
 	return mysqli_affected_rows($conn);
 }
 
 
 //untuk mengubah / edit
-function ubah_grapher($ubah_dokter_radiographer)
+function update_radiographer($value)
 {
 	global $conn;
-	$radiographer_id = $ubah_dokter_radiographer["radiographer_id"];
-	$radiographer_name = $ubah_dokter_radiographer["radiographer_name"];
-	$radiographer_lastname = $ubah_dokter_radiographer["radiographer_lastname"];
-	$radiographer_sex = $ubah_dokter_radiographer["radiographer_sex"];
-	$radiographer_tlp = $ubah_dokter_radiographer["radiographer_tlp"];
-	$radiographer_email = $ubah_dokter_radiographer["radiographer_email"];
+	$pk = $value["pk"];
+	$radiographer_id = $value["radiographer_id"];
+	$radiographer_name = $value["radiographer_name"];
+	$radiographer_lastname = $value["radiographer_lastname"];
+	$radiographer_sex = $value["radiographer_sex"];
+	$radiographer_tlp = $value["radiographer_tlp"];
+	$radiographer_email = $value["radiographer_email"];
 
-
-	//query insert data
-	$query = "UPDATE xray_radiographer SET 
-				radiographer_name = '$radiographer_name',
-				radiographer_lastname ='$radiographer_lastname',
-				radiographer_sex = '$radiographer_sex',
-				radiographer_tlp = '$radiographer_tlp',
-				radiographer_email = '$radiographer_email'
-				WHERE radiographer_id = $radiographer_id
-	";
-
-	mysqli_query($conn, $query);
+	mysqli_query($conn, "UPDATE xray_radiographer SET 
+	radiographer_id = '$radiographer_id',
+	radiographer_name = '$radiographer_name',
+	radiographer_lastname ='$radiographer_lastname',
+	radiographer_sex = '$radiographer_sex',
+	radiographer_tlp = '$radiographer_tlp',
+	radiographer_email = '$radiographer_email'
+	WHERE pk = '$pk'");
 
 	return mysqli_affected_rows($conn);
 }

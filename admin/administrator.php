@@ -52,8 +52,8 @@ if ($_SESSION['level'] == "admin") {
 
 							<div class="col-sm-2">
 								<h4 class="h4">Radiographer</h4>
-								<li class="li-adm"><a href="new_dokter_radiographer.php"><i class="fas fa-plus-square"></i> <?= $lang['add'] ?></a></li>
-								<li class="li-adm"><a href="view_dokter_radiographer.php"><i class="fas fa-paper-plane"></i> <?= $lang['view'] ?></a></li>
+								<li class="li-adm"><a href="new_radiographer.php"><i class="fas fa-plus-square"></i> <?= $lang['add'] ?></a></li>
+								<li class="li-adm"><a href="view_radiographer.php"><i class="fas fa-paper-plane"></i> <?= $lang['view'] ?></a></li>
 							</div>
 
 							<div class="col-sm-2">
