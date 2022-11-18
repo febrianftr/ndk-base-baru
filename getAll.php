@@ -136,7 +136,7 @@ while ($row = mysqli_fetch_array($query)) {
     } else {
         $aksi = PDFFIRST . $study_iuid . PDFLAST .
             RADIANTFIRST . $study_iuid . RADIANTLAST .
-            DICOMFIRST . $study_iuid . DICOMLAST;
+            HTMLFIRST . $study_iuid . HTMLLAST;
     }
 
     // kondisi jika prioriry normal dan CITO

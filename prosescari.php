@@ -181,8 +181,7 @@ while ($row = mysqli_fetch_array($result)) {
       TELEGRAMSIGNATUREFIRST . $study_iuid . TELEGRAMSIGNATURELAST;
     // ketika login radiographer
   } else if ($level == 'radiographer') {
-    $level =  RADIANTFIRST . $study_iuid . RADIANTLAST .
-      HTMLFIRST . $study_iuid . HTMLLAST .
+    $level = HTMLFIRST . $study_iuid . HTMLLAST .
       OHIFMOBILEFIRST . $study_iuid . OHIFMOBILELAST;
     // kondisi ketika xray_workload masuk dari trigger
     if ($status != '-') {
