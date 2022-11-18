@@ -174,7 +174,7 @@ while ($row = mysqli_fetch_array($result)) {
     $level =
       RADIANTFIRST . $study_iuid . RADIANTLAST .
       HTMLFIRST . $study_iuid . HTMLLAST .
-      OHIFMOBILEFIRST . $study_iuid . OHIFMOBILELAST .
+      OHIFFIRST . $study_iuid . OHIFLAST .
       CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workload_status . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
       EDITWORKLOADFIRST . $study_iuid . EDITWORKLOADLAST .
       TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST .
@@ -186,7 +186,7 @@ while ($row = mysqli_fetch_array($result)) {
       $level = EDITPASIENFIRST . $study_iuid . EDITPASIENLAST .
         CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workload_status . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
         HTMLFIRST . $study_iuid . HTMLLAST .
-        OHIFMOBILEFIRST . $study_iuid . OHIFMOBILELAST .
+        OHIFFIRST . $study_iuid . OHIFLAST .
         TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST;
       // DELETEFIRST . $study_iuid . DELETELAST;
     } else {

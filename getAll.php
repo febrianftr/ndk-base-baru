@@ -135,7 +135,7 @@ while ($row = mysqli_fetch_array($query)) {
         }
     } else {
         $aksi = PDFFIRST . $study_iuid . PDFLAST .
-            RADIANTFIRST . $study_iuid . RADIANTLAST .
+            OHIFFIRST . $study_iuid . OHIFLAST .
             HTMLFIRST . $study_iuid . HTMLLAST;
     }
 

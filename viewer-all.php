@@ -47,7 +47,7 @@ define('RADIANTLAST', '%22" "target="_blank"><span class="btn rgba-stylish-sligh
 
 // HOROS
 define('HOROSFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="Horos://?methodName=retrieve&serverName=INTIWID&then=open&retrieveOnlyIfNeeded=yes&filterKey=StudyInstanceUID&filterValue=');
-define('HOROSLAST', '"target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/horos.svg" data-toggle="tooltip" title="Radiant Viewer" style="width: 100%;"></span></a>');
+define('HOROSLAST', '"target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/horos.png" data-toggle="tooltip" title="Radiant Viewer" style="width: 100%;"></span></a>');
 
 //ipiview
 define('IPIVIEWFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="http://192.168.10.144:8089/ipiview/ipiview/html/start.html?StudyInstanceUID=');
@@ -108,4 +108,4 @@ define('HTMLWORKLISTLAST', '" class="button8 delete1" target="_blank"><img src="
 define('RADIANTWORKLISTFIRST', '<a href="radiant://?n=paet&v=dcmPACS&n=pstv&v=0020000D&v=%22');
 define('RADIANTWORKLISTLAST', '%22" class="button8 delete1"><img src="../image/radiAnt.png" style="width: 50px;"><br><span> Radiant</span></a>');
 define('HOROSWORKLISTFIRST', '<a href="Horos://?methodName=retrieve&serverName=INTIWID&then=open&retrieveOnlyIfNeeded=yes&filterKey=StudyInstanceUID&filterValue=');
-define('HOROSWORKLISTLAST', '"class="button8 delete1"><img src="../image/horos.svg" style="width: 50px;"><br><span> Radiant</span></a>');
+define('HOROSWORKLISTLAST', '"class="button8 delete1"><img src="../image/horos.png" style="width: 50px;"><br><span> Horos Viewer</span></a>');
