@@ -5,11 +5,11 @@ session_start();
 
 $pk = $_GET["pk"];
 
-if (delete_aetitle($pk) > 0) {
+if (delete_ae($pk) > 0) {
 	echo "<script type='text/javascript'>
 	setTimeout(function () { 
 	swal({
-			   title: 'Data Berhasil Dihapus',
+			   title: 'Berhasil Dihapus!',
 			   text:  '',
 			   icon: 'success',
 			   timer: 1000,
@@ -17,14 +17,14 @@ if (delete_aetitle($pk) > 0) {
 		   });  
 	},10); 
 	window.setTimeout(function(){ 
-	 window.location.replace('view_aetitle.php');
+	 window.location.replace('view_ae.php');
 	} ,1000); 
    </script>";
 } else {
 	echo "<script type='text/javascript'>
 	setTimeout(function () { 
 	swal({
-			   title: 'Data Gagal Dihapus',
+			   title: 'Gagal Dihapus!',
 			   text:  '',
 			   icon: 'error',
 			   timer: 1000,
@@ -32,7 +32,7 @@ if (delete_aetitle($pk) > 0) {
 		   });  
 	},10); 
 	window.setTimeout(function(){ 
-	 window.location.replace('view_aetitle.php');
+	 window.location.replace('view_ae.php');
 	} ,1000); 
    </script>";
 }

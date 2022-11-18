@@ -653,42 +653,50 @@ function berita($post_berita)
 
 //////////////////////// end of berita //////////////////////////////////////////////////////////////////////
 
-function aetitlepost($aetitlepost2)
+function new_ae($value)
 {
-	global $conn_pacs;
-	$aetitle = $aetitlepost2['aetitle'];
-	$ip = $aetitlepost2['ip'];
-	$port = $aetitlepost2['port'];
-	$color = $aetitlepost2['color'];
+	global $conn_pacsio;
+	$aetitle = $value['aetitle'];
+	$ip = $value['ip'];
+	$port = $value['port'];
+	// $color = $value['color'];
 
-	$query = "INSERT INTO ae (aet, hostname, port, installed, color) VALUES ('$aetitle', '$ip', '$port', 1, '$color')";
-	mysqli_query($conn_pacs, $query);
+	mysqli_query(
+		$conn_pacsio,
+		"INSERT INTO ae (aet, hostname, port, installed) 
+		VALUES ('$aetitle', '$ip', '$port', 1)"
+	);
 
-	return mysqli_affected_rows($conn_pacs);
+	return mysqli_affected_rows($conn_pacsio);
 }
 
-function update_aetitle($updated_aetitle2)
+function update_ae($value)
 {
-	global $conn_pacs;
-	$pk = $updated_aetitle2['pk'];
-	$aetitle = $updated_aetitle2['aetitle'];
-	$ip = $updated_aetitle2['ip'];
-	$port = $updated_aetitle2['port'];
-	$color = $updated_aetitle2['color'];
+	global $conn_pacsio;
+	$pk = $value['pk'];
+	$aetitle = $value['aetitle'];
+	$ip = $value['ip'];
+	$port = $value['port'];
+	// $color = $value['color'];
 
-	mysqli_query($conn_pacs, "UPDATE ae SET 
-				aet = '$aetitle',
-				hostname = '$ip',
-				port = '$port',
-				color = '$color'
-				WHERE pk = '$pk'
-	");
-	return mysqli_affected_rows($conn_pacs);
+	mysqli_query(
+		$conn_pacsio,
+		"UPDATE ae SET 
+		aet = '$aetitle',
+		hostname = '$ip',
+		port = '$port'
+		WHERE pk = '$pk'
+	"
+	);
+	return mysqli_affected_rows($conn_pacsio);
 }
 
-function delete_aetitle($pk)
+function delete_ae($pk)
 {
-	global $conn_pacs;
-	mysqli_query($conn_pacs, "DELETE FROM ae WHERE pk = '$pk' ");
-	return mysqli_affected_rows($conn_pacs);
+	global $conn_pacsio;
+	mysqli_query(
+		$conn_pacsio,
+		"DELETE FROM ae WHERE pk = '$pk'"
+	);
+	return mysqli_affected_rows($conn_pacsio);
 }

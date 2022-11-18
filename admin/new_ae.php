@@ -5,11 +5,11 @@ session_start();
 
 if (isset($_POST["submit"])) {
     if ($_POST['passwordconfirm'] == "27102108") {
-        if (aetitlepost($_POST) > 0) {
+        if (new_ae($_POST) > 0) {
             echo "<script type='text/javascript'>
             setTimeout(function () { 
             swal({
-                       title: 'Data Berhasil Diinput',
+                       title: 'Berhasil Diinput!',
                        text:  '',
                        icon: 'success',
                        timer: 1000,
@@ -17,14 +17,14 @@ if (isset($_POST["submit"])) {
                    });  
             },10); 
             window.setTimeout(function(){ 
-             window.location.replace('view_aetitle.php');
+             window.location.replace('view_ae.php');
             } ,1000); 
            </script>";
         } else {
             echo "<script type='text/javascript'>
             setTimeout(function () { 
             swal({
-                       title: 'Data Gagal Diinput',
+                       title: 'Gagal Diinput!',
                        text:  '',
                        icon: 'error',
                        timer: 1000,
@@ -32,7 +32,7 @@ if (isset($_POST["submit"])) {
                    });  
             },10); 
             window.setTimeout(function(){ 
-             window.location.replace('aetitle.php');
+             window.location.replace('new_ae.php');
             } ,1000); 
            </script>";
         }
@@ -48,7 +48,7 @@ if (isset($_POST["submit"])) {
                });  
         },10); 
         window.setTimeout(function(){ 
-         window.location.replace('aetitle.php');
+         window.location.replace('new_ae.php');
         } ,1000); 
        </script>";
     }
@@ -80,7 +80,7 @@ if ($_SESSION['level'] == "admin") {
                     <h1 style="color: #ee7423"><?= $lang['add_aetitle'] ?></h1>
                     <div class="container">
                         <div class="row">
-                            <a class="ahref" href="view_aetitle.php"><i class="fas fa-eye"></i><?= $lang['view_aetitle'] ?></a>
+                            <a class="ahref" href="view_ae.php"><i class="fas fa-eye"></i><?= $lang['view_aetitle'] ?></a>
                             <br><br>
                         </div>
                     </div>
@@ -96,8 +96,8 @@ if ($_SESSION['level'] == "admin") {
                                     <input class="form-control" type="text" name="ip" required><br />
                                     <label for="port">PORT</label>
                                     <input class="form-control" type="text" name="port" required><br />
-                                    <label for="color">COLOR</label>
-                                    <input class="form-control" type="color" name="color" required><br />
+                                    <!-- <label for="color">COLOR</label>
+                                    <input class="form-control" type="color" name="color" required><br /> -->
                                     <label for="port">Password Confirm</label>
                                     <input class="form-control" type="password" name="passwordconfirm" required><br />
                                     <input type="submit" class="btn btn-success" name="submit" value="SAVE" style="margin: 0px; font-size: 12px; font-weight: bold;">

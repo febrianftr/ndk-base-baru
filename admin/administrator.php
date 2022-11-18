@@ -75,8 +75,8 @@ if ($_SESSION['level'] == "admin") {
 							</div>
 							<div class="col-sm-2">
 								<h4 class="h4">AET</h4>
-								<li class="li-adm"><a href="aetitle.php"><i class="fas fa-plus-square"></i> <?= $lang['add'] ?></a></li>
-								<li class="li-adm"><a href="view_aetitle.php"><i class="fas fa-paper-plane"></i> <?= $lang['view'] ?></a></li>
+								<li class="li-adm"><a href="new_ae.php"><i class="fas fa-plus-square"></i> <?= $lang['add'] ?></a></li>
+								<li class="li-adm"><a href="view_ae.php"><i class="fas fa-paper-plane"></i> <?= $lang['view'] ?></a></li>
 							</div>
 						</div>
 					</div>

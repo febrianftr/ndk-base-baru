@@ -159,10 +159,10 @@ if ($_SESSION['level'] == "radiographer") {
 
                       <div class="btn-group btn-group-justified" role="group" aria-label="...">
                         <div class="btn-group" role="group">
-                          <a style="text-decoration: none;" href="aetitle.php"><button type="button" class="btn btn-default"> Create AE-TITLE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></a>
+                          <a style="text-decoration: none;" href="new_ae.php"><button type="button" class="btn btn-default"> Create AE-TITLE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></a>
                         </div>
                         <div class="btn-group" role="group">
-                          <a style="text-decoration: none;" href="view_aetitle.php"><button type="button" class="btn btn-default"> View AE-TITLE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></a>
+                          <a style="text-decoration: none;" href="view_ae.php"><button type="button" class="btn btn-default"> View AE-TITLE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></a>
                         </div>
                       </div>
 

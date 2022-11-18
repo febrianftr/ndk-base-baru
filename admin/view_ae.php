@@ -6,7 +6,10 @@ session_start();
 
 $username = $_SESSION['username'];
 
-$result = mysqli_query($conn_pacs, "SELECT * FROM ae WHERE NOT pk = 1");
+$result = mysqli_query(
+    $conn_pacsio,
+    "SELECT * FROM ae"
+);
 
 if ($_SESSION['level'] == "admin") {
 ?>
@@ -32,7 +35,7 @@ if ($_SESSION['level'] == "admin") {
             <div id="content1">
                 <div class="container-fluid">
                     <h1 style="color: #ee7423"><?= $lang['data_aetitle'] ?></h1>
-                    <a class="ahref" href="aetitle.php"><i class="fas fa-plus"></i><?= $lang['add_aetitle'] ?></a>
+                    <a class="ahref" href="new_ae.php"><i class="fas fa-plus"></i><?= $lang['add_aetitle'] ?></a>
                     <br><br>
                     <div class="about-inti table-box">
                         <table class="table-dicom table-paginate" style="margin-top: 0px;" border="1" cellpadding="8" cellspacing="0">
@@ -42,28 +45,23 @@ if ($_SESSION['level'] == "admin") {
                                     <th>AE Title</th>
                                     <th>IP</th>
                                     <th>PORT</th>
-                                    <th>COLOR</th>
                                     <th>ACTION</th>
                                 </tr>
                             </thead>
                             <?php $i = 1; ?>
-                            <?php while ($row = mysqli_fetch_assoc($result)) {
-
-                            ?>
+                            <?php while ($row = mysqli_fetch_assoc($result)) { ?>
                                 <tr>
                                     <td><?= $i; ?></td>
                                     <td><?= $row['aet']; ?></td>
                                     <td><?= $row['hostname']; ?></td>
                                     <td><?= $row['port']; ?></td>
-                                    <td><?= $row['color']; ?></td>
                                     <td>
-                                        <a href="update_aetitle.php?pk= <?= $row["pk"]; ?>"><img data-toggle="tooltip" title="Edit" class="iconbutton" src="../image/edit.png" style="height: 20px;"></a>
-                                        <a href="delete_aetitle.php?pk=<?= $row["pk"]; ?>" class="tombol-hapus"><img style="height: 20px;" data-toggle="tooltip" title="Hapus" class="iconbutton" src="../image/delete.png"></a>
+                                        <a href="update_ae.php?pk= <?= $row["pk"]; ?>"><img data-toggle="tooltip" title="Edit" class="iconbutton" src="../image/edit.png" style="height: 20px;"></a>
+                                        <a href="delete_ae.php?pk=<?= $row["pk"]; ?>" class="tombol-hapus"><img style="height: 20px;" data-toggle="tooltip" title="Hapus" class="iconbutton" src="../image/delete.png"></a>
                                     </td>
                                 </tr>
                                 <?php $i++; ?>
-                            <?php }
-                            ?>
+                            <?php } ?>
                         </table>
                     </div>
                 </div>
@@ -86,8 +84,8 @@ if ($_SESSION['level'] == "admin") {
                     e.preventDefault();
                     const href = $(this).attr('href');
                     swal({
-                            title: "Apakah kamu yakin ?",
-                            text: "Kamu ingin menghapus data?",
+                            title: "Hapus",
+                            text: "Yakin ingin menghapus?",
                             icon: "warning",
                             buttons: true,
                             dangerMode: true,

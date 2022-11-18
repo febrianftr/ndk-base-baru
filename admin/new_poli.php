@@ -23,7 +23,7 @@
             });
         }, 10);
         window.setTimeout(function() {
-            window.location.replace('view_aetitle.php');
+            window.location.replace('view_ae.php');
         }, 3000);
     }
 </script>

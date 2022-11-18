@@ -729,7 +729,7 @@ function update_aetitle($updated_aetitle2)
 	return mysqli_affected_rows($conn_pacs);
 }
 
-function delete_aetitle($pk)
+function delete_ae($pk)
 {
 	global $conn_pacs;
 	mysqli_query($conn_pacs, "DELETE FROM ae WHERE pk = '$pk' ");

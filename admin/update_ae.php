@@ -1,18 +1,21 @@
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <?php
 require 'function_dokter.php';
 session_start();
-//ambil data di url
+
 $pk = $_GET["pk"];
-$result =  mysqli_query($conn_pacs, "SELECT * FROM ae WHERE pk = '$pk' ");
+$result =  mysqli_query(
+    $conn_pacsio,
+    "SELECT * FROM ae WHERE pk = '$pk' "
+);
+
 $row = mysqli_fetch_assoc($result);
 if (isset($_POST["submit"])) {
     if ($_POST['passwordconfirm'] == "27102108") {
-        if (update_aetitle($_POST) > 0) {
+        if (update_ae($_POST) > 0) {
             echo "<script type='text/javascript'>
             setTimeout(function () { 
             swal({
-                       title: 'Data Berhasil Diubah',
+                       title: 'Berhasil Diubah!',
                        text:  '',
                        icon: 'success',
                        timer: 1000,
@@ -20,14 +23,14 @@ if (isset($_POST["submit"])) {
                    });  
             },10); 
             window.setTimeout(function(){ 
-             window.location.replace('view_aetitle.php');
+             window.location.replace('view_ae.php');
             } ,1000); 
            </script>";
         } else {
             echo "<script type='text/javascript'>
             setTimeout(function () { 
             swal({
-                       title: 'Data Gagal Diinput',
+                       title: 'Gagal Diinput!',
                        text:  '',
                        icon: 'error',
                        timer: 1000,
@@ -35,7 +38,7 @@ if (isset($_POST["submit"])) {
                    });  
             },10); 
             window.setTimeout(function(){ 
-             window.location.replace('update_aetitle.php?pk=" . $pk . "');
+             window.location.replace('update_ae.php?pk=" . $pk . "');
             } ,1000); 
            </script>";
         }
@@ -51,7 +54,7 @@ if (isset($_POST["submit"])) {
             });  
      },10); 
         window.setTimeout(function(){ 
-         window.location.replace('update_aetitle.php?pk=" . $pk . "');
+         window.location.replace('update_ae.php?pk=" . $pk . "');
         } ,1000); 
        </script>";
     }
@@ -101,8 +104,8 @@ if ($_SESSION['level'] == "admin") {
 
                                 <label for="port"><b>PORT</b></label><br>
                                 <input class="form-control" type="text" name="port" id="port" required value="<?= $row["port"]; ?>">
-                                <label for="color"><b>COLOR</b></label><br>
-                                <input class="form-control" type="color" name="color" id="color" required value="<?= $row["color"]; ?>">
+                                <!-- <label for="color"><b>COLOR</b></label><br>
+                                <input class="form-control" type="color" name="color" id="color" required value="<?= $row["color"]; ?>"> -->
                                 <label for="password"><b>Password Confirm</b></label><br>
                                 <input class="form-control" type="password" name="passwordconfirm" required><br />
                                 <button class="btn-worklist" type="submit" name="submit">Save AE Title</button>
