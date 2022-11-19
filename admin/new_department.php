@@ -3,15 +3,35 @@ require 'function_dokter.php';
 session_start();
 if (isset($_POST["submit"])) {
 	if (new_departement($_POST) > 0) {
-		echo "<script>
-				alert('Berhasil ditambahkan!');
-				document.location.href= 'view_department.php';
-			</script>";
+		echo "<script type='text/javascript'>
+		setTimeout(function () { 
+		swal({
+				title: 'Berhasil Diinput!',
+				text:  '',
+				icon: 'success',
+				timer: 1000,
+				showConfirmButton: true
+			});  
+		},10); 
+		window.setTimeout(function(){ 
+		window.location.replace('view_department.php');
+		} ,1000); 
+	</script>";
 	} else {
-		echo "<script>
-				alert('Gagal ditambahkan!');
-				document.location.href= 'view_department.php';
-			</script>";
+		echo "<script type='text/javascript'>
+            setTimeout(function () { 
+            swal({
+                    title: 'Gagal Diinput!',
+                    text:  '',
+                    icon: 'error',
+                    timer: 1000,
+                    showConfirmButton: true
+                });  
+            },10); 
+            window.setTimeout(function(){ 
+            window.location.replace('view_department.php');
+            } ,1000); 
+        </script>";
 	}
 }
 if ($_SESSION['level'] == "admin") {
@@ -49,11 +69,11 @@ if ($_SESSION['level'] == "admin") {
 								<ul>
 									<li>
 										<label for="dep_id"><b>Department ID</b></label><br>
-										<input type="text" id="dep_id" name="dep_id" placeholder="ID Department..."><br>
+										<input type="text" id="dep_id" name="dep_id" placeholder="ID Department..." required><br>
 									</li>
 									<li>
 										<label for="name_dep"><b><?= $lang['departmen_name'] ?></b></label><br>
-										<input type="text" id="name_dep" name="name_dep" placeholder="Department.."><br>
+										<input type="text" id="name_dep" name="name_dep" placeholder="Department.." required><br>
 									</li>
 									<li>
 										<button class="button1" type="submit" name="submit"><?= $lang['add_data'] ?></button>

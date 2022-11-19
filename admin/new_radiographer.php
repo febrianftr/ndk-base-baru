@@ -11,18 +11,48 @@ if (isset($_POST["submit"])) {
 	$row = mysqli_fetch_assoc($result);
 	$cek = mysqli_num_rows($result);
 	if (!filter_var($radiographer_email, FILTER_VALIDATE_EMAIL)) {
-		echo "<script>alert('Format Email salah');</script>";
+		echo "<script type='text/javascript'>
+        setTimeout(function () { 
+        swal({
+                   title: 'Format Email Salah',
+                   text:  '',
+                   icon: 'error',
+                   timer: 1000,
+                   showConfirmButton: true
+               });  
+        },10); 
+       </script>";
 	} else {
 		if (new_radiographer($_POST) > 0) {
-			echo "<script>
-					alert('berhasil dimasukkan');
-					document.location.href='view_radiographer.php';
-				</script>";
+			echo "<script type='text/javascript'>
+            setTimeout(function () { 
+            swal({
+                    title: 'Berhasil Diinput!',
+                    text:  '',
+                    icon: 'success',
+                    timer: 1000,
+                    showConfirmButton: true
+                });  
+            },10); 
+            window.setTimeout(function(){ 
+            window.location.replace('view_radiographer.php');
+            } ,1000); 
+        </script>";
 		} else {
-			echo "<script>
-					alert('Gagal dimasukkan');
-					document.location.href= 'view_radiographer.php';
-				</script>";
+			echo "<script type='text/javascript'>
+            setTimeout(function () { 
+            swal({
+                    title: 'Gagal Diinput!',
+                    text:  '',
+                    icon: 'error',
+                    timer: 1000,
+                    showConfirmButton: true
+                });  
+            },10); 
+            window.setTimeout(function(){ 
+            window.location.replace('view_radiographer.php');
+            } ,1000); 
+        </script>";
 		}
 	}
 }

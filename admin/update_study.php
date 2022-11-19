@@ -12,15 +12,35 @@ $row = mysqli_fetch_assoc(mysqli_query(
 
 if (isset($_POST["submit"])) {
 	if (update_study($_POST) > 0) {
-		echo "<script>
-				alert('Data Berhasil diubah');
-				document.location.href= 'view_study.php';
-			</script>";
+		echo "<script type='text/javascript'>
+		setTimeout(function () { 
+		swal({
+				title: 'Berhasil Diinput!',
+				text:  '',
+				icon: 'success',
+				timer: 1000,
+				showConfirmButton: true
+			});  
+		},10); 
+		window.setTimeout(function(){ 
+		window.location.replace('view_study.php');
+		} ,1000); 
+	</script>";
 	} else {
-		echo "<script>
-				alert('Data Gagal diubah');
-				document.location.href= 'update_study.php?pk=$pk';
-			</script>";
+		echo "<script type='text/javascript'>
+            setTimeout(function () { 
+            swal({
+					title: 'Gagal Diinput!',
+					text:  '',
+					icon: 'error',
+					timer: 1000,
+					showConfirmButton: true
+				});  
+            },10); 
+            window.setTimeout(function(){ 
+            window.location.replace('update_study.php?pk=$pk');
+            } ,1000); 
+        </script>";
 	}
 }
 if ($_SESSION['level'] == "admin") {
@@ -60,7 +80,7 @@ if ($_SESSION['level'] == "admin") {
 								<div class="col-md-10 col-md-offset-1">
 									<input type="hidden" name="pk" value="<?= $row["pk"]; ?>">
 									<label for="type"><b><?= $lang['pro_type'] ?></b></label><br>
-									<select id="id_modality" name="id_modality">
+									<select id="id_modality" name="id_modality" required>
 										<option>---Select Modality---</option>
 										<?php
 										$result = mysqli_query($conn, "SELECT * FROM xray_modalitas ORDER BY xray_type_code ASC ");
@@ -69,9 +89,9 @@ if ($_SESSION['level'] == "admin") {
 										<?php } ?>
 									</select>
 									<label for="id_study"><b>ID Study</b></label><br>
-									<input type="text" id="id_study" name="id_study" value="<?= $row['id_study']; ?>" placeholder="Input ID Study Desc"><br>
+									<input type="text" id="id_study" name="id_study" value="<?= $row['id_study']; ?>" placeholder="Input ID Study Desc" required><br>
 									<label for="study"><b>Study Desc</b></label><br>
-									<input type="text" id="study" name="study" value="<?= $row['study']; ?>" placeholder="Input Study Desc"><br>
+									<input type="text" id="study" name="study" value="<?= $row['study']; ?>" placeholder="Input Study Desc" required><br>
 									<label for="harga"><b><?= $lang['price'] ?></b></label><br>
 									<input type="text" id="harga" name="harga" value="<?= $row['harga']; ?>" placeholder="<?= $lang['input_price'] ?>">
 									<button class="button button1" type="submit" name="submit"><?= $lang['add_data'] ?> </button>

@@ -4,15 +4,35 @@ session_start();
 
 if (isset($_POST["submit"])) {
 	if (new_dokter($_POST) > 0) {
-		echo "<script>
-			alert('Berhasil Ditambahkan!');
-			document.location.href='view_dokter.php';
-		</script>";
+		echo "<script type='text/javascript'>
+            setTimeout(function () { 
+            swal({
+					title: 'Berhasil Diinput!',
+					text:  '',
+					icon: 'success',
+					timer: 1000,
+					showConfirmButton: true
+				});  
+            },10); 
+            window.setTimeout(function(){ 
+            window.location.replace('view_dokter.php');
+            } ,1000); 
+        	</script>";
 	} else {
-		echo "<script>
-			alert('Gagal diubah');
-			document.location.href= 'view_dokter.php';
-		</script>";
+		echo "<script type='text/javascript'>
+            setTimeout(function () { 
+            swal({
+                    title: 'Gagal Diinput!',
+                    text:  '',
+                    icon: 'error',
+                    timer: 1000,
+                    showConfirmButton: true
+                });  
+            },10); 
+            window.setTimeout(function(){ 
+            window.location.replace('view_dokter.php');
+            } ,1000); 
+        </script>";
 	}
 }
 if ($_SESSION['level'] == "admin") {

@@ -4,7 +4,26 @@ require 'function_dokter.php';
 session_start();
 
 if (isset($_POST["submit"])) {
-    if ($_POST['passwordulang'] == $_POST['password']) {
+    $username = $_POST['username'];
+
+    $password = $_POST['password'];
+    $passwordulang = $_POST['passwordulang'];
+    $result = mysqli_query($conn, "SELECT * FROM xray_login WHERE username = '$username' ");
+    $row = mysqli_fetch_assoc($result);
+    $cek = mysqli_num_rows($result);
+    if ($cek > 0) {
+        echo "<script type='text/javascript'>
+		setTimeout(function () { 
+		swal({
+				title: 'username sudah ada',
+				text:  '',
+				icon: 'error',
+				timer: 1000,
+				showConfirmButton: true
+			});  
+		},10);
+	</script>";
+    } else if ($password == $passwordulang) {
         if (new_login($_POST) > 0) {
             echo "<script type='text/javascript'>
             setTimeout(function () { 

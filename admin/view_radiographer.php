@@ -69,7 +69,7 @@ if ($_SESSION['level'] == "admin") {
 											<!-- <td><?= $row["username"]; ?></td> -->
 											<td>
 												<a href="update_radiographer.php?pk=<?= $row["pk"]; ?>"><img data-toggle="tooltip" title="Edit" class="iconbutton" src="../image/edit.png"></a>
-												<a href="delete_radiographer.php?pk=<?= $row["pk"]; ?>" onclick="return confirm('Teruskan Menghapus Data?');"><img data-toggle="tooltip" title="Hapus" class="iconbutton" src="../image/delete.png"></a>
+												<a href="delete_radiographer.php?pk=<?= $row["pk"]; ?>" class="tombol-hapus"><img data-toggle="tooltip" title="Hapus" class="iconbutton" src="../image/delete.png"></a>
 											</td>
 										</tr>
 										<?php $i++; ?>
@@ -92,6 +92,26 @@ if ($_SESSION['level'] == "admin") {
 			</div>
 		</div>
 		<?php include('script-footer.php'); ?>
+		<script>
+			$(document).ready(function() {
+				$('.tombol-hapus').on('click', function(e) {
+					e.preventDefault();
+					const href = $(this).attr('href');
+					swal({
+							title: "Hapus",
+							text: "Yakin ingin menghapus?",
+							icon: "warning",
+							buttons: true,
+							dangerMode: true,
+						})
+						.then((result) => {
+							if (result) {
+								document.location.href = href;
+							}
+						})
+				});
+			});
+		</script>
 		<script>
 			$(document).ready(function() {
 				$('[data-toggle="tooltip"]').tooltip();

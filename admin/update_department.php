@@ -9,15 +9,35 @@ $row = mysqli_fetch_assoc(mysqli_query(
 ));
 if (isset($_POST["submit"])) {
 	if (update_department($_POST) > 0) {
-		echo "<script>
-				alert('Data Berhasil diubah');
-				document.location.href= 'view_department.php';
-			</script>";
+		echo "<script type='text/javascript'>
+		setTimeout(function () { 
+		swal({
+				title: 'Berhasil Diinput!',
+				text:  '',
+				icon: 'success',
+				timer: 1000,
+				showConfirmButton: true
+			});  
+		},10); 
+		window.setTimeout(function(){ 
+		window.location.replace('view_department.php');
+		} ,1000); 
+	</script>";
 	} else {
-		echo "<script>
-				alert('Data Gagal diubah');
-				document.location.href= 'update_department.php?pk=$pk';
-			</script>";
+		echo "<script type='text/javascript'>
+            setTimeout(function () { 
+            swal({
+					title: 'Gagal Diinput!',
+					text:  '',
+					icon: 'error',
+					timer: 1000,
+					showConfirmButton: true
+				});  
+            },10); 
+            window.setTimeout(function(){ 
+            window.location.replace('update_department.php?pk=$pk');
+            } ,1000); 
+        </script>";
 	}
 }
 if ($_SESSION['level'] == "admin") {
@@ -56,11 +76,11 @@ if ($_SESSION['level'] == "admin") {
 									<input type="hidden" name="pk" value="<?= $pk; ?>">
 									<li>
 										<label for="dep_id"><b>Department ID</b></label><br>
-										<input type="text" name="dep_id" id="dep_id" required value="<?= $row["dep_id"]; ?>">
+										<input type="text" name="dep_id" id="dep_id" required value="<?= $row["dep_id"]; ?>" required>
 									</li>
 									<li>
 										<label for="name_dep"><b>Nama Department</b></label><br>
-										<input type="text" name="name_dep" id="name_dep" required value="<?= $row["name_dep"]; ?>">
+										<input type="text" name="name_dep" id="name_dep" required value="<?= $row["name_dep"]; ?>" required>
 									</li>
 									<li>
 										<button class="button1" type="submit" name="submit">Ubah Data</button>

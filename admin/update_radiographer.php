@@ -10,15 +10,35 @@ $radiographer = mysqli_fetch_assoc(mysqli_query(
 
 if (isset($_POST["submit"])) {
 	if (update_radiographer($_POST) > 0) {
-		echo "<script>
-				alert('Berhasil diubah!');
-				document.location.href= 'view_radiographer.php';
-			</script>";
+		echo "<script type='text/javascript'>
+		setTimeout(function () { 
+		swal({
+				title: 'Berhasil Diinput!',
+				text:  '',
+				icon: 'success',
+				timer: 1000,
+				showConfirmButton: true
+			});  
+		},10); 
+		window.setTimeout(function(){ 
+		window.location.replace('view_radiographer.php');
+		} ,1000); 
+	</script>";
 	} else {
-		echo "<script>
-				alert('Gagal diubah!');
-				document.location.href= 'update_radiographer.php?pk=$pk';
-			</script>";
+		echo "<script type='text/javascript'>
+            setTimeout(function () { 
+            swal({
+					title: 'Gagal Diinput!',
+					text:  '',
+					icon: 'error',
+					timer: 1000,
+					showConfirmButton: true
+				});  
+            },10); 
+            window.setTimeout(function(){ 
+            window.location.replace('update_radiographer.php?pk=$pk');
+            } ,1000); 
+        </script>";
 	}
 }
 if ($_SESSION['level'] == "admin") {

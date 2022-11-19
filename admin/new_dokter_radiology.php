@@ -11,24 +11,76 @@ if (isset($_POST["submit"])) {
 	$row = mysqli_fetch_assoc($result);
 	$cek = mysqli_num_rows($result);
 	if ($cek > 0) {
-		echo "<script>alert('username sudah ada');</script>";
+		echo "<script type='text/javascript'>
+		setTimeout(function () { 
+		swal({
+				title: 'username sudah ada',
+				text:  '',
+				icon: 'error',
+				timer: 1000,
+				showConfirmButton: true
+			});  
+		},10);
+	</script>";
 	} elseif (!filter_var($dokrad_email, FILTER_VALIDATE_EMAIL)) {
-		echo "<script>alert('Format Email salah');</script>";
+		echo "<script type='text/javascript'>
+		setTimeout(function () { 
+		swal({
+				title: 'Format Email salah',
+				text:  '',
+				icon: 'error',
+				timer: 1000,
+				showConfirmButton: true
+			});  
+		},10);
+	</script>";
 	} else {
 		if ($password == $passwordulang) {
 			if (new_dokter_radiology($_POST) > 0) {
-				echo "<script>
-						alert('Berhasil dimasukkan');
-						document.location.href='view_dokter_radiology.php';
+				echo "<script type='text/javascript'>
+						setTimeout(function () { 
+						swal({
+								title: 'Berhasil Diinput!',
+								text:  '',
+								icon: 'success',
+								timer: 1000,
+								showConfirmButton: true
+							});  
+						},10); 
+						window.setTimeout(function(){ 
+						window.location.replace('view_dokter_radiology.php');
+						} ,1000); 
 					</script>";
 			} else {
-				echo "<script>
-						alert('Gagal dimasukkan');
-						document.location.href= 'view_dokter_radiology.php';
+				echo "<script type='text/javascript'>
+						setTimeout(function () { 
+						swal({
+								title: 'Gagal Diinput!',
+								text:  '',
+								icon: 'error',
+								timer: 1000,
+								showConfirmButton: true
+							});  
+						},10); 
+						window.setTimeout(function(){ 
+						window.location.replace('new_dokter_radiology.php');
+						} ,1000); 
 					</script>";
 			};
 		} else {
-			echo "<script>alert('password tidak sama');</script>";
+			echo "<script type='text/javascript'>
+						setTimeout(function () { 
+						swal({
+								title: 'Password Konfirmasi Salah',
+								text:  '',
+								icon: 'error',
+								timer: 1000,
+								showConfirmButton: true
+							});  
+						},10); 
+						window.setTimeout(function(){ 
+						} ,1000); 
+					</script>";
 		}
 	}
 }

@@ -3,15 +3,35 @@ require 'function_dokter.php';
 session_start();
 if (isset($_POST["submit"])) {
 	if (new_modalitas($_POST) > 0) {
-		echo "<script>
-				alert('Berhasil ditambahkan!');
-				document.location.href= 'view_modalitas.php';
-			</script>";
+		echo "<script type='text/javascript'>
+		setTimeout(function () { 
+		swal({
+				title: 'Berhasil Diinput!',
+				text:  '',
+				icon: 'success',
+				timer: 1000,
+				showConfirmButton: true
+			});  
+		},10); 
+		window.setTimeout(function(){ 
+		window.location.replace('view_modalitas.php');
+		} ,1000); 
+	</script>";
 	} else {
-		echo "<script>
-				alert('Gagal ditambahkan!');
-				document.location.href= 'new_modalitas.php';
-			</script>";
+		echo "<script type='text/javascript'>
+		setTimeout(function () { 
+		swal({
+				title: 'Gagal Diinput!',
+				text:  '',
+				icon: 'error',
+				timer: 1000,
+				showConfirmButton: true
+			});  
+		},10); 
+		window.setTimeout(function(){ 
+		window.location.replace('new_modalitas.php');
+		} ,1000); 
+	</script>";
 	}
 }
 if ($_SESSION['level'] == "admin") {
@@ -49,11 +69,11 @@ if ($_SESSION['level'] == "admin") {
 								<ul>
 									<li>
 										<label for="id_modality"><b><?= $lang['modality_code'] ?></b></label><br>
-										<input type="text" name="id_modality" id="id_modality" placeholder="<?= $lang['input_cod_mod'] ?>">
+										<input type="text" name="id_modality" id="id_modality" placeholder="<?= $lang['input_cod_mod'] ?>" required>
 									</li>
 									<li>
 										<label for="xray_type_code"><b><?= $lang['name_type'] ?></b></label><br>
-										<input type="text" name="xray_type_code" id="xray_type_code" placeholder="<?= $lang['input_name_type'] ?>">
+										<input type="text" name="xray_type_code" id="xray_type_code" placeholder="<?= $lang['input_name_type'] ?>" required>
 									</li>
 									<br>
 									<li>

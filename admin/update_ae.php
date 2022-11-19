@@ -14,32 +14,32 @@ if (isset($_POST["submit"])) {
 			echo "<script type='text/javascript'>
 		setTimeout(function () { 
 		swal({
-				   title: 'Berhasil Diinput!',
-				   text:  '',
-				   icon: 'success',
-				   timer: 1000,
-				   showConfirmButton: true
-			   });  
+				title: 'Berhasil Diinput!',
+				text:  '',
+				icon: 'success',
+				timer: 1000,
+				showConfirmButton: true
+			});  
 		},10); 
 		window.setTimeout(function(){ 
-		 window.location.replace('view_ae.php');
+		window.location.replace('view_ae.php');
 		} ,1000); 
-	   </script>";
+	</script>";
 		} else {
 			echo "<script type='text/javascript'>
             setTimeout(function () { 
             swal({
-                       title: 'Gagal Diinput!',
-                       text:  '',
-                       icon: 'error',
-                       timer: 1000,
-                       showConfirmButton: true
-                   });  
+					title: 'Gagal Diinput!',
+					text:  '',
+					icon: 'error',
+					timer: 1000,
+					showConfirmButton: true
+				});  
             },10); 
             window.setTimeout(function(){ 
-             window.location.replace('update_ae.php?pk=$pk');
+            window.location.replace('update_ae.php?pk=$pk');
             } ,1000); 
-           </script>";
+        </script>";
 		}
 	} else {
 		echo "<script type='text/javascript'>

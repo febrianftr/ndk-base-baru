@@ -9,30 +9,30 @@ if (delete_ae($pk) > 0) {
 	echo "<script type='text/javascript'>
 	setTimeout(function () { 
 	swal({
-			   title: 'Berhasil Dihapus!',
-			   text:  '',
-			   icon: 'success',
-			   timer: 1000,
-			   showConfirmButton: true
-		   });  
+			title: 'Berhasil Dihapus!',
+			text:  '',
+			icon: 'success',
+			timer: 1000,
+			showConfirmButton: true
+		});  
 	},10); 
 	window.setTimeout(function(){ 
-	 window.location.replace('view_ae.php');
+	window.location.replace('view_ae.php');
 	} ,1000); 
-   </script>";
+</script>";
 } else {
 	echo "<script type='text/javascript'>
 	setTimeout(function () { 
 	swal({
-			   title: 'Gagal Dihapus!',
-			   text:  '',
-			   icon: 'error',
-			   timer: 1000,
-			   showConfirmButton: true
-		   });  
+			title: 'Gagal Dihapus!',
+			text:  '',
+			icon: 'error',
+			timer: 1000,
+			showConfirmButton: true
+		});  
 	},10); 
 	window.setTimeout(function(){ 
-	 window.location.replace('view_ae.php');
+	window.location.replace('view_ae.php');
 	} ,1000); 
-   </script>";
+</script>";
 }

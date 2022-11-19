@@ -6,13 +6,33 @@ session_start();
 $pk = $_GET["pk"];
 
 if (delete_study($pk) > 0) {
-	echo "<script>
-			alert('Berhasil dihapus!');
-			document.location.href= 'view_study.php';
-		</script>";
+	echo "<script type='text/javascript'>
+	setTimeout(function () { 
+	swal({
+			title: 'Berhasil Dihapus!',
+			text:  '',
+			icon: 'success',
+			timer: 1000,
+			showConfirmButton: true
+		});  
+	},10); 
+	window.setTimeout(function(){ 
+	window.location.replace('view_study.php');
+	} ,1000); 
+</script>";
 } else {
-	echo "<script>
-			alert('Gagal dihapus!');
-			document.location.href= 'view_study.php';
-		</script>";
+	echo "<script type='text/javascript'>
+	setTimeout(function () { 
+	swal({
+			title: 'Gagal Dihapus!',
+			text:  '',
+			icon: 'error',
+			timer: 1000,
+			showConfirmButton: true
+		});  
+	},10); 
+	window.setTimeout(function(){ 
+	window.location.replace('view_study.php');
+	} ,1000); 
+</script>";
 }
