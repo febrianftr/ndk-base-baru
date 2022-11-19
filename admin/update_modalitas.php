@@ -3,22 +3,22 @@ require 'function_dokter.php';
 session_start();
 
 //ambil data di url
-$idmod = $_GET["idmod"];
-$row = query("SELECT * FROM xray_modalitas WHERE idmod=$idmod")[0];
+$pk = $_GET["pk"];
+$row = mysqli_fetch_assoc(mysqli_query(
+	$conn,
+	"SELECT * FROM xray_modalitas WHERE pk = '$pk'"
+));
 if (isset($_POST["submit"])) {
-	if (ubah_mod($_POST) > 0) {
-		echo "
-<script>
-	alert('Data Berhasil diubah');
-	document.location.href= 'view_modalitas.php';
-</script>
-";
+	if (update_modalitas($_POST) > 0) {
+		echo "<script>
+				alert('Data Berhasil diubah');
+				document.location.href= 'view_modalitas.php';
+			</script>";
 	} else {
-		echo "
-<script>
-	alert('Data Gagal diubah');
-	document.location.href= 'view_modalitas.php';
-</script>";
+		echo "<script>
+				alert('Data Gagal diubah');
+				document.location.href= 'update_modalitas.php?pk=$pk';
+			</script>";
 	}
 }
 if ($_SESSION['level'] == "admin") {
@@ -54,29 +54,20 @@ if ($_SESSION['level'] == "admin") {
 					<div class="container-fluid">
 						<div class="row form-dokter">
 							<form action="" method="post" enctype="multipart/form-data">
-								<input type="hidden" name="idmod" value="<?= $row["idmod"]; ?>">
+								<input type="hidden" name="pk" value="<?= $row["pk"]; ?>">
 								<ul>
 									<li>
 										<label><b>Pilih Kode Modalitas</b></label><br>
-										<input type="text" name="xray_type_code" readonly="" value="<?= $row["xray_type_code"]; ?>">
-										<p>Jika ingin edit kode modalitas. mohon hapus data, lalu buat data baru..</p>
-									</li>
-
-									<li>
-										<label for="typename"><b>Nama Tipe</b></label><br>
-										<input type="text" name="typename" id="typename" value="<?= $row["typename"]; ?>">
+										<input type="text" name="id_modality" value="<?= $row["id_modality"]; ?>">
 									</li>
 									<li>
-										<label for="imgmod"><b>Image Modality</b></label><br>
-										<img style="width: 200px;" src="../gambar/<?= $row["imgmod"]; ?>">
-										<input type="file" name="file">
-										<input type="hidden" name="fileupdate" value="<?= $row["imgmod"]; ?>">
+										<label for="xray_type_code"><b>Nama Tipe</b></label><br>
+										<input type="text" name="xray_type_code" id="xray_type_code" value="<?= $row["xray_type_code"]; ?>">
 									</li>
 									<li>
 										<button class="button1" type="submit" name="submit">Ubah Data</button>
 									</li>
 								</ul>
-
 							</form>
 						</div>
 					</div>

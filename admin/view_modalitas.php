@@ -2,7 +2,10 @@
 require 'function_dokter.php';
 session_start();
 
-$data_mod = mysqli_query($conn, "SELECT * FROM xray_modalitas");
+$data_mod = mysqli_query(
+	$conn,
+	"SELECT * FROM xray_modalitas"
+);
 if ($_SESSION['level'] == "admin") {
 ?>
 	<!DOCTYPE html>
@@ -41,9 +44,6 @@ if ($_SESSION['level'] == "admin") {
 										<br>
 										<a class="ahref" href="new_modalitas.php"><i class="fas fa-plus"></i> <?= $lang['add_modality'] ?></a>
 									</div>
-									<!-- <div style="padding: 0px;" class="col-md-3 col-md-offset-3">
-				<input class="form-control" id="myInput" type="text" placeholder="Search..">
-				</div> -->
 								</div>
 								<div class="col-md-12 table-box" style="overflow-x:auto;">
 									<table class=" table-dicom table-paginate" style="margin-top: 0px;" border="1" cellpadding="8" cellspacing="0">
@@ -56,18 +56,18 @@ if ($_SESSION['level'] == "admin") {
 											</tr>
 										</thead>
 										<?php $i = 1; ?>
-										<?php foreach ($data_mod as $row) : ?>
+										<?php foreach ($data_mod as $row) { ?>
 											<tr>
 												<td><?= $i ?></td>
+												<td><?= $row["id_modality"]; ?></td>
 												<td><?= $row["xray_type_code"]; ?></td>
-												<td><?= $row["typename"]; ?></td>
 												<td>
-													<a href="update_modalitas.php?idmod=<?= $row["idmod"]; ?>"><img data-toggle="tooltip" title="Edit" class="iconbutton" src="../image/edit.png"></a>
-													<a href="delete_modalitas.php?idmod=<?= $row["idmod"]; ?>" onclick="return confirm('Teruskan Menghapus Data?');"><img data-toggle="tooltip" title="Hapus" class="iconbutton" src="../image/delete.png"></a>
+													<a href="update_modalitas.php?pk=<?= $row["pk"]; ?>"><img data-toggle="tooltip" title="Edit" class="iconbutton" src="../image/edit.png"></a>
+													<a href="delete_modalitas.php?pk=<?= $row["pk"]; ?>" onclick="return confirm('Teruskan Menghapus Data?');"><img data-toggle="tooltip" title="Hapus" class="iconbutton" src="../image/delete.png"></a>
 												</td>
 											</tr>
 											<?php $i++; ?>
-										<?php endforeach; ?>
+										<?php } ?>
 									</table>
 								</div>
 							</div>

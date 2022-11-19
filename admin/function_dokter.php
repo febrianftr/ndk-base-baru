@@ -320,64 +320,50 @@ function update_department($value)
 ////////////////Modalitas////////////////////////
 
 //untuk insert atau menambahkan
-function tambah_mod($post_mod)
+function new_modalitas($value)
 {
 	global $conn;
-	$q2 = mysqli_query($conn, 'SELECT MAX(idmod) as user_id2 from xray_modalitas');
-	$row2 = mysqli_fetch_assoc($q2);
-	$ai2 = $row2['user_id2'] + 1;
-	$xray_type_code = $post_mod['xray_type_code'];
-	$typename = $post_mod['typename'];
 
-	$name = $_FILES["file"]["name"];
-	$file_tmp = $_FILES["file"]["tmp_name"];
-	$dokrad_img = move_uploaded_file($file_tmp, '../gambar/' . $name);
+	$id_modality = $value['id_modality'];
+	$xray_type_code = $value['xray_type_code'];
 
-
-	//query insert data
-	$query = "INSERT INTO xray_modalitas
-				VALUES
-				('$ai2','$xray_type_code', '$typename', '$name')";
-
-	mysqli_query($conn, $query);
+	mysqli_query(
+		$conn,
+		"INSERT INTO xray_modalitas (id_modality, xray_type_code) 
+		VALUES('$id_modality', '$xray_type_code')"
+	);
 
 	return mysqli_affected_rows($conn);
 }
 
 //untuk menghapus
-function hapus_mod($idmod)
+function delete_modalitas($pk)
 {
 	global $conn;
-	mysqli_query($conn, "DELETE FROM xray_modalitas 
-				WHERE idmod = '$idmod'
-				");
+
+	mysqli_query(
+		$conn,
+		"DELETE FROM xray_modalitas 
+		WHERE pk = '$pk'"
+	);
+
 	return mysqli_affected_rows($conn);
 }
 
-
-
-//untuk mengubah / edit
-function ubah_mod($post_mod)
+function update_modalitas($value)
 {
 	global $conn;
-	$idmod = $post_mod['idmod'];
-	$xray_type_code = $post_mod['xray_type_code'];
-	$typename = $post_mod['typename'];
-	$typemod = $post_mod['typemod'];
+	$pk = $value['pk'];
+	$id_modality = $value['id_modality'];
+	$xray_type_code = $value['xray_type_code'];
 
-	$name = $_FILES["file"]["name"];
-	$file_tmp = $_FILES["file"]["tmp_name"];
-	move_uploaded_file($file_tmp, '../gambar/' . $name);
-
-	//query insert data
-	$query = "UPDATE xray_modalitas SET
-				xray_type_code = '$xray_type_code',
-				typename = '$typename',
-				imgmod = '$name'
-				WHERE idmod = '$idmod'
-	";
-
-	mysqli_query($conn, $query);
+	mysqli_query(
+		$conn,
+		"UPDATE xray_modalitas SET
+		xray_type_code = '$xray_type_code',
+		id_modality = '$id_modality'
+		WHERE pk = '$pk'"
+	);
 
 	return mysqli_affected_rows($conn);
 }

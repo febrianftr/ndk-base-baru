@@ -4,12 +4,12 @@ session_start();
 if (isset($_POST["submit"])) {
 	if (new_departement($_POST) > 0) {
 		echo "<script>
-				alert('Data Berhasil ditambahkan');
+				alert('Berhasil ditambahkan!');
 				document.location.href= 'view_department.php';
 			</script>";
 	} else {
 		echo "<script>
-				alert('Data Gagal ditambahkan');
+				alert('Gagal ditambahkan!');
 				document.location.href= 'view_department.php';
 			</script>";
 	}

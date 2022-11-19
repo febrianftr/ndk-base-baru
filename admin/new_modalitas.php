@@ -2,19 +2,16 @@
 require 'function_dokter.php';
 session_start();
 if (isset($_POST["submit"])) {
-	if (tambah_mod($_POST) > 0) {
-		echo "
-<script>
-	alert('Data Berhasil ditambahkan');
-	document.location.href= 'view_modalitas.php';
-</script>
-";
+	if (new_modalitas($_POST) > 0) {
+		echo "<script>
+				alert('Berhasil ditambahkan!');
+				document.location.href= 'view_modalitas.php';
+			</script>";
 	} else {
-		echo "
-<script>
-	alert('Data Gagal ditambahkan');
-	document.location.href= 'view_modalitas.php';
-</script>";
+		echo "<script>
+				alert('Gagal ditambahkan!');
+				document.location.href= 'new_modalitas.php';
+			</script>";
 	}
 }
 if ($_SESSION['level'] == "admin") {
@@ -51,17 +48,14 @@ if ($_SESSION['level'] == "admin") {
 							<form action="" method="post" enctype="multipart/form-data">
 								<ul>
 									<li>
-										<label for="xray_type_code"><b><?= $lang['modality_code'] ?></b></label><br>
-										<input type="text" name="xray_type_code" id="xray_type_code" placeholder="<?= $lang['input_cod_mod'] ?>">
+										<label for="id_modality"><b><?= $lang['modality_code'] ?></b></label><br>
+										<input type="text" name="id_modality" id="id_modality" placeholder="<?= $lang['input_cod_mod'] ?>">
 									</li>
 									<li>
-										<label for="typename"><b><?= $lang['name_type'] ?></b></label><br>
-										<input type="text" name="typename" id="typename" placeholder="<?= $lang['input_name_type'] ?>">
+										<label for="xray_type_code"><b><?= $lang['name_type'] ?></b></label><br>
+										<input type="text" name="xray_type_code" id="xray_type_code" placeholder="<?= $lang['input_name_type'] ?>">
 									</li>
-									<li>
-										<label for="imgmod"><b><?= $lang['image_modality'] ?></b></label><br>
-										<input type="file" name="file"><br>
-									</li><br>
+									<br>
 									<li>
 										<button class="button1" type="submit" name="submit"><?= $lang['add_data'] ?></button>
 									</li>
