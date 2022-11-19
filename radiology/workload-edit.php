@@ -201,7 +201,7 @@ if ($_SESSION['level'] == "radiology") { ?>
 															<td><?= $study_desc; ?></td>
 														</tr>
 														<tr>
-															<td><span class="table-left">Schedule Date</span></td>
+															<td><span class="table-left">Study Date</span></td>
 														</tr>
 														<tr>
 															<td><?= $study_datetime; ?></td>

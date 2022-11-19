@@ -133,7 +133,7 @@ $pdf->Cell(28, 5, 'Tgl Lahir / Umur', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
 $pdf->Cell(55, 5, $pat_birthdate, 0, 0, 'L');
 // -------------------
-$pdf->Cell(35, 5, 'Waktu Pemeriksaan', 0, 0, 'L');
+$pdf->Cell(35, 5, 'Selesai Pemeriksaan', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
 $pdf->Cell(65, 5, $study_datetime, 0, 1, 'L');
 //-------------------

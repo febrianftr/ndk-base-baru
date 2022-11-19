@@ -65,6 +65,7 @@ $patient = mysqli_query($conn_pacsio, "SELECT
             study_desc,
             study.updated_time,
             study_datetime,
+            examed_at,
             film_small,
             film_medium,
             film_large,
@@ -390,6 +391,7 @@ while ($status = mysqli_fetch_array($statuses)) {
                 $pat_name = strtoupper(defaultValue($row['pat_name']));
                 $pat_sex = strtoupper(defaultValue($row['pat_sex']));
                 $pat_birthdate = strtoupper(diffDate($row['pat_birthdate']));
+                $examed_at = strtoupper(defaultValueDateTime($row['examed_at']));
                 $study_datetime = strtoupper(defaultValueDateTime($row['study_datetime']));
                 $study_desc = strtoupper(defaultValue($row['study_desc']));
                 $mods_in_study = strtoupper(defaultValue($row['mods_in_study']));
@@ -435,8 +437,8 @@ while ($status = mysqli_fetch_array($statuses)) {
                     <td align="center"><?= $priority_doctor; ?></td>
                     <td align="center"><?= $payment; ?></td>
                     <td align="center"><?= $create_time; ?></td>
+                    <td align="center"><?= $examed_at; ?></td>
                     <td align="center"><?= $study_datetime; ?></td>
-                    <td align="center"><?= $updated_time; ?></td>
                     <td align="center"><?= $approved_at; ?></td>
                     <td align="center"><?= $spendtime; ?></td>
                     <td align="center"><?= $status; ?></td>
