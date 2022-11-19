@@ -71,10 +71,6 @@ define('DRAFTLAST', '"><span class="btn btn-warning btn-inti"><i class="fas fa-e
 define('RADIANTFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="radiant://?n=paet&v=dcmPACS&n=pstv&v=0020000D&v=%22');
 define('RADIANTLAST', '%22" "target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/radiAnt.png" data-toggle="tooltip" title="Radiant Viewer" style="width: 100%;"></span></a>');
 
-// HOROS
-define('HOROSFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="Horos://?methodName=retrieve&serverName=INTIWID&then=open&retrieveOnlyIfNeeded=yes&filterKey=StudyInstanceUID&filterValue=');
-define('HOROSLAST', '"target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/horos.png" data-toggle="tooltip" title="Radiant Viewer" style="width: 100%;"></span></a>');
-
 //ipiview
 define('IPIVIEWFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="http://192.168.10.144:8089/ipiview/ipiview/html/start.html?StudyInstanceUID=');
 define('IPIVIEWLAST', '" target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/eyeyellow.svg" data-toggle="tooltip" title="IPI Viewer" style="width: 100%;"></span></a>');
@@ -82,6 +78,12 @@ define('IPIVIEWLAST', '" target="_blank"><span class="btn rgba-stylish-slight bt
 // inobitec
 define('INOBITECFIRST', '<a href="#" class="ahref-edit" onclick="inobitec(');
 define('INOBITECLAST', ')"id="inobitec" data-ip="' . $_SERVER['SERVER_NAME'] . '"><span class="btn btn-warning btn-inti"><i class="fas fa-eye" data-toggle="tooltip" title="Web Viewer"></i></span></a>');
+
+// HOROS
+$horos = '<a href="Horos://?methodName=displayStudy&StudyInstanceUID=';
+define('HOROSFIRST', "$horos");
+define('HOROSLAST', '"class="ahref-edit" style="text-decoration:none;" target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/horos.png" data-toggle="tooltip" title="Radiant Viewer" style="width: 100%;"></span></a>');
+
 
 // untuk icon OHIF LARGE DI WORKLIST
 $ohif_large = '"class="button8 delete1" target="_blank"><img src="../image/smartphone.svg" style="width: 50px;"><br> <span> Mobile Viewer</span></a>';
@@ -132,5 +134,5 @@ define('RADIANTWORKLISTFIRST', '<a href="radiant://?n=paet&v=dcmPACS&n=pstv&v=00
 define('RADIANTWORKLISTLAST', '%22" class="button8 delete1"><img src="../image/radiAnt.png" style="width: 50px;"><br><span> Radiant</span></a>');
 // url HOROS -> Horos://?methodName=retrieve&serverName=INTIWID&then=open&retrieveOnlyIfNeeded=yes&filterKey=StudyInstanceUID&filterValue=
 // url HOROS -> Horos://?methodName=displayStudy&StudyInstanceUID=
-define('HOROSWORKLISTFIRST', '<a href="Horos://?methodName=displayStudy&StudyInstanceUID=');
+define('HOROSWORKLISTFIRST', "$horos");
 define('HOROSWORKLISTLAST', '"class="button8 delete1"><img src="../image/horos.png" style="width: 50px;"><br><span> Horos Viewer</span></a>');
