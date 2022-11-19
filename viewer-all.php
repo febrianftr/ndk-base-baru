@@ -131,6 +131,6 @@ define('HTMLWORKLISTLAST', '" class="button8 delete1" target="_blank"><img src="
 define('RADIANTWORKLISTFIRST', '<a href="radiant://?n=paet&v=dcmPACS&n=pstv&v=0020000D&v=%22');
 define('RADIANTWORKLISTLAST', '%22" class="button8 delete1"><img src="../image/radiAnt.png" style="width: 50px;"><br><span> Radiant</span></a>');
 // url HOROS -> Horos://?methodName=retrieve&serverName=INTIWID&then=open&retrieveOnlyIfNeeded=yes&filterKey=StudyInstanceUID&filterValue=
-// url HOROS -> Horos://?methodName=displayStudy&StudyInstanceUID
-define('HOROSWORKLISTFIRST', '<a href="Horos://?methodName=displayStudy&StudyInstanceUID');
+// url HOROS -> Horos://?methodName=displayStudy&StudyInstanceUID=
+define('HOROSWORKLISTFIRST', '<a href="Horos://?methodName=displayStudy&StudyInstanceUID=');
 define('HOROSWORKLISTLAST', '"class="button8 delete1"><img src="../image/horos.png" style="width: 50px;"><br><span> Horos Viewer</span></a>');
