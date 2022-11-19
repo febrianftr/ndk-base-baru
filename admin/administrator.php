@@ -70,8 +70,8 @@ if ($_SESSION['level'] == "admin") {
 
 							<div class="col-sm-2">
 								<h4 class="h4"><?= $lang['procedure'] ?></h4>
-								<li class="li-adm"><a href="new_price.php"><i class="fas fa-plus-square"></i> <?= $lang['add'] ?></a></li>
-								<li class="li-adm"><a href="view_price.php"><i class="fas fa-paper-plane"></i> <?= $lang['view'] ?></a></li>
+								<li class="li-adm"><a href="new_study.php"><i class="fas fa-plus-square"></i> <?= $lang['add'] ?></a></li>
+								<li class="li-adm"><a href="view_study.php"><i class="fas fa-paper-plane"></i> <?= $lang['view'] ?></a></li>
 							</div>
 							<div class="col-sm-2">
 								<h4 class="h4">AET</h4>

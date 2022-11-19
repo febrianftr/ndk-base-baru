@@ -3,19 +3,16 @@ require 'function_dokter.php';
 session_start();
 
 if (isset($_POST["submit"])) {
-	if (tambah_price($_POST) > 0) {
-		echo "
-<script>
-	alert('Data Berhasil ditambahkan');
-	document.location.href= 'view_price.php';
-</script>
-";
+	if (new_study($_POST) > 0) {
+		echo "<script>
+				alert('Berhasil ditambahkan!');
+				document.location.href= 'view_study.php';
+			</script>";
 	} else {
-		echo "
-<script>
-	alert('Data Gagal ditambahkan');
-	document.location.href= 'view_price.php';
-</script>";
+		echo "<script>
+				alert('Gagal ditambahkan!');
+				document.location.href= 'new_study.php';
+			</script>";
 	}
 }
 if ($_SESSION['level'] == "admin") {
@@ -50,32 +47,21 @@ if ($_SESSION['level'] == "admin") {
 						<div class="row form-dokter">
 							<form class="adm_new_price" action="" method="post">
 								<div class="col-md-10 col-md-offset-1">
-									<!-- <label for="code_xray"><b><?= $lang['xray_code'] ?></b></label><br> -->
-									<!-- <input type="text" id="code_xray" name="code_xray" placeholder="<?= $lang['input_xray_code'] ?>"><br> -->
-
 									<label for="type"><b><?= $lang['pro_type'] ?></b></label><br>
-									<?php
-									$result = mysqli_query($conn, "SELECT * FROM xray_modalitas ORDER BY xray_type_code ASC ");
-									?>
-									<select id="idmod" name="idmod">
+									<select id="id_modality" name="id_modality">
 										<option>---Select Modality---</option>
 										<?php
+										$result = mysqli_query($conn, "SELECT * FROM xray_modalitas ORDER BY xray_type_code ASC ");
 										while ($row = mysqli_fetch_assoc($result)) {  ?>
-											<option value="<?= $row['idmod']; ?>"><?= $row['xray_type_code']; ?></option>
+											<option value="<?= $row['id_modality']; ?>"><?= $row['xray_type_code']; ?></option>
 										<?php } ?>
 									</select>
-
-									<!-- <input type="text" id="type" name="type" placeholder="<?= $lang['input_pro_type'] ?>"><br> -->
-									<label for="type"><b>
-											<!-- <?= $lang['pro_type'] ?> -->Study Desc
-										</b></label><br>
-									<input type="text" id="main_prosedur" name="main_prosedur" placeholder="Input Study Desc"><br>
-
-									<!-- <label for="prosedur"><b><?= $lang['procedure'] ?>Series Desc</b></label><br> -->
-									<!-- <input type="text" id="prosedur" name="prosedur" placeholder="Input Series Desc"><br> -->
-
-									<label for="price"><b><?= $lang['price'] ?></b></label><br>
-									<input type="text" id="price" name="price" placeholder="<?= $lang['input_price'] ?>">
+									<label for="id_study"><b>ID Study</b></label><br>
+									<input type="text" id="id_study" name="id_study" placeholder="Input ID Study Desc"><br>
+									<label for="study"><b>Study Desc</b></label><br>
+									<input type="text" id="study" name="study" placeholder="Input Study Desc"><br>
+									<label for="harga"><b><?= $lang['price'] ?></b></label><br>
+									<input type="text" id="harga" name="harga" placeholder="<?= $lang['input_price'] ?>">
 
 									<button class="button button1" type="submit" name="submit"><?= $lang['add_data'] ?> </button>
 								</div>

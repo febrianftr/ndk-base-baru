@@ -370,74 +370,53 @@ function update_modalitas($value)
 
 /////////END OF MODALITAS/////////////////////////////
 
-/////////////////////PRICE///////////////////////////
-
-
-function tambah_price($post_price)
+function new_study($value)
 {
 	global $conn;
-	// $code_xray = $post_price['code_xray'];
-	// $prosedur = $post_price['prosedur'];
-	$idmod = $post_price['idmod'];
-	$result = mysqli_query($conn, "SELECT * FROM xray_modalitas WHERE idmod = '$idmod' ");
-	$row = mysqli_fetch_assoc($result);
-	$xray_type_code = $row['xray_type_code'];
-	$main_prosedur = $post_price['main_prosedur'];
-	$price = $post_price['price'];
+	$id_modality = $value['id_modality'];
+	$id_study = $value['id_study'];
+	$study = $value['study'];
+	$harga = $value['harga'];
 
-	$q1 = mysqli_query($conn, 'SELECT MAX(idharga) as user_id1 from xray_price');
-	$row1 = mysqli_fetch_assoc($q1);
-	$ai1 = $row1['user_id1'] + 1;
-
-
-	//query insert data
-	$query = "INSERT INTO xray_price
-				(idharga,main_prosedur,type,price)
-				VALUES
-				('$ai1','$main_prosedur','$xray_type_code', '$price')";
-
-	mysqli_query($conn, $query);
+	mysqli_query(
+		$conn,
+		"INSERT INTO xray_study (id_modality, id_study, study, harga)
+		VALUES ('$id_modality', '$id_study', '$study', '$harga')"
+	);
 
 	return mysqli_affected_rows($conn);
 }
 
 //untuk menghapus
-function hapus_price($idharga)
+function delete_study($pk)
 {
 	global $conn;
-	mysqli_query($conn, "DELETE FROM xray_price 
-				WHERE idharga = '$idharga'
-				");
+	mysqli_query(
+		$conn,
+		"DELETE FROM xray_study
+		WHERE pk = '$pk'"
+	);
 	return mysqli_affected_rows($conn);
 }
 
-
-
-//untuk mengubah / edit
-function ubah_price($post_price)
+function update_study($value)
 {
 	global $conn;
-	$idharga = $post_price['idharga'];
-	// $code_xray = $post_price['code_xray'];
-	// $prosedur = $post_price['prosedur'];
-	$main_prosedur = $post_price['main_prosedur'];
-	$price = $post_price['price'];
+	$pk = $value['pk'];
+	$id_modality = $value['id_modality'];
+	$id_study = $value['id_study'];
+	$study = $value['study'];
+	$harga = $value['harga'];
 
-	$idmod = $post_price['idmod'];
-
-	$result = mysqli_query($conn, "SELECT * FROM xray_modalitas WHERE idmod = '$idmod' ");
-	$row1 = mysqli_fetch_assoc($result);
-	$xray_type_code = $row1['xray_type_code'];
-
-	//query insert data
-	$query = "UPDATE xray_price SET
-				main_prosedur = '$main_prosedur',
-				type = '$xray_type_code',
-				price = '$price'
-				WHERE idharga = '$idharga'
-	";
-
-	mysqli_query($conn, $query);
+	mysqli_query(
+		$conn,
+		"UPDATE xray_study SET
+		id_modality = '$id_modality',
+		id_study = '$id_study',
+		study = '$study',
+		harga = '$harga'
+		WHERE pk = '$pk'"
+	);
 
 	return mysqli_affected_rows($conn);
 }

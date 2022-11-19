@@ -3,7 +3,12 @@ require 'function_dokter.php';
 session_start();
 if (isset($_SESSION["username"]))
 
-	$data_price = mysqli_query($conn, "SELECT * FROM xray_price GROUP BY main_prosedur ORDER BY type, main_prosedur ASC");
+	$data_price = mysqli_query(
+		$conn,
+		"SELECT * FROM xray_study
+		ORDER BY study ASC"
+	);
+
 if ($_SESSION['level'] == "admin") {
 ?>
 	<!DOCTYPE html>
@@ -39,11 +44,8 @@ if ($_SESSION['level'] == "admin") {
 								<div class="">
 									<div style="padding: 0px;" class="col-md-6">
 										<br>
-										<a class="ahref" href="new_price.php"><i class="fas fa-plus"></i> <?= $lang['add_procedure'] ?></a>
+										<a class="ahref" href="new_study.php"><i class="fas fa-plus"></i> <?= $lang['add_procedure'] ?></a>
 									</div>
-									<!-- <div style="padding: 0px;" class="col-md-3 col-md-offset-3">
-				<input class="form-control" id="myInput" type="text" placeholder="Search..">
-				</div> -->
 								</div>
 
 								<div class="col-md-12 table-box" style="overflow-x:auto;">
@@ -51,27 +53,31 @@ if ($_SESSION['level'] == "admin") {
 										<thead>
 											<tr>
 												<th>No</th>
-												<!-- <th><?= $lang['xray_code'] ?></th> -->
-												<th>Main Procedure</th>
-												<!-- <th><?= $lang['procedure'] ?></th> -->
-												<th><?= $lang['pro_type'] ?></th>
+												<th>Modality</th>
+												<th>ID Study</th>
+												<th>Study</th>
 												<th><?= $lang['price'] ?></th>
 												<th><?= $lang['action'] ?></th>
 											</tr>
 										</thead>
 										<?php
 										$i = 1;
-										while ($row = mysqli_fetch_assoc($data_price)) { ?>
+										while ($row = mysqli_fetch_assoc($data_price)) {
+											$row_modality = mysqli_fetch_assoc(mysqli_query(
+												$conn,
+												"SELECT * FROM xray_modalitas 
+												WHERE id_modality = '$row[id_modality]'"
+											))
+										?>
 											<tr>
 												<td><?= $i; ?></td>
-												<!-- <td><?= $row["code_xray"]; ?></td> -->
-												<td><?= $row["main_prosedur"]; ?></td>
-												<!-- <td><?= $row["prosedur"]; ?></td> -->
-												<td><?= $row["type"]; ?></td>
-												<td><?= $row["price"]; ?></td>
+												<td><?= $row_modality['xray_type_code']; ?></td>
+												<td><?= $row["id_study"]; ?></td>
+												<td><?= $row["study"]; ?></td>
+												<td><?= $row["harga"]; ?></td>
 												<td>
-													<a href="update_price.php?idharga=<?= $row["idharga"]; ?>"><img data-toggle="tooltip" title="Edit" class="iconbutton" src="../image/edit.png"></a>
-													<a href="delet_price.php?idharga= <?= $row["idharga"]; ?>" onclick="return confirm('Teruskan Menghapus Data?');"><img data-toggle="tooltip" title="Hapus" class="iconbutton" src="../image/delete.png"></a>
+													<a href="update_study.php?pk=<?= $row["pk"]; ?>"><img data-toggle="tooltip" title="Edit" class="iconbutton" src="../image/edit.png"></a>
+													<a href="delete_study.php?pk= <?= $row["pk"]; ?>" onclick="return confirm('Teruskan Menghapus Data?');"><img data-toggle="tooltip" title="Hapus" class="iconbutton" src="../image/delete.png"></a>
 												</td>
 											</tr>
 											<?php $i++; ?>
