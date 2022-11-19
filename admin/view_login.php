@@ -7,8 +7,8 @@ session_start();
 $username = $_SESSION['username'];
 
 $result = mysqli_query(
-    $conn_pacsio,
-    "SELECT * FROM ae"
+    $conn,
+    "SELECT * FROM xray_login"
 );
 
 if ($_SESSION['level'] == "admin") {
@@ -17,7 +17,7 @@ if ($_SESSION['level'] == "admin") {
     <html xmlns="http://www.w3.org/1999/xhtml">
 
     <head>
-        <title>View AE-TITLE | radiographer</title>
+        <title>View Login | radiographer</title>
         <?php include('head.php'); ?>
     </head>
 
@@ -27,37 +27,38 @@ if ($_SESSION['level'] == "admin") {
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb1 breadcrumb">
                 <li class="breadcrumb-item"><a href="index.php"><?= $lang['home'] ?></a></li>
-                <li class="breadcrumb-item active" aria-current="page"><?= $lang['table_aetitle'] ?></li>
+                <li class="breadcrumb-item active" aria-current="page">View Login</li>
             </ol>
         </nav>
 
         <div id="container1">
             <div id="content1">
                 <div class="container-fluid">
-                    <h1 style="color: #ee7423"><?= $lang['data_aetitle'] ?></h1>
-                    <a class="ahref" href="new_ae.php"><i class="fas fa-plus"></i><?= $lang['add_aetitle'] ?></a>
+                    <h1 style="color: #ee7423">List Data Login</h1>
+                    <a class="ahref" href="new_login.php"><i class="fas fa-plus"></i>Add Login</a>
                     <br><br>
                     <div class="about-inti table-box">
                         <table class="table-dicom table-paginate" style="margin-top: 0px;" border="1" cellpadding="8" cellspacing="0">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>AE Title</th>
-                                    <th>IP</th>
-                                    <th>PORT</th>
-                                    <th>ACTION</th>
+                                    <th>Username</th>
+                                    <th>Level</th>
+                                    <th>Date</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <?php $i = 1; ?>
                             <?php while ($row = mysqli_fetch_assoc($result)) { ?>
                                 <tr>
                                     <td><?= $i; ?></td>
-                                    <td><?= $row['aet']; ?></td>
-                                    <td><?= $row['hostname']; ?></td>
-                                    <td><?= $row['port']; ?></td>
+                                    <td><?= $row['username']; ?></td>
+                                    <td><?= $row['level']; ?></td>
+                                    <td><?= $row['date'] == null ? '-' : date('d-m-Y', strtotime($row['date'])); ?></td>
                                     <td>
-                                        <a href="update_ae.php?pk=<?= $row["pk"]; ?>"><img data-toggle="tooltip" title="Edit" class="iconbutton" src="../image/edit.png" style="height: 20px;"></a>
-                                        <a href="delete_ae.php?pk=<?= $row["pk"]; ?>" class="tombol-hapus"><img style="height: 20px;" data-toggle="tooltip" title="Hapus" class="iconbutton" src="../image/delete.png"></a>
+                                        <a href="update_login.php?id_table=<?= $row["id_table"]; ?>"><img data-toggle="tooltip" title="Edit" class="iconbutton" src="../image/edit.png" style="height: 20px;"></a>
+                                        <a href="update_login_password.php?id_table=<?= $row["id_table"]; ?>"><img data-toggle="tooltip" title="Edit" class="iconbutton" src="../image/edit.png" style="height: 20px;"></a>
+                                        <a href="delete_login.php?id_table=<?= $row["id_table"]; ?>" class="tombol-hapus"><img style="height: 20px;" data-toggle="tooltip" title="Hapus" class="iconbutton" src="../image/delete.png"></a>
                                     </td>
                                 </tr>
                                 <?php $i++; ?>

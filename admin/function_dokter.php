@@ -14,6 +14,84 @@ function query($query)
 	return $rows;
 }
 
+function view_login($value)
+{
+	global $conn;
+	$id_table = $_SESSION['id_table'];
+	$password = $value["password"];
+	$password_hash = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
+
+	mysqli_query($conn, "UPDATE xray_login SET 
+				password = '$password_hash'
+				WHERE id_table = '$id_table'");
+}
+
+function new_login($value)
+{
+	global $conn;
+	$username = $value["username"];
+	$password = $value["password"];
+	$password_hash = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
+	$level = $value["level"];
+
+	mysqli_query(
+		$conn,
+		"INSERT INTO xray_login (username, password, level, date) 
+		VALUES ('$username','$password_hash', '$level', NOW())"
+	);
+
+	return mysqli_affected_rows($conn);
+}
+
+function update_login($value)
+{
+	global $conn;
+
+	$id_table = $value["id_table"];
+	$username = $value["username"];
+	$level = $value["level"];
+
+	mysqli_query(
+		$conn,
+		"UPDATE xray_login SET 
+		username = '$username',
+		level = '$level'
+		WHERE id_table = '$id_table'"
+	);
+
+	return mysqli_affected_rows($conn);
+}
+
+function update_login_password($value)
+{
+	global $conn;
+
+	$id_table = $value["id_table"];
+	$password = $value["password"];
+	$password_hash = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
+
+	mysqli_query(
+		$conn,
+		"UPDATE xray_login SET 
+		password = '$password_hash'
+		WHERE id_table = '$id_table'"
+	);
+
+	return mysqli_affected_rows($conn);
+}
+
+function delete_login($id_table)
+{
+	global $conn;
+
+	mysqli_query(
+		$conn,
+		"DELETE FROM xray_login 
+		WHERE id_table = '$id_table'"
+	);
+
+	return mysqli_affected_rows($conn);
+}
 ///////DOKTER PENGIRIM///////////////////////////////////////////////////////////////
 
 //untuk insert atau menambahkan
@@ -582,15 +660,15 @@ function berita($post_berita)
 function new_ae($value)
 {
 	global $conn_pacsio;
-	$aetitle = $value['aetitle'];
-	$ip = $value['ip'];
+	$aet = $value['aet'];
+	$hostname = $value['hostname'];
 	$port = $value['port'];
 	// $color = $value['color'];
 
 	mysqli_query(
 		$conn_pacsio,
 		"INSERT INTO ae (aet, hostname, port, installed) 
-		VALUES ('$aetitle', '$ip', '$port', 1)"
+		VALUES ('$aet', '$hostname', '$port', 1)"
 	);
 
 	return mysqli_affected_rows($conn_pacsio);
@@ -600,16 +678,15 @@ function update_ae($value)
 {
 	global $conn_pacsio;
 	$pk = $value['pk'];
-	$aetitle = $value['aetitle'];
-	$ip = $value['ip'];
+	$aet = $value['aet'];
+	$hostname = $value['hostname'];
 	$port = $value['port'];
-	// $color = $value['color'];
 
 	mysqli_query(
 		$conn_pacsio,
 		"UPDATE ae SET 
-		aet = '$aetitle',
-		hostname = '$ip',
+		aet = '$aet',
+		hostname = '$hostname',
 		port = '$port'
 		WHERE pk = '$pk'
 	"

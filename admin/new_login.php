@@ -4,8 +4,8 @@ require 'function_dokter.php';
 session_start();
 
 if (isset($_POST["submit"])) {
-    if ($_POST['passwordconfirm'] == "27102108") {
-        if (new_ae($_POST) > 0) {
+    if ($_POST['passwordulang'] == $_POST['password']) {
+        if (new_login($_POST) > 0) {
             echo "<script type='text/javascript'>
             setTimeout(function () { 
             swal({
@@ -17,7 +17,7 @@ if (isset($_POST["submit"])) {
                    });  
             },10); 
             window.setTimeout(function(){ 
-             window.location.replace('view_ae.php');
+             window.location.replace('view_login.php');
             } ,1000); 
            </script>";
         } else {
@@ -32,7 +32,7 @@ if (isset($_POST["submit"])) {
                    });  
             },10); 
             window.setTimeout(function(){ 
-             window.location.replace('new_ae.php');
+             window.location.replace('new_login.php');
             } ,1000); 
            </script>";
         }
@@ -48,7 +48,7 @@ if (isset($_POST["submit"])) {
                });  
         },10); 
         window.setTimeout(function(){ 
-         window.location.replace('new_ae.php');
+         window.location.replace('new_login.php');
         } ,1000); 
        </script>";
     }
@@ -61,7 +61,7 @@ if ($_SESSION['level'] == "admin") {
 
     <head>
 
-        <title>AE-TITLE | Radiographer</title>
+        <title>Login | Radiographer</title>
         <?php include('head.php'); ?>
     </head>
 
@@ -70,17 +70,17 @@ if ($_SESSION['level'] == "admin") {
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb1 breadcrumb">
                 <li class="breadcrumb-item"><a href="index.php"><?= $lang['home'] ?></a></li>
-                <li class="breadcrumb-item active" aria-current="page"><?= $lang['input_aetitle'] ?></li>
+                <li class="breadcrumb-item active" aria-current="page">Input Login</li>
             </ol>
         </nav>
 
         <div id="container1">
             <div id="content1">
                 <div class="body">
-                    <h1 style="color: #ee7423"><?= $lang['add_aetitle'] ?></h1>
+                    <h1 style="color: #ee7423">Add Login</h1>
                     <div class="container">
                         <div class="row">
-                            <a class="ahref" href="view_ae.php"><i class="fas fa-eye"></i><?= $lang['view_aetitle'] ?></a>
+                            <a class="ahref" href="view_login.php"><i class="fas fa-eye"></i>List Login</a>
                             <br><br>
                         </div>
                     </div>
@@ -90,17 +90,22 @@ if ($_SESSION['level'] == "admin") {
 
                             <div class="aetitle-box">
                                 <form action="" method="post">
-                                    <label for="aet">AE TITLE</label>
-                                    <input class="form-control" type="text" name="aet" required><br />
-                                    <label for="hostname">IP/Hostname</label>
-                                    <input class="form-control" type="text" name="hostname" required><br />
-                                    <label for="port">PORT</label>
-                                    <input class="form-control" type="text" name="port" required><br />
-                                    <!-- <label for="color">COLOR</label>
-                                    <input class="form-control" type="color" name="color" required><br /> -->
-                                    <label for="port">Password Confirm</label>
-                                    <input class="form-control" type="password" name="passwordconfirm" required><br />
-                                    <input type="submit" class="btn btn-success" name="submit" value="SAVE" style="margin: 0px; font-size: 12px; font-weight: bold;">
+                                    <input type="hidden" name="id_table">
+                                    <label for="username"><b>Username</b></label><br>
+                                    <input class="form-control" type="text" name="username" id="username" required>
+                                    <label for="password"><b><?= $lang['input_pw'] ?></b></label><br>
+                                    <input class="form-control" type="password" name="password" id="password" placeholder="<?= $lang['input_pw'] ?>.." required>
+                                    <label for="passwordulang"><b><?= $lang['input_pw2'] ?></b></label><br>
+                                    <input class="form-control" type="password" name="passwordulang" id="passwordulang" placeholder="<?= $lang['input_pw2'] ?>.." required><br>
+                                    <label for="level"><b>Level</b></label><br>
+                                    <select name="level">
+                                        <option value="refferal">Referral</option>
+                                        <option value="radiographer">Radiographer</option>
+                                        <option value="radiology">Radiology</option>
+                                        <option value="admin">Admin</option>
+                                        <option value="superadmin">Superadmin</option>
+                                    </select>
+                                    <button class="btn-worklist" type="submit" name="submit">Save</button>
                                 </form>
                             </div>
                         </div>
