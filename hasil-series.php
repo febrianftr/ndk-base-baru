@@ -58,12 +58,15 @@ $row = mysqli_fetch_assoc(mysqli_query(
 			<table class="table-dicom" id="example" style="margin-top: 3px;" cellpadding="8" cellspacing="0">
 				<thead class="thead1">
 					<tr>
-						<th>Series</th>
 						<th>Body Part</th>
+						<th>Series</th>
+						<th>Laterality</th>
 						<th>Src Aet</th>
 						<th><?= $lang['modality'] ?></th>
 						<th>#i</th>
-						<th>Create Time</th>
+						<th>Department</th>
+						<th>Created Date</th>
+						<th>Updated Date</th>
 					</tr>
 					<?php
 					$pk_study = $row['pk_study'];
@@ -74,15 +77,17 @@ $row = mysqli_fetch_assoc(mysqli_query(
 						FROM $table_series
 						WHERE study_fk = '$pk_study'"
 					);
-					while ($row1 = mysqli_fetch_assoc($query)) {
-					?>
+					while ($row1 = mysqli_fetch_assoc($query)) { ?>
 						<tr>
-							<td align="left"><?= defaultValue($row1['series_desc']) ?></td>
 							<td align="left"><?= defaultValue($row1['body_part']); ?></td>
+							<td align="left"><?= defaultValue($row1['series_desc']) ?></td>
+							<td align="left"><?= defaultValue($row1['laterality']) ?></td>
 							<td align="left"><?= defaultValue($row1['src_aet']); ?></td>
 							<td align="left"><?= defaultValue($row1['modality']); ?></td>
 							<td align="left"><?= defaultValue($row1['num_instances']); ?></td>
+							<td align="left"><?= defaultValue($row1['department']) ?></td>
 							<td align="left"><?= defaultValueDateTime($row1['created_time']); ?></td>
+							<td align="left"><?= defaultValueDateTime($row1['updated_time']); ?></td>
 						</tr>
 					<?php
 					}

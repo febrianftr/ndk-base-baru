@@ -38,6 +38,7 @@ $study_desc = defaultValue($row['study_desc']);
 $mods_in_study = defaultValue($row['mods_in_study']);
 $num_series = defaultValue($row['num_series']);
 $num_instances = defaultValue($row['num_instances']);
+$created_time = defaultValueDateTime($row['created_time']);
 $updated_time = defaultValueDateTime($row['updated_time']);
 $pat_id = defaultValue($row['pat_id']);
 $weight = defaultValue($row['weight']);
@@ -50,6 +51,7 @@ $priority = defaultValue($row['priority']);
 $priority_doctor = defaultValue($row['priority_doctor']);
 $radiographer_name = defaultValue($row['radiographer_name']);
 $create_time = defaultValueDateTime($row['create_time']);
+$examed_at = defaultValueDateTime($row['examed_at']);
 $pat_state = defaultValue($row['pat_state']);
 $spc_needs = defaultValue($row['spc_needs']);
 $payment = defaultValue($row['payment']);
@@ -221,7 +223,7 @@ if ($row['status'] == 'waiting' || $row['status'] == '') {
                 <tr>
                     <td><?= $lang['exam_date'] ?></td>
                     <td>&nbsp;: </td>
-                    <td align="left">&nbsp; <?= $study_datetime; ?></td>
+                    <td align="left">&nbsp; <?= $examed_at; ?></td>
                 </tr>
                 <tr>
                     <td><?= $lang['study_date'] ?></td>
@@ -237,6 +239,16 @@ if ($row['status'] == 'waiting' || $row['status'] == '') {
                     <td><?= $lang['spend_time'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= $spendtime; ?></td>
+                </tr>
+                <tr>
+                    <td>Created Date</td>
+                    <td>&nbsp;: </td>
+                    <td align="left">&nbsp; <?= $created_time; ?></td>
+                </tr>
+                <tr>
+                    <td>Updated Date</td>
+                    <td>&nbsp;: </td>
+                    <td align="left">&nbsp; <?= $updated_time; ?></td>
                 </tr>
             </thead>
         </table>

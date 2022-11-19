@@ -10,6 +10,7 @@ study.mods_in_study,
 study.num_series,
 study.num_instances,
 study.retrieve_aets,
+study.created_time,
 study.updated_time";
 
 $table_study = "$database_pacsio.study AS study";
