@@ -1,5 +1,5 @@
 <?php
-require '../koneksi/koneksi.php';
+require 'koneksi/koneksi.php';
 $template_id = $_POST['template_id'];
 $row = mysqli_fetch_assoc(mysqli_query(
     $conn,

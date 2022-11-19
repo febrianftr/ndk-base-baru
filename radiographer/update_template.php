@@ -5,19 +5,33 @@ session_start();
 $template_id = $_GET["template_id"];
 // $jml = mysqli_num_rows($result2);
 if (isset($_POST["submit"])) {
-	if (ubah_temp_new($_POST) > 0) {
-		echo "
-<script>
-	alert('Data Berhasil diubah');
-	document.location.href= 'view_template.php';
-</script>
-";
+	if (update_template($_POST) > 0) {
+		echo "<script type='text/javascript'>
+            setTimeout(function () { 
+            swal({
+                    title: 'Berhasil Diinput!',
+                    text:  '',
+                    icon: 'success',
+                    timer: 1000,
+                    showConfirmButton: true
+                });  
+            },10); 
+            window.setTimeout(function(){ 
+            window.location.replace('view_template.php');
+            } ,1000); 
+        </script>";
 	} else {
-		echo "
-<script>
-	alert('Data Gagal diubah');
-	document.location.href= 'view_template.php';
-</script>";
+		echo "<script type='text/javascript'>
+            setTimeout(function () { 
+            swal({
+                    title: 'Gagal Diinput!',
+                    text:  '',
+                    icon: 'error',
+                    timer: 1000,
+                    showConfirmButton: true
+                });  
+            },10);
+        </script>";
 	}
 }
 $result = mysqli_query($conn, "SELECT * FROM xray_dokter_radiology");
@@ -53,7 +67,7 @@ if ($_SESSION['level'] == "radiographer") {
 						<?php
 						$result2 =  mysqli_query($conn, "SELECT * FROM xray_template WHERE template_id = '$template_id' ");
 						$row2 = mysqli_fetch_assoc($result2);
-						
+
 						?>
 						<form action="" method="post">
 							<input type="hidden" name="template_id" value="<?= $row2["template_id"]; ?>">

@@ -111,6 +111,23 @@
 <script>
     // untuk menampilkan data popup
     $(function() {
+        $(document).on('click', '.view-template', function(e) {
+            e.preventDefault();
+            $("#view-template").modal('show');
+            $.post('../hasil-template.php', {
+                    template_id: $(this).attr('data-id')
+                },
+                function(html) {
+                    $(".modal-body").html(html);
+                }
+            );
+        });
+    });
+    // end untuk menampilkan data popup
+</script>
+<script>
+    // untuk menampilkan data popup
+    $(function() {
         $(document).on('click', '.edit-record', function(e) {
             e.preventDefault();
             $("#myModal").modal('show');

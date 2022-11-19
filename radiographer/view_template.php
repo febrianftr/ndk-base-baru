@@ -50,7 +50,7 @@ if ($_SESSION['level'] == "radiographer") {
             </div>
           </div>
         </div>
-
+        <?php require '../modal.php'; ?>
       </div>
     </div>
 

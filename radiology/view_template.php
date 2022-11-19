@@ -50,7 +50,7 @@ if ($_SESSION['level'] == "radiology") {
             </div>
           </div>
         </div>
-
+        <?php require '../modal.php'; ?>
       </div>
     </div>
 
@@ -60,6 +60,26 @@ if ($_SESSION['level'] == "radiology") {
       </div>
     </div>
     <?php include('script-footer.php'); ?>
+    <script>
+      $(document).ready(function() {
+        $('.tombol-hapus').on('click', function(e) {
+          e.preventDefault();
+          const href = $(this).attr('href');
+          swal({
+              title: "Hapus",
+              text: "Yakin ingin menghapus?",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+            })
+            .then((result) => {
+              if (result) {
+                document.location.href = href;
+              }
+            })
+        });
+      });
+    </script>
     <script>
       $(document).ready(function() {
         $("li[data-target='#template']").addClass("active");

@@ -5,19 +5,36 @@ require 'function_radiographer.php';
 session_start();
 
 if (isset($_POST["submit"])) {
-  if (new_temp($_POST) > 0) {
-    echo "
-<script>
-  alert('Template Berhasil ditambahkan');
-  document.location.href= 'view_template.php';
-</script>
-";
+  if (new_template($_POST) > 0) {
+    echo "<script type='text/javascript'>
+            setTimeout(function () { 
+            swal({
+                    title: 'Berhasil Diinput!',
+                    text:  '',
+                    icon: 'success',
+                    timer: 1000,
+                    showConfirmButton: true
+                });  
+            },10); 
+            window.setTimeout(function(){ 
+            window.location.replace('view_template.php');
+            } ,1000); 
+        </script>";
   } else {
-    echo "
-<script>
-  alert('Template Gagal ditambahkan');
-  document.location.href= 'new_template.php';
-</script>";
+    echo "<script type='text/javascript'>
+            setTimeout(function () { 
+            swal({
+                    title: 'Gagal Diinput!',
+                    text:  '',
+                    icon: 'error',
+                    timer: 1000,
+                    showConfirmButton: true
+                });  
+            },10); 
+            window.setTimeout(function(){ 
+            window.location.replace('new_template.php');
+            } ,1000); 
+        </script>";
   }
 }
 
@@ -58,8 +75,8 @@ if ($_SESSION['level'] == "radiographer") {
               <h1><?= $lang['create_template'] ?></h1>
 
               <form action="" method="post">
-                <input class="form-control" type="text" name="title" placeholder="<?= $lang['insert_tittle'] ?>.." style="width: 100%; margin-bottom: 7px;">
-                <textarea class="ckeditor" name="fill" style="width: 100%; height: 250px;" id="ckeditor"></textarea>
+                <input class="form-control" type="text" name="title" placeholder="<?= $lang['insert_tittle'] ?>.." style="width: 100%; margin-bottom: 7px;" required>
+                <textarea class="ckeditor" name="fill" style="width: 100%; height: 250px;" id="ckeditor" required></textarea>
                 <select name="username">
                   <?php while ($row = mysqli_fetch_assoc($result)) { ?>
                     <option value="<?= $row['username']; ?>"><?= $row['dokrad_name'] . ' ' . $row['dokrad_lastname']; ?></option>

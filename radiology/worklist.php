@@ -425,25 +425,6 @@ if ($_SESSION['level'] == "radiology") { ?>
 						</div>
 					</div>
 				</div>
-				<!-- Modal -->
-				<div class="modal fade" id="view-template" role="dialog">
-					<div class="modal-dialog modal-lg">
-						<!-- Modal content-->
-						<div class="modal-content">
-							<div class="modal-header">
-								<h4 class="modal-title">Report</h4>
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-							</div>
-							<div class="modal-body">
-								<textarea style="width: 100%; height: 320px;"><?= $template['template_id'];  ?></textarea>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- Modal -->
 			</div>
 		</div>
 		<div class="footerindex">
@@ -457,23 +438,6 @@ if ($_SESSION['level'] == "radiology") { ?>
 			$(document).ready(function() {
 				$("li[id='worklist1']").addClass("active");
 			});
-		</script>
-		<script>
-			// untuk menampilkan data popup
-			$(function() {
-				$(document).on('click', '.view-template', function(e) {
-					e.preventDefault();
-					$("#view-template").modal('show');
-					$.post('hasil-template.php', {
-							template_id: $(this).attr('data-id')
-						},
-						function(html) {
-							$(".modal-body").html(html);
-						}
-					);
-				});
-			});
-			// end untuk menampilkan data popup
 		</script>
 		<script>
 			CKEDITOR.replace('ckeditor', {

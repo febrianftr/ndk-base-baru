@@ -1,3 +1,4 @@
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <?php
 
 require '../koneksi/koneksi.php';
@@ -235,12 +236,12 @@ function hapus_temp_new($template_id)
 	return mysqli_affected_rows($conn);
 }
 
-function ubah_temp_new($ubah_template_id)
+function update_template($value)
 {
 	global $conn;
-	$template_id = $ubah_template_id['template_id'];
-	$title = $ubah_template_id['title'];
-	$fill = $ubah_template_id['fill'];
+	$template_id = $value['template_id'];
+	$title = $value['title'];
+	$fill = $value['fill'];
 
 	mysqli_query($conn, "UPDATE xray_template SET 
 				title = '$title',
@@ -250,7 +251,7 @@ function ubah_temp_new($ubah_template_id)
 	return mysqli_affected_rows($conn);
 }
 
-function new_temp($new_template)
+function new_template($new_template)
 {
 	global $conn;
 	$title = $new_template['title'];
