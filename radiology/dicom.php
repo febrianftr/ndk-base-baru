@@ -117,7 +117,7 @@ if ($_SESSION['level'] == "radiology") {
 							"data": "radiographer_name"
 						},
 						{
-							"data": "updated_time"
+							"data": "study_datetime"
 						},
 						{
 							"data": "approve_date"

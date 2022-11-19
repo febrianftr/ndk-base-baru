@@ -13,7 +13,7 @@ $username = $_SESSION['username'];
 $level = $_SESSION['level'];
 
 // kolom untuk order by 
-$columns = array('pk', 'pk', 'status', 'pat_name', 'pat_id', 'patientid', 'pat_birthdate', 'pat_sex', 'study_desc', 'pk', 'mods_in_study', 'named', 'name_dep', 'dokrad_name', 'radiographer_name', 'updated_time', 'approved_at', 'pk');
+$columns = array('pk', 'pk', 'status', 'pat_name', 'pat_id', 'patientid', 'pat_birthdate', 'pat_sex', 'study_desc', 'pk', 'mods_in_study', 'named', 'name_dep', 'dokrad_name', 'radiographer_name', 'study_datetime', 'approved_at', 'pk');
 
 $row_dokrad = mysqli_fetch_assoc(mysqli_query(
   $conn,
@@ -50,13 +50,13 @@ if ($level == 'radiology') {
 }
 
 if ($_POST["is_date_search"] == "yes") {
-  $from = date_create($_POST["from_updated_time"]);
-  $from_updated_time = date_format($from, "Y-m-d H:i");
+  $from = date_create($_POST["from_study_datetime"]);
+  $from_study_datetime = date_format($from, "Y-m-d H:i");
 
-  $to = date_create($_POST["to_updated_time"]);
-  $to_updated_time = date_format($to, "Y-m-d H:i");
+  $to = date_create($_POST["to_study_datetime"]);
+  $to_study_datetime = date_format($to, "Y-m-d H:i");
 
-  $query .= 'study.updated_time BETWEEN "' . $from_updated_time . '" AND "' . $to_updated_time . '" AND ';
+  $query .= 'study.study_datetime BETWEEN "' . $from_study_datetime . '" AND "' . $to_study_datetime . '" AND ';
 }
 
 // kolom untuk mencari LIKE masing2 kolom (SEARCHING)
@@ -71,7 +71,7 @@ if (isset($_POST["search"]["value"])) {
   OR mods_in_study LIKE "%' . $_POST["search"]["value"] . '%" 
   OR named LIKE "%' . $_POST["search"]["value"] . '%"
   OR radiographer_name LIKE "%' . $_POST["search"]["value"] . '%"
-  OR study.updated_time LIKE "%' . $_POST["search"]["value"] . '%"
+  OR study.study_datetime LIKE "%' . $_POST["search"]["value"] . '%"
   OR approved_at LIKE "%' . $_POST["search"]["value"] . '%"
   )';
 }
@@ -103,7 +103,7 @@ if (isset($_POST["order"])) {
   $query .= 'ORDER BY ' . $columns[$_POST['order']['0']['column']] . ' ' . $_POST['order']['0']['dir'] . ' 
  ';
 } else {
-  $query .= 'ORDER BY study.updated_time DESC ';
+  $query .= 'ORDER BY study.study_datetime DESC ';
 }
 
 $query1 = '';
@@ -150,7 +150,7 @@ while ($row = mysqli_fetch_array($result)) {
   $status = styleStatus($row['status']);
   $fromorder = $row['fromorder'];
   $approved_at = defaultValueDateTime($row['approved_at']);
-  $spendtime = spendTime($updated_time, $approved_at, $row['status']);
+  $spendtime = spendTime($study_datetime, $approved_at, $row['status']);
   $pk_dokter_radiology = $row['pk_dokter_radiology'];
   //kondisi status change doctor
   if ($row['status'] == 'approved') {
@@ -250,7 +250,7 @@ while ($row = mysqli_fetch_array($result)) {
   $sub_array[] = $name_dep;
   $sub_array[] = $dokrad_name;
   $sub_array[] = $radiographer_name;
-  $sub_array[] = $updated_time;
+  $sub_array[] = $study_datetime;
   $sub_array[] = $approved_at;
   $sub_array[] = $spendtime;
   $sub_array[]  = $i++;

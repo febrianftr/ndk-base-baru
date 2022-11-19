@@ -44,7 +44,7 @@ if ($radiographerName == 'all') {
 }
 
 // kondisi form
-$kondisi = "study.updated_time BETWEEN '$fromUpdatedTime' AND '$toUpdatedTime'
+$kondisi = "study.study_datetime BETWEEN '$fromUpdatedTime' AND '$toUpdatedTime'
             AND mods_in_study IN('$modsInStudy')
             AND priority_doctor IN('$priorityDoctor')
             AND radiographer_name IN('$radiographerName')
@@ -64,6 +64,7 @@ $patient = mysqli_query($conn_pacsio, "SELECT
             mods_in_study,
             study_desc,
             study.updated_time,
+            study.study_datetime,
             study_datetime,
             examed_at,
             film_small,
@@ -87,7 +88,7 @@ $patient = mysqli_query($conn_pacsio, "SELECT
             JOIN $table_workload_bhp
             ON study.study_iuid = xray_workload_bhp.uid
             WHERE $kondisi
-            ORDER BY study.updated_time DESC");
+            ORDER BY study.study_datetime DESC");
 
 // menampilkan jumlah film
 $sum = mysqli_fetch_array(mysqli_query(
@@ -185,12 +186,12 @@ $totalStatus = mysqli_fetch_array(mysqli_query(
 $approved = mysqli_fetch_array(mysqli_query(
     $conn_pacsio,
     "SELECT 
-    SUM((SELECT TIMESTAMPDIFF(MINUTE, study.updated_time, CONCAT(approved_at)) <= 180)) AS less_than_three_hour,
-    SUM((SELECT TIMESTAMPDIFF(MINUTE, study.updated_time, CONCAT(approved_at)) > 180)) AS greater_than_three_hour,
-    (SUM((SELECT TIMESTAMPDIFF(MINUTE, study.updated_time, CONCAT(approved_at)) <= 180)) /
+    SUM((SELECT TIMESTAMPDIFF(MINUTE, study.study_datetime, CONCAT(approved_at)) <= 180)) AS less_than_three_hour,
+    SUM((SELECT TIMESTAMPDIFF(MINUTE, study.study_datetime, CONCAT(approved_at)) > 180)) AS greater_than_three_hour,
+    (SUM((SELECT TIMESTAMPDIFF(MINUTE, study.study_datetime, CONCAT(approved_at)) <= 180)) /
         ($totalApproved[count_approved_at])
     ) * 100 AS persentase_less_than_three_hour,
-    (SUM((SELECT TIMESTAMPDIFF(MINUTE, study.updated_time, CONCAT(approved_at)) > 180)) /
+    (SUM((SELECT TIMESTAMPDIFF(MINUTE, study.study_datetime, CONCAT(approved_at)) > 180)) /
         ($totalApproved[count_approved_at])
     ) * 100 AS persentase_greater_than_three_hour
     FROM $table_patient
@@ -413,7 +414,7 @@ while ($status = mysqli_fetch_array($statuses)) {
                 $kv = strtoupper(defaultValue($row['kv']));
                 $mas = strtoupper(defaultValue($row['mas']));
                 $approved_at = defaultValueDateTime($row['approved_at']);
-                $spendtime = spendTime($updated_time, $approved_at, $row['status']);
+                $spendtime = spendTime($study_datetime, $approved_at, $row['status']);
             ?>
                 <tr>
                     <td align="center"><?= $no; ?></td>

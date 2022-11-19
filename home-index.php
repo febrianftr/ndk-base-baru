@@ -6,7 +6,7 @@ $query = "SELECT COUNT(*) AS total
 FROM $table_study
 JOIN $table_workload
 ON study.study_iuid = xray_workload.uid
-WHERE DATE(updated_time) = CURRENT_DATE()";
+WHERE DATE(study_datetime) = CURRENT_DATE()";
 
 // total studies
 $total = mysqli_fetch_assoc(mysqli_query(
@@ -211,7 +211,7 @@ $approved = mysqli_fetch_assoc(mysqli_query(
           "data": "radiographer_name"
         },
         {
-          "data": "updated_time"
+          "data": "study_datetime"
         },
         {
           "data": "approve_date"

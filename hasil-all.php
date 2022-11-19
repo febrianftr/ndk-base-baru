@@ -24,7 +24,7 @@ $row = mysqli_fetch_assoc(mysqli_query(
     LEFT JOIN $table_workload
     ON study.study_iuid = xray_workload.uid
     WHERE study.study_iuid = '$uid'
-    ORDER BY study.updated_time DESC"
+    ORDER BY study.study_datetime DESC"
 ));
 $pat_name = defaultValue($row['pat_name']);
 $pat_sex = styleSex($row['pat_sex']);
@@ -55,7 +55,7 @@ $spc_needs = defaultValue($row['spc_needs']);
 $payment = defaultValue($row['payment']);
 $status = styleStatus($row['status']);
 $approved_at = defaultValueDateTime($row['approved_at']);
-$spendtime = spendTime($updated_time, $approved_at, $row['status']);
+$spendtime = spendTime($study_datetime, $approved_at, $row['status']);
 $fromorder = $row['fromorder'];
 $pk_dokter_radiology = $row['pk_dokter_radiology'];
 
@@ -226,7 +226,7 @@ if ($row['status'] == 'waiting' || $row['status'] == '') {
                 <tr>
                     <td><?= $lang['study_date'] ?></td>
                     <td>&nbsp;: </td>
-                    <td align="left">&nbsp; <?= $updated_time; ?></td>
+                    <td align="left">&nbsp; <?= $study_datetime; ?></td>
                 </tr>
                 <tr>
                     <td><?= $lang['approve_date'] ?></td>

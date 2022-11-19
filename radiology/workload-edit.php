@@ -56,7 +56,7 @@ $fromorder = $row['fromorder'];
 $status = styleStatus($row['status']);
 $fill = $row['fill'];
 $approved_at = defaultValueDateTime($row['approved_at']);
-$spendtime = spendTime($updated_time, $approved_at, $row['status']);
+$spendtime = spendTime($study_datetime, $approved_at, $row['status']);
 $pk_study = $row['pk_study'];
 $detail_uid = '<a href="#" class="hasil-all penawaran-a" data-id="' . $uid . '">' . removeCharacter($pat_name) . '</a>';
 
@@ -70,7 +70,7 @@ $query_mrn = mysqli_query(
 	ON patient.pk = study.patient_fk 
 	WHERE pat_id = '$row[pat_id]'
 	AND study.study_iuid != '$uid'
-	ORDER BY study.updated_time DESC"
+	ORDER BY study.study_datetime DESC"
 );
 
 if (isset($_POST["save_template"])) {
@@ -257,7 +257,7 @@ if ($_SESSION['level'] == "radiology") { ?>
 														<td><span class="table-left">Waktu Pemeriksaan</span></td>
 													</tr>
 													<tr>
-														<td><strong class="text-dark text-center"><?= defaultValueDateTime($mrn['updated_time']); ?></strong></td>
+														<td><strong class="text-dark text-center"><?= defaultValueDateTime($mrn['study_datetime']); ?></strong></td>
 													</tr>
 													<tr>
 														<td>

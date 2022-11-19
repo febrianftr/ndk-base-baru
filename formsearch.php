@@ -9,10 +9,10 @@ $date2 = date('d-m-Y 23:59');
                 <label class="work-1"><?= $lang['search_date'] ?></label><br>
                 <div class="wrap-search">
                     <span class="date-icon">
-                        <input type="text" name="from_updated_time" id="from_updated_time" class="form-control" placeholder="From Date" value="<?= $date ?>" autocomplete="off" />
+                        <input type="text" name="from_study_datetime" id="from_study_datetime" class="form-control" placeholder="From Date" value="<?= $date ?>" autocomplete="off" />
                     </span>
                     <span class="date-icon">
-                        <input type="text" name="to_updated_time" id="to_updated_time" class="form-control" placeholder="To Date" value="<?= $date2 ?>" autocomplete="off" /><br></span>
+                        <input type="text" name="to_study_datetime" id="to_study_datetime" class="form-control" placeholder="To Date" value="<?= $date2 ?>" autocomplete="off" /><br></span>
                 </div>
             </div>
             <div style="padding: 0px;" class="col-lg-4 input-checkbox">

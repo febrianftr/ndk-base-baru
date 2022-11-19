@@ -29,11 +29,11 @@ if ($dicom == '/dicom.php') {
     // OR kondisi pk_dokter_radiology is null (tidak integrasi simrs) dan ketika login dokter radiologi. 
     $kondisi = "WHERE (xray_workload.status = 'waiting' AND xray_order.dokradid = '$dokradid')
                 OR (xray_order.dokradid IS NULL)
-                ORDER BY xray_order.priority IS NULL, xray_order.priority ASC, study.updated_time DESC 
+                ORDER BY xray_order.priority IS NULL, xray_order.priority ASC, study.study_datetime DESC 
                 LIMIT 3000";
 } else {
     // (getAll.php) kondisi
-    $kondisi = 'ORDER BY study.updated_time DESC LIMIT 1000';
+    $kondisi = 'ORDER BY study.study_datetime DESC LIMIT 1000';
 }
 
 $query = mysqli_query(
@@ -85,7 +85,7 @@ while ($row = mysqli_fetch_array($query)) {
     $status = styleStatus($row['status']);
     $fill = $row['fill'];
     $approved_at = defaultValueDateTime($row['approved_at']);
-    $spendtime = spendTime($updated_time, $approved_at, $row['status']);
+    $spendtime = spendTime($study_datetime, $approved_at, $row['status']);
     $pk_dokter_radiology = $row['pk_dokter_radiology'];
     //kondisi status change doctor
     if ($row['status'] == 'approved') {
@@ -180,7 +180,7 @@ while ($row = mysqli_fetch_array($query)) {
         "name_dep" => $name_dep,
         "dokrad_name" => $dokrad_name,
         "radiographer_name" => $radiographer_name,
-        "updated_time" => $updated_time,
+        "study_datetime" => $study_datetime,
         "approve_date" => $approved_at,
         "spendtime" => $spendtime
     ];

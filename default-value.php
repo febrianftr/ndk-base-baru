@@ -34,12 +34,12 @@ function diffDate($value)
     return $result;
 }
 
-function spendTime($value_updated_time, $value_approved_at, $value_status)
+function spendTime($value_study_datetime, $value_approved_at, $value_status)
 {
-    $updated_time = date("Y-m-d H:i", strtotime($value_updated_time));
+    $study_datetime = date("Y-m-d H:i", strtotime($value_study_datetime));
     $approved_at = date("Y-m-d H:i", strtotime($value_approved_at));
     if ($value_status == 'APPROVED' || $value_status == 'approved') {
-        $interval = strtotime($approved_at) - strtotime($updated_time);
+        $interval = strtotime($approved_at) - strtotime($study_datetime);
         $hour = floor($interval / (60 * 60));
         $minute = $interval - $hour * (60 * 60);
         $minute = $minute / 60;

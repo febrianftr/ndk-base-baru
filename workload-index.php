@@ -14,13 +14,13 @@
 				<?php require 'thead.php'; ?>
 			</thead>
 		</table>
-</div>
+	</div>
 </div>
 <?php require 'modal.php'; ?>
 <script src="js/3.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery.datetimepicker.full.js"></script>
 <script>
-	$('#from_updated_time').datetimepicker({
+	$('#from_study_datetime').datetimepicker({
 		format: 'd-m-Y H:i',
 		allowTimes: ['00:00',
 			'01:00',
@@ -49,7 +49,7 @@
 			'23:59'
 		]
 	});
-	$('#to_updated_time').datetimepicker({
+	$('#to_study_datetime').datetimepicker({
 		format: 'd-m-Y H:i',
 		allowTimes: ['00:00',
 			'01:00',
@@ -86,7 +86,7 @@
 		});
 		fetch_data('no');
 
-		function fetch_data(is_date_search = 'yes', from_updated_time = '', to_updated_time = '', mods_in_study = '', pat_name = '', mrn = '') {
+		function fetch_data(is_date_search = 'yes', from_study_datetime = '', to_study_datetime = '', mods_in_study = '', pat_name = '', mrn = '') {
 			var dataTable = $('#purchase_order').DataTable({
 				"processing": true,
 				"serverSide": true,
@@ -97,8 +97,8 @@
 					type: "POST",
 					data: {
 						is_date_search: is_date_search,
-						from_updated_time: from_updated_time,
-						to_updated_time: to_updated_time,
+						from_study_datetime: from_study_datetime,
+						to_study_datetime: to_study_datetime,
 						mods_in_study: mods_in_study,
 						pat_name: pat_name,
 						mrn: mrn
@@ -108,14 +108,14 @@
 		}
 
 		$('#range').click(function() {
-			var from_updated_time = $('#from_updated_time').val();
-			var to_updated_time = $('#to_updated_time').val();
+			var from_study_datetime = $('#from_study_datetime').val();
+			var to_study_datetime = $('#to_study_datetime').val();
 			var pat_name = $('#pat_name').val();
 			var mrn = $('#mrn').val();
 			var mods_in_study = get_filter('checkbox');
-			if (from_updated_time != '' && to_updated_time != '') {
+			if (from_study_datetime != '' && to_study_datetime != '') {
 				$('#purchase_order').DataTable().destroy();
-				fetch_data('yes', from_updated_time, to_updated_time, mods_in_study, pat_name, mrn);
+				fetch_data('yes', from_study_datetime, to_study_datetime, mods_in_study, pat_name, mrn);
 			} else {
 				alert("Please Select Date");
 			}
