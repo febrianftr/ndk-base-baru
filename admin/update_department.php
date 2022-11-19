@@ -2,22 +2,22 @@
 require 'function_dokter.php';
 session_start();
 //ambil data di url
-$depid = $_GET["depid"];
-$row = query("SELECT * FROM xray_department WHERE depid=$depid")[0];
+$pk = $_GET["pk"];
+$row = mysqli_fetch_assoc(mysqli_query(
+	$conn,
+	"SELECT * FROM xray_department WHERE pk = '$pk'"
+));
 if (isset($_POST["submit"])) {
-	if (ubah_dep($_POST) > 0) {
-		echo "
-<script>
-	alert('Data Berhasil diubah');
-	document.location.href= 'view_departmen.php';
-</script>
-";
+	if (update_department($_POST) > 0) {
+		echo "<script>
+				alert('Data Berhasil diubah');
+				document.location.href= 'view_department.php';
+			</script>";
 	} else {
-		echo "
-<script>
-	alert('Data Gagal diubah');
-	document.location.href= 'view_departmen.php';
-</script>";
+		echo "<script>
+				alert('Data Gagal diubah');
+				document.location.href= 'update_department.php?pk=$pk';
+			</script>";
 	}
 }
 if ($_SESSION['level'] == "admin") {
@@ -26,7 +26,7 @@ if ($_SESSION['level'] == "admin") {
 	<html>
 
 	<head>
-		<title>Ubah Data Departmen</title>
+		<title>Ubah Data Department</title>
 		<?php include('head.php'); ?>
 	</head>
 
@@ -36,8 +36,8 @@ if ($_SESSION['level'] == "admin") {
 			<ol class="breadcrumb1 breadcrumb">
 				<li class="breadcrumb-item"><a href="index.php">Home</a></li>
 				<li class="breadcrumb-item"><a href="administrator.php">Administrator</a></li>
-				<li class="breadcrumb-item"><a href="view_departmen.php">Tabel Departmen</a></li>
-				<li class="breadcrumb-item active" aria-current="page">Edit Data Departmen</li>
+				<li class="breadcrumb-item"><a href="view_department.php">Tabel Department</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Edit Data Department</li>
 				<li style="float: right;">
 					<label>Zoom</label>
 					<a href="#" id="decfont"><i class="fas fa-minus-circle"></i></a>
@@ -48,12 +48,16 @@ if ($_SESSION['level'] == "admin") {
 		<div id="container1">
 			<div id="content1">
 				<div class="body">
-					<h1>Ubah Data Departmen</h1>
+					<h1>Ubah Data Department</h1>
 					<div class="container-fluid">
 						<div class="row form-dokter">
 							<form action="" method="post">
-								<input type="hidden" name="depid" value="<?= $row["depid"]; ?>">
 								<ul>
+									<input type="hidden" name="pk" value="<?= $pk; ?>">
+									<li>
+										<label for="dep_id"><b>Department ID</b></label><br>
+										<input type="text" name="dep_id" id="dep_id" required value="<?= $row["dep_id"]; ?>">
+									</li>
 									<li>
 										<label for="name_dep"><b>Nama Department</b></label><br>
 										<input type="text" name="name_dep" id="name_dep" required value="<?= $row["name_dep"]; ?>">

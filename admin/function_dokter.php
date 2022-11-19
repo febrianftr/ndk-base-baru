@@ -264,50 +264,52 @@ function update_radiographer($value)
 ///////////////////////////DEPARTMEN/////////////////////////////////
 
 //untuk insert atau menambahkan
-function tambah_dep($post_departmen)
+function new_departement($value)
 {
 	global $conn;
-	$depid = $post_departmen['depid'];
-	$name_dep = $post_departmen['name_dep'];
 
+	$depid = $value['dep_id'];
+	$name_dep = $value['name_dep'];
 
-	//query insert data
-	$query = "INSERT INTO xray_department
-				VALUES
-				('$depid', '$name_dep')";
-
-	mysqli_query($conn, $query);
+	mysqli_query(
+		$conn,
+		"INSERT INTO xray_department (dep_id, name_dep)
+		VALUES('$depid', '$name_dep')"
+	);
 
 	return mysqli_affected_rows($conn);
 }
 
 //untuk menghapus
-function hapus_dep($depid)
+function delete_department($pk)
 {
 	global $conn;
-	mysqli_query($conn, "DELETE FROM xray_department 
-				WHERE depid = $depid
-				");
+
+	mysqli_query(
+		$conn,
+		"DELETE FROM xray_department 
+		WHERE pk = '$pk'"
+	);
 
 	return mysqli_affected_rows($conn);
 }
 
 
 //untuk mengubah / edit
-function ubah_dep($post_departmen)
+function update_department($value)
 {
 	global $conn;
-	$depid = $post_departmen['depid'];
-	$name_dep = $post_departmen['name_dep'];
+	$pk = $value['pk'];
+	$dep_id = $value['dep_id'];
+	$name_dep = $value['name_dep'];
 
-
-	//query insert data
-	$query = "UPDATE xray_department SET
-				name_dep = '$name_dep'
-				WHERE depid = '$depid'
-	";
-
-	mysqli_query($conn, $query);
+	mysqli_query(
+		$conn,
+		"UPDATE xray_department SET
+		dep_id = '$dep_id',
+		name_dep = '$name_dep'
+		WHERE pk = '$pk'"
+	);
 
 	return mysqli_affected_rows($conn);
 }

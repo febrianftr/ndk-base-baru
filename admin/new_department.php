@@ -2,19 +2,16 @@
 require 'function_dokter.php';
 session_start();
 if (isset($_POST["submit"])) {
-	if (tambah_dep($_POST) > 0) {
-		echo "
-<script>
-	alert('Data Berhasil ditambahkan');
-	document.location.href= 'view_departmen.php';
-</script>
-";
+	if (new_departement($_POST) > 0) {
+		echo "<script>
+				alert('Data Berhasil ditambahkan');
+				document.location.href= 'view_department.php';
+			</script>";
 	} else {
-		echo "
-<script>
-	alert('Data Gagal ditambahkan');
-	document.location.href= 'view_departmen.php';
-</script>";
+		echo "<script>
+				alert('Data Gagal ditambahkan');
+				document.location.href= 'view_department.php';
+			</script>";
 	}
 }
 if ($_SESSION['level'] == "admin") {
@@ -51,8 +48,8 @@ if ($_SESSION['level'] == "admin") {
 							<form action="" method="post" class="form_adm">
 								<ul>
 									<li>
-										<label for="depid"><b>Department ID</b></label><br>
-										<input type="text" id="depid" name="depid" placeholder="ID Department..."><br>
+										<label for="dep_id"><b>Department ID</b></label><br>
+										<input type="text" id="dep_id" name="dep_id" placeholder="ID Department..."><br>
 									</li>
 									<li>
 										<label for="name_dep"><b><?= $lang['departmen_name'] ?></b></label><br>

@@ -2,8 +2,10 @@
 require 'function_dokter.php';
 session_start();
 if (isset($_SESSION["username"]))
-
-	$data_departmen = query("SELECT * FROM xray_department");
+	$data_departmen = mysqli_query(
+		$conn,
+		"SELECT * FROM xray_department"
+	);
 if ($_SESSION['level'] == "admin") {
 ?>
 	<!DOCTYPE html>
@@ -28,7 +30,6 @@ if ($_SESSION['level'] == "admin") {
 				</li>
 			</ol>
 		</nav>
-
 		<div id="container1">
 			<div id="content1">
 				<div class="body">
@@ -36,10 +37,8 @@ if ($_SESSION['level'] == "admin") {
 					<br>
 					<div class="container-fluid">
 						<div class="">
-
-
 							<div class="col-md-12 table-box" style="overflow-x:auto;">
-								<a class="ahref" href="new_departmen.php"><i class="fas fa-plus"></i> <?= $lang['add_departmen'] ?></a>
+								<a class="ahref" href="new_department.php"><i class="fas fa-plus"></i> <?= $lang['add_departmen'] ?></a>
 								<br><br>
 								<table class="table-paginate table-dicom" border="1" cellpadding="8" cellspacing="0">
 									<thead>
@@ -51,18 +50,18 @@ if ($_SESSION['level'] == "admin") {
 										</tr>
 									</thead>
 									<?php $i = 1; ?>
-									<?php foreach ($data_departmen as $row) : ?>
+									<?php foreach ($data_departmen as $row) { ?>
 										<tr>
 											<td><?= $i ?></td>
-											<td><?= $row["depid"]; ?></td>
+											<td><?= $row["dep_id"]; ?></td>
 											<td><?= $row["name_dep"]; ?></td>
 											<td>
-												<a href="update_departmen.php?depid= <?= $row["depid"]; ?>"><img data-toggle="tooltip" title="Edit" class="iconbutton" src="../image/edit.png"></a>
-												<a href="delete_departmen.php?depid= <?= $row["depid"]; ?>" onclick="return confirm('Teruskan Menghapus Data?');"><img data-toggle="tooltip" title="Hapus" class="iconbutton" src="../image/delete.png"></a>
+												<a href="update_department.php?pk=<?= $row["pk"]; ?>"><img data-toggle="tooltip" title="Edit" class="iconbutton" src="../image/edit.png"></a>
+												<a href="delete_department.php?pk=<?= $row["pk"]; ?>" onclick="return confirm('Teruskan Menghapus Data?');"><img data-toggle="tooltip" title="Hapus" class="iconbutton" src="../image/delete.png"></a>
 											</td>
 										</tr>
 										<?php $i++; ?>
-									<?php endforeach; ?>
+									<?php } ?>
 								</table>
 							</div>
 
