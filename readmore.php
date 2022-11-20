@@ -112,19 +112,19 @@ if (!($_SESSION['username'] = $data['username'])) {
 
     <div class="sdsd container">
       <div class="row">
-       <div class="readbox">
-<a href="index.php" style="width: 100px;" class="positive ui button"><i class="fas fa-arrow-left"></i> Back to login</a>
+        <div class="readbox">
+          <a href="index.php" style="width: 100px;" class="positive ui button"><i class="fas fa-arrow-left"></i> Back to login</a>
 
 
           <h3 class="ui horizontal divider header">
-          <i class="fas fa-tags"></i>&nbsp;
-          Description
+            <i class="fas fa-tags"></i>&nbsp;
+            Description
           </h3>
           <p><b>Panduan Penggunaan Intiwid RisPacs.</b></p>
           <p>Download Panduan lengkap <a href="read-more/manual-book.docx">Di sini</a></p>
           <h3 class="ui horizontal divider header">
-          <i class="fas fa-chart-bar"></i>&nbsp;
-          Requirements
+            <i class="fas fa-chart-bar"></i>&nbsp;
+            Requirements
           </h3>
 
           <table class="ui definition table">
@@ -137,7 +137,7 @@ if (!($_SESSION['username'] = $data['username'])) {
                 <td>Web Viewer</td>
                 <td>Web Browser (Recommended Mozilla Firefox)</td>
               </tr>
-             
+
             </tbody>
           </table>
 
@@ -156,20 +156,20 @@ if (!($_SESSION['username'] = $data['username'])) {
                 <div class="description">Setting system environment variables di komputer anda. Search <b>edit the system environment variables</b>
                   Lalu pilih <b>environment variables</b> :
                   <div class="ui medium images">
-                    <img class="medium ui image"  src="read-more/img/rm-1.png">
-                    <img class="medium ui image"  src="read-more/img/rm-2.png">
+                    <img class="medium ui image" src="read-more/img/rm-1.png">
+                    <img class="medium ui image" src="read-more/img/rm-2.png">
                   </div><br>
-                   
+
                   Lalu pada tab <b>system variables</b> pilih <b>New</b>, Masukkan <b> Variable Name : JAVA_HOME</b> dan <b>Variable Value : C:\Program Files (x86)\Java\jdk1.7.0_55</b>
-                   <div class="ui medium images">
-                    <img class="medium ui image"  src="read-more/img/rm-3.png">
-                    <img class="medium ui image"  src="read-more/img/rm-4.png">
+                  <div class="ui medium images">
+                    <img class="medium ui image" src="read-more/img/rm-3.png">
+                    <img class="medium ui image" src="read-more/img/rm-4.png">
                   </div><br>
 
                   Lalu pada tab <b>Use variables for server pacs</b> pilih <b>path</b> lalu <b>Edit</b>, pilih <b>new</b> dan isi data: <b>C:\Program Files (x86)\Java\jdk1.7.0_55\bin</b> lalu pilih <b>OK</b>
-                   <div class="ui medium images">
-                    <img class="medium ui image"  src="read-more/img/rm-3.png">
-                    <img class="medium ui image"  src="read-more/img/rm-5.png">
+                  <div class="ui medium images">
+                    <img class="medium ui image" src="read-more/img/rm-3.png">
+                    <img class="medium ui image" src="read-more/img/rm-5.png">
                   </div><br>
                 </div>
               </div>
@@ -179,14 +179,14 @@ if (!($_SESSION['username'] = $data['username'])) {
                 <div class="header"><i class="fas fa-caret-right"></i> Configure Java</div>
                 <div class="description">Search dengan keyword <b>configure java</b>, Pilih <b>tab update</b>, klik <b>check for update automatically</b>, pilih <b>Do not check</b>
                   <div class="ui medium images">
-                    <img class="medium ui image"  src="read-more/img/rm-6.png">
-                    <img class="medium ui image"  src="read-more/img/rm-7.png">
-                    <img class="medium ui image"  src="read-more/img/rm-8.png">
+                    <img class="medium ui image" src="read-more/img/rm-6.png">
+                    <img class="medium ui image" src="read-more/img/rm-7.png">
+                    <img class="medium ui image" src="read-more/img/rm-8.png">
                   </div><br>
-                   
+
                   Lalu pilih <b>tab Security </b> dan <b>setting medium</b> dan pilih <b>OK</b>
-                   <div class="ui medium images">
-                    <img class="medium ui image"  src="read-more/img/rm-9.png">
+                  <div class="ui medium images">
+                    <img class="medium ui image" src="read-more/img/rm-9.png">
                   </div><br>
                 </div>
               </div>
@@ -195,8 +195,8 @@ if (!($_SESSION['username'] = $data['username'])) {
             </div>
           </div>
 
-          
-       </div>
+
+        </div>
       </div>
     </div><br><br><br><br>
 
@@ -223,7 +223,7 @@ if (!($_SESSION['username'] = $data['username'])) {
 
   </html>
 <?php } else {
-  if ($_SESSION['level'] == "admin") {
+  if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
     header("location:admin/administrator.php");
   } else if ($_SESSION['level'] == "superadmin") {
     header("location:superadmin/index.php");

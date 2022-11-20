@@ -4,6 +4,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/mdb.min.js"></script>
+    <script src="../radiology/ckeditor/ckeditor.js"></script>
     <script src="js/script.js"></script>
     <script src="navbar.js"></script>
     <!-- <script src="ckeditor/ckeditor.js"></script> -->
@@ -29,6 +30,23 @@
                 "deferRender": true
             });
         });
+    </script>
+    <script>
+        // untuk menampilkan data popup
+        $(function() {
+            $(document).on('click', '.view-template', function(e) {
+                e.preventDefault();
+                $("#view-template").modal('show');
+                $.post('../hasil-template.php', {
+                        template_id: $(this).attr('data-id')
+                    },
+                    function(html) {
+                        $(".modal-body").html(html);
+                    }
+                );
+            });
+        });
+        // end untuk menampilkan data popup
     </script>
 
     <!-- =======menghapus border pada div======== -->

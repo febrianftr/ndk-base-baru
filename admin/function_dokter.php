@@ -703,3 +703,25 @@ function delete_ae($pk)
 	);
 	return mysqli_affected_rows($conn_pacsio);
 }
+
+function update_template($value)
+{
+	global $conn;
+	$template_id = $value['template_id'];
+	$title = $value['title'];
+	$fill = $value['fill'];
+
+	mysqli_query($conn, "UPDATE xray_template SET 
+				title = '$title',
+				fill = '$fill'
+				WHERE template_id = '$template_id'
+	");
+	return mysqli_affected_rows($conn);
+}
+
+function delete_template($template_id)
+{
+	global $conn;
+	mysqli_query($conn, "DELETE FROM xray_template WHERE template_id = '$template_id' ");
+	return mysqli_affected_rows($conn);
+}

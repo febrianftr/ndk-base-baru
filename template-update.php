@@ -46,7 +46,7 @@ if (isset($_POST["submit"])) {
             <li>
                 <?php if ($_SESSION['level'] == 'radiology') { ?>
                     <input type="hidden" name="username">
-                <?php } else if ($_SESSION['level'] == 'radiographer') { ?>
+                <?php } else { ?>
                     <select name="username">
                         <?php while ($row = mysqli_fetch_assoc($result)) { ?>
                             <option value="<?= $row['username']; ?>" <?= $row['username'] == $row2['username'] ? 'selected' : "";  ?>><?= $row['dokrad_name'] . ' ' . $row['dokrad_lastname']; ?></option>

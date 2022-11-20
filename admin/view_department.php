@@ -6,7 +6,7 @@ if (isset($_SESSION["username"]))
 		$conn,
 		"SELECT * FROM xray_department"
 	);
-if ($_SESSION['level'] == "admin") {
+if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 ?>
 	<!DOCTYPE html>
 	<html>

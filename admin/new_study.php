@@ -35,7 +35,7 @@ if (isset($_POST["submit"])) {
 	</script>";
 	}
 }
-if ($_SESSION['level'] == "admin") {
+if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 ?>
 	<!DOCTYPE html>
 	<html>

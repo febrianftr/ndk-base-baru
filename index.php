@@ -172,17 +172,10 @@ if (!($_SESSION['username'] = $data['username'])) {
 
   </html>
 <?php } else {
-  $sub_query = "
-        INSERT INTO xray_login_details 
-        (username) 
-        VALUES ('" . $username . "')
-        ";
-  mysqli_query($conn, $sub_query);
-  // $_SESSION['login_details_id'] = $connect->lastInsertId();
-  if ($_SESSION['level'] == "admin") {
+  if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
     header("location:admin/administrator.php");
   } else if ($_SESSION['level'] == "superadmin") {
-    header("location:contract/update_contract.php");
+    header("location:admin/administrator.php");
   } else if ($_SESSION['level'] == "radiology") {
     header("location:radiology/dicom.php");
   } else if ($_SESSION['level'] == "radiographer") {

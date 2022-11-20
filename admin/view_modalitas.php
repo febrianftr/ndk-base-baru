@@ -6,7 +6,7 @@ $data_mod = mysqli_query(
 	$conn,
 	"SELECT * FROM xray_modalitas"
 );
-if ($_SESSION['level'] == "admin") {
+if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 ?>
 	<!DOCTYPE html>
 	<html>

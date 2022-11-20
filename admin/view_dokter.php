@@ -4,7 +4,7 @@ session_start();
 
 $data_dokter = mysqli_query($conn, "SELECT * FROM xray_dokter
 									");
-if ($_SESSION['level'] == "admin") {
+if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 ?>
 	<!DOCTYPE html>
 	<html>

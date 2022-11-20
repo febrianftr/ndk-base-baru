@@ -7,7 +7,7 @@ $data_dokter = mysqli_query($conn, "SELECT *
 									INNER JOIN xray_login
 									ON xray_radiographer.username = xray_login.username
 									");
-if ($_SESSION['level'] == "admin") {
+if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 ?>
     <!DOCTYPE html>
     <html>

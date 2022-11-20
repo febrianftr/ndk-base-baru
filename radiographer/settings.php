@@ -78,7 +78,7 @@ if ($_SESSION['level'] == "radiographer") {
                 </div>
 
                 <div class="col-xs-1 settingclass">
-                  <a href="new_template.php" style="text-decoration: none;">
+                  <a href="view_template.php" style="text-decoration: none;">
                     <div class="thumbnail">
                       <img src="../icon-menubar/template.svg">
                       <center>Template Expertise</center>
