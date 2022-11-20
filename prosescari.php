@@ -79,7 +79,7 @@ if (isset($_POST["search"]["value"])) {
 // jika modality disearch
 if (isset($_POST['mods_in_study']) && $_POST['mods_in_study'] != "") {
   $mods_in_study = implode("','", $_POST['mods_in_study']);
-  $mods_in_study = str_replace('\SR', '\\\SR', $mods_in_study);
+  $mods_in_study = str_replace('\\', '\\\\', $mods_in_study);
   $query .= "AND mods_in_study IN('" . $mods_in_study . "')
  ";
 }
