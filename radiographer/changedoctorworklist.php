@@ -14,35 +14,73 @@ $query_changedoctor = mysqli_query(
 	FROM $table_dokter_radiology WHERE dokradid NOT LIKE '$dokradid' "
 );
 
+?>
 
+<?php
 if (isset($_POST["submit"])) {
 	if ($_POST['status'] == 'waiting') {
 		if (ubahdokterworklist($_POST)) {
-			echo "
-			<script>
-				alert('Data berhasil dikirimkan');
-				document.location.href= 'workload.php';
+			echo "<script type='text/javascript'>
+				setTimeout(function () { 
+				swal({
+						title: 'Berhasil diubah!',
+						text:  '',
+						icon: 'success',
+						timer: 1000,
+						showConfirmButton: true
+					});  
+				},10); 
+				window.setTimeout(function(){ 
+				window.location.replace('workload.php');
+				} ,1000); 
 			</script>";
 		} else {
-			echo "
-			<script>
-				alert('data gagal dikirimkan');
-				document.location.href= 'changedoctorworklist.php?uid=$uid&dokradid=$dokradid&status=$status';
-			</script>";
+			echo "<script type='text/javascript'>
+			setTimeout(function () { 
+			swal({
+					title: 'Gagal Diubah!',
+					text:  '',
+					icon: 'error',
+					timer: 1000,
+					showConfirmButton: true
+				});  
+			},10); 
+			window.setTimeout(function(){ 
+			window.location.replace('changedoctorworklist.php?uid=$uid&dokradid=$dokradid&status=$status');
+			} ,1000); 
+		</script>";
 		}
 	} else {
 		if (ubahdokterworkload($_POST)) {
-			echo "
-			<script>
-				alert('Data berhasil dikirimkan');
-				document.location.href= 'workload.php';
+			echo "<script type='text/javascript'>
+				setTimeout(function () { 
+				swal({
+						title: 'Berhasil diubah!',
+						text:  '',
+						icon: 'success',
+						timer: 1000,
+						showConfirmButton: true
+					});  
+				},10); 
+				window.setTimeout(function(){ 
+				window.location.replace('workload.php');
+				} ,1000); 
 			</script>";
 		} else {
-			echo "
-			<script>
-				alert('data gagal dikirimkan');
-				document.location.href= 'changedoctorworklist.php?uid=$uid&dokradid=$dokradid&status=$status';
-			</script>";
+			echo "<script type='text/javascript'>
+			setTimeout(function () { 
+			swal({
+					title: 'Gagal Diubah!',
+					text:  '',
+					icon: 'error',
+					timer: 1000,
+					showConfirmButton: true
+				});  
+			},10); 
+			window.setTimeout(function(){ 
+			window.location.replace('changedoctorworklist.php?uid=$uid&dokradid=$dokradid&status=$status');
+			} ,1000); 
+		</script>";
 		}
 	}
 }
@@ -56,6 +94,8 @@ if ($_SESSION['level'] == "radiology" || $_SESSION['level'] == "radiographer") {
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Ubah</title>
+		<script type="text/javascript" src="../js/sweetalert.min.js" />
+		</script>
 		<?php include('head.php'); ?>
 	</head>
 
