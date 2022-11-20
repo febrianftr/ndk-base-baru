@@ -492,7 +492,7 @@ function hapus_worklistpacs($study_iuid)
 	return mysqli_affected_rows($conn_pacs);
 }
 
-function hapus_temp($template_id)
+function delete_template($template_id)
 {
 	global $conn;
 	mysqli_query($conn, "DELETE FROM xray_template WHERE template_id = '$template_id' ");
@@ -523,21 +523,6 @@ function update_template($value)
 	return mysqli_affected_rows($conn);
 }
 
-function new_template($new_template)
-{
-	global $conn;
-	$title = $new_template['title'];
-	$fill = $new_template['fill'];
-	$username = $new_template['username'];
-
-	$q5 = mysqli_query($conn, 'SELECT MAX(template_id) as user_id5 from xray_template');
-	$row5 = mysqli_fetch_assoc($q5);
-	$ai5 = $row5['user_id5'] + 1;
-
-	mysqli_query($conn, "INSERT INTO xray_template (template_id,title,fill,username) VALUES ('$ai5','$title','$fill','$username')");
-
-	return mysqli_affected_rows($conn);
-}
 
 function password($passwordid)
 {

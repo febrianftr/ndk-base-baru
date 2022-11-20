@@ -1,40 +1,7 @@
 <?php
 require 'function_radiographer.php';
 session_start();
-//ambil data di url
-$template_id = $_GET["template_id"];
-// $jml = mysqli_num_rows($result2);
-if (isset($_POST["submit"])) {
-	if (update_template($_POST) > 0) {
-		echo "<script type='text/javascript'>
-            setTimeout(function () { 
-            swal({
-                    title: 'Berhasil Diinput!',
-                    text:  '',
-                    icon: 'success',
-                    timer: 1000,
-                    showConfirmButton: true
-                });  
-            },10); 
-            window.setTimeout(function(){ 
-            window.location.replace('view_template.php');
-            } ,1000); 
-        </script>";
-	} else {
-		echo "<script type='text/javascript'>
-            setTimeout(function () { 
-            swal({
-                    title: 'Gagal Diinput!',
-                    text:  '',
-                    icon: 'error',
-                    timer: 1000,
-                    showConfirmButton: true
-                });  
-            },10);
-        </script>";
-	}
-}
-$result = mysqli_query($conn, "SELECT * FROM xray_dokter_radiology");
+
 if ($_SESSION['level'] == "radiographer") {
 ?>
 	<!DOCTYPE html>
@@ -49,7 +16,6 @@ if ($_SESSION['level'] == "radiographer") {
 		<?php include('sidebar.php'); ?>
 		<div class="container-fluid" id="main">
 			<div class="row">
-
 				<div class="col-12" style="padding-left: 0;">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
@@ -59,37 +25,8 @@ if ($_SESSION['level'] == "radiographer") {
 						</ol>
 					</nav>
 				</div>
-
 				<div class="container-fluid">
-
-					<div class="form-template col-12 col-md-offset-2">
-						<h1><?= $lang['create_template'] ?></h1>
-						<?php
-						$result2 =  mysqli_query($conn, "SELECT * FROM xray_template WHERE template_id = '$template_id' ");
-						$row2 = mysqli_fetch_assoc($result2);
-
-						?>
-						<form action="" method="post">
-							<input type="hidden" name="template_id" value="<?= $row2["template_id"]; ?>">
-
-							<label for="title"><b><?= $lang['title'] ?></b></label><br>
-							<input class="form-control" type="text" name="title" id="title" required value="<?= $row2["title"]; ?>">
-
-							<label for="fill"><b>Fill</b></label><br>
-							<textarea class="ckeditor" id="ckeditor" name="fill" id="fill"> <?= $row2["fill"]; ?> </textarea>
-
-							<label for="dokter"><b><?= $lang['radiology_physician'] ?></b></label><br>
-							<select name="username">
-								<?php while ($row = mysqli_fetch_assoc($result)) { ?>
-									<option value="<?= $row['username']; ?>"><?= $row['dokrad_name'] . ' ' . $row['dokrad_lastname']; ?></option>
-								<?php } ?>
-							</select>
-
-							<button class="btn-worklist" type="submit" name="submit"><?= $lang['save_template'] ?></button>
-
-
-						</form>
-					</div>
+					<?php include('../template-update.php') ?>
 				</div>
 			</div>
 		</div>
@@ -99,7 +36,6 @@ if ($_SESSION['level'] == "radiographer") {
 			</div>
 		</div>
 		<?php include('script-footer.php'); ?>
-
 	</body>
 
 	</html>

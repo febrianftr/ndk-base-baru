@@ -7,7 +7,7 @@ $uid = $_GET["uid"];
 $template_id = $_GET["template_id"];
 $halaman = $_GET["halaman"];
 
-if (hapus_temp($template_id) > 0) {
+if (delete_template($template_id) > 0) {
 	echo "	
 			<script>
 				alert('Template Berhasil dihapus');

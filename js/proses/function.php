@@ -70,3 +70,20 @@ function ubahdokterworkload($post)
 
     return mysqli_affected_rows($conn);
 }
+
+
+function new_template($new_template)
+{
+    global $conn;
+    $title = $new_template['title'];
+    $fill = $new_template['fill'];
+    $username = $new_template['username'];
+
+    mysqli_query(
+        $conn,
+        "INSERT INTO xray_template (title, fill, username) 
+		VALUES ('$title','$fill','$username')"
+    );
+
+    return mysqli_affected_rows($conn);
+}
