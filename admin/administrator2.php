@@ -1,17 +1,14 @@
 <?php
-
 require '../koneksi/koneksi.php';
-
 session_start();
 $username = $_SESSION['username'];
+if ($_SESSION['level'] == "admin") {
 $level = $_SESSION['level'];
 
 if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
-
 ?>
-	<!DOCTYPE html>
-	<html>
-
+<!DOCTYPE html>
+<html>
 	<head>
 		<title>Administrator | Admin</title>
 		<?php include('head.php'); ?>
@@ -51,7 +48,6 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 				.li-admin h5{
 						text-align: center;
 						font-weight: bold;
-						color: #fff;
 				}
 				.tab-pane h4{
 					color: #1a61ac;
@@ -59,13 +55,13 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 				.nav-tabs li a{
 					font-weight: bold;
 					font-size: 18px;
-					padding: 7px 10px 10px 10px;
+					padding: 7px 10px 15px 10px;
 					color: #1a61ac;
 					}
 				.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
-					color: #FFF;
+					color: #1a61ac;
 					cursor: default;
-					background-color: #1f69b7;
+					background-color: #b3d3f4;
 					border: none;
 					border-bottom-color: rgb(221, 221, 221);
 					border-bottom-color: transparent;
@@ -74,12 +70,12 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 					}
 					.nav > li > a:hover, .nav > li > a:focus {
 						text-decoration: none;
-						background-color: #1f69b7;
+						background-color: #b3d3f4;
 						border: none;
-						color:  #fff;
+						color:  #1a61ac;
 						}
 					.tab-content{
-						background-color: #1f69b7;
+						background-color: #b3d3f4;
 						width: 100%;
 						height: 200px;
 						margin: -10px 0;
@@ -87,9 +83,7 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 						border-radius: 5px;
 					}
 		</style>
-
 	</head>
-
 	<body>
 		<?php include('menu-bar.php'); ?><br>
 		<nav aria-label="breadcrumb">
@@ -98,10 +92,8 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 				<li class="breadcrumb-item active" aria-current="page"><?= $lang['administrator'] ?></li>
 			</ol>
 		</nav>
-
 		<div id="container1">
 			<div id="content1">
-
 				<div class="container-fluid adm">
 					<div class="content-adm" style="padding: 0;">
 						
@@ -114,11 +106,6 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 								<li><a data-toggle="tab" href="#menu4">Modality</a></li>
 								<li><a data-toggle="tab" href="#menu5">Procedure</a></li>
 								<li><a data-toggle="tab" href="#menu6">AET</a></li>
-								<?php
-							if ($level == 'superadmin') { ?>
-								<li><a data-toggle="tab" href="#menu7">Procedure</a></li>
-								<li><a data-toggle="tab" href="#menu8">AET</a></li>
-							<?php } ?>
 							</ul>
 							<div class="tab-content">
 								<div id="home" class="tab-pane fade in active">
@@ -264,45 +251,15 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 							</div>
 							<?php
 							if ($level == 'superadmin') { ?>
-								<div id="menu5" class="tab-pane fade">
-									<div id="home" class="tab-pane fade in active">
-									<div>
-										<ul class="social-links">
-											<li class="li-admin">
-												<a href="new_login.php">
-													<img style="width: 100%;" src="../image/plus.png">
-													<h5><?= $lang['add'] ?></h5>
-												</a>
-											</li>
-											<li class="li-admin">
-												<a href="view_login.php">
-													<img style="width: 100%;" src="../image/view.png">
-													<h5><?= $lang['view'] ?></h5>
-												</a>
-											</li>
-										</ul>
-									</div>
+								<div class="col-sm-2">
+									<h4 class="h4">Login</h4>
+									<li class="li-adm"><a href="new_login.php"><i class="fas fa-plus-square"></i> <?= $lang['add'] ?></a></li>
+									<li class="li-adm"><a href="view_login.php"><i class="fas fa-paper-plane"></i> <?= $lang['view'] ?></a></li>
 								</div>
-								</div>
-								<div id="menu5" class="tab-pane fade">
-									<div id="home" class="tab-pane fade in active">
-									<div>
-										<ul class="social-links">
-											<li class="li-admin">
-												<a href="new_template.php">
-													<img style="width: 100%;" src="../image/plus.png">
-													<h5><?= $lang['add'] ?></h5>
-												</a>
-											</li>
-											<li class="li-admin">
-												<a href="view_template.php">
-													<img style="width: 100%;" src="../image/view.png">
-													<h5><?= $lang['view'] ?></h5>
-												</a>
-											</li>
-										</ul>
-									</div>
-								</div>
+								<div class="col-sm-2">
+									<h4 class="h4">Template Dokter Radiology</h4>
+									<li class="li-adm"><a href="new_template.php"><i class="fas fa-plus-square"></i> <?= $lang['add'] ?></a></li>
+									<li class="li-adm"><a href="view_template.php"><i class="fas fa-paper-plane"></i> <?= $lang['view'] ?></a></li>
 								</div>
 							<?php } ?>
 
@@ -314,16 +271,15 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 			<div class="footerindex">
 				<div class="footer-login col-sm-12"><br>
 					<center>
-						<p>&copy; Powered by Intiwid IT Solution 2022</a>.</p>
+					<p>&copy; Powered by Intiwid IT Solution 2022</a>.</p>
 					</center>
 				</div>
 			</div>
 		</div>
-		</div>
-		<?php include('script-footer.php'); ?>
-	</body>
-
-	</html>
+	</div>
+	<?php include('script-footer.php'); ?>
+</body>
+</html>
 <?php } else {
 	header("location:../index.php");
 } ?>

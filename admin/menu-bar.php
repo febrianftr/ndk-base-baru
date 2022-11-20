@@ -27,11 +27,8 @@ $name = $row10['ad_name'] . ' ' . $row10['ad_lastname'];
           <!-- <div id="center" class="col-md-2">
             <img class="logo1" src="image/logo-rispacs1.png" />
           </div> -->
-          <div id="center2" class="col-md-2 col-md-offset-3">
-            <img class="logo" src="image/intiwid-logo.png" />
-          </div>
-          <div id="center1" class="col-md-2 col-md-offset-3">
-            <img class="logo2" src="image/ipi.png" />
+          <div id="center2" class="col-md-2">
+            <img class="logo" src="../image/intiwid-logo-new-putih-2.png" />
           </div>
         </div>
 
@@ -71,7 +68,7 @@ $name = $row10['ad_name'] . ' ' . $row10['ad_lastname'];
                   <center><a href="logout.php"><img style="width: 30px;" src="../icon-menubar/new_icon/logout.png"><br><?= $lang['logout'] ?></a></center>
                 </li>
                 <li style="float: right; color: #fff">
-                  <center><strong><br>Hai <i class="far fa-smile"></i>, <?php echo $name; ?></strong></center>
+                  <center><bold><br>Administrator</bold></center>
                 </li>
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                   <!-- <i class="fa fa-bars"></i> -->
