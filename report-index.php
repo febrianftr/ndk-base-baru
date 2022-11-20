@@ -19,13 +19,13 @@
 
 							<div class="col-md-2" style="padding: 4px;">
 								<div class="input-group input-group-regist input-regist input-group-icon">
-									<input type="text" name="from_workload" id="from_workload" placeholder="From Date" autocomplete="off" />
+									<input type="text" name="from_workload" id="from_workload" placeholder="From Date" autocomplete="off" required />
 									<div class="input-icon"><i class="fas fa-calendar-alt"></i></div>
 								</div>
 							</div>
 							<div class="col-md-2" style="padding: 4px;">
 								<div class="input-group input-group-regist input-regist input-group-icon">
-									<input type="text" name="to_workload" id="to_workload" placeholder="To Date" autocomplete="off" />
+									<input type="text" name="to_workload" id="to_workload" placeholder="To Date" autocomplete="off" required />
 									<div class="input-icon"><i class="fas fa-calendar-alt"></i></div>
 								</div>
 							</div>
@@ -38,21 +38,21 @@
 										"SELECT mods_in_study FROM study GROUP BY mods_in_study LIMIT 15"
 									);
 									while ($row = mysqli_fetch_assoc($study)) { ?>
-										<li><label><input class="common_selector cbox checkbox4 search-input-workload" type="checkbox" id="mods_in_study" name="mods_in_study[]" value="<?= $row['mods_in_study']; ?>" checked><span><?= $row['mods_in_study']; ?></span></label></li>
+										<li><label><input class="common_selector cbox checkbox4 search-input-workload" type="checkbox" id="mods_in_study" name="mods_in_study[]" value="<?= $row['mods_in_study']; ?>" checked required><span><?= $row['mods_in_study']; ?></span></label></li>
 									<?php } ?>
 								</ul>
 							</div>
 							<div class="col-md-2">
 								Priority Doctor :
 								<ul class="ks-cboxtags">
-									<li><label><input class="common_selector cbox5 checkbox4 search-input-workload" type="checkbox" id="priority_doctor" name="priority_doctor[]" value="normal" checked><span>Normal</span></label></li>
-									<li><label><input class="common_selector cbox5 checkbox4 search-input-workload" type="checkbox" id="priority_doctor" name="priority_doctor[]" value="cito" checked><span>Cito</span></label></li>
+									<li><label><input class="common_selector cbox5 checkbox4 search-input-workload" type="checkbox" id="priority_doctor" name="priority_doctor[]" value="normal" checked required><span>Normal</span></label></li>
+									<li><label><input class="common_selector cbox5 checkbox4 search-input-workload" type="checkbox" id="priority_doctor" name="priority_doctor[]" value="cito" checked required><span>Cito</span></label></li>
 								</ul>
 							</div>
 							<div class="col-md-2">
 								<div class="form-group">
 									<label for="sel1">Select Radiographer:</label>
-									<select class="form-control select2" multiple="multiple" name="radiographer[]" id="radiographer" style="width: 100%;">
+									<select class="form-control select2" multiple="multiple" name="radiographer[]" id="radiographer" style="width: 100%;" required>
 										<option value="all">Semua</option>
 										<?php
 										$query_radiografer = mysqli_query($conn, "SELECT * FROM xray_order WHERE radiographer_name IS NOT NULL GROUP BY radiographer_name LIMIT 30");

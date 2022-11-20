@@ -1,3 +1,5 @@
+<script type="text/javascript" src="../js/sweetalert.min.js" />
+</script>
 <?php
 require 'function_radiology.php';
 

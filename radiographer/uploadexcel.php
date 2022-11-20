@@ -13,76 +13,76 @@ if ($_SESSION['level'] == "radiographer") {
         <title>Backup Excel | Radiographer</title>
         <?php include('head.php'); ?>
         <style>
-            body{
+            body {
                 background-color: #1f69b7;
             }
         </style>
     </head>
 
     <body>
-    <?php include('sidebar.php'); ?>
-    <div class="container-fluid" id="main">
-        <div class="row">
-            
-            <div id="content1">
-                <div class="feb-button">
-                    <div class="col-md-6 rata-tengah">
-                        <div class="left-wrap">
-                            <div class="left">
-                                <div><img src="../icon-menubar/new_icon/excel.png"></div>
-                                <div class="heading">UPLOAD FILE REPORT</div>
-                                <div class="site-title">Back Up Your Report Files</div>
-                                <div class="site-slogan">With <a style="color: #85cbb3; font-weight: bold;" href="index.php">INTIWID</a> Backup</div>
+        <?php include('sidebar.php'); ?>
+        <div class="container-fluid" id="main">
+            <div class="row">
+
+                <div id="content1">
+                    <div class="feb-button">
+                        <div class="col-md-6 rata-tengah">
+                            <div class="left-wrap">
+                                <div class="left">
+                                    <div><img src="../icon-menubar/new_icon/excel.png"></div>
+                                    <div class="heading">UPLOAD FILE REPORT</div>
+                                    <div class="site-title">Back Up Your Report Files</div>
+                                    <div class="site-slogan">With <a style="color: #85cbb3; font-weight: bold;" href="index.php">INTIWID</a> Backup</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <div class=" text-dark">
-                            <div class="table-box">
-                                <!-- <div id="menu">
+
+                        <div class="col-md-6">
+                            <div class=" text-dark">
+                                <div class="table-box">
+                                    <!-- <div id="menu">
                                         <a href="uploadexcel.php" class="active">Upload</a>
                                         <a href="downloadexcel.php">Download</a>
                                     </div> -->
 
-                                <div id="content1" style="font-size: 14px;">
-                                    <p>Files can be uploaded with this extension <b> .doc, .docx, .xls, .xlsx, .ppt, .pptx, .pdf, .rar, .zip </b> maximum upload files 10MB.</p><br>
-                                    <p style="color: red;"><b>Rename your format excel file before upload with .XLSX</b></p>
+                                    <div id="content1" style="font-size: 14px;">
+                                        <p>Files can be uploaded with this extension <b> .doc, .docx, .xls, .xlsx, .ppt, .pptx, .pdf, .rar, .zip </b> maximum upload files 10MB.</p><br>
+                                        <p style="color: red;"><b>Rename your format excel file before upload with .XLSX</b></p>
 
-                                    <?php
+                                        <?php
 
-                                    if (@$_POST['upload']) {
-                                        $allowed_ext    = array('doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'pdf', 'rar', 'zip');
-                                        $file_name        = $_FILES['file']['name'];
-                                        $file_ext        = strtolower(end(explode('.', $file_name)));
-                                        $file_size        = $_FILES['file']['size'];
-                                        $file_tmp        = $_FILES['file']['tmp_name'];
-                                        $nama            = $_POST['nama'];
-                                        $tgl            = date("Y-m-d");
+                                        if (@$_POST['upload']) {
+                                            $allowed_ext    = array('doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'pdf', 'rar', 'zip');
+                                            $file_name        = $_FILES['file']['name'];
+                                            @$file_ext        = strtolower(end(explode('.', $file_name)));
+                                            $file_size        = $_FILES['file']['size'];
+                                            $file_tmp        = $_FILES['file']['tmp_name'];
+                                            $nama            = $_POST['nama'];
+                                            $tgl            = date("Y-m-d");
 
-                                        if (in_array($file_ext, $allowed_ext) === true) {
-                                            if ($file_size < 10440700) {
-                                                $lokasi = 'files/' . $nama . '.' . $file_ext;
-                                                move_uploaded_file($file_tmp, $lokasi);
-                                                $q2 = mysqli_query($conn, 'SELECT MAX(id) as upload from xray_upload_excel');
-                                                $row2 = mysqli_fetch_assoc($q2);
-                                                $ai2 = $row2['upload'] + 1;
-                                                $in = mysqli_query($conn, "INSERT INTO xray_upload_excel VALUES('$ai2', '$tgl', '$nama', '$file_ext', '$file_size', '$lokasi')");
-                                                if ($in) {
-                                                    echo '<div class="ok">SUCCESS: File berhasil di Upload!</div>';
+                                            if (in_array($file_ext, $allowed_ext) === true) {
+                                                if ($file_size < 10440700) {
+                                                    $lokasi = 'files/' . $nama . '.' . $file_ext;
+                                                    move_uploaded_file($file_tmp, $lokasi);
+                                                    $q2 = mysqli_query($conn, 'SELECT MAX(id) as upload from xray_upload_excel');
+                                                    $row2 = mysqli_fetch_assoc($q2);
+                                                    $ai2 = $row2['upload'] + 1;
+                                                    $in = mysqli_query($conn, "INSERT INTO xray_upload_excel VALUES('$ai2', '$tgl', '$nama', '$file_ext', '$file_size', '$lokasi')");
+                                                    if ($in) {
+                                                        echo '<div class="ok">SUCCESS: File berhasil di Upload!</div>';
+                                                    } else {
+                                                        echo '<div class="error">ERROR: Gagal upload file!</div>';
+                                                    }
                                                 } else {
-                                                    echo '<div class="error">ERROR: Gagal upload file!</div>';
+                                                    echo '<div class="error">ERROR: Besar ukuran file (file size) maksimal 1 Mb!</div>';
                                                 }
                                             } else {
-                                                echo '<div class="error">ERROR: Besar ukuran file (file size) maksimal 1 Mb!</div>';
+                                                echo '<div class="error">ERROR: Ekstensi file tidak di izinkan!</div>';
                                             }
-                                        } else {
-                                            echo '<div class="error">ERROR: Ekstensi file tidak di izinkan!</div>';
                                         }
-                                    }
-                                    ?>
+                                        ?>
 
-                                    <p>
+                                        <p>
                                         <form action="" method="post" enctype="multipart/form-data">
                                             <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0">
                                                 <tr>
@@ -109,31 +109,31 @@ if ($_SESSION['level'] == "radiographer") {
                                                 </tr>
                                             </table>
                                         </form>
-                                    </p>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
-
                 </div>
+
             </div>
-
-        </div>       
-    </div>
-
-    <div class="footerindex">
-        <div class="">
-          <?php include('footer-itw.php'); ?>
         </div>
-    </div>
-     
-            <?php include('script-footer.php'); ?>
-            <script>
-				$(document).ready(function(){
-					$("li[data-target='#service']").addClass("active");
-					$("ul[id='service'] li[id='uploadexcel1']").addClass("active");
-				});
-			</script>
+
+        <div class="footerindex">
+            <div class="">
+                <?php include('footer-itw.php'); ?>
+            </div>
+        </div>
+
+        <?php include('script-footer.php'); ?>
+        <script>
+            $(document).ready(function() {
+                $("li[data-target='#service']").addClass("active");
+                $("ul[id='service'] li[id='uploadexcel1']").addClass("active");
+            });
+        </script>
     </body>
 
     </html>
