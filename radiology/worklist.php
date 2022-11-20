@@ -71,25 +71,7 @@ $query_mrn = mysqli_query(
 	AND study.study_iuid != '$uid'
 	ORDER BY study.study_datetime DESC"
 );
-// untuk tombol approved
-if (isset($_POST["save_approve"])) {
-	if (insert_workload($_POST)) {
-		echo "
-			<script>
-				document.location.href= 'dicom.php';
-				win = window.open('pdf/expertise.php?uid=$uid', '_blank');
-				win.focus();
-			</script>";
-		mysqli_close($conn);
-	} else {
-		echo "
-			<script>
-				alert('approve gagal');
-				document.location.href= 'worklist.php?uid=$uid';
-			</script>";
-		mysqli_close($conn);
-	}
-}
+
 
 // untuk tombol save template
 if (isset($_POST["save_template"])) {
@@ -125,12 +107,58 @@ if (isset($_POST["save_draft"])) {
 			</script>";
 	}
 }
-
+// untuk tombol approved
+if (isset($_POST["save_approve"])) {
+	if ($_POST['fill'] == null) {
+		echo "<script type='text/javascript'>
+					alert('expertise wajib diisi');
+				</script>";
+		mysqli_close($conn);
+	} else {
+		if (insert_workload($_POST)) {
+			echo "<script type='text/javascript'>
+					setTimeout(function () { 
+					swal({
+							title: 'Berhasil expertise!',
+							text:  '',
+							icon: 'success',
+							timer: 1000,
+							showConfirmButton: true
+						});  
+					},10); 
+					window.setTimeout(function(){ 
+					document.location.href= 'dicom.php';
+					} ,1000); 
+					win = window.open('pdf/expertise.php?uid=$uid', '_blank');
+					win.focus();
+				</script>";
+			mysqli_close($conn);
+		} else {
+			echo "<script type='text/javascript'>
+					setTimeout(function () { 
+					swal({
+							title: 'Gagal Expertise!',
+							text:  '',
+							icon: 'error',
+							timer: 1000,
+							showConfirmButton: true
+						});  
+					},10); 
+					window.setTimeout(function(){ 
+					document.location.href= 'worklist.php?uid=$uid';
+					} ,1000); 
+				</script>";
+			mysqli_close($conn);
+		}
+	}
+}
 if ($_SESSION['level'] == "radiology") { ?>
 	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 	<html xmlns="http://www.w3.org/1999/xhtml">
 
 	<head>
+		<script type="text/javascript" src="../js/sweetalert.min.js" />
+		</script>
 		<?php include('head.php'); ?>
 		<title>Expertise | Radiology Physician</title>
 		<script type="text/javascript" src="js/jquery1.10.2.js"></script>
