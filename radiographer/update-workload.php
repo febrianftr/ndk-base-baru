@@ -133,7 +133,15 @@ if ($_SESSION['level'] == "radiographer") {
 											</li>
 											<li>
 												<label for="name_dep">Nama Departemen</label><br>
-												<input type="text" name="name_dep" id="name_dep" value="<?= $name_dep; ?>">
+												<select class="selectpicker" data-size="10" data-live-search="true" data-width="100%" name="dep_id" data-style="btn-info">
+													<?php
+													$department = mysqli_query($conn, "SELECT * FROM xray_department");
+													while ($row_department = mysqli_fetch_array($department)) { ?>
+														<option value="<?= $row_department['dep_id']; ?>" data-tokens=""><?= $row_department['name_dep']; ?></option>
+													<?php } ?>
+												</select>
+												<!-- jika menggunakan inputan data -->
+												<!-- <input type="text" name="name_dep" id="name_dep" value="<?= $name_dep; ?>"> -->
 											</li>
 											<li>
 												<label for="spc_needs">Klinis</label><br>
@@ -286,6 +294,7 @@ if ($_SESSION['level'] == "radiographer") {
 		</div>
 		<?php include('script-footer.php'); ?>
 		<script src="../js/proses/update-workload.js"></script>
+		<script src="js/bootstrap-select.min.js"></script>
 		<script>
 			$(document).ready(function() {
 				// class sidebar aktif

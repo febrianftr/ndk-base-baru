@@ -179,6 +179,6 @@ if (!($_SESSION['username'] = $data['username'])) {
   } else if ($_SESSION['level'] == "radiology") {
     header("location:radiology/dicom.php");
   } else if ($_SESSION['level'] == "radiographer") {
-    header("location:radiographer/index.php");
+    header("location:radiographer/workload.php");
   }
 } ?>
