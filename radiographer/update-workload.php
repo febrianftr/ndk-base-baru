@@ -313,7 +313,7 @@ if ($_SESSION['level'] == "radiographer") {
 			</div>
 		</div>
 		<?php include('script-footer.php'); ?>
-		<script src="../js/proses/update-workload.js"></script>
+		<script src="../js/proses/update-workload.js?v=1"></script>
 		<script src="js/bootstrap-select.min.js"></script>
 		<script>
 			$(document).ready(function() {
