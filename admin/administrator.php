@@ -260,9 +260,7 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 									</div>
 								</div>
 								</div>
-								
-							</div>
-							<?php
+								<?php
 							if ($level == 'superadmin') { ?>
 								<div id="menu7" class="tab-pane fade">
 									<div id="home" class="tab-pane fade in active">
@@ -305,6 +303,9 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 								</div>
 								</div>
 							<?php } ?>
+								
+							</div>
+							
 
 						</div>
 					</div>
