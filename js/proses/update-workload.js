@@ -8,11 +8,11 @@ $(document).ready(function () {
   let pat_sex = $("#pat_sex").val();
   let address = $("#address").val();
   let weight = $("#weight").val();
-  let name_dep = $("#name_dep").val();
+  let dep_id = $("#dep_id").val();
   let mods_in_study = $("#mods_in_study").val();
-  let named = $("#named").val();
+  let dokterid = $("#dokterid").val();
   let contrast = $("#contrast").val();
-  let radiographer_name = $("#radiographer_name").val();
+  let radiographer_id = $("#radiographer_id").val();
   let priority = $("#priority").val();
   let pat_state = $("#pat_state").val();
   let payment = $("#payment").val();
@@ -21,6 +21,14 @@ $(document).ready(function () {
   let kv = $("#kv").val();
   let mas = $("#mas").val();
   $(".loading").hide();
+
+  $.validator.addMethod(
+    "valueNotEquals",
+    function (value, element, arg) {
+      return arg !== value;
+    },
+    "Please select an item!"
+  );
 
   $("#edit-workload").validate({
     rules: {
@@ -31,10 +39,10 @@ $(document).ready(function () {
       pat_sex: "required",
       pat_birthdate: "required",
       address: "required",
-      name_dep: "required",
+      dep_id: { valueNotEquals: "null" },
       mods_in_study: "required",
-      named: "required",
-      radiographer_name: "required",
+      dokterid: { valueNotEquals: "null" },
+      radiographer_id: { valueNotEquals: "null" },
       priority: "required",
       pat_state: "required",
       spc_needs: "required",
