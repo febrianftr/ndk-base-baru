@@ -176,21 +176,20 @@ $pdf->WriteHTML("<br>");
 if (!empty($signature)) {
     $pdf->WriteHTML(
         "<p align='right'>Terimakasih atas kepercayaan TS</p>
-        <p align='center'>                                                                                                                                             Salam sejawat</p>"
+        <p align='right'>Salam sejawat</p>"
     );
     $pdf->image('../phpqrcode/ttddokter/' . $signature, 163, 170, 25);
     $pdf->WriteHTML(
         "<br>
-        <br><br><br><br>
-        <p align='center'>                                                                                                                                                $dokrad_name <br />                                                                                                                                  $nip</p>"
+        <br><br><br><br>$nip</p>"
     );
 } else {
     // jika ttd tidak menggunakan signature
     $pdf->WriteHTML(
         "<p align='right'>Terimakasih atas kepercayaan TS</p>
-        <p align='center'>                                                                                                                                             Salam sejawat</p><br>
+        <p align='right'>Salam sejawat</p><br>
         <br><br><br><br><br>
-        <p align='center'>                                                                                                                                                $dokrad_name <br />                                                                                                                                   $nip</p>"
+        <p align='right'>$nip</p>"
     );
 }
 
