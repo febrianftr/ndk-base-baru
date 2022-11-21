@@ -185,13 +185,13 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 									<div>
 										<ul class="social-links">
 											<li class="li-admin">
-												<a href="new_departmen.php">
+												<a href="new_department.php">
 													<img style="width: 100%;" src="../image/plus.png">
 													<h5><?= $lang['add'] ?></h5>
 												</a>
 											</li>
 											<li class="li-admin">
-												<a href="view_departmen.php">
+												<a href="view_department.php">
 													<img style="width: 100%;" src="../image/view.png">
 													<h5><?= $lang['view'] ?></h5>
 												</a>
@@ -225,13 +225,13 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 									<div>
 										<ul class="social-links">
 											<li class="li-admin">
-												<a href="new_price.php">
+												<a href="new_study.php">
 													<img style="width: 100%;" src="../image/plus.png">
 													<h5><?= $lang['add'] ?></h5>
 												</a>
 											</li>
 											<li class="li-admin">
-												<a href="view_price.php">
+												<a href="view_study.php">
 													<img style="width: 100%;" src="../image/view.png">
 													<h5><?= $lang['view'] ?></h5>
 												</a>
