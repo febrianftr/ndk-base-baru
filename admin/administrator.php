@@ -116,8 +116,8 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 								<li><a data-toggle="tab" href="#menu6">AET</a></li>
 								<?php
 							if ($level == 'superadmin') { ?>
-								<li><a data-toggle="tab" href="#menu7">Procedure</a></li>
-								<li><a data-toggle="tab" href="#menu8">AET</a></li>
+								<li><a data-toggle="tab" href="#menu7">Login</a></li>
+								<li><a data-toggle="tab" href="#menu8">Template</a></li>
 							<?php } ?>
 							</ul>
 							<div class="tab-content">
