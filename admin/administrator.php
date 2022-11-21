@@ -264,7 +264,7 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 							</div>
 							<?php
 							if ($level == 'superadmin') { ?>
-								<div id="menu5" class="tab-pane fade">
+								<div id="menu7" class="tab-pane fade">
 									<div id="home" class="tab-pane fade in active">
 									<div>
 										<ul class="social-links">
@@ -284,7 +284,7 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 									</div>
 								</div>
 								</div>
-								<div id="menu5" class="tab-pane fade">
+								<div id="menu8" class="tab-pane fade">
 									<div id="home" class="tab-pane fade in active">
 									<div>
 										<ul class="social-links">
