@@ -137,7 +137,7 @@ if ($_SESSION['level'] == "radiographer") {
 													<?php
 													$department = mysqli_query($conn, "SELECT * FROM xray_department");
 													while ($row_department = mysqli_fetch_array($department)) { ?>
-														<option value="<?= $row_department['dep_id']; ?>" data-tokens=""><?= $row_department['name_dep']; ?></option>
+														<option value="<?= $row_department['dep_id']; ?>"><?= $row_department['name_dep']; ?></option>
 													<?php } ?>
 												</select>
 												<!-- jika menggunakan inputan data -->
@@ -155,7 +155,14 @@ if ($_SESSION['level'] == "radiographer") {
 										</li>
 										<li class="dokteravail">
 											<label for="named">Nama Dokter Pengirim</label><br>
-											<input type="text" name="named" id="named" value="<?= $named; ?>">
+											<select class="selectpicker" data-size="10" data-live-search="true" data-width="100%" name="dokterid" data-style="btn-info">
+												<?php
+												$dokter = mysqli_query($conn, "SELECT * FROM xray_dokter");
+												while ($row_dokter = mysqli_fetch_array($dokter)) { ?>
+													<option value="<?= $row_dokter['dokterid']; ?>"><?= $row_dokter['named']; ?></option>
+												<?php } ?>
+											</select>
+											<!-- <input type="text" name="named" id="named" value="<?= $named; ?>"> -->
 										</li>
 										<li>
 											<label for="contrast">Kontras</label><br>
@@ -173,7 +180,14 @@ if ($_SESSION['level'] == "radiographer") {
 										<br>
 										<li>
 											<label for="radiographer_name">Nama Radiographer</label><br>
-											<input type="text" name="radiographer_name" id="radiographer_name" value="<?= $radiographer_name; ?>">
+											<select class="selectpicker" data-size="10" data-live-search="true" data-width="100%" name="radiographer_id" data-style="btn-info">
+												<?php
+												$radiographer = mysqli_query($conn, "SELECT * FROM xray_radiographer");
+												while ($row_radiographer = mysqli_fetch_array($radiographer)) { ?>
+													<option value="<?= $row_radiographer['radiographer_id']; ?>"><?= $row_radiographer['radiographer_name']; ?></option>
+												<?php } ?>
+											</select>
+											<!-- <input type="text" name="radiographer_name" id="radiographer_name" value="<?= $radiographer_name; ?>"> -->
 										</li>
 										<li>
 											<label for="priority">Prioritas</label><br>
