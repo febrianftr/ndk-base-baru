@@ -17,7 +17,7 @@ define('MOBILEFIRST', '<a style="text-decoration:none;" class="ahref-edit" href=
 define('MOBILELAST', '"target="_blank"><span class="btn btn-warning btn-inti"><i class="fas fa-eye" data-toggle="tooltip" title="Web Viewer"></i></span></a>');
 
 define('CHANGEDOCTORICONYES', '<i class="fas fa-user-md fa-lg"></i>');
-define('CHANGEDOCTORICONNO', '<i class="fas fa-user-times fa-lg text-warning"></i>');
+define('CHANGEDOCTORICONNO', '<i class="fas fa-user-times fa-lg deep-orange-text"></i>');
 
 // Change doctor
 define('CHANGEDOCTORFIRST', '<a style="text-decoration: none;" href="changedoctorworklist.php?uid=');
@@ -86,7 +86,7 @@ define('HOROSLAST', '"class="ahref-edit" style="text-decoration:none;" target="_
 
 
 // untuk icon OHIF LARGE DI WORKLIST
-$ohif_large = '"class="button8 delete1" target="_blank"><img src="../image/smartphone.svg" style="width: 50px;"><br> <span> Mobile Viewer</span></a>';
+$ohif_large = '"class="button8 delete1" target="_blank"><img src="../image/web.svg" style="width: 50px;"><br> <span> Web Viewer</span></a>';
 // untuk icon OHIF small DI WORKLIST
 $ohif_small = '"style="text-decoration:none;" class="ahref-edit" target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/eyegreen.svg" data-toggle="tooltip" title="Tab Viewer" style="width: 100%;"></span></a>';
 
