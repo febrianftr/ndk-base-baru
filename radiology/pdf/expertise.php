@@ -182,7 +182,7 @@ if (!empty($signature)) {
     $pdf->WriteHTML(
         "<br>
         <br><br><br><br>
-        <p align='center'>                                                                                                                                                $dokrad_name <br />                                                                                                                                                NIP $nip</p>"
+        <p align='center'>                                                                                                                                                $dokrad_name <br />                                                                                                                                  NIP $nip</p>"
     );
 } else {
     // jika ttd tidak menggunakan signature
@@ -190,7 +190,7 @@ if (!empty($signature)) {
         "<p align='right'>Terimakasih atas kepercayaan TS</p>
         <p align='center'>                                                                                                                                             Salam sejawat</p><br>
         <br><br><br><br><br>
-        <p align='center'>                                                                                                                                                $dokrad_name <br />                                                                                                                                                NIP $nip</p>"
+        <p align='center'>                                                                                                                                                $dokrad_name <br />                                                                                                                                   NIP $nip</p>"
     );
 }
 
