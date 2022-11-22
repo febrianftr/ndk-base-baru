@@ -213,17 +213,6 @@ if ($_SESSION['level'] == "radiographer") {
 											<label for="dokrad_name">Nama Dokter Radiology</label><br>
 											<input class="not-allowed" type="text" id="dokrad_name" value="<?= $dokrad_name; ?>" readonly>
 										</li>
-										<li>
-											<label for="pat_state">Keadaan Pasien</label><br>
-											<label class="radio-admin">
-												<input type="radio" <?= strtolower($pat_state) == 'rawat jalan' ? 'checked' : ''; ?> name="pat_state" value="rawat jalan"> Rawat Jalan
-												<span class="checkmark"></span>
-											</label>
-											<label class="radio-admin">
-												<input type="radio" <?= strtolower($pat_state) == 'rawat inap' ? 'checked' : ''; ?> name="pat_state" value="rawat inap"> Rawat Inap
-												<span class="checkmark"></span>
-											</label>
-										</li>
 										<br>
 										<li>
 											<label for="payment">Pembayaran</label><br>

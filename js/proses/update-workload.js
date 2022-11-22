@@ -14,7 +14,6 @@ $(document).ready(function () {
   let contrast = $("#contrast").val();
   let radiographer_id = $("#radiographer_id").val();
   let priority = $("#priority").val();
-  let pat_state = $("#pat_state").val();
   let payment = $("#payment").val();
   let contrast_allergies = $("#contrast_allergies").val();
   let spc_needs = $("#spc_needs").val();
@@ -44,7 +43,6 @@ $(document).ready(function () {
       dokterid: { valueNotEquals: "null" },
       radiographer_id: { valueNotEquals: "null" },
       priority: "required",
-      pat_state: "required",
       spc_needs: "required",
       kv: "required",
       mas: "required",
