@@ -175,7 +175,7 @@ class PDF extends FPDF
                 break;
             case 'P':
                 $this->Ln(5);
-                $this->ALIGN = $attr['ALIGN'];
+                $this->ALIGN = @$attr['ALIGN'];
                 break;
             case 'FONT':
                 if (isset($attr['COLOR']) && $attr['COLOR'] != '') {
