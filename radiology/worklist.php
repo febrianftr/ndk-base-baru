@@ -372,7 +372,7 @@ if ($_SESSION['level'] == "radiology") { ?>
 										?>
 										<br>
 										<div class="textarea-ckeditor">
-											<textarea class="ckeditor" name="fill" style="width: 100%; height: 320px;" id="ckeditor">
+											<textarea class="ckeditor" name="fill" id="ckeditor">
 											<?= $fill; ?>
 											</textarea>
 										</div>

@@ -45,6 +45,7 @@ CKEDITOR.editorConfig = function (config) {
 
   config.uiColor = "#f1f1f1";
   config.height = 482;
+  config.width = "19.5cm";
 
   config.toolbarGroups = [
     { name: "clipboard", groups: ["clipboard", "undo"] },
