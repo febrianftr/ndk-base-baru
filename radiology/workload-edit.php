@@ -74,17 +74,18 @@ $query_mrn = mysqli_query(
 );
 
 if (isset($_POST["save_template"])) {
-	if (insert_template_workload($_POST)) {
+	$insert = insert_template_workload($_POST);
+	if ($insert) {
 		echo "
 			<script>
 				alert('Report Telah Di Simpan ke template');
-				document.location.href= 'workload-edit.php?uid=$uid';
+				document.location.href= 'workload-edit.php?uid=$uid&template_id=$insert';
 			</script>";
 	} else {
 		echo "
 			<script>
 				alert('Report Gagal Di Simpan ke template');
-				document.location.href= 'workload-edit.php?uid=$uid';
+				history.back();
 			</script>";
 	}
 }
@@ -100,7 +101,7 @@ if (isset($_POST["save_edit"])) {
 		echo "
 			<script>
 				alert('Report Gagal Di Simpan ke Draft');
-				document.location.href= 'workload-edit.php?uid=$uid';
+				history.back();
 			</script>";
 	}
 }

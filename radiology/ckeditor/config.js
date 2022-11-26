@@ -71,5 +71,5 @@ CKEDITOR.editorConfig = function (config) {
   ];
 
   config.removeButtons =
-    "Subscript,Superscript,Strike,PasteText,PasteFromWord,Scayt,Anchor,RemoveFormat,NumberedList,Outdent,Indent,Blockquote,JustifyBlock,Styles,Format,About,Image,Table,HorizontalRule,SpecialChar";
+    "BulletedList,Subscript,Superscript,Strike,PasteText,PasteFromWord,Scayt,Anchor,RemoveFormat,NumberedList,Outdent,Indent,Blockquote,JustifyBlock,Styles,Format,About,Image,Table,HorizontalRule,SpecialChar";
 };
