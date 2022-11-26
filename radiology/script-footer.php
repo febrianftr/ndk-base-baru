@@ -3,7 +3,7 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <!-- <script src="js/bootstrap.min.js"></script> -->
 <script type="text/javascript" src="js/sketch.min.js"></script>
-<script src="ckeditor/ckeditor.js"></script>
+<script src="ckeditor/ckeditor.js?v=1"></script>
 <script type="text/javascript" src="../js/popper.min.js"></script>
 <script src="../js/bootstrap4.min.js"></script>
 <script type="text/javascript" src="../js/mdb.min.js"></script>
