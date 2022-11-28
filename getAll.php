@@ -8,9 +8,17 @@ require 'model/query-base-order.php';
 require 'model/query-base-study.php';
 require 'model/query-base-patient.php';
 require 'model/query-base-dokter-radiology.php';
+require 'model/query-base-selected-dokter-radiology.php';
 session_start();
 
 $username = $_SESSION['username'];
+
+// kondisi jika mapping dokter diaktifkan
+$selected_dokter_radiology = mysqli_fetch_assoc(mysqli_query(
+    $conn,
+    "SELECT $select_selected_dokter_radiology 
+    FROM $table_selected_dokter_radiology"
+));
 
 // kondisi jika ada di dicom.php
 $row_dokrad = mysqli_fetch_assoc(mysqli_query(
@@ -113,8 +121,8 @@ while ($row = mysqli_fetch_array($query)) {
     if ($dicom == '/dicom.php') {
         // kondisi ketika xray_workload masuk dari trigger
         if ($status != '-') {
-            // kondisi ketika pasien manual tetapi pk_dokter_radiologi null 
-            if ($fromorder == null && $pk_dokter_radiology == null) {
+            // kondisi ketika pasien manual tetapi pk_dokter_radiologi null dan ketika aktif bernilai 1 mapping dokter
+            if ($fromorder == null && $pk_dokter_radiology == null && $selected_dokter_radiology['is_active'] == 1) {
                 $aksi = '?';
             } else {
                 // kondisi ketika pasien manual tetapi pk_dokter_radiologi sudah ada 
