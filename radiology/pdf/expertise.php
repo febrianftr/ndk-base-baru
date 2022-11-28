@@ -96,7 +96,7 @@ $pdf->SetFont('Arial', '', 10);
 
 $pdf->SetTitle('Hasil expertise');
 
-$pdf->image('header-rs.jpg', 14, 10, 185);
+$pdf->image('kop_surat_rsudkrganyar.png', 14, 10, 185);
 $pdf->MultiCell(0, 15, '', 0, "J", false);
 
 
