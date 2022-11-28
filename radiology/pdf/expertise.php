@@ -96,8 +96,8 @@ $pdf->SetFont('Arial', '', 10);
 
 $pdf->SetTitle('Hasil expertise');
 
-$pdf->image('kop_surat_rsudkrganyar.png', 14, 10, 175);
-$pdf->MultiCell(0, 22, '', 0, "J", false);
+$pdf->image('header-rs.jpg', 14, 10, 185);
+$pdf->MultiCell(0, 15, '', 0, "J", false);
 
 
 // ------------------------------------------------------------
@@ -157,7 +157,7 @@ $pdf->Cell(55, 5, $spc_needs_two, 0, 0, 'L');
 $pdf->Cell(35, 5, '', 0, 0, 'L');
 $pdf->Cell(3, 5, '', 0, 0, 'L');
 $pdf->Cell(65, 5, $study_desc_two, 0, 1, 'L');
-$pdf->Line(16, 82, 198, 82);
+$pdf->Line(16, 75, 198, 75);
 $fill = str_replace("&nbsp;", " ", $fill);
 $fill = str_replace("&ndash;", "-", $fill);
 $fill = str_replace("&agrave;", "->", $fill);
