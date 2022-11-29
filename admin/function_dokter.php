@@ -739,3 +739,17 @@ function update_selected_dokter_radiology($value)
 
 	return mysqli_affected_rows($conn);
 }
+
+function update_hostname_publik($value)
+{
+	global $conn;
+	$ip_publik = $value['ip_publik'];
+
+	mysqli_query(
+		$conn,
+		"INSERT INTO xray_hostname_publik (pk, ip_publik, created_at) VALUES(1, '$ip_publik', NOW())
+		ON DUPLICATE KEY UPDATE ip_publik = '$ip_publik', created_at = NOW()"
+	);
+
+	return mysqli_affected_rows($conn);
+}

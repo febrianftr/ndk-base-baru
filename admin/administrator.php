@@ -132,6 +132,7 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 									<li><a data-toggle="tab" href="#menu7">Login</a></li>
 									<li><a data-toggle="tab" href="#menu8">Template</a></li>
 									<li><a data-toggle="tab" href="#menu9">Worklist</a></li>
+									<li><a data-toggle="tab" href="#menu10">IP Publik</a></li>
 								<?php } ?>
 							</ul>
 							<div class="tab-content">
@@ -329,6 +330,26 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 													</li>
 													<li class="li-admin">
 														<a href="view_selected_dokter_radiology.php">
+															<img style="width: 100%;" src="../image/view.png">
+															<h5><?= $lang['view'] ?></h5>
+														</a>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									<div id="menu10" class="tab-pane fade">
+										<div id="home" class="tab-pane fade in active">
+											<div>
+												<ul class="social-links">
+													<li class="li-admin">
+														<a href="new_hostname_publik.php">
+															<img style="width: 100%;" src="../image/plus.png">
+															<h5><?= $lang['add'] ?> or Update</h5>
+														</a>
+													</li>
+													<li class="li-admin">
+														<a href="view_hostname_publik.php">
 															<img style="width: 100%;" src="../image/view.png">
 															<h5><?= $lang['view'] ?></h5>
 														</a>
