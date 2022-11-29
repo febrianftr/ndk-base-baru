@@ -10,6 +10,7 @@ if ($_SESSION['level'] == "radiology") {
 	<html>
 
 	<head>
+		<meta http-equiv="refresh" content="300" />
 		<title>Worklist | Radiology</title>
 		<?php include('head.php'); ?>
 	</head>

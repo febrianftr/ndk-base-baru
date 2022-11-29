@@ -102,13 +102,8 @@ while ($row = mysqli_fetch_array($query)) {
         $workloadstat = 'waiting';
     }
 
-    if ($_SESSION['level'] == 'radiology' && $row['status'] == 'waiting') {
-        $detail = '<a href="worklist.php?uid=' . $study_iuid . '" class="penawaran-a">' . removeCharacter($pat_name) . '</a>';
-    } elseif ($_SESSION['level'] == 'radiology' && $row['status'] == 'approved') {
-        $detail = '<a href="workload-edit.php?uid=' . $study_iuid . '" class="penawaran-a">' . removeCharacter($pat_name) . '</a>';
-    } else {
-        $detail = '<a href="#" class="hasil-all penawaran-a" data-id="' . $row['study_iuid'] . '">' . removeCharacter($pat_name) . '</a>';
-    }
+    // kondisi ketika detail nama lihat detail HOME (radiographer, radiology, referral)
+    $detail = '<a href="#" class="hasil-all penawaran-a" data-id="' . $row['study_iuid'] . '">' . removeCharacter($pat_name) . '</a>';
 
     if ($fromorder == 'SIMRS' || $fromorder == 'simrs') {
         $badge = SIMRS;
@@ -130,6 +125,7 @@ while ($row = mysqli_fetch_array($query)) {
             // kondisi ketika pasien manual tetapi pk_dokter_radiologi null dan ketika aktif bernilai 1 mapping dokter
             if ($fromorder == null && $pk_dokter_radiology == null && $selected_dokter_radiology['is_active'] == 1) {
                 $aksi = '?';
+                $detail = '<a href="dicom.php" class="penawaran-a">' . removeCharacter($pat_name) . '</a>';
             } else {
                 // kondisi ketika pasien manual tetapi pk_dokter_radiologi sudah ada 
                 if (!$fill || $fill == null) {
@@ -140,12 +136,16 @@ while ($row = mysqli_fetch_array($query)) {
                     $worklist = DRAFTFIRST . $study_iuid . DRAFTLAST;
                 }
 
+                // kondisi ketika sudah dipilih dokternya 
+                $detail = '<a href="worklist.php?uid=' . $study_iuid . '" class="penawaran-a">' . removeCharacter($pat_name) . '</a>';
+
                 $aksi = $worklist .
                     CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workloadstat . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST;
             }
         } else {
             // kondisi ketika xray_workload TIDAK masuk dari trigger
             $aksi = '!TRIGGER!';
+            $detail = '<a href="dicom.php" class="penawaran-a">' . removeCharacter($pat_name) . '</a>';
         }
     } else {
         $aksi = PDFFIRST . $study_iuid . PDFLAST .

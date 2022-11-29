@@ -166,11 +166,15 @@ while ($row = mysqli_fetch_array($result)) {
     $icon_change_doctor = CHANGEDOCTORICONYES;
   }
 
+  // kondisi ketika detail nama lihat detail query (radiographer, referral)
+  $detail = '<a href="#" class="hasil-all penawaran-a" data-id="' . $row['study_iuid'] . '">' . removeCharacter($pat_name) . '</a>';
+
   //kondisi status change doctor
   // kondisi session level ketika login
   $level = $_SESSION['level'];
   // ketika login radiology
   if ($level == 'radiology') {
+    $detail = '<a href="workload-edit.php?uid=' . $study_iuid . '" class="penawaran-a">' . removeCharacter($pat_name) . '</a>';
     $level =
       HOROSFIRST . $study_iuid . HOROSLAST .
       OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
@@ -212,12 +216,6 @@ while ($row = mysqli_fetch_array($result)) {
     $priority_style = PRIORITYCITO;
   } else {
     $priority_style = '';
-  }
-
-  if ($_SESSION['level'] == 'radiology') {
-    $detail = '<a href="workload-edit.php?uid=' . $study_iuid . '" class="penawaran-a">' . removeCharacter($pat_name) . '</a>';
-  } else {
-    $detail = '<a href="#" class="hasil-all penawaran-a" data-id="' . $row['study_iuid'] . '">' . removeCharacter($pat_name) . '</a>';
   }
 
   // kondisi mencari ditabel dokter radiology
