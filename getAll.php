@@ -101,8 +101,14 @@ while ($row = mysqli_fetch_array($query)) {
     } else {
         $workloadstat = 'waiting';
     }
-    //kondisi status change doctor
-    $detail = '<a href="#" class="hasil-all penawaran-a" data-id="' . $row['study_iuid'] . '">' . removeCharacter($pat_name) . '</a>';
+
+    if ($_SESSION['level'] == 'radiology' && $row['status'] == 'waiting') {
+        $detail = '<a href="worklist.php?uid=' . $study_iuid . '" class="penawaran-a">' . removeCharacter($pat_name) . '</a>';
+    } elseif ($_SESSION['level'] == 'radiology' && $row['status'] == 'approved') {
+        $detail = '<a href="workload-edit.php?uid=' . $study_iuid . '" class="penawaran-a">' . removeCharacter($pat_name) . '</a>';
+    } else {
+        $detail = '<a href="#" class="hasil-all penawaran-a" data-id="' . $row['study_iuid'] . '">' . removeCharacter($pat_name) . '</a>';
+    }
 
     if ($fromorder == 'SIMRS' || $fromorder == 'simrs') {
         $badge = SIMRS;

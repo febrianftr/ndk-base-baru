@@ -61,6 +61,14 @@ function insert_workload($value)
 		"SELECT * FROM xray_dokter_radiology WHERE username = '$username'"
 	));
 	$pk = $dokter_radiologi['pk'];
+	$dokradid = $dokter_radiologi['dokradid'];
+	$dokrad_name = $dokter_radiologi['dokrad_name'];
+
+	mysqli_query(
+		$conn,
+		"INSERT INTO xray_order (uid, dokradid, dokrad_name) VALUES ('$uid', '$dokradid', '$dokrad_name')
+		ON DUPLICATE KEY UPDATE dokradid = '$dokradid', dokrad_name = '$dokrad_name'"
+	);
 
 	mysqli_query(
 		$conn,

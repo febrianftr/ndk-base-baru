@@ -214,7 +214,11 @@ while ($row = mysqli_fetch_array($result)) {
     $priority_style = '';
   }
 
-  $detail = '<a href="#" class="hasil-all penawaran-a" data-id="' . $row['study_iuid'] . '">' . removeCharacter($pat_name) . '</a>';
+  if ($_SESSION['level'] == 'radiology') {
+    $detail = '<a href="workload-edit.php?uid=' . $study_iuid . '" class="penawaran-a">' . removeCharacter($pat_name) . '</a>';
+  } else {
+    $detail = '<a href="#" class="hasil-all penawaran-a" data-id="' . $row['study_iuid'] . '">' . removeCharacter($pat_name) . '</a>';
+  }
 
   // kondisi mencari ditabel dokter radiology
   $row_dokrad = mysqli_fetch_assoc(mysqli_query(
