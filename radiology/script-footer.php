@@ -21,7 +21,7 @@
 </script>
 <script type="text/javascript" src="../js/datetime-moment.js" />
 </script>
-<script type="text/javascript" src="../js/inobitec.js"></script>
+<script type="text/javascript" src="../js/inobitec.js?v=2"></script>
 <script type="text/javascript" src="../js/select2.min.js"></script>
 
 

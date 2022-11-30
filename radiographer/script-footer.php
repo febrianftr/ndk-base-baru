@@ -22,7 +22,7 @@
 </script>
 <script src="../js/datetime-moment.js" />
 </script>
-<script src="../js/inobitec.js"></script>
+<script src="../js/inobitec.js?v=2"></script>
 <script type="text/javascript" src="../js/jquery.validate.min.js" />
 </script>
 <script type="text/javascript" src="../js/sweetalert.min.js" />
