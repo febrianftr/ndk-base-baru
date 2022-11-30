@@ -45,7 +45,7 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 									<thead>
 										<tr>
 											<th>No</th>
-											<th>Active ? </th>
+											<th>IP Publik </th>
 											<th>Waktu</th>
 											<th><?= $lang['action'] ?></th>
 										</tr>
