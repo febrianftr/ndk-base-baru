@@ -213,6 +213,6 @@ if (!empty($signature)) {
     );
 }
 
-$pdf->Output('I', $pat_name);
+$pdf->Output('I', $pat_name . '.pdf');
 
 mysqli_close($conn);
