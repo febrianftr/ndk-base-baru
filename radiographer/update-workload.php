@@ -38,6 +38,7 @@ $study_iuid = $row['study_iuid'];
 $accession_no = $row['accession_no'];
 $ref_physician = $row['ref_physician'];
 $study_desc = $row['study_desc'];
+$harga_prosedur = defaultValueNumber($row['harga_prosedur']);
 $mods_in_study = $row['mods_in_study'];
 $num_series = $row['num_series'];
 $num_instances = $row['num_instances'];
@@ -234,6 +235,10 @@ if ($_SESSION['level'] == "radiographer") {
 											<label for="study">Study</label><br>
 											<input type="text" class="not-allowed" name="study_desc" id="study_desc" value="<?= $study_desc; ?>" readonly>
 										</li>
+										<li>
+											<label for="harga_prosedur">Tarif Pemeriksaan</label><br>
+											<input type="text" name="harga_prosedur" id="harga_prosedur" value="<?= number_format($harga_prosedur, 0, ',', ','); ?>">
+										</li>
 									</div>
 									<div class="form-update-workload col-md-4">
 										<li>
@@ -302,7 +307,7 @@ if ($_SESSION['level'] == "radiographer") {
 			</div>
 		</div>
 		<?php include('script-footer.php'); ?>
-		<script src="../js/proses/update-workload.js?v=1"></script>
+		<script src="../js/proses/update-workload.js?v=10"></script>
 		<script src="js/bootstrap-select.min.js"></script>
 		<script>
 			$(document).ready(function() {
