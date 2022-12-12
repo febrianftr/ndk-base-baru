@@ -186,6 +186,8 @@ if ($_SESSION['level'] == "radiology") { ?>
 									</ol>
 								</nav>
 							</div>
+
+
 							<div class="col-lg-2">
 								<div class="div-left">
 									<div class="left-top">
