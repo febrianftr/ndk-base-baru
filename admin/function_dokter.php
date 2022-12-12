@@ -725,3 +725,31 @@ function delete_template($template_id)
 	mysqli_query($conn, "DELETE FROM xray_template WHERE template_id = '$template_id' ");
 	return mysqli_affected_rows($conn);
 }
+
+function update_selected_dokter_radiology($value)
+{
+	global $conn;
+	$is_active = $value['is_active'];
+
+	mysqli_query(
+		$conn,
+		"INSERT INTO xray_selected_dokter_radiology (pk, is_active, created_at, updated_at) VALUES(1, '$is_active', NOW(), NOW())
+		ON DUPLICATE KEY UPDATE is_active = '$is_active', created_at = NOW(), updated_at = NOW()"
+	);
+
+	return mysqli_affected_rows($conn);
+}
+
+function update_hostname_publik($value)
+{
+	global $conn;
+	$ip_publik = $value['ip_publik'];
+
+	mysqli_query(
+		$conn,
+		"INSERT INTO xray_hostname_publik (pk, ip_publik, created_at) VALUES(1, '$ip_publik', NOW())
+		ON DUPLICATE KEY UPDATE ip_publik = '$ip_publik', created_at = NOW()"
+	);
+
+	return mysqli_affected_rows($conn);
+}

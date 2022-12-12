@@ -75,18 +75,19 @@ $query_mrn = mysqli_query(
 
 // untuk tombol save template
 if (isset($_POST["save_template"])) {
-	if (insert_template_workload($_POST)) {
+	$insert = insert_template_workload($_POST);
+	if ($insert) {
 		echo "
 			<script>
 				alert('Report Telah Di Simpan ke template');
-				document.location.href= 'worklist.php?uid=$uid';
+				document.location.href= 'worklist.php?uid=$uid&template_id=$insert';
 			</script>
 			";
 	} else {
 		echo "
 			<script>
 				alert('Report Gagal Di Simpan ke template');
-				document.location.href= 'worklist.php?uid=$uid';
+				history.back();
 			</script>";
 	}
 }
@@ -103,7 +104,7 @@ if (isset($_POST["save_draft"])) {
 		echo "
 			<script>
 				alert('Report Gagal Di Simpan ke Draft');
-				document.location.href= 'worklist.php?uid=$uid';
+				history.back();
 			</script>";
 	}
 }
@@ -145,7 +146,7 @@ if (isset($_POST["save_approve"])) {
 						});  
 					},10); 
 					window.setTimeout(function(){ 
-					document.location.href= 'worklist.php?uid=$uid';
+					history.back();
 					} ,1000); 
 				</script>";
 			mysqli_close($conn);

@@ -5,27 +5,25 @@ require 'model/query-base-study.php';
 $query = "SELECT COUNT(*) AS total
 FROM $table_study
 JOIN $table_workload
-ON study.study_iuid = xray_workload.uid
-WHERE DATE(study_datetime) = CURRENT_DATE()";
+ON study.study_iuid = xray_workload.uid ";
 
 // total studies
 $total = mysqli_fetch_assoc(mysqli_query(
   $conn_pacsio,
-  $query
+  $query . 'WHERE DATE(study_datetime) = CURRENT_DATE()'
 ));
 
 // total waiting
 $waiting = mysqli_fetch_assoc(mysqli_query(
   $conn_pacsio,
-  $query . ' AND status = "waiting"'
+  $query . 'WHERE DATE(study_datetime) = CURRENT_DATE() AND status = "waiting"'
 ));
 
 // total approved
 $approved = mysqli_fetch_assoc(mysqli_query(
   $conn_pacsio,
-  $query . ' AND status = "approved"'
+  $query . ' WHERE DATE(approved_at) = CURRENT_DATE() AND status = "approved"'
 ));
-
 
 ?>
 <style type="text/css">

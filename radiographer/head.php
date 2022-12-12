@@ -12,7 +12,7 @@
 <link rel="stylesheet" type="text/css" media="screen" href="css/jquery.datetimepicker.min.css">
 <link rel="stylesheet" href="css/bootstrap-select.min.css">
 <link href="../css/select2.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="../css/style_master.css?v=2">
+<link rel="stylesheet" href="../css/style_master.css?v=3">
 <link rel="stylesheet" href="css/css_media.css">
 
 <!-- untuk validasi form -->

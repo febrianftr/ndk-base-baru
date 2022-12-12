@@ -29,25 +29,22 @@ function update_draft($value)
 	return mysqli_affected_rows($conn);
 }
 
-function insert_template_workload($post_exam_temp)
+function insert_template_workload($value)
 {
 	global $conn;
-	$title = $post_exam_temp['title'];
-	$fill = $post_exam_temp['fill'];
+	$title = $value['title'];
+	$fill = $value['fill'];
 	$username = $_SESSION['username'];
 	if (empty($title)) {
 		echo "<script>alert('Title belum diisi!');</script>";
 	} else {
-		$q2 = mysqli_query($conn, 'SELECT MAX(template_id) as pdf from xray_template');
-		$row2 = mysqli_fetch_assoc($q2);
-		$ai2 = $row2['pdf'] + 1;
-		$query = "INSERT INTO xray_template
-				VALUES 
-				('$ai2','$title','$fill','$username')
-				";
-		mysqli_query($conn, $query);
+		mysqli_query(
+			$conn,
+			"INSERT INTO xray_template (title, fill, username) 
+			VALUES ('$title','$fill','$username')"
+		);
 
-		return mysqli_affected_rows($conn);
+		return mysqli_insert_id($conn);
 	}
 }
 
@@ -64,6 +61,14 @@ function insert_workload($value)
 		"SELECT * FROM xray_dokter_radiology WHERE username = '$username'"
 	));
 	$pk = $dokter_radiologi['pk'];
+	$dokradid = $dokter_radiologi['dokradid'];
+	$dokrad_name = $dokter_radiologi['dokrad_name'];
+
+	mysqli_query(
+		$conn,
+		"INSERT INTO xray_order (uid, dokradid, dokrad_name) VALUES ('$uid', '$dokradid', '$dokrad_name')
+		ON DUPLICATE KEY UPDATE dokradid = '$dokradid', dokrad_name = '$dokrad_name'"
+	);
 
 	mysqli_query(
 		$conn,

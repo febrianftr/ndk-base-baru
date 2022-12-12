@@ -28,17 +28,20 @@ $row = mysqli_fetch_assoc(mysqli_query(
     WHERE study.study_iuid = '$uid'"
 ));
 
-$pat_name = substr(removeCharacter(ucwords(strtolower(defaultValue($row['pat_name'])))), 0, 24);
+$pat_name = substr(removeCharacter(ucwords(strtolower(defaultValue($row['pat_name'])))), 0, 26);
 $pat_sex = $row['pat_sex'];
-$pat_birthdate = diffDate($row['pat_birthdate']);
+$pat_birthdate = $row['pat_birthdate'];
+$age = diffDate($pat_birthdate);
 $study_datetime = defaultValueDateTime($row['study_datetime']);
-$study_desc = substr(ucwords(strtolower(defaultValue($row['study_desc']))), 0, 29);
+$study_desc_one = substr(ucwords(strtolower(defaultValue($row['study_desc']))), 0, 32);
+$study_desc_two = substr(ucwords(strtolower(defaultValue($row['study_desc']))), 32, 32);
 $pat_id = defaultValue($row['pat_id']);
 $no_foto = defaultValue($row['no_foto']);
 $address = ucwords(strtolower(defaultValue($row['address'])));
 $name_dep = substr(ucwords(strtolower(defaultValue($row['name_dep']))), 0, 29);
 $named = substr(ucwords(strtolower(defaultValue($row['named']))), 0, 29);
-$spc_needs = substr(ucfirst(defaultValue($row['spc_needs'])), 0, 75);
+$spc_needs_one = substr(ucfirst(strtolower(defaultValue($row['spc_needs']))), 0, 29);
+$spc_needs_two = substr(ucfirst(strtolower(defaultValue($row['spc_needs']))), 29, 29);
 $fill = $row['fill'];
 $signature = $row['signature'];
 $status = $row['status'];
@@ -52,7 +55,7 @@ $row_dokrad = mysqli_fetch_assoc(mysqli_query(
     WHERE pk = '$pk_dokter_radiology'"
 ));
 
-$dokrad_name = ucwords(strtolower(defaultValue($row_dokrad['dokrad_fullname'])));
+$dokrad_name = defaultValue($row_dokrad['dokrad_fullname']);
 $nip = $row_dokrad['nip'];
 
 
@@ -85,7 +88,7 @@ require('html-parser.php');
 $pdf = new PDF('P', 'mm', 'A4');
 
 // membuat halaman baru
-$pdf->SetMargins(10, 22, 8);
+$pdf->SetMargins(15, 23, 15);
 $pdf->AddPage();
 // setting jenis font yang akan digunakan
 $pdf->SetFont('Arial', '', 10);
@@ -93,62 +96,68 @@ $pdf->SetFont('Arial', '', 10);
 
 $pdf->SetTitle('Hasil expertise');
 
-$pdf->image('header-rs.jpg', 7, 2, 198);
-$pdf->MultiCell(0, 1, ' 
-
-
-
-
-                    ', 0, "J", false);
+$pdf->image('header-rs.jpg', 14, 10, 185);
+$pdf->MultiCell(0, 15, '', 0, "J", false);
 
 
 // ------------------------------------------------------------
 
-
-$pdf->Cell(28, 5, 'No Foto', 0, 0, 'L');
+$pdf->Cell(28, 5, 'No RM', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
-$pdf->Cell(55, 5, $no_foto, 0, 0, 'L');
+$pdf->Cell(55, 5, $pat_id, 0, 0, 'L');
+// ------------------
+$pdf->Cell(35, 5, 'No Foto', 0, 0, 'L');
+$pdf->Cell(3, 5, ':', 0, 0, 'L');
+$pdf->Cell(55, 5, $no_foto, 0, 1, 'L');
+// -----------------
+$pdf->Cell(28, 5, 'Nama', 0, 0, 'L');
+$pdf->Cell(3, 5, ':', 0, 0, 'L');
+$pdf->Cell(55, 5, $pat_name, 0, 0, 'L');
 // ------------------
 $pdf->Cell(35, 5, 'Ruang', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
 $pdf->Cell(65, 5, $name_dep, 0, 1, 'L');
-// ------------------
-$pdf->Cell(28, 5, 'No RM', 0, 0, 'L');
+// -----------------
+$pdf->Cell(28, 5, 'Tgl Lahir', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
-$pdf->Cell(55, 5, $pat_id, 0, 0, 'L');
+$pdf->Cell(55, 5, defaultValueDate($pat_birthdate), 0, 0, 'L');
 // ------------------
 $pdf->Cell(35, 5, 'Dokter Pengirim', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
 $pdf->Cell(65, 5, $named, 0, 1, 'L');
 // -----------------
-$pdf->Cell(28, 5, 'Nama', 0, 0, 'L');
+$pdf->Cell(28, 5, 'Umur', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
-$pdf->Cell(55, 5, $pat_name, 0, 0, 'L');
+$pdf->Cell(55, 5, $age, 0, 0, 'L');
 // -----------------
 $pdf->Cell(35, 5, 'Dokter Radiologi', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
 $pdf->Cell(65, 5, $dokrad_name, 0, 1, 'L');
-// -----------------
-$pdf->Cell(28, 5, 'Tgl Lahir / Umur', 0, 0, 'L');
-$pdf->Cell(3, 5, ':', 0, 0, 'L');
-$pdf->Cell(55, 5, $pat_birthdate, 0, 0, 'L');
-// -------------------
-$pdf->Cell(35, 5, 'Selesai Pemeriksaan', 0, 0, 'L');
-$pdf->Cell(3, 5, ':', 0, 0, 'L');
-$pdf->Cell(65, 5, $study_datetime, 0, 1, 'L');
 //-------------------
 $pdf->Cell(28, 5, 'Jenis Kelamin', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
 $pdf->Cell(55, 5, $pat_sex, 0, 0, 'L');
-// -----------------
-$pdf->Cell(35, 5, 'Pemeriksaan', 0, 0, 'L');
+// -------------------
+$pdf->Cell(35, 5, 'Tanggal Pemeriksaan', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
-$pdf->Cell(65, 5, $study_desc, 0, 1, 'L');
+$pdf->Cell(65, 5, defaultValueDate($study_datetime), 0, 1, 'L');
 // -----------------
 $pdf->Cell(28, 5, 'Klinis', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
-$pdf->Cell(158, 5, $spc_needs, 0, 2, 'L');
-$pdf->Line(10, 59, 200, 59);
+$pdf->Cell(55, 5, $spc_needs_one, 0, 0, 'L');
+// -----------------
+$pdf->Cell(35, 5, 'Jenis Pemeriksaan', 0, 0, 'L');
+$pdf->Cell(3, 5, ':', 0, 0, 'L');
+$pdf->Cell(65, 5, $study_desc_one, 0, 1, 'L');
+// -----------------
+$pdf->Cell(28, 5, '', 0, 0, 'L');
+$pdf->Cell(3, 5, '', 0, 0, 'L');
+$pdf->Cell(55, 5, $spc_needs_two, 0, 0, 'L');
+// -----------------
+$pdf->Cell(35, 5, '', 0, 0, 'L');
+$pdf->Cell(3, 5, '', 0, 0, 'L');
+$pdf->Cell(65, 5, $study_desc_two, 0, 1, 'L');
+$pdf->Line(16, 75, 198, 75);
 $fill = str_replace("&nbsp;", " ", $fill);
 $fill = str_replace("&ndash;", "-", $fill);
 $fill = str_replace("&agrave;", "->", $fill);
@@ -191,7 +200,7 @@ if (!empty($signature)) {
     $pdf->image('../phpqrcode/ttddokter/' . $signature, 163, 170, 25);
     $pdf->WriteHTML(
         "<br>
-        <br><br><br><br>
+        <br><br>
         <p align='right'>$dokrad_name <br />$nip</p>"
     );
 } else {
@@ -199,11 +208,13 @@ if (!empty($signature)) {
     $pdf->WriteHTML(
         "<p align='right'>Terimakasih atas kepercayaan TS</p>
         <p align='right'>Salam sejawat</p><br>
-        <br><br><br><br><br>
+        <br><br><br>
         <p align='right'>$dokrad_name <br />$nip</p>"
     );
 }
 
-$pdf->Output('I', $pat_name);
+$pdf->AutoPrint();
+
+$pdf->Output('I', $pat_name . '.pdf');
 
 mysqli_close($conn);
