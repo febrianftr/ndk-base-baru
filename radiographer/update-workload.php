@@ -58,6 +58,7 @@ $dokrad_name = $row['dokrad_name'];
 $pat_state = $row['pat_state'];
 $priority = $row['priority'];
 $spc_needs = $row['spc_needs'];
+$id_payment = $row['id_payment'];
 $payment = $row['payment'];
 $film_small = $row['film_small'];
 $film_medium = $row['film_medium'];
@@ -104,7 +105,7 @@ if ($_SESSION['level'] == "radiographer") {
 											</li>
 											<li>
 												<label for="pat_id">MRN</label><br>
-												<input class="not-allowed" type="text" name="pat_id" id="pat_id" value="<?= $pat_id; ?>" readonly>
+												<input type="text" name="pat_id" id="pat_id" value="<?= $pat_id; ?>">
 											</li>
 											<li>
 												<label for="pat_name">Nama</label><br>
@@ -114,11 +115,11 @@ if ($_SESSION['level'] == "radiographer") {
 												<label for="pat_sex"><b>Jenis Kelamin</b></label><br>
 												<div class="status">
 													<label class="radio-admin">
-														<input type="radio" checked="checked" name="pat_sex" id="pat_sex" <?= strtoupper($pat_sex) == 'M' ? 'checked' : ''; ?> value="M"> Laki - laki
+														<input type="radio" <?= strtoupper($pat_sex) == 'M' ? 'checked' : ''; ?> name="pat_sex" id="pat_sex" value="M"> Laki - laki
 														<span class="checkmark"></span>
 													</label>
 													<label class="radio-admin">
-														<input type="radio" name="pat_sex" id="pat_sex" <?= strtoupper($pat_sex) == 'F' ? 'checked' : ''; ?> value="F"> Perempuan
+														<input type="radio" <?= strtoupper($pat_sex) == 'F' ? 'checked' : ''; ?> name="pat_sex" id="pat_sex" value="F"> Perempuan
 														<span class="checkmark"></span>
 													</label>
 												</div>
@@ -174,11 +175,25 @@ if ($_SESSION['level'] == "radiographer") {
 											<label for="contrast">Kontras</label><br>
 											<div class="status">
 												<label class="radio-admin">
-													<input type="radio" <?= strtolower($contrast) == 'perlu kontras' ? 'checked' : ''; ?> name="contrast" id="contrast" value="Perlu Kontras"> Perlu Kontras
+													<input type="radio" <?= strtolower($contrast) == '1' ? 'checked' : ''; ?> name="contrast" id="contrast" value="1"> Kontras
 													<span class="checkmark"></span>
 												</label>
 												<label class="radio-admin">
-													<input type="radio" <?= strtolower($contrast) == 'tidak perlu kontras' ? 'checked' : ''; ?> name="contrast" id="contrast" value="Tidak perlu kontras"> Tidak perlu contrast
+													<input type="radio" <?= strtolower($contrast) == '0' ? 'checked' : ''; ?> name="contrast" id="contrast" value="0"> Tidak Kontras
+													<span class="checkmark"></span>
+												</label>
+											</div>
+										</li>
+										<br>
+										<li>
+											<label for="contrast_allergies">Alergi Kontras</label><br>
+											<div class="status">
+												<label class="radio-admin">
+													<input type="radio" <?= strtolower($contrast_allergies) == '1' ? 'checked' : ''; ?> name="contrast_allergies" id="contrast_allergies" value="1"> Alergi Kontras
+													<span class="checkmark"></span>
+												</label>
+												<label class="radio-admin">
+													<input type="radio" <?= strtolower($contrast_allergies) == '0' ? 'checked' : ''; ?> name="contrast_allergies" id="contrast_allergies" value="0"> Tidak Alergi Kontras
 													<span class="checkmark"></span>
 												</label>
 											</div>
@@ -214,21 +229,19 @@ if ($_SESSION['level'] == "radiographer") {
 											<label for="dokrad_name">Nama Dokter Radiology</label><br>
 											<input class="not-allowed" type="text" id="dokrad_name" value="<?= $dokrad_name; ?>" readonly>
 										</li>
+
 										<br>
 										<li>
 											<label for="payment">Pembayaran</label><br>
-											<input type="text" name="payment" id="payment" value="<?= $payment; ?>">
-										</li>
-										<li>
-											<label for="contrast_allergies">Alergi Kontras</label><br>
-											<label class="radio-admin">
-												<input type="radio" <?= strtolower($contrast_allergies) == 'alergi contrast' ? 'checked' : ''; ?> name="contrast_allergies" value="alergi contrast"> Alergi Kontras
-												<span class="checkmark"></span>
-											</label>
-											<label class="radio-admin">
-												<input type="radio" <?= strtolower($contrast_allergies) == 'tidak alergi contrast' ? 'checked' : ''; ?> name="contrast_allergies" value="tidak alergi contrast"> Tidak Alergi Kontras
-												<span class="checkmark"></span>
-											</label>
+											<select class="selectpicker" id="id_payment" data-size="10" data-live-search="true" data-width="100%" name="id_payment" data-style="btn-info">
+												<option value="null">--pilih--</option>
+												<?php
+												$payment_insurance  = mysqli_query($conn, "SELECT * FROM xray_payment_insurance");
+												while ($row_payment = mysqli_fetch_array($payment_insurance)) { ?>
+													<option value="<?= $row_payment['id_payment']; ?>" <?= $row_payment['id_payment'] == $id_payment ? 'selected' : "";  ?>><?= $row_payment['payment']; ?></option>
+												<?php } ?>
+											</select>
+											<!-- <input type="text" name="payment" id="payment" value="<?= $payment; ?>"> -->
 										</li>
 										<br>
 										<li>
@@ -307,7 +320,7 @@ if ($_SESSION['level'] == "radiographer") {
 			</div>
 		</div>
 		<?php include('script-footer.php'); ?>
-		<script src="../js/proses/update-workload.js?v=10"></script>
+		<script src="../js/proses/update-workload.js?v=12"></script>
 		<script src="js/bootstrap-select.min.js"></script>
 		<script>
 			$(document).ready(function() {

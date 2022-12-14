@@ -25,29 +25,78 @@ $toUpdatedTime = $_POST['to_workload'];
 $toUpdatedTime = $toUpdatedTime != null ? date("Y-m-d H:i", strtotime($toUpdatedTime)) : null;
 $modsInStudy = implode("','", $_POST['mods_in_study']);
 $priorityDoctor = implode("','", $_POST['priority_doctor']);
-$radiographerName = implode("','", $_POST['radiographer']);
-$radiographerAll = [];
+$radiographerId = implode("','", $_POST['radiographer']);
+$depId = implode("','", $_POST['dep_id']);
+$dokradId = implode("','", $_POST['dokradid']);
+$statusOne = implode("','", $_POST['status']);
 
-// jika radiografer dipilih all maka query semua radiographer name
-if ($radiographerName == 'all') {
-    $query_radiografer = mysqli_query(
-        $conn,
-        "SELECT * FROM xray_order WHERE radiographer_name IS NOT NULL GROUP BY radiographer_name LIMIT 30"
-    );
-    while ($radiographer = mysqli_fetch_assoc($query_radiografer)) {
-        $radiographerAll[] = $radiographer['radiographer_name'];
+// dokter radiologi
+$dokterRadiologyAll = [];
+$query_dokter_radiology = mysqli_query(
+    $conn,
+    "SELECT dokrad_name, dokrad_lastname FROM xray_dokter_radiology WHERE dokradid IN('$dokradId')"
+);
+while ($dokterRadiology = mysqli_fetch_assoc($query_dokter_radiology)) {
+    $dokterRadiologyAll[] = $dokterRadiology['dokrad_name'] . ' ' . $dokterRadiology['dokrad_lastname'];
+    $dokradFullName = str_replace("'", "", implode("'<br />'", $dokterRadiologyAll));
+}
+
+// radiografer
+$radiographerIdArray = [];
+$radiographerNameArray = [];
+$query_radiographer = "SELECT radiographer_name, radiographer_id FROM xray_radiographer";
+// jika radiografer dipilih all maka query semua radiographer id
+if ($radiographerId == 'all') {
+    $radiographer_query = mysqli_query($conn, $query_radiographer);
+    while ($radiographer = mysqli_fetch_assoc($radiographer_query)) {
+        $radiographerIdArray[] = $radiographer['radiographer_id'];
+        $radiographerNameArray[] = $radiographer['radiographer_name'];
     }
-    $radiographerName = implode("','", $radiographerAll);
+    $radiographerId = implode("','", $radiographerIdArray);
+    $radiographerName = implode("','", $radiographerNameArray);
     // else jika dipilih query masing2 radiografer
 } else {
-    $radiographerName = implode("','", $_POST['radiographer']);
+    $radiographer_query = mysqli_query($conn, $query_radiographer . " WHERE radiographer_id IN('$radiographerId')");
+    while ($radiographer = mysqli_fetch_assoc($radiographer_query)) {
+        $radiographerIdArray[] = $radiographer['radiographer_id'];
+        $radiographerNameArray[] = $radiographer['radiographer_name'];
+    }
+    $radiographerId = implode("','", $radiographerIdArray);
+    $radiographerName = implode("','", $radiographerNameArray);
+}
+
+// department
+$depIdArray = [];
+$nameDepArray = [];
+$query_department = "SELECT name_dep, dep_id FROM xray_department";
+// jika department dipilih all maka query semua department id
+if ($depId == 'all') {
+    $department_query = mysqli_query($conn, $query_department);
+    while ($department = mysqli_fetch_assoc($department_query)) {
+        $depIdArray[] = $department['dep_id'];
+        $nameDepArray[] = $department['name_dep'];
+    }
+    $depId = implode("','", $depIdArray);
+    $nameDep = implode("','", $nameDepArray);
+    // else jika dipilih query masing2 department
+} else {
+    $department_query = mysqli_query($conn, $query_department . " WHERE dep_id IN('$depId')");
+    while ($department = mysqli_fetch_assoc($department_query)) {
+        $depIdArray[] = $department['dep_id'];
+        $nameDepArray[] = $department['name_dep'];
+    }
+    $depId = implode("','", $depIdArray);
+    $nameDep = implode("','", $nameDepArray);
 }
 
 // kondisi form
 $kondisi = "study.study_datetime BETWEEN '$fromUpdatedTime' AND '$toUpdatedTime'
             AND mods_in_study IN('$modsInStudy')
             AND priority_doctor IN('$priorityDoctor')
-            AND radiographer_name IN('$radiographerName')
+            AND radiographer_id IN('$radiographerId')
+            AND dep_id IN('$depId')
+            AND dokradid IN('$dokradId')
+            AND status IN('$statusOne')
             ";
 
 // menampilkan detail pasien
@@ -57,12 +106,15 @@ $patient = mysqli_query($conn_pacsio, "SELECT
             pat_sex,
             pat_id,
             patientid AS no_foto,
+            dokrad_name,
             radiographer_name,
             name_dep,
             payment,
             create_time,
             mods_in_study,
             study_desc,
+            contrast,
+            contrast_allergies,
             study.updated_time,
             study.study_datetime,
             study_datetime,
@@ -73,8 +125,10 @@ $patient = mysqli_query($conn_pacsio, "SELECT
             film_reject_small,
             film_reject_medium,
             film_reject_large,
+            harga_prosedur,
             kv,
             mas,
+            priority,
             priority_doctor,
             status,
             approved_at
@@ -90,10 +144,13 @@ $patient = mysqli_query($conn_pacsio, "SELECT
             WHERE $kondisi
             ORDER BY study.study_datetime DESC");
 
-// menampilkan jumlah film
+// menampilkan jumlah film dan tarif pemeriksaan
 $sum = mysqli_fetch_array(mysqli_query(
     $conn_pacsio,
     "SELECT 
+    SUM(contrast_allergies) AS contrast_allergies,
+    SUM(contrast) AS contrast,
+    SUM(harga_prosedur) AS harga_prosedur,
     SUM(film_reject_small) AS film_reject_small, 
     SUM(film_reject_medium) AS film_reject_medium, 
     SUM(film_reject_large) AS film_reject_large,
@@ -265,8 +322,24 @@ while ($status = mysqli_fetch_array($statuses)) {
                 <td align="center"><?= str_replace("'", "", $modsInStudy); ?></td>
             </tr>
             <tr>
-                <td align="center">Keadaan Pasien : </td>
+                <td align="center">Prioritas Pasien : </td>
                 <td align="center"><?= str_replace("'", "", $priorityDoctor); ?></td>
+            </tr>
+            <!-- <tr>
+                <td align="center">Radiografer : </td>
+                <td align="center"><?= str_replace("'", "", $radiographerName); ?></td>
+            </tr> -->
+            <!-- <tr>
+                <td align="center">Departemen : </td>
+                <td align="center"><?= str_replace("'", "", $nameDep); ?></td>
+            </tr> -->
+            <tr>
+                <td align="center">Dokter Radiologi : </td>
+                <td align="center"><?= str_replace("'", "", $dokradFullName); ?></td>
+            </tr>
+            <tr>
+                <td align="center">Status : </td>
+                <td align="center"><?= str_replace("'", "", $statusOne); ?></td>
             </tr>
             <tr>
                 <td align="center">Tgl Penarikan : </td>
@@ -356,12 +429,18 @@ while ($status = mysqli_fetch_array($statuses)) {
                 <th rowspan="3">No Rekam <br /> Medis</th>
                 <th rowspan="3">Nama <br /> Radiografer</th>
                 <th rowspan="3">Tanggal <br /> Lahir</th>
+                <th rowspan="3">Umur</th>
                 <th rowspan="3">Ruangan</th>
+                <th rowspan="3">Dokter Radiologi</th>
                 <th rowspan="3">Modality</th>
                 <th rowspan="3">Pemeriksaan</th>
+                <th rowspan="3">Tarif <br /> Pemeriksaan</th>
                 <th colspan="6">Film</th>
                 <th colspan="4" rowspan="2">Exposed</th>
-                <th rowspan="3">Status <br /> Pasien</th>
+                <th rowspan="3">Prioritas <br /> (SIMRS)</th>
+                <th rowspan="3">Prioritas <br /> (Dokter)</th>
+                <th rowspan="3">Kontras</th>
+                <th rowspan="3">Alergi Kontras</th>
                 <th rowspan="3">Pembayaran</th>
                 <th rowspan="3">Waktu Pendaftaran <br /> Pasien</th>
                 <th rowspan="3">Waktu Mulai <br /> Pemeriksaan</th>
@@ -391,19 +470,25 @@ while ($status = mysqli_fetch_array($statuses)) {
             while ($row = mysqli_fetch_array($patient)) {
                 $pat_name = strtoupper(defaultValue($row['pat_name']));
                 $pat_sex = strtoupper(defaultValue($row['pat_sex']));
-                $pat_birthdate = strtoupper(diffDate($row['pat_birthdate']));
+                $pat_birthdate = defaultValueDate($row['pat_birthdate']);
+                $age = strtoupper(diffDate($row['pat_birthdate']));
                 $examed_at = strtoupper(defaultValueDateTime($row['examed_at']));
                 $study_datetime = strtoupper(defaultValueDateTime($row['study_datetime']));
                 $study_desc = strtoupper(defaultValue($row['study_desc']));
+                $harga_prosedur = strtoupper(defaultValue($row['harga_prosedur']));
                 $mods_in_study = strtoupper(defaultValue($row['mods_in_study']));
                 $updated_time = strtoupper(defaultValueDateTime($row['updated_time']));
                 $pat_id = strtoupper(defaultValue($row['pat_id']));
                 $no_foto = strtoupper(defaultValue($row['no_foto']));
                 $name_dep = strtoupper(defaultValue($row['name_dep']));
+                $dokrad_name = strtoupper(defaultValue($row['dokrad_name']));
                 $radiographer_name = strtoupper(defaultValue($row['radiographer_name']));
                 $create_time = defaultValueDateTime($row['create_time']);
                 $priority_doctor = strtoupper(defaultValue($row['priority_doctor']));
+                $priority = strtoupper(defaultValue($row['priority']));
                 $payment = strtoupper(defaultValue($row['payment']));
+                $contrast = strtoupper(defaultValue($row['contrast']));
+                $contrast_allergies = strtoupper(defaultValue($row['contrast_allergies']));
                 $status = strtoupper(defaultValue($row['status']));
                 $film_small = strtoupper(defaultValue($row['film_small']));
                 $film_medium = strtoupper(defaultValue($row['film_medium']));
@@ -424,9 +509,12 @@ while ($status = mysqli_fetch_array($statuses)) {
                     <td align="center"><?= $pat_id; ?></td>
                     <td align="center"><?= $radiographer_name; ?></td>
                     <td align="center"><?= $pat_birthdate; ?></td>
+                    <td align="center"><?= $age; ?></td>
                     <td align="center"><?= $name_dep; ?></td>
+                    <td align="center"><?= $dokrad_name; ?></td>
                     <td align="center"><?= $mods_in_study; ?></td>
                     <td align="center"><?= $study_desc; ?></td>
+                    <td align="center"><?= $harga_prosedur; ?></td>
                     <td align="center"><?= $film_small; ?></td>
                     <td align="center"> <?= $film_medium; ?> </td>
                     <td align="center"><?= $film_large; ?></td>
@@ -435,7 +523,10 @@ while ($status = mysqli_fetch_array($statuses)) {
                     <td align="center"><?= $film_reject_large; ?></td>
                     <td align="center" colspan="2"><?= $kv; ?></td>
                     <td align="center" colspan="2"><?= $mas; ?></td>
+                    <td align="center"><?= $priority; ?></td>
                     <td align="center"><?= $priority_doctor; ?></td>
+                    <td align="center"><?= $contrast; ?></td>
+                    <td align="center"><?= $contrast_allergies; ?></td>
                     <td align="center"><?= $payment; ?></td>
                     <td align="center"><?= $create_time; ?></td>
                     <td align="center"><?= $examed_at; ?></td>
@@ -448,14 +539,17 @@ while ($status = mysqli_fetch_array($statuses)) {
                 $no++;
             } ?>
             <tr>
-                <td align="center" colspan="10">Jumlah</td>
+                <td align="center" colspan="12">Jumlah</td>
+                <td align="center"><?= $sum['harga_prosedur']; ?></td>
                 <td align="center"><?= $sum['film_small']; ?></td>
                 <td align="center"><?= $sum['film_medium']; ?></td>
                 <td align="center"><?= $sum['film_large']; ?></td>
                 <td align="center"><?= $sum['film_reject_small']; ?></td>
                 <td align="center"><?= $sum['film_reject_medium']; ?></td>
                 <td align="center"><?= $sum['film_reject_large']; ?></td>
-                <td align="center" colspan="4"></td>
+                <td align="center" colspan="6"></td>
+                <td align="center"><?= $sum['contrast']; ?></td>
+                <td align="center"><?= $sum['contrast_allergies']; ?></td>
             </tr>
         </tbody>
     </table>
