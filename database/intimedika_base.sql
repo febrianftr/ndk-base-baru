@@ -11,7 +11,7 @@
  Target Server Version : 50649
  File Encoding         : 65001
 
- Date: 08/12/2022 16:19:43
+ Date: 14/12/2022 13:10:37
 */
 
 SET NAMES utf8mb4;
@@ -350,6 +350,7 @@ CREATE TABLE `xray_order`  (
   `pat_state` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `contrast_allergies` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `spc_needs` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `id_payment` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `payment` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `fromorder` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `examed_at` datetime(0) NULL DEFAULT NULL,
@@ -412,6 +413,19 @@ CREATE TABLE `xray_patient_order`  (
 -- Records of xray_patient_order
 -- ----------------------------
 INSERT INTO `xray_patient_order` VALUES (1, 43, '1088872939', 'Pasien', 'Demo', 'M', '2000-01-02', '', 'rafdi');
+
+-- ----------------------------
+-- Table structure for xray_payment_insurance
+-- ----------------------------
+DROP TABLE IF EXISTS `xray_payment_insurance`;
+CREATE TABLE `xray_payment_insurance`  (
+  `pk` int(11) NOT NULL AUTO_INCREMENT,
+  `id_payment` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `payment` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `created_at` timestamp(0) NULL DEFAULT NULL,
+  `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`pk`, `id_payment`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for xray_radiographer

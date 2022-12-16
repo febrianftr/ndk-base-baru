@@ -67,10 +67,13 @@ $(document).ready(function () {
       no_foto: "required",
       pat_id: "required",
       pat_name: "required",
-      pat_sex: "required",
+      pat_sex: { required: true },
+      // contrast: { required: true },
+      // contrast_allergies: { required: true },
       pat_birthdate: "required",
       address: "required",
       dep_id: { valueNotEquals: "null" },
+      id_payment: { valueNotEquals: "null" },
       mods_in_study: "required",
       dokterid: { valueNotEquals: "null" },
       radiographer_id: { valueNotEquals: "null" },
@@ -94,12 +97,11 @@ $(document).ready(function () {
         required: true,
       },
     },
-    messages: {
-      required: "wajib diisi",
-    },
     errorPlacement: function (error, element) {
       if (element.is(":radio")) {
         error.appendTo(element.parents("li"));
+        // console.log(element.parents("li"));
+        console.log(error.insertAfter());
       } else {
         error.insertAfter(element);
       }
@@ -113,7 +115,6 @@ $(document).ready(function () {
       $(element).removeClass("invalid");
     },
     errorClass: "invalid-text",
-    focusCleanup: true,
     ignoreTitle: true,
     submitHandler: function (form) {
       $.ajax({

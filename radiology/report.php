@@ -32,9 +32,26 @@ if ($_SESSION['level'] == "radiology") {
 					placeholder: 'Select Radiographer'
 				});
 
-				$('.cboxtombol').click(function() {
-					$('.cbox').prop('checked', this.checked);
+				$('.check-genders').click(function() {
+					$('.check-gender').prop('checked', this.checked);
 				});
+
+				$('.check-modalities').click(function() {
+					$('.check-modality').prop('checked', this.checked);
+				});
+
+				$('.check-priorities').click(function() {
+					$('.check-priority').prop('checked', this.checked);
+				});
+
+				$('.check-radiologists').click(function() {
+					$('.check-radiologist').prop('checked', this.checked);
+				});
+
+				$('.check-statuses').click(function() {
+					$('.check-status').prop('checked', this.checked);
+				});
+
 				// --------------------
 				$('#from_workload').datetimepicker({
 					format: 'd-m-Y H:i'
