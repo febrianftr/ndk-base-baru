@@ -26,6 +26,6 @@
     }
 
     .invalid-text {
-        color: red;
+        color: red !important;
     }
 </style>

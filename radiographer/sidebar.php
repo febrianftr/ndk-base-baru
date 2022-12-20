@@ -37,7 +37,7 @@ include '../contract-service.php';
                 <a href="#" class="products1"><i class="fa fa-user fa-lg"></i> <?= $lang['patient_order'] ?> <label class="products1-arrow"><span class="arrow"></span></label></a>
             </li>
             <ul class="sub-menu1 collapse" id="products1">
-                <!-- <li id="regist1"><a href="registration.php"><?= $lang['registration'] ?></a></li> -->
+                <li id="regist1"><a href="registration.php"><?= $lang['registration'] ?></a></li>
                 <li id="order3"><a href="order2.php"><?= $lang['all_order'] ?></a></li>
                 <li id="exam3"><a href="exam2.php"><?= $lang['examroom'] ?></a></li>
             </ul>
