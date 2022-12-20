@@ -23,6 +23,7 @@ if ($_SESSION['level'] == "radiographer") {
 			<div class="row">
 				<div id="content1">
 					<div class="body">
+
 						<div class="container-fluid">
 							<div class="head-title" style="width: 365px;">
 								<h3 class="textsearchnewpasien2"><?= $lang['regist_new_patient'] ?></h3>
@@ -33,15 +34,15 @@ if ($_SESSION['level'] == "radiographer") {
 										<div class="col-sm-6">
 											<table class="table-form">
 												<tr>
-													<td><label for="mrn"><b>MRN <span class="text-danger">*</span></b></label></td>
+													<td width="150"><label for="mrn"><b>MRN <span class="text-danger">*</span></b></label></td>
 													<td><input type="text" name="mrn" id="mrn" maxlength="10" placeholder="<?= $lang['input_mrn'] ?>" required></td>
 												</tr>
 												<tr>
-													<td><label for="name"><b><?= $lang['name'] ?> <span class="text-danger">*</span></b></label></td>
+													<td width="150"><label for="name"><b><?= $lang['name'] ?> <span class="text-danger">*</span></b></label></td>
 													<td><input type="text" name="name" id="name" placeholder="<?= $lang['input_f_name'] ?>" required></td>
 												</tr>
 												<tr>
-													<td><label for="sex"><b>Gender <span class="text-danger">*</span></b></label></td>
+													<td width="150"><label for="sex"><b>Gender <span class="text-danger">*</span></b></label></td>
 													<td>
 														<label class="radio-admin">
 															<input type="radio" checked="checked" name="sex" value="M" required> <?= $lang['male'] ?>
@@ -54,11 +55,11 @@ if ($_SESSION['level'] == "radiographer") {
 													</td>
 												</tr>
 												<tr>
-													<td><label for="birth_date"><b><?= $lang['birth_date'] ?> <span class="text-danger">*</span></b></label></td>
+													<td width="150"><label for="birth_date"><b><?= $lang['birth_date'] ?> <span class="text-danger">*</span></b></label></td>
 													<td><input type="text" name="birth_date" id="birth_date" placeholder="<?= $lang['input_birth_date'] ?>" autocomplete="off" required></td>
 												</tr>
 												<tr>
-													<td><label for="weight"><b><?= $lang['weight'] ?></b></label></td>
+													<td width="150"><label for="weight"><b><?= $lang['weight'] ?></b></label></td>
 													<td><input type="text" name="weight" id="weight" placeholder="<?= $lang['input_weight'] ?>"></td>
 												</tr>
 											</table>
@@ -66,17 +67,17 @@ if ($_SESSION['level'] == "radiographer") {
 										<div class="col-sm-6">
 											<table class="table-form">
 												<tr>
-													<td><label for="address"><b><?= $lang['address'] ?></b></label></td>
+													<td width="150"><label for="address"><b><?= $lang['address'] ?></b></label></td>
 													<td><textarea type="text" name="address" id="address" placeholder="<?= $lang['input_address'] ?>"></textarea></td>
 												</tr>
 												<tr>
-													<td><label for="note"><b><?= $lang['note'] ?></b></label></td>
+													<td width="150"><label for="note"><b><?= $lang['note'] ?></b></label></td>
 													<td><textarea type="text" name="note" id="note" placeholder="<?= $lang['input_note'] ?>"></textarea></td>
 												</tr>
 												<tr>
 													<div class="container-fluid">
 														<div class="row">
-															<td><label for="phone"><b><?= $lang['no_telp'] ?></b></label></td>
+															<td width="150"><label for="phone"><b><?= $lang['no_telp'] ?></b></label></td>
 															<td>
 																<input style="border-radius: 0px 4px 4px 0px;" type="text" name="phone" id="phone" placeholder="<?= $lang['input_telp'] ?>">
 															</td>
@@ -84,7 +85,7 @@ if ($_SESSION['level'] == "radiographer") {
 													</div>
 												</tr>
 												<tr>
-													<td><label for="email"><b>E-Mail</b></label></td>
+													<td width="150"><label for="email"><b>E-Mail</b></label></td>
 													<td><input type="text" name="email" id="email" placeholder="<?= $lang['input_email'] ?>"></td>
 												</tr>
 											</table>
@@ -99,84 +100,84 @@ if ($_SESSION['level'] == "radiographer") {
 								</div>
 							</form>
 						</div>
+
 					</div>
-				</div>
-			</div>
-			<div class="head-title" style="width: 365px;">
-				<h3 class="textsearchnewpasien2">List Patient</h3>
-			</div>
-			<div id="content">
-				<div class="body">
-					<div id=content>
+
+					<div>
 						<div class="container-fluid" style="margin-bottom: 100px;">
-							<div class="table-view col-md-12 table-box">
-								<table class="table-dicom table-paginate" border="1" cellpadding="8" cellspacing="0" style="margin-top: 3px;">
-									<thead>
-										<tr>
-											<th>
-												<center>No</center>
-											</th>
-											<th>
-												<center>MRN</center>
-											</th>
-											<th>
-												<center><?= $lang['name'] ?></center>
-											</th>
-											<th>
-												<center>Gender</center>
-											</th>
-											<th>
-												<center>Birth Date</center>
-											</th>
-											<th>
-												<center>Weight</center>
-											</th>
-											<th>
-												<center>Address</center>
-											</th>
-											<th>
-												<center>Phone</center>
-											</th>
-											<th>
-												<center>Email</center>
-											</th>
-											<th>
-												<center>Note</center>
-											</th>
-											<th>
-												<center><?= $lang['create_date'] ?></center>
-											</th>
-											<th>
-												<center>ACTION</center>
-											</th>
-										</tr>
-									</thead>
-									<?php
-									$i = 1;
-									$patient = mysqli_query(
-										$conn,
-										"SELECT * FROM xray_patient ORDER BY created_at DESC"
-									);
-									while ($row = mysqli_fetch_array($patient)) { ?>
-										<tr>
-											<td> <?= $i; ?> </td>
-											<td> <?= defaultValue($row['mrn']) ?> </td>
-											<td><?= defaultValue($row['name']) . " " . $row['lastname']  ?></td>
-											<td><?= defaultValue($row['sex']) ?></td>
-											<td><?= defaultValueDate($row['birth_date']) ?></td>
-											<td><?= defaultValueNumber($row['weight']) ?></td>
-											<td><?= defaultValue($row['address']) ?></td>
-											<td><?= defaultValue($row['phone']) ?></td>
-											<td><?= defaultValue($row['email']) ?></td>
-											<td><?= defaultValue($row['note']) ?></td>
-											<td><?= defaultValueDateTime($row['created_at']) ?></td>
-											<td width="150">
-												<a href="registration-live.php?pk=<?= $row['pk']; ?>" class="btn-worklist" value="Create Order"><?= $lang['create_order'] ?>
-											</td>
-										</tr>
-										<?php $i++; ?>
-									<?php } ?>
-								</table>
+							<div class="head-title" style="width: 365px;">
+								<h3 class="textsearchnewpasien2">List Patient</h3>
+							</div>
+							<div class="row back-search">
+								<div class="table-view col-md-12 table-box">
+									<table class="table-dicom table-paginate" border="1" cellpadding="8" cellspacing="0" style="margin-top: 3px;">
+										<thead>
+											<tr>
+												<th>
+													<center>No</center>
+												</th>
+												<th>
+													<center>MRN</center>
+												</th>
+												<th>
+													<center><?= $lang['name'] ?></center>
+												</th>
+												<th>
+													<center>Gender</center>
+												</th>
+												<th>
+													<center>Birth Date</center>
+												</th>
+												<th>
+													<center>Weight</center>
+												</th>
+												<th>
+													<center>Address</center>
+												</th>
+												<th>
+													<center>Phone</center>
+												</th>
+												<th>
+													<center>Email</center>
+												</th>
+												<th>
+													<center>Note</center>
+												</th>
+												<th>
+													<center><?= $lang['create_date'] ?></center>
+												</th>
+												<th>
+													<center>ACTION</center>
+												</th>
+											</tr>
+										</thead>
+										<?php
+										$i = 1;
+										$patient = mysqli_query(
+											$conn,
+											"SELECT * FROM xray_patient ORDER BY created_at DESC"
+										);
+										while ($row = mysqli_fetch_array($patient)) { ?>
+											<tr>
+												<td> <?= $i; ?> </td>
+												<td> <?= defaultValue($row['mrn']) ?> </td>
+												<td><?= defaultValue($row['name']) . " " . $row['lastname']  ?></td>
+												<td><?= defaultValue($row['sex']) ?></td>
+												<td><?= defaultValueDate($row['birth_date']) ?></td>
+												<td><?= defaultValueNumber($row['weight']) ?></td>
+												<td><?= defaultValue($row['address']) ?></td>
+												<td><?= defaultValue($row['phone']) ?></td>
+												<td><?= defaultValue($row['email']) ?></td>
+												<td><?= defaultValue($row['note']) ?></td>
+												<td><?= defaultValueDateTime($row['created_at']) ?></td>
+												<td width="150">
+													<a href="registration-live.php?pk=<?= $row['pk']; ?>" class="btn-worklist" value="Create Order" style="color: #ececec;"><?= $lang['create_order'] ?>
+												</td>
+											</tr>
+											<?php $i++; ?>
+										<?php } ?>
+									</table>
+								</div>
 							</div>
 						</div>
 					</div>
