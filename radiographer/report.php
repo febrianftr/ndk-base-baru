@@ -29,9 +29,7 @@ if ($_SESSION['level'] == "radiographer") {
 				$("li[data-target='#service']").addClass("active");
 				$("ul[id='service'] li[id='report1']").addClass("active");
 
-				$(".select2").select2({
-					placeholder: 'Select Radiographer'
-				});
+				$(".select2").select2();
 
 				$('.check-genders').click(function() {
 					$('.check-gender').prop('checked', this.checked);

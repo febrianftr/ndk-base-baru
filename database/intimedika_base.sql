@@ -11,7 +11,7 @@
  Target Server Version : 50649
  File Encoding         : 65001
 
- Date: 14/12/2022 13:10:37
+ Date: 20/12/2022 09:57:09
 */
 
 SET NAMES utf8mb4;
@@ -364,9 +364,9 @@ CREATE TABLE `xray_order`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `xray_patient`;
 CREATE TABLE `xray_patient`  (
-  `pk` int(10) NOT NULL,
+  `pk` int(10) NOT NULL AUTO_INCREMENT,
   `patientid` int(10) NULL DEFAULT NULL,
-  `mrn` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `mrn` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `lastname` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `sex` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
@@ -376,21 +376,12 @@ CREATE TABLE `xray_patient`  (
   `phone` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `note` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `village` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `city` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `sub_district` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `post_code` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `province` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `country` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_date` datetime(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`pk`) USING BTREE,
+  `created_at` timestamp(0) NULL DEFAULT NULL,
+  `updated_at` timestamp(0) NULL DEFAULT NULL,
+  `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`pk`, `mrn`) USING BTREE,
   UNIQUE INDEX `index_mrn`(`mrn`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of xray_patient
--- ----------------------------
-INSERT INTO `xray_patient` VALUES (21, 21, 'X331', 'PASIEN', 'DEMO1', 'M', '2000-01-02', NULL, NULL, '+62', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-06-23 12:18:03');
+) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for xray_patient_order
