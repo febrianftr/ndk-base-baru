@@ -19,6 +19,11 @@ include '../contract-service.php';
     </div>
 </div>
 <!-- ------loader------ -->
+
+
+
+
+
 <?php include "../bahasa.php"; ?>
 <div class="nav-side-menu">
     <div class="brand">

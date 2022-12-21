@@ -149,11 +149,11 @@ if ($_SESSION['level'] == "radiographer") {
                               <div class="row">
                                 <div class="col-md-6"><br>
                                   <label for="schedule_date"><b><?= $lang['exam_date'] ?></b></label>
-                                  <input type="text" name="schedule_date" id="schedule_date" autocomplete="off"></input>
+                                  <input type="text" name="schedule_date" id="schedule_date" autocomplete="off" style="height: 31px; border: 2px solid #d2c8c8; border-radius: 4px;"></input>
                                 </div>
                                 <div class="col-md-6"><br>
                                   <label for="schedule_time"><b><?= $lang['exam_time'] ?></b></label><br>
-                                  <input type="text" name="schedule_time" id="schedule_time" autocomplete="off"></input>
+                                  <input type="text" name="schedule_time" id="schedule_time" autocomplete="off" style="height: 31px; border: 2px solid #d2c8c8; border-radius: 4px;"></input>
                                 </div>
                               </div>
                             </div>
