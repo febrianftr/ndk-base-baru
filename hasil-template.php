@@ -11,7 +11,10 @@ $row = mysqli_fetch_assoc(mysqli_query(
     <h6 class="text-center font-weight-bold">
         <label><?= $row['title']; ?></label>
     </h6>
-    <p>
+    <button onclick="selectText('divid')">Select</button>
+    <div id="divid">
         <?= $row['fill']; ?>
-    </p>
+    </div>
+
+
 </div>
