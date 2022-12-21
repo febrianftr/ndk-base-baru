@@ -135,12 +135,12 @@ $patient = mysqli_query($conn_pacsio, "SELECT
             FROM $table_patient
             JOIN $table_study
             ON patient.pk = study.patient_fk
-            JOIN $table_order
-            ON xray_order.uid = study.study_iuid
             JOIN $table_workload
             ON study.study_iuid = xray_workload.uid
+            JOIN $table_order
+            ON xray_order.uid = xray_workload.uid
             JOIN $table_workload_bhp
-            ON study.study_iuid = xray_workload_bhp.uid
+            ON xray_workload.uid = xray_workload_bhp.uid
             WHERE $kondisi
             ORDER BY study.study_datetime DESC");
 
@@ -160,12 +160,12 @@ $sum = mysqli_fetch_array(mysqli_query(
     FROM $table_patient
     JOIN $table_study
     ON patient.pk = study.patient_fk
-    JOIN $table_order
-    ON xray_order.uid = study.study_iuid
     JOIN $table_workload
     ON study.study_iuid = xray_workload.uid
+    JOIN $table_order
+    ON xray_order.uid = xray_workload.uid
     JOIN $table_workload_bhp
-    ON study.study_iuid = xray_workload_bhp.uid
+    ON xray_workload.uid = xray_workload_bhp.uid
     WHERE $kondisi"
 ));
 
@@ -178,12 +178,12 @@ $studies = mysqli_query(
     FROM $table_patient
     JOIN $table_study
     ON patient.pk = study.patient_fk
-    JOIN $table_order
-    ON xray_order.uid = study.study_iuid
     JOIN $table_workload
     ON study.study_iuid = xray_workload.uid
+    JOIN $table_order
+    ON xray_order.uid = xray_workload.uid
     JOIN $table_workload_bhp
-    ON study.study_iuid = xray_workload_bhp.uid
+    ON xray_workload.uid = xray_workload_bhp.uid
     WHERE $kondisi
     GROUP BY UPPER(study_desc)
     ORDER BY study_desc ASC"
@@ -197,12 +197,12 @@ $countStudies = mysqli_fetch_array(mysqli_query(
     FROM $table_patient
     JOIN $table_study
     ON patient.pk = study.patient_fk
-    JOIN $table_order
-    ON xray_order.uid = study.study_iuid
     JOIN $table_workload
     ON study.study_iuid = xray_workload.uid
+    JOIN $table_order
+    ON xray_order.uid = xray_workload.uid
     JOIN $table_workload_bhp
-    ON study.study_iuid = xray_workload_bhp.uid
+    ON xray_workload.uid = xray_workload_bhp.uid
     WHERE $kondisi"
 ));
 
@@ -214,12 +214,12 @@ $totalApproved = mysqli_fetch_array(mysqli_query(
     FROM $table_patient
     JOIN $table_study
     ON patient.pk = study.patient_fk
-    JOIN $table_order
-    ON xray_order.uid = study.study_iuid
     JOIN $table_workload
     ON study.study_iuid = xray_workload.uid
+    JOIN $table_order
+    ON xray_order.uid = xray_workload.uid
     JOIN $table_workload_bhp
-    ON study.study_iuid = xray_workload_bhp.uid
+    ON xray_workload.uid = xray_workload_bhp.uid
     WHERE $kondisi
     AND status = 'approved'"
 ));
@@ -231,12 +231,12 @@ $totalStatus = mysqli_fetch_array(mysqli_query(
     FROM $table_patient
     JOIN $table_study
     ON patient.pk = study.patient_fk
-    JOIN $table_order
-    ON xray_order.uid = study.study_iuid
     JOIN $table_workload
     ON study.study_iuid = xray_workload.uid
+    JOIN $table_order
+    ON xray_order.uid = xray_workload.uid
     JOIN $table_workload_bhp
-    ON study.study_iuid = xray_workload_bhp.uid
+    ON xray_workload.uid = xray_workload_bhp.uid
     WHERE $kondisi"
 ));
 
@@ -254,12 +254,12 @@ $approved = mysqli_fetch_array(mysqli_query(
     FROM $table_patient
     JOIN $table_study
     ON patient.pk = study.patient_fk
-    JOIN $table_order
-    ON xray_order.uid = study.study_iuid
     JOIN $table_workload
     ON study.study_iuid = xray_workload.uid
+    JOIN $table_order
+    ON xray_order.uid = xray_workload.uid
     JOIN $table_workload_bhp
-    ON study.study_iuid = xray_workload_bhp.uid
+    ON xray_workload.uid = xray_workload_bhp.uid
     WHERE $kondisi
     AND status = 'approved'"
 ));
@@ -274,12 +274,12 @@ $statuses = mysqli_query(
     FROM $table_patient
     JOIN $table_study
     ON patient.pk = study.patient_fk
-    JOIN $table_order
-    ON xray_order.uid = study.study_iuid
     JOIN $table_workload
     ON study.study_iuid = xray_workload.uid
+    JOIN $table_order
+    ON xray_order.uid = xray_workload.uid
     JOIN $table_workload_bhp
-    ON study.study_iuid = xray_workload_bhp.uid
+    ON xray_workload.uid = xray_workload_bhp.uid
     WHERE $kondisi
     GROUP BY status"
 );

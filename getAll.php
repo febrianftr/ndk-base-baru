@@ -23,7 +23,7 @@ $selected_dokter_radiology = mysqli_fetch_assoc(mysqli_query(
 // kondisi jika ada di dicom.php
 $row_dokrad = mysqli_fetch_assoc(mysqli_query(
     $conn,
-    "SELECT $select_dokter_radiology 
+    "SELECT dokradid 
     FROM $table_dokter_radiology 
     WHERE username = '$username'"
 ));
@@ -47,17 +47,34 @@ if ($dicom == '/dicom.php') {
 $query = mysqli_query(
     $conn_pacsio,
     "SELECT 
-    $select_patient,
-    $select_study,
-    $select_order,
-    $select_workload
+    pat_id,
+    pat_name,
+    pat_sex,
+    pat_birthdate,
+    study_iuid,
+    study_datetime,
+    study_desc,
+    mods_in_study,
+    study.updated_time,
+    status,
+    fill,
+    approved_at,
+    pk_dokter_radiology,
+    patientid AS no_foto,
+    named,
+    dokradid,
+    dokrad_name,
+    name_dep,
+    radiographer_name,
+    priority,
+    fromorder
     FROM $table_patient
     JOIN $table_study
     ON patient.pk = study.patient_fk
-    LEFT JOIN $table_order
-    ON xray_order.uid = study.study_iuid
-    LEFT JOIN $table_workload
+    JOIN $table_workload
     ON study.study_iuid = xray_workload.uid
+    LEFT JOIN $table_order
+    ON xray_order.uid = xray_workload.uid
     $kondisi"
 );
 
@@ -69,26 +86,17 @@ while ($row = mysqli_fetch_array($query)) {
     $pat_birthdate = diffDate($row['pat_birthdate']);
     $study_iuid = defaultValue($row['study_iuid']);
     $study_datetime = defaultValueDateTime($row['study_datetime']);
-    $accession_no = defaultValue($row['accession_no']);
-    $ref_physician = defaultValue($row['ref_physician']);
     $study_desc = defaultValue($row['study_desc']);
     $mods_in_study = defaultValue($row['mods_in_study']);
-    $num_series = defaultValue($row['num_series']);
-    $num_instances = defaultValue($row['num_instances']);
     $updated_time = defaultValueDateTime($row['updated_time']);
     $pat_id = defaultValue($row['pat_id']);
     $no_foto = defaultValue($row['no_foto']);
-    $address = defaultValue($row['address']);
     $name_dep = defaultValue($row['name_dep']);
     $named = defaultValue($row['named']);
     $radiographer_name = defaultValue($row['radiographer_name']);
     $dokrad_name = defaultValue($row['dokrad_name']);
     $dokradid = defaultValue($row['dokradid']);
-    $create_time = defaultValueDateTime($row['create_time']);
-    $pat_state = defaultValue($row['pat_state']);
     $priority = defaultValue($row['priority']);
-    $spc_needs = defaultValue($row['spc_needs']);
-    $payment = defaultValue($row['payment']);
     $fromorder = $row['fromorder'];
     $status = styleStatus($row['status']);
     $fill = $row['fill'];
@@ -164,7 +172,7 @@ while ($row = mysqli_fetch_array($query)) {
     // kondisi mencari ditabel dokter radiology
     $row_dokrad = mysqli_fetch_assoc(mysqli_query(
         $conn,
-        "SELECT $select_dokter_radiology 
+        "SELECT CONCAT(xray_dokter_radiology.dokrad_name,' ',xray_dokter_radiology.dokrad_lastname) AS dokrad_fullname
         FROM $table_dokter_radiology 
         WHERE pk = '$pk_dokter_radiology'"
     ));
@@ -188,7 +196,6 @@ while ($row = mysqli_fetch_array($query)) {
         "pat_sex" => $pat_sex,
         "study_desc" => $study_desc,
         "series_desc" => READMORESERIESFIRST . $study_iuid . READMORESERIESLAST,
-        "num_series" => $num_series . ' / ' . $num_instances,
         "mods_in_study" => $mods_in_study,
         "named" => $named,
         "name_dep" => $name_dep,
