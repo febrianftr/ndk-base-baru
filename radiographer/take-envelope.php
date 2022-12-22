@@ -45,17 +45,17 @@ if ($_SESSION['level'] == "radiographer") {
 				<div id="content1">
 
 					<div class="d-flex justify-content-center align-items-center" style="height: 50vh;">
-						<div class="col-md-6 box-change-dokter">
+						<div class="col-md-6 box-change-dokter table-box">
 							<form method="post" id="take-envelope">
 								<div class="radiobtn1">
 									<div class='alert alert-info' role='alert'>Hasil Expertise Pasien <?= defaultValue($row_take_envelope['pat_name']); ?>, modalitas <?= defaultValue($row_take_envelope['mods_in_study']); ?>, Pemeriksaan <?= defaultValue($row_take_envelope['study_desc']); ?></div>
 									<input type="hidden" id="study_iuid" name="study_iuid" value="<?= $uid; ?>">
 									<label for="name">Nama</label><br>
-									<input type="text" name="name" id="name" value="<?= $row_take_envelope['name'] ?? '' ?>">
+									<input type="text" class="form-control" name="name" id="name" value="<?= $row_take_envelope['name'] ?? '' ?>">
 									<br>
 									<br>
 									<label for="created_at">Waktu Ambil</label><br>
-									<input type="text" name="created_at" id="created_at" value="<?= $row_take_envelope['created_at'] ? defaultValueDateTime($row_take_envelope['created_at']) : date('d-m-Y H:i'); ?>">
+									<input type="text" class="form-control" name="created_at" id="created_at" value="<?= $row_take_envelope['created_at'] ? defaultValueDateTime($row_take_envelope['created_at']) : date('d-m-Y H:i'); ?>">
 									<br>
 									<br>
 									<?php
@@ -65,14 +65,16 @@ if ($_SESSION['level'] == "radiographer") {
 										$checked = '';
 									}
 									?>
-									<label class="radio-admin">
-										<input type="radio" <?= $checked; ?> name="is_taken" id="is_taken" value="1"> Sudah Diambil
-										<span class="checkmark"></span>
-									</label>
-									<label class="radio-admin">
-										<input type="radio" <?= strtoupper($is_taken) == '0' ? 'checked' : ''; ?> name="is_taken" id="is_taken" value="0"> Belum Diambil
-										<span class="checkmark"></span>
-									</label>
+									<div style="background-color: white; padding: 12px; border-radius: 4px; border: 1px solid #ced4da;">
+										<label class="radio-admin">
+											<input type="radio" <?= $checked; ?> name="is_taken" id="is_taken" value="1"> Sudah Diambil
+											<span class="checkmark"></span>
+										</label>
+										<label class="radio-admin">
+											<input type="radio" <?= strtoupper($is_taken) == '0' ? 'checked' : ''; ?> name="is_taken" id="is_taken" value="0"> Belum Diambil
+											<span class="checkmark"></span>
+										</label>
+									</div>
 								</div>
 								<button class="btn-worklist3 btn-lg" type="submit" id="submit" name="submit" style="margin: 10px 0; float:right;">
 									<span class="spinner-grow spinner-grow-sm loading" role="status" aria-hidden="true"></span>
