@@ -11,7 +11,7 @@
  Target Server Version : 50649
  File Encoding         : 65001
 
- Date: 20/12/2022 09:57:23
+ Date: 22/12/2022 13:49:53
 */
 
 SET NAMES utf8mb4;
@@ -664,6 +664,25 @@ CREATE TABLE `xray_study`  (
 INSERT INTO `xray_study` VALUES (1, 'CR', '1', 'THORAX', '100000');
 INSERT INTO `xray_study` VALUES (2, 'CT', '2', 'CT HEAD', '10000000');
 INSERT INTO `xray_study` VALUES (3, 'CR', '2', 'ABDOMEN', '200000');
+
+-- ----------------------------
+-- Table structure for xray_take_envelope
+-- ----------------------------
+DROP TABLE IF EXISTS `xray_take_envelope`;
+CREATE TABLE `xray_take_envelope`  (
+  `pk` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `is_taken` smallint(6) NULL DEFAULT NULL,
+  `created_at` timestamp(0) NULL DEFAULT NULL,
+  `updated_at` timestamp(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`pk`, `uid`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of xray_take_envelope
+-- ----------------------------
+INSERT INTO `xray_take_envelope` VALUES (7, '1.2.840.113564.10151014.20200817160556900170', 'utama andika', 1, '2022-12-22 13:47:00', '2022-12-22 13:46:48');
 
 -- ----------------------------
 -- Table structure for xray_template

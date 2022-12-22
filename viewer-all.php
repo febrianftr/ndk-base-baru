@@ -18,15 +18,22 @@ define('HTMLLAST', '"target="_blank"><span class="btn rgba-stylish-slight btn-in
 define('MOBILEFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="http://' . $_SERVER['SERVER_NAME'] . ':19898/dwv-viewer/index.html?type=manifest&input=%2Fweasis-pacs-connector%2Fmanifest%3FseriesUID%3D');
 define('MOBILELAST', '"target="_blank"><span class="btn btn-warning btn-inti"><i class="fas fa-eye" data-toggle="tooltip" title="Web Viewer"></i></span></a>');
 
+// Change doctor
 define('CHANGEDOCTORICONYES', '<i class="fas fa-user-md fa-lg"></i>');
 define('CHANGEDOCTORICONNO', '<i class="fas fa-user-times fa-lg deep-orange-text"></i>');
-
-// Change doctor
 define('CHANGEDOCTORFIRST', '<a style="text-decoration: none;" href="changedoctorworklist.php?uid=');
 define('CHANGEDOCTORMID', '&dokradid=');
 define('CHANGEDOCTORSTAT', '&status=');
 define('CHANGEDOCTORLAST', '"><span class="btn rgba-stylish-slight darken-1 btn-inti2">');
 define('CHANGEDOCTORVERYLAST', '</span></a>');
+
+// Ambil hasil expertise
+define('GETEXPERTISEICONYES', '<i class="fas fa-envelope fa-lg"></i>');
+define('GETEXPERTISEICONNO', '<i class="fas fa-envelope-open fa-lg deep-orange-text"></i>');
+define('GETEXPERTISEFIRST', '<a style="text-decoration: none;" title="');
+define('GETEXPERTISETITLE', '" href="take-envelope.php?uid=');
+define('GETEXPERTISELAST', '"><span class="btn rgba-stylish-slight darken-1 btn-inti2">');
+define('GETEXPERTISEVERYLAST', '</span></a>');
 
 // DELETE
 define('DELETEFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="deleteworkload.php?uid=');

@@ -11,7 +11,7 @@
  Target Server Version : 50649
  File Encoding         : 65001
 
- Date: 20/12/2022 09:57:09
+ Date: 22/12/2022 13:50:05
 */
 
 SET NAMES utf8mb4;
@@ -516,6 +516,20 @@ CREATE TABLE `xray_study`  (
   `harga` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`pk`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Table structure for xray_take_envelope
+-- ----------------------------
+DROP TABLE IF EXISTS `xray_take_envelope`;
+CREATE TABLE `xray_take_envelope`  (
+  `pk` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `is_taken` smallint(6) NULL DEFAULT NULL,
+  `created_at` timestamp(0) NULL DEFAULT NULL,
+  `updated_at` timestamp(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`pk`, `uid`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for xray_template

@@ -8,6 +8,7 @@ require 'model/query-base-order.php';
 require 'model/query-base-study.php';
 require 'model/query-base-patient.php';
 require 'model/query-base-dokter-radiology.php';
+require 'model/query-base-take-envelope.php';
 
 $username = $_SESSION['username'];
 $level = $_SESSION['level'];
@@ -173,6 +174,21 @@ while ($row = mysqli_fetch_array($result)) {
     $icon_change_doctor = CHANGEDOCTORICONYES;
   }
 
+  $row_envelope = mysqli_fetch_assoc(mysqli_query(
+    $conn,
+    "SELECT is_taken, name, created_at FROM $table_take_envelope WHERE uid = '$row[study_iuid]'"
+  ));
+  $is_taken = $row_envelope['is_taken'];
+  $name_envelope = $row_envelope['name'];
+  $created_at_envelope = $row_envelope['created_at'];
+
+  // kondisi ketika hasil expertise belum diambil menggunakan icon berbeda
+  if ($is_taken == null || $is_taken == 0) {
+    $icon_get_expertise = GETEXPERTISEICONNO;
+  } else {
+    $icon_get_expertise = GETEXPERTISEICONYES;
+  }
+
   // kondisi ketika detail nama lihat detail query (radiographer, referral)
   $detail = '<a href="#" class="hasil-all penawaran-a" data-id="' . $row['study_iuid'] . '">' . removeCharacter($pat_name) . '</a>';
 
@@ -195,7 +211,8 @@ while ($row = mysqli_fetch_array($result)) {
     if ($status != '-') {
       $level = EDITPASIENFIRST . $study_iuid . EDITPASIENLAST .
         CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workload_status . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
-        OHIFOLDFIRST . $study_iuid . OHIFOLDLAST;
+        OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
+        GETEXPERTISEFIRST . $name_envelope . ' ' . defaultValueDateTime($created_at_envelope) . GETEXPERTISETITLE .  $study_iuid . GETEXPERTISELAST . $icon_get_expertise . GETEXPERTISEVERYLAST;
       // TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST;
       // DELETEFIRST . $study_iuid . DELETELAST;
     } else {
