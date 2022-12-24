@@ -183,10 +183,15 @@ while ($row = mysqli_fetch_array($result)) {
   $created_at_envelope = $row_envelope['created_at'];
 
   // kondisi ketika hasil expertise belum diambil menggunakan icon berbeda
-  if ($is_taken == null || $is_taken == 0) {
+  if ($row['status'] == 'waiting') {
+    $icon_get_expertise = GETEXPERTISEICONWAITING;
+    $href_get_expertise = GETEXPERTISEHREFNO;
+  } else if ($is_taken == null && $row['status'] == 'approved' || $is_taken == 0 && $row['status'] == 'approved') {
     $icon_get_expertise = GETEXPERTISEICONNO;
+    $href_get_expertise = GETEXPERTISEHREFYES . $study_iuid;
   } else {
     $icon_get_expertise = GETEXPERTISEICONYES;
+    $href_get_expertise = GETEXPERTISEHREFYES . $study_iuid;
   }
 
   // kondisi ketika detail nama lihat detail query (radiographer, referral)
@@ -212,7 +217,7 @@ while ($row = mysqli_fetch_array($result)) {
       $level = EDITPASIENFIRST . $study_iuid . EDITPASIENLAST .
         CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workload_status . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
         OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
-        GETEXPERTISEFIRST . $name_envelope . ' ' . defaultValueDateTime($created_at_envelope) . GETEXPERTISETITLE .  $study_iuid . GETEXPERTISELAST . $icon_get_expertise . GETEXPERTISEVERYLAST;
+        GETEXPERTISEFIRST . $name_envelope . ' ' . defaultValueDateTime($created_at_envelope) . $href_get_expertise . GETEXPERTISELAST . $icon_get_expertise . GETEXPERTISEVERYLAST;
       // TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST;
       // DELETEFIRST . $study_iuid . DELETELAST;
     } else {

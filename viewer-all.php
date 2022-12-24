@@ -30,8 +30,10 @@ define('CHANGEDOCTORVERYLAST', '</span></a>');
 // Ambil hasil expertise
 define('GETEXPERTISEICONYES', '<i class="fas fa-envelope fa-lg"></i>');
 define('GETEXPERTISEICONNO', '<i class="fas fa-envelope-open fa-lg deep-orange-text"></i>');
+define('GETEXPERTISEICONWAITING', '<i class="fas fa-envelope-open fa-lg deep-orange-text not-allowed"></i>');
 define('GETEXPERTISEFIRST', '<a style="text-decoration: none;" title="');
-define('GETEXPERTISETITLE', '" href="take-envelope.php?uid=');
+define('GETEXPERTISEHREFYES', '" href="take-envelope.php?uid=');
+define('GETEXPERTISEHREFNO', '" href="#');
 define('GETEXPERTISELAST', '"><span class="btn rgba-stylish-slight darken-1 btn-inti2">');
 define('GETEXPERTISEVERYLAST', '</span></a>');
 
