@@ -11,11 +11,28 @@
  Target Server Version : 50649
  File Encoding         : 65001
 
- Date: 22/12/2022 13:50:05
+ Date: 26/12/2022 07:20:49
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for active_notification_unread
+-- ----------------------------
+DROP TABLE IF EXISTS `active_notification_unread`;
+CREATE TABLE `active_notification_unread`  (
+  `pk` bigint(20) NOT NULL AUTO_INCREMENT,
+  `is_active` tinyint(4) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`pk`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of active_notification_unread
+-- ----------------------------
+INSERT INTO `active_notification_unread` VALUES (1, 0, '2022-12-26 07:14:01', '2022-12-26 07:14:01');
 
 -- ----------------------------
 -- Table structure for failed_jobs
