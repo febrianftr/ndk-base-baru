@@ -3957,6 +3957,64 @@ table.dataTable > thead .sorting::before, table.dataTable > thead .sorting::afte
 }
 
 
+/* --------------BURGER BAR------------------------ */
+.burger-bar {
+  position: relative;
+  width: 40px;
+  height: 30px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.burger-bar input {
+  display: none;
+}
+
+.burger-bar span {
+  display: block;
+  position: absolute;
+  height: 4px;
+  width: 25px;
+  background: #f9f9f9;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: .25s ease-in-out;
+}
+
+.burger-bar span:nth-of-type(1) {
+  top: 0px;
+  transform-origin: left center;
+}
+
+.burger-bar span:nth-of-type(2) {
+  top: 35%;
+  transform: translateY(-50%);
+  transform-origin: left center;
+}
+
+.burger-bar span:nth-of-type(3) {
+  top: 72%;
+  transform-origin: left center;
+  transform: translateY(-100%);
+}
+
+.burger-bar input:checked~span:nth-of-type(1) {
+  transform: rotate(45deg);
+  top: 0px;
+  left: 5px;
+}
+
+.burger-bar input:checked~span:nth-of-type(2) {
+  width: 0%;
+  opacity: 0;
+}
+
+.burger-bar input:checked~span:nth-of-type(3) {
+  transform: rotate(-45deg);
+  top: 18px;
+  left: 5px;
+}
 
 
 
