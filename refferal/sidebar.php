@@ -44,7 +44,15 @@ if (isset($_SESSION["username"])) {
     <div class="brand">
         <div style="width: 195px; padding: 0 0 0 15px; margin: 7px 0;"><img style="width: 100%;" src="../image/intiwid-logo-new-putih-2.png"></div>
     </div>
-    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content1"></i>
+    <!-- <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content1"></i> -->
+    <div class="toggle-btn">
+        <label for="burger" class="burger-bar">
+            <input id="burger" type="checkbox" data-toggle="collapse" data-target="#menu-content1">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+    </div>
     <div class="menu-list1">
         <ul id="menu-content1" class="menu-content1 collapse out">
             <li data-target="#home1">
