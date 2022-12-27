@@ -96,6 +96,7 @@ if (isset($_POST["save_edit"])) {
 				document.location.href= 'workload.php';
 				win = window.open('pdf/expertise.php?uid=$uid', '_blank');
 				win.focus();
+				win.print();
 			</script>";
 	} else {
 		echo "

@@ -132,6 +132,7 @@ if (isset($_POST["save_approve"])) {
 					} ,1000); 
 					win = window.open('pdf/expertise.php?uid=$uid', '_blank');
 					win.focus();
+					win.print();
 				</script>";
 			mysqli_close($conn);
 		} else {
