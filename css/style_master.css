@@ -169,7 +169,7 @@ table.table-dicom tbody tr {
   padding-bottom: 5px;
   text-align: left;
   background: #ececec;
-  color: #49957b;
+  color: #1f69b7;
   text-align: center;
   font-weight: bold;
   /* border-bottom: 3px solid #d0d0d0; */
@@ -738,7 +738,7 @@ table.dataTable.no-footer {
 }
 
 .informasi-tambahan {
-  color: #369280;
+  color: #737373;
 }
 
 /* -----game---------------- */
@@ -835,7 +835,7 @@ canvas {
 
 
 .informasi-tambahan2 {
-  color: #369280;
+  color: #737373;
 }
 
 .left-information {
@@ -1654,7 +1654,7 @@ label.file1:after {
 }
 
 .textsearchnewpasien2 {
-  color: #064588;
+  color: #8c8c8c;
   /* background: #fff; */
   /* margin: 7px 0px 0px 0px; */
   padding: 5px;

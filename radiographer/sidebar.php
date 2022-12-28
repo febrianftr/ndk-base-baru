@@ -30,9 +30,6 @@ include '../contract-service.php';
         <div style="width: 195px; padding: 0 0 0 15px; margin: 7px 0;"><img style="width: 100%;" src="../image/intiwid-logo-new-putih-2.png"></div>
     </div>
     <!-- <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content1"></i> -->
-    <style>
-
-    </style>
     <div class="toggle-btn">
         <label for="burger" class="burger-bar">
             <input id="burger" type="checkbox" data-toggle="collapse" data-target="#menu-content1">

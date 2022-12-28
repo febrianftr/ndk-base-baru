@@ -109,7 +109,7 @@ if ($_SESSION['level'] == "radiographer") {
 								<h3 class="textsearchnewpasien2">List Patient</h3>
 							</div>
 							<div class="row back-search">
-								<div class="table-view col-md-12 table-box">
+								<div class="table-view col-md-12 table-box" style="overflow-x: scroll;">
 									<table class="table-dicom table-paginate" border="1" cellpadding="8" cellspacing="0" style="margin-top: 3px;">
 										<thead>
 											<tr>
