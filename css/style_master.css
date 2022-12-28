@@ -458,7 +458,7 @@ table.dataTable.no-footer {
 }
 
 .btn-worklist {
-  background-color: #55B997;
+  background-color: #348C6E;
   color: #fff;
   display: inline-block;
   border-width: 1px;
@@ -644,12 +644,12 @@ table.dataTable.no-footer {
 }
 
 .btn-worklist1:hover {
-  background-color: #4da88a;
+  background-color: #47a586;
   color: #fff;
 }
 
 .btn-worklist2 {
-  background-color: #e37979;
+  background-color: #d24141;
   color: #fff;
   display: inline-block;
   border-width: 1px;
@@ -662,8 +662,8 @@ table.dataTable.no-footer {
 }
 
 .btn-worklist2:hover {
-  background-color: #fff;
-  color: #e37979;
+  background-color: #c23737;
+  color: #fff;
 }
 
 .btn-worklist3 {
