@@ -129,7 +129,7 @@ a {
   margin-top: 5px;
   color: #393939;
   display: inline-table;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 
 h4 {
