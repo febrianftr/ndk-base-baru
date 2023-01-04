@@ -148,38 +148,38 @@ if ($_SESSION['level'] == "radiographer") {
                               <!-- schedule date time -->
                               <div class="row">
                                 <div class="col-md-6"><br>
-                                  <label for="schedule_date"><b><?= $lang['exam_date'] ?></b></label>
+                                  <label style="font-weight: bold;" for="schedule_date"><b><?= $lang['exam_date'] ?></b></label>
                                   <input type="text" name="schedule_date" id="schedule_date" autocomplete="off" style="height: 31px; border: 2px solid #d2c8c8; border-radius: 4px;"></input>
                                 </div>
                                 <div class="col-md-6"><br>
-                                  <label for="schedule_time"><b><?= $lang['exam_time'] ?></b></label><br>
+                                  <label style="font-weight: bold;" for="schedule_time"><b><?= $lang['exam_time'] ?></b></label><br>
                                   <input type="text" name="schedule_time" id="schedule_time" autocomplete="off" style="height: 31px; border: 2px solid #d2c8c8; border-radius: 4px;"></input>
                                 </div>
                               </div>
                             </div>
                             <div class="container-fluid"><br>
                               <!-- kontras -->
-                              <label for="contrast">Contrast</label><br>
-                              <label class="radio-admin">
-                                <input type="radio" name="contrast" id="contrast" value="1"> <?= $lang['using_contrast'] ?>
-                                <span class="checkmark"></span>
-                              </label>
+                              <label style="font-weight: bold;" for="contrast" style="font-weight: bold;">Contrast</label><br>
                               <label class="radio-admin">
                                 <input type="radio" name="contrast" id="contrast" value="0"> <?= $lang['not_using_contrast'] ?>
                                 <span class="checkmark"></span>
+                              </label>
+                              <label class="radio-admin">
+                                <input type="radio" name="contrast" id="contrast" value="1"> <?= $lang['using_contrast'] ?>
+                                <span class="checkmark"></span>
                               </label><br><br>
                               <!-- kontras alergi -->
-                              <label for="contrast_allergies"><b><?= $lang['contrast_allergy'] ?></b></label><br>
-                              <label class="radio-admin">
-                                <input type="radio" name="contrast_allergies" id="contrast_allergies" value="1"> <?= $lang['yes'] ?>
-                                <span class="checkmark"></span>
-                              </label>
+                              <label style="font-weight: bold;" for="contrast_allergies"><b><?= $lang['contrast_allergy'] ?></b></label><br>
                               <label class="radio-admin">
                                 <input type="radio" name="contrast_allergies" id="contrast_allergies" value="0"> <?= $lang['no'] ?>
                                 <span class="checkmark"></span>
+                              </label>
+                              <label class="radio-admin">
+                                <input type="radio" name="contrast_allergies" id="contrast_allergies" value="1"> <?= $lang['yes'] ?>
+                                <span class="checkmark"></span>
                               </label><br><br>
                               <!-- prioritas -->
-                              <label for="priority"><b><?= $lang['priority'] ?></b></label><br>
+                              <label style="font-weight: bold;" for="priority"><b><?= $lang['priority'] ?></b></label><br>
                               <label class="radio-admin">
                                 <input type="radio" name="priority" id="priority" value="normal"> Normal
                                 <span class="checkmark"></span>
@@ -190,7 +190,7 @@ if ($_SESSION['level'] == "radiographer") {
                               </label>
                               <br><br>
                               <!-- special needs -->
-                              <label for="spc_needs"><b><?= $lang['spc_needs'] ?></b></label><br>
+                              <label style="font-weight: bold;" for="spc_needs"><b><?= $lang['spc_needs'] ?></b></label><br>
                               <textarea rows="4" cols="50" type="text" name="spc_needs" id="spc_needs" style="width: 315; height: 90px;"></textarea><br><br>
                               <!-- from order -->
                               <input type="hidden" name="fromorder" id="fromorder" value="RIS">
@@ -231,6 +231,7 @@ if ($_SESSION['level'] == "radiographer") {
         $(".select2").select2();
         $("li[data-target='#products1']").addClass("active");
         $("ul[id='products1'] li[id='regist1']").addClass("active");
+        $("li[data-target='#products1'] a i").css('color', '#c5f90d');
 
         $('#schedule_date').datetimepicker({
           timepicker: false,
