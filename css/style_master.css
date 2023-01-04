@@ -3954,6 +3954,10 @@ table.dataTable > thead .sorting::before, table.dataTable > thead .sorting::afte
     color: #2a412f;
 }
 
+.table tbody tr.highlight td {
+  background-color: #cacaca;
+    color: #1862b0;
+}
 
 
 

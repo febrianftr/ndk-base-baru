@@ -7,11 +7,23 @@ $row = mysqli_fetch_assoc(mysqli_query(
     WHERE template_id = '$template_id'"
 ));
 ?>
+
 <div class="fill">
     <h6 class="text-center font-weight-bold">
-        <label><?= $row['title']; ?></label>
+        <label><?= $row['title']; ?></label><button onclick="copyToClipboard('#p1')">Copy</button>
     </h6>
-    <p>
+    <p id="p1">
         <?= $row['fill']; ?>
     </p>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+function copyToClipboard(element) {
+  var $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val($(element).text()).select();
+  document.execCommand("copy");
+  $temp.remove();
+}
+</script>

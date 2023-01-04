@@ -64,6 +64,12 @@
 </script>
 
 <script>
+ $(".table-dicom").on("click", "tbody tr", function (event) {
+  $(this).addClass("highlight").siblings().removeClass("highlight");
+});
+</script>
+
+<script>
     $(document).ready(function() {
         $("#myInput").on("keyup", function() {
             var value = $(this).val().toLowerCase();
