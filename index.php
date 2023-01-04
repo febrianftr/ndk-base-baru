@@ -121,7 +121,70 @@ if (!($_SESSION['username'] = $data['username'])) {
                     <label class="label5"><?= $lang['input_pw'] ?></label>
                   </div>
 
-                  <button class="buttonsearch" type="submit" name="login" onclick="play()"><span><?= $lang['login'] ?></span></button>
+                  <!-- <button class="buttonsearch" type="submit" name="login" onclick="play()"><span><?= $lang['login'] ?></span></button> -->
+                  <style>
+                    .btn-login2 {
+                      font-family: inherit;
+                      font-size: 20px;
+                      background: #d9003d;
+                      color: white;
+                      padding: 0.7em 1em;
+                      padding-left: 0.9em;
+                      display: flex;
+                      align-items: center;
+                      border: none;
+                      border-radius: 16px;
+                      overflow: hidden;
+                      transition: all 0.2s;
+                    }
+
+                    .btn-login2 span {
+                      display: block;
+                      margin-left: 0.3em;
+                      transition: all 0.3s ease-in-out;
+                    }
+
+                    .btn-login2 i {
+                      display: block;
+                      transform-origin: center center;
+                      transition: transform 0.3s ease-in-out;
+                    }
+
+                    .btn-login2:hover .svg-wrapper {
+                      animation: fly-1 0.6s ease-in-out infinite alternate;
+                    }
+
+                    .btn-login2:hover i {
+                      transform: translateX(1.2em) rotate(0deg) scale(1.6);
+                    }
+
+                    .btn-login2:hover span {
+                      transform: translateX(5em);
+                    }
+
+                    .btn-login2:active {
+                      transform: scale(0.95);
+                    }
+
+                    @keyframes fly-1 {
+                      from {
+                        transform: translateY(0.1em);
+                      }
+
+                      to {
+                        transform: translateY(-0.1em);
+                      }
+                    }
+                  </style>
+                  <button class="btn-login2" type="submit" name="login" onclick="play()">
+                    <div class="svg-wrapper-1">
+                      <div class="svg-wrapper">
+                        <i class="fas fa-sign-in-alt"></i>
+                      </div>
+                    </div>
+                    <span><?= $lang['login'] ?></span>
+                  </button>
+
                 </div><br>
 
                 <div class="dropdown" style="bottom: 24px; position: absolute; width: 87%;">

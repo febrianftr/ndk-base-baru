@@ -1,5 +1,7 @@
 <?php
 
+$hostname = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM xray_hostname_publik"));
+
 // PDF
 define('PDFFIRST', '<a style="text-decoration:none;" class="" href="../radiology/pdf/expertise.php?uid=');
 define('PDFLAST', '"target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/file.svg" data-toggle="tooltip" title="PDF" style="width: 100%;"></span></a>');
@@ -16,15 +18,24 @@ define('HTMLLAST', '"target="_blank"><span class="btn rgba-stylish-slight btn-in
 define('MOBILEFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="http://' . $_SERVER['SERVER_NAME'] . ':19898/dwv-viewer/index.html?type=manifest&input=%2Fweasis-pacs-connector%2Fmanifest%3FseriesUID%3D');
 define('MOBILELAST', '"target="_blank"><span class="btn btn-warning btn-inti"><i class="fas fa-eye" data-toggle="tooltip" title="Web Viewer"></i></span></a>');
 
+// Change doctor
 define('CHANGEDOCTORICONYES', '<i class="fas fa-user-md fa-lg"></i>');
 define('CHANGEDOCTORICONNO', '<i class="fas fa-user-times fa-lg deep-orange-text"></i>');
-
-// Change doctor
 define('CHANGEDOCTORFIRST', '<a style="text-decoration: none;" href="changedoctorworklist.php?uid=');
 define('CHANGEDOCTORMID', '&dokradid=');
 define('CHANGEDOCTORSTAT', '&status=');
 define('CHANGEDOCTORLAST', '"><span class="btn rgba-stylish-slight darken-1 btn-inti2">');
 define('CHANGEDOCTORVERYLAST', '</span></a>');
+
+// Ambil hasil expertise
+define('GETEXPERTISEICONYES', '<i class="fas fa-envelope fa-lg"></i>');
+define('GETEXPERTISEICONNO', '<i class="fas fa-envelope-open fa-lg deep-orange-text"></i>');
+define('GETEXPERTISEICONWAITING', '<i class="fas fa-envelope-open fa-lg deep-orange-text not-allowed"></i>');
+define('GETEXPERTISEFIRST', '<a style="text-decoration: none;" title="');
+define('GETEXPERTISEHREFYES', '" href="take-envelope.php?uid=');
+define('GETEXPERTISEHREFNO', '" href="#');
+define('GETEXPERTISELAST', '"><span class="btn rgba-stylish-slight darken-1 btn-inti2">');
+define('GETEXPERTISEVERYLAST', '</span></a>');
 
 // DELETE
 define('DELETEFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="deleteworkload.php?uid=');
@@ -91,7 +102,7 @@ $ohif_large = '"class="button8 delete1" target="_blank"><img src="../image/web.s
 $ohif_small = '"style="text-decoration:none;" class="ahref-edit" target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/eyegreen.svg" data-toggle="tooltip" title="Tab Viewer" style="width: 100%;"></span></a>';
 
 // OHIF TERBARU
-if ($_SERVER['SERVER_NAME'] == '202.150.157.78') {
+if ($_SERVER['SERVER_NAME'] == $hostname['ip_publik']) {
     // jika menggunakan ip publik
     define('OHIFNEWFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="http://' . $_SERVER['SERVER_NAME'] . ':82/viewer?StudyInstanceUIDs=');
     define('OHIFNEWLAST', "$ohif_small");
@@ -107,7 +118,7 @@ if ($_SERVER['SERVER_NAME'] == '202.150.157.78') {
 }
 
 // OHIF LAMA
-if ($_SERVER['SERVER_NAME'] == '202.150.157.78') {
+if ($_SERVER['SERVER_NAME'] == $hostname['ip_publik']) {
     // jika menggunakan ip publik
     // jika menggunakan ohif lama icon (small)
     define('OHIFOLDFIRST', '<a href="http://' . $_SERVER['SERVER_NAME'] . ':92/viewer/');

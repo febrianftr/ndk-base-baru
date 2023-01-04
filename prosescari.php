@@ -8,6 +8,7 @@ require 'model/query-base-order.php';
 require 'model/query-base-study.php';
 require 'model/query-base-patient.php';
 require 'model/query-base-dokter-radiology.php';
+require 'model/query-base-take-envelope.php';
 
 $username = $_SESSION['username'];
 $level = $_SESSION['level'];
@@ -17,7 +18,7 @@ $columns = array('pk', 'pk', 'status', 'pat_name', 'pat_id', 'patientid', 'pat_b
 
 $row_dokrad = mysqli_fetch_assoc(mysqli_query(
   $conn,
-  "SELECT $select_dokter_radiology 
+  "SELECT pk 
   FROM $table_dokter_radiology 
   WHERE username = '$username'"
 ));
@@ -28,17 +29,33 @@ $kondisi = " WHERE xray_workload.status = 'approved'
 AND xray_workload.pk_dokter_radiology = '$pk'";
 
 $query_base = "SELECT 
-              $select_patient,
-              $select_study,
-              $select_order,
-              $select_workload
+              pat_id,
+              pat_name,
+              pat_sex,
+              pat_birthdate,
+              study_iuid,
+              study_datetime,
+              study_desc,
+              mods_in_study,
+              study.updated_time,
+              status,
+              approved_at,
+              pk_dokter_radiology,
+              patientid AS no_foto,
+              named,
+              dokradid,
+              dokrad_name,
+              name_dep,
+              radiographer_name,
+              priority,
+              fromorder
               FROM $table_patient
               JOIN $table_study
               ON patient.pk = study.patient_fk
+              JOIN $table_workload
+              ON study.study_iuid = xray_workload.uid
               LEFT JOIN $table_order
-              ON xray_order.uid = study.study_iuid
-              LEFT JOIN $table_workload
-              ON study.study_iuid = xray_workload.uid";
+              ON xray_order.uid = xray_workload.uid";
 
 // kondisi jika login radiology
 if ($level == 'radiology') {
@@ -127,26 +144,17 @@ while ($row = mysqli_fetch_array($result)) {
   $pat_birthdate = diffDate($row['pat_birthdate']);
   $study_iuid = defaultValue($row['study_iuid']);
   $study_datetime = defaultValueDateTime($row['study_datetime']);
-  $accession_no = defaultValue($row['accession_no']);
-  $ref_physician = defaultValue($row['ref_physician']);
   $study_desc = defaultValue($row['study_desc']);
   $mods_in_study = defaultValue($row['mods_in_study']);
-  $num_series = defaultValue($row['num_series']);
-  $num_instances = defaultValue($row['num_instances']);
   $updated_time = defaultValueDateTime($row['updated_time']);
   $pat_id = defaultValue($row['pat_id']);
   $no_foto = defaultValue($row['no_foto']);
-  $address = defaultValue($row['address']);
   $name_dep = defaultValue($row['name_dep']);
   $named = defaultValue($row['named']);
   $radiographer_name = defaultValue($row['radiographer_name']);
   $dokrad_name = defaultValue($row['dokrad_name']);
   $dokradid = defaultValue($row['dokradid']);
-  $create_time = defaultValueDateTime($row['create_time']);
-  $pat_state = defaultValue($row['pat_state']);
   $priority = defaultValue($row['priority']);
-  $spc_needs = defaultValue($row['spc_needs']);
-  $payment = defaultValue($row['payment']);
   $status = styleStatus($row['status']);
   $fromorder = $row['fromorder'];
   $approved_at = defaultValueDateTime($row['approved_at']);
@@ -166,11 +174,35 @@ while ($row = mysqli_fetch_array($result)) {
     $icon_change_doctor = CHANGEDOCTORICONYES;
   }
 
+  $row_envelope = mysqli_fetch_assoc(mysqli_query(
+    $conn,
+    "SELECT is_taken, name, created_at FROM $table_take_envelope WHERE uid = '$row[study_iuid]'"
+  ));
+  $is_taken = $row_envelope['is_taken'];
+  $name_envelope = $row_envelope['name'];
+  $created_at_envelope = $row_envelope['created_at'];
+
+  // kondisi ketika hasil expertise belum diambil menggunakan icon berbeda
+  if ($row['status'] == 'waiting') {
+    $icon_get_expertise = GETEXPERTISEICONWAITING;
+    $href_get_expertise = GETEXPERTISEHREFNO;
+  } else if ($is_taken == null && $row['status'] == 'approved' || $is_taken == 0 && $row['status'] == 'approved') {
+    $icon_get_expertise = GETEXPERTISEICONNO;
+    $href_get_expertise = GETEXPERTISEHREFYES . $study_iuid;
+  } else {
+    $icon_get_expertise = GETEXPERTISEICONYES;
+    $href_get_expertise = GETEXPERTISEHREFYES . $study_iuid;
+  }
+
+  // kondisi ketika detail nama lihat detail query (radiographer, referral)
+  $detail = '<a href="#" class="hasil-all penawaran-a" data-id="' . $row['study_iuid'] . '">' . removeCharacter($pat_name) . '</a>';
+
   //kondisi status change doctor
   // kondisi session level ketika login
   $level = $_SESSION['level'];
   // ketika login radiology
   if ($level == 'radiology') {
+    $detail = '<a href="workload-edit.php?uid=' . $study_iuid . '" class="penawaran-a">' . removeCharacter($pat_name) . '</a>';
     $level =
       HOROSFIRST . $study_iuid . HOROSLAST .
       OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
@@ -184,7 +216,8 @@ while ($row = mysqli_fetch_array($result)) {
     if ($status != '-') {
       $level = EDITPASIENFIRST . $study_iuid . EDITPASIENLAST .
         CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workload_status . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
-        OHIFOLDFIRST . $study_iuid . OHIFOLDLAST;
+        OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
+        GETEXPERTISEFIRST . $name_envelope . ' ' . defaultValueDateTime($created_at_envelope) . $href_get_expertise . GETEXPERTISELAST . $icon_get_expertise . GETEXPERTISEVERYLAST;
       // TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST;
       // DELETEFIRST . $study_iuid . DELETELAST;
     } else {
@@ -214,12 +247,10 @@ while ($row = mysqli_fetch_array($result)) {
     $priority_style = '';
   }
 
-  $detail = '<a href="#" class="hasil-all penawaran-a" data-id="' . $row['study_iuid'] . '">' . removeCharacter($pat_name) . '</a>';
-
   // kondisi mencari ditabel dokter radiology
   $row_dokrad = mysqli_fetch_assoc(mysqli_query(
     $conn,
-    "SELECT $select_dokter_radiology 
+    "SELECT CONCAT(xray_dokter_radiology.dokrad_name,' ',xray_dokter_radiology.dokrad_lastname) AS dokrad_fullname
       FROM $table_dokter_radiology 
       WHERE pk = '$pk_dokter_radiology'"
   ));

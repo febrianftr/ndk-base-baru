@@ -28,13 +28,28 @@ if ($_SESSION['level'] == "radiology") {
 				$("li[data-target='#service']").addClass("active");
 				$("ul[id='service'] li[id='report1']").addClass("active");
 
-				$(".select2").select2({
-					placeholder: 'Select Radiographer'
+				$(".select2").select2();
+
+				$('.check-genders').click(function() {
+					$('.check-gender').prop('checked', this.checked);
 				});
 
-				$('.cboxtombol').click(function() {
-					$('.cbox').prop('checked', this.checked);
+				$('.check-modalities').click(function() {
+					$('.check-modality').prop('checked', this.checked);
 				});
+
+				$('.check-priorities').click(function() {
+					$('.check-priority').prop('checked', this.checked);
+				});
+
+				$('.check-radiologists').click(function() {
+					$('.check-radiologist').prop('checked', this.checked);
+				});
+
+				$('.check-statuses').click(function() {
+					$('.check-status').prop('checked', this.checked);
+				});
+
 				// --------------------
 				$('#from_workload').datetimepicker({
 					format: 'd-m-Y H:i'

@@ -2,40 +2,11 @@
 require 'function_radiographer.php';
 session_start();
 
-$username = $_SESSION['username'];
-
-if (isset($_POST["submit"])) {
-  if (inputorder($_POST)) {
-    echo "<script>
-    alert('Berhasil menambahkan data');
-    document.location.href= 'order2.php';
-  </script>
-";
-  } else {
-    echo "
-<script>
-  alert('Gagal menambahkan data');
-  document.location.href= 'registration-live.php';
-</script>";
-  }
-}
-// ------
-if (isset($_POST["popup"])) {
-  if (inputpopup($_POST)) {
-    echo "
-<script>
-  alert('Berhasil menambahkan data dokter pengirim');
-  document.location.href= 'registration-live.php';
-</script>
-";
-  } else {
-    echo "
-<script>
-  alert('Gagal menambahkan data dokter pengirim');
-  document.location.href= 'registration-live.php';
-</script>";
-  }
-}
+$pk = $_GET['pk'];
+$patient_get = mysqli_fetch_assoc(mysqli_query(
+  $conn,
+  "SELECT * FROM xray_patient WHERE pk = '$pk'"
+));
 
 if ($_SESSION['level'] == "radiographer") {
 ?>
@@ -44,23 +15,16 @@ if ($_SESSION['level'] == "radiographer") {
 
   <head>
     <?php include('head.php'); ?>
-
-
     <script>
-      // Ignore this in your implementation
-      window.isMbscDemo = true;
     </script>
     <title>Registration | Radiographer</title>
-
   </head>
 
   <body>
     <?php include('sidebar.php'); ?>
     <div class="container-fluid" id="main">
       <div class="row">
-
         <div id="content1">
-
           <div class="container-fluid">
             <div class="row">
               <div class="col-12" style="padding-left: 0;">
@@ -68,200 +32,186 @@ if ($_SESSION['level'] == "radiographer") {
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.php">Home</a></li>
                     <li class="breadcrumb-item"><a href="registration.php">Registration</a></li>
-                    <li class="breadcrumb-item"><a href="inputorder.php">Create Order</a></li>
                     <li class="breadcrumb-item active">Information Order</li>
                   </ol>
                 </nav>
               </div>
-              <div class="col-md-6 left-information">
-                <h1 class="informasi-tambahan2">
-                  <center><?= $lang['info_order'] ?></center>
-                </h1>
-                <hr>
-                <form action="" method="POST">
+              <div class="container-fluid">
+                <form method="POST" id="registration-live">
 
-                  <div class="row info-pat">
-                    <div class="info-left col-sm-5">
-                      <table class="infopatientworklist" border="0">
-                        <?php
-                        $result1 = mysqli_query($conn, "SELECT * FROM xray_patient_order WHERE username = '$username' ORDER BY patientorderid DESC LIMIT 0,99");
-                        $row1 = mysqli_fetch_assoc($result1);
-                        $birth_date = $row1['birth_date'];
-                        $bday = new DateTime($birth_date);
-                        $today = new DateTime(date('y-m-d'));
-                        $diff = $today->diff($bday);
-                        ?>
-                        <tr>
-                          <input type="hidden" name="<?= $row1['patientid']; ?>">
-                          <td><b><?= $lang['name'] ?></b>
-                          <td>&nbsp;&nbsp;:&nbsp;</td>
-                          <td><?= $row1['name'] . ' ' . $row1['lastname']; ?></td>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td><b>MRN</b>
-                          <td>&nbsp;&nbsp;:&nbsp;</td>
-                          <td><?= $row1['mrn']; ?></td>
-                          </td>
-                        </tr>
-                      </table>
-                    </div>
-
-                    <div class="info-right col-sm-5">
-                      <table class="infopatientworklist" border="0">
-                        <tr>
-                          <td><b><?= $lang['sex'] ?></b>
-                          <td>&nbsp;&nbsp;:&nbsp;</td>
-                          <td><?= $row1['sex']; ?></td>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td><b><?= $lang['age'] ?></b>
-                          <td>&nbsp;&nbsp;:&nbsp;</td>
-                          <td><?php echo $diff->y . 'Y' . ' ' . $diff->m . 'M' . ' ' . $diff->d . 'D'; ?></td>
-                          </td>
-
-                        </tr>
-                      </table>
-                    </div>
-                  </div>
-                  <div>
-
-
-                    <div class="dokteravail">
-                      <label for="dokterid"><?= $lang['referral_physician'] ?></label><br>
-                      <select class="selectpicker" data-size="10" data-live-search="true" data-width="100%" name="dokterid" id="dokterid" data-style="btn-info">
-                        <?php
-                        $result = mysqli_query($conn, "SELECT * FROM xray_dokter");
-                        while ($row = mysqli_fetch_assoc($result)) { ?>
-                          <option style="font-weight: bold; font-size: 12px;" value="<?= $row['dokterid']; ?>"><b><?= $row['named'] . ' ' . $row['lastnamed']; ?></b></option>
-                        <?php } ?>
-                        <option value="" id="dokter_lain"><?= $lang['other_physician'] ?></option>
-                      </select>
-                      <a href="#" data-toggle="collapse" data-target="#demo" value="" class="dok_lain"><?= $lang['other_physician'] ?></a>
-                    </div>
-
-
-
-                    <div id="demo" class="collapse">
-                      <!-- <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo"><?= $lang['hide_input'] ?></button> -->
-                      <!-- <hr> -->
-                      <label><?= $lang['f_name'] ?></label>
-
-                      <input type="text" name="namedluar" placeholder="<?= $lang['input_f_name'] ?>">
-                      <label><?= $lang['l_name'] ?></label>
-                      <input type="text" name="lastnamedluar" placeholder="<?= $lang['input_l_name'] ?>">
-                      <!-- <label>Email</label>
-                            <input type="text" name="emailluar" placeholder="<?= $lang['input_email'] ?>"> --><br>
+                  <div class="row justify-content-center">
+                    <div class="col-md-6 left-information">
+                      <h1 class="informasi-tambahan2">
+                        <center><?= $lang['info_order'] ?></center>
+                      </h1>
                       <hr>
+
+                      <!-- patient -->
+                      <label>Patient Name :</label><br>
+                      <select class="selectpicker" data-size="10" data-live-search="true" data-width="100%" name="mrn" id="mrn" data-style="btn-info">
+                        <option value="null">--pilih--</option>
+                        <?php
+                        $query_patient = mysqli_query($conn, "SELECT * FROM xray_patient");
+                        while ($patient = mysqli_fetch_array($query_patient)) { ?>
+                          <option value="<?= $patient['mrn'] . '|' . $patient['name'] . '|' . $patient['sex'] . '|' . $patient['birth_date'] . '|' . $patient['address'] . '|' . $patient['weight']; ?>" <?= $patient_get['mrn'] == $patient['mrn'] ? 'selected' : ""; ?>><?= $patient['name']; ?></option>
+                        <?php } ?>
+                      </select><br>
+
+                      <!-- dokter pengirim -->
+                      <div>
+                        <div class="dokteravail">
+                          <label for="dokterid"><?= $lang['referral_physician'] ?> :</label><br>
+                          <select class="selectpicker" data-size="10" data-live-search="true" data-width="100%" name="dokterid" id="dokterid" data-style="btn-info">
+                            <option value="null">--pilih--</option>
+                            <?php
+                            $query_dokter = mysqli_query($conn, "SELECT * FROM xray_dokter");
+                            while ($dokter = mysqli_fetch_assoc($query_dokter)) { ?>
+                              <option value="<?= $dokter['dokterid'] . '|' . $dokter['named']; ?>"><b><?= $dokter['named'] . ' ' . $dokter['lastnamed']; ?></b></option>
+                            <?php } ?>
+                            <!-- <option value="" id="dokter_lain"><?= $lang['other_physician'] ?></option> -->
+                          </select>
+                          <!-- <a href="#" data-toggle="collapse" data-target="#demo" value="" class="dok_lain"><?= $lang['other_physician'] ?></a> -->
+                        </div>
+                      </div>
+
+                      <!-- department -->
+                      <label><?= $lang['select_poly'] ?> :</label><br>
+                      <select class="selectpicker" data-size="10" data-live-search="true" data-width="100%" name="dep_id" id="dep_id" data-style="btn-info">
+                        <option value="null">--pilih--</option>
+                        <?php
+                        $query_department = mysqli_query($conn, "SELECT * FROM xray_department");
+                        while ($department = mysqli_fetch_array($query_department)) { ?>
+                          <option value="<?= $department['dep_id'] . '|' . $department['name_dep']; ?>"><?= $department['name_dep']; ?></option>
+                        <?php } ?>
+                      </select><br>
+
+                      <!-- Payment -->
+                      <label>Select Payment :</label> <br>
+                      <select class="selectpicker" data-size="10" data-live-search="true" data-width="100%" name="id_payment" id="id_payment" data-style="btn-info">
+                        <option value="null">--pilih--</option>
+                        <?php
+                        $query_payment = mysqli_query($conn, "SELECT * FROM xray_payment_insurance");
+                        while ($payment = mysqli_fetch_array($query_payment)) { ?>
+                          <option value="<?= $payment["id_payment"] . '|' . $payment["payment"]; ?> "><?= $payment['payment']; ?></option>
+                        <?php } ?>
+                      </select>
+
+                      <!-- modalitas -->
+                      <label><?= $lang['select_mod'] ?> :</label> <br>
+                      <select class="selectpicker" data-size="10" data-live-search="true" data-width="100%" name="id_modality" id="id_modality" data-style="btn-info">
+                        <option value="null">--pilih--</option>
+                        <?php
+                        $query_modality = mysqli_query($conn, "SELECT * FROM xray_modalitas");
+                        while ($modality = mysqli_fetch_array($query_modality)) { ?>
+                          <option value="<?= $modality["id_modality"] . '|' . $modality["xray_type_code"]; ?> " data-subtext="<?= $modality['xray_type_code']; ?>"><?= $modality['xray_type_code']; ?></option>
+                        <?php } ?>
+                      </select>
+
+                      <!-- study -->
+                      <div class="select-procedure">
+                        <label><?= $lang['select_procedure']; ?> :</label> <br>
+                        <select data-size="10" data-live-search="true" style="height: 242px;" class="form-control select2" multiple="multiple" name="id_prosedur[]" id="id_prosedur" required>
+                        </select>
+                      </div>
+
+                      <!-- radiographer -->
+                      <label>Select Radiographer :</label><br>
+                      <select class="selectpicker" data-size="10" data-live-search="true" data-width="100%" name="radiographer_id" id="radiographer_id" data-style="btn-info">
+                        <option value="null">--pilih--</option>
+                        <?php
+                        $query_radiographer = mysqli_query($conn, "SELECT * FROM xray_radiographer");
+                        while ($radiographer = mysqli_fetch_array($query_radiographer)) { ?>
+                          <option value="<?= $radiographer['radiographer_id'] . '|' . $radiographer['radiographer_name']; ?>"><?= $radiographer['radiographer_name'] . ' ' . $radiographer['radiographer_lastname']; ?></option>
+                        <?php } ?>
+                      </select><br>
+
+                      <!-- dokter radiologi -->
+                      <label>Select Radiologist :</label><br>
+                      <select class="selectpicker" data-size="10" data-live-search="true" data-width="100%" name="dokradid" id="dokradid" data-style="btn-info">
+                        <option value="null">--pilih--</option>
+                        <?php
+                        $query_dokter_radiologi = mysqli_query($conn, "SELECT * FROM xray_dokter_radiology");
+                        while ($dokter_radiologi = mysqli_fetch_array($query_dokter_radiologi)) { ?>
+                          <option value="<?= $dokter_radiologi['dokradid'] . '|' . $dokter_radiologi['dokrad_name']; ?>"><?= $dokter_radiologi['dokrad_name'] . ' ' . $dokter_radiologi['dokrad_lastname']; ?></option>
+                        <?php } ?>
+                      </select><br>
                     </div>
-
-
-
-                  </div>
-                  <label><?= $lang['select_poly'] ?> :</label> <br>
-                  <select class="selectpicker" data-size="10" data-live-search="true" data-width="100%" name="dep_id" data-style="btn-info">
-                    <?php
-                    $result4 = mysqli_query($conn, "SELECT * FROM xray_department");
-                    while ($row4 = mysqli_fetch_array($result4)) { ?>
-                      <option value="<?= $row4['dep_id']; ?>" data-tokens=""><?= $row4['name_dep']; ?></option>
-                    <?php } ?>
-                  </select><br>
-
-                  <label><?= $lang['select_mod'] ?>:</label> <br>
-
-                  <select class="selectpicker" data-size="10" data-live-search="true" data-width="100%" name="xray_type_code" id="modalitas" data-style="btn-info">
-                    <option>----Pilih Modality-----</option>
-                    <?php
-                    $result5 = mysqli_query($conn, "SELECT * FROM xray_modalitas");
-                    while ($row5 = mysqli_fetch_array($result5)) { ?>
-                      <option value="<?= $row5["xray_type_code"]; ?>" data-subtext="<?= $row5['xray_type_code']; ?>"><?= $row5['xray_type_code']; ?></option>
-                    <?php } ?>
-                  </select>
-
-                  <div class="select-procedure">
-                    <label><?= $lang['select_procedure']; ?></label> <br>
-                    <select data-size="10" data-live-search="true" data-width="100%" name="main_prosedur[]" id="prosedur" multiple="multiple" style="height: 242px;">
-
-                    </select>
-                  </div>
-
-              </div>
-
-              <div class="col-md-6">
-                <div class="regist" style="margin-bottom: 100px;">
-                  <div class="input-tambahan">
-                    <center>
-                      <h1 class="informasi-tambahan"><?= $lang['additional_form'] ?></h1>
-                    </center>
-                    <hr>
-                    <div class="input_adm">
-                      <div class="container-fluid">
-                        <div class="row">
-                          <div class="col-md-6"><br>
-                            <label for="schedule_date"><b><?= $lang['exam_date'] ?></b></label>
-                            <input type="text" name="schedule_date" id="schedule_date" autocomplete="off"></input>
-                          </div>
-                          <div class="col-md-6"><br>
-                            <label for="schedule_time"><b><?= $lang['exam_time'] ?></b></label><br>
-                            <input type="text" name="schedule_time" id="schedule_time" autocomplete="off"></input>
+                    <div class="col-md-6">
+                      <div class="left-information">
+                        <div class="input-tambahan">
+                          <center>
+                            <h1 class="informasi-tambahan"><?= $lang['additional_form'] ?></h1>
+                          </center>
+                          <hr>
+                          <div class="input_adm">
+                            <div class="container-fluid">
+                              <!-- schedule date time -->
+                              <div class="row">
+                                <div class="col-md-6"><br>
+                                  <label style="font-weight: bold;" for="schedule_date"><b><?= $lang['exam_date'] ?></b></label>
+                                  <input type="text" name="schedule_date" id="schedule_date" autocomplete="off" style="height: 31px; border: 2px solid #d2c8c8; border-radius: 4px;"></input>
+                                </div>
+                                <div class="col-md-6"><br>
+                                  <label style="font-weight: bold;" for="schedule_time"><b><?= $lang['exam_time'] ?></b></label><br>
+                                  <input type="text" name="schedule_time" id="schedule_time" autocomplete="off" style="height: 31px; border: 2px solid #d2c8c8; border-radius: 4px;"></input>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="container-fluid"><br>
+                              <!-- kontras -->
+                              <label style="font-weight: bold;" for="contrast" style="font-weight: bold;">Contrast</label><br>
+                              <label class="radio-admin">
+                                <input type="radio" name="contrast" id="contrast" value="0"> <?= $lang['not_using_contrast'] ?>
+                                <span class="checkmark"></span>
+                              </label>
+                              <label class="radio-admin">
+                                <input type="radio" name="contrast" id="contrast" value="1"> <?= $lang['using_contrast'] ?>
+                                <span class="checkmark"></span>
+                              </label><br><br>
+                              <!-- kontras alergi -->
+                              <label style="font-weight: bold;" for="contrast_allergies"><b><?= $lang['contrast_allergy'] ?></b></label><br>
+                              <label class="radio-admin">
+                                <input type="radio" name="contrast_allergies" id="contrast_allergies" value="0"> <?= $lang['no'] ?>
+                                <span class="checkmark"></span>
+                              </label>
+                              <label class="radio-admin">
+                                <input type="radio" name="contrast_allergies" id="contrast_allergies" value="1"> <?= $lang['yes'] ?>
+                                <span class="checkmark"></span>
+                              </label><br><br>
+                              <!-- prioritas -->
+                              <label style="font-weight: bold;" for="priority"><b><?= $lang['priority'] ?></b></label><br>
+                              <label class="radio-admin">
+                                <input type="radio" name="priority" id="priority" value="normal"> Normal
+                                <span class="checkmark"></span>
+                              </label>
+                              <label class="radio-admin">
+                                <input type="radio" name="priority" id="priority" value="cito"> Cito
+                                <span class="checkmark"></span>
+                              </label>
+                              <br><br>
+                              <!-- special needs -->
+                              <label style="font-weight: bold;" for="spc_needs"><b><?= $lang['spc_needs'] ?></b></label><br>
+                              <textarea rows="4" cols="50" type="text" name="spc_needs" id="spc_needs" style="width: 315; height: 90px;"></textarea><br><br>
+                              <!-- from order -->
+                              <input type="hidden" name="fromorder" id="fromorder" value="RIS">
+                              <!-- create time -->
+                              <input type="hidden" name="create_time" id="create_time" value="<?= date('Y-m-d H:i:s'); ?>">
+                              <button class="btn btn-info btn-lg" type="submit" id="submit" name="submit" style="border-radius: 5px; box-shadow:none">
+                                <span class="spinner-grow spinner-grow-sm loading" role="status" aria-hidden="true"></span>
+                                <p class="loading" style="display:inline;">Loading...</p>
+                                <p class="ubah" style="display:inline;">Order</p>
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </div>
-                      <div class="container-fluid"><br>
-                        <label for="contrast">Contrast</label><br>
-                        <label class="radio-admin" style="display: block;">
-                          <input type="radio" name="contrast" value="Perlu Kontras" required> <?= $lang['using_contrast'] ?>
-                          <span class="checkmark"></span>
-                        </label><br>
-                        <label class="radio-admin" style="display: block;">
-                          <input type="radio" checked="checked" name="contrast" value="Tidak perlu contrast" required> <?= $lang['not_using_contrast'] ?>
-                          <span class="checkmark"></span>
-                        </label><br><br>
-                        <label for="priority"><b><?= $lang['priority'] ?></b></label><br>
-                        <select name="priority">
-                          <option value="normal">normal</option>
-                          <option value="cito">cito</option>
-                        </select><br>
-                        <br>
-                        <label for="pat_state"><b><?= $lang['patient_state'] ?></b></label><br>
-                        <select name="pat_state">
-                          <option value="Rawat Inap"><?= $lang['inpatient'] ?></option>
-                          <option value="Rawat Jalan"><?= $lang['outpatient'] ?></option>
-                        </select><br>
-                        <br>
-                        <label for="contrast_allergies"><b><?= $lang['contrast_allergy'] ?></b></label><br>
-                        <select name="contrast_allergies">
-                          <option value="Tidak Alergi Contrast"><?= $lang['no'] ?></option>
-                          <option value="Alergi Contrast"><?= $lang['yes'] ?></option>
-                        </select><br>
-                        <!-- <label for="payment"><b>Payment</b></label><br>
-                                <label class="radio-admin">
-                                  <input type="radio" checked="checked" name="payment" value="BPJS" required> BPJS
-                                  <span class="checkmark"></span>
-                                </label><br>
-                                <label class="radio-admin">
-                                  <input type="radio" checked="checked" name="payment" value="umum" required> Umum
-                                  <span class="checkmark"></span>
-                                </label><br>
-                                <label class="radio-admin">
-                                  <input type="radio" checked="checked" name="payment" value="" required> Asuransi ...
-                                  <span class="checkmark"></span></label>
-                                  <input type="text" name="other_payment" placeholder="Masukan jenis asuransi.."> -->
-                        <br>
-                        <label for="spc_needs"><b><?= $lang['spc_needs'] ?></b></label><br>
-                        <textarea rows="4" cols="50" type="text" name="spc_needs" id="spc_needs" style="width: 315; height: 90px;"></textarea><br><br>
-                        <button class="btn btn-info btn-lg" type="submit" name="submit" style="border-radius: 5px; box-shadow:none"><b>Order</b></button>
-                      </div>
-                      </form>
                     </div>
                   </div>
-                </div>
+
+                </form>
               </div>
             </div>
           </div>
-
-
         </div>
       </div>
     </div>
@@ -271,36 +221,43 @@ if ($_SESSION['level'] == "radiographer") {
         <?php include('footer-itw.php'); ?>
       </div>
     </div>
-
     <?php include('script-footer.php'); ?>
-    <script>
-      $(document).ready(function() {
-        $("li[data-target='#products1']").addClass("active");
-        $("ul[id='products1'] li[id='regist1']").addClass("active");
-      });
-    </script>
-
-
-
     <script src="js/bootstrap-select.min.js"></script>
     <script type="text/javascript" src="js/jquery.datetimepicker.full.js"></script>
+    <script src="../js/proses/registration-live.js?v=2"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="css/jquery.datetimepicker.min.css">
     <script>
       $(document).ready(function() {
-        $('#modalitas').change(function() {
+        $(".select2").select2();
+        $("li[data-target='#products1']").addClass("active");
+        $("ul[id='products1'] li[id='regist1']").addClass("active");
+        $("li[data-target='#products1'] a i").css('color', '#c5f90d');
+
+        $('#schedule_date').datetimepicker({
+          timepicker: false,
+          format: 'Y-m-d'
+        });
+
+        $('#schedule_time').datetimepicker({
+          datepicker: false,
+          step: 1,
+          format: 'H:i:s'
+        });
+
+        $('#id_modality').change(function() {
           if ($(this).val() != '') {
             var action = $(this).attr("id");
-            var query = $(this).val();
+            var id_modality = $(this).val().split('|');
             var result = '';
-            if (action == "modalitas") {
-              result = 'prosedur';
+            if (action == "id_modality") {
+              result = 'id_prosedur';
             }
             $.ajax({
               url: "registration-prosedur.php",
               method: "POST",
               data: {
                 action: action,
-                query: query
+                id_modality: id_modality[0]
               },
               success: function(data) {
                 $('#' + result).html(data);
@@ -310,73 +267,6 @@ if ($_SESSION['level'] == "radiographer") {
         });
       });
     </script>
-    <!-- ------ -->
-    <script>
-      $(document).ready(function() {
-        $('#modalitas').change(function() {
-          if ($(this).val() != '') {
-            var action1 = $(this).attr("id");
-            var query = $(this).val();
-            var result = '';
-            if (action1 == "modalitas") {
-              result = 'prosedur1';
-            }
-            $.ajax({
-              url: "registration-prosedur.php",
-              method: "POST",
-              data: {
-                action1: action1,
-                query: query
-              },
-              success: function(data) {
-                $('#' + result).html(data);
-              }
-            })
-          }
-        });
-      });
-    </script>
-    <!-- ------ -->
-    <script>
-      $(document).ready(function() {
-        $('#modalitas').change(function() {
-          if ($(this).val() != '') {
-            var action2 = $(this).attr("id");
-            var query = $(this).val();
-            var result = '';
-            if (action2 == "modalitas") {
-              result = 'prosedur2';
-            }
-            $.ajax({
-              url: "registration-prosedur.php",
-              method: "POST",
-              data: {
-                action2: action2,
-                query: query
-              },
-              success: function(data) {
-                $('#' + result).html(data);
-              }
-            })
-          }
-        });
-      });
-    </script>
-    <!-- -------- -->
-    <script>
-      $('#schedule_date').datetimepicker({
-        timepicker: false,
-        format: 'Y-m-d'
-      });
-      $('#schedule_time').datetimepicker({
-        datepicker: false,
-        step: 1,
-        format: 'H:i:s'
-      });
-    </script>
-
-
-
   </body>
 
   </html>

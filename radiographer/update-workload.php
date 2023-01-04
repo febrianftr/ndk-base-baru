@@ -38,22 +38,27 @@ $study_iuid = $row['study_iuid'];
 $accession_no = $row['accession_no'];
 $ref_physician = $row['ref_physician'];
 $study_desc = $row['study_desc'];
+$harga_prosedur = defaultValueNumber($row['harga_prosedur']);
 $mods_in_study = $row['mods_in_study'];
 $num_series = $row['num_series'];
 $num_instances = $row['num_instances'];
 $pat_id = $row['pat_id'];
 $no_foto = $row['no_foto'];
 $address = $row['address'];
+$dep_id = $row['dep_id'];
 $name_dep = $row['name_dep'];
+$dokterid = $row['dokterid'];
 $named = $row['named'];
 $weight = $row['weight'];
 $contrast = $row['contrast'];
 $contrast_allergies = $row['contrast_allergies'];
+$radiographer_id = $row['radiographer_id'];
 $radiographer_name = $row['radiographer_name'];
 $dokrad_name = $row['dokrad_name'];
 $pat_state = $row['pat_state'];
 $priority = $row['priority'];
 $spc_needs = $row['spc_needs'];
+$id_payment = $row['id_payment'];
 $payment = $row['payment'];
 $film_small = $row['film_small'];
 $film_medium = $row['film_medium'];
@@ -100,7 +105,7 @@ if ($_SESSION['level'] == "radiographer") {
 											</li>
 											<li>
 												<label for="pat_id">MRN</label><br>
-												<input class="not-allowed" type="text" name="pat_id" id="pat_id" value="<?= $pat_id; ?>" readonly>
+												<input type="text" name="pat_id" id="pat_id" value="<?= $pat_id; ?>">
 											</li>
 											<li>
 												<label for="pat_name">Nama</label><br>
@@ -110,11 +115,11 @@ if ($_SESSION['level'] == "radiographer") {
 												<label for="pat_sex"><b>Jenis Kelamin</b></label><br>
 												<div class="status">
 													<label class="radio-admin">
-														<input type="radio" checked="checked" name="pat_sex" id="pat_sex" <?= strtoupper($pat_sex) == 'M' ? 'checked' : ''; ?> value="M"> Laki - laki
+														<input type="radio" <?= strtoupper($pat_sex) == 'M' ? 'checked' : ''; ?> name="pat_sex" id="pat_sex" value="M"> Laki - laki
 														<span class="checkmark"></span>
 													</label>
 													<label class="radio-admin">
-														<input type="radio" name="pat_sex" id="pat_sex" <?= strtoupper($pat_sex) == 'F' ? 'checked' : ''; ?> value="F"> Perempuan
+														<input type="radio" <?= strtoupper($pat_sex) == 'F' ? 'checked' : ''; ?> name="pat_sex" id="pat_sex" value="F"> Perempuan
 														<span class="checkmark"></span>
 													</label>
 												</div>
@@ -133,11 +138,12 @@ if ($_SESSION['level'] == "radiographer") {
 											</li>
 											<li>
 												<label for="name_dep">Nama Departemen</label><br>
-												<select class="selectpicker" data-size="10" data-live-search="true" data-width="100%" name="dep_id" data-style="btn-info">
+												<select class="selectpicker" id="dep_id" data-size="10" data-live-search="true" data-width="100%" name="dep_id" data-style="btn-info">
+													<option value="null">--pilih--</option>
 													<?php
 													$department = mysqli_query($conn, "SELECT * FROM xray_department");
 													while ($row_department = mysqli_fetch_array($department)) { ?>
-														<option value="<?= $row_department['dep_id']; ?>"><?= $row_department['name_dep']; ?></option>
+														<option value="<?= $row_department['dep_id']; ?>" <?= $row_department['dep_id'] == $dep_id ? 'selected' : "";  ?>><?= $row_department['name_dep']; ?></option>
 													<?php } ?>
 												</select>
 												<!-- jika menggunakan inputan data -->
@@ -155,11 +161,12 @@ if ($_SESSION['level'] == "radiographer") {
 										</li>
 										<li class="dokteravail">
 											<label for="named">Nama Dokter Pengirim</label><br>
-											<select class="selectpicker" data-size="10" data-live-search="true" data-width="100%" name="dokterid" data-style="btn-info">
+											<select class="selectpicker" id="dokterid" data-size="10" data-live-search="true" data-width="100%" name="dokterid" data-style="btn-info">
+												<option value="null">--pilih--</option>
 												<?php
 												$dokter = mysqli_query($conn, "SELECT * FROM xray_dokter");
 												while ($row_dokter = mysqli_fetch_array($dokter)) { ?>
-													<option value="<?= $row_dokter['dokterid']; ?>"><?= $row_dokter['named']; ?></option>
+													<option value="<?= $row_dokter['dokterid']; ?>" <?= $row_dokter['dokterid'] == $dokterid ? 'selected' : "";  ?>><?= $row_dokter['named']; ?></option>
 												<?php } ?>
 											</select>
 											<!-- <input type="text" name="named" id="named" value="<?= $named; ?>"> -->
@@ -168,11 +175,25 @@ if ($_SESSION['level'] == "radiographer") {
 											<label for="contrast">Kontras</label><br>
 											<div class="status">
 												<label class="radio-admin">
-													<input type="radio" <?= strtolower($contrast) == 'perlu kontras' ? 'checked' : ''; ?> name="contrast" id="contrast" value="Perlu Kontras"> Perlu Kontras
+													<input type="radio" <?= strtolower($contrast) == '1' ? 'checked' : ''; ?> name="contrast" id="contrast" value="1"> Kontras
 													<span class="checkmark"></span>
 												</label>
 												<label class="radio-admin">
-													<input type="radio" <?= strtolower($contrast) == 'tidak perlu kontras' ? 'checked' : ''; ?> name="contrast" id="contrast" value="Tidak perlu kontras"> Tidak perlu contrast
+													<input type="radio" <?= strtolower($contrast) == '0' ? 'checked' : ''; ?> name="contrast" id="contrast" value="0"> Tidak Kontras
+													<span class="checkmark"></span>
+												</label>
+											</div>
+										</li>
+										<br>
+										<li>
+											<label for="contrast_allergies">Alergi Kontras</label><br>
+											<div class="status">
+												<label class="radio-admin">
+													<input type="radio" <?= strtolower($contrast_allergies) == '1' ? 'checked' : ''; ?> name="contrast_allergies" id="contrast_allergies" value="1"> Alergi Kontras
+													<span class="checkmark"></span>
+												</label>
+												<label class="radio-admin">
+													<input type="radio" <?= strtolower($contrast_allergies) == '0' ? 'checked' : ''; ?> name="contrast_allergies" id="contrast_allergies" value="0"> Tidak Alergi Kontras
 													<span class="checkmark"></span>
 												</label>
 											</div>
@@ -180,11 +201,12 @@ if ($_SESSION['level'] == "radiographer") {
 										<br>
 										<li>
 											<label for="radiographer_name">Nama Radiographer</label><br>
-											<select class="selectpicker" data-size="10" data-live-search="true" data-width="100%" name="radiographer_id" data-style="btn-info">
+											<select class="selectpicker" id="radiographer_id" data-size="10" data-live-search="true" data-width="100%" name="radiographer_id" data-style="btn-info">
+												<option value="null">--pilih--</option>
 												<?php
 												$radiographer = mysqli_query($conn, "SELECT * FROM xray_radiographer");
 												while ($row_radiographer = mysqli_fetch_array($radiographer)) { ?>
-													<option value="<?= $row_radiographer['radiographer_id']; ?>"><?= $row_radiographer['radiographer_name']; ?></option>
+													<option value="<?= $row_radiographer['radiographer_id']; ?>" <?= $row_radiographer['radiographer_id'] == $radiographer_id ? 'selected' : "";  ?>><?= $row_radiographer['radiographer_name']; ?></option>
 												<?php } ?>
 											</select>
 											<!-- <input type="text" name="radiographer_name" id="radiographer_name" value="<?= $radiographer_name; ?>"> -->
@@ -207,37 +229,28 @@ if ($_SESSION['level'] == "radiographer") {
 											<label for="dokrad_name">Nama Dokter Radiology</label><br>
 											<input class="not-allowed" type="text" id="dokrad_name" value="<?= $dokrad_name; ?>" readonly>
 										</li>
-										<li>
-											<label for="pat_state">Keadaan Pasien</label><br>
-											<label class="radio-admin">
-												<input type="radio" <?= strtolower($pat_state) == 'rawat jalan' ? 'checked' : ''; ?> name="pat_state" value="rawat jalan"> Rawat Jalan
-												<span class="checkmark"></span>
-											</label>
-											<label class="radio-admin">
-												<input type="radio" <?= strtolower($pat_state) == 'rawat inap' ? 'checked' : ''; ?> name="pat_state" value="rawat inap"> Rawat Inap
-												<span class="checkmark"></span>
-											</label>
-										</li>
+
 										<br>
 										<li>
 											<label for="payment">Pembayaran</label><br>
-											<input type="text" name="payment" id="payment" value="<?= $payment; ?>">
-										</li>
-										<li>
-											<label for="contrast_allergies">Alergi Kontras</label><br>
-											<label class="radio-admin">
-												<input type="radio" <?= strtolower($contrast_allergies) == 'alergi contrast' ? 'checked' : ''; ?> name="contrast_allergies" value="alergi contrast"> Alergi Kontras
-												<span class="checkmark"></span>
-											</label>
-											<label class="radio-admin">
-												<input type="radio" <?= strtolower($contrast_allergies) == 'tidak alergi contrast' ? 'checked' : ''; ?> name="contrast_allergies" value="tidak alergi contrast"> Tidak Alergi Kontras
-												<span class="checkmark"></span>
-											</label>
+											<select class="selectpicker" id="id_payment" data-size="10" data-live-search="true" data-width="100%" name="id_payment" data-style="btn-info">
+												<option value="null">--pilih--</option>
+												<?php
+												$payment_insurance  = mysqli_query($conn, "SELECT * FROM xray_payment_insurance");
+												while ($row_payment = mysqli_fetch_array($payment_insurance)) { ?>
+													<option value="<?= $row_payment['id_payment']; ?>" <?= $row_payment['id_payment'] == $id_payment ? 'selected' : "";  ?>><?= $row_payment['payment']; ?></option>
+												<?php } ?>
+											</select>
+											<!-- <input type="text" name="payment" id="payment" value="<?= $payment; ?>"> -->
 										</li>
 										<br>
 										<li>
 											<label for="study">Study</label><br>
 											<input type="text" class="not-allowed" name="study_desc" id="study_desc" value="<?= $study_desc; ?>" readonly>
+										</li>
+										<li>
+											<label for="harga_prosedur">Tarif Pemeriksaan</label><br>
+											<input type="text" name="harga_prosedur" id="harga_prosedur" value="<?= number_format($harga_prosedur, 0, ',', ','); ?>">
 										</li>
 									</div>
 									<div class="form-update-workload col-md-4">
@@ -307,7 +320,7 @@ if ($_SESSION['level'] == "radiographer") {
 			</div>
 		</div>
 		<?php include('script-footer.php'); ?>
-		<script src="../js/proses/update-workload.js"></script>
+		<script src="../js/proses/update-workload.js?v=12"></script>
 		<script src="js/bootstrap-select.min.js"></script>
 		<script>
 			$(document).ready(function() {

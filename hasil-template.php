@@ -12,6 +12,7 @@ $row = mysqli_fetch_assoc(mysqli_query(
     <h6 class="text-center font-weight-bold">
         <label><?= $row['title']; ?></label><button onclick="copyToClipboard('#p1')">Copy</button>
     </h6>
+<<<<<<< HEAD
     <p id="p1">
         <?= $row['fill']; ?>
     </p>
@@ -27,3 +28,12 @@ function copyToClipboard(element) {
   $temp.remove();
 }
 </script>
+=======
+    <!-- <button onclick="selectText('divid')">Select</button> -->
+    <div id="divid">
+        <?= $row['fill']; ?>
+    </div>
+
+
+</div>
+>>>>>>> e7063c3bc7596b52f4177d7a027b716f7da09384

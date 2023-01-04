@@ -10,31 +10,32 @@ if ($_SESSION['level'] == "radiographer") {
   <head>
     <title>Home | Radiographer</title>
     <?php include('head.php'); ?>
-    
+
   </head>
 
   <body>
-  <?php include('sidebar.php'); ?>
+    <?php include('sidebar.php'); ?>
     <div class="container-fluid" id="main">
-        <div class="row">
-            
-          <!-- //////content home/////////////// -->
-          <?php include('../home-index.php'); ?>
-          <!-- //////end content home/////////////// -->
+      <div class="row">
 
-        </div>       
+        <!-- //////content home/////////////// -->
+        <?php include('../home-index.php'); ?>
+        <!-- //////end content home/////////////// -->
+
+      </div>
     </div>
 
     <div class="footerindex">
-        <div class="">
-          <?php include('footer-itw.php'); ?>
-        </div>
+      <div class="">
+        <?php include('footer-itw.php'); ?>
+      </div>
     </div>
     <?php include('script-footer.php'); ?>
     <script>
-      $(document).ready(function(){
-          $("li[data-target='#home1']").addClass("active");
-        });
+      $(document).ready(function() {
+        $("li[data-target='#home1']").addClass("active");
+        $("li[data-target='#home1'] a i").css('color', '#c5f90d');
+      });
     </script>
   </body>
 

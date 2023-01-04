@@ -19,12 +19,29 @@ include '../contract-service.php';
     </div>
 </div>
 <!-- ------loader------ -->
+
+
+
+
+
 <?php include "../bahasa.php"; ?>
 <div class="nav-side-menu">
     <div class="brand">
         <div style="width: 195px; padding: 0 0 0 15px; margin: 7px 0;"><img style="width: 100%;" src="../image/intiwid-logo-new-putih-2.png"></div>
     </div>
-    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content1"></i>
+    <!-- <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content1"></i> -->
+    <div class="toggle-btn">
+        <label for="burger" class="burger-bar">
+            <input id="burger" type="checkbox" data-toggle="collapse" data-target="#menu-content1">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+    </div>
+
+
+
+
     <div class="menu-list1">
         <ul id="menu-content1" class="menu-content1 collapse out">
             <li data-target="#home1">
@@ -37,7 +54,7 @@ include '../contract-service.php';
                 <a href="#" class="products1"><i class="fa fa-user fa-lg"></i> <?= $lang['patient_order'] ?> <label class="products1-arrow"><span class="arrow"></span></label></a>
             </li>
             <ul class="sub-menu1 collapse" id="products1">
-                <!-- <li id="regist1"><a href="registration.php"><?= $lang['registration'] ?></a></li> -->
+                <li id="regist1"><a href="registration.php"><?= $lang['registration'] ?></a></li>
                 <li id="order3"><a href="order2.php"><?= $lang['all_order'] ?></a></li>
                 <li id="exam3"><a href="exam2.php"><?= $lang['examroom'] ?></a></li>
             </ul>

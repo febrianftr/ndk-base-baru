@@ -57,7 +57,7 @@ function inobitec(uid) {
     dataType: "xml",
     cache: false,
     success: function (response) {
-      alert("Buka Viewer INOBITEC");
+      // alert("Buka Viewer INOBITEC");
     },
     error: function (response) {
       alert("gagal, konfigurasi client!");

@@ -1,3 +1,35 @@
+// key up untuk harga prosedur
+$(function () {
+  $("#harga_prosedur").keyup(function (e) {
+    $(this).val(format($(this).val()));
+  });
+});
+
+// format rupiah
+var format = function (num) {
+  var str = num.toString().replace("", ""),
+    parts = false,
+    output = [],
+    i = 1,
+    formatted = null;
+  if (str.indexOf(".") > 0) {
+    parts = str.split(".");
+    str = parts[0];
+  }
+  str = str.split("").reverse();
+  for (var j = 0, len = str.length; j < len; j++) {
+    if (str[j] != ",") {
+      output.push(str[j]);
+      if (i % 3 == 0 && j < len - 1) {
+        output.push(",");
+      }
+      i++;
+    }
+  }
+  formatted = output.reverse().join("");
+  return "" + formatted + (parts ? "." + parts[1].substr(0, 2) : "");
+};
+
 $(document).ready(function () {
   let study_iuid = $("#study_iuid").val();
   let accession_no = $("#accession_no").val();
@@ -8,13 +40,12 @@ $(document).ready(function () {
   let pat_sex = $("#pat_sex").val();
   let address = $("#address").val();
   let weight = $("#weight").val();
-  let name_dep = $("#name_dep").val();
+  let dep_id = $("#dep_id").val();
   let mods_in_study = $("#mods_in_study").val();
-  let named = $("#named").val();
+  let dokterid = $("#dokterid").val();
   let contrast = $("#contrast").val();
-  let radiographer_name = $("#radiographer_name").val();
+  let radiographer_id = $("#radiographer_id").val();
   let priority = $("#priority").val();
-  let pat_state = $("#pat_state").val();
   let payment = $("#payment").val();
   let contrast_allergies = $("#contrast_allergies").val();
   let spc_needs = $("#spc_needs").val();
@@ -22,31 +53,55 @@ $(document).ready(function () {
   let mas = $("#mas").val();
   $(".loading").hide();
 
+  $.validator.addMethod(
+    "valueNotEquals",
+    function (value, element, arg) {
+      return arg !== value;
+    },
+    "Please select an item!"
+  );
+
   $("#edit-workload").validate({
     rules: {
       accession_no: "required",
       no_foto: "required",
       pat_id: "required",
       pat_name: "required",
-      pat_sex: "required",
+      pat_sex: { required: true },
+      // contrast: { required: true },
+      // contrast_allergies: { required: true },
       pat_birthdate: "required",
       address: "required",
-      name_dep: "required",
+      dep_id: { valueNotEquals: "null" },
+      id_payment: { valueNotEquals: "null" },
       mods_in_study: "required",
-      named: "required",
-      radiographer_name: "required",
+      dokterid: { valueNotEquals: "null" },
+      radiographer_id: { valueNotEquals: "null" },
+      weight: "number",
+      harga_prosedur: {
+        number: true,
+        required: true,
+      },
+      film_small: "number",
+      film_medium: "number",
+      film_large: "number",
+      film_reject_small: "number",
+      film_reject_medium: "number",
+      film_reject_large: "number",
       priority: "required",
-      pat_state: "required",
       spc_needs: "required",
-      kv: "required",
-      mas: "required",
-    },
-    messages: {
-      required: "wajib diisi",
+      kv: {
+        required: true,
+      },
+      mas: {
+        required: true,
+      },
     },
     errorPlacement: function (error, element) {
       if (element.is(":radio")) {
         error.appendTo(element.parents("li"));
+        // console.log(element.parents("li"));
+        console.log(error.insertAfter());
       } else {
         error.insertAfter(element);
       }
@@ -60,7 +115,6 @@ $(document).ready(function () {
       $(element).removeClass("invalid");
     },
     errorClass: "invalid-text",
-    focusCleanup: true,
     ignoreTitle: true,
     submitHandler: function (form) {
       $.ajax({

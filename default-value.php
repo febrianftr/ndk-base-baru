@@ -5,6 +5,11 @@ function defaultValue($value)
     return $value ?? '-';
 }
 
+function defaultValueNumber($value)
+{
+    return $value ?? 0;
+}
+
 function defaultValueDate($value)
 {
     return isset($value) ? date('d-m-Y', strtotime($value)) : '-';

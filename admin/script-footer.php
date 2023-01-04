@@ -4,7 +4,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/mdb.min.js"></script>
-    <script src="../radiology/ckeditor/ckeditor.js"></script>
+    <script src="../radiology/ckeditor/ckeditor.js?v=5"></script>
     <script src="js/script.js"></script>
     <script src="navbar.js"></script>
     <!-- <script src="ckeditor/ckeditor.js"></script> -->

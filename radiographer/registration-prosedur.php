@@ -1,21 +1,15 @@
 <?php
 
-require 'function_radiographer.php';
-
-//fetch.php
+require '../koneksi/koneksi.php';
+?>
+<!-- <option value="null">null</option> -->
+<?php
 if (isset($_POST["action"])) { ?>
-
   <?php
-  $query = $_POST["query"];
-  $query2 = "SELECT * FROM xray_price WHERE type = '$query' GROUP BY main_prosedur ORDER BY main_prosedur ASC";
-  $result2 = mysqli_query($conn, $query2);
+  $id_modality = $_POST["id_modality"];
+  $result = mysqli_query($conn, "SELECT * FROM xray_study WHERE id_modality = '$id_modality' ORDER BY study ASC");
+  while ($study = mysqli_fetch_array($result)) {
   ?>
-
-  <!-- <option value="" >---PILIH PROSEDUR---</option> -->
-  <?php while ($row2 = mysqli_fetch_array($result2)) { ?>
-    <!-- <optgroup label="<?php echo $row2['main_prosedur']; ?>"> -->
-    <option value="<?php echo $row2["main_prosedur"]; ?>"><?php echo $row2["main_prosedur"]; ?></option>
-    <!-- </optgroup> -->
+    <option value="<?= $study["id_study"] . '|' . $study["study"] . '|' . $study["harga"]; ?>"><?= $study["study"]; ?></option>
   <?php } ?>
-
 <?php } ?>

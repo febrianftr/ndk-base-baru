@@ -132,6 +132,7 @@ if ($_SESSION['level'] == "radiographer") {
             $(document).ready(function() {
                 $("li[data-target='#service']").addClass("active");
                 $("ul[id='service'] li[id='uploadexcel1']").addClass("active");
+                $("li[data-target='#service'] a i").css('color', '#c5f90d');
             });
         </script>
     </body>
