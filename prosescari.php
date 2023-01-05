@@ -153,7 +153,7 @@ while ($row = mysqli_fetch_array($result)) {
   $named = defaultValue($row['named']);
   $radiographer_name = defaultValue($row['radiographer_name']);
   $dokrad_name = defaultValue($row['dokrad_name']);
-  $dokradid = defaultValue($row['dokradid']);
+  $dokradid = $row['dokradid'];
   $priority = defaultValue($row['priority']);
   $status = styleStatus($row['status']);
   $fromorder = $row['fromorder'];
@@ -168,7 +168,7 @@ while ($row = mysqli_fetch_array($result)) {
   }
 
   // kondisi ketika dokter belum ada menggunakan icon berbeda
-  if ($fromorder == null && $pk_dokter_radiology == null) {
+  if ($pk_dokter_radiology == null && $dokradid == null) {
     $icon_change_doctor = CHANGEDOCTORICONNO;
   } else {
     $icon_change_doctor = CHANGEDOCTORICONYES;
