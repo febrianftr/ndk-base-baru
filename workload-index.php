@@ -86,7 +86,7 @@
 		});
 		fetch_data('no');
 
-		function fetch_data(is_date_search = 'yes', from_study_datetime = '', to_study_datetime = '', mods_in_study = '', pat_name = '', mrn = '') {
+		function fetch_data(is_date_search = 'yes', from_study_datetime = '', to_study_datetime = '', mods_in_study = '', pat_name = '', mrn = '', patientid = '') {
 			var dataTable = $('#purchase_order').DataTable({
 				"processing": true,
 				"serverSide": true,
@@ -101,7 +101,8 @@
 						to_study_datetime: to_study_datetime,
 						mods_in_study: mods_in_study,
 						pat_name: pat_name,
-						mrn: mrn
+						mrn: mrn,
+						patientid: patientid
 					}
 				},
 			});
@@ -113,9 +114,10 @@
 			var pat_name = $('#pat_name').val();
 			var mrn = $('#mrn').val();
 			var mods_in_study = get_filter('checkbox');
+			var patientid = $('#patientid').val();
 			if (from_study_datetime != '' && to_study_datetime != '') {
 				$('#purchase_order').DataTable().destroy();
-				fetch_data('yes', from_study_datetime, to_study_datetime, mods_in_study, pat_name, mrn);
+				fetch_data('yes', from_study_datetime, to_study_datetime, mods_in_study, pat_name, mrn, patientid);
 			} else {
 				alert("Please Select Date");
 			}

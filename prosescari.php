@@ -115,6 +115,13 @@ if (isset($_POST['mrn']) && $_POST['mrn'] != "") {
  ';
 }
 
+// jika patientid / nofoto diketik
+if (isset($_POST['patientid']) && $_POST['patientid'] != "") {
+  $patientid = strtoupper($_POST['patientid']);
+  $query .= 'AND patientid LIKE "%' . $patientid . '%"
+ ';
+}
+
 // order by
 if (isset($_POST["order"])) {
   $query .= 'ORDER BY ' . $columns[$_POST['order']['0']['column']] . ' ' . $_POST['order']['0']['dir'] . ' 

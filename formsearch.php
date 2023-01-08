@@ -45,7 +45,11 @@ $date2 = date('d-m-Y 23:59');
                     </span>
                     <span class="search-icon">
                         <i class="ic-search2 fas fa-search"></i>
-                        <input class="search-input-workload" style="color: black; width: 33%;" type="text" name="mrn" id="mrn" placeholder="<?= $lang['input_mrn'] ?>">
+                        <input class="search-input-workload" style="color: black; width: 25%;" type="text" name="mrn" id="mrn" placeholder="<?= $lang['input_mrn'] ?>">
+                    </span>
+                    <span class="search-icon">
+                        <i class="ic-search2 fas fa-search"></i>
+                        <input class="search-input-workload" style="color: black; width: 25%;" type="text" name="patientid" id="patientid" placeholder="Input No Foto">
                     </span>
                 </div>
             </div>
