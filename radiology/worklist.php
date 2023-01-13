@@ -192,26 +192,7 @@ if ($_SESSION['level'] == "radiology") { ?>
 
 							<div class="col-lg-2">
 								<div class="div-left">
-									<div class="left-top">
-										<div style="width: 50%; padding: 3px;">
-											<div class="work-order">
-												<ul>
-													<a class="button-work-order" href="#">
-														<li class="li-work patient-work">History</li>
-													</a>
-												</ul>
-											</div>
-										</div>
-										<div style="width: 50%; padding: 3px;">
-											<div class="work-patient">
-												<ul>
-													<a class="button-work-patient" href="#">
-														<li class="li-work patient-work">viewer</li>
-													</a>
-												</ul>
-											</div>
-										</div>
-									</div>
+
 									<div class="info-patient">
 										<div class="info-patient2">
 											<div class="row justify-content-center">
@@ -273,6 +254,26 @@ if ($_SESSION['level'] == "radiology") { ?>
 														</tr>
 													</table>
 												</div>
+											</div>
+										</div>
+									</div>
+									<div class="left-top">
+										<div style="width: 50%; padding: 3px;">
+											<div class="work-order">
+												<ul>
+													<a class="button-work-order" href="#">
+														<li class="li-work patient-work">History</li>
+													</a>
+												</ul>
+											</div>
+										</div>
+										<div style="width: 50%; padding: 3px;">
+											<div class="work-patient">
+												<ul>
+													<a class="button-work-patient" href="#">
+														<li class="li-work patient-work">viewer</li>
+													</a>
+												</ul>
 											</div>
 										</div>
 									</div>
