@@ -111,7 +111,7 @@ if ($_SESSION['level'] == "radiographer") {
 			$(document).ready(function() {
 				$("li[data-target='#products1']").addClass("active");
 				$("ul[id='products1'] li[id='order3']").addClass("active");
-				$("li[data-target='#products1'] a i").css('color', '#c5f90d');
+				$("li[data-target='#products1'] a i").css('color', '#bdbdbd');
 			});
 		</script>
 		<script>

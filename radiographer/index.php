@@ -34,7 +34,7 @@ if ($_SESSION['level'] == "radiographer") {
     <script>
       $(document).ready(function() {
         $("li[data-target='#home1']").addClass("active");
-        $("li[data-target='#home1'] a i").css('color', '#c5f90d');
+        $("li[data-target='#home1'] a i").css('color', '#bdbdbd');
       });
     </script>
   </body>
