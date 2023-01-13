@@ -80,6 +80,7 @@ if ($_SESSION['level'] == "radiographer") {
         <script>
             $(document).ready(function() {
                 $("li[id='storage1']").addClass("active");
+                $("li[id='storage1'] a i").css('color', '#c5f90d');
             });
         </script>
     </body>

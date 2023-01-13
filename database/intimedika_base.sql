@@ -1,3 +1,4 @@
+
 /*
  Navicat Premium Data Transfer
 
@@ -11,7 +12,7 @@
  Target Server Version : 50649
  File Encoding         : 65001
 
- Date: 26/12/2022 07:20:49
+ Date: 08/01/2023 19:39:58
 */
 
 SET NAMES utf8mb4;
@@ -398,7 +399,7 @@ CREATE TABLE `xray_patient`  (
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`pk`, `mrn`) USING BTREE,
   UNIQUE INDEX `index_mrn`(`mrn`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for xray_patient_order
@@ -546,7 +547,7 @@ CREATE TABLE `xray_take_envelope`  (
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`pk`, `uid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for xray_template
@@ -604,6 +605,7 @@ CREATE TABLE `xray_workload`  (
   `pk_dokter_radiology` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `study_datetime_pacsio` datetime(0) NULL DEFAULT NULL,
   `updated_time_pacsio` datetime(0) NULL DEFAULT NULL,
+  `study_desc_pacsio` varchar(150) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `priority_doctor` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `signature` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `signature_datetime` datetime(0) NULL DEFAULT NULL,
@@ -633,3 +635,4 @@ CREATE TABLE `xray_workload_bhp`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 SET FOREIGN_KEY_CHECKS = 1;
+

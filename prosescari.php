@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 require 'koneksi/koneksi.php';
@@ -115,6 +116,13 @@ if (isset($_POST['mrn']) && $_POST['mrn'] != "") {
  ';
 }
 
+// jika patientid / nofoto diketik
+if (isset($_POST['patientid']) && $_POST['patientid'] != "") {
+  $patientid = strtoupper($_POST['patientid']);
+  $query .= 'AND patientid LIKE "%' . $patientid . '%"
+ ';
+}
+
 // order by
 if (isset($_POST["order"])) {
   $query .= 'ORDER BY ' . $columns[$_POST['order']['0']['column']] . ' ' . $_POST['order']['0']['dir'] . ' 
@@ -153,7 +161,7 @@ while ($row = mysqli_fetch_array($result)) {
   $named = defaultValue($row['named']);
   $radiographer_name = defaultValue($row['radiographer_name']);
   $dokrad_name = defaultValue($row['dokrad_name']);
-  $dokradid = defaultValue($row['dokradid']);
+  $dokradid = $row['dokradid'];
   $priority = defaultValue($row['priority']);
   $status = styleStatus($row['status']);
   $fromorder = $row['fromorder'];
@@ -168,7 +176,7 @@ while ($row = mysqli_fetch_array($result)) {
   }
 
   // kondisi ketika dokter belum ada menggunakan icon berbeda
-  if ($fromorder == null && $pk_dokter_radiology == null) {
+  if ($pk_dokter_radiology == null && $dokradid == null) {
     $icon_change_doctor = CHANGEDOCTORICONNO;
   } else {
     $icon_change_doctor = CHANGEDOCTORICONYES;

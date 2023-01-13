@@ -95,7 +95,7 @@ while ($row = mysqli_fetch_array($query)) {
     $named = defaultValue($row['named']);
     $radiographer_name = defaultValue($row['radiographer_name']);
     $dokrad_name = defaultValue($row['dokrad_name']);
-    $dokradid = defaultValue($row['dokradid']);
+    $dokradid = $row['dokradid'];
     $priority = defaultValue($row['priority']);
     $fromorder = $row['fromorder'];
     $status = styleStatus($row['status']);
@@ -120,7 +120,7 @@ while ($row = mysqli_fetch_array($query)) {
     }
 
     // kondisi ketika dokter belum ada menggunakan icon berbeda
-    if ($fromorder == null && $pk_dokter_radiology == null) {
+    if ($pk_dokter_radiology == null && $dokradid == null) {
         $icon_change_doctor = CHANGEDOCTORICONNO;
     } else {
         $icon_change_doctor = CHANGEDOCTORICONYES;
@@ -130,8 +130,8 @@ while ($row = mysqli_fetch_array($query)) {
     if ($dicom == '/dicom.php') {
         // kondisi ketika xray_workload masuk dari trigger
         if ($status != '-') {
-            // kondisi ketika pasien manual tetapi pk_dokter_radiologi null dan ketika aktif bernilai 1 mapping dokter
-            if ($fromorder == null && $pk_dokter_radiology == null && $selected_dokter_radiology['is_active'] == 1) {
+            // kondisi pk_dokter_radiologi null dan dokradid null dan ketika aktif bernilai 1 mapping dokter
+            if ($pk_dokter_radiology == null && $dokradid == null && $selected_dokter_radiology['is_active'] == 1) {
                 $aksi = '?';
                 $detail = '<a href="dicom.php" class="penawaran-a">' . removeCharacter($pat_name) . '</a>';
             } else {

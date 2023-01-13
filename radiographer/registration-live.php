@@ -231,6 +231,7 @@ if ($_SESSION['level'] == "radiographer") {
         $(".select2").select2();
         $("li[data-target='#products1']").addClass("active");
         $("ul[id='products1'] li[id='regist1']").addClass("active");
+        $("li[data-target='#products1'] a i").css('color', '#c5f90d');
 
         $('#schedule_date').datetimepicker({
           timepicker: false,

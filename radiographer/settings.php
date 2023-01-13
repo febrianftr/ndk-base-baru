@@ -265,6 +265,7 @@ if ($_SESSION['level'] == "radiographer") {
     <script>
       $(document).ready(function() {
         $("li[id='settings1']").addClass("active");
+        $("li[id='settings1'] a i").css('color', '#c5f90d');
       });
     </script>
 
