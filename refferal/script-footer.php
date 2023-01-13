@@ -29,6 +29,12 @@
     </script>
     <!-- =======menghapus border pada div======== -->
 
+<script>
+ $(".table-dicom").on("click", "tbody tr", function (event) {
+  $(this).addClass("highlight").siblings().removeClass("highlight");
+});
+</script>
+
     <script>
         $(document).ready(function() {
             $('#incfont').click(function() {

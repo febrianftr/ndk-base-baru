@@ -30,10 +30,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Report</h4>
+                
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <textarea style="width: 100%; height: 320px;"><?= $template['template_id'];  ?></textarea>
+                <textarea  style="width: 100%; height: 320px;"><?= $template['template_id'];  ?></textarea>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -42,3 +43,4 @@
     </div>
 </div>
 <!-- Modal -->
+

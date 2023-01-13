@@ -54,6 +54,7 @@ $contrast = $row['contrast'];
 $contrast_allergies = $row['contrast_allergies'];
 $radiographer_id = $row['radiographer_id'];
 $radiographer_name = $row['radiographer_name'];
+$dokradid = $row['dokradid'];
 $dokrad_name = $row['dokrad_name'];
 $pat_state = $row['pat_state'];
 $priority = $row['priority'];
@@ -226,11 +227,17 @@ if ($_SESSION['level'] == "radiographer") {
 										</li>
 										<br>
 										<li>
-											<label for="dokrad_name">Nama Dokter Radiology</label><br>
+											<!-- <label for="dokrad_name">Nama Dokter Radiology</label><br>
+											<select class="selectpicker" id="id_payment" data-size="10" data-live-search="true" data-width="100%" name="id_payment" data-style="btn-info">
+												<option value="null">--pilih--</option>
+												<?php
+												$dokter_radiology  = mysqli_query($conn, "SELECT dokradid, dokrad_name FROM xray_dokter_radiology");
+												while ($row_dokter_radiology = mysqli_fetch_array($dokter_radiology)) { ?>
+													<option value="<?= $row_dokter_radiology['dokradid']; ?>" <?= $row_dokter_radiology['dokradid'] == $dokradid ? 'selected' : "";  ?>><?= $row_dokter_radiology['payment']; ?></option>
+												<?php } ?>
+											</select> -->
 											<input class="not-allowed" type="text" id="dokrad_name" value="<?= $dokrad_name; ?>" readonly>
-										</li>
-
-										<br>
+										</li> <br>
 										<li>
 											<label for="payment">Pembayaran</label><br>
 											<select class="selectpicker" id="id_payment" data-size="10" data-live-search="true" data-width="100%" name="id_payment" data-style="btn-info">

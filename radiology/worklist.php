@@ -330,7 +330,7 @@ if ($_SESSION['level'] == "radiology") { ?>
 									<!-- intiwid viewer -->
 									<div class="data-patient">
 										<div class="content2-adm li-adm">
-											<h4 style="margin: 0px;">Intiwid Viewer</h4>
+											<h4 style="margin: 0px;">Viewer</h4>
 											<hr style="margin: 10px 0px;">
 											<div class="buttons1">
 												<?= HOROSWORKLISTFIRST . $uid . HOROSWORKLISTLAST .
