@@ -115,7 +115,7 @@ if ($_SESSION['level'] == "radiographer") {
 				<div id="content1"><br>
 					<div class="body">
 						<div class="container-fluid">
-							<div class="col-12" style="padding-left: 0;">
+							<div class="col-12" style="padding: 0;">
 								<nav aria-label="breadcrumb">
 									<ol class="breadcrumb">
 										<li class="breadcrumb-item"><a href="index.php">Home</a></li>
@@ -124,9 +124,8 @@ if ($_SESSION['level'] == "radiographer") {
 								</nav>
 							</div>
 							<div class="table-view col-md-12 table-box" style="overflow-x:auto;">
-								<h3 class="text-center">Worklist</h3>
-								<hr>
-								<h6 class="text-center"><?= $lang['patient_being_examined'] ?></h6>
+								
+								<h4 class="text-center"><?= $lang['patient_being_examined'] ?></h4>
 								<br>
 								<form class="form-inline" method="POST" action="deleteexamall.php">
 									<div class="form-group">
@@ -235,7 +234,7 @@ if ($_SESSION['level'] == "radiographer") {
 			$(document).ready(function() {
 				$("li[data-target='#products1']").addClass("active");
 				$("ul[id='products1'] li[id='exam3']").addClass("active");
-				$("li[data-target='#products1'] a i").css('color', '#c5f90d');
+				$("li[data-target='#products1'] a i").css('color', '#bdbdbd');
 
 			});
 		</script>

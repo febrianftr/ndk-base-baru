@@ -18,7 +18,7 @@ if ($_SESSION['level'] == "radiographer") {
         <section class="home-section">
             <div class="container-fluid" id="main">
                 <div class="row">
-                    <div class="col-12" style="padding-left: 0;">
+                    <div class="col-12" style="padding: 0;">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb" style="margin-bottom: 0; padding-top:0;">
                                 <li class="breadcrumb-item"><a href="index.php">Home</a></li>

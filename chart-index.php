@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-12" style="padding-left: 0;">
+    <div class="col-12" style="padding: 0;">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.php">Home</a></li>

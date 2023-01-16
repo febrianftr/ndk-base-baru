@@ -34,7 +34,7 @@ if ($_SESSION['level'] == "radiographer") {
     <?php include('sidebar.php'); ?>
     <div class="container-fluid" id="main">
       <div class="row">
-        <div class="col-12" style="padding-left: 0;">
+        <div class="col-12" style="padding: 0;">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.php">Home</a></li>
@@ -265,7 +265,7 @@ if ($_SESSION['level'] == "radiographer") {
     <script>
       $(document).ready(function() {
         $("li[id='settings1']").addClass("active");
-        $("li[id='settings1'] a i").css('color', '#c5f90d');
+        $("li[id='settings1'] a i").css('color', '#bdbdbd');
       });
     </script>
 

@@ -55,7 +55,7 @@ body {
   font-size: 11px;
   color: #747474;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color: #f9f9f9;
+  background-color: #fff;
   background-size: cover;
   background-attachment: fixed;
 }
@@ -153,15 +153,15 @@ th {
 }
 
 table.table-dicom tbody tr {
-  background-color: #e3e3e3;
+  background-color: #fff;
 }
 .table-dicom tr:nth-child(even) {
-  background-color: #ececec;
+  background-color: #fff;
 }
 
 .table-dicom tr:hover {
-  background-color: #cacaca;
-  color: #1862b0;
+  background-color: #f2f2f2;
+  color: #353535;
 }
 .table-dicom td a{
   color: #329ecf;
@@ -171,11 +171,12 @@ table.table-dicom tbody tr {
   padding-top: 5px;
   padding-bottom: 5px;
   text-align: left;
-  background: #ececec;
+  background: #fff;
   color: #1f69b7;
   text-align: center;
-  font-weight: bold;
-  /* border-bottom: 3px solid #d0d0d0; */
+  /* font-weight: bold; */
+  border-bottom: 1px solid #d0d0d0;
+  border-top: 1px solid #d0d0d0;
   font-size: 13px;
 }
 
@@ -190,7 +191,7 @@ table.table-dicom tbody tr {
 }
 
 .table-box {
-  background-color: #f7f7f7;
+  background-color: #fff;
   padding: 10px;
   border-radius: 7px;
   border: solid 1px #ecebeb;
@@ -217,13 +218,14 @@ table td {
 table.dataTable tbody th,
 table.dataTable tbody td {
   padding: 3px 1px;
+  border-bottom: 1px solid #d0d0d0;
   /* font-family: 'Roboto', sans-serif; */
   /* font-weight: bold; */
 }
 
-table.dataTable.no-footer {
+/* table.dataTable.no-footer {
   border-bottom: 2px solid #cacaca;
-}
+} */
 
 /*--------------- end of table------------- */
 
@@ -450,8 +452,8 @@ table.dataTable.no-footer {
 
 
 .input-checkbox {
-  border-right: 3px solid #cacaca;
-  border-left: 3px solid #cacaca;
+  border-right: 2px solid #d5d5d5;
+  border-left: 2px solid #d5d5d5;
   min-height: 77px;
 }
 
@@ -507,11 +509,12 @@ table.dataTable.no-footer {
 
 
 .search-workload {
-  background-color: #f7f7f7;
-  color: #373737;
-  border: 4px solid #cacaca;
+  background-color: #f2f2f2;
+  color: #4d4d4d;
+  /* border: 4px solid #e6e6e6; */
   margin-bottom: 8px;
   border-radius: 6px;
+  border-bottom: 1px solid #d5d5d5;
 }
 
 .note5 {
@@ -572,6 +575,7 @@ table.dataTable.no-footer {
 
 .wrap-search {
   padding: 3px;
+  font-size: 14px;
 }
 
 
@@ -605,11 +609,14 @@ table.dataTable.no-footer {
 }
 
 .work-1 {
-  background-color: #cacaca;
+  background-color: #fff;
   width: 100%;
   color: #1f69b7;
   padding: 1px 5px 5px 3px;
   font-weight: bold;
+  border-bottom: 1px solid #d0d0d0;
+  border-top: 1px solid #d0d0d0;
+  padding: 8px;
 }
 
 
@@ -741,7 +748,7 @@ table.dataTable.no-footer {
 }
 
 .informasi-tambahan {
-  color: #737373;
+  color: #353535;
 }
 
 /* -----game---------------- */
@@ -838,16 +845,17 @@ canvas {
 
 
 .informasi-tambahan2 {
-  color: #737373;
+  color: #353535;
 }
 
 .left-information {
-  border: 3px solid #d2c8c8;
+  border: 1px solid #d2c8c8;
   padding: 10px 10px 88px 10px;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   border-radius: 5px;
   background: #ececec;
   height: 100%;
+  margin-bottom: 30px;
 }
 
 
@@ -1195,7 +1203,7 @@ select {
 .ic-search2 {
   position: absolute;
   color: #cacaca;
-  top: 54px;
+  top: 67px;
   margin: -10px 0px 0px 7px;
   font-size: 15px;
 }
@@ -1230,14 +1238,14 @@ select {
 
 .btn-inti2 {
   margin: 1px;
-  padding: 5px 2px;
-  width: 20px;
+  padding: 2px 3px;
+  width: 25px;
   /*margin-right: 3px;*/
   /* color: #fff; */
   /*margin-bottom: 5px;*/
   font-size: 12px;
-  height: 29px;
-  border-top: solid 2px #d0d0d0;
+  height: 25px;
+  border-top: solid 1px #d0d0d0;
   box-shadow: none;
 }
 
@@ -1657,10 +1665,10 @@ label.file1:after {
 }
 
 .textsearchnewpasien2 {
-  color: #8c8c8c;
+  color: #1f69b7;
   /* background: #fff; */
   /* margin: 7px 0px 0px 0px; */
-  padding: 5px;
+  padding: 1px 5px 11px 5px;
 }
 
 .margin-top-minus {
@@ -1852,7 +1860,7 @@ textarea {
   padding: 5px 5px 5px 25px;
   margin: 2px 0;
   display: inline-block;
-  border: 2px solid #d2c8c8;;
+  border: 1px solid #d2c8c8;;
   border-radius: 4px;
   box-sizing: border-box;
   -webkit-transition: 0.5s;
@@ -2152,7 +2160,7 @@ input[type="submit"] {
 
 .regist {
   width: 100%;
-  background-color: #f7f7f7;
+  /* background-color: #f7f7f7; */
   padding: 5px;
   /* border: 3px solid #d2c8c8; */
   padding: 10px;
@@ -2351,6 +2359,7 @@ input[type="submit"] {
   width: 15px;
   background-color: #eee;
   border-radius: 3px;
+  margin-top: 3px;
 }
 
 /* On mouse-over, add a grey background color */
@@ -2362,6 +2371,7 @@ input[type="submit"] {
 .c1 input:checked~.checkmark1 {
   background-color: #68B399;
   border-radius: 3px;
+  margin-top: 3px;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -2369,6 +2379,7 @@ input[type="submit"] {
   content: "";
   position: absolute;
   display: none;
+  margin-top: 3px;
 }
 
 /* Show the checkmark when checked */
@@ -2379,7 +2390,7 @@ input[type="submit"] {
 /* Style the checkmark/indicator */
 .c1 .checkmark1:after {
   left: 4px;
-  top: 0px;
+  top: -4px;
   width: 7px;
   height: 14px;
   border: solid white;
@@ -3140,7 +3151,8 @@ font-size: large;
 }
 
 #main{
-   margin: 10px;
+  /* margin: 12px; */
+  padding: 15px 33px 33px 33px;
 }
 
 .settingclass img {
@@ -3445,7 +3457,7 @@ button:focus {
 
 
 .back-search{
-  background-color: #dfdfdf;
+  background-color: #f9f9f9;
   padding: 8px;
   border-radius: 5px;
   margin-bottom: 10px;
@@ -3613,10 +3625,13 @@ table.dataTable > thead .sorting::before, table.dataTable > thead .sorting::afte
 
 .head-title{
   margin-left: -15px;
-  background: #dfdfdf;
+  background: #eaeaea;
   border-radius: 5px 5px 0 0;
   margin-bottom: -16px;
   padding-left: 4px;
+  border-bottom: 1px solid #d0d0d0;
+  border-top: 1px solid #d0d0d0;
+  border-right: 1px solid #d0d0d0;
 }
 
 .table-view{
@@ -3960,8 +3975,8 @@ table.dataTable > thead .sorting::before, table.dataTable > thead .sorting::afte
 }
 
 .table-dicom tbody tr.highlight td {
-  background-color: #cacaca;
-    color: #1862b0;
+  background-color: #f2f2f2;
+  color: #353535;
 }
 
 /* --------------BURGER BAR------------------------ */
@@ -4025,7 +4040,52 @@ table.dataTable > thead .sorting::before, table.dataTable > thead .sorting::afte
 /* ---------------------burger----------- */
 
 
+.box-dashboard1 {
+  background: #f4f4f4;
+  padding: 13px;
+  border-radius: 10px;
+  margin-bottom: 100px;
+}
 
+.info-box {
+  background: #fff;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 3em;
+  border: 1px solid #ede8f0;
+  border-radius: 5px;
+  margin: 5px 0;
+}
+
+.info-box .box-icon i {
+  display: block;
+  width: 48px;
+  height: 48px;
+  font-size: 50px;
+  color: #fff;
+}
+
+.info-box .box-content {
+  padding-left: 3em;
+  white-space: nowrap;
+  color: #d5d5d5;
+  font-size: 15px;
+}
+
+.info-box .box-content .big {
+  display: block;
+  font-size: 2em;
+  line-height: 150%;
+  color: #fff;
+  font-weight: bold;
+}
+
+.info-box .box-icon i,
+.content-wrap .info-boxes .info-box .box-icon i {
+  fill: #99a0b0;
+}
 
 
 

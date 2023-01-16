@@ -27,7 +27,7 @@ if ($_SESSION['level'] == "radiographer") {
         <div id="content1">
           <div class="container-fluid">
             <div class="row">
-              <div class="col-12" style="padding-left: 0;">
+              <div class="col-12" style="padding: 0;">
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.php">Home</a></li>
@@ -231,7 +231,7 @@ if ($_SESSION['level'] == "radiographer") {
         $(".select2").select2();
         $("li[data-target='#products1']").addClass("active");
         $("ul[id='products1'] li[id='regist1']").addClass("active");
-        $("li[data-target='#products1'] a i").css('color', '#c5f90d');
+        $("li[data-target='#products1'] a i").css('color', '#bdbdbd');
 
         $('#schedule_date').datetimepicker({
           timepicker: false,

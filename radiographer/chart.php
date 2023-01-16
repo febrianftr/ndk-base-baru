@@ -30,7 +30,7 @@ if ($_SESSION['level'] == "radiographer") {
 				// class sidebar aktif
 				$("li[data-target='#service']").addClass("active");
 				$("ul[id='service'] li[id='chart2']").addClass("active");
-				$("li[data-target='#service'] a i").css('color', '#c5f90d');
+				$("li[data-target='#service'] a i").css('color', '#bdbdbd');
 
 				// tanggal
 				$('#from').datetimepicker({
