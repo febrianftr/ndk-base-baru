@@ -29,7 +29,7 @@ if ($_SESSION['level'] == "radiographer") {
 								<h3 class="textsearchnewpasien2"><?= $lang['regist_new_patient'] ?></h3>
 							</div>
 							<form method="post" id="registration">
-								<div class="row back-search">
+								<div class="row left-information">
 									<div style="margin: 0px 0px;" class="row regist">
 										<div class="col-sm-6">
 											<table class="table-form">
@@ -108,7 +108,7 @@ if ($_SESSION['level'] == "radiographer") {
 							<div class="head-title" style="width: 365px;">
 								<h3 class="textsearchnewpasien2">List Patient</h3>
 							</div>
-							<div class="row back-search">
+							<div class="row left-information">
 								<div class="table-view col-md-12 table-box" style="overflow-x: scroll;">
 									<table class="table-dicom table-paginate" border="1" cellpadding="8" cellspacing="0" style="margin-top: 3px;">
 										<thead>
