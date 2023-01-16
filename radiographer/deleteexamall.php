@@ -7,10 +7,7 @@ $to = date('Y-m-d H:i', strtotime($_POST["to"]));
 
 $query = mysqli_query(
 	$conn_mppsio,
-	"DELETE mwl_item, patient 
-	FROM mwl_item 
-	INNER JOIN patient
-	ON mwl_item.patient_fk = patient.pk
+	"DELETE FROM mwl_item
 	WHERE mwl_item.created_time BETWEEN '$from' AND '$to'"
 );
 
