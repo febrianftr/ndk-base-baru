@@ -52,54 +52,6 @@ $approved = mysqli_fetch_assoc(mysqli_query(
   </div>
 </div>
 
-<style>
-  .box-dashboard1 {
-    background: #ececec;
-    padding: 13px;
-    border-radius: 10px;
-    margin-bottom: 100px;
-  }
-
-  .info-box {
-    background: #fff;
-    height: 160px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 0 3em;
-    border: 1px solid #ede8f0;
-    border-radius: 5px;
-    margin: 5px 0;
-  }
-
-  .info-box .box-icon i {
-    display: block;
-    width: 48px;
-    height: 48px;
-    font-size: 50px;
-    color: #fff;
-  }
-
-  .info-box .box-content {
-    padding-left: 3em;
-    white-space: nowrap;
-    color: #d5d5d5;
-    font-size: 15px;
-  }
-
-  .info-box .box-content .big {
-    display: block;
-    font-size: 2em;
-    line-height: 150%;
-    color: #fff;
-    font-weight: bold;
-  }
-
-  .info-box .box-icon i,
-  .content-wrap .info-boxes .info-box .box-icon i {
-    fill: #99a0b0;
-  }
-</style>
 <div class="container-fluid">
   <br><br>
   <div class="box-dashboard1">
