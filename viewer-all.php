@@ -4,7 +4,7 @@ $hostname = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM xray_hostname_
 
 // PDF
 define('PDFFIRST', '<a style="text-decoration:none;" class="" href="../radiology/pdf/expertise.php?uid=');
-define('PDFLAST', '"target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/file.svg" data-toggle="tooltip" title="PDF" style="width: 100%;"></span></a>');
+define('PDFLAST', '"target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/new/pdf-new.svg" data-toggle="tooltip" title="PDF" style="width: 100%;"></span></a>');
 
 // DICOM
 define('DICOMFIRST', '<a style="text-decoration:none;" href="jnlp://' . $_SERVER['SERVER_NAME'] . ':19898/weasis-pacs-connector/DCM_viewer.jnlp?studyUID=');
@@ -19,8 +19,8 @@ define('MOBILEFIRST', '<a style="text-decoration:none;" class="ahref-edit" href=
 define('MOBILELAST', '"target="_blank"><span class="btn btn-warning btn-inti"><i class="fas fa-eye" data-toggle="tooltip" title="Web Viewer"></i></span></a>');
 
 // Change doctor
-define('CHANGEDOCTORICONYES', '<i class="fas fa-user-md fa-lg"></i>');
-define('CHANGEDOCTORICONNO', '<i class="fas fa-user-times fa-lg deep-orange-text"></i>');
+define('CHANGEDOCTORICONYES', '<img src="../image/new/user-doctor.svg" data-toggle="tooltip" title="choose Physician" style="width: 100%;">');
+define('CHANGEDOCTORICONNO', '<img src="../image/new/user-doctor-no.svg" data-toggle="tooltip" title="choose Physician" style="width: 100%;">');
 define('CHANGEDOCTORFIRST', '<a style="text-decoration: none;" href="changedoctorworklist.php?uid=');
 define('CHANGEDOCTORMID', '&dokradid=');
 define('CHANGEDOCTORSTAT', '&status=');
@@ -28,9 +28,9 @@ define('CHANGEDOCTORLAST', '"><span class="btn rgba-stylish-slight darken-1 btn-
 define('CHANGEDOCTORVERYLAST', '</span></a>');
 
 // Ambil hasil expertise
-define('GETEXPERTISEICONYES', '<i class="fas fa-envelope fa-lg"></i>');
+define('GETEXPERTISEICONYES', '<img src="../image/new/envelop.svg" data-toggle="tooltip" style="width: 100%;">');
 define('GETEXPERTISEICONNO', '<i class="fas fa-envelope-open fa-lg deep-orange-text"></i>');
-define('GETEXPERTISEICONWAITING', '<i class="fas fa-envelope-open fa-lg deep-orange-text not-allowed"></i>');
+define('GETEXPERTISEICONWAITING', '<img src="../image/new/envelop-not.svg" data-toggle="tooltip" class="not-allowed" style="width: 100%;">');
 define('GETEXPERTISEFIRST', '<a style="text-decoration: none;" title="');
 define('GETEXPERTISEHREFYES', '" href="take-envelope.php?uid=');
 define('GETEXPERTISEHREFNO', '" href="#');
@@ -43,7 +43,7 @@ define('DELETELAST', '"onclick=\'return confirm("Delete data?");\'><span class="
 
 // EDIT PASIEN
 define('EDITPASIENFIRST', '<a href="update-workload.php?uid=');
-define('EDITPASIENLAST', '"<span class="btn text-primary rgba-stylish-slight btn-inti2"><img src="../image/redo.svg" data-toggle="tooltip" title="Update" style="width: 100%;"></span></a>');
+define('EDITPASIENLAST', '"<span class="btn text-primary rgba-stylish-slight btn-inti2"><img src="../image/new/update-new.svg" data-toggle="tooltip" title="Update" style="width: 100%;"></span></a>');
 
 // EDIT WORKLOAD
 define('EDITWORKLOADFIRST', '<a href="workload-edit.php?uid=');

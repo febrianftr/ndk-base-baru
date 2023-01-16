@@ -124,9 +124,8 @@ if ($_SESSION['level'] == "radiographer") {
 								</nav>
 							</div>
 							<div class="table-view col-md-12 table-box" style="overflow-x:auto;">
-								<h3 class="text-center">Worklist</h3>
-								<hr>
-								<h6 class="text-center"><?= $lang['patient_being_examined'] ?></h6>
+								
+								<h4 class="text-center"><?= $lang['patient_being_examined'] ?></h4>
 								<br>
 								<form class="form-inline" method="POST" action="deleteexamall.php">
 									<div class="form-group">
