@@ -452,8 +452,8 @@ table.dataTable tbody td {
 
 
 .input-checkbox {
-  border-right: 3px solid #e6e6e6;
-  border-left: 3px solid #e6e6e6;
+  border-right: 2px solid #d5d5d5;
+  border-left: 2px solid #d5d5d5;
   min-height: 77px;
 }
 
@@ -509,9 +509,9 @@ table.dataTable tbody td {
 
 
 .search-workload {
-  background-color: #f7f7f7;
-  color: #373737;
-  border: 4px solid #e6e6e6;
+  background-color: #eaeaea;
+  color: #4d4d4d;
+  /* border: 4px solid #e6e6e6; */
   margin-bottom: 8px;
   border-radius: 6px;
 }
@@ -574,6 +574,7 @@ table.dataTable tbody td {
 
 .wrap-search {
   padding: 3px;
+  font-size: 14px;
 }
 
 
@@ -607,9 +608,9 @@ table.dataTable tbody td {
 }
 
 .work-1 {
-  background-color: #e6e6e6;
+  background-color: #0f4e91;
   width: 100%;
-  color: #1f69b7;
+  color: #fff;
   padding: 1px 5px 5px 3px;
   font-weight: bold;
 }
@@ -2353,6 +2354,7 @@ input[type="submit"] {
   width: 15px;
   background-color: #eee;
   border-radius: 3px;
+  margin-top: 3px;
 }
 
 /* On mouse-over, add a grey background color */
@@ -2364,6 +2366,7 @@ input[type="submit"] {
 .c1 input:checked~.checkmark1 {
   background-color: #68B399;
   border-radius: 3px;
+  margin-top: 3px;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -2371,6 +2374,7 @@ input[type="submit"] {
   content: "";
   position: absolute;
   display: none;
+  margin-top: 3px;
 }
 
 /* Show the checkmark when checked */
@@ -2381,7 +2385,7 @@ input[type="submit"] {
 /* Style the checkmark/indicator */
 .c1 .checkmark1:after {
   left: 4px;
-  top: 0px;
+  top: -4px;
   width: 7px;
   height: 14px;
   border: solid white;
