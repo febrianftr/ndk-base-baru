@@ -319,6 +319,9 @@ if ($_SESSION['level'] == "radiology") { ?>
 																HOROSFIRST . $study_iuid . HOROSLAST .
 																OHIFOLDFIRST . $study_iuid . OHIFOLDLAST;
 															?>
+															<a href="#" class="view-history-expertise" data-id="<?= $study_iuid;  ?>">
+																<i data-toggle="tooltip" title="View History Expertise" class="fa fa-file-archive-o fa-lg"></i>
+															</a>
 														</td>
 													</tr>
 												</tbody>

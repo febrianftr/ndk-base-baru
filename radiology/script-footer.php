@@ -136,6 +136,23 @@
     });
     // end untuk menampilkan data popup
 </script>
+<script>
+    // untuk menampilkan data popup history expertise
+    $(function() {
+        $(document).on('click', '.view-history-expertise', function(e) {
+            e.preventDefault();
+            $("#view-history-expertise").modal('show');
+            $.post('../hasil-history-expertise.php', {
+                    study_iuid: $(this).attr('data-id')
+                },
+                function(html) {
+                    $(".modal-body").html(html);
+                }
+            );
+        });
+    });
+    // end untuk menampilkan data popup history expertise
+</script>
 <!-- <script>
         document.addEventListener("contextmenu", function(e) {
             e.preventDefault();
