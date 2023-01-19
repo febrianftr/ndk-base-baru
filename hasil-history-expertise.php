@@ -21,8 +21,7 @@ $row = mysqli_fetch_assoc(mysqli_query(
     ON study.study_iuid = xray_workload.uid
 	WHERE study_iuid = '$study_iuid'"
 ));
-$approved_at = $row['approved_at'];
-$print_approved_at = date("d M Y H:i:s", strtotime($approved_at));
+$approved_at = defaultValueDateTime($row['approved_at']);
 ?>
 <div class="fill-history_expertise" style="margin: 20px;">
     <table class="" id="example" style="margin-top: 3px;" cellpadding="8" cellspacing="0">
@@ -30,7 +29,7 @@ $print_approved_at = date("d M Y H:i:s", strtotime($approved_at));
             <tr>
                 <td><?= $lang['patient_name'] ?></td>
                 <td>&nbsp;: </td>
-                <td align="left">&nbsp; <?= removeCharacter($row['pat_name']); ?></td>
+                <td align="left">&nbsp; <?= removeCharacter($row['pat_name']) . ' ' . styleStatus($row['status']); ?></td>
             </tr>
             <tr>
                 <td>MRN</td>
@@ -50,7 +49,7 @@ $print_approved_at = date("d M Y H:i:s", strtotime($approved_at));
             <tr>
                 <td>Approve Date</td>
                 <td>&nbsp;: </td>
-                <td align="left" class="font-weight-bold">&nbsp; <?= defaultValue($print_approved_at); ?></td>
+                <td align="left" class="font-weight-bold">&nbsp; <?= $approved_at; ?></td>
             </tr>
         </thead>
     </table>

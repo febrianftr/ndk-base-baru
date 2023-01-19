@@ -64,10 +64,13 @@ $detail_uid = '<a href="#" class="hasil-all penawaran-a" data-id="' . $uid . '">
 $query_mrn = mysqli_query(
 	$conn,
 	"SELECT $select_patient,
-	$select_study 
+	$select_study,
+    $select_workload 
 	FROM $table_patient
 	JOIN $table_study
-	ON patient.pk = study.patient_fk 
+	ON patient.pk = study.patient_fk
+	JOIN $table_workload
+    ON study.study_iuid = xray_workload.uid 
 	WHERE pat_id = '$row[pat_id]'
 	AND study.study_iuid != '$uid'
 	ORDER BY study.study_datetime DESC"
@@ -141,26 +144,6 @@ if ($_SESSION['level'] == "radiology") { ?>
 							</div>
 							<div class="col-lg-2">
 								<div class="div-left">
-									<div class="left-top">
-										<div style="width: 50%; padding: 3px;">
-											<div class="work-order">
-												<ul>
-													<a class="button-work-order" href="#">
-														<li class="li-work patient-work">History</li>
-													</a>
-												</ul>
-											</div>
-										</div>
-										<div style="width: 50%; padding: 3px;">
-											<div class="work-patient">
-												<ul>
-													<a class="button-work-patient" href="#">
-														<li class="li-work patient-work">viewer</li>
-													</a>
-												</ul>
-											</div>
-										</div>
-									</div>
 									<div class="info-patient">
 										<div class="info-patient2">
 											<div class="row justify-content-center">
@@ -225,6 +208,26 @@ if ($_SESSION['level'] == "radiology") { ?>
 											</div>
 										</div>
 									</div>
+									<div class="left-top">
+										<div style="width: 50%; padding: 3px;">
+											<div class="work-order">
+												<ul>
+													<a class="button-work-order" href="#">
+														<li class="li-work patient-work">History</li>
+													</a>
+												</ul>
+											</div>
+										</div>
+										<div style="width: 50%; padding: 3px;">
+											<div class="work-patient">
+												<ul>
+													<a class="button-work-patient" href="#">
+														<li class="li-work patient-work">viewer</li>
+													</a>
+												</ul>
+											</div>
+										</div>
+									</div>
 									<!-- history pasien berdasarkan mrn pat_iid-->
 									<div class="data-order">
 										<b class="title-history">History Patient</b><br>
@@ -241,7 +244,7 @@ if ($_SESSION['level'] == "radiology") { ?>
 														<td><span class="table-left">Name</span></td>
 													</tr>
 													<tr>
-														<td><?= $detail_mrn; ?></td>
+														<td><?= $detail_mrn . ' ' . styleStatus($mrn['status']); ?></td>
 													</tr>
 													<tr>
 														<td><span class="table-left">MRN</span></td>
@@ -267,6 +270,9 @@ if ($_SESSION['level'] == "radiology") { ?>
 																HOROSFIRST . $study_iuid . HOROSLAST .
 																OHIFOLDFIRST . $study_iuid . OHIFOLDLAST;
 															?>
+															<a href="#" class="view-history-expertise" data-id="<?= $study_iuid;  ?>">
+																<i data-toggle="tooltip" title="View History Expertise" class="fa fa-file-archive-o fa-lg"></i>
+															</a>
 														</td>
 													</tr>
 												</tbody>
