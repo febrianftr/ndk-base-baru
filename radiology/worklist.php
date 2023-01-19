@@ -64,7 +64,7 @@ $query_mrn = mysqli_query(
 	$conn,
 	"SELECT $select_patient,
 	$select_study,
-	$select_workload 
+	$select_workload
 	FROM $table_patient
 	JOIN $table_study
 	ON patient.pk = study.patient_fk 
