@@ -28,7 +28,7 @@ $row = mysqli_fetch_assoc(mysqli_query(
     WHERE study.study_iuid = '$uid'"
 ));
 
-$pat_name = substr(removeCharacter(ucwords(strtolower(defaultValue($row['pat_name'])))), 0, 26);
+$pat_name = substr(removeCharacter(ucwords(strtolower(defaultValue($row['pat_name'])))), 0, 23);
 $pat_sex = $row['pat_sex'];
 $pat_birthdate = $row['pat_birthdate'];
 $age = diffDate($pat_birthdate);
@@ -39,7 +39,7 @@ $pat_id = defaultValue($row['pat_id']);
 $no_foto = defaultValue($row['no_foto']);
 $address = ucwords(strtolower(defaultValue($row['address'])));
 $name_dep = substr(ucwords(strtolower(defaultValue($row['name_dep']))), 0, 29);
-$named = substr(ucwords(strtolower(defaultValue($row['named']))), 0, 29);
+$named = substr(strtolower(defaultValue($row['named'])), 0, 29);
 $spc_needs_one = substr(ucfirst(strtolower(defaultValue($row['spc_needs']))), 0, 29);
 $spc_needs_two = substr(ucfirst(strtolower(defaultValue($row['spc_needs']))), 29, 29);
 $fill = $row['fill'];
