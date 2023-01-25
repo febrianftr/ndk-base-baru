@@ -15,7 +15,7 @@ $username = $_SESSION['username'];
 $level = $_SESSION['level'];
 
 // kolom untuk order by 
-$columns = array('pk', 'pk', 'status', 'pat_name', 'pat_id', 'patientid', 'pat_birthdate', 'pat_sex', 'study_desc', 'pk', 'mods_in_study', 'named', 'name_dep', 'dokrad_name', 'radiographer_name', 'study_datetime', 'approved_at', 'pk');
+$columns = array('pk', 'pk', 'status', 'pat_name', 'pat_id', 'patientid', 'pat_birthdate', 'pat_sex', 'study_desc_pacsio', 'pk', 'mods_in_study', 'named', 'name_dep', 'dokrad_name', 'radiographer_name', 'study_datetime', 'approved_at', 'pk');
 
 $row_dokrad = mysqli_fetch_assoc(mysqli_query(
   $conn,
@@ -36,7 +36,7 @@ $query_base = "SELECT
               pat_birthdate,
               study_iuid,
               study_datetime,
-              study_desc,
+              study_desc_pacsio,
               mods_in_study,
               study.updated_time,
               status,
@@ -85,7 +85,7 @@ if (isset($_POST["search"]["value"])) {
   OR pat_name LIKE "%' . $_POST["search"]["value"] . '%" 
   OR pat_birthdate LIKE "%' . $_POST["search"]["value"] . '%"
   OR pat_sex LIKE "%' . $_POST["search"]["value"] . '%"
-  OR study_desc LIKE "%' . $_POST["search"]["value"] . '%"
+  OR study_desc_pacsio LIKE "%' . $_POST["search"]["value"] . '%"
   OR mods_in_study LIKE "%' . $_POST["search"]["value"] . '%" 
   OR named LIKE "%' . $_POST["search"]["value"] . '%"
   OR radiographer_name LIKE "%' . $_POST["search"]["value"] . '%"
@@ -152,7 +152,7 @@ while ($row = mysqli_fetch_array($result)) {
   $pat_birthdate = diffDate($row['pat_birthdate']);
   $study_iuid = defaultValue($row['study_iuid']);
   $study_datetime = defaultValueDateTime($row['study_datetime']);
-  $study_desc = defaultValue($row['study_desc']);
+  $study_desc_pacsio = defaultValue($row['study_desc_pacsio']);
   $mods_in_study = defaultValue($row['mods_in_study']);
   $updated_time = defaultValueDateTime($row['updated_time']);
   $pat_id = defaultValue($row['pat_id']);
@@ -282,7 +282,7 @@ while ($row = mysqli_fetch_array($result)) {
   $sub_array[] = $no_foto;
   $sub_array[] = $pat_birthdate;
   $sub_array[] = $pat_sex;
-  $sub_array[] = $study_desc;
+  $sub_array[] = $study_desc_pacsio;
   $sub_array[] = READMORESERIESFIRST . $study_iuid . READMORESERIESLAST;
   $sub_array[] = $mods_in_study;
   $sub_array[] = $named;

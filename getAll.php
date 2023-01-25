@@ -53,7 +53,7 @@ $query = mysqli_query(
     pat_birthdate,
     study_iuid,
     study_datetime,
-    study_desc,
+    study_desc_pacsio,
     mods_in_study,
     study.updated_time,
     status,
@@ -86,7 +86,7 @@ while ($row = mysqli_fetch_array($query)) {
     $pat_birthdate = diffDate($row['pat_birthdate']);
     $study_iuid = defaultValue($row['study_iuid']);
     $study_datetime = defaultValueDateTime($row['study_datetime']);
-    $study_desc = defaultValue($row['study_desc']);
+    $study_desc_pacsio = defaultValue($row['study_desc_pacsio']);
     $mods_in_study = defaultValue($row['mods_in_study']);
     $updated_time = defaultValueDateTime($row['updated_time']);
     $pat_id = defaultValue($row['pat_id']);
@@ -194,7 +194,7 @@ while ($row = mysqli_fetch_array($query)) {
         "no_foto" => $no_foto,
         "pat_birthdate" => $pat_birthdate,
         "pat_sex" => $pat_sex,
-        "study_desc" => $study_desc,
+        "study_desc_pacsio" => $study_desc_pacsio,
         "series_desc" => READMORESERIESFIRST . $study_iuid . READMORESERIESLAST,
         "mods_in_study" => $mods_in_study,
         "named" => $named,

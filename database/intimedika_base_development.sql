@@ -1,4 +1,3 @@
-
 /*
  Navicat Premium Data Transfer
 
@@ -12,7 +11,7 @@
  Target Server Version : 50649
  File Encoding         : 65001
 
- Date: 08/01/2023 19:40:09
+ Date: 25/01/2023 11:30:46
 */
 
 SET NAMES utf8mb4;
@@ -34,6 +33,23 @@ CREATE TABLE `active_notification_unread`  (
 -- Records of active_notification_unread
 -- ----------------------------
 INSERT INTO `active_notification_unread` VALUES (1, 0, '2022-12-26 07:46:45', '2022-12-26 07:46:45');
+
+-- ----------------------------
+-- Table structure for active_update_simrs
+-- ----------------------------
+DROP TABLE IF EXISTS `active_update_simrs`;
+CREATE TABLE `active_update_simrs`  (
+  `pk` bigint(20) NOT NULL AUTO_INCREMENT,
+  `is_active` tinyint(4) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`pk`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of active_update_simrs
+-- ----------------------------
+INSERT INTO `active_update_simrs` VALUES (1, 1, '2022-12-28 15:08:47', '2022-12-28 15:08:47');
 
 -- ----------------------------
 -- Table structure for failed_jobs
@@ -147,6 +163,22 @@ CREATE TABLE `personal_access_tokens`  (
 -- ----------------------------
 INSERT INTO `personal_access_tokens` VALUES (1, 'App\\User', 1, 'andikautama034@gmail.com', 'e4be60b9f1a58ceb7abdf8112aa4bc06a709eabdc59e5a94a5015d655d9d9d8b', '[\"*\"]', '2022-12-19 11:02:39', '2022-10-17 09:52:24', '2022-12-19 11:02:39');
 INSERT INTO `personal_access_tokens` VALUES (2, 'App\\User', 2, 'kutamz@gmail.com', '3a6aa94fa33e095a1cc53503fcadc52b7ecb6b774d0cab809a4ec3694ebd15ed', '[\"*\"]', '2022-12-08 15:35:43', '2022-12-08 10:22:48', '2022-12-08 15:35:43');
+
+-- ----------------------------
+-- Table structure for update_uid_simrs
+-- ----------------------------
+DROP TABLE IF EXISTS `update_uid_simrs`;
+CREATE TABLE `update_uid_simrs`  (
+  `pk` bigint(20) NOT NULL AUTO_INCREMENT,
+  `uid_simrs` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `uid_study` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `uid_change` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `is_change` mediumint(9) NULL DEFAULT NULL,
+  `created_at` timestamp(0) NULL DEFAULT NULL,
+  `updated_at` timestamp(0) NULL DEFAULT NULL,
+  `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`pk`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for users
@@ -422,14 +454,17 @@ CREATE TABLE `xray_order`  (
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`pk`) USING BTREE,
   UNIQUE INDEX `uid`(`uid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 57 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 5927 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of xray_order
 -- ----------------------------
-INSERT INTO `xray_order` VALUES (54, '1.2.840.113564.10151014.20200818083200424680', '', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '3031', 'dokter radiologi ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `xray_order` VALUES (55, '1.2.840.113564.10151014.20200817160556900170', '', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'SIMRS', NULL, NULL);
-INSERT INTO `xray_order` VALUES (56, '1.2.840.113564.10151014.20200818032502487530', '', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '3031', 'dokter radiologi ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'SIMRS', NULL, NULL);
+INSERT INTO `xray_order` VALUES (1, '1', 'acc2', '0', 'mrn2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '198407112019042000P', 'dr Dedy Setiawan.M.Ked.Klin, Sp.A', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'SIMRS', NULL, NULL);
+INSERT INTO `xray_order` VALUES (2, '2', 'acc1', '0', 'mrn1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '198407112019042000P', 'dr Dedy Setiawan.M.Ked.Klin, Sp.A', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'SIMRS', NULL, NULL);
+INSERT INTO `xray_order` VALUES (3, '3', 'acc4', '0', 'mrn4', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '198407112019042000P', 'dr Dedy Setiawan.M.Ked.Klin, Sp.A', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'SIMRS', NULL, NULL);
+INSERT INTO `xray_order` VALUES (4, '4', 'acc3', '0', 'mrn3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '198407112019042000P', 'dr Dedy Setiawan.M.Ked.Klin, Sp.A', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'SIMRS', NULL, NULL);
+INSERT INTO `xray_order` VALUES (5925, '1.2.840.113564.1011111', '639412140136', '23301097', '639412', 'M Agung Raihan', NULL, 'KP CIPADUNG Rt/Rw 4/2 Kel. Cibiru Hilir Kec. Cileunyi Kabupaten Bandung', 'M', '2004-01-22', NULL, 'IGD', 'Gawat Darurat', '03', 'CT', 'RAD.33480', 'CT Kepala 3 Dimensi', '1220750', '198407112019042000P', 'dr Dedy Setiawan.M.Ked.Klin, Sp.A', NULL, NULL, NULL, NULL, NULL, '198204102010011012P', 'dr.Ganjar Simakerti, Sp.Rad, MARS', NULL, '2023-01-20 08:01:22', '2023-01-20', '08:01:39', NULL, 'Normal', 'Instalasi Gawat Darurat', NULL, 'MHI', 'UMU', 'Umum (Non Asuransi)', 'SIMRS', '2023-01-20 07:57:56', NULL);
+INSERT INTO `xray_order` VALUES (5926, '1.2.840.113564.10151014.20200818083200424680', 'Acc10Gede', 'NoFoto123', '1020123', NULL, NULL, 'bekasi1', NULL, NULL, '60', '2', 'pOli RawaT', NULL, NULL, NULL, NULL, '0', '1', 'dr Dedy Setiawan.M.Ked.Klin, Sp.A', NULL, NULL, '1', 'radiografer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'normal', NULL, NULL, 'Sehat Selalu IGD IgD yA', '1', 'BPJS', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for xray_patient
@@ -453,7 +488,7 @@ CREATE TABLE `xray_patient`  (
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`pk`, `mrn`) USING BTREE,
   UNIQUE INDEX `index_mrn`(`mrn`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 41 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of xray_patient
@@ -477,6 +512,7 @@ INSERT INTO `xray_patient` VALUES (36, NULL, '101138911', 'aldi muriyanata', NUL
 INSERT INTO `xray_patient` VALUES (37, NULL, '83212144', 'utama', NULL, 'M', '2000-01-02', NULL, 'bekasi', '081289580210', NULL, NULL, '2022-12-17 14:41:42', '2022-12-17 14:41:42', NULL);
 INSERT INTO `xray_patient` VALUES (38, NULL, '1029182031', 'rsud kab karanganyar', NULL, 'M', '2000-01-02', '50', 'bekasi', '081289580210', 'andikautama034@gmail.com', 'sehat aja', '2022-12-20 09:35:21', '2022-12-20 09:35:21', NULL);
 INSERT INTO `xray_patient` VALUES (39, NULL, '832121123', 'utama', NULL, 'M', '2000-01-02', '60', 'bekasi', '081289580210', 'andikautama034@gmail.com', 'a', '2022-12-20 09:53:20', '2022-12-20 09:53:20', NULL);
+INSERT INTO `xray_patient` VALUES (40, NULL, '10112892', 'RSUD KOTA BANDUNG 1', NULL, 'M', '2000-01-02', NULL, NULL, NULL, NULL, NULL, '2023-01-09 18:09:18', '2023-01-09 18:09:18', NULL);
 
 -- ----------------------------
 -- Table structure for xray_payment_insurance
@@ -1116,15 +1152,17 @@ CREATE TABLE `xray_workload`  (
   `signature` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `signature_datetime` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`pk`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of xray_workload
 -- ----------------------------
-INSERT INTO `xray_workload` VALUES (8, '1.2.840.113564.10151014.20200818083200424680', '31232131', 'approved', '<strong>Dilakukan pemeriksaan MSCT</strong><strong>/CT scan </strong><strong>abdomen </strong><strong>sampai pelvis potongan </strong><strong>axial. Dibuat rekonstruksi potongan koronal dan sagittal. Scanning tanpa dan dengan memakai kontras oral,I.V.distal</strong><br />\r\n&nbsp;<br />\r\n<strong><em><u>Scanning daerah :\\</u></em></strong><br />\r\nHepar&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;: Membesar ringan, permukaan rata, densitas homogeny. Tidak tampak massa. Vena porta, Vena hepatic dan vena cava inferior tidak melebar. Duktus biliaris&nbsp;intrahepatal dan ekxtrahepatal melebar.Tidak tampak koleksi cairan di sekitarnya.<br />\r\nKantung empedu : Membesar, dinding tidak menebal, regular. Tidak tampak massa/batu. Duktus<br />\r\nbiliaris intra-ekstrahepatal melebar<br />\r\nAbdomen tengah : tampak bayangan massa isodens pada prekontras dan terlihat enhancement pada post kontras, batas cukup tegas, ukuran lk 35,2x53,0 mm yang tampak berbatasan dengan bagian inferiolateral caput pankreas. Tampak bayangan hipodens di sekitar massa.<br />\r\nLimpa&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; : Ukuran tidak membesar, densitas homogen. Vena lienalis tidak melebar. Tidak tampak koleksi&nbsp;<br />\r\ncairan di sekitarnya.<br />\r\nPankreas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; : Ukuran tidak membesar, densitas homogen, ductus pankreatikus tidak melebar.<br />\r\nGinjal kanan : Ukuran tidak membesar, struktur parenkhim homogen, system pelvokalises tidak melebar, tidak&nbsp; tampak batu. Tampak massa kistik multipel, ukuran terbesar lk 44,4x36,0 mm. Ureter kanan tidak melebar.<br />\r\nGinjal kiri : Ukuran tidak membesar, struktur parenkhim homogen, system pelvokalises tidak melebar, tidak&nbsp; tampak batu. Tampak massa kistik ukuran lk 10,2x8,2 mm. Ureter kiri tidak melebar.<br />\r\nVesica urinaria&nbsp;&nbsp; : Besar dan bentuk normal. Tidak tampak batu/SOL.<br />\r\nRektum&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; : Posisi normal, dinding tidak menebal, perirectal fat normal<br />\r\nTidak tampak bayangan hipodens dengan ring enhancement di paraaorta. Tampak kalsifikasi pada aorta abdominalis.<br />\r\nStruktur gastrointestinal normal. Tidak dijumpai polip,&nbsp; divertikel atau kolitis. Intraabdomen tidak tampak massa yang mencurigakan. Tidak terlihat pengumpulan cairan bebas di rongga abdomen.<br />\r\nPada bagian paru yang tervisualisasi&nbsp; : Tampak bayangan nodul isodens, batas tegas dan terlihta hiperdens pada winow paru di lapang bawah kanan. Tidak dijumpai efusi pleura.<br />\r\n&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />\r\nKESAN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :<br />\r\nHepatomegali ringan<br />\r\nHydrops gallbladder disertai edema di sekitarnya<br />\r\nMassa padat yang terlihat enhancement pada post kontras, batas cukup tegas, di abdomen tengah atas --&gt; ec. massa ampula vateri DD/massa capurt pankreas, disertai dilatasi duktus biliaris intra-ekstrahepatal dan edema di sekitar massa.<br />\r\nSimpel cyst ginjal kanan dan multipel simple cyst ginjal kiri<br />\r\nNodul di lapang bawah kanan suspek ec. metastase DD/rounded pneumonia (lab?)<br />\r\nCT-scan&nbsp; lien dan VU tidak dijumpai kelainan<br />\r\nStruktur gastrointestinal tidak tampak kelainan, divertikel, polip atau apolitis<br />\r\nTidak terlihat koleksi cairan bebas intrabdomen<br />\r\nTidak tampak pembesaran KGB paraaorta<br />\r\nKalsifikasi pada aorta abdominalis.<br />\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />\r\n&nbsp;<br />\r\n&nbsp;<br />\r\n&nbsp;', '2023-01-06 15:12:07', '2023-01-06 16:45:06', '9', '2020-08-18 08:35:32', '2020-08-18 09:05:15', NULL, 'normal', NULL, NULL);
-INSERT INTO `xray_workload` VALUES (9, '1.2.840.113564.10151014.20200817160556900170', '908959', 'waiting', NULL, NULL, NULL, NULL, '2020-08-17 16:07:02', '2020-08-17 16:36:32', NULL, 'normal', NULL, NULL);
-INSERT INTO `xray_workload` VALUES (10, '1.2.840.113564.10151014.20200818032502487530', '908959', 'waiting', NULL, NULL, NULL, '9', '2020-08-17 16:07:02', '2020-08-17 16:36:32', NULL, 'normal', NULL, NULL);
-INSERT INTO `xray_workload` VALUES (12, '1.2.40.0.13.1.4785472681996.06.21.2447671851', '1399710', 'waiting', NULL, NULL, NULL, NULL, '2019-10-15 08:34:21', '2020-06-11 15:56:33', 'thorax ya', 'normal', NULL, NULL);
+INSERT INTO `xray_workload` VALUES (8, '1.2.840.113564.10151014.20200818083200424680', '31232131', 'approved', '<strong>Dilakukan pemeriksaan MSCT</strong><strong>/CT scan </strong><strong>abdomen </strong><strong>sampai pelvis potongan </strong><strong>axial. Dibuat rekonstruksi potongan koronal dan sagittal. Scanning tanpa dan dengan memakai kontras oral,I.V.distal</strong><br />\r\n&nbsp;<br />\r\n<strong><em><u>Scanning daerah :\\</u></em></strong><br />\r\nHepar&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;: Membesar ringan, permukaan rata, densitas homogeny. Tidak tampak massa. Vena porta, Vena hepatic dan vena cava inferior tidak melebar. Duktus biliaris&nbsp;intrahepatal dan ekxtrahepatal melebar.Tidak tampak koleksi cairan di sekitarnya.<br />\r\nKantung empedu : Membesar, dinding tidak menebal, regular. Tidak tampak massa/batu. Duktus<br />\r\nbiliaris intra-ekstrahepatal melebar<br />\r\nAbdomen tengah : tampak bayangan massa isodens pada prekontras dan terlihat enhancement pada post kontras, batas cukup tegas, ukuran lk 35,2x53,0 mm yang tampak berbatasan dengan bagian inferiolateral caput pankreas. Tampak bayangan hipodens di sekitar massa.<br />\r\nLimpa&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; : Ukuran tidak membesar, densitas homogen. Vena lienalis tidak melebar. Tidak tampak koleksi&nbsp;<br />\r\ncairan di sekitarnya.<br />\r\nPankreas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; : Ukuran tidak membesar, densitas homogen, ductus pankreatikus tidak melebar.<br />\r\nGinjal kanan : Ukuran tidak membesar, struktur parenkhim homogen, system pelvokalises tidak melebar, tidak&nbsp; tampak batu. Tampak massa kistik multipel, ukuran terbesar lk 44,4x36,0 mm. Ureter kanan tidak melebar.<br />\r\nGinjal kiri : Ukuran tidak membesar, struktur parenkhim homogen, system pelvokalises tidak melebar, tidak&nbsp; tampak batu. Tampak massa kistik ukuran lk 10,2x8,2 mm. Ureter kiri tidak melebar.<br />\r\nVesica urinaria&nbsp;&nbsp; : Besar dan bentuk normal. Tidak tampak batu/SOL.<br />\r\nRektum&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; : Posisi normal, dinding tidak menebal, perirectal fat normal<br />\r\nTidak tampak bayangan hipodens dengan ring enhancement di paraaorta. Tampak kalsifikasi pada aorta abdominalis.<br />\r\nStruktur gastrointestinal normal. Tidak dijumpai polip,&nbsp; divertikel atau kolitis. Intraabdomen tidak tampak massa yang mencurigakan. Tidak terlihat pengumpulan cairan bebas di rongga abdomen.<br />\r\nPada bagian paru yang tervisualisasi&nbsp; : Tampak bayangan nodul isodens, batas tegas dan terlihta hiperdens pada winow paru di lapang bawah kanan. Tidak dijumpai efusi pleura.<br />\r\n&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />\r\nKESAN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :<br />\r\nHepatomegali ringan<br />\r\nHydrops gallbladder disertai edema di sekitarnya<br />\r\nMassa padat yang terlihat enhancement pada post kontras, batas cukup tegas, di abdomen tengah atas --&gt; ec. massa ampula vateri DD/massa capurt pankreas, disertai dilatasi duktus biliaris intra-ekstrahepatal dan edema di sekitar massa.<br />\r\nSimpel cyst ginjal kanan dan multipel simple cyst ginjal kiri<br />\r\nNodul di lapang bawah kanan suspek ec. metastase DD/rounded pneumonia (lab?)<br />\r\nCT-scan&nbsp; lien dan VU tidak dijumpai kelainan<br />\r\nStruktur gastrointestinal tidak tampak kelainan, divertikel, polip atau apolitis<br />\r\nTidak terlihat koleksi cairan bebas intrabdomen<br />\r\nTidak tampak pembesaran KGB paraaorta<br />\r\nKalsifikasi pada aorta abdominalis.<br />\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />\r\n&nbsp;<br />\r\n&nbsp;<br />\r\n&nbsp;', '2023-01-06 15:12:07', '2023-01-06 16:45:06', '9', '2020-08-18 08:35:32', '2020-08-18 09:05:15', 'KELAS 2 | THORAX PA', 'normal', NULL, NULL);
+INSERT INTO `xray_workload` VALUES (9, '1.2.840.113564.10151014.20200817160556900170', '908959', 'waiting', NULL, NULL, NULL, NULL, '2020-08-17 16:07:02', '2020-08-17 16:36:32', 'KELAS 2 | THORAX AP', 'normal', NULL, NULL);
+INSERT INTO `xray_workload` VALUES (10, '1.2.840.113564.10151014.20200818032502487530', '908959', 'waiting', NULL, NULL, NULL, '9', '2020-08-17 16:07:02', '2020-08-17 16:36:32', 'KELAS 1 | THORAX / LAT', 'normal', NULL, NULL);
+INSERT INTO `xray_workload` VALUES (12, '1.2.40.0.13.1.4785472681996.06.21.2447671851', '1399710', 'waiting', NULL, NULL, NULL, NULL, '2019-10-15 08:34:21', '2020-06-11 15:56:33', 'KELAS 6 | LAT', 'normal', NULL, NULL);
+INSERT INTO `xray_workload` VALUES (25, '1.2.276.0.26.1.1.1.2.548725.20221011.14', '1010', 'waiting', NULL, NULL, NULL, NULL, '2020-07-04 09:33:17', '2022-11-02 11:46:36', 'KELAS 7 | THORAX PA', 'normal', NULL, NULL);
+INSERT INTO `xray_workload` VALUES (30, '1.2.276.0.26.1.1.1.2.548725.20221011.14123', 'R.RJ-4384/1', 'waiting', NULL, NULL, NULL, NULL, '2020-07-04 09:33:17', '2022-11-02 11:46:36', 'KELAS 5 | THORAX PA', 'normal', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for xray_workload_bhp
@@ -1156,4 +1194,3 @@ INSERT INTO `xray_workload_bhp` VALUES (2, '1.2.840.113564.10151014.202008171605
 INSERT INTO `xray_workload_bhp` VALUES (3, '1.2.840.113564.10151014.20200818032502487530', NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL, '90', '90', '2022-12-29 21:21:25', '2022-12-29 21:21:25');
 
 SET FOREIGN_KEY_CHECKS = 1;
-

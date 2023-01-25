@@ -1,4 +1,3 @@
-
 /*
  Navicat Premium Data Transfer
 
@@ -12,7 +11,7 @@
  Target Server Version : 50649
  File Encoding         : 65001
 
- Date: 08/01/2023 19:39:58
+ Date: 25/01/2023 11:31:00
 */
 
 SET NAMES utf8mb4;
@@ -34,6 +33,23 @@ CREATE TABLE `active_notification_unread`  (
 -- Records of active_notification_unread
 -- ----------------------------
 INSERT INTO `active_notification_unread` VALUES (1, 0, '2022-12-26 07:14:01', '2022-12-26 07:14:01');
+
+-- ----------------------------
+-- Table structure for active_update_simrs
+-- ----------------------------
+DROP TABLE IF EXISTS `active_update_simrs`;
+CREATE TABLE `active_update_simrs`  (
+  `pk` bigint(20) NOT NULL AUTO_INCREMENT,
+  `is_active` tinyint(4) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`pk`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of active_update_simrs
+-- ----------------------------
+INSERT INTO `active_update_simrs` VALUES (1, 1, '2022-12-28 15:08:47', '2022-12-28 15:08:47');
 
 -- ----------------------------
 -- Table structure for failed_jobs
@@ -635,4 +651,3 @@ CREATE TABLE `xray_workload_bhp`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 SET FOREIGN_KEY_CHECKS = 1;
-
