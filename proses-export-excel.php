@@ -24,6 +24,7 @@ $fromUpdatedTime = $fromUpdatedTime != null ? date("Y-m-d H:i", strtotime($fromU
 $toUpdatedTime = $_POST['to_workload'];
 $toUpdatedTime = $toUpdatedTime != null ? date("Y-m-d H:i", strtotime($toUpdatedTime)) : null;
 $modsInStudy = implode("','", $_POST['mods_in_study']);
+$modsInStudy = str_replace('\\', '\\\\', $modsInStudy);
 $priorityDoctor = implode("','", $_POST['priority_doctor']);
 $radiographerId = implode("','", $_POST['radiographer']);
 $depId = implode("','", $_POST['dep_id']);
