@@ -4087,8 +4087,30 @@ table.dataTable > thead .sorting::before, table.dataTable > thead .sorting::afte
   fill: #99a0b0;
 }
 
+.btn-ver{
+  position: absolute; 
+  right: 10px;
+  top:23px;  
+  width: 22%;
+  cursor: pointer;
+  z-index: 99;
+  box-shadow: none;
+}
 
+.btn-ver:hover{
+  box-shadow: none;
+}
 
+.btn-gen{
+  box-shadow: none;
+  margin-top: 4px;
+  width: 22%;
+  margin-left: 3px;
+}
+
+.btn-gen:hover{
+  box-shadow: none;
+}
 
 
   
