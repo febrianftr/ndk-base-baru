@@ -6,6 +6,7 @@ require '../model/query-base-workload-bhp.php';
 require '../model/query-base-order.php';
 require '../model/query-base-study.php';
 require '../model/query-base-patient.php';
+require '../viewer-all.php';
 session_start();
 
 $uid = $_GET["uid"];
@@ -44,6 +45,7 @@ $num_series = $row['num_series'];
 $num_instances = $row['num_instances'];
 $pat_id = $row['pat_id'];
 $no_foto = $row['no_foto'];
+$acc = $row['acc'];
 $address = $row['address'];
 $dep_id = $row['dep_id'];
 $name_dep = $row['name_dep'];
@@ -61,6 +63,7 @@ $priority = $row['priority'];
 $spc_needs = $row['spc_needs'];
 $id_payment = $row['id_payment'];
 $payment = $row['payment'];
+$fromorder = $row['fromorder'];
 $film_small = $row['film_small'];
 $film_medium = $row['film_medium'];
 $film_large = $row['film_large'];
@@ -70,6 +73,12 @@ $film_reject_large = $row['film_reject_large'];
 $re_photo = $row['re_photo'];
 $kv = $row['kv'];
 $mas = $row['mas'];
+
+if ($fromorder == 'SIMRS' && $accession_no == $acc || $fromorder == 'simrs' && $accession_no == $acc) {
+	$simrs = SIMRS;
+} else {
+	$simrs = '';
+}
 
 if ($_SESSION['level'] == "radiographer") {
 ?>
@@ -91,14 +100,32 @@ if ($_SESSION['level'] == "radiographer") {
 							<center>
 								<h1>Edit Data</h1>
 							</center>
+							<form method="post" id="post-acc-number">
+								<button class="btn buttonsearch2 waves-effect waves-light" type="submit" id="submit" name="submit">
+									<span class="spinner-grow spinner-grow-sm loading" role="status" aria-hidden="true"></span>
+									<p class="loading-acc" style="display:inline;">Loading...</p>
+									<p class="ubah-acc" style="display:inline;">Verify</p>
+								</button>
+							</form>
 							<form method="post" id="edit-workload">
 								<div style="margin: 0px 0px;" class="row back-search">
 									<div class="form-update-workload col-md-4">
+										<!-- <ul>
+											<li>
+												<label for="uid_simrs">uid simrs</label><br>
+												<input class="not-allowed" type="text" value="<?= $uid ?>" readonly>
+											</li>
+											<li>
+												<label for="uid_alat">uid modality</label><br>
+												<input class="not-allowed" type="text" value="<?= $study_iuid ?>" readonly>
+											</li>
+										</ul> -->
 										<input type="hidden" name="study_iuid" id="study_iuid" value="<?= $uid; ?>"></input>
 										<ul>
 											<li>
 												<label for="accession_no">Accession Number</label><br>
-												<input type="text" id="accession_no" value="<?= $accession_no; ?>" name="accession_no">
+												<input type="text" style="width: 50% !important;" id="accession_no" value="<?= $accession_no; ?>" name="accession_no">
+												<a href="#" id="generate">Generate</a>
 											</li>
 											<li>
 												<label for="no_foto">No Foto</label><br>
@@ -327,7 +354,7 @@ if ($_SESSION['level'] == "radiographer") {
 			</div>
 		</div>
 		<?php include('script-footer.php'); ?>
-		<script src="../js/proses/update-workload.js?v=12"></script>
+		<script src="../js/proses/update-workload.js?v=15"></script>
 		<script src="js/bootstrap-select.min.js"></script>
 		<script>
 			$(document).ready(function() {
