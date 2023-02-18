@@ -9,7 +9,7 @@
     <script type="text/javascript" src="../js/mdb.min.js"></script>
     <script src="js/script.js"></script>
     <script src="navbar.js"></script>
-    <script src="ckeditor/ckeditor.js?v=5"></script>
+    <script src="ckeditor/ckeditor.js?v=<?= $random; ?>"></script>
     <script src="js/jquery-ui.js"></script>
     <script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="../js/dataTables.bootstrap4.min.js"></script>
