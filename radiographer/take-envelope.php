@@ -51,7 +51,7 @@ if ($_SESSION['level'] == "radiographer") {
 						<div class="col-md-6 box-change-dokter table-box">
 							<form method="post" id="take-envelope">
 								<div class="radiobtn1">
-									<div class='alert alert-info' role='alert'>Hasil Expertise Pasien <?= defaultValue($row_take_envelope['pat_name']); ?>, modalitas <?= defaultValue($row_take_envelope['mods_in_study']); ?>, Pemeriksaan <?= defaultValue($row_take_envelope['study_desc_pacsio']); ?></div>
+									<div class='alert alert-info' role='alert'>Hasil Expertise Pasien <?= removeCharacter(defaultValue($row_take_envelope['pat_name'])); ?>, modalitas <?= defaultValue($row_take_envelope['mods_in_study']); ?>, Pemeriksaan <?= defaultValue($row_take_envelope['study_desc_pacsio']); ?></div>
 									<input type="hidden" id="study_iuid" name="study_iuid" value="<?= $uid; ?>">
 									<label for="name">Nama</label><br>
 									<input type="text" class="form-control" name="name" id="name" value="<?= $row_take_envelope['name'] ?? '' ?>">
