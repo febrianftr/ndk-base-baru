@@ -22,7 +22,7 @@ if ($_SESSION['level'] == "radiographer") {
     </head>
 
     <body>
-        <?php include('sidebar.php'); ?>
+        <?php include('../sidebar-index.php'); ?>
         <div class="container" id="main">
             <div class="row">
 

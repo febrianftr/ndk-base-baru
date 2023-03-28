@@ -15,7 +15,7 @@ if ($_SESSION['level'] == "refferal") {
 
   <body>
 
-    <?php include('sidebar.php'); ?>
+    <?php include('../sidebar-index.php'); ?>
     <div class="container-fluid" id="main">
       <div class="row">
 

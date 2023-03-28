@@ -29,7 +29,7 @@ if ($_SESSION['level'] == "radiographer") {
     </head>
 
     <body>
-        <?php include('sidebar.php'); ?><br>
+        <?php include('../sidebar-index.php'); ?><br>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb1 breadcrumb">
                 <li class="breadcrumb-item"><a href="index.php"><?= $lang['home'] ?></a></li>

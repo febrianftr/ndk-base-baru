@@ -20,7 +20,7 @@ if ($_SESSION['level'] == "radiology") {
 
   <body>
 
-    <?php include('sidebar.php'); ?>
+    <?php include('../sidebar-index.php'); ?>
     <div class="container-fluid" id="main">
       <?php include('../template-index.php') ?>
     </div>
