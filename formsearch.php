@@ -47,10 +47,23 @@ $date2 = date('d-m-Y 23:59');
                         <i class="ic-search2 fas fa-search"></i>
                         <input class="search-input-workload" style="color: black; width: 25%;" type="text" name="mrn" id="mrn" placeholder="<?= $lang['input_mrn'] ?>">
                     </span>
-                    <span class="search-icon">
-                        <i class="ic-search2 fas fa-search"></i>
-                        <input class="search-input-workload" style="color: black; width: 25%;" type="text" name="patientid" id="patientid" placeholder="Input No Foto">
-                    </span>
+                    <!-- jika login radiology mencari berdasarkan fill, else mencari berdasarkan no foto -->
+                    <?php if ($level == 'radiology') { ?>
+                        <span class="search-icon">
+                            <i class="ic-search2 fas fa-search"></i>
+                            <input class="search-input-workload" style="color: black; width: 25%;" type="text" name="fill" id="fill" placeholder="Input Expertise">
+                        </span>
+                    <?php } else if ($level == 'radiographer' || $level == 'refferal') { ?>
+                        <span class="search-icon">
+                            <i class="ic-search2 fas fa-search"></i>
+                            <input class="search-input-workload" style="color: black; width: 25%;" type="text" name="patientid" id="patientid" placeholder="Input No Foto">
+                        </span>
+                    <?php } else { ?>
+                        <span class="search-icon">
+                            <i class="ic-search2 fas fa-search"></i>
+                            <input class="search-input-workload" style="color: black; width: 25%;" type="text" name="patientid" id="patientid" placeholder="Input No Foto">
+                        </span>
+                    <?php } ?>
                 </div>
             </div>
         </div>
