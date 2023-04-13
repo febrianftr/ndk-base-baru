@@ -108,6 +108,7 @@ include '../contract-service.php';
             
             <!-- =================END OF SIDEBAR POLI====================== -->
             <?php if($_SESSION['level'] == 'refferal') {?>
+                <script type="text/javascript" src="js/jquery.min.js"></script>
             <li id="query1">
                 <a href="workload.php">
                     <i class="fa fa-file-alt fa-lg"></i> Query
