@@ -1,5 +1,5 @@
 <?php
-include '../contract-service.php';
+// include '../contract-service.php';
 ?>
 
 <!-- ------loader------ -->
@@ -51,72 +51,72 @@ include '../contract-service.php';
             </li>
 
             <!-- =================SIDEBAR RADIOGRAPHER====================== -->
-            <?php if($_SESSION['level'] == 'radiographer') {?>
-            <li data-toggle="collapse" data-target="#products1" class="collapsed">
-                <a href="#" class="products1"><i class="fa fa-user fa-lg"></i> <?= $lang['patient_order'] ?> <label class="products1-arrow"><span class="arrow"></span></label></a>
-            </li>
-            <ul class="sub-menu1 collapse" id="products1">
-                <li id="regist1"><a href="registration.php"><?= $lang['registration'] ?></a></li>
-                <li id="order3"><a href="order2.php"><?= $lang['all_order'] ?></a></li>
-                <li id="exam3"><a href="exam2.php"><?= $lang['examroom'] ?></a></li>
-            </ul>
+            <?php if ($_SESSION['level'] == 'radiographer') { ?>
+                <li data-toggle="collapse" data-target="#products1" class="collapsed">
+                    <a href="#" class="products1"><i class="fa fa-user fa-lg"></i> <?= $lang['patient_order'] ?> <label class="products1-arrow"><span class="arrow"></span></label></a>
+                </li>
+                <ul class="sub-menu1 collapse" id="products1">
+                    <li id="regist1"><a href="registration.php"><?= $lang['registration'] ?></a></li>
+                    <li id="order3"><a href="order2.php"><?= $lang['all_order'] ?></a></li>
+                    <li id="exam3"><a href="exam2.php"><?= $lang['examroom'] ?></a></li>
+                </ul>
 
-            <li data-toggle="collapse" data-target="#service" class="collapsed">
-                <a href="#" class="services"><i class="fa fa-file-alt fa-lg"></i> <?= $lang['report'] ?><label class="services-arrow"><span class="arrow"></span></label></a>
-            </li>
-            <ul class="sub-menu1 collapse" id="service">
-                <li id="workload1"><a href="workload.php"><?= $lang['workload'] ?></a></li>
-                <li id="report1"><a href="report.php"><?= $lang['download_excel'] ?></a></li>
-                <li id="uploadexcel1"><a href="uploadexcel.php"><?= $lang['backup_excel'] ?></a></li>
-                <li id="downloadexcel1"><a href="downloadexcel.php">Storage Excel</a></li>
-                <li id="chart2"><a href="chart.php"><?= $lang['chart'] ?></a></li>
-            </ul>
+                <li data-toggle="collapse" data-target="#service" class="collapsed">
+                    <a href="#" class="services"><i class="fa fa-file-alt fa-lg"></i> <?= $lang['report'] ?><label class="services-arrow"><span class="arrow"></span></label></a>
+                </li>
+                <ul class="sub-menu1 collapse" id="service">
+                    <li id="workload1"><a href="workload.php"><?= $lang['workload'] ?></a></li>
+                    <li id="report1"><a href="report.php"><?= $lang['download_excel'] ?></a></li>
+                    <li id="uploadexcel1"><a href="uploadexcel.php"><?= $lang['backup_excel'] ?></a></li>
+                    <li id="downloadexcel1"><a href="downloadexcel.php">Storage Excel</a></li>
+                    <li id="chart2"><a href="chart.php"><?= $lang['chart'] ?></a></li>
+                </ul>
 
-            <li id="storage1">
-                <a href="storage.php">
-                    <i class="fa fa-database fa-lg"></i> <?= $lang['storage'] ?>
-                </a>
-            </li>
+                <li id="storage1">
+                    <a href="storage.php">
+                        <i class="fa fa-database fa-lg"></i> <?= $lang['storage'] ?>
+                    </a>
+                </li>
             <?php } ?>
             <!-- =================END OF SIDEBAR RADIOGRAPHER====================== -->
-            
+
             <!-- =================SIDEBAR DOKTER RADIOLOGI====================== -->
-            <?php if($_SESSION['level'] == 'radiology') {?>
-            <li id="worklist1">
-                <a href="dicom.php">
-                    <i class="fas fa-user-edit fa-lg"></i> Worklist
-                </a>
-            </li>
+            <?php if ($_SESSION['level'] == 'radiology') { ?>
+                <li id="worklist1">
+                    <a href="dicom.php">
+                        <i class="fas fa-user-edit fa-lg"></i> Worklist
+                    </a>
+                </li>
 
-            <li data-toggle="collapse" data-target="#service" class="collapsed">
-                <a href="#" class="products1"><i class="fa fa-file-alt fa-lg"></i> <?= $lang['report'] ?> <label class="products1-arrow"><span class="arrow"></label></span></a>
-            </li>
-            <ul class="sub-menu1 collapse" id="service">
-                <li id="workload1"><a href="workload.php">Expertise Approved</a></li>
-                <li id="report1"><a href="report.php"><?= $lang['download_excel'] ?></a></li>
-            </ul>
+                <li data-toggle="collapse" data-target="#service" class="collapsed">
+                    <a href="#" class="products1"><i class="fa fa-file-alt fa-lg"></i> <?= $lang['report'] ?> <label class="products1-arrow"><span class="arrow"></label></span></a>
+                </li>
+                <ul class="sub-menu1 collapse" id="service">
+                    <li id="workload1"><a href="workload.php">Expertise Approved</a></li>
+                    <li id="report1"><a href="report.php"><?= $lang['download_excel'] ?></a></li>
+                </ul>
 
-            <li data-toggle="collapse" data-target="#template" class="collapsed">
-                <a href="#" class="services"><i class="fas fa-file-medical fa-lg"></i> Template Expertise <label class="services-arrow"><span class="arrow"></label></span></a>
-            </li>
-            <ul class="sub-menu1 collapse" id="template">
-                <li id="newt1"><a href="new_template.php">New Template</a></li>
-                <li id="viewt1"><a href="view_template.php">View Template</a></li>
-            </ul>
-            <?php }?>
+                <li data-toggle="collapse" data-target="#template" class="collapsed">
+                    <a href="#" class="services"><i class="fas fa-file-medical fa-lg"></i> Template Expertise <label class="services-arrow"><span class="arrow"></label></span></a>
+                </li>
+                <ul class="sub-menu1 collapse" id="template">
+                    <li id="newt1"><a href="new_template.php">New Template</a></li>
+                    <li id="viewt1"><a href="view_template.php">View Template</a></li>
+                </ul>
+            <?php } ?>
             <!-- =================END OF SIDEBAR DOKTER RADIOLOGI====================== -->
-            
+
             <!-- =================END OF SIDEBAR POLI====================== -->
-            <?php if($_SESSION['level'] == 'refferal') {?>
+            <?php if ($_SESSION['level'] == 'refferal') { ?>
                 <script type="text/javascript" src="js/jquery.min.js"></script>
-            <li id="query1">
-                <a href="workload.php">
-                    <i class="fa fa-file-alt fa-lg"></i> Query
-                </a>
-            </li>
-            <?php }?>
+                <li id="query1">
+                    <a href="workload.php">
+                        <i class="fa fa-file-alt fa-lg"></i> Query
+                    </a>
+                </li>
+            <?php } ?>
             <!-- =================END OF SIDEBAR DOKTER RADIOLOGI====================== -->
-            
+
             <li id="settings1">
                 <a href="settings.php">
                     <i class="fa fa-wrench fa-lg"></i> <?= $lang['settings'] ?>
