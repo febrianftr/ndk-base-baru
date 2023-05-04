@@ -40,7 +40,7 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 	<html>
 
 	<head>
-		<title>Insert Departmen</title>
+		<title>Insert Payment</title>
 		<?php include('head.php'); ?>
 	</head>
 

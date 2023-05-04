@@ -2,7 +2,7 @@
 require 'function_dokter.php';
 session_start();
 if (isset($_SESSION["username"]))
-	$data_departmen = mysqli_query(
+	$data_payment = mysqli_query(
 		$conn,
 		"SELECT * FROM xray_payment_insurance"
 	);
@@ -50,7 +50,7 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 										</tr>
 									</thead>
 									<?php $i = 1; ?>
-									<?php foreach ($data_departmen as $row) { ?>
+									<?php foreach ($data_payment as $row) { ?>
 										<tr>
 											<td><?= $i ?></td>
 											<td><?= $row["id_payment"]; ?></td>
