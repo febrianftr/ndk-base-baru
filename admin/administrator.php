@@ -413,7 +413,7 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 													</a>
 												</li>
 												<li class="li-admin">
-													<a href="http://<?= $_SERVER['SERVER_NAME']; ?>:8000/kop-surat" frameborder="0"></iframe>">
+													<a href="http://<?= $_SERVER['SERVER_NAME']; ?>:8000/kop-surat" frameborder="0"></iframe>
 														<img style="width: 100%;" src="../image/view.png">
 														<h5><?= $lang['view'] ?></h5>
 													</a>
