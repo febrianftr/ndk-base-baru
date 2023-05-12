@@ -21,11 +21,11 @@ $row = mysqli_fetch_assoc(mysqli_query(
 	WHERE study_iuid = '$uid'"
 ));
 
-$pat_name = $row['pat_name'];
-$pat_id = $row['pat_id'];
-$pat_sex = $row['pat_sex'];
-$mods_in_study = $row['mods_in_study'];
-$study_desc = $row['study_desc'];
+$pat_name = defaultValue($row['pat_name']);
+$pat_id = defaultValue($row['pat_id']);
+$pat_sex = styleSex($row['pat_sex']);
+$mods_in_study = defaultValue($row['mods_in_study']);
+$study_desc = defaultValue($row['study_desc']);
 
 if ($_SESSION['level'] == "radiographer") {
 ?>
@@ -59,7 +59,7 @@ if ($_SESSION['level'] == "radiographer") {
 												<td>UID : <?= $uid ?></td>
 											</tr>
 											<tr>
-												<td>Nama Pasien : <?= $pat_name ?></td>
+												<td>Nama Pasien : <?= removeCharacter($pat_name) ?></td>
 											</tr>
 											<tr>
 												<td>MRN : <?= $pat_id ?></td>
