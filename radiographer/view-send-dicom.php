@@ -62,7 +62,7 @@ if ($_SESSION['level'] == "radiographer") {
 															<td>UID </td> <td>&nbsp;&nbsp;: <?= $uid ?></td>
 														</tr>
 														<tr>
-															<td>Nama Pasien </td> <td>&nbsp;&nbsp;: <?= $pat_name ?></td>
+															<td>Nama Pasien </td> <td>&nbsp;&nbsp;: <?= removeCharacter($pat_name) ?></td>
 														</tr>
 														<tr>
 															<td>MRN </td><td>&nbsp;&nbsp;: <?= $pat_id ?></td>
@@ -88,26 +88,6 @@ if ($_SESSION['level'] == "radiographer") {
 										<hr>
 											<h6>Pilih AET Station yang akan dikirim</h6>
 
-										<table>
-											<tr>
-												<td>UID : <?= $uid ?></td>
-											</tr>
-											<tr>
-												<td>Nama Pasien : <?= removeCharacter($pat_name) ?></td>
-											</tr>
-											<tr>
-												<td>MRN : <?= $pat_id ?></td>
-											</tr>
-											<tr>
-												<td>Jenis Kelamin : <?= $pat_sex ?></td>
-											</tr>
-											<tr>
-												<td>Pemeriksaan : <?= $study_desc ?></td>
-											</tr>
-											<tr>
-												<td>Modality : <?= $mods_in_study ?></td>
-											</tr>
-										</table>
 										
 										<hr>
 										<?php
