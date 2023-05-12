@@ -88,7 +88,7 @@ define('IPIVIEWLAST', '" target="_blank"><span class="btn rgba-stylish-slight bt
 
 // send dicom
 define('SENDDICOMFIRST', '<a title="" href="view-send-dicom.php?uid=');
-define('SENDDICOMLAST', '"><span class="btn rgba-stylish-slight darken-1 btn-inti2"></span></a>');
+define('SENDDICOMLAST', '"><span class="btn rgba-stylish-slight darken-1 btn-inti2"><img src="../image/send-dicom.svg" data-toggle="tooltip" title="Send image to" style="width: 100%;"></span></a>');
 
 // inobitec
 define('INOBITECFIRST', '<a href="#" class="ahref-edit" onclick="inobitec(');
