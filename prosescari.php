@@ -234,7 +234,7 @@ while ($row = mysqli_fetch_array($result)) {
     if ($status != '-') {
       $level = EDITPASIENFIRST . $study_iuid . EDITPASIENLAST .
         CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workload_status . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
-        OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
+        OHIFOLDFIRST . $study_iuid . OHIFOLDLAST . SENDDICOMFIRST . $study_iuid . SENDDICOMLAST .
         GETEXPERTISEFIRST . $name_envelope . ' ' . defaultValueDateTime($created_at_envelope) . $href_get_expertise . GETEXPERTISELAST . $icon_get_expertise . GETEXPERTISEVERYLAST;
       // TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST;
       // DELETEFIRST . $study_iuid . DELETELAST;
