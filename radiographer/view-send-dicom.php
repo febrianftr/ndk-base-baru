@@ -1,9 +1,31 @@
 <?php
-
-require '../js/proses/function.php';
+require '../koneksi/koneksi.php';
 require '../default-value.php';
+require '../model/query-base-study.php';
+require '../model/query-base-patient.php';
+
 session_start();
 $uid = $_GET['uid'];
+
+$row = mysqli_fetch_assoc(mysqli_query(
+	$conn_pacsio,
+	"SELECT 
+	pat_id,
+	pat_name,
+	pat_sex,
+	study_desc,
+	mods_in_study
+	FROM $table_patient
+	JOIN $table_study
+	ON patient.pk = study.patient_fk
+	WHERE study_iuid = '$uid'"
+));
+
+$pat_name = $row['pat_name'];
+$pat_id = $row['pat_id'];
+$pat_sex = $row['pat_sex'];
+$mods_in_study = $row['mods_in_study'];
+$study_desc = $row['study_desc'];
 
 if ($_SESSION['level'] == "radiographer") {
 ?>
@@ -28,11 +50,30 @@ if ($_SESSION['level'] == "radiographer") {
 						<div class="col-md-6 box-change-dokter table-box">
 							<form method="post" id="send-dicom">
 								<div class="radiobtn1">
-									<h6>Pilih AET yang akan dikirim</h6>
+									<h6>Pilih AET Station yang akan dikirim</h6>
 									<hr>
 									<form method="POST" id="send-dicom" action="../send-dicom.php">
-										<input type="hidden" name="uid" value="<?= $_GET['uid']; ?>" id="uid">
-										<span>UID : <?= $_GET['uid']; ?></span>
+										<input type="hidden" name="uid" value="<?= $uid ?>" id="uid">
+										<table>
+											<tr>
+												<td>UID : <?= $uid ?></td>
+											</tr>
+											<tr>
+												<td>Nama Pasien : <?= $pat_name ?></td>
+											</tr>
+											<tr>
+												<td>MRN : <?= $pat_id ?></td>
+											</tr>
+											<tr>
+												<td>Jenis Kelamin : <?= $pat_sex ?></td>
+											</tr>
+											<tr>
+												<td>Pemeriksaan : <?= $study_desc ?></td>
+											</tr>
+											<tr>
+												<td>Modality : <?= $mods_in_study ?></td>
+											</tr>
+										</table>
 										<hr>
 										<?php
 										$sql = mysqli_query(
@@ -45,6 +86,7 @@ if ($_SESSION['level'] == "radiographer") {
 											</label>
 										<?php } ?>
 										<hr>
+										<a class="btn btn-info btn-lg" href="workload.php" style="border-radius: 5px; box-shadow:none">Back</a>
 										<button class="btn btn-info btn-lg" type="submit" id="submit" name="submit" style="border-radius: 5px; box-shadow:none">
 											<span class="spinner-grow spinner-grow-sm loading" role="status" aria-hidden="true"></span>
 											<p class="loading" style="display:inline;">Loading...</p>
