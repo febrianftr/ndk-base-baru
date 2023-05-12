@@ -21,11 +21,11 @@ $row = mysqli_fetch_assoc(mysqli_query(
 	WHERE study_iuid = '$uid'"
 ));
 
-$pat_name = $row['pat_name'];
-$pat_id = $row['pat_id'];
-$pat_sex = $row['pat_sex'];
-$mods_in_study = $row['mods_in_study'];
-$study_desc = $row['study_desc'];
+$pat_name = defaultValue($row['pat_name']);
+$pat_id = defaultValue($row['pat_id']);
+$pat_sex = styleSex($row['pat_sex']);
+$mods_in_study = defaultValue($row['mods_in_study']);
+$study_desc = defaultValue($row['study_desc']);
 
 if ($_SESSION['level'] == "radiographer") {
 ?>
@@ -53,6 +53,7 @@ if ($_SESSION['level'] == "radiographer") {
 								
 									<form method="POST" id="send-dicom" action="../send-dicom.php">
 										<input type="hidden" name="uid" value="<?= $uid ?>" id="uid">
+<<<<<<< HEAD
 										<div class="container">
 											<div class="row">
 												<div class="col-md-7">
@@ -86,6 +87,28 @@ if ($_SESSION['level'] == "radiographer") {
 
 										<hr>
 											<h6>Pilih AET Station yang akan dikirim</h6>
+=======
+										<table>
+											<tr>
+												<td>UID : <?= $uid ?></td>
+											</tr>
+											<tr>
+												<td>Nama Pasien : <?= removeCharacter($pat_name) ?></td>
+											</tr>
+											<tr>
+												<td>MRN : <?= $pat_id ?></td>
+											</tr>
+											<tr>
+												<td>Jenis Kelamin : <?= $pat_sex ?></td>
+											</tr>
+											<tr>
+												<td>Pemeriksaan : <?= $study_desc ?></td>
+											</tr>
+											<tr>
+												<td>Modality : <?= $mods_in_study ?></td>
+											</tr>
+										</table>
+>>>>>>> 2b2ab837cc4406e647cdf5667acaf821970f908d
 										<hr>
 										<?php
 										$sql = mysqli_query(
