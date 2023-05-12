@@ -53,7 +53,7 @@ if ($_SESSION['level'] == "radiographer") {
 								
 									<form method="POST" id="send-dicom" action="../send-dicom.php">
 										<input type="hidden" name="uid" value="<?= $uid ?>" id="uid">
-<<<<<<< HEAD
+
 										<div class="container">
 											<div class="row">
 												<div class="col-md-7">
@@ -87,7 +87,7 @@ if ($_SESSION['level'] == "radiographer") {
 
 										<hr>
 											<h6>Pilih AET Station yang akan dikirim</h6>
-=======
+
 										<table>
 											<tr>
 												<td>UID : <?= $uid ?></td>
@@ -108,7 +108,7 @@ if ($_SESSION['level'] == "radiographer") {
 												<td>Modality : <?= $mods_in_study ?></td>
 											</tr>
 										</table>
->>>>>>> 2b2ab837cc4406e647cdf5667acaf821970f908d
+										
 										<hr>
 										<?php
 										$sql = mysqli_query(
