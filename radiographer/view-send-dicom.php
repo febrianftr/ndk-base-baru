@@ -50,30 +50,45 @@ if ($_SESSION['level'] == "radiographer") {
 						<div class="col-md-6 box-change-dokter table-box">
 							<form method="post" id="send-dicom">
 								<div class="radiobtn1">
-									<h6>Pilih AET Station yang akan dikirim</h6>
-									<hr>
+								
 									<form method="POST" id="send-dicom" action="../send-dicom.php">
 										<input type="hidden" name="uid" value="<?= $uid ?>" id="uid">
-										<table>
-											<tr>
-												<td>UID : <?= $uid ?></td>
-											</tr>
-											<tr>
-												<td>Nama Pasien : <?= removeCharacter($pat_name) ?></td>
-											</tr>
-											<tr>
-												<td>MRN : <?= $pat_id ?></td>
-											</tr>
-											<tr>
-												<td>Jenis Kelamin : <?= $pat_sex ?></td>
-											</tr>
-											<tr>
-												<td>Pemeriksaan : <?= $study_desc ?></td>
-											</tr>
-											<tr>
-												<td>Modality : <?= $mods_in_study ?></td>
-											</tr>
-										</table>
+
+										<div class="container">
+											<div class="row">
+												<div class="col-md-7">
+													<table>
+														<tr>
+															<td>UID </td> <td>&nbsp;&nbsp;: <?= $uid ?></td>
+														</tr>
+														<tr>
+															<td>Nama Pasien </td> <td>&nbsp;&nbsp;: <?= removeCharacter($pat_name) ?></td>
+														</tr>
+														<tr>
+															<td>MRN </td><td>&nbsp;&nbsp;: <?= $pat_id ?></td>
+														</tr>
+													</table>
+												</div>
+												<div class="col-md-5">	
+													<table>
+														<tr>
+														<td>Jenis Kelamin </td><td>&nbsp;&nbsp;: <?= $pat_sex ?></td>
+														</tr>
+														<tr>
+															<td>Pemeriksaan </td><td>&nbsp;&nbsp;: <?= $study_desc ?></td>
+														</tr>
+														<tr>
+															<td>Modality </td><td>&nbsp;&nbsp;: <?= $mods_in_study ?></td>
+														</tr>
+													</table>
+												</div>
+											</div>
+										</div>
+
+										<hr>
+											<h6>Pilih AET Station yang akan dikirim</h6>
+
+										
 										<hr>
 										<?php
 										$sql = mysqli_query(
