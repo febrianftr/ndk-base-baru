@@ -121,22 +121,30 @@ if ($_SERVER['SERVER_NAME'] == $hostname['ip_publik']) {
     define('OHIFNEWWORKLISTLAST', "$ohif_large");
 }
 
+
+function ohifurl($port)
+{
+    return "http://$_SERVER[SERVER_NAME]:$port/viewer/";
+}
 // OHIF LAMA
 if ($_SERVER['SERVER_NAME'] == $hostname['ip_publik']) {
     // jika menggunakan ip publik
     // jika menggunakan ohif lama icon (small)
-    define('OHIFOLDFIRST', '<a href="http://' . $_SERVER['SERVER_NAME'] . ':92/viewer/');
+    $url = ohifurl(92);
+    define('OHIFOLDFIRST', '<a href="' . $url . '');
     define('OHIFOLDLAST', "$ohif_small");
     // jika menggunakan ohif lama icon(large)
-    define('OHIFOLDWORKLISTFIRST', '<a href="http://' . $_SERVER['SERVER_NAME'] . ':92/viewer/');
+    define('OHIFOLDWORKLISTFIRST', '<a data-toggle="collapse" href="#ohif" role="button" aria-expanded="false" aria-controls="ohif');
     define('OHIFOLDWORKLISTLAST', "$ohif_large");
 } else {
     // jika menggunakan ip lokal
     // jika menggunakan ohif lama icon (small)
-    define('OHIFOLDFIRST', '<a href="http://' . $_SERVER['SERVER_NAME'] . ':91/viewer/');
+    $url = ohifurl(91);
+    define('OHIFOLDFIRST', '<a href="' . $url . '');
     define('OHIFOLDLAST', "$ohif_small");
+
     // jika menggunakan ohif lama icon(large)
-    define('OHIFOLDWORKLISTFIRST', '<a href="http://' . $_SERVER['SERVER_NAME'] . ':91/viewer/');
+    define('OHIFOLDWORKLISTFIRST', '<a data-toggle="collapse" href="#ohif" role="button" aria-expanded="false" aria-controls="ohif');
     define('OHIFOLDWORKLISTLAST', "$ohif_large");
 }
 
