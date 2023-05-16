@@ -1,6 +1,8 @@
 <?php
 
 require '../koneksi/koneksi.php';
+include "phpqrcode/qrlib.php";
+
 //untuk menampilkan
 function query($query)
 {
@@ -55,6 +57,7 @@ function insert_workload($value)
 	$fill = addslashes($value['fill']);
 	$username = $value['username'];
 	$priority_doctor = $value['priority_doctor'];
+	$hostname = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM xray_hostname_publik"));
 
 	$dokter_radiologi = mysqli_fetch_assoc(mysqli_query(
 		$conn,
@@ -81,6 +84,8 @@ function insert_workload($value)
 		WHERE uid = '$uid'
 		"
 	);
+
+	QRcode::png("$hostname[ip_publik]:8000/pasien/$uid", "phpqrcode/ttddokter/$uid.png", "L", 4, 4);
 
 	return mysqli_affected_rows($conn);
 }
