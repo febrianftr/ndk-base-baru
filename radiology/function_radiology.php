@@ -80,7 +80,9 @@ function insert_workload($value)
 		xray_workload.status = 'approved', 
 		fill = '$fill',
 		approved_at = NOW(),
-		priority_doctor = '$priority_doctor'
+		priority_doctor = '$priority_doctor',
+		signature = '$signature',
+		signature_datetime = NOW()
 		WHERE uid = '$uid'
 		"
 	);
