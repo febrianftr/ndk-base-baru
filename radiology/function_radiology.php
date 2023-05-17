@@ -57,7 +57,9 @@ function insert_workload($value)
 	$fill = addslashes($value['fill']);
 	$username = $value['username'];
 	$priority_doctor = $value['priority_doctor'];
+	$signature = $uid . ".png";
 	$hostname = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM xray_hostname_publik"));
+	$link = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM rename_link"));
 
 	$dokter_radiologi = mysqli_fetch_assoc(mysqli_query(
 		$conn,
@@ -87,7 +89,7 @@ function insert_workload($value)
 		"
 	);
 
-	QRcode::png("$hostname[ip_publik]:8000/pasien/$uid", "phpqrcode/ttddokter/$uid.png", "L", 4, 4);
+	QRcode::png("$hostname[ip_publik]:8089/$link[link_simrs_expertise]/pasien.php?uid=$uid", "phpqrcode/ttddokter/$uid.png", "L", 4, 4);
 
 	return mysqli_affected_rows($conn);
 }
