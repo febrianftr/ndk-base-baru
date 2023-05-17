@@ -41,7 +41,7 @@ $hostname = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM xray_hostname_
                 <tr>
                     <td>Nama</td>
                     <td>:</td>
-                    <td><?= defaultValue($study['pat_name']); ?></td>
+                    <td><?= removeCharacter(defaultValue($study['pat_name'])); ?></td>
                 </tr>
                 <tr>
                     <td>Tgl Lahir</td>
