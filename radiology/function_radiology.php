@@ -89,7 +89,11 @@ function insert_workload($value)
 		"
 	);
 
+	// untuk xampp
 	QRcode::png("http://$hostname[ip_publik]:8089/$link[link_simrs_expertise]/pasien.php?uid=$uid", "phpqrcode/ttddokter/$uid.png", "L", 4, 4);
+
+	// untuk laravel
+	// QRcode::png("http://$hostname[ip_publik]:8000/pasien/$uid", "phpqrcode/ttddokter/$uid.png", "L", 4, 4);
 
 	return mysqli_affected_rows($conn);
 }
