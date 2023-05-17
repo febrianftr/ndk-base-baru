@@ -89,7 +89,7 @@ function insert_workload($value)
 		"
 	);
 
-	QRcode::png("http://' . $hostname[ip_publik]:8089/$link[link_simrs_expertise]/pasien.php?uid=$uid", "phpqrcode/ttddokter/$uid.png", "L", 4, 4);
+	QRcode::png("http://$hostname[ip_publik]:8089/$link[link_simrs_expertise]/pasien.php?uid=$uid", "phpqrcode/ttddokter/$uid.png", "L", 4, 4);
 
 	return mysqli_affected_rows($conn);
 }
