@@ -9,6 +9,7 @@ require '../random.php';
 <link rel="stylesheet" href="css/form-css.css?v=<?= $random; ?>">
 <link rel="stylesheet" href="css/loading.css">
 <link rel="stylesheet" href="css/ionicons.min.css">
+<link rel="stylesheet" href="fontawesome/css/all.min.css">
 <!-- <link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap.css"> -->
 
 
