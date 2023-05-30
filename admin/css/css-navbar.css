@@ -1105,6 +1105,55 @@ h4{
   padding-top: 20px;
 }
 
+
+
+
+.box-admin1{
+  color: #fff; 
+  padding: 10px 0; 
+  border-radius: 5px;
+}
+
+.box-title-admin{
+  background-color: #1f69b7; 
+  padding: 11px 8px 31px 8px;
+  border-radius: 8px;
+}
+
+.box-title-admin h3{
+  font-size: 1.3vw;
+}
+
+
+
+.btn-add-admin{
+  border-radius: 0; 
+  box-shadow: none; 
+  background-color: cadetblue; 
+  border: none; 
+  width: 100%; 
+  padding: 7px 0;
+  display: block;
+  text-align: center;
+  color: inherit;
+  font-size: 20px;
+}
+
+.btn-view-admin{
+  border-radius: 0; 
+  box-shadow: none; 
+  background-color: #FF731D; 
+  border: none; 
+  width: 100%; 
+  padding: 7px 0;
+  display: block;
+  text-align: center;
+  color: inherit;
+  font-size: 20px;
+}
+
+
+
 @media only screen and (max-width: 991px) {
   .search-workload5{
     height: 290px;
@@ -1113,13 +1162,16 @@ h4{
   height: 82%;
   padding: 10px;
 }
+.box-title-admin h3{
+  font-size: 25px;
 }
-
+}
 
 @media only screen and (max-width: 1148px) {
   .search_chart2{
   padding-top: 0px;
 }
+
 }
 
 .aetitle-box{
@@ -1150,7 +1202,8 @@ rgba(0,0,0,.05);
   .home-box3{
     padding: 78px 29px 77px 59px;
     text-align: left;
-}
+  }
+  
 }
 
 .home-box3{

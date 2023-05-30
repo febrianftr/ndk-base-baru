@@ -127,43 +127,7 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 					
 
 					<style>
-						.box-admin1{
-							color: #fff; 
-							padding: 10px 0; 
-							border-radius: 5px;
-						}
-
-						.box-title-admin{
-							background-color: #1f69b7; 
-							padding: 11px 8px 31px 8px;
-							border-radius: 8px;
-						}
-
-						.btn-add-admin{
-							border-radius: 0; 
-							box-shadow: none; 
-							background-color: cadetblue; 
-							border: none; 
-							width: 100%; 
-							padding: 7px 0;
-							display: block;
-							text-align: center;
-							color: inherit;
-							font-size: 20px;
-						}
-
-						.btn-view-admin{
-							border-radius: 0; 
-							box-shadow: none; 
-							background-color: #FF731D; 
-							border: none; 
-							width: 100%; 
-							padding: 7px 0;
-							display: block;
-							text-align: center;
-							color: inherit;
-							font-size: 20px;
-						}
+						
 					</style>
 					<br><br><br>
 					<div class="row">
