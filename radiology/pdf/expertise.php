@@ -59,7 +59,7 @@ $dokrad_name = defaultValue($row_dokrad['dokrad_fullname']);
 $nip = $row_dokrad['nip'];
 $link_dokrad_img = "http://" . $_SERVER['SERVER_NAME'] . ":8000/storage/" . $row_dokrad['dokrad_img'];
 // kondisi ketika dokrad_img null & ketika server laravel error
-$dokrad_img =  $row_dokrad['dokrad_img'] == null ? 'scan-ttd-default.PNG' : (@file_get_contents($link_dokrad_img) === false ? '' : $link_dokrad_img);
+$dokrad_img =  $row_dokrad['dokrad_img'] == null ? 'scan-ttd-default.PNG' : (@file_get_contents($link_dokrad_img) === false ? 'scan-ttd-default.PNG' : $link_dokrad_img);
 
 // kop surat
 $kopSurat = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM kop_surat LIMIT 1"));
