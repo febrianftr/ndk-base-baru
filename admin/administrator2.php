@@ -339,6 +339,17 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 								</div>
 							</div>
 						</div>
+
+						<div class="col-md-2">
+							<div class="box-admin1">
+								<div class="box-title-admin">
+									<h3>Expertise</h3>
+									<hr style="margin-top: 5px;">
+									<a href="new_expertise.php" class="btn-add-admin"><i class="fas fa-plus"></i>&nbsp;&nbsp; Add</a>
+									<a href="view_expertise.php" class="btn-view-admin"><i class="fas fa-table"></i>&nbsp;&nbsp; View</a>
+								</div>
+							</div>
+						</div>
 						
 						
 					</div>
