@@ -126,10 +126,6 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 					
 					
 
-					<style>
-						
-					</style>
-					<br><br><br>
 					<div class="row">
 						
 						<div class="col-md-2">
