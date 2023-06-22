@@ -62,3 +62,15 @@
     </div>
 </div>
 <!--END Modal view history expertise patient -->
+
+<!-- pop up update-workload untuk accession no -->
+<div class="modal" id="modal-acc">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body"></div>
+        </div>
+    </div>
+</div>

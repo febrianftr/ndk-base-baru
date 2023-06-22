@@ -7,6 +7,7 @@ require '../model/query-base-order.php';
 require '../model/query-base-study.php';
 require '../model/query-base-patient.php';
 require '../viewer-all.php';
+
 session_start();
 
 $uid = $_GET["uid"];
@@ -81,13 +82,17 @@ if ($fromorder == 'SIMRS' && $accession_no == $acc || $fromorder == 'simrs' && $
 }
 
 if ($_SESSION['level'] == "radiographer") {
+
 ?>
 	<!DOCTYPE html>
 	<html>
 
 	<head>
 		<title>Update Workload</title>
-		<?php include('head.php'); ?>
+		<?php
+		include('head.php');
+		require '../modal.php';
+		?>
 	</head>
 
 	<body>
@@ -127,7 +132,8 @@ if ($_SESSION['level'] == "radiographer") {
 											<ul>
 												<li>
 													<label for="accession_no">Accession Number</label><br>
-													<input type="text" style="width: 50% !important;" id="accession_no" value="<?= $accession_no; ?>" name="accession_no">
+													<input type="text" style="width: 35% !important;" id="accession_no" value="<?= $accession_no; ?>" name="accession_no">
+													<a href="#" style="background-color: grey; color:white;" class="btn btn-sm btn-gen hasil-acc" data-id="<?= $uid; ?>" title="Detail"><i class="fas fa-upload"></i></a>
 													<a href="#" class="btn btn-warning btn-sm btn-gen" id="generate" title="Generate"><i class="fas fa-bolt"></i></a>
 												</li>
 												<li>

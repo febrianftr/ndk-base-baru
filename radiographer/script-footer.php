@@ -117,6 +117,24 @@
 <script>
     // untuk menampilkan data popup
     $(function() {
+        $(document).on('click', '.hasil-acc', function(e) {
+            e.preventDefault();
+            $("#modal-acc").modal('show');
+            $.post('../hasil-acc.php', {
+                    pat_id: $("#pat_id").val(),
+                    uid: $(this).attr('data-id')
+                },
+                function(html) {
+                    $(".modal-body").html(html);
+                }
+            );
+        });
+    });
+    // end untuk menampilkan data popup
+</script>
+<script>
+    // untuk menampilkan data popup
+    $(function() {
         $(document).on('click', '.view-template', function(e) {
             e.preventDefault();
             $("#view-template").modal('show');
@@ -148,6 +166,23 @@
     });
     // end untuk menampilkan data popup
 </script>
+<script>
+    // untuk menampilkan data popup
+    $(function() {
+        $(document).on('click', '.order2', function(e) {
+            e.preventDefault();
+            $("#modal-order2").modal('show');
+            $.post('hasil-order2.php', {
+                    uid: $(this).attr('data-id')
+                },
+                function(html) {
+                    $(".modal-body").html(html);
+                }
+            );
+        });
+    });
+    // end untuk menampilkan data popup
+</script>
 <!-- <script>
     document.addEventListener("contextmenu", function(e) {
         e.preventDefault();
@@ -162,7 +197,6 @@
             $('a[href="' + currLoc + '"]').addClass("active-menu");
         });
     </script> -->
-
 
 <script>
     $(document).ready(function() {
