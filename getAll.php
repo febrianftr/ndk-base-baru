@@ -156,8 +156,15 @@ while ($row = mysqli_fetch_array($query)) {
             $detail = '<a href="dicom.php" class="penawaran-a">' . removeCharacter($pat_name) . '</a>';
         }
     } else {
+        //viewer login pak hardian
+        if($username == 'hardian' OR 'hardian_dokter'){
+  $aksi = PDFFIRST . $study_iuid . PDFLAST .
+            OHIFOLDFIRST . $study_iuid . OHIFOLDLAST.
+            DICOMNEWFIRST . $study_iuid . DICOMNEWLAST;
+        }else{
         $aksi = PDFFIRST . $study_iuid . PDFLAST .
             OHIFOLDFIRST . $study_iuid . OHIFOLDLAST;
+            }
     }
 
     // kondisi jika prioriry normal dan CITO
