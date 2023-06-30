@@ -336,9 +336,12 @@ if ($_SESSION['level'] == "radiology") { ?>
 											<h4 style="margin: 0px;">Viewer</h4>
 											<hr style="margin: 10px 0px;">
 											<div class="buttons1">
-												<?= HOROSWORKLISTFIRST . $uid . HOROSWORKLISTLAST .
+												<?php if ($username == "hardian_dokter") { echo
+													DICOMNEWWORKLISTFIRST . $uid . DICOMNEWWORKLISTLAST .
 													OHIFOLDWORKLISTFIRST . $uid . OHIFOLDWORKLISTLAST;
-												?>
+												} else { echo
+													HOROSWORKLISTFIRST . $uid . HOROSWORKLISTLAST .
+													OHIFOLDWORKLISTFIRST . $uid . OHIFOLDWORKLISTLAST;} ?>
 											</div>
 										</div>
 									</div>

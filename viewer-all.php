@@ -7,11 +7,11 @@ define('PDFFIRST', '<a style="text-decoration:none;" class="" href="../radiology
 define('PDFLAST', '"target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/new/pdf-new.svg" data-toggle="tooltip" title="PDF" style="width: 100%;"></span></a>');
 
 // DICOM
-define('DICOMFIRST', '<a style="text-decoration:none;" href="jnlp://' . $_SERVER['SERVER_NAME'] . ':9090/weasis-pacs-connector/IHEInvokeImageDisplay?studyUID=');
+define('DICOMFIRST', '<a style="text-decoration:none;" href="jnlp://' . $_SERVER['SERVER_NAME'] . ':19898/weasis-pacs-connector/DCM_viewer.jnlp?studyUID=');
 define('DICOMLAST', '"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/eyered.svg" data-toggle="tooltip" title="Dicom Viewer" style="width: 100%;"></span></a>');
 
 // DICOM NEW
-define('DICOMNEWFIRST', '<a style="text-decoration:none;" href="jnlp://' . $_SERVER['SERVER_NAME'] . ':19898/weasis-pacs-connector/DCM_viewer.jnlp?studyUID=');
+define('DICOMNEWFIRST', '<a style="text-decoration:none;" href="http://' . $_SERVER['SERVER_NAME'] . ':9090/weasis-pacs-connector/IHEInvokeImageDisplay?studyUID=');
 define('DICOMNEWLAST', '"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/eyered.svg" data-toggle="tooltip" title="Dicom Viewer" style="width: 100%;"></span></a>');
 
 // HTML
@@ -155,6 +155,8 @@ if ($_SERVER['SERVER_NAME'] == $hostname['ip_publik']) {
 // VIEWER DI WORKLIST ICON LARGE
 define('DICOMWORKLISTFIRST', '<a href="jnlp://' . $_SERVER['SERVER_NAME'] . ':19898/weasis-pacs-connector/DCM_viewer.jnlp?studyUID=');
 define('DICOMWORKLISTLAST', '"class="button8 delete1"><img src="../image/desktop.svg" style="width: 50px;"><br> <span> Dicom Viewer</span></a>');
+define('DICOMNEWWORKLISTFIRST', '<a href="http://' . $_SERVER['SERVER_NAME'] . ':9090/weasis-pacs-connector/IHEInvokeImageDisplay?studyUID=');
+define('DICOMNEWWORKLISTLAST', '"class="button8 delete1"><img src="../image/desktop.svg" style="width: 50px;"><br> <span> Dicom Viewer</span></a>');
 define('HTMLWORKLISTFIRST', '<a href="http://' . $_SERVER['SERVER_NAME'] . ':19898/intiwid/viewer.html?studyUID=');
 define('HTMLWORKLISTLAST', '" class="button8 delete1" target="_blank"><img src="../image/html.svg" style="width: 50px;"><br> <span> HTML Viewer</span></a>');
 define('RADIANTWORKLISTFIRST', '<a href="radiant://?n=paet&v=dcmPACS&n=pstv&v=0020000D&v=%22');
