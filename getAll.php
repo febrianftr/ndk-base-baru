@@ -12,6 +12,7 @@ require 'model/query-base-selected-dokter-radiology.php';
 session_start();
 
 $username = $_SESSION['username'];
+$level = $_SESSION['level'];
 
 // kondisi jika mapping dokter diaktifkan
 $selected_dokter_radiology = mysqli_fetch_assoc(mysqli_query(
@@ -156,16 +157,33 @@ while ($row = mysqli_fetch_array($query)) {
             $detail = '<a href="dicom.php" class="penawaran-a">' . removeCharacter($pat_name) . '</a>';
         }
     } else {
-        //viewer login pak hardian
-        if($username == 'hardian' OR 'hardian_dokter'){
-  $aksi = PDFFIRST . $study_iuid . PDFLAST .
+        if($level == 'refferal'){
+            $aksi = PDFFIRST . $study_iuid . PDFLAST. 
+        HTMLFIRST . $study_iuid . HTMLLAST;
+        } elseif ($level == 'radiographer') {
+            //viewer login pak hardian
+            if($username == 'hardian'){
+                $aksi = PDFFIRST . $study_iuid . PDFLAST .
+              OHIFOLDFIRST . $study_iuid . OHIFOLDLAST.
+              DICOMNEWFIRST . $study_iuid . DICOMNEWLAST;
+            }else{
+            $aksi = PDFFIRST . $study_iuid . PDFLAST. 
             OHIFOLDFIRST . $study_iuid . OHIFOLDLAST.
-            DICOMNEWFIRST . $study_iuid . DICOMNEWLAST;
-        }else{
-        $aksi = PDFFIRST . $study_iuid . PDFLAST .
-            OHIFOLDFIRST . $study_iuid . OHIFOLDLAST;
+            HTMLFIRST . $study_iuid . HTMLLAST;
             }
+        } else {
+            if($username == 'hardian_dokter'){
+                $aksi = PDFFIRST . $study_iuid . PDFLAST .
+                OHIFOLDFIRST . $study_iuid . OHIFOLDLAST.
+                DICOMNEWFIRST . $study_iuid . DICOMNEWLAST;
+        }else{
+            $aksi = PDFFIRST . $study_iuid . PDFLAST. 
+            OHIFOLDFIRST . $study_iuid . OHIFOLDLAST.
+            INOBITECFIRST . "'$study_iuid'" . INOBITECLAST;
+        }
     }
+ }
+
 
     // kondisi jika prioriry normal dan CITO
     if ($priority == 'Normal' || $priority == 'NORMAL' || $priority == 'normal') {

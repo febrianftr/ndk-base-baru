@@ -11,7 +11,7 @@ $status = $_GET['status'];
 $query_changedoctor = mysqli_query(
 	$conn,
 	"SELECT $select_dokter_radiology 
-	FROM $table_dokter_radiology WHERE dokradid NOT LIKE '$dokradid' "
+	FROM $table_dokter_radiology WHERE dokradid NOT LIKE '$dokradid' AND username NOT IN ('hardian_dokter', 'sarah')"
 );
 
 ?>
@@ -217,7 +217,7 @@ if ($_SESSION['level'] == "radiology" || $_SESSION['level'] == "radiographer") {
 						}
 					</style>
 
-					<div class="d-flex justify-content-center align-items-center" style="height: 50vh;">
+					<div class="d-flex justify-content-center align-items-center">
 						<div class="col-md-6 box-change-dokter">
 							<form action="" method="post">
 								<?php while ($row_changedoctor = mysqli_fetch_assoc($query_changedoctor)) { ?>

@@ -108,6 +108,7 @@ $pdf = new PDF('P', 'mm', 'A4');
 
 // membuat halaman baru
 $pdf->SetMargins(15, 23, 15);
+$pdf->SetAutoPageBreak(true, 40);
 $pdf->AddPage();
 // setting jenis font yang akan digunakan
 $pdf->SetFont('Arial', '', 10);
@@ -115,8 +116,8 @@ $pdf->SetFont('Arial', '', 10);
 
 $pdf->SetTitle('Hasil expertise');
 
-$pdf->image($kop_surat_image, 14, 10, 185);
-$pdf->MultiCell(0, 25, '', 0, "J", false);
+$pdf->image($kop_surat_image, 13, 10, 185);
+$pdf->MultiCell(0, 18, '', 0, "J", false);
 
 
 // ------------------------------------------------------------
@@ -204,7 +205,7 @@ $fill = str_replace('<div style="text-align:center;">', '<br /><p align="center"
 $fill = str_replace('<div style="text-align:left;">', '<br /><p align="left">', $fill);
 $fill = str_replace('<div style="text-align:right;">', '<br /><p align="right">', $fill);
 
-$pdf->WriteHTML("<strong><u><p align='center'>Hasil Pemeriksaan Radiology</p></u></strong>");
+$pdf->WriteHTML("<strong><u><p align='center'>Bismillahirrahmanirrahim</p></u></strong>");
 $pdf->WriteHTML("<br>");
 $pdf->WriteHtml($fill);
 $pdf->WriteHTML("<br>");

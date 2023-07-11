@@ -96,7 +96,7 @@ define('SENDDICOMLAST', '"><span class="btn rgba-stylish-slight darken-1 btn-int
 
 // inobitec
 define('INOBITECFIRST', '<a href="#" class="ahref-edit" onclick="inobitec(');
-define('INOBITECLAST', ')"id="inobitec" data-ip="' . $_SERVER['SERVER_NAME'] . '"><span class="btn btn-warning btn-inti"><i class="fas fa-eye" data-toggle="tooltip" title="Web Viewer"></i></span></a>');
+define('INOBITECLAST', ')"id="inobitec" data-ip="' . $_SERVER['SERVER_NAME'] . '"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/inobitec.png" data-toggle="tooltip" title="Radiant Viewer" style="width: 72%;"></span></a>');
 
 // HOROS
 $horos = '<a href="Horos://?methodName=displayStudy&StudyInstanceUID=';
@@ -165,3 +165,5 @@ define('RADIANTWORKLISTLAST', '%22" class="button8 delete1"><img src="../image/r
 // url HOROS -> Horos://?methodName=displayStudy&StudyInstanceUID=
 define('HOROSWORKLISTFIRST', "$horos");
 define('HOROSWORKLISTLAST', '"class="button8 delete1"><img src="../image/horos.png" style="width: 50px;"><br><span> Horos Viewer</span></a>');
+define('INOBITECWORKLISTFIRST', '<a onclick="inobitec(');
+define('INOBITECWORKLISTLAST', ')" id="inobitec" data-ip="' . $_SERVER['SERVER_NAME'] . '" class="button8 delete1"><img src="../image/inobitec.png" style="width: 50px;"><br><span> Inobitec Viewer</span></a>');

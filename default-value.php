@@ -22,7 +22,7 @@ function defaultValueDateTime($value)
 
 function removeCharacter($value)
 {
-    return str_replace('^', '', $value);
+    return str_replace('^', ' ', $value);
 }
 
 function diffDate($value)
