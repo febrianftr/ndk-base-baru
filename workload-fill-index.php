@@ -5,18 +5,26 @@ $level = $_SESSION['level'];
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="index.php">Home</a></li>
-			<li class="breadcrumb-item active">Workload</li>
+			<li class="breadcrumb-item active">Expertise History</li>
 		</ol>
 	</nav>
 </div>
 <div class="table-view">
-	<h3 class="text-center">Expertise Approved</h3>
+	<h3 class="text-center">Expertise History</h3>
 	<hr>
 	<?php require_once 'formsearch.php'; ?>
 	<div class="col-md-12 table-box" style="overflow-x:auto;">
-		<table class="table-dicom" id="purchase_order" style="width: 2400px;" cellpadding="8" cellspacing="0">
+		<table class="table-dicom" id="purchase_order" cellpadding="8" cellspacing="0">
 			<thead class="thead1">
-				<?php require 'thead.php'; ?>
+				<tr>
+					<th>No</th>
+					<th>Status</th>
+					<th><?= $lang['patient_name'] ?></th>
+					<th>MRN</th>
+					<th><?= $lang['study'] ?></th>
+					<th><?= $lang['modality'] ?></th>
+					<th><?= $lang['study_date'] ?></th>
+				</tr>
 			</thead>
 		</table>
 	</div>
@@ -105,7 +113,7 @@ $level = $_SESSION['level'];
 				"order": [],
 				"searching": false,
 				"ajax": {
-					url: "../prosescari.php",
+					url: "../prosescari-fill.php",
 					type: "POST",
 					data: {
 						is_date_search: is_date_search,

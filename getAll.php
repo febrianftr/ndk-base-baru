@@ -99,7 +99,7 @@ while ($row = mysqli_fetch_array($query)) {
     $dokradid = $row['dokradid'];
     $priority = defaultValue($row['priority']);
     $fromorder = $row['fromorder'];
-    $status = styleStatus($row['status']);
+    $status = styleStatus($row['status'], $study_iuid);
     $fill = $row['fill'];
     $approved_at = defaultValueDateTime($row['approved_at']);
     $spendtime = spendTime($study_datetime, $approved_at, $row['status']);
@@ -157,32 +157,32 @@ while ($row = mysqli_fetch_array($query)) {
             $detail = '<a href="dicom.php" class="penawaran-a">' . removeCharacter($pat_name) . '</a>';
         }
     } else {
-        if($level == 'refferal'){
-            $aksi = PDFFIRST . $study_iuid . PDFLAST. 
-        HTMLFIRST . $study_iuid . HTMLLAST;
+        if ($level == 'refferal') {
+            $aksi = PDFFIRST . $study_iuid . PDFLAST .
+                HTMLFIRST . $study_iuid . HTMLLAST;
         } elseif ($level == 'radiographer') {
             //viewer login pak hardian
-            if($username == 'hardian'){
+            if ($username == 'hardian') {
                 $aksi = PDFFIRST . $study_iuid . PDFLAST .
-              OHIFOLDFIRST . $study_iuid . OHIFOLDLAST.
-              DICOMNEWFIRST . $study_iuid . DICOMNEWLAST;
-            }else{
-            $aksi = PDFFIRST . $study_iuid . PDFLAST. 
-            OHIFOLDFIRST . $study_iuid . OHIFOLDLAST.
-            HTMLFIRST . $study_iuid . HTMLLAST;
+                    OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
+                    DICOMNEWFIRST . $study_iuid . DICOMNEWLAST;
+            } else {
+                $aksi = PDFFIRST . $study_iuid . PDFLAST .
+                    OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
+                    HTMLFIRST . $study_iuid . HTMLLAST;
             }
         } else {
-            if($username == 'hardian_dokter'){
+            if ($username == 'hardian_dokter') {
                 $aksi = PDFFIRST . $study_iuid . PDFLAST .
-                OHIFOLDFIRST . $study_iuid . OHIFOLDLAST.
-                DICOMNEWFIRST . $study_iuid . DICOMNEWLAST;
-        }else{
-            $aksi = PDFFIRST . $study_iuid . PDFLAST. 
-            OHIFOLDFIRST . $study_iuid . OHIFOLDLAST.
-            INOBITECFIRST . "'$study_iuid'" . INOBITECLAST;
+                    OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
+                    DICOMNEWFIRST . $study_iuid . DICOMNEWLAST;
+            } else {
+                $aksi = PDFFIRST . $study_iuid . PDFLAST .
+                    OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
+                    INOBITECFIRST . "'$study_iuid'" . INOBITECLAST;
+            }
         }
     }
- }
 
 
     // kondisi jika prioriry normal dan CITO
