@@ -23,7 +23,7 @@
 </script>
 <script type="text/javascript" src="../js/inobitec.js?v=<?= $random; ?>"></script>
 <script type="text/javascript" src="../js/select2.min.js"></script>
-
+<script type="text/javascript" src="../js/change-doctor-approved.js?v=<?= $random; ?>"></script>
 
 <!-- =======menghapus border pada div======== -->
 <script>

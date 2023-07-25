@@ -225,14 +225,14 @@ while ($row = mysqli_fetch_array($result)) {
       $level =
         DICOMNEWFIRST . $study_iuid . DICOMNEWLAST .
         OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
-        CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workload_status . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
+        CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
         EDITWORKLOADFIRST . $study_iuid . EDITWORKLOADLAST;
     } else {
       $detail = '<a href="workload-edit.php?uid=' . $study_iuid . '" class="penawaran-a">' . removeCharacter($pat_name) . '</a>';
       $level =
         INOBITECFIRST . $study_iuid . INOBITECLAST .
         OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
-        CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workload_status . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
+        CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
         EDITWORKLOADFIRST . $study_iuid . EDITWORKLOADLAST;
       // TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST .
       // TELEGRAMSIGNATUREFIRST . $study_iuid . TELEGRAMSIGNATURELAST;
@@ -244,7 +244,7 @@ while ($row = mysqli_fetch_array($result)) {
       //login pak hardian
       if ($username == 'hardian') {
         $level = EDITPASIENFIRST . $study_iuid . EDITPASIENLAST .
-          CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workload_status . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
+          CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
           DICOMNEWFIRST . $study_iuid . DICOMNEWLAST .
           OHIFOLDFIRST . $study_iuid . OHIFOLDLAST
           . SENDDICOMFIRST . $study_iuid . SENDDICOMLAST .
@@ -253,7 +253,7 @@ while ($row = mysqli_fetch_array($result)) {
         // DELETEFIRST . $study_iuid . DELETELAST;
       } else {
         $level = EDITPASIENFIRST . $study_iuid . EDITPASIENLAST .
-          CHANGEDOCTORFIRST . $study_iuid . CHANGEDOCTORMID . $dokradid . CHANGEDOCTORSTAT . $workload_status . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
+          CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
           OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
           HTMLFIRST . $study_iuid . HTMLLAST
           // . SENDDICOMFIRST . $study_iuid . SENDDICOMLAST .
