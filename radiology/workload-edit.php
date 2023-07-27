@@ -53,7 +53,7 @@ $priority_doctor = $row['priority_doctor'];
 $spc_needs = defaultValue($row['spc_needs']);
 $payment = defaultValue($row['payment']);
 $fromorder = $row['fromorder'];
-$status = styleStatus($row['status']);
+$status = styleStatus($row['status'], $study_iuid);
 $fill = $row['fill'];
 $approved_at = defaultValueDateTime($row['approved_at']);
 $spendtime = spendTime($study_datetime, $approved_at, $row['status']);
@@ -244,7 +244,7 @@ if ($_SESSION['level'] == "radiology") { ?>
 														<td><span class="table-left">Name</span></td>
 													</tr>
 													<tr>
-														<td><?= $detail_mrn . ' ' . styleStatus($mrn['status']); ?></td>
+														<td><?= $detail_mrn . ' ' . styleStatus($mrn['status'], $study_iuid); ?></td>
 													</tr>
 													<tr>
 														<td><span class="table-left">MRN</span></td>
@@ -267,7 +267,7 @@ if ($_SESSION['level'] == "radiology") { ?>
 													<tr>
 														<td>
 															<?= PDFFIRST . $study_iuid . PDFLAST .
-																HOROSFIRST . $study_iuid . HOROSLAST .
+																INOBITECFIRST . "'$study_iuid'" . INOBITECLAST .
 																OHIFOLDFIRST . $study_iuid . OHIFOLDLAST;
 															?>
 															<a href="#" class="view-history-expertise" data-id="<?= $study_iuid;  ?>">
@@ -287,7 +287,7 @@ if ($_SESSION['level'] == "radiology") { ?>
 											<h4 style="margin: 0px;">Viewer</h4>
 											<hr style="margin: 10px 0px;">
 											<div class="buttons1">
-												<?= HOROSWORKLISTFIRST . $uid . HOROSWORKLISTLAST .
+												<?= INOBITECWORKLISTFIRST . "'$uid'" . INOBITECWORKLISTLAST .
 													OHIFOLDWORKLISTFIRST . $uid . OHIFOLDWORKLISTLAST; ?>
 											</div>
 										</div>
@@ -360,7 +360,7 @@ if ($_SESSION['level'] == "radiology") { ?>
 															</div>
 															<div class="modal-footer">
 																<button type="button" class="btn btn-close" data-dismiss="modal">Close</button>
-																<button style="border-radius: 5px; font-weight: bold; margin-bottom:4px;" class=" btn btn-success" name="save_template">Save</button>
+																<button style="border-radius: 5px; font-weight: bold; margin-bottom:4px;" class=" btn btn-success" id="save_template" name="save_template">Save</button>
 															</div>
 														</div>
 													</div>
@@ -368,7 +368,7 @@ if ($_SESSION['level'] == "radiology") { ?>
 											</div>
 											<!-- END OF POP UP -->
 											<div class="btn-bar-1">
-												<button class="btn btn-worklist btn-expertise button-popup-approve waves-effect waves-light" name="save_edit"><i class="fas fa-save"></i> Save Edit</button>
+												<button class="btn btn-worklist btn-expertise button-popup-approve waves-effect waves-light" name="save_edit" id="save_edit"><i class="fas fa-save"></i> Save Edit</button>
 											</div>
 											</form>
 										</div>
@@ -471,6 +471,30 @@ if ($_SESSION['level'] == "radiology") { ?>
 		<script>
 			CKEDITOR.replace('ckeditor', {
 				enterMode: CKEDITOR.ENTER_BR
+			});
+		</script>
+		<script>
+			var save = false;
+			$('#save_edit').click(function() {
+				save = true;
+			});
+
+			$('#save_template').click(function() {
+				save = true;
+			});
+
+			// ketika dokter input 1 kata, dan close browser atau pindah halaman akan muncul pop up.
+			$(document).ready(function() {
+				CKEDITOR.instances['ckeditor'].on('change', function(e) {
+					var fill = CKEDITOR.instances['ckeditor'].getData();
+
+					window.addEventListener('beforeunload', function(e) {
+						if (fill !== '' && save !== true) {
+							e.preventDefault();
+							e.returnValue = '';
+						}
+					});
+				});
 			});
 		</script>
 		<!-- -------------------javascript select template-------------- -->

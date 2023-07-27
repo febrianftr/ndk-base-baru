@@ -67,6 +67,7 @@
                 <ul class="sub-menu1 collapse" id="service">
                     <li id="workload1"><a href="workload.php"><?= $lang['workload'] ?></a></li>
                     <li id="report1"><a href="report.php"><?= $lang['download_excel'] ?></a></li>
+                    <li id="expertise-history"><a href="workload-fill.php">Expertise History</a></li>
                     <li id="uploadexcel1"><a href="uploadexcel.php"><?= $lang['backup_excel'] ?></a></li>
                     <li id="downloadexcel1"><a href="downloadexcel.php">Storage Excel</a></li>
                     <li id="chart2"><a href="chart.php"><?= $lang['chart'] ?></a></li>
@@ -94,6 +95,7 @@
                 <ul class="sub-menu1 collapse" id="service">
                     <li id="workload1"><a href="workload.php">Expertise Approved</a></li>
                     <li id="report1"><a href="report.php"><?= $lang['download_excel'] ?></a></li>
+                    <li id="expertise-history"><a href="workload-fill.php">Expertise History</a></li>
                 </ul>
 
                 <li data-toggle="collapse" data-target="#template" class="collapsed">
@@ -109,6 +111,12 @@
             <!-- =================END OF SIDEBAR POLI====================== -->
             <?php if ($_SESSION['level'] == 'refferal') { ?>
                 <script type="text/javascript" src="js/jquery.min.js"></script>
+                <li id="expertise-history">
+                    <a href="workload-fill.php">
+                        <i class="fa fa-history fa-lg"></i>
+                        Expertise History
+                    </a>
+                </li>
                 <li id="query1">
                     <a href="workload.php">
                         <i class="fa fa-file-alt fa-lg"></i> Query

@@ -52,7 +52,7 @@ $priority = defaultValue($row['priority']);
 $spc_needs = defaultValue($row['spc_needs']);
 $payment = defaultValue($row['payment']);
 $fromorder = $row['fromorder'];
-$status = styleStatus($row['status']);
+$status = styleStatus($row['status'], $study_iuid);
 $fill = $row['fill'];
 $approved_at = defaultValueDateTime($row['approved_at']);
 $spendtime = spendTime($study_datetime, $approved_at, $row['status']);
@@ -290,7 +290,7 @@ if ($_SESSION['level'] == "radiology") { ?>
 														<td><span class="table-left">Name</span></td>
 													</tr>
 													<tr>
-														<td><?= $detail_mrn . ' ' . styleStatus($mrn['status']); ?></td>
+														<td><?= $detail_mrn . ' ' . styleStatus($mrn['status'], $study_iuid); ?></td>
 													</tr>
 													<tr>
 														<td><span class="table-left">MRN</span></td>
@@ -333,12 +333,15 @@ if ($_SESSION['level'] == "radiology") { ?>
 											<h4 style="margin: 0px;">Viewer</h4>
 											<hr style="margin: 10px 0px;">
 											<div class="buttons1">
-												<?php if ($username == "hardian_dokter") { echo
+												<?php if ($username == "hardian_dokter") {
+													echo
 													DICOMNEWWORKLISTFIRST . $uid . DICOMNEWWORKLISTLAST .
-													OHIFOLDWORKLISTFIRST . $uid . OHIFOLDWORKLISTLAST;
-												} else { echo
+														OHIFOLDWORKLISTFIRST . $uid . OHIFOLDWORKLISTLAST;
+												} else {
+													echo
 													INOBITECWORKLISTFIRST . "'$uid'" . INOBITECWORKLISTLAST .
-													OHIFOLDWORKLISTFIRST . $uid . OHIFOLDWORKLISTLAST;} ?>
+														OHIFOLDWORKLISTFIRST . $uid . OHIFOLDWORKLISTLAST;
+												} ?>
 											</div>
 										</div>
 									</div>
@@ -389,7 +392,7 @@ if ($_SESSION['level'] == "radiology") { ?>
 											<?= $fill; ?>
 											</textarea>
 										</div>
-										<button class="btn btn-worklist btn-expertise button-popup-approve" name="save_approve"><i class="fas fa-check-square"></i> Approve</button>
+										<button class="btn btn-worklist btn-expertise button-popup-approve" id="save_edit" name="save_approve"><i class="fas fa-check-square"></i> Approve</button>
 										<div class="kotak">
 											<!---POP UP -->
 											<div class="container">
@@ -409,7 +412,7 @@ if ($_SESSION['level'] == "radiology") { ?>
 															</div>
 															<div class="modal-footer">
 																<button type="button" class="btn btn-close" data-dismiss="modal">Close</button>
-																<button style="border-radius: 5px; font-weight: bold; margin-bottom:4px;" class=" btn btn-success" name="save_template">Save</button>
+																<button style="border-radius: 5px; font-weight: bold; margin-bottom:4px;" class=" btn btn-success" id="save_template" name="save_template">Save</button>
 															</div>
 														</div>
 													</div>
@@ -417,7 +420,7 @@ if ($_SESSION['level'] == "radiology") { ?>
 											</div>
 											<!-- END OF POP UP -->
 											<div class="btn-bar-1">
-												<button class="btn btn-worklist3 btn-expertise" name="save_draft" onclick="return confirm('Are you sure save draft?');"><i class="fas fa-save"></i> Save Draft</button>
+												<button class="btn btn-worklist3 btn-expertise" id="save_draft" name="save_draft" onclick="return confirm('Are you sure save draft?');"><i class="fas fa-save"></i> Save Draft</button>
 											</div>
 											</form>
 										</div>
@@ -483,6 +486,34 @@ if ($_SESSION['level'] == "radiology") { ?>
 		<script>
 			CKEDITOR.replace('ckeditor', {
 				enterMode: CKEDITOR.ENTER_BR
+			});
+		</script>
+		<script>
+			var save = false;
+			$('#save_edit').click(function() {
+				save = true;
+			});
+
+			$('#save_template').click(function() {
+				save = true;
+			});
+
+			$('#save_draft').click(function() {
+				save = true;
+			});
+
+			// ketika dokter input 1 kata, dan close browser atau pindah halaman akan muncul pop up.
+			$(document).ready(function() {
+				CKEDITOR.instances['ckeditor'].on('change', function(e) {
+					var fill = CKEDITOR.instances['ckeditor'].getData();
+
+					window.addEventListener('beforeunload', function(e) {
+						if (fill !== '' && save !== true) {
+							e.preventDefault();
+							e.returnValue = '';
+						}
+					});
+				});
 			});
 		</script>
 		<!-- -------------------javascript select template-------------- -->
