@@ -94,7 +94,7 @@ define('IPIVIEWLAST', '" target="_blank"><span class="btn rgba-stylish-slight bt
 define('SENDDICOMFIRST', '<a title="" href="view-send-dicom.php?uid=');
 define('SENDDICOMLAST', '"><span class="btn rgba-stylish-slight darken-1 btn-inti2"><img src="../image/send-dicom.svg" data-toggle="tooltip" title="Send image to" style="width: 100%;"></span></a>');
 
-// inobitec
+// ino  bitec
 define('INOBITECFIRST', '<a href="#" class="ahref-edit" onclick="inobitec(');
 define('INOBITECLAST', ')"id="inobitec" data-ip="' . $_SERVER['SERVER_NAME'] . '"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/inobitec.png" data-toggle="tooltip" title="Radiant Viewer" style="width: 72%;"></span></a>');
 
