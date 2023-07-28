@@ -218,3 +218,14 @@
         }
     }
 </script>
+<script>
+    function validationDokter(e, dokrad_fullname) {
+        e.preventDefault();
+        swal({
+            title: 'Validation',
+            text: 'Bukan pasien dokter ' + dokrad_fullname,
+            icon: "error",
+            timer: 1500,
+        });
+    }
+</script>
