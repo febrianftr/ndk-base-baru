@@ -10,7 +10,11 @@ $level = $_SESSION['level'];
 	</nav>
 </div>
 <div class="table-view">
-	<h3 class="text-center">Expertise Approved</h3>
+	<?php if ($level == "radiology") { ?>
+		<h3 class="text-center">Expertise Approved</h3>
+	<?php } else { ?>
+		<h3 class="text-center">Workload</h3>
+	<?php } ?>
 	<hr>
 	<?php require_once 'formsearch.php'; ?>
 	<div class="col-md-12 table-box" style="overflow-x:auto;">

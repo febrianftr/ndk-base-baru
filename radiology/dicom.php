@@ -136,6 +136,9 @@ if ($_SESSION['level'] == "radiology") {
 							"data": "mrn"
 						},
 						{
+							"data": "study_datetime"
+						},
+						{
 							"data": "no_foto"
 						},
 						{
@@ -164,9 +167,6 @@ if ($_SESSION['level'] == "radiology") {
 						},
 						{
 							"data": "radiographer_name"
-						},
-						{
-							"data": "study_datetime"
 						},
 						{
 							"data": "approve_date"

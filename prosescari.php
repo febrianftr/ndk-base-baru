@@ -225,7 +225,7 @@ while ($row = mysqli_fetch_array($result)) {
       $level =
         DICOMNEWFIRST . $study_iuid . DICOMNEWLAST .
         OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
-        CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .EDITWORKLOADFIRST . $study_iuid . EDITWORKLOADLAST;
+        CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST . EDITWORKLOADFIRST . $study_iuid . EDITWORKLOADLAST;
     } else {
       $detail = '<a href="workload-edit.php?uid=' . $study_iuid . '" class="penawaran-a">' . removeCharacter($pat_name) . '</a>';
       $level =
@@ -312,6 +312,7 @@ while ($row = mysqli_fetch_array($result)) {
   $sub_array[] = $status . '&nbsp;' . $badge;
   $sub_array[] = $detail . '&nbsp;' . $priority_style;
   $sub_array[] = $pat_id;
+  $sub_array[] = $study_datetime;
   $sub_array[] = $no_foto;
   $sub_array[] = $pat_birthdate;
   $sub_array[] = $pat_sex;
@@ -322,7 +323,6 @@ while ($row = mysqli_fetch_array($result)) {
   $sub_array[] = $name_dep;
   $sub_array[] = $dokrad_name;
   $sub_array[] = $radiographer_name;
-  $sub_array[] = $study_datetime;
   $sub_array[] = $approved_at;
   $sub_array[] = $spendtime;
   $sub_array[]  = $i++;
