@@ -254,7 +254,8 @@ while ($row = mysqli_fetch_array($result)) {
         $level = EDITPASIENFIRST . $study_iuid . EDITPASIENLAST .
           CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
           OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
-          HTMLFIRST . $study_iuid . HTMLLAST
+          HTMLFIRST . $study_iuid . HTMLLAST .
+          DICOMFIRST . $study_iuid . DICOMLAST
           // . SENDDICOMFIRST . $study_iuid . SENDDICOMLAST .
           // GETEXPERTISEFIRST . $name_envelope . ' ' . defaultValueDateTime($created_at_envelope) . $href_get_expertise . GETEXPERTISELAST . $icon_get_expertise . GETEXPERTISEVERYLAST
         ;
