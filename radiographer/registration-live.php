@@ -161,7 +161,7 @@ if ($_SESSION['level'] == "radiographer") {
                               <!-- kontras -->
                               <label style="font-weight: bold;" for="contrast" style="font-weight: bold;">Contrast</label><br>
                               <label class="radio-admin">
-                                <input type="radio" name="contrast" id="contrast" value="0"> <?= $lang['not_using_contrast'] ?>
+                                <input type="radio"  name="contrast" id="contrast" value="0" checked="checked"> <?= $lang['not_using_contrast'] ?>
                                 <span class="checkmark"></span>
                               </label>
                               <label class="radio-admin">
@@ -171,7 +171,7 @@ if ($_SESSION['level'] == "radiographer") {
                               <!-- kontras alergi -->
                               <label style="font-weight: bold;" for="contrast_allergies"><b><?= $lang['contrast_allergy'] ?></b></label><br>
                               <label class="radio-admin">
-                                <input type="radio" name="contrast_allergies" id="contrast_allergies" value="0"> <?= $lang['no'] ?>
+                                <input type="radio" name="contrast_allergies" id="contrast_allergies" value="0" checked="checked"> <?= $lang['no'] ?>
                                 <span class="checkmark"></span>
                               </label>
                               <label class="radio-admin">
@@ -181,7 +181,7 @@ if ($_SESSION['level'] == "radiographer") {
                               <!-- prioritas -->
                               <label style="font-weight: bold;" for="priority"><b><?= $lang['priority'] ?></b></label><br>
                               <label class="radio-admin">
-                                <input type="radio" name="priority" id="priority" value="normal"> Normal
+                                <input type="radio" name="priority" id="priority" value="normal" checked="checked"> Normal
                                 <span class="checkmark"></span>
                               </label>
                               <label class="radio-admin">
