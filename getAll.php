@@ -111,6 +111,8 @@ while ($row = mysqli_fetch_array($query)) {
     } else {
         $workload_status = 'waiting';
     }
+    // $querypublic = mysqli_query($conn, "SELECT * FROM ")
+    $addonlinkohif = "http://" . $hostname['ip_publik'] . ":92/viewer/";
 
     // kondisi ketika detail nama lihat detail HOME (radiographer, radiology, referral)
     $detail = '<a href="#" class="hasil-all penawaran-a" data-id="' . $row['study_iuid'] . '">' . removeCharacter($pat_name) . '</a>';
@@ -166,11 +168,13 @@ while ($row = mysqli_fetch_array($query)) {
             if ($username == 'hardian') {
                 $aksi = PDFFIRST . $study_iuid . PDFLAST .
                     OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
-                    DICOMNEWFIRST . $study_iuid . DICOMNEWLAST;
+                    DICOMNEWFIRST . $study_iuid . DICOMNEWLAST .
+                    LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST;
             } else {
                 $aksi = PDFFIRST . $study_iuid . PDFLAST .
                     OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
-                    HTMLFIRST . $study_iuid . HTMLLAST;
+                    HTMLFIRST . $study_iuid . HTMLLAST .
+                    LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST;
             }
         } else {
             if ($username == 'hardian_dokter') {

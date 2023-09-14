@@ -184,7 +184,8 @@ while ($row = mysqli_fetch_array($result)) {
   } else {
     $workload_status = 'waiting';
   }
-
+  //menambahkan ippublic link ohif
+  $addonlinkohif = "http://" . $hostname['ip_publik'] . ":92/viewer/";
   // kondisi ketika dokter belum ada menggunakan icon berbeda
   if ($pk_dokter_radiology == null && $dokradid == null) {
     $icon_change_doctor = CHANGEDOCTORICONNO;
@@ -247,7 +248,8 @@ while ($row = mysqli_fetch_array($result)) {
           DICOMNEWFIRST . $study_iuid . DICOMNEWLAST .
           OHIFOLDFIRST . $study_iuid . OHIFOLDLAST
           . SENDDICOMFIRST . $study_iuid . SENDDICOMLAST .
-          GETEXPERTISEFIRST . $name_envelope . ' ' . defaultValueDateTime($created_at_envelope) . $href_get_expertise . GETEXPERTISELAST . $icon_get_expertise . GETEXPERTISEVERYLAST;
+          GETEXPERTISEFIRST . $name_envelope . ' ' . defaultValueDateTime($created_at_envelope) . $href_get_expertise . GETEXPERTISELAST . $icon_get_expertise . GETEXPERTISEVERYLAST .
+          LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST;
         // TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST;
         // DELETEFIRST . $study_iuid . DELETELAST;
       } else {
@@ -255,7 +257,8 @@ while ($row = mysqli_fetch_array($result)) {
           CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
           OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
           HTMLFIRST . $study_iuid . HTMLLAST .
-          DICOMFIRST . $study_iuid . DICOMLAST
+          DICOMFIRST . $study_iuid . DICOMLAST .
+          LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST
           // . SENDDICOMFIRST . $study_iuid . SENDDICOMLAST .
           // GETEXPERTISEFIRST . $name_envelope . ' ' . defaultValueDateTime($created_at_envelope) . $href_get_expertise . GETEXPERTISELAST . $icon_get_expertise . GETEXPERTISEVERYLAST
         ;
