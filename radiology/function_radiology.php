@@ -123,21 +123,57 @@ function insert_workload($value)
 	// untuk tanda tangan digital
 	QRcode::png(
 		"Patient Name: $pat_name
-MRN : $pat_id 
-Study : $study_desc
-Study Date : $study_datetime
-Approved By : $dokrad_name 
-Physician Radiology ID : $dokradid
-Approved Sign in $signature_datetime",
+	MRN : $pat_id 
+	Study : $study_desc
+	Study Date : $study_datetime
+	Approved By : $dokrad_name 
+	Physician Radiology ID : $dokradid
+	Approved Sign in $signature_datetime",
 		"phpqrcode/ttddokter/$uid.png",
 		"L",
 		4,
 		4
 	);
+	$QR2 = imagecreatefrompng("phpqrcode/ttddokter/$uid.png");
+	$logopath2 = '..\\image\ipi-icon3.png';
+	// memulai menggambar logo dalam file qrcode
+	$logo2 = imagecreatefromstring(file_get_contents($logopath2));
+	imagecolortransparent($logo2, imagecolorallocatealpha($logo2, 0, 0, 0, 127));
+	imagealphablending($logo2, false);
+	imagesavealpha($logo2, true);
+	$QR_width2 = imagesx($QR2);
+	$QR_height2 = imagesy($QR2);
+	$logo_width2 = imagesx($logo2);
+	$logo_height2 = imagesy($logo2);
+	// Scale logo to fit in the QR Code
+	$logo_qr_width2 = $QR_width2 / 8;
+	$scale2 = $logo_width2 / $logo_qr_width2;
+	$logo_qr_height2 = $logo_height2 / $scale2;
+	imagecopyresampled($QR2, $logo2, $QR_width2 / 2.3, $QR_height2 / 2.3, 0, 0, $logo_qr_width2, $logo_qr_height2, $logo_width2, $logo_height2);
+	// Simpan kode QR lagi, dengan logo di atasnya
+	imagepng($QR2, "phpqrcode/ttddokter/$uid.png");
 
 	// untuk hasil pasien (xampp)
 	$hasilPasien = $hostname['ip_publik'] == null ? 'Domain Tidak Ditemukan! Silahkan input domain RS pada aplikasi RIS' : "http://$hostname[ip_publik]:8089/$link[link_simrs_expertise]/pasien.php?uid=$uid";
 	QRcode::png($hasilPasien, "phpqrcode/hasil-pasien/$uid.png", "L", 4, 4);
+	$QR = imagecreatefrompng("phpqrcode/hasil-pasien/$uid.png");
+	$logopath = '..\\image\ipi-icon3.png';
+	// memulai menggambar logo dalam file qrcode
+	$logo = imagecreatefromstring(file_get_contents($logopath));
+	imagecolortransparent($logo, imagecolorallocatealpha($logo, 0, 0, 0, 127));
+	imagealphablending($logo, false);
+	imagesavealpha($logo, true);
+	$QR_width = imagesx($QR);
+	$QR_height = imagesy($QR);
+	$logo_width = imagesx($logo);
+	$logo_height = imagesy($logo);
+	// Scale logo to fit in the QR Code
+	$logo_qr_width = $QR_width / 8;
+	$scale = $logo_width / $logo_qr_width;
+	$logo_qr_height = $logo_height / $scale;
+	imagecopyresampled($QR, $logo, $QR_width / 2.3, $QR_height / 2.3, 0, 0, $logo_qr_width, $logo_qr_height, $logo_width, $logo_height);
+	// Simpan kode QR lagi, dengan logo di atasnya
+	imagepng($QR, "phpqrcode/hasil-pasien/$uid.png");
 
 	// untuk hasil pasien (laravel)
 	// QRcode::png("http://$hostname[ip_publik]:8000/pasien/$uid", "phpqrcode/hasil-pasien/$uid.png", "L", 4, 4);
