@@ -326,3 +326,24 @@
         }
     }
 </script>
+<script>
+    function copyText(e, study_iuid) {
+        e.preventDefault();
+        swal({
+            title: 'Copy',
+            text: 'Link Has been Copied',
+            icon: "success",
+            timer: 1500,
+        }).then(function() {
+            const textarea = document.createElement('textarea');
+            textarea.value = study_iuid;
+            // Move the textarea outside the viewport to make it invisible
+            textarea.style.position = 'absolute';
+            textarea.style.left = '-99999999px';
+            document.body.prepend(textarea);
+            // highlight the content of the textarea element
+            textarea.select();
+            document.execCommand('copy');
+        });
+    }
+</script>

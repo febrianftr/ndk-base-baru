@@ -53,7 +53,7 @@ if ($_SESSION['level'] == "radiographer") {
                         <?php
                         $query_patient = mysqli_query($conn, "SELECT * FROM xray_patient");
                         while ($patient = mysqli_fetch_array($query_patient)) { ?>
-                          <option value="<?= $patient['mrn'] . '|' . $patient['name'] . '|' . $patient['sex'] . '|' . $patient['birth_date'] . '|' . $patient['address'] . '|' . $patient['weight']; ?>" <?= $patient_get['mrn'] == $patient['mrn'] ? 'selected' : ""; ?>><?= $patient['name']; ?></option>
+                          <option value="<?= $patient['mrn'] . '|' . $patient['name'] . '|' . $patient['sex'] . '|' . $patient['birth_date'] . '|' . $patient['address'] . '|' . $patient['weight']; ?>" <?= $patient_get['mrn'] == $patient['mrn'] ? 'selected' : ""; ?>><?= mb_convert_encoding($patient['name'], 'UTF-8', 'ISO-8859-1'); ?></option>
                         <?php } ?>
                       </select><br>
 
@@ -66,7 +66,7 @@ if ($_SESSION['level'] == "radiographer") {
                             <?php
                             $query_dokter = mysqli_query($conn, "SELECT * FROM xray_dokter");
                             while ($dokter = mysqli_fetch_assoc($query_dokter)) { ?>
-                              <option value="<?= $dokter['dokterid'] . '|' . $dokter['named']; ?>"><b><?= $dokter['named'] . ' ' . $dokter['lastnamed']; ?></b></option>
+                              <option value="<?= $dokter['dokterid'] . '|' . $dokter['named']; ?>"><b><?= mb_convert_encoding($dokter['named'], 'UTF-8', 'ISO-8859-1') . ' ' . mb_convert_encoding($dokter['lastnamed'], 'UTF-8', 'ISO-8859-1'); ?></b></option>
                             <?php } ?>
                             <!-- <option value="" id="dokter_lain"><?= $lang['other_physician'] ?></option> -->
                           </select>
@@ -81,7 +81,7 @@ if ($_SESSION['level'] == "radiographer") {
                         <?php
                         $query_department = mysqli_query($conn, "SELECT * FROM xray_department");
                         while ($department = mysqli_fetch_array($query_department)) { ?>
-                          <option value="<?= $department['dep_id'] . '|' . $department['name_dep']; ?>"><?= $department['name_dep']; ?></option>
+                          <option value="<?= $department['dep_id'] . '|' . $department['name_dep']; ?>"><?= mb_convert_encoding($department['name_dep'], 'UTF-8', 'ISO-8859-1'); ?></option>
                         <?php } ?>
                       </select><br>
 
@@ -92,7 +92,7 @@ if ($_SESSION['level'] == "radiographer") {
                         <?php
                         $query_payment = mysqli_query($conn, "SELECT * FROM xray_payment_insurance");
                         while ($payment = mysqli_fetch_array($query_payment)) { ?>
-                          <option value="<?= $payment["id_payment"] . '|' . $payment["payment"]; ?> "><?= $payment['payment']; ?></option>
+                          <option value="<?= $payment["id_payment"] . '|' . $payment["payment"]; ?> "><?= mb_convert_encoding($payment['payment'], 'UTF-8', 'ISO-8859-1'); ?></option>
                         <?php } ?>
                       </select>
 
@@ -121,7 +121,7 @@ if ($_SESSION['level'] == "radiographer") {
                         <?php
                         $query_radiographer = mysqli_query($conn, "SELECT * FROM xray_radiographer");
                         while ($radiographer = mysqli_fetch_array($query_radiographer)) { ?>
-                          <option value="<?= $radiographer['radiographer_id'] . '|' . $radiographer['radiographer_name']; ?>"><?= $radiographer['radiographer_name'] . ' ' . $radiographer['radiographer_lastname']; ?></option>
+                          <option value="<?= $radiographer['radiographer_id'] . '|' . $radiographer['radiographer_name']; ?>"><?= mb_convert_encoding($radiographer['radiographer_name'], 'UTF-8', 'ISO-8859-1') . ' ' . mb_convert_encoding($radiographer['radiographer_lastname'], 'UTF-8', 'ISO-8859-1'); ?></option>
                         <?php } ?>
                       </select><br>
 
@@ -130,9 +130,9 @@ if ($_SESSION['level'] == "radiographer") {
                       <select class="selectpicker" data-size="10" data-live-search="true" data-width="100%" name="dokradid" id="dokradid" data-style="btn-info">
                         <option value="null">--pilih--</option>
                         <?php
-                        $query_dokter_radiologi = mysqli_query($conn, "SELECT * FROM xray_dokter_radiology");
+                        $query_dokter_radiologi = mysqli_query($conn, "SELECT * FROM xray_dokter_radiology WHERE username NOT IN ('sarah', 'hardian_dokter')");
                         while ($dokter_radiologi = mysqli_fetch_array($query_dokter_radiologi)) { ?>
-                          <option value="<?= $dokter_radiologi['dokradid'] . '|' . $dokter_radiologi['dokrad_name']; ?>"><?= $dokter_radiologi['dokrad_name'] . ' ' . $dokter_radiologi['dokrad_lastname']; ?></option>
+                          <option value="<?= $dokter_radiologi['dokradid'] . '|' . $dokter_radiologi['dokrad_name']; ?>"><?= mb_convert_encoding($dokter_radiologi['dokrad_name'], 'UTF-8', 'ISO-8859-1') . ' ' . mb_convert_encoding($dokter_radiologi['dokrad_lastname'], 'UTF-8', 'ISO-8859-1'); ?></option>
                         <?php } ?>
                       </select><br>
                     </div>
@@ -161,7 +161,7 @@ if ($_SESSION['level'] == "radiographer") {
                               <!-- kontras -->
                               <label style="font-weight: bold;" for="contrast" style="font-weight: bold;">Contrast</label><br>
                               <label class="radio-admin">
-                                <input type="radio" name="contrast" id="contrast" value="0"> <?= $lang['not_using_contrast'] ?>
+                                <input type="radio"  name="contrast" id="contrast" value="0" checked="checked"> <?= $lang['not_using_contrast'] ?>
                                 <span class="checkmark"></span>
                               </label>
                               <label class="radio-admin">
@@ -171,7 +171,7 @@ if ($_SESSION['level'] == "radiographer") {
                               <!-- kontras alergi -->
                               <label style="font-weight: bold;" for="contrast_allergies"><b><?= $lang['contrast_allergy'] ?></b></label><br>
                               <label class="radio-admin">
-                                <input type="radio" name="contrast_allergies" id="contrast_allergies" value="0"> <?= $lang['no'] ?>
+                                <input type="radio" name="contrast_allergies" id="contrast_allergies" value="0" checked="checked"> <?= $lang['no'] ?>
                                 <span class="checkmark"></span>
                               </label>
                               <label class="radio-admin">
@@ -181,7 +181,7 @@ if ($_SESSION['level'] == "radiographer") {
                               <!-- prioritas -->
                               <label style="font-weight: bold;" for="priority"><b><?= $lang['priority'] ?></b></label><br>
                               <label class="radio-admin">
-                                <input type="radio" name="priority" id="priority" value="normal"> Normal
+                                <input type="radio" name="priority" id="priority" value="normal" checked="checked"> Normal
                                 <span class="checkmark"></span>
                               </label>
                               <label class="radio-admin">
