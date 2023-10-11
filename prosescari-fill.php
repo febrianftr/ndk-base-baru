@@ -8,6 +8,7 @@ require 'model/query-base-workload.php';
 require 'model/query-base-order.php';
 require 'model/query-base-study.php';
 require 'model/query-base-patient.php';
+require 'model/query-base-dokter-radiology.php';
 require 'model/query-base-workload-fill.php';
 
 $username = $_SESSION['username'];
@@ -15,6 +16,17 @@ $level = $_SESSION['level'];
 
 // kolom untuk order by 
 $columns = array('pk', 'pk', 'pat_name', 'pat_id', 'study_desc_pacsio', 'study_datetime');
+
+$row_dokrad = mysqli_fetch_assoc(mysqli_query(
+  $conn,
+  "SELECT pk 
+  FROM $table_dokter_radiology 
+  WHERE username = '$username'"
+));
+$pk = $row_dokrad['pk'];
+
+// query ketika login radiologi
+$kondisi = " WHERE xray_workload.pk_dokter_radiology = '$pk'";
 
 $query_base = "SELECT 
               pat_id,
@@ -37,7 +49,14 @@ $query_base = "SELECT
               LEFT JOIN $table_order
               ON xray_order.uid = xray_workload.uid";
 
-$query = $query_base . ' WHERE ';
+// kondisi jika login radiology
+if ($level == 'radiology') {
+  $query =  $query_base . $kondisi . ' AND ';
+} else {
+  // kondisi jika login selain radiology
+  $query = $query_base . ' WHERE ';
+  $kondisi = '';
+}
 
 if ($_POST["is_date_search"] == "yes") {
   $from = date_create($_POST["from_study_datetime"]);

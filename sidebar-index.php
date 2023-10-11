@@ -44,12 +44,13 @@
 
     <div class="menu-list1">
         <ul id="menu-content1" class="menu-content1 collapse out">
-            <li data-target="#home1">
-                <a href="index.php">
-                    <i class="fa fa-home fa-lg"></i> <?= $lang['home'] ?>
-                </a>
-            </li>
-
+            <?php if ($_SESSION['level'] != 'radiology') { ?>
+                <li data-target="#home1">
+                    <a href="index.php">
+                        <i class="fa fa-home fa-lg"></i> <?= $lang['home'] ?>
+                    </a>
+                </li>
+            <?php } ?>
             <!-- =================SIDEBAR RADIOGRAPHER====================== -->
             <?php if ($_SESSION['level'] == 'radiographer') { ?>
                 <li data-toggle="collapse" data-target="#products1" class="collapsed">

@@ -240,7 +240,7 @@ if (!($_SESSION['username'] = $data['username'])) {
   } else if ($_SESSION['level'] == "superadmin") {
     header("location:admin/administrator.php");
   } else if ($_SESSION['level'] == "radiology") {
-    header("location:radiology/index.php");
+    header("location:radiology/dicom.php");
   } else if ($_SESSION['level'] == "radiographer") {
     header("location:radiographer/workload.php");
   }

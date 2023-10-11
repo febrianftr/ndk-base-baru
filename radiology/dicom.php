@@ -71,9 +71,9 @@ if ($_SESSION['level'] == "radiology") {
 							<div class="table-view col-md-12 dashboard-home" style="overflow-x:auto;">
 								<?php
 								if ($jumlah_cito > 0) { ?>
-									<div class="alert alert-danger text-center" role="alert">
+									<div class="alert alert-danger text-center" style="font-size:large;" role="alert">
 										<i class="fa fa-bell" aria-hidden="true"></i>
-										<?= $jumlah_cito ?> Pasien Prioritas CITO
+										<?= $jumlah_cito ?> Pasien Prioritas <i style="color: red;" class="fas fa-circle"></i> CITO
 									</div>
 								<?php } else { ?>
 									<div class="alert alert-success text-center" role="alert">
