@@ -137,7 +137,7 @@ while ($row = mysqli_fetch_array($query)) {
             // kondisi pk_dokter_radiologi null dan dokradid null dan ketika aktif bernilai 1 mapping dokter
             if ($pk_dokter_radiology == null && $dokradid == null && $selected_dokter_radiology['is_active'] == 1) {
                 $aksi = '?';
-                $detail = '<a href="dicom.php" onclick="validationDokter(event,' . "'$dokrad_fullname'" . ')" class="penawaran-a">' . removeCharacter($pat_name) . '</a>';
+                $detail = '<a href="dicom.php" onclick="validationDokter(event,' . "'$dokrad_fullname'" . ')" class="penawaran-a">' . removeCharacter(mb_convert_encoding($pat_name, 'UTF-8', 'ISO-8859-1')) . '</a>';
             } else {
                 // kondisi ketika pasien manual tetapi pk_dokter_radiologi sudah ada 
                 if (!$fill || $fill == null) {
@@ -149,7 +149,7 @@ while ($row = mysqli_fetch_array($query)) {
                 }
 
                 // kondisi ketika sudah dipilih dokternya 
-                $detail = '<a href="worklist.php?uid=' . $study_iuid . '" class="penawaran-a">' . removeCharacter($pat_name) . '</a>';
+                $detail = '<a href="worklist.php?uid=' . $study_iuid . '" class="penawaran-a">' . removeCharacter(mb_convert_encoding($pat_name, 'UTF-8', 'ISO-8859-1')) . '</a>';
 
                 $aksi = $worklist .
                     CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST;
@@ -225,13 +225,13 @@ while ($row = mysqli_fetch_array($query)) {
         "no_foto" => $no_foto,
         "pat_birthdate" => $pat_birthdate,
         "pat_sex" => $pat_sex,
-        "study_desc" => $study_desc_pacsio,
+        "study_desc" => mb_convert_encoding($study_desc_pacsio, 'UTF-8', 'ISO-8859-1'),
         "series_desc" => READMORESERIESFIRST . $study_iuid . READMORESERIESLAST,
         "mods_in_study" => $mods_in_study,
-        "named" => $named,
-        "name_dep" => $name_dep,
-        "dokrad_name" => $dokrad_name,
-        "radiographer_name" => $radiographer_name,
+        "named" => mb_convert_encoding($named, 'UTF-8', 'ISO-8859-1'),
+        "name_dep" => mb_convert_encoding($name_dep, 'UTF-8', 'ISO-8859-1'),
+        "dokrad_name" => mb_convert_encoding($dokrad_name, 'UTF-8', 'ISO-8859-1'),
+        "radiographer_name" => mb_convert_encoding($radiographer_name, 'UTF-8', 'ISO-8859-1'),
         "study_datetime" => $study_datetime,
         "approve_date" => $approved_at,
         "spendtime" => $spendtime

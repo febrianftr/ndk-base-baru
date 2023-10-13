@@ -214,7 +214,7 @@ while ($row = mysqli_fetch_array($result)) {
   }
 
   // kondisi ketika detail nama lihat detail query (radiographer, referral)
-  $detail = '<a href="#" class="hasil-all penawaran-a" data-id="' . $row['study_iuid'] . '">' . removeCharacter($pat_name) . '</a>';
+  $detail = '<a href="#" class="hasil-all penawaran-a" data-id="' . $row['study_iuid'] . '">' . removeCharacter(mb_convert_encoding($pat_name, 'UTF-8', 'ISO-8859-1')) . '</a>';
 
   //kondisi status change doctor
   // kondisi session level ketika login
@@ -222,13 +222,13 @@ while ($row = mysqli_fetch_array($result)) {
   // ketika login radiology
   if ($level == 'radiology') {
     if ($username == 'hardian_dokter') {
-      $detail = '<a href="workload-edit.php?uid=' . $study_iuid . '" class="penawaran-a">' . removeCharacter($pat_name) . '</a>';
+      $detail = '<a href="workload-edit.php?uid=' . $study_iuid . '" class="penawaran-a">' . removeCharacter(mb_convert_encoding($pat_name, 'UTF-8', 'ISO-8859-1')) . '</a>';
       $level =
         DICOMNEWFIRST . $study_iuid . DICOMNEWLAST .
         OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
         CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST . EDITWORKLOADFIRST . $study_iuid . EDITWORKLOADLAST;
     } else {
-      $detail = '<a href="workload-edit.php?uid=' . $study_iuid . '" class="penawaran-a">' . removeCharacter($pat_name) . '</a>';
+      $detail = '<a href="workload-edit.php?uid=' . $study_iuid . '" class="penawaran-a">' . removeCharacter(mb_convert_encoding($pat_name, 'UTF-8', 'ISO-8859-1')) . '</a>';
       $level =
         INOBITECFIRST . $study_iuid . INOBITECLAST .
         OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
@@ -321,13 +321,13 @@ while ($row = mysqli_fetch_array($result)) {
   $sub_array[] = $no_foto;
   $sub_array[] = $pat_birthdate;
   $sub_array[] = $pat_sex;
-  $sub_array[] = $study_desc_pacsio;
+  $sub_array[] = mb_convert_encoding($study_desc_pacsio, 'UTF-8', 'ISO-8859-1');
   $sub_array[] = READMORESERIESFIRST . $study_iuid . READMORESERIESLAST;
   $sub_array[] = $mods_in_study;
-  $sub_array[] = $named;
-  $sub_array[] = $name_dep;
-  $sub_array[] = $dokrad_name;
-  $sub_array[] = $radiographer_name;
+  $sub_array[] = mb_convert_encoding($named, 'UTF-8', 'ISO-8859-1');
+  $sub_array[] = mb_convert_encoding($name_dep, 'UTF-8', 'ISO-8859-1');
+  $sub_array[] = mb_convert_encoding($dokrad_name, 'UTF-8', 'ISO-8859-1');;
+  $sub_array[] = mb_convert_encoding($radiographer_name, 'UTF-8', 'ISO-8859-1');;
   $sub_array[] = $approved_at;
   $sub_array[] = $spendtime;
   $sub_array[]  = $i++;
