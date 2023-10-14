@@ -37,8 +37,9 @@ if ($dicom == '/dicom.php') {
     // (dicom.php) berdasarkan priority CITO, updated_time DESC.
     // kondisi ketika bridging simrs status waiting dan dokradid simrs (xray_order).
     // OR kondisi ketika bridging simrs dokter radiologi is null atau pasien manual (tidak integrasi simrs). 
-    $kondisi = "WHERE (xray_workload.status = 'waiting' AND xray_order.dokradid = '$dokradid')
+    $kondisi = "WHERE (xray_workload.status = 'waiting' AND xray_order.dokradid = '$dokradid' AND study.study_datetime >= '2023-10-12')
                 OR (xray_workload.status = 'waiting' AND xray_order.dokradid IS NULL)
+                AND study.study_datetime >= '2023-10-12'
                 ORDER BY xray_order.priority IS NULL, xray_order.priority ASC, study.study_datetime DESC 
                 LIMIT 3000";
 } else {
@@ -115,7 +116,7 @@ while ($row = mysqli_fetch_array($query)) {
     $addonlinkohif = "http://" . $hostname['ip_publik'] . ":92/viewer/";
 
     // kondisi ketika detail nama lihat detail HOME (radiographer, radiology, referral)
-    $detail = '<a href="#" class="hasil-all penawaran-a" data-id="' . $row['study_iuid'] . '">' . removeCharacter($pat_name) . '</a>';
+    $detail = '<a href="#" class="hasil-all penawaran-a" data-id="' . $row['study_iuid'] . '">' . mb_convert_encoding(removeCharacter($pat_name), 'UTF-8', 'ISO-8859-1') . '</a>';
 
     if ($fromorder == 'SIMRS' || $fromorder == 'simrs') {
         $badge = SIMRS;
@@ -137,7 +138,7 @@ while ($row = mysqli_fetch_array($query)) {
             // kondisi pk_dokter_radiologi null dan dokradid null dan ketika aktif bernilai 1 mapping dokter
             if ($pk_dokter_radiology == null && $dokradid == null && $selected_dokter_radiology['is_active'] == 1) {
                 $aksi = '?';
-                $detail = '<a href="dicom.php" onclick="validationDokter(event,' . "'$dokrad_fullname'" . ')" class="penawaran-a">' . removeCharacter(mb_convert_encoding($pat_name, 'UTF-8', 'ISO-8859-1')) . '</a>';
+                $detail = '<a href="dicom.php" onclick="validationDokter(event,' . "'$dokrad_fullname'" . ')" class="penawaran-a">' . mb_convert_encoding(removeCharacter($pat_name), 'UTF-8', 'ISO-8859-1') . '</a>';
             } else {
                 // kondisi ketika pasien manual tetapi pk_dokter_radiologi sudah ada 
                 if (!$fill || $fill == null) {
@@ -149,7 +150,7 @@ while ($row = mysqli_fetch_array($query)) {
                 }
 
                 // kondisi ketika sudah dipilih dokternya 
-                $detail = '<a href="worklist.php?uid=' . $study_iuid . '" class="penawaran-a">' . removeCharacter(mb_convert_encoding($pat_name, 'UTF-8', 'ISO-8859-1')) . '</a>';
+                $detail = '<a href="worklist.php?uid=' . $study_iuid . '" class="penawaran-a">' . mb_convert_encoding(removeCharacter($pat_name), 'UTF-8', 'ISO-8859-1') . '</a>';
 
                 $aksi = $worklist .
                     CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST;
@@ -157,7 +158,7 @@ while ($row = mysqli_fetch_array($query)) {
         } else {
             // kondisi ketika xray_workload TIDAK masuk dari trigger
             $aksi = '!TRIGGER!';
-            $detail = '<a href="dicom.php" class="penawaran-a">' . removeCharacter($pat_name) . '</a>';
+            $detail = '<a href="dicom.php" class="penawaran-a">' . mb_convert_encoding(removeCharacter($pat_name), 'UTF-8', 'ISO-8859-1') . '</a>';
         }
     } else {
         if ($level == 'refferal') {

@@ -113,7 +113,7 @@ while ($row = mysqli_fetch_array($query)) {
         $aksi = "-";
     }
 
-    $detail = '<a href="#" class="order2 penawaran-a" data-id="' . $uid . '">' . defaultValue($row['name']) . '</a>';
+    $detail = '<a href="#" class="order2 penawaran-a" data-id="' . $uid . '">' . defaultValue(mb_convert_encoding($row["name"], 'UTF-8', 'ISO-8859-1')) . '</a>';
 
     // kondisi ketika data dari simrs
     if ($fromorder == 'SIMRS' || $fromorder == 'simrs') {
