@@ -160,7 +160,7 @@ while ($row = mysqli_fetch_array($result)) {
   }
 
   // kondisi ketika detail nama lihat detail query (radiographer, referral)
-  $detail = '<a href="#" class="hasil-all penawaran-a" data-id="' . $row['study_iuid'] . '">' . removeCharacter($pat_name) . '</a>';
+  $detail = '<a href="#" class="hasil-all penawaran-a" data-id="' . $row['study_iuid'] . '">' . removeCharacter(mb_convert_encoding($pat_name, 'UTF-8', 'ISO-8859-1')) . '</a>';
 
   // kondisi jika prioriry normal dan CITO
   if ($priority == 'Normal' || $priority == 'NORMAL' || $priority == 'normal') {
@@ -179,7 +179,7 @@ while ($row = mysqli_fetch_array($result)) {
   $sub_array[] = $status . '&nbsp;' . $badge;
   $sub_array[] = $detail . '&nbsp;' . $priority_style;
   $sub_array[] = $pat_id;
-  $sub_array[] = $study_desc_pacsio;
+  $sub_array[] = mb_convert_encoding($study_desc_pacsio, 'UTF-8', 'ISO-8859-1');
   $sub_array[] = $mods_in_study;
   $sub_array[] = $study_datetime;
   $sub_array[]  = $i++;
