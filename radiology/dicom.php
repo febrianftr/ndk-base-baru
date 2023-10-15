@@ -19,8 +19,8 @@ $row_dokrad = mysqli_fetch_assoc(mysqli_query(
 ));
 $dokradid = $row_dokrad['dokradid'];
 
-$kondisi = "WHERE (xray_workload.status = 'waiting' AND xray_order.dokradid = '$dokradid' AND xray_order.priority = 'cito' AND study.study_datetime >= '2023-10-12')
-OR (xray_workload.status = 'waiting' AND xray_order.dokradid IS NULL AND xray_order.priority = 'cito' AND study.study_datetime >= '2023-10-12')
+$kondisi = "WHERE (xray_workload.status = 'waiting' AND xray_order.dokradid = '$dokradid' AND xray_order.priority = 'cito' AND study.study_datetime >= '2023-10-13')
+OR (xray_workload.status = 'waiting' AND xray_order.dokradid IS NULL AND xray_order.priority = 'cito' AND study.study_datetime >= '2023-10-13')
 ORDER BY xray_order.priority IS NULL, xray_order.priority ASC, study.study_datetime DESC 
 LIMIT 3000";
 
