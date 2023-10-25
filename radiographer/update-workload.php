@@ -297,7 +297,7 @@ if ($_SESSION['level'] == "radiographer") {
 											</li>
 										</div>
 										<div class="form-update-workload col-lg-4">
-											<li>
+											<!-- <li>
 												<label for="film_small">Film Small</label><br>
 												<input type="text" name="film_small" id="film_small" value="<?= $film_small; ?>">
 											</li>
@@ -320,11 +320,26 @@ if ($_SESSION['level'] == "radiographer") {
 											<li>
 												<label for="film_reject_large">Film Reject Large </label><br>
 												<input type="text" name="film_reject_large" id="film_reject_large" value="<?= $film_reject_large; ?>">
-											</li>
+											</li> -->
 											<li>
+												<label for="radiographer_name">Faktor Pengulangan Foto</label><br>
+												<select class="selectpicker" id="re_photo" data-size="10" data-live-search="true" data-width="100%" name="re_photo" data-style="btn-info">
+													<option value="null">--pilih--</option>
+													<option value="terpotong" <?= "terpotong" == $re_photo ? 'selected' : "";  ?>>Terpotong</option>
+													<option value="artefak_logam" <?= "artefak_logam" == $re_photo ? 'selected' : "";  ?>>Artefak Logam</option>
+													<option value="fog_level" <?= "fog_level" == $re_photo ? 'selected' : "";  ?>>Fog Level</option>
+													<option value="unsharpness" <?= "unsharpness" == $re_photo ? 'selected' : "";  ?>>Unsharpness/Kabur</option>
+													<option value="faktor_ekposi" <?= "faktor_ekposi" == $re_photo ? 'selected' : "";  ?>>Faktor Eksposi</option>
+													<option value="salah_positioning" <?= "salah_positioning" == $re_photo ? 'selected' : "";  ?>>Salah Positioning</option>
+													<option value="alat_error" <?= "alat_error" == $re_photo ? 'selected' : "";  ?>>Alat Error</option>
+													<option value="teknik_exam" <?= "teknik_exam" == $re_photo ? 'selected' : "";  ?>>Teknik Exam</option>
+												</select>
+												<!-- <input type="text" name="radiographer_name" id="radiographer_name" value="<?= $radiographer_name; ?>"> -->
+											</li>
+											<!-- <li>
 												<label for="re_photo">Keterangan pengulangan foto</label><br>
 												<textarea rows="4" cols="50" type="text" name="re_photo" id="re_photo" value="<?= $re_photo; ?>"><?= $re_photo; ?></textarea>
-											</li>
+											</li> -->
 											<li>
 												<label for="kv">KV</label><br>
 												<input type="text" name="kv" id="kv" value="<?= $kv; ?>">

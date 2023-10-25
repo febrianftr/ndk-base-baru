@@ -406,7 +406,7 @@ if ($_SESSION['level'] == "radiology") {
 											<br>
 											<!-- menampilkan OHIF 1 halaman -->
 											<!-- <div class="collapse" id="ohif"> -->
-												<iframe src="<?= "$url$uid" ?>" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="600px"></iframe>
+											<iframe src="<?= "$url$uid" ?>" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="600px"></iframe>
 											<!-- </div> -->
 
 											<div class="textarea-ckeditor">

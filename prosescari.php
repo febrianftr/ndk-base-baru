@@ -15,7 +15,7 @@ $username = $_SESSION['username'];
 $level = $_SESSION['level'];
 
 // kolom untuk order by 
-$columns = array('pk', 'pk', 'status', 'pat_name', 'pat_id', 'patientid', 'pat_birthdate', 'pat_sex', 'study_desc_pacsio', 'pk', 'mods_in_study', 'named', 'name_dep', 'dokrad_name', 'radiographer_name', 'study_datetime', 'approved_at', 'pk');
+$columns = array('pk', 'pk', 'status', 'pat_name', 'pat_id', 'study_datetime', 'patientid', 'pat_birthdate', 'pat_sex', 'study_desc_pacsio', 'pk', 'mods_in_study', 'named', 'name_dep', 'dokrad_name', 'radiographer_name', 'approved_at', 'pk');
 
 $row_dokrad = mysqli_fetch_assoc(mysqli_query(
   $conn,

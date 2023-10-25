@@ -206,20 +206,20 @@ $("#edit-workload").validate({
       number: true,
       required: true,
     },
-    film_small: "number",
-    film_medium: "number",
-    film_large: "number",
-    film_reject_small: "number",
-    film_reject_medium: "number",
-    film_reject_large: "number",
+    // film_small: "number",
+    // film_medium: "number",
+    // film_large: "number",
+    // film_reject_small: "number",
+    // film_reject_medium: "number",
+    // film_reject_large: "number",
     priority: "required",
     spc_needs: "required",
-    kv: {
-      required: true,
-    },
-    mas: {
-      required: true,
-    },
+    // kv: {
+    //   required: true,
+    // },
+    // mas: {
+    //   required: true,
+    // },
   },
   errorPlacement: function (error, element) {
     if (element.is(":radio")) {
