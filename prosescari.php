@@ -258,7 +258,8 @@ while ($row = mysqli_fetch_array($result)) {
           OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
           HTMLFIRST . $study_iuid . HTMLLAST .
           DICOMFIRST . $study_iuid . DICOMLAST .
-          LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST
+          LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST .
+          COPYUIDFIRST . EXTLINKOHIF . $row['study_iuid'] . EXTLINKOHIF . COPYUIDLAST
           // . SENDDICOMFIRST . $study_iuid . SENDDICOMLAST .
           // GETEXPERTISEFIRST . $name_envelope . ' ' . defaultValueDateTime($created_at_envelope) . $href_get_expertise . GETEXPERTISELAST . $icon_get_expertise . GETEXPERTISEVERYLAST
         ;

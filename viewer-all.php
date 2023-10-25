@@ -169,3 +169,5 @@ define('INOBITECWORKLISTLAST', ')" id="inobitec" data-ip="' . $_SERVER['SERVER_N
 define('LINKOHIFFIRST', '<button class="btn btn-inti2" id="my_button" onclick="copyText(event, ');
 define('LINKOHIFLAST', ')"><i class="fas fa-link"></i></button>');
 define('EXTLINKOHIF', "'");
+define('COPYUIDFIRST', '<button class="btn btn-inti2" id="my_button" onclick="copyText(event, ');
+define('COPYUIDLAST', ')"><i class="fas fa-copy"></i></button>');
