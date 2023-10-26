@@ -54,8 +54,15 @@ function expertise($uidInput)
     // kondisi mencari ditabel dokter radiology
     $row_dokrad = mysqli_fetch_assoc(mysqli_query(
         $conn,
-        "SELECT $select_dokter_radiology 
-		FROM $table_dokter_radiology 
+        "SELECT CONCAT(xray_dokter_radiology.dokrad_name,' ',xray_dokter_radiology.dokrad_lastname) AS dokrad_fullname,
+        xray_dokter_radiology.pk,
+        xray_dokter_radiology.dokrad_email,
+        xray_dokter_radiology.dokradid,
+        xray_dokter_radiology.username,
+        xray_dokter_radiology.dokrad_img,
+        xray_dokter_radiology.nip,
+        xray_dokter_radiology.idtele
+		FROM xray_dokter_radiology AS xray_dokter_radiology
 		WHERE pk = '$pk_dokter_radiology'"
     ));
 
