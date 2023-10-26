@@ -55,10 +55,10 @@
 						</div>
 						<div class="row justify-content-center align-items-center" style="padding: 10px; border-radius: 5px; border: solid 2px #eff1f7;">
 							<div class="col-md-6">
-								<input type="checkbox" class="check-priorities" style="margin-top: 0px;" checked> <?= $lang['check_all'] ?> Priority Doctor :
+								<input type="checkbox" class="check-priorities" style="margin-top: 0px;" checked> <?= $lang['check_all'] ?> Priority:
 								<ul class="ks-cboxtags">
-									<li><label><input class="common_selector check-priority cbox5 checkbox4 search-input-workload" type="checkbox" id="priority_doctor" name="priority_doctor[]" value="normal" checked><span>Normal</span></label></li>
-									<li><label><input class="common_selector check-priority cbox5 checkbox4 search-input-workload" type="checkbox" id="priority_doctor" name="priority_doctor[]" value="cito" checked><span>Cito</span></label></li>
+									<li><label><input class="common_selector check-priority cbox5 checkbox4 search-input-workload" type="checkbox" id="priority" name="priority[]" value="normal" checked><span>Normal</span></label></li>
+									<li><label><input class="common_selector check-priority cbox5 checkbox4 search-input-workload" type="checkbox" id="priority" name="priority[]" value="cito" checked><span>Cito</span></label></li>
 								</ul>
 							</div>
 						</div>

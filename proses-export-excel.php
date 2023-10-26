@@ -25,7 +25,7 @@ $toUpdatedTime = $_POST['to_workload'];
 $toUpdatedTime = $toUpdatedTime != null ? date("Y-m-d H:i", strtotime($toUpdatedTime)) : null;
 $modsInStudy = implode("','", $_POST['mods_in_study']);
 $modsInStudy = str_replace('\\', '\\\\', $modsInStudy);
-$priorityDoctor = implode("','", $_POST['priority_doctor']);
+$priority = implode("','", $_POST['priority']);
 $radiographerId = implode("','", $_POST['radiographer']);
 $depId = implode("','", $_POST['dep_id']);
 $dokradId = implode("','", $_POST['dokradid']);
@@ -115,7 +115,7 @@ if ($dokradId == 'all') {
 // kondisi form
 $kondisi = "study.study_datetime BETWEEN '$fromUpdatedTime' AND '$toUpdatedTime'
             AND mods_in_study IN('$modsInStudy')
-            AND priority_doctor IN('$priorityDoctor')
+            AND priority IN('$priority')
             AND $kondisi_radiographer
             AND $kondisi_department
             AND $kondisi_dokterRadiology
@@ -348,7 +348,7 @@ while ($status = mysqli_fetch_array($statuses)) {
             </tr>
             <tr>
                 <td align="center">Prioritas Pasien : </td>
-                <td align="center"><?= str_replace("'", "", $priorityDoctor); ?></td>
+                <td align="center"><?= str_replace("'", "", $priority); ?></td>
             </tr>
             <!-- <tr>
                 <td align="center">Radiografer : </td>
