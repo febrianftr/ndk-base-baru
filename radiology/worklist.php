@@ -596,6 +596,6 @@ if ($_SESSION['level'] == "radiology") {
 			</script>";
 	}
 } else {
-	header("location:../index.php");
+	header("location:../index.php?to=worklist.php?uid=$uid");
 	mysqli_close($conn);
 } ?>
