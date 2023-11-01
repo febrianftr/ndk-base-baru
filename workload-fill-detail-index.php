@@ -7,6 +7,7 @@ require 'model/query-base-study.php';
 require 'model/query-base-patient.php';
 require 'model/query-base-dokter-radiology.php';
 require 'model/query-base-workload-fill.php';
+require 'model/query-base-workload-radiographers.php';
 require 'js/proses/function.php';
 include "bahasa.php";
 
@@ -213,9 +214,60 @@ if ($row['status'] == 'waiting' || $row['status'] == '') {
                         <td align="left">&nbsp; <?= $dokrad_name; ?></td>
                     </tr>
                     <tr>
-                        <td><?= $lang['radiographer'] ?></td>
+                        <td><?= $lang['radiographer'] ?> ID</td>
                         <td>&nbsp;: </td>
-                        <td align="left">&nbsp; <?= $radiographer_name; ?></td>
+                        <?php
+                        $workload_radiographers = mysqli_query(
+                            $conn,
+                            "SELECT * FROM xray_workload_radiographers
+                        WHERE uid = '$uid'
+                        "
+                        );
+                        $count = mysqli_num_rows($workload_radiographers);
+                        $index = 1;
+                        if ($count > 0) { ?>
+                            <td align="left">&nbsp;
+                                <?php while ($row_workload_radiographer = mysqli_fetch_assoc($workload_radiographers)) {
+                                    if ($count - 1 >= $index) {
+                                        $comma = ", ";
+                                    } else {
+                                        $comma = " ";
+                                    }
+                                    echo $radiographers_id = $row_workload_radiographer["radiographers_id"] . $comma;
+                                    $index++;
+                                } ?>
+                            </td>
+                        <?php } else { ?>
+                            <td align="left">&nbsp;<?= "-" ?></td>
+                        <?php } ?>
+                    </tr>
+                    <tr>
+                        <td><?= $lang['radiographer'] ?> Name</td>
+                        <td>&nbsp;: </td>
+                        <?php
+                        $workload_radiographers = mysqli_query(
+                            $conn,
+                            "SELECT * FROM xray_workload_radiographers
+                        WHERE uid = '$uid'
+                        "
+                        );
+                        $count = mysqli_num_rows($workload_radiographers);
+                        $index = 1;
+                        if ($count > 0) { ?>
+                            <td align="left">&nbsp;
+                                <?php while ($row_workload_radiographer = mysqli_fetch_assoc($workload_radiographers)) {
+                                    if ($count - 1 >= $index) {
+                                        $comma = " | ";
+                                    } else {
+                                        $comma = " ";
+                                    }
+                                    echo $radiographers_name = $row_workload_radiographer["radiographers_name"] . $comma;
+                                    $index++;
+                                } ?>
+                            </td>
+                        <?php } else { ?>
+                            <td align="left">&nbsp;<?= "-" ?></td>
+                        <?php } ?>
                     </tr>
                     <tr>
                         <td><?= $lang['spc_needs'] ?></td>

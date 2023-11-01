@@ -92,6 +92,23 @@
         });
         // end untuk menampilkan data popup
     </script>
+    <script>
+        // untuk menampilkan data popup
+        $(function() {
+            $(document).on('click', '.hasil-radiographer', function(e) {
+                e.preventDefault();
+                $("#modal-radiographer").modal('show');
+                $.post('../hasil-radiographer.php', {
+                        uid: $(this).attr('data-id')
+                    },
+                    function(html) {
+                        $(".modal-body").html(html);
+                    }
+                );
+            });
+        });
+        // end untuk menampilkan data popup
+    </script>
 
     <!-- right click disabled -->
     <!-- <script>

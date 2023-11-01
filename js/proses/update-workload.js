@@ -12,7 +12,7 @@ let dep_id = $("#dep_id").val();
 let mods_in_study = $("#mods_in_study").val();
 let dokterid = $("#dokterid").val();
 let contrast = $("#contrast").val();
-let radiographer_id = $("#radiographer_id").val();
+let radiographers_id = $("#radiographers_id").val();
 let priority = $("#priority").val();
 let payment = $("#payment").val();
 let contrast_allergies = $("#contrast_allergies").val();
@@ -185,6 +185,19 @@ $.validator.addMethod(
   "Please select an item!"
 );
 
+// untuk select multiple array
+$.validator.addMethod(
+  "valueNotEqualMultiples",
+  function (value, element, arg) {
+    if (value.length == 0) {
+      var value = "null";
+    }
+
+    return arg !== value;
+  },
+  "Please select an item!"
+);
+
 $("#edit-workload").validate({
   rules: {
     accession_no: "required",
@@ -200,7 +213,7 @@ $("#edit-workload").validate({
     id_payment: { valueNotEquals: "null" },
     mods_in_study: "required",
     dokterid: { valueNotEquals: "null" },
-    radiographer_id: { valueNotEquals: "null" },
+    "radiographers_id[]": { valueNotEqualMultiples: "null" },
     weight: "number",
     harga_prosedur: {
       number: true,

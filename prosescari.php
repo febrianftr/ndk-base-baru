@@ -5,6 +5,7 @@ require 'koneksi/koneksi.php';
 require 'viewer-all.php';
 require 'default-value.php';
 require 'model/query-base-workload.php';
+require 'model/query-base-workload-bhp.php';
 require 'model/query-base-order.php';
 require 'model/query-base-study.php';
 require 'model/query-base-patient.php';
@@ -40,6 +41,9 @@ $query_base = "SELECT
               mods_in_study,
               study.updated_time,
               status,
+              kv,
+              mas,
+              spc_needs,
               approved_at,
               pk_dokter_radiology,
               patientid AS no_foto,
@@ -56,7 +60,9 @@ $query_base = "SELECT
               JOIN $table_workload
               ON study.study_iuid = xray_workload.uid
               LEFT JOIN $table_order
-              ON xray_order.uid = xray_workload.uid";
+              ON xray_order.uid = xray_workload.uid
+              LEFT JOIN $table_workload_bhp
+              ON xray_workload.uid = xray_workload_bhp.uid";
 
 // kondisi jika login radiology
 if ($level == 'radiology') {
@@ -178,6 +184,9 @@ while ($row = mysqli_fetch_array($result)) {
   $approved_at = defaultValueDateTime($row['approved_at']);
   $spendtime = spendTime($study_datetime, $approved_at, $row['status']);
   $pk_dokter_radiology = $row['pk_dokter_radiology'];
+  $kv = $row['kv'];
+  $mas = $row['mas'];
+  $spc_needs = $row['spc_needs'];
   //kondisi status change doctor
   if ($row['status'] == 'approved') {
     $workload_status = 'approved';
@@ -191,6 +200,15 @@ while ($row = mysqli_fetch_array($result)) {
     $icon_change_doctor = CHANGEDOCTORICONNO;
   } else {
     $icon_change_doctor = CHANGEDOCTORICONYES;
+  }
+
+  // kondisi ketika klinis dan kv mas kosong menggunakan icon berbeda
+  if ($kv == null || $mas == null || $spc_needs == null) {
+    $icon_edit_pasien = EDITPASIENICONNO;
+    // $icon_edit_pasien = "no";
+  } else {
+    $icon_edit_pasien = EDITPASIENICONYES;
+    // $icon_edit_pasien = "yes";
   }
 
   $row_envelope = mysqli_fetch_assoc(mysqli_query(
@@ -243,7 +261,7 @@ while ($row = mysqli_fetch_array($result)) {
     if ($status != '-') {
       //login pak hardian
       if ($username == 'hardian') {
-        $level = EDITPASIENFIRST . $study_iuid . EDITPASIENLAST .
+        $level = EDITPASIENFIRST . $study_iuid . EDITPASIENLAST . $icon_edit_pasien . EDITPASIENVERYLAST .
           CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
           DICOMNEWFIRST . $study_iuid . DICOMNEWLAST .
           OHIFOLDFIRST . $study_iuid . OHIFOLDLAST
@@ -253,7 +271,7 @@ while ($row = mysqli_fetch_array($result)) {
         // TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST;
         // DELETEFIRST . $study_iuid . DELETELAST;
       } else {
-        $level = EDITPASIENFIRST . $study_iuid . EDITPASIENLAST .
+        $level = $level = EDITPASIENFIRST . $study_iuid . EDITPASIENLAST . $icon_edit_pasien . EDITPASIENVERYLAST .
           CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
           OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
           HTMLFIRST . $study_iuid . HTMLLAST .
@@ -328,7 +346,7 @@ while ($row = mysqli_fetch_array($result)) {
   $sub_array[] = mb_convert_encoding($named, 'UTF-8', 'ISO-8859-1');
   $sub_array[] = mb_convert_encoding($name_dep, 'UTF-8', 'ISO-8859-1');
   $sub_array[] = mb_convert_encoding($dokrad_name, 'UTF-8', 'ISO-8859-1');;
-  $sub_array[] = mb_convert_encoding($radiographer_name, 'UTF-8', 'ISO-8859-1');;
+  $sub_array[] = READMORERADIOGRAPHERFIRST . $study_iuid . READMORERADIOGRAPHERLAST;
   $sub_array[] = $approved_at;
   $sub_array[] = $spendtime;
   $sub_array[]  = $i++;

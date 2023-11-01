@@ -2,6 +2,7 @@
 require 'function_radiographer.php';
 require '../default-value.php';
 require '../model/query-base-workload.php';
+require '../model/query-base-workload-radiographers.php';
 require '../model/query-base-workload-bhp.php';
 require '../model/query-base-order.php';
 require '../model/query-base-study.php';
@@ -55,6 +56,7 @@ $named = $row['named'];
 $weight = $row['weight'];
 $contrast = $row['contrast'];
 $contrast_allergies = $row['contrast_allergies'];
+// radiographer order
 $radiographer_id = $row['radiographer_id'];
 $radiographer_name = $row['radiographer_name'];
 $dokradid = $row['dokradid'];
@@ -74,6 +76,8 @@ $film_reject_large = $row['film_reject_large'];
 $re_photo = $row['re_photo'];
 $kv = $row['kv'];
 $mas = $row['mas'];
+$kv1 = $row['kv1'];
+$mas1 = $row['mas1'];
 
 if ($fromorder == 'SIMRS' && $accession_no == $acc || $fromorder == 'simrs' && $accession_no == $acc) {
 	$simrs = SIMRS;
@@ -238,6 +242,21 @@ if ($_SESSION['level'] == "radiographer") {
 											<br>
 											<li>
 												<label for="radiographer_name">Nama Radiographer</label><br>
+												<select class="selectpicker" style="height: 150px;" id="radiographers_id" data-size="10" data-live-search="true" data-width="100%" name="radiographers_id[]" data-style="btn-info" multiple="multiple">
+													<?php
+													$radiographer = mysqli_query($conn, "SELECT * FROM xray_radiographer");
+
+													while ($row_radiographer = mysqli_fetch_array($radiographer)) {
+														$radiographers = mysqli_query($conn, "SELECT * FROM xray_workload_radiographers WHERE uid = '$uid'");
+													?>
+														<option value="<?= $row_radiographer['radiographer_id']; ?>" <?php while ($row_radiographers = mysqli_fetch_assoc($radiographers)) {
+																															echo $selected = $row_radiographer['radiographer_id'] == $row_radiographers['radiographers_id'] ? "selected" : "";
+																														}; ?>><?= $row_radiographer['radiographer_name'] . ' ' . $row_radiographer['radiographer_lastname']; ?></option>
+													<?php } ?>
+												</select>
+											</li>
+											<!-- <li>
+												<label for="radiographer_name">Nama Radiographer</label><br>
 												<select class="selectpicker" id="radiographer_id" data-size="10" data-live-search="true" data-width="100%" name="radiographer_id" data-style="btn-info">
 													<option value="null">--pilih--</option>
 													<?php
@@ -246,8 +265,7 @@ if ($_SESSION['level'] == "radiographer") {
 														<option value="<?= $row_radiographer['radiographer_id']; ?>" <?= $row_radiographer['radiographer_id'] == $radiographer_id ? 'selected' : "";  ?>><?= $row_radiographer['radiographer_name'] . ' ' . $row_radiographer['radiographer_lastname']; ?></option>
 													<?php } ?>
 												</select>
-												<!-- <input type="text" name="radiographer_name" id="radiographer_name" value="<?= $radiographer_name; ?>"> -->
-											</li>
+											</li> -->
 											<li>
 												<label for="priority">Prioritas</label><br>
 												<div class="status">
@@ -341,12 +359,16 @@ if ($_SESSION['level'] == "radiographer") {
 												<textarea rows="4" cols="50" type="text" name="re_photo" id="re_photo" value="<?= $re_photo; ?>"><?= $re_photo; ?></textarea>
 											</li> -->
 											<li>
-												<label for="kv">KV</label><br>
-												<input type="text" name="kv" id="kv" value="<?= $kv; ?>">
+												<label for="kv">KV</label>
+												<input type="text" style="width: 150px;" name="kv" id="kv" value="<?= $kv; ?>">
+												<label for="mas">mAs</label>
+												<input type="text" style="width: 150px;" name="mas" id="mas" value="<?= $mas; ?>">
 											</li>
 											<li>
-												<label for="mas">mAs</label><br>
-												<input type="text" name="mas" id="mas" value="<?= $mas; ?>">
+												<label for="kv">KV</label>
+												<input type="text" style="width: 150px;" name="kv1" id="kv1" value="<?= $kv1; ?>">
+												<label for="mas">mAs</label>
+												<input type="text" style="width: 150px;" name="mas1" id="mas1" value="<?= $mas1; ?>">
 											</li>
 											<br>
 											<li>

@@ -44,8 +44,11 @@ define('DELETEFIRST', '<a style="text-decoration:none;" class="ahref-edit" href=
 define('DELETELAST', '"onclick=\'return confirm("Delete data?");\'><span class="btn red lighten-1 btn-intiwid1"><i class="fas fa-trash-alt" data-toggle="tooltip" title="Delete"></i></span></a>');
 
 // EDIT PASIEN
+define('EDITPASIENICONYES', '<img src="../image/new/update-new.svg" data-toggle="tooltip" title="Update" style="width: 100%;">');
+define('EDITPASIENICONNO', '<img src="../image/new/update-new-yellow.svg" data-toggle="tooltip" title="Update" style="width: 100%;">');
 define('EDITPASIENFIRST', '<a href="update-workload.php?uid=');
-define('EDITPASIENLAST', '"<span class="btn text-primary rgba-stylish-slight btn-inti2"><img src="../image/new/update-new.svg" data-toggle="tooltip" title="Update" style="width: 100%;"></span></a>');
+define('EDITPASIENLAST', '"<span class="btn text-primary rgba-stylish-slight btn-inti2">');
+define('EDITPASIENVERYLAST', '</span></a>');
 
 // EDIT WORKLOAD
 define('EDITWORKLOADFIRST', '<a href="workload-edit.php?uid=');
@@ -62,6 +65,10 @@ define('TELEGRAMSIGNATURELAST', '"><span class="btn text-secondary rgba-stylish-
 // pop up read more series
 define('READMORESERIESFIRST', '<a href="#" class="hasil-series penawaran-a" data-id="');
 define('READMORESERIESLAST', '">Read More</a>');
+
+// pop up read more radiographer
+define('READMORERADIOGRAPHERFIRST', '<a href="#" class="hasil-radiographer penawaran-a" data-id="');
+define('READMORERADIOGRAPHERLAST', '">Read More</a>');
 
 // integrasi simrs
 define('SIMRS', '<i class="fas fa-exchange-alt text-info" style="font-size:0.5rem;" title="terintegrasi dengan SIMRS"></i>');
