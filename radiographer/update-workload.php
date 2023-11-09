@@ -359,16 +359,16 @@ if ($_SESSION['level'] == "radiographer") {
 												<textarea rows="4" cols="50" type="text" name="re_photo" id="re_photo" value="<?= $re_photo; ?>"><?= $re_photo; ?></textarea>
 											</li> -->
 											<li>
-												<label for="kv">KV</label>
-												<input type="text" style="width: 150px;" name="kv" id="kv" value="<?= $kv; ?>">
-												<label for="mas">mAs</label>
-												<input type="text" style="width: 150px;" name="mas" id="mas" value="<?= $mas; ?>">
+												<label for="kv">KV1</label>
+												<input type="text" style="width: 80px;" name="kv" id="kv" value="<?= $kv; ?>">
+												<label for="mas">mAs1</label>
+												<input type="text" style="width: 80px;" name="mas" id="mas" value="<?= $mas; ?>">
 											</li>
 											<li>
-												<label for="kv">KV</label>
-												<input type="text" style="width: 150px;" name="kv1" id="kv1" value="<?= $kv1; ?>">
-												<label for="mas">mAs</label>
-												<input type="text" style="width: 150px;" name="mas1" id="mas1" value="<?= $mas1; ?>">
+												<label for="kv">KV2</label>
+												<input type="text" style="width: 80px;" name="kv1" id="kv1" value="<?= $kv1; ?>">
+												<label for="mas">mAs2</label>
+												<input type="text" style="width: 80px;" name="mas1" id="mas1" value="<?= $mas1; ?>">
 											</li>
 											<br>
 											<li>
