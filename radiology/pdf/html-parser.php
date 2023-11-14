@@ -315,4 +315,15 @@ class PDF extends FPDF
             $script = 'print(true);';
         $this->IncludeJS($script);
     }
+
+    function Footer()
+    {
+        //atur posisi 1.5 cm dari bawah
+        $this->SetY(-15);
+        $this->Image('footer-pku.jpg', 0, 265, 215);
+        //Arial italic 9
+        // $this->SetFont('Arial', 'I', 9);
+        //nomor halaman
+        // $this->Cell(0, 10, 'Halaman ' . $this->PageNo(), 0, 0, 'R');
+    }
 } //end of class
