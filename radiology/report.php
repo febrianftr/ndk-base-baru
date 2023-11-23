@@ -46,6 +46,10 @@ if ($_SESSION['level'] == "radiology") {
 					$('.check-status').prop('checked', this.checked);
 				});
 
+				$('.check-contrasts').click(function() {
+					$('.check-contrast').prop('checked', this.checked);
+				});
+
 				// --------------------
 				$('#from_workload').datetimepicker({
 					format: 'd-m-Y H:i',

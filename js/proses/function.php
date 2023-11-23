@@ -93,7 +93,7 @@ function expertise($uidInput)
     // memanggil library FPDF
     require('../radiology/pdf/fpdf.php');
     require('../radiology/pdf/hex.php');
-    require('../radiology/pdf/html-parser.php');
+    require('pdf/html-parser.php');
 
     // intance object dan memberikan pengaturan halaman PDF
     $pdf = new PDF('P', 'mm', 'A4');

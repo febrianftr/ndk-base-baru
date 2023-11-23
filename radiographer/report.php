@@ -44,6 +44,10 @@ if ($_SESSION['level'] == "radiographer") {
 					$('.check-priority').prop('checked', this.checked);
 				});
 
+				$('.check-contrasts').click(function() {
+					$('.check-contrast').prop('checked', this.checked);
+				});
+
 				$('.check-statuses').click(function() {
 					$('.check-status').prop('checked', this.checked);
 				});

@@ -64,6 +64,15 @@
 						</div>
 						<div class="row justify-content-center align-items-center" style="padding: 10px; border-radius: 5px; border: solid 2px #eff1f7;">
 							<div class="col-md-6">
+								<input type="checkbox" class="check-contrasts" style="margin-top: 0px;" checked> <?= $lang['check_all'] ?> Contrast:
+								<ul class="ks-cboxtags">
+									<li><label><input class="common_selector check-contrast cbox5 checkbox4 search-input-workload" type="checkbox" id="contrast" name="contrast[]" value="1" checked><span>Kontras</span></label></li>
+									<li><label><input class="common_selector check-contrast cbox5 checkbox4 search-input-workload" type="checkbox" id="contrast" name="contrast[]" value="0" checked><span>Tidak Kontras</span></label></li>
+								</ul>
+							</div>
+						</div>
+						<div class="row justify-content-center align-items-center" style="padding: 10px; border-radius: 5px; border: solid 2px #eff1f7;">
+							<div class="col-md-6">
 								<div class="form-group">
 									<label for="sel1">Select Radiographer:</label>
 									<select class="form-control select2" multiple="multiple" name="radiographer[]" id="radiographer" style="width: 100%;" required>

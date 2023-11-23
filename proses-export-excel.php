@@ -26,11 +26,24 @@ $toUpdatedTime = $_POST['to_workload'];
 $toUpdatedTime = $toUpdatedTime != null ? date("Y-m-d H:i", strtotime($toUpdatedTime)) : null;
 $modsInStudy = implode("','", $_POST['mods_in_study']);
 $modsInStudy = str_replace('\\', '\\\\', $modsInStudy);
+$contrast = implode("','", $_POST['contrast']);
 $priority = implode("','", $_POST['priority']);
 $radiographerId = implode("','", $_POST['radiographer']);
 $depId = implode("','", $_POST['dep_id']);
 $dokradId = implode("','", $_POST['dokradid']);
 $statusOne = implode("','", $_POST['status']);
+
+// contrast
+if (isset($_POST['contrast'])) {
+    // jika contrast dipilih all maka query semua contrast
+    if (count($_POST['contrast']) == 2) {
+        $kondisi_contrast = "(contrast IN('$contrast') OR contrast IS NULL)";
+    } else {
+        $kondisi_contrast = "contrast IN('$contrast')";
+    };
+} else {
+    "";
+}
 
 // radiografer
 $radiographerIdArray = [];
@@ -119,6 +132,7 @@ if ($dokradId == 'all') {
 $kondisi = "study.study_datetime BETWEEN '$fromUpdatedTime' AND '$toUpdatedTime'
             AND mods_in_study IN('$modsInStudy')
             AND priority IN('$priority')
+            AND $kondisi_contrast
             AND $kondisi_department
             AND $kondisi_radiographer
             AND $kondisi_dokterRadiology
@@ -376,6 +390,10 @@ while ($status = mysqli_fetch_array($statuses)) {
             <tr>
                 <td align="center">Radiografer : </td>
                 <td align="center"><?= $radiographerIdResult; ?></td>
+            </tr>
+            <tr>
+                <td align="center">Contrast : </td>
+                <td align="center"><?= str_replace("'", "", $contrast); ?></td>
             </tr>
             <!-- <tr>
                 <td align="center">Departemen : </td>
