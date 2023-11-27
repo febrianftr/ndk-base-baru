@@ -1,5 +1,49 @@
 <?php
+require '../koneksi/koneksi.php';
+require 'default-value.php';
+require '../model/query-base-workload.php';
+require '../model/query-base-order.php';
+require '../model/query-base-study.php';
+require '../model/query-base-patient.php';
+
 $level = $_SESSION['level'];
+$waiting3hour = mysqli_fetch_assoc(mysqli_query(
+	$conn_pacsio,
+	"SELECT 
+	COUNT(*) AS jumlah
+	FROM $table_patient
+	JOIN $table_study 
+	ON patient.pk = study.patient_fk 
+	JOIN $table_workload
+	ON study.study_iuid = xray_workload.uid 
+	LEFT JOIN $table_order
+	ON xray_order.uid = xray_workload.uid 
+	WHERE status = 'waiting'
+	AND study.study_datetime < DATE_SUB(NOW(), INTERVAL 3 HOUR)
+	AND study.updated_time >= '2023-11-26'
+	AND priority = 'normal'
+	"
+));
+$moreThan3hour = $waiting3hour["jumlah"];
+
+$waiting1hour = mysqli_fetch_assoc(mysqli_query(
+	$conn_pacsio,
+	"SELECT 
+	COUNT(*) AS jumlah
+	FROM $table_patient
+	JOIN $table_study 
+	ON patient.pk = study.patient_fk 
+	JOIN $table_workload
+	ON study.study_iuid = xray_workload.uid 
+	LEFT JOIN $table_order
+	ON xray_order.uid = xray_workload.uid 
+	WHERE status = 'waiting'
+	AND study.study_datetime < DATE_SUB(NOW(), INTERVAL 1 HOUR)
+	AND study.updated_time >= '2023-11-26'
+	AND priority = 'cito'
+	"
+));
+$moreThan1hour = $waiting1hour["jumlah"];
 ?>
 <div class="col-12" style="padding: 0;">
 	<nav aria-label="breadcrumb">
@@ -17,6 +61,20 @@ $level = $_SESSION['level'];
 	<?php } ?>
 	<hr>
 	<?php require_once 'formsearch.php'; ?>
+
+	<!-- waiting three hour normal -->
+	<div class="blinking" style="text-align: center;">
+		<hr>
+		<a href="#" class="hasil-waiting-morethan3hour penawaran-a"><?php echo "Waiting <strong>($moreThan3hour)</strong> study"; ?></a>
+		<hr>
+	</div>
+	<!-- waiting one hour CITO -->
+	<div class="blinking-cito" style="text-align: center;">
+		<hr>
+		<a href="#" class="hasil-waiting-morethan1hour penawaran-a"><?php echo "Waiting CITO <strong>($moreThan1hour)</strong> study"; ?></a>
+		<hr>
+	</div>
+
 	<div class="col-md-12 table-box" style="overflow-x:auto;">
 		<table class="table-dicom" id="purchase_order" style="width: 2400px;" cellpadding="8" cellspacing="0">
 			<thead class="thead1">

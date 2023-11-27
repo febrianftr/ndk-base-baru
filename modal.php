@@ -22,6 +22,30 @@
     </div>
 </div>
 
+<!-- pop up hasil waiting morethan3hour -->
+<div class="modal" id="modal-waiting-morethan3hour">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body"></div>
+        </div>
+    </div>
+</div>
+
+<!-- pop up hasil waiting morethan1hour -->
+<div class="modal" id="modal-waiting-morethan1hour">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body"></div>
+        </div>
+    </div>
+</div>
+
 <!-- pop up hasil radiographer -->
 <div class="modal" id="modal-radiographer">
     <div class="modal-dialog modal-dialog-scrollable modal-lg">

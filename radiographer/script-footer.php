@@ -118,6 +118,40 @@
 <script>
     // untuk menampilkan data popup
     $(function() {
+        $(document).on('click', '.hasil-waiting-morethan3hour', function(e) {
+            e.preventDefault();
+            $("#modal-waiting-morethan3hour").modal('show');
+            $.post('../hasil-waiting-morethan3hour.php', {
+                    uid: $(this).attr('data-id')
+                },
+                function(html) {
+                    $(".modal-body").html(html);
+                }
+            );
+        });
+    });
+    // end untuk menampilkan data popup
+</script>
+<script>
+    // untuk menampilkan data popup
+    $(function() {
+        $(document).on('click', '.hasil-waiting-morethan1hour', function(e) {
+            e.preventDefault();
+            $("#modal-waiting-morethan1hour").modal('show');
+            $.post('../hasil-waiting-morethan1hour.php', {
+                    uid: $(this).attr('data-id')
+                },
+                function(html) {
+                    $(".modal-body").html(html);
+                }
+            );
+        });
+    });
+    // end untuk menampilkan data popup
+</script>
+<script>
+    // untuk menampilkan data popup
+    $(function() {
         $(document).on('click', '.hasil-radiographer', function(e) {
             e.preventDefault();
             $("#modal-radiographer").modal('show');

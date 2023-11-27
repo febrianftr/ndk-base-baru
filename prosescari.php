@@ -183,6 +183,7 @@ while ($row = mysqli_fetch_array($result)) {
   $fromorder = $row['fromorder'];
   $approved_at = defaultValueDateTime($row['approved_at']);
   $spendtime = spendTime($study_datetime, $approved_at, $row['status']);
+  $blinking = hour($study_datetime, $row['status'], $priority);
   $pk_dokter_radiology = $row['pk_dokter_radiology'];
   $kv = $row['kv'];
   $mas = $row['mas'];
@@ -272,7 +273,7 @@ while ($row = mysqli_fetch_array($result)) {
         // DELETEFIRST . $study_iuid . DELETELAST;
       } else {
         $level = $level = EDITPASIENFIRST . $study_iuid . EDITPASIENLAST . $icon_edit_pasien . EDITPASIENVERYLAST .
-          CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
+          CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $blinking . CHANGEDOCTORCLASS . $icon_change_doctor . CHANGEDOCTORVERYLAST .
           OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
           HTMLFIRST . $study_iuid . HTMLLAST .
           DICOMFIRST . $study_iuid . DICOMLAST .

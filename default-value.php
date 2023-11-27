@@ -56,6 +56,32 @@ function spendTime($value_study_datetime, $value_approved_at, $value_status)
     return $spendTime;
 }
 
+function hour($value_study_datetime, $value_status, $value_priority)
+{
+    date_default_timezone_set('Asia/Jakarta');
+    $study_datetime = date("Y-m-d H:i", strtotime($value_study_datetime));
+    $datenow = date("Y-m-d H:i");
+    if (strtolower($value_status) == 'waiting') {
+        $interval =  strtotime($datenow) - strtotime($study_datetime);
+        $hour = floor($interval / (60 * 60));
+        $minute = $interval - $hour * (60 * 60);
+        $minute = $minute / 60;
+        $resulthour = "{$hour}";
+    } else {
+        $resulthour = '-';
+    }
+
+    if ($resulthour >= 3 && strtolower($value_priority) == "normal") {
+        $blinking = "blinking ";
+    } else if ($resulthour >= 1 && strtolower($value_priority) == "cito") {
+        $blinking = "blinking-cito ";
+    } else {
+        $blinking = "";
+    }
+
+    return $blinking;
+}
+
 function styleSex($value)
 {
     if ($value == 'M') {

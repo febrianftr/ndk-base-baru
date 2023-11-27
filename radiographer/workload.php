@@ -24,7 +24,36 @@ if ($_SESSION['level'] == "radiographer") {
           position: fixed;
         }
       }
+
+      @keyframes blink {
+        0% {
+          background-color: orange;
+        }
+
+        100% {
+          background-color: white;
+        }
+      }
+
+      .blinking {
+        animation: blink 1.5s infinite;
+      }
+
+      @keyframes blinkCito {
+        0% {
+          background-color: red;
+        }
+
+        100% {
+          background-color: white;
+        }
+      }
+
+      .blinking-cito {
+        animation: blinkCito 1.5s infinite;
+      }
     </style>
+    <meta http-equiv="refresh" content="500" />
   </head>
 
   <body>

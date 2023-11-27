@@ -205,7 +205,7 @@ $("#edit-workload").validate({
     pat_id: "required",
     pat_name: "required",
     pat_sex: { required: true },
-    // contrast: { required: true },
+    contrast: { required: true },
     // contrast_allergies: { required: true },
     pat_birthdate: "required",
     address: "required",
