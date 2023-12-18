@@ -25,20 +25,6 @@ if ($_SESSION['level'] == "radiographer") {
         }
       }
 
-      @keyframes blink {
-        0% {
-          background-color: orange;
-        }
-
-        100% {
-          background-color: white;
-        }
-      }
-
-      .blinking {
-        animation: blink 1.5s infinite;
-      }
-
       @keyframes blinkCito {
         0% {
           background-color: red;
@@ -51,6 +37,62 @@ if ($_SESSION['level'] == "radiographer") {
 
       .blinking-cito {
         animation: blinkCito 1.5s infinite;
+      }
+
+      @keyframes blinkThreeHour {
+        0% {
+          background-color: orange;
+        }
+
+        100% {
+          background-color: white;
+        }
+      }
+
+      .blinking-3-hour {
+        animation: blinkThreeHour 1.5s infinite;
+      }
+
+      @keyframes blinkSixHour {
+        0% {
+          background-color: yellow;
+        }
+
+        100% {
+          background-color: white;
+        }
+      }
+
+      .blinking-6-hour {
+        animation: blinkSixHour 1.5s infinite;
+      }
+
+      @keyframes blinkTwelveHour {
+        0% {
+          background-color: green;
+        }
+
+        100% {
+          background-color: white;
+        }
+      }
+
+      .blinking-12-hour {
+        animation: blinkTwelveHour 1.5s infinite;
+      }
+
+      @keyframes blinkTwentyFourHour {
+        0% {
+          background-color: blue;
+        }
+
+        100% {
+          background-color: white;
+        }
+      }
+
+      .blinking-24-hour {
+        animation: blinkTwentyFourHour 1.5s infinite;
       }
     </style>
     <meta http-equiv="refresh" content="500" />

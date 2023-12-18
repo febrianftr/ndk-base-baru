@@ -118,6 +118,57 @@
 <script>
     // untuk menampilkan data popup
     $(function() {
+        $(document).on('click', '.hasil-waiting-morethan24hour', function(e) {
+            e.preventDefault();
+            $("#modal-waiting-morethan24hour").modal('show');
+            $.post('../hasil-waiting-morethan24hour.php', {
+                    uid: $(this).attr('data-id')
+                },
+                function(html) {
+                    $(".modal-body").html(html);
+                }
+            );
+        });
+    });
+    // end untuk menampilkan data popup
+</script>
+<script>
+    // untuk menampilkan data popup
+    $(function() {
+        $(document).on('click', '.hasil-waiting-morethan12hour', function(e) {
+            e.preventDefault();
+            $("#modal-waiting-morethan12hour").modal('show');
+            $.post('../hasil-waiting-morethan12hour.php', {
+                    uid: $(this).attr('data-id')
+                },
+                function(html) {
+                    $(".modal-body").html(html);
+                }
+            );
+        });
+    });
+    // end untuk menampilkan data popup
+</script>
+<script>
+    // untuk menampilkan data popup
+    $(function() {
+        $(document).on('click', '.hasil-waiting-morethan6hour', function(e) {
+            e.preventDefault();
+            $("#modal-waiting-morethan6hour").modal('show');
+            $.post('../hasil-waiting-morethan6hour.php', {
+                    uid: $(this).attr('data-id')
+                },
+                function(html) {
+                    $(".modal-body").html(html);
+                }
+            );
+        });
+    });
+    // end untuk menampilkan data popup
+</script>
+<script>
+    // untuk menampilkan data popup
+    $(function() {
         $(document).on('click', '.hasil-waiting-morethan3hour', function(e) {
             e.preventDefault();
             $("#modal-waiting-morethan3hour").modal('show');

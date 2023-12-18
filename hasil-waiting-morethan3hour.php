@@ -10,21 +10,24 @@ require 'bahasa.php';
 
 $waiting3hour = mysqli_query(
 	$conn_pacsio,
-	"SELECT $select_patient, 
+	"SELECT 
+	$select_patient, 
 	$select_study, 
 	$select_workload,
 	$select_order
 	FROM $table_patient
-	JOIN $table_study
+	JOIN $table_study 
 	ON patient.pk = study.patient_fk 
 	JOIN $table_workload
 	ON study.study_iuid = xray_workload.uid 
-	LEFT JOIN  $table_order
+	LEFT JOIN $table_order
 	ON xray_order.uid = xray_workload.uid 
 	WHERE status = 'waiting'
 	AND study.study_datetime < DATE_SUB(NOW(), INTERVAL 3 HOUR)
-	AND study.updated_time >= '2023-11-26'
 	AND priority = 'normal'
+	AND mods_in_study IN('US')
+	AND study_desc_pacsio != 'USG VASCULER'
+	AND study.updated_time >= '2023-11-26'
 	"
 );
 ?>
@@ -50,6 +53,7 @@ $waiting3hour = mysqli_query(
 						<th><?= $lang['study_date'] ?></th>
 						<th>No Foto</th>
 						<th><?= $lang['study'] ?></th>
+						<th>Contrast</th>
 					</tr>
 					<?php
 					while ($row1 = mysqli_fetch_assoc($waiting3hour)) {
@@ -77,6 +81,7 @@ $waiting3hour = mysqli_query(
 							<td align="left"><?= defaultValueDateTime($row1['study_datetime']); ?></td>
 							<td align="left"><?= defaultValue($row1['patientid']); ?></td>
 							<td align="left"><?= defaultValue($row1['study_desc']); ?></td>
+							<td align="left"><?= contrast($row1['contrast']); ?></td>
 						</tr>
 					<?php
 					}

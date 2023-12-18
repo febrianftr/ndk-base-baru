@@ -53,6 +53,7 @@ $query_base = "SELECT
               name_dep,
               radiographer_name,
               priority,
+              contrast,
               fromorder
               FROM $table_patient
               JOIN $table_study
@@ -181,9 +182,10 @@ while ($row = mysqli_fetch_array($result)) {
   $priority = defaultValue($row['priority']);
   $status = styleStatus($row['status'], $study_iuid);
   $fromorder = $row['fromorder'];
+  $contrast = $row['contrast'];
   $approved_at = defaultValueDateTime($row['approved_at']);
   $spendtime = spendTime($study_datetime, $approved_at, $row['status']);
-  $blinking = hour($study_datetime, $row['status'], $priority);
+  $blinking = hour($study_datetime, $row['status'], $priority, $mods_in_study, $contrast, $study_desc_pacsio);
   $pk_dokter_radiology = $row['pk_dokter_radiology'];
   $kv = $row['kv'];
   $mas = $row['mas'];

@@ -8,23 +8,26 @@ require 'model/query-base-workload.php';
 require 'model/query-base-order.php';
 require 'bahasa.php';
 
-$waiting3hour = mysqli_query(
+$waiting6hour = mysqli_query(
 	$conn_pacsio,
-	"SELECT $select_patient, 
+	"SELECT 
+	$select_patient, 
 	$select_study, 
 	$select_workload,
 	$select_order
 	FROM $table_patient
-	JOIN $table_study
+	JOIN $table_study 
 	ON patient.pk = study.patient_fk 
 	JOIN $table_workload
 	ON study.study_iuid = xray_workload.uid 
-	LEFT JOIN  $table_order
+	LEFT JOIN $table_order
 	ON xray_order.uid = xray_workload.uid 
 	WHERE status = 'waiting'
-	AND study.study_datetime < DATE_SUB(NOW(), INTERVAL 1 HOUR)
+	AND study.study_datetime < DATE_SUB(NOW(), INTERVAL 6 HOUR)
+	AND priority = 'normal'
+	AND mods_in_study IN('DX', 'CR', 'DX\\\\CR')
+	AND contrast = 0
 	AND study.updated_time >= '2023-11-26'
-	AND priority = 'cito'
 	"
 );
 ?>
@@ -35,7 +38,7 @@ $waiting3hour = mysqli_query(
 </style>
 <div class="fill">
 	<div class="table-responsive-sm">
-		<h5 class="text-center font-weight-bold">The patient has not been read for more than 1 hour</h5>
+		<h5 class="text-center font-weight-bold">The patient has not been read for more than 6 hour</h5>
 	</div>
 	<br>
 	<h4>
@@ -53,7 +56,7 @@ $waiting3hour = mysqli_query(
 						<th>Contrast</th>
 					</tr>
 					<?php
-					while ($row1 = mysqli_fetch_assoc($waiting3hour)) {
+					while ($row1 = mysqli_fetch_assoc($waiting6hour)) {
 						// kondisi ketika dokter belum ada menggunakan icon berbeda
 						if ($row1["pk_dokter_radiology"] == null && $row1["dokradid"] == null) {
 							$icon_change_doctor = CHANGEDOCTORICONNO;
