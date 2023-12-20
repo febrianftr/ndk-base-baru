@@ -37,7 +37,7 @@ if ($_SESSION['level'] == "radiographer") {
 
       .blinking-cito {
         /* animation: blinkCito 1.5s infinite; */
-        background-color: red;
+        background-color: #d24141;
       }
 
       @keyframes blinkThreeHour {
@@ -52,7 +52,7 @@ if ($_SESSION['level'] == "radiographer") {
 
       .blinking-3-hour {
         /* animation: blinkThreeHour 1.5s infinite; */
-        background-color: orange;
+        background-color: #e49608;
       }
 
       @keyframes blinkSixHour {
@@ -67,7 +67,7 @@ if ($_SESSION['level'] == "radiographer") {
 
       .blinking-6-hour {
         /* animation: blinkSixHour 1.5s infinite; */
-        background-color: #caca12;
+        background-color: #12cab0;
       }
 
       @keyframes blinkTwelveHour {
@@ -82,7 +82,7 @@ if ($_SESSION['level'] == "radiographer") {
 
       .blinking-12-hour {
         /* animation: blinkTwelveHour 1.5s infinite; */
-        background-color: green;
+        background-color: #1c9b1c;
       }
 
       @keyframes blinkTwentyFourHour {
@@ -97,7 +97,7 @@ if ($_SESSION['level'] == "radiographer") {
 
       .blinking-24-hour {
         /* animation: blinkTwentyFourHour 1.5s infinite; */
-        background-color: blue;
+        background-color: #1e4edf;
       }
 
       .table .penawaran-a{
