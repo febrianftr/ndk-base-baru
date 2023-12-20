@@ -151,7 +151,7 @@ $moreThan24hourContrast = $waiting24hourContrast["jumlah"];
 				<!-- waiting 1 hour CITO -->
 				<div class="notif-blink blinking-cito" style="text-align: center;">
 					
-					<a href="#" class="hasil-waiting-morethan1hour penawaran-a"><?php echo "Waiting CITO <strong>($moreThan1hour)</strong> study"; ?></a>
+					<a href="#" class="hasil-waiting-morethan1hour penawaran-a"><?php echo "Waiting CITO ($moreThan1hour) study"; ?></a>
 					
 				</div>
 			</td>
@@ -159,7 +159,7 @@ $moreThan24hourContrast = $waiting24hourContrast["jumlah"];
 				<!-- waiting 3 hour reguler -->
 				<div class="notif-blink blinking-3-hour" style="text-align: center;">
 					
-					<a href="#" class="hasil-waiting-morethan3hour penawaran-a"><?php echo "Waiting 3 hour <strong>($moreThan3hourReguler)</strong> study"; ?></a>
+					<a href="#" class="hasil-waiting-morethan3hour penawaran-a"><?php echo "Waiting 3 hour ($moreThan3hourReguler) study"; ?></a>
 					
 				</div>
 			</td>
@@ -167,7 +167,7 @@ $moreThan24hourContrast = $waiting24hourContrast["jumlah"];
 				<!-- waiting 6 hour reguler -->
 				<div class="notif-blink blinking-6-hour" style="text-align: center;">
 					
-					<a href="#" class="hasil-waiting-morethan6hour penawaran-a"><?php echo "Waiting 6 hour <strong>($moreThan6hourReguler)</strong> study"; ?></a>
+					<a href="#" class="hasil-waiting-morethan6hour penawaran-a"><?php echo "Waiting 6 hour ($moreThan6hourReguler) study"; ?></a>
 					
 				</div>
 			</td>
@@ -175,7 +175,7 @@ $moreThan24hourContrast = $waiting24hourContrast["jumlah"];
 				<!-- waiting 12 hour reguler -->
 				<div class="notif-blink blinking-12-hour" style="text-align: center;">
 					
-					<a href="#" class="hasil-waiting-morethan12hour penawaran-a"><?php echo "Waiting 12 hour <strong>($moreThan12hourReguler)</strong> study"; ?></a>
+					<a href="#" class="hasil-waiting-morethan12hour penawaran-a"><?php echo "Waiting 12 hour ($moreThan12hourReguler) study"; ?></a>
 					
 				</div>
 			</td>
@@ -183,7 +183,7 @@ $moreThan24hourContrast = $waiting24hourContrast["jumlah"];
 				<!-- waiting 24 hour contrast -->
 				<div class="notif-blink blinking-24-hour" style="text-align: center;">
 					
-					<a href="#" class="hasil-waiting-morethan24hour penawaran-a"><?php echo "Waiting 24 hour <strong>($moreThan24hourContrast)</strong> study"; ?></a>
+					<a href="#" class="hasil-waiting-morethan24hour penawaran-a"><?php echo "Waiting 24 hour ($moreThan24hourContrast) study"; ?></a>
 					
 				</div>
 			</td>
