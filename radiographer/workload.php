@@ -67,7 +67,7 @@ if ($_SESSION['level'] == "radiographer") {
 
       .blinking-6-hour {
         /* animation: blinkSixHour 1.5s infinite; */
-        background-color: #12cab0;
+        background-color: #15b19b;
       }
 
       @keyframes blinkTwelveHour {
