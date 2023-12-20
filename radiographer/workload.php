@@ -36,7 +36,8 @@ if ($_SESSION['level'] == "radiographer") {
       }
 
       .blinking-cito {
-        animation: blinkCito 1.5s infinite;
+        /* animation: blinkCito 1.5s infinite; */
+        background-color: red;
       }
 
       @keyframes blinkThreeHour {
@@ -50,7 +51,8 @@ if ($_SESSION['level'] == "radiographer") {
       }
 
       .blinking-3-hour {
-        animation: blinkThreeHour 1.5s infinite;
+        /* animation: blinkThreeHour 1.5s infinite; */
+        background-color: orange;
       }
 
       @keyframes blinkSixHour {
@@ -64,7 +66,8 @@ if ($_SESSION['level'] == "radiographer") {
       }
 
       .blinking-6-hour {
-        animation: blinkSixHour 1.5s infinite;
+        /* animation: blinkSixHour 1.5s infinite; */
+        background-color: #caca12;
       }
 
       @keyframes blinkTwelveHour {
@@ -78,7 +81,8 @@ if ($_SESSION['level'] == "radiographer") {
       }
 
       .blinking-12-hour {
-        animation: blinkTwelveHour 1.5s infinite;
+        /* animation: blinkTwelveHour 1.5s infinite; */
+        background-color: green;
       }
 
       @keyframes blinkTwentyFourHour {
@@ -92,8 +96,20 @@ if ($_SESSION['level'] == "radiographer") {
       }
 
       .blinking-24-hour {
-        animation: blinkTwentyFourHour 1.5s infinite;
+        /* animation: blinkTwentyFourHour 1.5s infinite; */
+        background-color: blue;
       }
+
+      .table .penawaran-a{
+        color: #fff;
+        font-weight: bold;
+      }
+
+      .notif-blink{
+        padding: 15px 0px;
+  border-radius: 5px;
+      }
+      
     </style>
     <meta http-equiv="refresh" content="500" />
   </head>

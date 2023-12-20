@@ -149,42 +149,42 @@ $moreThan24hourContrast = $waiting24hourContrast["jumlah"];
 		<tr>
 			<td>
 				<!-- waiting 1 hour CITO -->
-				<div class="blinking-cito" style="text-align: center;">
-					<hr>
+				<div class="notif-blink blinking-cito" style="text-align: center;">
+					
 					<a href="#" class="hasil-waiting-morethan1hour penawaran-a"><?php echo "Waiting CITO <strong>($moreThan1hour)</strong> study"; ?></a>
-					<hr>
+					
 				</div>
 			</td>
 			<td>
 				<!-- waiting 3 hour reguler -->
-				<div class="blinking-3-hour" style="text-align: center;">
-					<hr>
+				<div class="notif-blink blinking-3-hour" style="text-align: center;">
+					
 					<a href="#" class="hasil-waiting-morethan3hour penawaran-a"><?php echo "Waiting 3 hour <strong>($moreThan3hourReguler)</strong> study"; ?></a>
-					<hr>
+					
 				</div>
 			</td>
 			<td>
 				<!-- waiting 6 hour reguler -->
-				<div class="blinking-6-hour" style="text-align: center;">
-					<hr>
+				<div class="notif-blink blinking-6-hour" style="text-align: center;">
+					
 					<a href="#" class="hasil-waiting-morethan6hour penawaran-a"><?php echo "Waiting 6 hour <strong>($moreThan6hourReguler)</strong> study"; ?></a>
-					<hr>
+					
 				</div>
 			</td>
 			<td>
 				<!-- waiting 12 hour reguler -->
-				<div class="blinking-12-hour" style="text-align: center;">
-					<hr>
+				<div class="notif-blink blinking-12-hour" style="text-align: center;">
+					
 					<a href="#" class="hasil-waiting-morethan12hour penawaran-a"><?php echo "Waiting 12 hour <strong>($moreThan12hourReguler)</strong> study"; ?></a>
-					<hr>
+					
 				</div>
 			</td>
 			<td>
 				<!-- waiting 24 hour contrast -->
-				<div class="blinking-24-hour" style="text-align: center;">
-					<hr>
+				<div class="notif-blink blinking-24-hour" style="text-align: center;">
+					
 					<a href="#" class="hasil-waiting-morethan24hour penawaran-a"><?php echo "Waiting 24 hour <strong>($moreThan24hourContrast)</strong> study"; ?></a>
-					<hr>
+					
 				</div>
 			</td>
 			<!-- <td> -->
