@@ -61,13 +61,15 @@ $hostname = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM xray_hostname_
                 </tr>
             </table>
             <hr>
-            <?php if ($_SERVER['SERVER_NAME'] == $hostname['ip_publik'] OR $_SERVER['SERVER_NAME'] == '49.128.176.141') {
-                $port='92';}else{ 
-                    $port='91';} ?>
+            <?php if ($_SERVER['SERVER_NAME'] == $hostname['ip_publik'] or $_SERVER['SERVER_NAME'] == '49.128.176.141') {
+                $port = '92';
+            } else {
+                $port = '91';
+            } ?>
             <iframe src="http://<?= $_SERVER['SERVER_NAME'] . ':' ?><?= $port  ?>/viewer/<?= $study['study_iuid']; ?>" width="100%" height="700px" frameborder="0"></iframe>
             <!-- <iframe src="http://202.150.157.78:92/viewer/1.2.40.0.13.1.286424.20230127.09161597301" width="100%" height="700px" frameborder="0"></iframe> -->
         <?php } else { ?>
-            <p class="text-center">Pasien Tidak Ditemukan</p>
+            <p class="text-center">Expired</p>
         <?php } ?>
     </div>
 </body>

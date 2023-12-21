@@ -114,7 +114,7 @@
 										<?php
 										$query_radiologist = mysqli_query(
 											$conn,
-											"SELECT dokradid, dokrad_name, dokrad_lastname FROM xray_dokter_radiology"
+											"SELECT dokradid, dokrad_name, dokrad_lastname FROM xray_dokter_radiology WHERE username NOT IN ('sarah', 'hardian_dokter')"
 										);
 										while ($radiologist = mysqli_fetch_assoc($query_radiologist)) { ?>
 											<option value="<?php echo $radiologist['dokradid']; ?>"><?php echo $radiologist['dokrad_name'] . ' ' . $radiologist['dokrad_lastname']; ?></option>
