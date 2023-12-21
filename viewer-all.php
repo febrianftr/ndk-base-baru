@@ -26,7 +26,7 @@ define('MOBILELAST', '"target="_blank"><span class="btn btn-warning btn-inti"><i
 define('CHANGEDOCTORICONYES', '<img src="../image/new/user-doctor.svg" data-toggle="tooltip" title="choose Physician" style="width: 100%;">');
 define('CHANGEDOCTORICONNO', '<img src="../image/new/user-doctor-no.svg" data-toggle="tooltip" title="choose Physician" style="width: 100%;">');
 define('CHANGEDOCTORFIRST', '<a style="text-decoration: none;" href="#" onclick="changeDoctorApproved(event, ');
-define('CHANGEDOCTORLAST', ')"><span class="');
+define('CHANGEDOCTORLAST', ')"><span style="box-shadow: none;" class="');
 define('CHANGEDOCTORCLASS', 'btn rgba-stylish-slight darken-1 btn-inti2">');
 define('CHANGEDOCTORVERYLAST', '</span></a>');
 
@@ -47,7 +47,7 @@ define('DELETELAST', '"onclick=\'return confirm("Delete data?");\'><span class="
 // EDIT PASIEN
 define('EDITPASIENICONYES', '<img src="../image/new/update-new.svg" data-toggle="tooltip" title="Update" style="width: 100%;">');
 define('EDITPASIENICONNO', '<img src="../image/new/update-new-yellow.svg" data-toggle="tooltip" title="Update" style="width: 100%;">');
-define('EDITPASIENFIRST', '<a href="update-workload.php?uid=');
+define('EDITPASIENFIRST', '<a style="box-shadow: none;" href="update-workload.php?uid=');
 define('EDITPASIENLAST', '"<span class="btn text-primary rgba-stylish-slight btn-inti2">');
 define('EDITPASIENVERYLAST', '</span></a>');
 
