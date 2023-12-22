@@ -293,7 +293,7 @@ while ($row = mysqli_fetch_array($result)) {
     }
     // ketika login refferal
   } else if ($level == 'refferal') {
-    $level = HTMLFIRST . $study_iuid . HTMLLAST .
+    $level = DICOMFIRST . $study_iuid . DICOMLAST . HTMLFIRST . $study_iuid . HTMLLAST .
       LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST;
   } else {
     $level = '-';

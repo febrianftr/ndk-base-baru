@@ -163,6 +163,7 @@ while ($row = mysqli_fetch_array($query)) {
     } else {
         if ($level == 'refferal') {
             $aksi = PDFFIRST . $study_iuid . PDFLAST .
+                DICOMFIRST . $study_iuid . DICOMLAST .
                 HTMLFIRST . $study_iuid . HTMLLAST .
                 LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST;
         } elseif ($level == 'radiographer') {
