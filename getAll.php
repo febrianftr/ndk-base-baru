@@ -164,6 +164,7 @@ while ($row = mysqli_fetch_array($query)) {
         if ($level == 'refferal') {
             $aksi = PDFFIRST . $study_iuid . PDFLAST .
                 DICOMFIRST . $study_iuid . DICOMLAST .
+                RENDERFIRST . $study_iuid . RENDERLAST.
                 HTMLFIRST . $study_iuid . HTMLLAST .
                 LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST;
         } elseif ($level == 'radiographer') {

@@ -158,6 +158,11 @@ if ($_SERVER['SERVER_NAME'] == $hostname['ip_publik'] or $_SERVER['SERVER_NAME']
     define('OHIFOLDWORKLISTLAST', "$ohif_large");
 }
 
+// RENDER
+define('RENDERFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="http://' . $_SERVER['SERVER_NAME'] . ':93/?dicomweb=http://' . $_SERVER['SERVER_NAME'] . ':9090/dcm4chee-arc/aets/DCM4CHEE/rs/studies/');
+define('RENDERLAST', '"target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/eyepink.svg" data-toggle="tooltip" title="Intiwid Render Viewer" style="width: 100%;"></span></a>');
+
+
 // VIEWER DI WORKLIST ICON LARGE
 define('DICOMWORKLISTFIRST', '<a href="jnlp://' . $_SERVER['SERVER_NAME'] . ':19898/weasis-pacs-connector/DCM_viewer.jnlp?studyUID=');
 define('DICOMWORKLISTLAST', '"class="button8 delete1"><img src="../image/desktop.svg" style="width: 50px;"><br> <span> Dicom Viewer</span></a>');
@@ -167,6 +172,9 @@ define('HTMLWORKLISTFIRST', '<a href="http://' . $_SERVER['SERVER_NAME'] . ':198
 define('HTMLWORKLISTLAST', '" class="button8 delete1" target="_blank"><img src="../image/html.svg" style="width: 50px;"><br> <span> HTML Viewer</span></a>');
 define('RADIANTWORKLISTFIRST', '<a href="radiant://?n=paet&v=dcmPACS&n=pstv&v=0020000D&v=%22');
 define('RADIANTWORKLISTLAST', '%22" class="button8 delete1"><img src="../image/radiAnt.png" style="width: 50px;"><br><span> Radiant</span></a>');
+define('RENDERWORKLISTFIRST', '<a href="http://' . $_SERVER['SERVER_NAME'] . ':93/?dicomweb=http://' . $_SERVER['SERVER_NAME'] . ':9090/dcm4chee-arc/aets/DCM4CHEE/rs/studies/');
+define('RENDERWORKLISTLAST', '" class="button8 delete1" target="_blank"><img src="../image/render-viewer.svg" style="width: 50px;"><br> <span> Intiwid Render Viewer</span></a>');
+
 // url HOROS -> Horos://?methodName=retrieve&serverName=INTIWID&then=open&retrieveOnlyIfNeeded=yes&filterKey=StudyInstanceUID&filterValue=
 // url HOROS -> Horos://?methodName=displayStudy&StudyInstanceUID=
 define('HOROSWORKLISTFIRST', "$horos");
