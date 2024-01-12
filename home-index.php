@@ -40,20 +40,8 @@ $approved = mysqli_fetch_assoc(mysqli_query(
 </style>
 <meta http-equiv="refresh" content="600" />
 <br>
-<div class=" container-fluid ovrflow scroller-itwd">
-
-  <div class="ovrflow">
-    <table class="table-dicom" id="example" style="margin-top: 3px; width: 100px;" cellpadding="8" cellspacing="0">
-      <thead class="thead1">
-        <?php require 'thead.php'; ?>
-      </thead>
-    </table>
-    <?php require 'modal.php'; ?>
-  </div>
-</div>
 
 <div class="container-fluid">
-  <br><br>
   <div class="box-dashboard1">
     <div class="row">
       <div class="col-md-12">
@@ -107,6 +95,21 @@ $approved = mysqli_fetch_assoc(mysqli_query(
     </div>
   </div>
 </div>
+
+<div class=" container-fluid ovrflow scroller-itwd">
+
+  <div class="ovrflow">
+    <table class="table-dicom" id="example" style="margin-top: 3px; width: 100px;" cellpadding="8" cellspacing="0">
+      <thead class="thead1">
+        <?php require 'thead.php'; ?>
+      </thead>
+    </table>
+    <?php require 'modal.php'; ?>
+  </div>
+</div>
+<div><br><br><br><br><br></div>
+
+
 <script src="js/3.1.1/jquery.min.js"></script>
 <script>
   $('document').ready(function() {
