@@ -50,7 +50,7 @@ body {
   font-size: 11px;
   color: #fff;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color: #2c3846;
+  background-color: #162c44;
   background-size: cover;
   background-attachment: fixed;
 }
@@ -78,7 +78,7 @@ body {
   width: auto;
   overflow-x: scroll;
   white-space: nowrap;
-  /*  scrollbar-color: #dd6800 #cbcccb; 
+  /*  scrollbar-color: #fd9c20 #cbcccb; 
   scrollbar-width: thin;*/
 }
 
@@ -144,10 +144,10 @@ th {
 }
 
 table.table-dicom tbody tr {
-  background-color: #2c3846;
+  background-color: #162c44;
 }
 .table-dicom tr:nth-child(even) {
-  background-color: #2c3846;
+  background-color: #162c44;
 }
 
 .table-dicom tr:hover {
@@ -163,7 +163,7 @@ table.table-dicom tbody tr {
   padding-top: 5px;
   padding-bottom: 5px;
   text-align: left;
-  background: #2c3846;
+  background: #162c44;
   color: #fff;
   text-align: center;
   font-weight: bold;
@@ -182,16 +182,16 @@ table.table-dicom tbody tr {
 }
 
 .table-box {
-  background-color: #fff;
+  background-color: #162c44;
   padding: 10px;
   border-radius: 7px;
-  border: solid 1px #ecebeb;
+  /* border: solid 1px #ecebeb; */
   margin-top: 5px;
 }
 
 .table-box1 {
   background-color: whitesmoke;
-  border-top: 5px solid#dd6800;
+  border-top: 5px solid#fd9c20;
   margin-top: 10px;
   padding: 5px 75px;
 }
@@ -323,7 +323,7 @@ table.dataTable tbody td {
 
 .nav-fostrap li:hover a {
   background: #ecebeb;
-  color: #dd6800 !important;
+  color: #fd9c20 !important;
   border-radius: 12px;
 }
 
@@ -542,7 +542,7 @@ table.dataTable tbody td {
 }*/
 
 .border-reg {
-  border-right: 3px solid #dd6800;
+  border-right: 3px solid #fd9c20;
 }
 
 .wrap-search {
@@ -578,7 +578,7 @@ table.dataTable tbody td {
 .work-1 {
   background-color: #fff;
   width: 100%;
-  color: #dd6800;
+  color: #fd9c20;
   padding: 1px 5px 5px 3px;
   font-weight: bold;
   border-bottom: 1px solid #d0d0d0;
@@ -642,7 +642,7 @@ table.dataTable tbody td {
 
 .btn-worklist3 {
   background-color: #fff;
-  color: #dd6800;
+  color: #fd9c20;
   display: inline-block;
   border-width: 1px;
   border-style: solid;
@@ -808,11 +808,11 @@ canvas {
 }
 
 .left-information {
-  border: 1px solid #d2c8c8;
+  border: 1px solid #14263c;
   padding: 10px 10px 88px 10px;
   /* margin-bottom: 20px; */
   border-radius: 5px;
-  background: #ececec;
+  background: #14263c;
   height: 100%;
   margin-bottom: 30px;
 }
@@ -1084,7 +1084,7 @@ select {
 
 .search-workload5 {
   background-color: #116d93;
-  color: #dd6800;
+  color: #fd9c20;
   border: 4px solid #116d93;
   margin-bottom: 25px;
   height: 210px;
@@ -1106,7 +1106,7 @@ select {
 }
 
 .report-input2 {
-  border-right: 3px solid #dd6800;
+  border-right: 3px solid #fd9c20;
   height: 50px;
 }
 
@@ -1560,10 +1560,10 @@ label.file1:after {
 }
 
 .textsearchnewpasien2 {
-  color: #dd6800;
+  color: #fd9c20;
   /* background: #fff; */
   /* margin: 7px 0px 0px 0px; */
-  padding: 1px 5px 11px 5px;
+  padding: 5px 5px 5px 5px;
 }
 
 .margin-top-minus {
@@ -1604,7 +1604,7 @@ label.file1:after {
 
 .table-dicom thead th,
 .table-dicom thead td {
-  /* border-bottom: 3px solid #dd6800; */
+  /* border-bottom: 3px solid #fd9c20; */
 }
 
 /* table.dataTable thead th,
@@ -2026,7 +2026,7 @@ input[type="submit"] {
 }
 
 .regist label {
-  color: #747474;
+  color: #fff;
   font-weight: bold;
 }
 
@@ -2613,7 +2613,7 @@ input[type="submit"] {
 
 .div-left {
   min-height: 764px;
-  background: #dd6800;
+  background: #fd9c20;
   /* margin-top: 0px; */
   border-radius: 3px;
   padding: 5px;
@@ -2657,7 +2657,7 @@ input[type="submit"] {
 
 .info-patient {
   /* margin: 10px 10px 10px 5px; */
-  border: 2px solid #dd6800;
+  border: 2px solid #fd9c20;
 }
 
 .info-patient2 {
@@ -2690,7 +2690,7 @@ input[type="submit"] {
   width: 100%;
   border-radius: 6px;
   padding: 5px;
-  border: 2px solid #dd6800;
+  border: 2px solid #fd9c20;
   overflow: auto;
   height: 275px;
 }
@@ -2698,7 +2698,7 @@ input[type="submit"] {
 .data-patient {
   color: #484848;
   background-color: #fcfcfc;
-  border: 2px solid #dd6800;
+  border: 2px solid #fd9c20;
   border-radius: 5px;
   padding: 5px;
 }
@@ -2795,7 +2795,7 @@ input[type="submit"] {
 }
 
 .buttons1 a.button8.delete1:hover {
-  background: #dd6800;
+  background: #fd9c20;
   color: #fff;
   box-shadow: none;
 }
@@ -2817,11 +2817,11 @@ input[type="submit"] {
   padding: 10px;
   border-radius: 5px;
   /* margin: 10px 10px 10px 5px; */
-  border: 2px solid #dd6800;
+  border: 2px solid #fd9c20;
 }
 
 .div-mid {
-  background: #dd6800;
+  background: #fd9c20;
   padding: 0px 5px 0px 5px;
   border-radius: 3px;
   min-height: 764px;
@@ -2834,7 +2834,7 @@ input[type="submit"] {
 }
 
 .textarea-ckeditor {
-  border: 2px solid #dd6800;
+  border: 2px solid #fd9c20;
   width: 100%;
   justify-content: center;
   display: flex;
@@ -2871,7 +2871,7 @@ input[type="submit"] {
 
 .div-right {
   min-height: 757px;
-  background: #dd6800;
+  background: #fd9c20;
   /* margin: 0px 10px 20px 10px; */
   border-radius: 3px;
   padding: 10px;
@@ -2921,7 +2921,7 @@ input[type="submit"] {
 }
 
 .infopatientworklist > tbody > tr:nth-of-type(2n + 1) {
-  color: #dd6800;
+  color: #fd9c20;
 }
 
 .btn-expertise {
@@ -3219,7 +3219,7 @@ button:focus {
   background-color: #173759;
   border: none;
   line-height: 28px;
-  /* border-bottom: 1px solid #dd6800; */
+  /* border-bottom: 1px solid #fd9c20; */
   margin: 0 22px;
   padding: 1px 19px;
 }
@@ -3296,7 +3296,7 @@ button:focus {
 .disokin {
   height: 125%;
   width: 100%;
-  background: #dd6800;
+  background: #fd9c20;
   position: absolute;
   z-index: 900;
 }
@@ -3447,13 +3447,13 @@ table.dataTable > thead .sorting_desc_disabled::after {
 
 .head-title {
   margin-left: -15px;
-  background: #eaeaea;
+  background: #14263c;
   border-radius: 5px 5px 0 0;
   margin-bottom: -16px;
   padding-left: 4px;
-  border-bottom: 1px solid #d0d0d0;
-  border-top: 1px solid #d0d0d0;
-  border-right: 1px solid #d0d0d0;
+  border-bottom: 1px solid #14263c;
+  border-top: 1px solid #14263c;
+  border-right: 1px solid #14263c;
 }
 
 .table-view {
@@ -3852,7 +3852,7 @@ table.dataTable > thead .sorting_desc_disabled::after {
 /* ---------------------burger----------- */
 
 .box-dashboard1 {
-  background: #4a5766;
+  background: #162940;
   padding: 13px;
   border-radius: 10px;
   margin-bottom: 25px;
@@ -3865,7 +3865,7 @@ table.dataTable > thead .sorting_desc_disabled::after {
   align-items: center;
   justify-content: flex-start;
   padding: 0 3em;
-  border: 1px solid #ede8f0;
+  /* border: 1px solid #ede8f0; */
   border-radius: 5px;
   margin: 5px 0;
 }

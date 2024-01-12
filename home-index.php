@@ -52,7 +52,7 @@ $approved = mysqli_fetch_assoc(mysqli_query(
         </center>
       </div>
       <div class="col-md-4">
-        <div class="info-box" style="background-color: #356395;">
+        <div class="info-box" style="background-color: #043971;">
           <div class="box-icon">
             <i class="fas fa-users"></i>
           </div>
@@ -65,7 +65,7 @@ $approved = mysqli_fetch_assoc(mysqli_query(
         </div>
       </div>
       <div class="col-md-4">
-        <div class="info-box" style="background-color: #10a085;">
+        <div class="info-box" style="background-color: #02826a;">
           <div class="box-icon">
             <i class="fas fa-user-check"></i>
           </div>
@@ -79,7 +79,7 @@ $approved = mysqli_fetch_assoc(mysqli_query(
         </div>
       </div>
       <div class="col-md-4">
-        <div class="info-box" style="background-color: #ce6c25;">
+        <div class="info-box" style="background-color: #bd5e1a;">
           <div class="box-icon">
             <i class="fas fa-user-clock"></i>
           </div>
