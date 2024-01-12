@@ -151,7 +151,7 @@ table.table-dicom tbody tr {
 }
 
 .table-dicom tr:hover {
-  background-color: #3e5166;
+  background-color: #17385c;
   /* color: #fff; */
 }
 .table-dicom td a {
@@ -3247,7 +3247,7 @@ button:focus {
 }
 .nav-side-menu li a {
   text-decoration: none;
-  color: #e1ffff;
+  color: #fff;
   display: inline-block;
   width: 100%;
 }
@@ -3296,7 +3296,7 @@ button:focus {
 .disokin {
   height: 125%;
   width: 100%;
-  background: #fd9c20;
+  background: #173759;
   position: absolute;
   z-index: 900;
 }
