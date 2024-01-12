@@ -316,7 +316,7 @@ if ($_SESSION['level'] == "radiographer") {
 			<div class="">
 				<div class="footer-login col-sm-12"><br>
 					<center>
-						<p>&copy; Powered by Intiwid IT Solution 2022</a>.</p>
+						<p>&copy; RSUD R.A. Kartini Jepara Official</a>.</p>
 					</center>
 				</div>
 			</div>
