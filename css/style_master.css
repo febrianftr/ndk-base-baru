@@ -2220,7 +2220,7 @@ input[type="submit"] {
 
 /* When the checkbox is checked, add a blue background */
 .c1 input:checked ~ .checkmark1 {
-  background-color: #68b399;
+  background-color: #10996a;
   border-radius: 3px;
   margin-top: 3px;
 }
@@ -3545,12 +3545,12 @@ table.dataTable > thead .sorting_desc_disabled::after {
   border-color: #309ace;
 }
 
-.input-regist input:focus + .input-icon i {
-  color: #377d71;
+.input-regist input:focus , .input-icon i {
+  color: #173759;
 }
 
-.input-regist input:focus + .input-icon:after {
-  border-right-color: #377d71;
+.input-regist input:focus , .input-icon:after {
+  border-right-color: #173759;
 }
 
 .input-regist input[type="radio"],
@@ -4064,7 +4064,9 @@ border-radius: 5px;
   padding: 0 5px;
 }
 
-
+.label-report1{
+  font-weight: bold;
+}
 
 @media (max-width: 960px) {
   .img3 {

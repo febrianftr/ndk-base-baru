@@ -40,7 +40,7 @@
 						</div> -->
 						<div class="row justify-content-center align-items-center" style="padding: 10px; border-radius: 5px; border: solid 2px #2d4966; margin-bottom: 5px;;">
 							<div class="col-md-6">
-								<input type="checkbox" class="check-modalities" style="margin-top: 0px;" checked> <?= $lang['check_all'] ?> Modality
+								<input type="checkbox" class="check-modalities" style="margin-top: 0px;" checked> <label class="label-report1"><?= $lang['check_all'] ?> Modality</label>
 								<ul class="ks-cboxtags">
 									<?php
 									$study = mysqli_query(
@@ -55,7 +55,7 @@
 						</div>
 						<div class="row justify-content-center align-items-center" style="padding: 10px; border-radius: 5px; border: solid 2px #2d4966; margin-bottom: 5px;;">
 							<div class="col-md-6">
-								<input type="checkbox" class="check-priorities" style="margin-top: 0px;" checked> <?= $lang['check_all'] ?> Priority:
+								<input type="checkbox" class="check-priorities" style="margin-top: 0px;" checked> <label class="label-report1"><?= $lang['check_all'] ?> Priority: </label>
 								<ul class="ks-cboxtags">
 									<li><label><input class="common_selector check-priority cbox5 checkbox4 search-input-workload" type="checkbox" id="priority" name="priority[]" value="normal" checked><span>Normal</span></label></li>
 									<li><label><input class="common_selector check-priority cbox5 checkbox4 search-input-workload" type="checkbox" id="priority" name="priority[]" value="cito" checked><span>Cito</span></label></li>
@@ -64,7 +64,7 @@
 						</div>
 						<div class="row justify-content-center align-items-center" style="padding: 10px; border-radius: 5px; border: solid 2px #2d4966; margin-bottom: 5px;;">
 							<div class="col-md-6">
-								<input type="checkbox" class="check-contrasts" style="margin-top: 0px;" checked> <?= $lang['check_all'] ?> Contrast:
+								<input type="checkbox" class="check-contrasts" style="margin-top: 0px;" checked> <label class="label-report1"><?= $lang['check_all'] ?> Contrast:</label>
 								<ul class="ks-cboxtags">
 									<li><label><input class="common_selector check-contrast cbox5 checkbox4 search-input-workload" type="checkbox" id="contrast" name="contrast[]" value="1" checked><span>Kontras</span></label></li>
 									<li><label><input class="common_selector check-contrast cbox5 checkbox4 search-input-workload" type="checkbox" id="contrast" name="contrast[]" value="0" checked><span>Tidak Kontras</span></label></li>
@@ -74,7 +74,7 @@
 						<div class="row justify-content-center align-items-center" style="padding: 10px; border-radius: 5px; border: solid 2px #2d4966; margin-bottom: 5px;;">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="sel1">Select Radiographer:</label>
+									<label for="sel1" class="label-report1">Select Radiographer:</label>
 									<select class="form-control select2" multiple="multiple" name="radiographer[]" id="radiographer" style="width: 100%;" required>
 										<option value="all" selected>Semua</option>
 										<?php
@@ -91,7 +91,7 @@
 						<div class="row justify-content-center align-items-center" style="padding: 10px; border-radius: 5px; border: solid 2px #2d4966; margin-bottom: 5px;;">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="sel1">Select Department:</label>
+									<label for="sel1" class="label-report1">Select Department:</label>
 									<select class="form-control select2" multiple="multiple" name="dep_id[]" id="dep_id" style="width: 100%;" required>
 										<option value="all" selected>Semua</option>
 										<?php
@@ -108,7 +108,7 @@
 						<div class="row justify-content-center align-items-center" style="padding: 10px; border-radius: 5px; border: solid 2px #2d4966; margin-bottom: 5px;;">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="sel1">Select Radiologist:</label>
+									<label for="sel1" class="label-report1">Select Radiologist:</label>
 									<select class="form-control select2" multiple="multiple" name="dokradid[]" id="dokradid" style="width: 100%;" required>
 										<option value="all" selected>Semua</option>
 										<?php
@@ -125,7 +125,7 @@
 						</div>
 						<div class="row justify-content-center align-items-center" style="padding: 10px; border-radius: 5px; border: solid 2px #2d4966; margin-bottom: 5px;;">
 							<div class="col-md-6">
-								<input type="checkbox" class="check-statuses" style="margin-top: 0px;" checked> <?= $lang['check_all'] ?> Status :
+								<input type="checkbox" class="check-statuses" style="margin-top: 0px;" checked> <label class="label-report1"><?= $lang['check_all'] ?> Status :</label>
 								<ul class="ks-cboxtags">
 									<li><label><input class="common_selector check-status cbox5 checkbox4 search-input-workload" type="checkbox" id="status" name="status[]" value="waiting" checked><span>Waiting</span></label></li>
 									<li><label><input class="common_selector check-status cbox5 checkbox4 search-input-workload" type="checkbox" id="status" name="status[]" value="approved" checked><span>Approved</span></label></li>
@@ -133,7 +133,7 @@
 							</div>
 						</div>
 						<div class="row justify-content-center align-items-center">
-							<div class="col-md-6" style="background: #f9f9f9; border-radius: 5px;">
+							<div class="col-md-6" style="border-radius: 5px;">
 								<button style="margin: 10px 0px; float: left; padding: 10px 30px; border-radius: 5px; border: none; font-weight: bold; font-size: 18px;" class="btn-excel" type="submit"><i class="fas fa-file-excel"></i>
 									<span class="spinner-grow spinner-grow-sm loading" role="status" aria-hidden="true"></span>
 									<p class="loading" style="display:inline;">Loading...</p>
