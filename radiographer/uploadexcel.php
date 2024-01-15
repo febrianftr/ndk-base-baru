@@ -12,14 +12,10 @@ if ($_SESSION['level'] == "radiographer") {
     <head>
         <title>Backup Excel | Radiographer</title>
         <?php include('head.php'); ?>
-        <style>
-            body {
-                background-color: #1f69b7;
-            }
-        </style>
+
     </head>
 
-    <body>
+    <body class="body-all">
         <?php include('../sidebar-index.php'); ?>
         <div class="container-fluid" id="main">
             <div class="row">
@@ -32,13 +28,13 @@ if ($_SESSION['level'] == "radiographer") {
                                     <div><img src="../icon-menubar/new_icon/excel.png"></div>
                                     <div class="heading">UPLOAD FILE REPORT</div>
                                     <div class="site-title">Back Up Your Report Files</div>
-                                    <div class="site-slogan">With <a style="color: #85cbb3; font-weight: bold;" href="index.php">INTIWID</a> Backup</div>
+
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-md-6">
-                            <div class=" text-dark">
+                            <div class=" text-light">
                                 <div class="table-box">
                                     <!-- <div id="menu">
                                         <a href="uploadexcel.php" class="active">Upload</a>

@@ -12,14 +12,10 @@ if ($_SESSION['level'] == "radiographer") {
     <head>
         <title>Download Excel | Radiographer</title>
         <?php include('head.php'); ?>
-        <style>
-            body {
-                background-color: #1f69b7;
-            }
-        </style>
+        
     </head>
 
-    <body>
+    <body class="body-all">
         <?php include('../sidebar-index.php'); ?>
         <div class="container-fluid" id="main">
             <div class="row">
@@ -32,17 +28,16 @@ if ($_SESSION['level'] == "radiographer") {
                                     <div><img src="../icon-menubar/new_icon/excel.png"></div>
                                     <div class="heading">FILE BACK UP REPORT</div>
                                     <div class="site-title">Your Report Files</div>
-                                    <div class="site-slogan"><a style="color: #85cbb3; font-weight: bold;" href="index.php">INTIWID</a> Backup</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="dashboard-home text-dark">
+                            <div class="dashboard-home text-light">
                                 <div>
                                     <div id="header"></div>
                                     <div id="content1">
                                         <center>
-                                            <h2 style="color: #49957b;">Download</h2>
+                                            <h2>Download</h2>
                                         </center>
                                         <p>
                                         <table class="table-dicom table-download table-paginate" id="example" width="100%" cellpadding="0" cellspacing="0">

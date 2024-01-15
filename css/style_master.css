@@ -996,7 +996,7 @@ select {
 /* ========dropdown======================= */
 
 .dashboard-home {
-  background-color: #4a5766;
+  background-color: #2d4966;
   border: solid 1px #4a5766;
   padding: 5px;
   margin: 13px 5px;
@@ -4066,6 +4066,10 @@ border-radius: 5px;
 
 .label-report1{
   font-weight: bold;
+}
+
+.body-all {
+  background-color: #173759;
 }
 
 @media (max-width: 960px) {
