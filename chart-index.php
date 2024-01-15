@@ -9,12 +9,12 @@
     </div>
     <div id="content1">
         <div class="container-fluid">
-            <div class="about-inti">
+            <div class="">
                 <form method="post" id="form-result-chart">
                     <div>
                         <div class="container-fluid search_chart2">
                             <div class="row">
-                                <div class="col-md-8" style="min-height: 140px; padding: 0px; border: 3px solid #cacaca; border-radius: 5px; background: whitesmoke;">
+                                <div class="col-md-8 box-filter-chart">
                                     <label class="work-1"><?= $lang['search_mod'] ?> <div style="float: right; margin-right: 10px;"><input type="checkbox" class="cboxtombol" style="margin-top: 0px;" checked> <?= $lang['check_all'] ?></div></label><br>
                                     <div class="wrap-search wrap-search2" style="height: auto;">
                                         <?php
@@ -60,7 +60,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div style="padding: 0px; min-height: 140px; border: 3px solid #cacaca; border-radius: 5px; background: whitesmoke;">
+                                    <div class="box-filter-chart">
                                         <label class="work-1"><?= $lang['search_date'] ?></label><br>
                                         <div class="wrap-search">
                                             <label for="from"><b>From</b></label><br>

@@ -882,7 +882,7 @@ canvas {
 
 .about-inti {
   padding: 0px 0px;
-  background-color: #f4f4f4;
+  /* background-color: #f4f4f4; */
 }
 
 /* //////////////////about//////////////////////////// */
@@ -3286,12 +3286,13 @@ button:focus {
 }
 
 .settingclass .thumbnail {
-  background-color: #e3e3e3;
-  border: 2px solid #e8e8e8;
+  background-color: #173759;
+  border: 2px solid #2d4966;
   width: 140px;
   padding: 3px;
   border-radius: 5px;
   margin-bottom: 10px;
+  color: #fff;
 }
 
 /* =====================Loader========================= */
@@ -4070,6 +4071,16 @@ border-radius: 5px;
 
 .body-all {
   background-color: #173759;
+}
+
+
+.box-filter-chart{
+  min-height: 140px;
+  padding: 0px; 
+  border: 3px solid #2d4966; 
+  border-radius: 5px; 
+  background: #162c44; 
+  margin-bottom: 15px;
 }
 
 @media (max-width: 960px) {

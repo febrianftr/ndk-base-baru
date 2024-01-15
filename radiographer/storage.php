@@ -13,15 +13,9 @@ if ($_SESSION['level'] == "radiographer") {
     <head>
         <title>Storage | Radiographer</title>
         <?php include('head.php'); ?>
-        <style>
-            body {
-                background-color: #1f69b7;
-            }
-        </style>
-
     </head>
 
-    <body>
+    <body class="body-all">
         <?php include('../sidebar-index.php'); ?>
         <div class="container" id="main">
             <div class="row">

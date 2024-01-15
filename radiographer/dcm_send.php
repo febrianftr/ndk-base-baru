@@ -22,7 +22,7 @@ if ($_SESSION['level'] == "radiographer") {
     <?php include('head.php'); ?>
   </head>
 
-  <body style="background-color: #1f69b7;">
+  <body class="body-all">
   <?php include('../sidebar-index.php'); ?>
     <div class="container-fluid" id="main">
       <div class="row">
@@ -37,13 +37,12 @@ if ($_SESSION['level'] == "radiographer") {
                   <div><img src="../icon-menubar/new_icon/send.png"></div>
                   <div class="heading">DICOM SEND</div>
                   <div class="site-title">Upload Your Dicom Files</div>
-                  <div class="site-slogan">With <a style="color: #e37979; font-weight: bold;" href="index.php">INTIWID</a> Dicom Send</div>
                 </div>
               </div>
             </div>
 
             <div class="col-md-6">
-              <div class="dashboard-home text-dark">
+              <div class="dashboard-home text-light">
 
                 <form action="" method="post" enctype="multipart/form-data">
                   <!--<select name="fromrs" id="formrs">
