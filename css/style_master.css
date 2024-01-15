@@ -78,7 +78,7 @@ body {
   width: auto;
   overflow-x: scroll;
   white-space: nowrap;
-  /*  scrollbar-color: #fd9c20 #cbcccb; 
+  /*  scrollbar-color: #2d4966 #cbcccb; 
   scrollbar-width: thin;*/
 }
 
@@ -191,7 +191,7 @@ table.table-dicom tbody tr {
 
 .table-box1 {
   background-color: whitesmoke;
-  border-top: 5px solid#fd9c20;
+  border-top: 5px solid#2d4966;
   margin-top: 10px;
   padding: 5px 75px;
 }
@@ -323,7 +323,7 @@ table.dataTable tbody td {
 
 .nav-fostrap li:hover a {
   background: #ecebeb;
-  color: #fd9c20 !important;
+  color: #2d4966 !important;
   border-radius: 12px;
 }
 
@@ -442,7 +442,7 @@ table.dataTable tbody td {
   background-color: #348c6e;
   color: #fff;
   display: inline-block;
-  border-width: 1px;
+  border-width: 0;
   /* border-style: solid; */
   border-radius: 3px;
   transition: 0.3s ease-in-out;
@@ -464,7 +464,7 @@ table.dataTable tbody td {
   background-color: #55b997;
   color: #fff;
   display: inline-block;
-  border-width: 1px;
+  border-width: 0;
   border-style: solid;
   transition: 0.5s ease-in-out;
   /* width: 25%; */
@@ -542,7 +542,7 @@ table.dataTable tbody td {
 }*/
 
 .border-reg {
-  border-right: 3px solid #fd9c20;
+  border-right: 3px solid #2d4966;
 }
 
 .wrap-search {
@@ -576,7 +576,7 @@ table.dataTable tbody td {
 }
 
 .work-1 {
-  background-color: #0e1c2d;
+  background-color: #2d4966;
   width: 100%;
   color: #fff;
   padding: 1px 5px 5px 3px;
@@ -590,7 +590,7 @@ table.dataTable tbody td {
   background-color: #c24d4d;
   color: #fff;
   display: inline-block;
-  border-width: 1px;
+  border-width: 0;
   border-style: solid;
   transition: 0.5s ease-in-out;
   padding: 4px;
@@ -610,7 +610,7 @@ table.dataTable tbody td {
   background-color: #55b997;
   color: #fff;
   display: inline-block;
-  border-width: 1px;
+  border-width: 0;
   border-style: solid;
   transition: 0.5s ease-in-out;
   padding: 6px;
@@ -626,7 +626,7 @@ table.dataTable tbody td {
   background-color: #d24141;
   color: #fff;
   display: inline-block;
-  border-width: 1px;
+  border-width: 0;
   border-style: solid;
   transition: 0.5s ease-in-out;
   padding: 6px;
@@ -642,7 +642,7 @@ table.dataTable tbody td {
 
 .btn-worklist3 {
   background-color: #fff;
-  color: #fd9c20;
+  color: #2d4966;
   display: inline-block;
   border-width: 1px;
   border-style: solid;
@@ -1084,7 +1084,7 @@ select {
 
 .search-workload5 {
   background-color: #116d93;
-  color: #fd9c20;
+  color: #2d4966;
   border: 4px solid #116d93;
   margin-bottom: 25px;
   height: 210px;
@@ -1106,7 +1106,7 @@ select {
 }
 
 .report-input2 {
-  border-right: 3px solid #fd9c20;
+  border-right: 3px solid #2d4966;
   height: 50px;
 }
 
@@ -1176,7 +1176,8 @@ select {
   /*margin-bottom: 5px;*/
   font-size: 12px;
   height: 25px;
-  border-top: solid 1px #d0d0d0;
+  /* border-top: solid 1px #d0d0d0; */
+  background-color: #fff;
   box-shadow: none;
 }
 
@@ -1604,7 +1605,7 @@ label.file1:after {
 
 .table-dicom thead th,
 .table-dicom thead td {
-  /* border-bottom: 3px solid #fd9c20; */
+  /* border-bottom: 3px solid #2d4966; */
 }
 
 /* table.dataTable thead th,
@@ -2613,7 +2614,7 @@ input[type="submit"] {
 
 .div-left {
   min-height: 764px;
-  background: #fd9c20;
+  background: #2d4966;
   /* margin-top: 0px; */
   border-radius: 3px;
   padding: 5px;
@@ -2657,7 +2658,7 @@ input[type="submit"] {
 
 .info-patient {
   /* margin: 10px 10px 10px 5px; */
-  border: 2px solid #fd9c20;
+  border: 2px solid #2d4966;
 }
 
 .info-patient2 {
@@ -2690,7 +2691,7 @@ input[type="submit"] {
   width: 100%;
   border-radius: 6px;
   padding: 5px;
-  border: 2px solid #fd9c20;
+  border: 2px solid #2d4966;
   overflow: auto;
   height: 275px;
 }
@@ -2698,7 +2699,7 @@ input[type="submit"] {
 .data-patient {
   color: #484848;
   background-color: #fcfcfc;
-  border: 2px solid #fd9c20;
+  border: 2px solid #2d4966;
   border-radius: 5px;
   padding: 5px;
 }
@@ -2795,7 +2796,7 @@ input[type="submit"] {
 }
 
 .buttons1 a.button8.delete1:hover {
-  background: #fd9c20;
+  background: #2d4966;
   color: #fff;
   box-shadow: none;
 }
@@ -2817,11 +2818,12 @@ input[type="submit"] {
   padding: 10px;
   border-radius: 5px;
   /* margin: 10px 10px 10px 5px; */
-  border: 2px solid #fd9c20;
+  border: 2px solid #2d4966;
+  color: #484848;
 }
 
 .div-mid {
-  background: #fd9c20;
+  background: #2d4966;
   padding: 0px 5px 0px 5px;
   border-radius: 3px;
   min-height: 764px;
@@ -2834,7 +2836,7 @@ input[type="submit"] {
 }
 
 .textarea-ckeditor {
-  border: 2px solid #fd9c20;
+  border: 2px solid #2d4966;
   width: 100%;
   justify-content: center;
   display: flex;
@@ -2871,7 +2873,7 @@ input[type="submit"] {
 
 .div-right {
   min-height: 757px;
-  background: #fd9c20;
+  background: #2d4966;
   /* margin: 0px 10px 20px 10px; */
   border-radius: 3px;
   padding: 10px;
@@ -2921,7 +2923,7 @@ input[type="submit"] {
 }
 
 .infopatientworklist > tbody > tr:nth-of-type(2n + 1) {
-  color: #fd9c20;
+  color: #2d4966;
 }
 
 .btn-expertise {
@@ -3219,7 +3221,7 @@ button:focus {
   background-color: #173759;
   border: none;
   line-height: 28px;
-  /* border-bottom: 1px solid #fd9c20; */
+  /* border-bottom: 1px solid #2d4966; */
   margin: 0 22px;
   padding: 1px 19px;
 }
@@ -3516,7 +3518,7 @@ table.dataTable > thead .sorting_desc_disabled::after {
 }
 
 .cont-regist h4 {
-  color: #064588;
+  /* color: #064588; */
 }
 
 .input-regist input,
@@ -3691,7 +3693,7 @@ table.dataTable > thead .sorting_desc_disabled::after {
 .cont-regist {
   padding: 1em 3em 2em 3em;
   margin: 0em auto;
-  background-color: #fff;
+  background-color: #173759;
   border-radius: 4.2px;
   box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
 }
@@ -3934,6 +3936,132 @@ table.dataTable > thead .sorting_desc_disabled::after {
 
 .modal-header, .modal-body{
   background-color: #162432;
+}
+
+.td1 {
+  font-weight: bold;
+}
+
+
+
+
+@media only screen and (max-width: 800px) {
+  .menu-size2 {
+    visibility: hidden;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .footerindex {
+    position: fixed;
+  }
+}
+
+@keyframes blinkCito {
+  0% {
+    background-color: red;
+  }
+
+  100% {
+    background-color: white;
+  }
+}
+
+.blinking-cito {
+  /* animation: blinkCito 1.5s infinite; */
+  background-color: #d24141;
+}
+
+@keyframes blinkThreeHour {
+  0% {
+    background-color: orange;
+  }
+
+  100% {
+    background-color: white;
+  }
+}
+
+.blinking-3-hour {
+  /* animation: blinkThreeHour 1.5s infinite; */
+  background-color: #e49608;
+}
+
+@keyframes blinkSixHour {
+  0% {
+    background-color: yellow;
+  }
+
+  100% {
+    background-color: white;
+  }
+}
+
+.blinking-6-hour {
+  /* animation: blinkSixHour 1.5s infinite; */
+  background-color: #15b19b;
+}
+
+@keyframes blinkTwelveHour {
+  0% {
+    background-color: green;
+  }
+
+  100% {
+    background-color: white;
+  }
+}
+
+.blinking-12-hour {
+  /* animation: blinkTwelveHour 1.5s infinite; */
+  background-color: #1c9b1c;
+}
+
+@keyframes blinkTwentyFourHour {
+  0% {
+    background-color: blue;
+  }
+
+  100% {
+    background-color: white;
+  }
+}
+
+.blinking-24-hour {
+  /* animation: blinkTwentyFourHour 1.5s infinite; */
+  background-color: #1e4edf;
+}
+
+.table .penawaran-a{
+  color: #fff;
+  font-weight: bold;
+}
+
+.notif-blink{
+  padding: 15px 0px;
+border-radius: 5px;
+}
+
+.select2-container--default .select2-results > .select2-results__options {
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #162c44;
+}
+
+.select2-container--default .select2-results__option[aria-selected="true"] {
+  background-color: #2d4966;
+}
+
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+  background-color: #173759;
+  border: 1px solid #162c44;
+  border-radius: 4px;
+  cursor: default;
+  float: left;
+  margin-right: 5px;
+  margin-top: 5px;
+  padding: 0 5px;
 }
 
 

@@ -15,7 +15,7 @@
 						<h4>Excel Report</h4>
 					</div>
 					<form method="POST" action="../proses-export-excel.php">
-						<div class="row justify-content-center align-items-center" style="padding: 10px; border-radius: 5px; border: solid 2px #eff1f7;">
+						<div class="row justify-content-center align-items-center" style="padding: 10px; border-radius: 5px; border: solid 2px #2d4966; margin-bottom: 5px;;">
 							<div class="col-md-3" style="padding: 4px;">
 								<div class="input-group input-group-regist input-regist input-group-icon">
 									<input type="text" name="from_workload" id="from_workload" placeholder="From Date" autocomplete="off" required />
@@ -29,7 +29,7 @@
 								</div>
 							</div>
 						</div>
-						<!-- <div class="row justify-content-center align-items-center" style="padding: 10px; border-radius: 5px; border: solid 2px #eff1f7;">
+						<!-- <div class="row justify-content-center align-items-center" style="padding: 10px; border-radius: 5px; border: solid 2px #2d4966; margin-bottom: 5px;;">
 							<div class="col-md-6">
 								<input type="checkbox" class="check-genders" style="margin-top: 0px;" checked> <?= $lang['check_all'] ?> Gender
 								<ul class="ks-cboxtags">
@@ -38,7 +38,7 @@
 								</ul>
 							</div>
 						</div> -->
-						<div class="row justify-content-center align-items-center" style="padding: 10px; border-radius: 5px; border: solid 2px #eff1f7;">
+						<div class="row justify-content-center align-items-center" style="padding: 10px; border-radius: 5px; border: solid 2px #2d4966; margin-bottom: 5px;;">
 							<div class="col-md-6">
 								<input type="checkbox" class="check-modalities" style="margin-top: 0px;" checked> <?= $lang['check_all'] ?> Modality
 								<ul class="ks-cboxtags">
@@ -53,7 +53,7 @@
 								</ul>
 							</div>
 						</div>
-						<div class="row justify-content-center align-items-center" style="padding: 10px; border-radius: 5px; border: solid 2px #eff1f7;">
+						<div class="row justify-content-center align-items-center" style="padding: 10px; border-radius: 5px; border: solid 2px #2d4966; margin-bottom: 5px;;">
 							<div class="col-md-6">
 								<input type="checkbox" class="check-priorities" style="margin-top: 0px;" checked> <?= $lang['check_all'] ?> Priority:
 								<ul class="ks-cboxtags">
@@ -62,7 +62,7 @@
 								</ul>
 							</div>
 						</div>
-						<div class="row justify-content-center align-items-center" style="padding: 10px; border-radius: 5px; border: solid 2px #eff1f7;">
+						<div class="row justify-content-center align-items-center" style="padding: 10px; border-radius: 5px; border: solid 2px #2d4966; margin-bottom: 5px;;">
 							<div class="col-md-6">
 								<input type="checkbox" class="check-contrasts" style="margin-top: 0px;" checked> <?= $lang['check_all'] ?> Contrast:
 								<ul class="ks-cboxtags">
@@ -71,7 +71,7 @@
 								</ul>
 							</div>
 						</div>
-						<div class="row justify-content-center align-items-center" style="padding: 10px; border-radius: 5px; border: solid 2px #eff1f7;">
+						<div class="row justify-content-center align-items-center" style="padding: 10px; border-radius: 5px; border: solid 2px #2d4966; margin-bottom: 5px;;">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="sel1">Select Radiographer:</label>
@@ -88,7 +88,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="row justify-content-center align-items-center" style="padding: 10px; border-radius: 5px; border: solid 2px #eff1f7;">
+						<div class="row justify-content-center align-items-center" style="padding: 10px; border-radius: 5px; border: solid 2px #2d4966; margin-bottom: 5px;;">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="sel1">Select Department:</label>
@@ -105,7 +105,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="row justify-content-center align-items-center" style="padding: 10px; border-radius: 5px; border: solid 2px #eff1f7;">
+						<div class="row justify-content-center align-items-center" style="padding: 10px; border-radius: 5px; border: solid 2px #2d4966; margin-bottom: 5px;;">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="sel1">Select Radiologist:</label>
@@ -123,7 +123,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="row justify-content-center align-items-center" style="padding: 10px; border-radius: 5px; border: solid 2px #eff1f7;">
+						<div class="row justify-content-center align-items-center" style="padding: 10px; border-radius: 5px; border: solid 2px #2d4966; margin-bottom: 5px;;">
 							<div class="col-md-6">
 								<input type="checkbox" class="check-statuses" style="margin-top: 0px;" checked> <?= $lang['check_all'] ?> Status :
 								<ul class="ks-cboxtags">

@@ -252,6 +252,7 @@ while ($row = mysqli_fetch_array($result)) {
       $detail = '<a href="workload-edit.php?uid=' . $study_iuid . '" class="penawaran-a">' . removeCharacter(mb_convert_encoding($pat_name, 'UTF-8', 'ISO-8859-1')) . '</a>';
       $level =
         INOBITECFIRST . $study_iuid . INOBITECLAST .
+        RENDERFIRST . $study_iuid . RENDERLAST .
         OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
         CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
         EDITWORKLOADFIRST . $study_iuid . EDITWORKLOADLAST;
@@ -267,6 +268,7 @@ while ($row = mysqli_fetch_array($result)) {
         $level = EDITPASIENFIRST . $study_iuid . EDITPASIENLAST . $icon_edit_pasien . EDITPASIENVERYLAST .
           CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
           DICOMNEWFIRST . $study_iuid . DICOMNEWLAST .
+          RENDERFIRST . $study_iuid . RENDERLAST .
           OHIFOLDFIRST . $study_iuid . OHIFOLDLAST
           . SENDDICOMFIRST . $study_iuid . SENDDICOMLAST .
           GETEXPERTISEFIRST . $name_envelope . ' ' . defaultValueDateTime($created_at_envelope) . $href_get_expertise . GETEXPERTISELAST . $icon_get_expertise . GETEXPERTISEVERYLAST .
@@ -276,11 +278,13 @@ while ($row = mysqli_fetch_array($result)) {
       } else {
         $level = $level = EDITPASIENFIRST . $study_iuid . EDITPASIENLAST . $icon_edit_pasien . EDITPASIENVERYLAST .
           CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $blinking . CHANGEDOCTORCLASS . $icon_change_doctor . CHANGEDOCTORVERYLAST .
-          OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
-          HTMLFIRST . $study_iuid . HTMLLAST .
           DICOMFIRST . $study_iuid . DICOMLAST .
-          LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST .
-          COPYUIDFIRST . EXTLINKOHIF . $row['study_iuid'] . EXTLINKOHIF . COPYUIDLAST
+          RENDERFIRST . $study_iuid . RENDERLAST .
+          OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
+          HTMLFIRST . $study_iuid . HTMLLAST 
+           
+          // LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST .
+          // COPYUIDFIRST . EXTLINKOHIF . $row['study_iuid'] . EXTLINKOHIF . COPYUIDLAST
           // . SENDDICOMFIRST . $study_iuid . SENDDICOMLAST .
           // GETEXPERTISEFIRST . $name_envelope . ' ' . defaultValueDateTime($created_at_envelope) . $href_get_expertise . GETEXPERTISELAST . $icon_get_expertise . GETEXPERTISEVERYLAST
         ;

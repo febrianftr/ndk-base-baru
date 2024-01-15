@@ -175,9 +175,10 @@ while ($row = mysqli_fetch_array($query)) {
                     LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST;
             } else {
                 $aksi = PDFFIRST . $study_iuid . PDFLAST .
+                    RENDERFIRST . $study_iuid . RENDERLAST .
                     OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
-                    HTMLFIRST . $study_iuid . HTMLLAST .
-                    LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST;
+                    HTMLFIRST . $study_iuid . HTMLLAST ;
+                    // LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST;
             }
         } else {
             if ($username == 'hardian_dokter') {

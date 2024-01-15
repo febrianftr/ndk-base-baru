@@ -181,6 +181,8 @@ define('HOROSWORKLISTFIRST', "$horos");
 define('HOROSWORKLISTLAST', '"class="button8 delete1"><img src="../image/horos.png" style="width: 50px;"><br><span> Horos Viewer</span></a>');
 define('INOBITECWORKLISTFIRST', '<a onclick="inobitec(');
 define('INOBITECWORKLISTLAST', ')" id="inobitec" data-ip="' . $_SERVER['SERVER_NAME'] . '" class="button8 delete1"><img src="../image/inobitec.png" style="width: 50px;"><br><span> Inobitec Viewer</span></a>');
+
+
 //copy link ohif
 define('LINKOHIFFIRST', '<button style="box-shadow: none; color: #6eb4ff;" title="Copy Link" class="btn btn-inti2 rgba-stylish-slight" id="my_button" onclick="copyText(event, ');
 define('LINKOHIFLAST', ')"><i class="fas fa-link"></i></button>');

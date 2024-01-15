@@ -147,8 +147,8 @@ $moreThan24hourContrast = $waiting24hourContrast["jumlah"];
 	<?php require_once 'formsearch.php'; ?>
 	<table class="table table-borderless">
 		<tr>
-			<td>
-				<!-- waiting 1 hour CITO -->
+			<!-- <td>
+				waiting 1 hour CITO
 				<div class="notif-blink blinking-cito" style="text-align: center;">
 					
 					<a href="#" class="hasil-waiting-morethan1hour penawaran-a"><?php echo "Waiting CITO ($moreThan1hour) study"; ?></a>
@@ -156,7 +156,7 @@ $moreThan24hourContrast = $waiting24hourContrast["jumlah"];
 				</div>
 			</td>
 			<td>
-				<!-- waiting 3 hour reguler -->
+				waiting 3 hour reguler
 				<div class="notif-blink blinking-3-hour" style="text-align: center;">
 					
 					<a href="#" class="hasil-waiting-morethan3hour penawaran-a"><?php echo "Waiting 3 hour ($moreThan3hourReguler) study"; ?></a>
@@ -164,7 +164,7 @@ $moreThan24hourContrast = $waiting24hourContrast["jumlah"];
 				</div>
 			</td>
 			<td>
-				<!-- waiting 6 hour reguler -->
+				waiting 6 hour reguler
 				<div class="notif-blink blinking-6-hour" style="text-align: center;">
 					
 					<a href="#" class="hasil-waiting-morethan6hour penawaran-a"><?php echo "Waiting 6 hour ($moreThan6hourReguler) study"; ?></a>
@@ -172,7 +172,7 @@ $moreThan24hourContrast = $waiting24hourContrast["jumlah"];
 				</div>
 			</td>
 			<td>
-				<!-- waiting 12 hour reguler -->
+				waiting 12 hour reguler
 				<div class="notif-blink blinking-12-hour" style="text-align: center;">
 					
 					<a href="#" class="hasil-waiting-morethan12hour penawaran-a"><?php echo "Waiting 12 hour ($moreThan12hourReguler) study"; ?></a>
@@ -180,13 +180,13 @@ $moreThan24hourContrast = $waiting24hourContrast["jumlah"];
 				</div>
 			</td>
 			<td>
-				<!-- waiting 24 hour contrast -->
+				waiting 24 hour contrast
 				<div class="notif-blink blinking-24-hour" style="text-align: center;">
 					
 					<a href="#" class="hasil-waiting-morethan24hour penawaran-a"><?php echo "Waiting 24 hour ($moreThan24hourContrast) study"; ?></a>
 					
 				</div>
-			</td>
+			</td> -->
 			<!-- <td> -->
 			<!-- waiting 24 hour vasculer -->
 			<!-- <div class="blinking" style="text-align: center;">
