@@ -95,14 +95,14 @@ if ($_SESSION['level'] == "radiographer") {
                     </a>
                   </div> -->
 
-                <div class="col-xs-1 settingclass">
+                <!-- <div class="col-xs-1 settingclass">
                   <a href="about.php" style="text-decoration: none;">
                     <div class="thumbnail">
                       <img src="../icon-menubar/about.svg">
                       <center><?= $lang['about'] ?></center>
                     </div>
                   </a>
-                </div>
+                </div> -->
                 <?php
                 //  if ($username == 'rafdi') {
 
