@@ -1,7 +1,7 @@
 <tr>
     <th>No</th>
     <th>Action</th>
-    <th>Status</th>
+    <th style="width: 70px;">Status</th>
     <th><?= $lang['patient_name'] ?></th>
     <th>MRN</th>
     <th><?= $lang['study_date'] ?></th>
