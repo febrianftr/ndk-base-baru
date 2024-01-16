@@ -3765,8 +3765,8 @@ table.dataTable > thead .sorting_desc_disabled::after {
 }
 
 .ks-cboxtags li input[type="checkbox"]:checked + span {
-  border: 2px solid #fff;
-  background-color: #173759;
+  /* border: 2px solid #fff; */
+  background-color: #f29129;
   color: #fff;
   transition: all 0.2s;
 }
@@ -3884,7 +3884,8 @@ table.dataTable > thead .sorting_desc_disabled::after {
 .info-box .box-content {
   padding-left: 3em;
   white-space: nowrap;
-  color: #162c44;
+  color: #fff;
+  font-weight: bold;
   font-size: 15px;
 }
 
