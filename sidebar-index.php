@@ -27,7 +27,7 @@
 <?php include "../bahasa.php"; ?>
 <div class="nav-side-menu">
     <div class="brand">
-        <div style="width: 100%; padding: 8px 10px 0px 15px; margin: 7px 0;"><img style="width: 100%;" src="../image/logo-front.png"></div>
+        <div style="width: 200px; padding: 8px 10px 0px 15px; margin: 7px 0;"><img style="width: 100%;" src="../image/logo-front.png"></div>
     </div>
     <!-- <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content1"></i> -->
     <div class="toggle-btn">

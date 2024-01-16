@@ -296,7 +296,7 @@
         width: 100%;
         margin-bottom: 10px;
         padding: 4px;
-        background: #1f69b7;
+        /* background: #1f69b7; */
     }
     .nav-side-menu .toggle-btn {
         display: block;
