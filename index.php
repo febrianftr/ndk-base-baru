@@ -106,6 +106,9 @@ if (!($_SESSION['username'] = $data['username'])) {
           <div class="login-all">
 
             <div class="form_login">
+              <div class="view">
+                <img src="image/logo-jep.png" class="img-right" alt="placeholder" style="width: 400px; border-radius: 0 10px 10px 0; margin-top: 10px; padding:10px;">
+              </div>
               <form class="login" method="post" action="">
                 <div class="form1">
                   <div class="group5">
@@ -122,90 +125,26 @@ if (!($_SESSION['username'] = $data['username'])) {
                   </div>
 
                   <!-- <button class="buttonsearch" type="submit" name="login" onclick="play()"><span><?= $lang['login'] ?></span></button> -->
-                  <style>
-                    .btn-login2 {
-                      font-family: inherit;
-                      font-size: 20px;
-                      background: #d9003d;
-                      color: white;
-                      padding: 0.7em 1em;
-                      padding-left: 0.9em;
-                      display: flex;
-                      align-items: center;
-                      border: none;
-                      border-radius: 16px;
-                      overflow: hidden;
-                      transition: all 0.2s;
-                    }
 
-                    .btn-login2 span {
-                      display: block;
-                      margin-left: 0.3em;
-                      transition: all 0.3s ease-in-out;
-                    }
-
-                    .btn-login2 i {
-                      display: block;
-                      transform-origin: center center;
-                      transition: transform 0.3s ease-in-out;
-                    }
-
-                    .btn-login2:hover .svg-wrapper {
-                      animation: fly-1 0.6s ease-in-out infinite alternate;
-                    }
-
-                    .btn-login2:hover i {
-                      transform: translateX(1.2em) rotate(0deg) scale(1.6);
-                    }
-
-                    .btn-login2:hover span {
-                      transform: translateX(5em);
-                    }
-
-                    .btn-login2:active {
-                      transform: scale(0.95);
-                    }
-
-                    @keyframes fly-1 {
-                      from {
-                        transform: translateY(0.1em);
-                      }
-
-                      to {
-                        transform: translateY(-0.1em);
-                      }
-                    }
-                  </style>
-                  <button class="btn-login2" type="submit" name="login" onclick="play()">
-                    <div class="svg-wrapper-1">
-                      <div class="svg-wrapper">
-                        <i class="fas fa-sign-in-alt"></i>
-                      </div>
-                    </div>
-                    <span><?= $lang['login'] ?></span>
+                  <button class="btn-login1" type="submit" name="login" onclick="play()">
+                    <span class="label"><?= $lang['login'] ?></span>
+                    <span class="icon">
+                      <i class="fas fa-sign-in-alt fa-lg"></i>
+                    </span>
                   </button>
-
                 </div><br>
 
-                <div class="dropdown" style="bottom: 24px; position: absolute; width: 87%;">
+                <!-- <div class="dropdown" style="bottom: 24px; position: absolute; width: 87%;">
                   <button class="dropdown-toggle" type="button" data-toggle="dropdown" style="padding: 6px; border: none; border-radius: 3px;background: #eaeaea; color: #1f69b7; font-weight: bold; font-size: 12px;"><?= $lang['language'] ?>
                     <span class="caret"></span></button>
                   <ul class="dropdown-menu">
                     <li><a href="?lang=en"><img style="width: 20px;" src="image/usa.png"> English</a></li>
                     <li><a href="?lang=id"><img style="width: 20px;" src="image/indonesia.png"> Bahasa</a></li>
                   </ul>
-                  <a class="float-right" style="color: blue; margin-top: 5px;" href="readmore.php"><?= $lang['read_more'] ?>?</a>
-                </div>
+                </div> -->
 
               </form>
 
-            </div>
-
-            <div class="view">
-              <img src="image/login_back.png" class="img-right" alt="placeholder" style="width: 400px; border-radius: 0 10px 10px 0;">
-              <div class="mask flex-center waves-effect waves-light">
-                <p style="position:absolute; bottom:0; right:0; padding:5px; color: #fff; font-weight:bold;">Intiwid RISPACS V.3.0</p>
-              </div>
             </div>
 
           </div>
@@ -240,7 +179,7 @@ if (!($_SESSION['username'] = $data['username'])) {
   } else if ($_SESSION['level'] == "superadmin") {
     header("location:admin/administrator.php");
   } else if ($_SESSION['level'] == "radiology") {
-    $_GET["to"] ? header("location:radiology/$_GET[to]") : header("location:radiology/dicom.php");
+    header("location:radiology/dicom.php");
   } else if ($_SESSION['level'] == "radiographer") {
     header("location:radiographer/workload.php");
   }

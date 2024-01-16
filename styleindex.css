@@ -10,7 +10,7 @@
 
 /*-----------------Menu bar index----------------------*/
 body {
-  background-color: #1f69b7;
+  background-color: #162c44;
   font-family: 'Oswald', sans-serif;
   /*background-color: #f28515;*/
   /*border-bottom: 100px solid blue;*/
@@ -195,7 +195,7 @@ img.avatar {
 
 
 .login {
-  margin: 15px auto;
+  margin: 0 0 16px 0;
   width: 100%;
   padding: 28px 25px;
 }
@@ -234,7 +234,7 @@ img.avatar {
 .buttonsearch {
   display: inline-block;
   border-radius: 4px;
-  background-color: #1f69b7;
+  background-color: #10a085;
   border: none;
   color: #FFFFFF;
   text-align: center;
@@ -454,7 +454,9 @@ img.avatar {
   display:block;
   width:300px;
   border:none;
-  border-bottom:1px solid #757575;
+  border-bottom:2px solid #008ed6;
+  background-color: #e8f0ff;
+  color: #162c44;
 }
 .input5:focus     { outline:none; }
 
@@ -476,7 +478,7 @@ img.avatar {
 .input5:focus ~ .label5, .input5:valid ~ .label5    {
   top:-20px;
   font-size:14px;
-  color:#5264AE;
+  color:#008ED6;
 }
 
 /* BOTTOM BARS ================================= */
@@ -539,7 +541,59 @@ img.avatar {
 /* --------------------------feb button-------------------- */
 
 
+.btn-login1 {
+  position: relative;
+  font-size: 14px;
+  letter-spacing: 3px;
+  height: 3em;
+  padding: 0 3em;
+  border: none;
+  background-color: #c41b54;
+  color: #fff;
+  text-transform: uppercase;
+  overflow: hidden;
+  border-radius: 5px
+}
 
+.btn-login1::before {
+  content: '';
+  display: block;
+  position: absolute;
+  z-index: 0;
+  bottom: 0;
+  left: 0;
+  height: 0px;
+  width: 100%;
+  background: rgb(196, 27, 84);
+  background: linear-gradient(90deg, rgba(196, 27, 84, 1) 20%, rgba(124, 7, 46, 1) 100%);
+  transition: 0.2s;
+}
+
+.btn-login1 .label {
+  position: relative;
+}
+
+.btn-login1 .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3em;
+  width: 3em;
+  position: absolute;
+  top: 3em;
+  right: 0;
+  opacity: 0;
+  transition: 0.4s;
+}
+
+.btn-login1:hover::before {
+  height: 100%;
+}
+
+.btn-login1:hover .icon {
+  top: 0;
+  opacity: 1;
+}
 
 
 
@@ -582,5 +636,3 @@ img.avatar {
     width: 100%;
   }
 }
-
-

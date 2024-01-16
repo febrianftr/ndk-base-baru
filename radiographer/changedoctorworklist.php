@@ -99,7 +99,7 @@ if ($_SESSION['level'] == "radiology" || $_SESSION['level'] == "radiographer") {
 		<?php include('head.php'); ?>
 	</head>
 
-	<body style="background-color: #1f69b7;">
+	<body class="body-all">
 		<?php include('../sidebar-index.php'); ?>
 		<div class="container-fluid" id="main">
 			<div class="row">
