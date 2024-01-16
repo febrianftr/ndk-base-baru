@@ -28,7 +28,7 @@ $name = $row10['ad_name'] . ' ' . $row10['ad_lastname'];
             <img class="logo1" src="image/logo-rispacs1.png" />
           </div> -->
           <div id="center2" class="col-md-2">
-            <img class="logo" src="../image/intiwid-logo-new-putih-2.png" />
+            <img class="logo" src="../image/logo-front.png" />
           </div>
         </div>
 
@@ -45,9 +45,9 @@ $name = $row10['ad_name'] . ' ' . $row10['ad_lastname'];
                 </li>
                 <!-- <li><center><a href="report.php"><img style="width: 30px;" src="../icon-menubar/report.png"><br><?= $lang['report'] ?></a></center></li> -->
                 <!--  <li><center><a href="report-news.php"><img style="width: 30px;" src="../icon-menubar/news.png"><br><?= $lang['report_news'] ?></a></center></li> -->
-                <li>
+                <!-- <li>
                   <center><a href="about.php"><img style="width: 30px;" src="../icon-menubar/new_icon/about.png"><br><?= $lang['about'] ?></a></center>
-                </li>
+                </li> -->
 
                 <!--  <li><center><a href="#" data-toggle="modal" data-target="#myModalMenu"><img data-toggle="tooltip" title="For Enterprise" style="width: 30px;" src="../icon-menubar/folder.png"><br>Management CS</a></center></li>
           <li><center><a href="#" data-toggle="modal" data-target="#myModalMenu"><img data-toggle="tooltip" title="For Enterprise" style="width: 30px;" src="../icon-menubar/bhp.png"><br>BHP</a></center></li>

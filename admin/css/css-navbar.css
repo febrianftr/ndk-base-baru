@@ -26,9 +26,7 @@ body {
   font-size: 12px;
   color: #666;
   font-family: 'Roboto', sans-serif;
-  background-image:url("../image/backmol.jpg"); 
-  background-size: cover;
-  background-attachment: fixed;
+  background-color: #162c44;
 }
 
 .content {
@@ -108,7 +106,7 @@ a {
   height: 35px;
 /*  background: linear-gradient(to right, #093637, #44a08d, #093637);*/
 /*background-color: #fff;*/
-  background-color: #225697;
+  background-color: #214a75;
   /*border-bottom: 5px solid #4cb946;*/
   /* margin-left: -5px; */
   opacity: 1;
@@ -152,7 +150,7 @@ a {
 .nav-fostrap {
   display: block;
   margin-bottom: 15px 0;
-   background: #1f69b7;
+   background: #173759;
   /* border-top: 1px solid #fff; */
   padding: 5px 20px;
   /* position: fixed; */

@@ -452,7 +452,7 @@ img.avatar {
   font-size:18px;
   padding:10px 10px 10px 5px;
   display:block;
-  width:300px;
+  width:100%;
   border:none;
   border-bottom:2px solid #008ed6;
   background-color: #e8f0ff;
