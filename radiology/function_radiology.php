@@ -178,9 +178,9 @@ function insert_workload($value)
 	// untuk hasil pasien (laravel)
 	// QRcode::png("http://$hostname[ip_publik]:8000/pasien/$uid", "phpqrcode/hasil-pasien/$uid.png", "L", 4, 4);
 
-	require '../js/proses/function.php';
+	// require '../js/proses/function.php';
 
-	expertise($uid);
+	// expertise($uid);
 
 	return mysqli_affected_rows($conn);
 }
@@ -368,9 +368,9 @@ Approved Sign in $signature_datetime",
 		VALUES ('$uid', '$pk_dokter_radiology', '$dokradid', '$dokrad_fullname', '$fill', 1, NOW())"
 	);
 
-	require '../js/proses/function.php';
+	// require '../js/proses/function.php';
 
-	expertise($uid);
+	// expertise($uid);
 
 	return mysqli_affected_rows($conn);
 }
