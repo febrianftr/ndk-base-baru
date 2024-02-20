@@ -117,7 +117,7 @@ $pdf->SetFont('Arial', '', 10);
 $pdf->SetTitle('Hasil expertise');
 
 $pdf->image($kop_surat_image, 10, 3, 195);
-$pdf->MultiCell(0, 18, '', 0, "J", false);
+$pdf->MultiCell(0, 24, '', 0, "J", false);
 
 
 // ------------------------------------------------------------
@@ -205,15 +205,14 @@ $fill = str_replace('<div style="text-align:center;">', '<br /><p align="center"
 $fill = str_replace('<div style="text-align:left;">', '<br /><p align="left">', $fill);
 $fill = str_replace('<div style="text-align:right;">', '<br /><p align="right">', $fill);
 
-$pdf->WriteHTML("<strong><u><p align='center'>Instalasi Radiologi</p></u></strong>");
+// $pdf->WriteHTML("<strong><u><p align='center'>Instalasi Radiologi</p></u></strong>");
 $pdf->WriteHTML("<br>");
 $pdf->WriteHtml($fill);
 $pdf->WriteHTML("<br>");
 $pdf->WriteHTML("<br>");
 
 $pdf->WriteHTML(
-    "<p align='right'>Terimakasih atas kepercayaan TS</p>
-    <p align='right'>Salam sejawat</p>"
+    "<p align='right'>Salam sejawat</p>"
 );
 
 if ($expertise['signature_dokter_radiologi'] == 'qr_code') {
