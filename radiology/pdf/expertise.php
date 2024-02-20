@@ -65,7 +65,7 @@ $dokrad_img =  $row_dokrad['dokrad_img'] == null ? 'scan-ttd-default.PNG' : (@fi
 $kopSurat = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM kop_surat LIMIT 1"));
 $link_surat_image = "http://" . $_SERVER['SERVER_NAME'] . ":8000/storage/" . $kopSurat['image'];
 // kondisi ketika gambar kop surat null & ketika server laravel error
-$kop_surat_image = $kopSurat['image'] == null ? 'header-rs.jpg' : (@file_get_contents($link_surat_image) === false ? 'header-rs.jpg' : $link_surat_image);
+$kop_surat_image = $kopSurat['image'] == null ? 'kop-jpr.JPG' : (@file_get_contents($link_surat_image) === false ? 'kop-jpr.JPG' : $link_surat_image);
 
 // qr code ttd dokter radiologi
 $link_qr_code_ttd = '../phpqrcode/ttddokter/' . $signature;
@@ -116,7 +116,7 @@ $pdf->SetFont('Arial', '', 10);
 
 $pdf->SetTitle('Hasil expertise');
 
-$pdf->image($kop_surat_image, 13, 10, 185);
+$pdf->image($kop_surat_image, 10, 3, 195);
 $pdf->MultiCell(0, 18, '', 0, "J", false);
 
 
@@ -177,7 +177,7 @@ $pdf->Cell(55, 5, $spc_needs_two, 0, 0, 'L');
 $pdf->Cell(35, 5, '', 0, 0, 'L');
 $pdf->Cell(3, 5, '', 0, 0, 'L');
 $pdf->Cell(65, 5, $study_desc_two, 0, 1, 'L');
-$pdf->Line(16, 83, 198, 83);
+$pdf->Line(16, 78, 198, 78);
 $fill = str_replace("&nbsp;", " ", $fill);
 $fill = str_replace("&ndash;", "-", $fill);
 $fill = str_replace("&agrave;", "->", $fill);
@@ -205,7 +205,7 @@ $fill = str_replace('<div style="text-align:center;">', '<br /><p align="center"
 $fill = str_replace('<div style="text-align:left;">', '<br /><p align="left">', $fill);
 $fill = str_replace('<div style="text-align:right;">', '<br /><p align="right">', $fill);
 
-$pdf->WriteHTML("<strong><u><p align='center'>Bismillahirrahmanirrahim</p></u></strong>");
+$pdf->WriteHTML("<strong><u><p align='center'>Instalasi Radiologi</p></u></strong>");
 $pdf->WriteHTML("<br>");
 $pdf->WriteHtml($fill);
 $pdf->WriteHTML("<br>");

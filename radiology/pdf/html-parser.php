@@ -320,7 +320,7 @@ class PDF extends FPDF
     {
         //atur posisi 1.5 cm dari bawah
         $this->SetY(-15);
-        $this->Image('footer-pku.jpg', 0, 265, 215);
+        // $this->Image('footer-pku.jpg', 0, 265, 215);
         //Arial italic 9
         // $this->SetFont('Arial', 'I', 9);
         //nomor halaman
