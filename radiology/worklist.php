@@ -358,10 +358,12 @@ if ($_SESSION['level'] == "radiology") {
 													<?php if ($username == "hardian_dokter") {
 														echo
 														DICOMNEWWORKLISTFIRST . $uid . DICOMNEWWORKLISTLAST .
+														RADIANTWORKLISTFIRST . $uid . RADIANTWORKLISTLAST .
 															OHIFOLDWORKLISTFIRST . $uid . OHIFOLDWORKLISTLAST;
 													} else {
 														echo
 														HOROSWORKLISTFIRST . "'$uid'" . HOROSWORKLISTLAST .
+														RADIANTWORKLISTFIRST . $uid . RADIANTWORKLISTLAST .
 															OHIFOLDWORKLISTFIRST . $uid . OHIFOLDWORKLISTLAST;
 													} ?>
 												</div>
