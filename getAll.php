@@ -163,9 +163,9 @@ while ($row = mysqli_fetch_array($query)) {
     } else {
         if ($level == 'refferal') {
             $aksi = PDFFIRST . $study_iuid . PDFLAST .
-                DICOMFIRST . $study_iuid . DICOMLAST .
-                HTMLFIRST . $study_iuid . HTMLLAST .
-                LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST;
+                    OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
+                    HTMLFIRST . $study_iuid . HTMLLAST ;
+                // LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST;
         } elseif ($level == 'radiographer') {
             //viewer login pak hardian
             if ($username == 'hardian') {
@@ -175,9 +175,8 @@ while ($row = mysqli_fetch_array($query)) {
                     LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST;
             } else {
                 $aksi = PDFFIRST . $study_iuid . PDFLAST .
-                    RENDERFIRST . $study_iuid . RENDERLAST .
-                    OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
-                    HTMLFIRST . $study_iuid . HTMLLAST ;
+                OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
+                HTMLFIRST . $study_iuid . HTMLLAST ;
                     // LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST;
             }
         } else {

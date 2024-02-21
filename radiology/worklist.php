@@ -335,7 +335,7 @@ if ($_SESSION['level'] == "radiology") {
 														<tr>
 															<td>
 																<?= PDFFIRST . $study_iuid . PDFLAST .
-																	HOROSFIRST . "'$study_iuid'" . HOROSLAST .
+																	HOROSFIRST . $study_iuid . HOROSLAST .
 																	OHIFOLDFIRST . $study_iuid . OHIFOLDLAST;
 																?>
 																<a href="#" class="view-history-expertise" data-id="<?= $study_iuid;  ?>">
@@ -362,7 +362,7 @@ if ($_SESSION['level'] == "radiology") {
 															OHIFOLDWORKLISTFIRST . $uid . OHIFOLDWORKLISTLAST;
 													} else {
 														echo
-														HOROSWORKLISTFIRST . "'$uid'" . HOROSWORKLISTLAST .
+														HOROSWORKLISTFIRST . $uid . HOROSWORKLISTLAST .
 														RADIANTWORKLISTFIRST . $uid . RADIANTWORKLISTLAST .
 															OHIFOLDWORKLISTFIRST . $uid . OHIFOLDWORKLISTLAST;
 													} ?>

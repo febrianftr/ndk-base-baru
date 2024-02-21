@@ -251,8 +251,8 @@ while ($row = mysqli_fetch_array($result)) {
     } else {
       $detail = '<a href="workload-edit.php?uid=' . $study_iuid . '" class="penawaran-a">' . removeCharacter(mb_convert_encoding($pat_name, 'UTF-8', 'ISO-8859-1')) . '</a>';
       $level =
-        INOBITECFIRST . $study_iuid . INOBITECLAST .
-        RENDERFIRST . $study_iuid . RENDERLAST .
+        HOROSFIRST . $study_iuid . HOROSLAST .
+        RADIANTFIRST . $study_iuid . RADIANTLAST .
         OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
         CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
         EDITWORKLOADFIRST . $study_iuid . EDITWORKLOADLAST;
@@ -278,8 +278,6 @@ while ($row = mysqli_fetch_array($result)) {
       } else {
         $level = $level = EDITPASIENFIRST . $study_iuid . EDITPASIENLAST . $icon_edit_pasien . EDITPASIENVERYLAST .
           CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $blinking . CHANGEDOCTORCLASS . $icon_change_doctor . CHANGEDOCTORVERYLAST .
-          DICOMFIRST . $study_iuid . DICOMLAST .
-          RENDERFIRST . $study_iuid . RENDERLAST .
           OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
           HTMLFIRST . $study_iuid . HTMLLAST 
            
@@ -297,8 +295,8 @@ while ($row = mysqli_fetch_array($result)) {
     }
     // ketika login refferal
   } else if ($level == 'refferal') {
-    $level = DICOMFIRST . $study_iuid . DICOMLAST . HTMLFIRST . $study_iuid . HTMLLAST .
-      LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST;
+    $level = OHIFOLDFIRST . $study_iuid . OHIFOLDLAST . 
+    HTMLFIRST . $study_iuid . HTMLLAST;
   } else {
     $level = '-';
   }
