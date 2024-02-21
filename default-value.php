@@ -10,6 +10,11 @@ function defaultValueNumber($value)
     return $value ?? 0;
 }
 
+function defaultValueTime($value)
+{
+    return isset($value) ? date('H:i', strtotime($value)) : '-';
+}
+
 function defaultValueDate($value)
 {
     return isset($value) ? date('d-m-Y', strtotime($value)) : '-';
