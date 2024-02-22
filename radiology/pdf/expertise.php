@@ -210,9 +210,9 @@ $pdf->WriteHTML("<br>");
 $pdf->WriteHtml($fill);
 $pdf->WriteHTML("<br>");
 $pdf->WriteHTML("<br>");
-
+$salam = "Jepara, ".defaultValueDate($approved_at);
 $pdf->WriteHTML(
-    "<p align='right'>Jepara, </p>"
+    "<p align='right'>$salam</p>"
 );
 
 if ($expertise['signature_dokter_radiologi'] == 'qr_code') {
