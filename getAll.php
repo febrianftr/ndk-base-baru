@@ -186,8 +186,9 @@ while ($row = mysqli_fetch_array($query)) {
                     DICOMNEWFIRST . $study_iuid . DICOMNEWLAST;
             } else {
                 $aksi = PDFFIRST . $study_iuid . PDFLAST .
-                    OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
-                    INOBITECFIRST . "'$study_iuid'" . INOBITECLAST;
+                HOROSFIRST . $study_iuid . HOROSLAST .
+                RADIANTFIRST . $study_iuid . RADIANTLAST .
+                OHIFOLDFIRST . $study_iuid . OHIFOLDLAST;
             }
         }
     }
