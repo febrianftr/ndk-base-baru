@@ -44,13 +44,13 @@
 
     <div class="menu-list1">
         <ul id="menu-content1" class="menu-content1 collapse out">
-            
-                <li data-target="#home1">
-                    <a href="index.php">
-                        <i class="fa fa-home fa-lg"></i> <?= $lang['home'] ?>
-                    </a>
-                </li>
-            
+
+            <li data-target="#home1">
+                <a href="index.php">
+                    <i class="fa fa-home fa-lg"></i> <?= $lang['home'] ?>
+                </a>
+            </li>
+
             <!-- =================SIDEBAR RADIOGRAPHER====================== -->
             <?php if ($_SESSION['level'] == 'radiographer') { ?>
                 <li data-toggle="collapse" data-target="#products1" class="collapsed">
@@ -97,6 +97,7 @@
                     <li id="workload1"><a href="workload.php">Expertise Approved</a></li>
                     <li id="report1"><a href="report.php"><?= $lang['download_excel'] ?></a></li>
                     <li id="expertise-history"><a href="workload-fill.php">Expertise History</a></li>
+                    <li id="query"><a href="query.php">Query</a></li>
                 </ul>
 
                 <li data-toggle="collapse" data-target="#template" class="collapsed">

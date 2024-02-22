@@ -14,6 +14,9 @@ require 'model/query-base-take-envelope.php';
 
 $username = $_SESSION['username'];
 $level = $_SESSION['level'];
+$http_referer = $_SERVER['HTTP_REFERER'] ?? '';
+$explode = explode('/', $http_referer);
+$queryphp = in_array("query.php", $explode);
 
 // kolom untuk order by 
 $columns = array('pk', 'pk', 'status', 'pat_name', 'pat_id', 'study_datetime', 'patientid', 'pat_birthdate', 'pat_sex', 'study_desc_pacsio', 'pk', 'mods_in_study', 'named', 'name_dep', 'dokrad_name', 'radiographer_name', 'approved_at', 'pk');
@@ -65,8 +68,8 @@ $query_base = "SELECT
               LEFT JOIN $table_workload_bhp
               ON xray_workload.uid = xray_workload_bhp.uid";
 
-// kondisi jika login radiology
-if ($level == 'radiology') {
+// kondisi jika login radiology dan link workload.php
+if ($level == 'radiology' && !$queryphp) {
   $query =  $query_base . $kondisi . ' AND ';
 } else {
   // kondisi jika login selain radiology
@@ -242,24 +245,23 @@ while ($row = mysqli_fetch_array($result)) {
   $level = $_SESSION['level'];
   // ketika login radiology
   if ($level == 'radiology') {
-    if ($username == 'hardian_dokter') {
+    if (!$queryphp) {
+      // kondisi jika login radiology dan link workload.php
       $detail = '<a href="workload-edit.php?uid=' . $study_iuid . '" class="penawaran-a">' . removeCharacter(mb_convert_encoding($pat_name, 'UTF-8', 'ISO-8859-1')) . '</a>';
-      $level =
-        DICOMNEWFIRST . $study_iuid . DICOMNEWLAST .
-        OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
-        CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST . EDITWORKLOADFIRST . $study_iuid . EDITWORKLOADLAST;
+      $editworkload = EDITWORKLOADFIRST . $study_iuid . EDITWORKLOADLAST;
     } else {
-      $detail = '<a href="workload-edit.php?uid=' . $study_iuid . '" class="penawaran-a">' . removeCharacter(mb_convert_encoding($pat_name, 'UTF-8', 'ISO-8859-1')) . '</a>';
-      $level =
-        HOROSFIRST . $study_iuid . HOROSLAST .
-        RADIANTFIRST . $study_iuid . RADIANTLAST .
-        OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
-        CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
-        EDITWORKLOADFIRST . $study_iuid . EDITWORKLOADLAST;
-      // TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST .
-      // TELEGRAMSIGNATUREFIRST . $study_iuid . TELEGRAMSIGNATURELAST;
-      // ketika login radiographer
+      // kondisi jika login radiology dan link query.php
+      $editworkload = "";
     }
+    $level =
+      HOROSFIRST . $study_iuid . HOROSLAST .
+      RADIANTFIRST . $study_iuid . RADIANTLAST .
+      OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
+      CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
+      $editworkload;
+    // TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST .
+    // TELEGRAMSIGNATUREFIRST . $study_iuid . TELEGRAMSIGNATURELAST;
+    // ketika login radiographer
   } else if ($level == 'radiographer') {
     // kondisi ketika xray_workload masuk dari trigger
     if ($status != '-') {
@@ -279,8 +281,8 @@ while ($row = mysqli_fetch_array($result)) {
         $level = $level = EDITPASIENFIRST . $study_iuid . EDITPASIENLAST . $icon_edit_pasien . EDITPASIENVERYLAST .
           CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $blinking . CHANGEDOCTORCLASS . $icon_change_doctor . CHANGEDOCTORVERYLAST .
           OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
-          HTMLFIRST . $study_iuid . HTMLLAST 
-           
+          HTMLFIRST . $study_iuid . HTMLLAST
+
           // LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST .
           // COPYUIDFIRST . EXTLINKOHIF . $row['study_iuid'] . EXTLINKOHIF . COPYUIDLAST
           // . SENDDICOMFIRST . $study_iuid . SENDDICOMLAST .
@@ -295,8 +297,8 @@ while ($row = mysqli_fetch_array($result)) {
     }
     // ketika login refferal
   } else if ($level == 'refferal') {
-    $level = OHIFOLDFIRST . $study_iuid . OHIFOLDLAST . 
-    HTMLFIRST . $study_iuid . HTMLLAST;
+    $level = OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
+      HTMLFIRST . $study_iuid . HTMLLAST;
   } else {
     $level = '-';
   }

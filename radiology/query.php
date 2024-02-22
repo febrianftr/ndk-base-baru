@@ -2,30 +2,39 @@
 require '../koneksi/koneksi.php';
 session_start();
 
-if ($_SESSION['level'] == "refferal") {
+// --------------------------------
+
+if ($_SESSION['level'] == "radiology") {
 ?>
   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-  <html xmlns="http://www.w3.org/1999/xhtml">
+  <html>
 
   <head>
+    <title>Workload | Radiographer</title>
     <?php include('head.php'); ?>
-    <title>Home | radiology</title>
+    <style>
+      @media only screen and (max-width: 800px) {
+        .menu-size2 {
+          visibility: hidden;
+        }
+      }
 
+      @media only screen and (max-width: 768px) {
+        .footerindex {
+          position: fixed;
+        }
+      }
+    </style>
   </head>
 
   <body>
-
     <?php include('../sidebar-index.php'); ?>
     <div class="container-fluid" id="main">
       <div class="row">
-
-        <!-- //////content home/////////////// -->
         <?php include('../workload-index.php'); ?>
-        <!-- //////end content home/////////////// -->
-
       </div>
     </div>
-
+    <br><br>
     <div class="footerindex">
       <div class="">
         <?php include('footer-itw.php'); ?>
@@ -34,11 +43,10 @@ if ($_SESSION['level'] == "refferal") {
     <?php include('script-footer.php'); ?>
     <script>
       $(document).ready(function() {
-        $("li[id='query1']").addClass("active");
+        $("li[data-target='#service']").addClass("active");
+        $("ul[id='service'] li[id='query']").addClass("active");
       });
     </script>
-
-
   </body>
 
   </html>

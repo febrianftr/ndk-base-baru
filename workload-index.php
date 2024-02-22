@@ -7,6 +7,9 @@ require '../model/query-base-study.php';
 require '../model/query-base-patient.php';
 
 $level = $_SESSION['level'];
+$http_referer = $_SERVER['HTTP_REFERER'] ?? '';
+$explode = explode('/', $http_referer);
+$queryphp = in_array("query.php", $explode);
 
 // $waiting24hourVasculer = mysqli_fetch_assoc(mysqli_query(
 // 	$conn_pacsio,
@@ -138,7 +141,7 @@ $moreThan24hourContrast = $waiting24hourContrast["jumlah"];
 	</nav>
 </div>
 <div class="table-view">
-	<?php if ($level == "radiology") { ?>
+	<?php if ($level == 'radiology' && $queryphp) { ?>
 		<h3 class="text-center">Expertise Approved</h3>
 	<?php } else { ?>
 		<h3 class="text-center">Workload</h3>
