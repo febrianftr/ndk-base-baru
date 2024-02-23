@@ -151,7 +151,7 @@ if ($_SERVER['SERVER_NAME'] == $hostname['ip_publik'] or $_SERVER['SERVER_NAME']
 } else {
     // jika menggunakan ip lokal
     // jika menggunakan ohif lama icon (small)
-    $url = ohifurl(91);
+    $url = ohifurl(92);
     define('OHIFOLDFIRST', '<a href="' . $url . '');
     define('OHIFOLDLAST', "$ohif_small");
 
