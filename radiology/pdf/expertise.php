@@ -121,6 +121,11 @@ $pdf->SetTitle('Hasil expertise');
 $pdf->image($kop_surat_image, -3, -3, 213);
 $pdf->MultiCell(0, 18, '', 0, "J", false);
 
+if ($pat_sex == 'M'){
+    $pat_sex_ind = 'L';
+} else if ($pat_sex == 'F'){
+    $pat_sex_ind = 'P';
+}
 
 // ------------------------------------------------------------
 
@@ -144,15 +149,15 @@ $pdf->Cell(28, 5, 'Tgl Lahir', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
 $pdf->Cell(55, 5, defaultValueDate($pat_birthdate), 0, 0, 'L');
 // ------------------
-$pdf->Cell(35, 5, 'Jam Pemeriksaan', 0, 0, 'L');
+$pdf->Cell(35, 5, 'Jam Mulai', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
 $pdf->Cell(55, 5, defaultValueTime($updated_time), 0, 1, 'L');
 // -----------------
 $pdf->Cell(28, 5, 'Jenis Kelamin', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
-$pdf->Cell(55, 5, $pat_sex, 0, 0, 'L');
+$pdf->Cell(55, 5, $pat_sex_ind, 0, 0, 'L');
 // -----------------
-$pdf->Cell(35, 5, 'Jam Selesai P.', 0, 0, 'L');
+$pdf->Cell(35, 5, 'Jam Selesai', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
 $pdf->Cell(65, 5, defaultValueTime($approved_at), 0, 1, 'L');
 //-------------------
