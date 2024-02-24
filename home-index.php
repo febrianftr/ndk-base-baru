@@ -134,9 +134,6 @@ $approved = mysqli_fetch_assoc(mysqli_query(
           "data": "mrn"
         },
         {
-          "data": "study_datetime"
-        },
-        {
           "data": "no_foto"
         },
         {
@@ -165,6 +162,9 @@ $approved = mysqli_fetch_assoc(mysqli_query(
         },
         {
           "data": "radiographer_name"
+        },
+        {
+          "data": "study_datetime"
         },
         {
           "data": "approve_date"

@@ -41,8 +41,8 @@ $no_foto = defaultValue($row['no_foto']);
 $address = ucwords(strtolower(defaultValue($row['address'])));
 $name_dep = substr(defaultValue($row['name_dep']), 0, 29);
 $named = substr(defaultValue($row['named']), 0, 29);
-$spc_needs_one = substr(defaultValue($row['spc_needs']), 0, 23);
-$spc_needs_two = substr(defaultValue($row['spc_needs']), 23, 23);
+$spc_needs_one = ucwords(substr(defaultValue($row['spc_needs']), 0, 23));
+$spc_needs_two = ucwords(substr(defaultValue($row['spc_needs']), 23, 23));
 $fill = $row['fill'];
 $signature = $row['signature'];
 $status = $row['status'];
@@ -121,10 +121,12 @@ $pdf->SetTitle('Hasil expertise');
 $pdf->image($kop_surat_image, -3, -3, 213);
 $pdf->MultiCell(0, 18, '', 0, "J", false);
 
-if ($pat_sex == 'M'){
+if ($pat_sex == 'M') {
     $pat_sex_ind = 'L';
-} else if ($pat_sex == 'F'){
+} else if ($pat_sex == 'F') {
     $pat_sex_ind = 'P';
+} else {
+    $pat_sex_ind = defaultValue($pat_sex);
 }
 
 // ------------------------------------------------------------
@@ -215,7 +217,7 @@ $pdf->WriteHTML("<br>");
 $pdf->WriteHtml($fill);
 $pdf->WriteHTML("<br>");
 $pdf->WriteHTML("<br>");
-$salam = "Jepara, ".defaultValueDate($approved_at);
+$salam = "Jepara, " . defaultValueDate($approved_at);
 $pdf->WriteHTML(
     "<p align='right'>$salam</p>"
 );
