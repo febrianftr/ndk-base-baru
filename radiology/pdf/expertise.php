@@ -41,11 +41,13 @@ $no_foto = defaultValue($row['no_foto']);
 $address = ucwords(strtolower(defaultValue($row['address'])));
 $name_dep = substr(defaultValue($row['name_dep']), 0, 29);
 $named = substr(defaultValue($row['named']), 0, 29);
-$spc_needs_one = ucwords(substr(defaultValue($row['spc_needs']), 0, 23));
-$spc_needs_two = ucwords(substr(defaultValue($row['spc_needs']), 23, 23));
+$spc_needs_array = explode("-", $row['spc_needs']);
+$spc_needs_one = ucfirst(substr(defaultValue($spc_needs_array[1]), 0, 34));
+$spc_needs_two = substr(defaultValue($spc_needs_array[1]), 34, 34);
 $fill = $row['fill'];
 $signature = $row['signature'];
 $status = $row['status'];
+$create_time = $row['create_time'];
 $approved_at = $row['approved_at'];
 $pk_dokter_radiology = $row['pk_dokter_radiology'];
 
@@ -143,33 +145,33 @@ $pdf->Cell(28, 5, 'Nama', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
 $pdf->Cell(55, 5, $pat_name, 0, 0, 'L');
 // ------------------
-$pdf->Cell(35, 5, 'Tanggal Pemeriksaan', 0, 0, 'L');
-$pdf->Cell(3, 5, ':', 0, 0, 'L');
-$pdf->Cell(65, 5, defaultValueDate($study_datetime), 0, 1, 'L');
-// -----------------
-$pdf->Cell(28, 5, 'Tgl Lahir', 0, 0, 'L');
-$pdf->Cell(3, 5, ':', 0, 0, 'L');
-$pdf->Cell(55, 5, defaultValueDate($pat_birthdate), 0, 0, 'L');
+// $pdf->Cell(35, 5, 'Tanggal Pemeriksaan', 0, 0, 'L');
+// $pdf->Cell(3, 5, ':', 0, 0, 'L');
+// $pdf->Cell(65, 5, defaultValueDate($study_datetime), 0, 1, 'L');
 // ------------------
 $pdf->Cell(35, 5, 'Jam Mulai', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
 $pdf->Cell(55, 5, defaultValueTime($updated_time), 0, 1, 'L');
 // -----------------
-$pdf->Cell(28, 5, 'Jenis Kelamin', 0, 0, 'L');
+$pdf->Cell(28, 5, 'Tgl Lahir', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
-$pdf->Cell(55, 5, $pat_sex_ind, 0, 0, 'L');
+$pdf->Cell(55, 5, defaultValueDate($pat_birthdate), 0, 0, 'L');
 // -----------------
 $pdf->Cell(35, 5, 'Jam Selesai', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
 $pdf->Cell(65, 5, defaultValueTime($approved_at), 0, 1, 'L');
-//-------------------
-$pdf->Cell(28, 5, 'Klinis', 0, 0, 'L');
+// -----------------
+$pdf->Cell(28, 5, 'Jenis Kelamin', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
-$pdf->Cell(55, 5, $spc_needs_one, 0, 0, 'L');
+$pdf->Cell(55, 5, $pat_sex_ind, 0, 0, 'L');
 // -------------------
 $pdf->Cell(35, 5, 'Waktu Pemeriksaan', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
 $pdf->Cell(65, 5, spendTime($updated_time, $approved_at, $status), 0, 1, 'L');
+//-------------------
+$pdf->Cell(28, 5, 'Klinis', 0, 0, 'L');
+$pdf->Cell(3, 5, ':', 0, 0, 'L');
+$pdf->Cell(55, 5, trim($spc_needs_one), 0, 0, 'L');
 // -----------------
 $pdf->Cell(28, 5, '', 0, 0, 'L');
 $pdf->Cell(3, 5, '', 0, 0, 'L');
@@ -217,7 +219,7 @@ $pdf->WriteHTML("<br>");
 $pdf->WriteHtml($fill);
 $pdf->WriteHTML("<br>");
 $pdf->WriteHTML("<br>");
-$salam = "Jepara, " . defaultValueDate($approved_at);
+$salam = "Jepara, " . defaultValueDate($create_time);
 $pdf->WriteHTML(
     "<p align='right'>$salam</p>"
 );
