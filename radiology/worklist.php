@@ -61,6 +61,7 @@ $create_time = defaultValueDateTime($row['create_time']);
 $pat_state = defaultValue($row['pat_state']);
 $priority = defaultValue($row['priority']);
 $spc_needs = defaultValue($row['spc_needs']);
+$laboratory_support = defaultValue($row['laboratory_support']);
 $payment = defaultValue($row['payment']);
 $fromorder = $row['fromorder'];
 $status = styleStatus($row['status'], $study_iuid);
@@ -250,6 +251,12 @@ if ($_SESSION['level'] == "radiology") {
 															</tr>
 															<tr>
 																<td><?= $spc_needs; ?></td>
+															</tr>
+															<tr>
+																<td><span class="table-left">Laboratory Support</span></td>
+															</tr>
+															<tr>
+																<td><?= $laboratory_support; ?></td>
 															</tr>
 															<tr>
 																<td><span class="table-left">Procedure</span></td>

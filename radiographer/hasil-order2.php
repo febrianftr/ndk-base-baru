@@ -199,6 +199,11 @@ $fromorder = $row['fromorder'];
                     <td align="left">&nbsp; <?= defaultValue($row['spc_needs']); ?></td>
                 </tr>
                 <tr>
+                    <td><?= "Laboratory Support" ?></td>
+                    <td>&nbsp;: </td>
+                    <td align="left">&nbsp; <?= defaultValue($row['laboratory_support']); ?></td>
+                </tr>
+                <tr>
                     <td>Kode <?= $lang['payment'] ?></td>
                     <td>&nbsp;: </td>
                     <td align="left">&nbsp; <?= defaultValue($row['id_payment']); ?></td>
