@@ -29,6 +29,9 @@
     <div class="brand">
         <div style="width: 200px; padding: 8px 10px 0px 15px; margin: 7px 0;"><img style="width: 100%;" src="../image/logo-front.png"></div>
     </div>
+    <div class="user-sidebar">
+        <i class="fas fa-user fa-lg"></i> : <?= $_SESSION['username']; ?>
+    </div>
     <!-- <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content1"></i> -->
     <div class="toggle-btn">
         <label for="burger" class="burger-bar">
