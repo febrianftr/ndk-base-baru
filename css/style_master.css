@@ -3946,6 +3946,16 @@ table.dataTable > thead .sorting_desc_disabled::after {
 
 
 
+.user-sidebar{
+  margin-left: 20px;
+  background-color: #14263c;
+  padding: 7px 5px;
+  border-radius: 8px;
+  width: 205px;
+  font-weight: bold;
+}
+
+
 
 @media only screen and (max-width: 800px) {
   .menu-size2 {
