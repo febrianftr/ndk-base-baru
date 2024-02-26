@@ -14,9 +14,12 @@ require 'model/query-base-take-envelope.php';
 
 $username = $_SESSION['username'];
 $level = $_SESSION['level'];
+$http_referer = $_SERVER['HTTP_REFERER'] ?? '';
+$explode = explode('/', $http_referer);
+$queryphp = in_array("query.php", $explode);
 
 // kolom untuk order by 
-$columns = array('pk', 'pk', 'status', 'pat_name', 'pat_id', 'study_datetime', 'patientid', 'pat_birthdate', 'pat_sex', 'study_desc_pacsio', 'pk', 'mods_in_study', 'named', 'name_dep', 'dokrad_name', 'radiographer_name', 'approved_at', 'pk');
+$columns = array('pk', 'pk', 'status', 'pat_name', 'pat_id', 'study_datetime', 'patientid', 'pat_birthdate', 'pat_sex', 'prosedur', 'pk', 'mods_in_study', 'named', 'name_dep', 'dokrad_name', 'radiographer_name', 'approved_at', 'pk');
 
 $row_dokrad = mysqli_fetch_assoc(mysqli_query(
   $conn,
@@ -37,7 +40,6 @@ $query_base = "SELECT
               pat_birthdate,
               study_iuid,
               study_datetime,
-              study_desc_pacsio,
               mods_in_study,
               study.updated_time,
               status,
@@ -53,6 +55,7 @@ $query_base = "SELECT
               name_dep,
               radiographer_name,
               priority,
+              prosedur,
               contrast,
               fromorder
               FROM $table_patient
@@ -65,8 +68,8 @@ $query_base = "SELECT
               LEFT JOIN $table_workload_bhp
               ON xray_workload.uid = xray_workload_bhp.uid";
 
-// kondisi jika login radiology
-if ($level == 'radiology') {
+// kondisi jika login radiology dan link workload.php
+if ($level == 'radiology' && !$queryphp) {
   $query =  $query_base . $kondisi . ' AND ';
 } else {
   // kondisi jika login selain radiology
@@ -92,7 +95,7 @@ if (isset($_POST["search"]["value"])) {
   OR pat_name LIKE "%' . $_POST["search"]["value"] . '%" 
   OR pat_birthdate LIKE "%' . $_POST["search"]["value"] . '%"
   OR pat_sex LIKE "%' . $_POST["search"]["value"] . '%"
-  OR study_desc_pacsio LIKE "%' . $_POST["search"]["value"] . '%"
+  OR prosedur LIKE "%' . $_POST["search"]["value"] . '%"
   OR mods_in_study LIKE "%' . $_POST["search"]["value"] . '%" 
   OR named LIKE "%' . $_POST["search"]["value"] . '%"
   OR radiographer_name LIKE "%' . $_POST["search"]["value"] . '%"
@@ -169,7 +172,6 @@ while ($row = mysqli_fetch_array($result)) {
   $pat_birthdate = diffDate($row['pat_birthdate']);
   $study_iuid = defaultValue($row['study_iuid']);
   $study_datetime = defaultValueDateTime($row['study_datetime']);
-  $study_desc_pacsio = defaultValue($row['study_desc_pacsio']);
   $mods_in_study = defaultValue($row['mods_in_study']);
   $updated_time = defaultValueDateTime($row['updated_time']);
   $pat_id = defaultValue($row['pat_id']);
@@ -183,9 +185,10 @@ while ($row = mysqli_fetch_array($result)) {
   $status = styleStatus($row['status'], $study_iuid);
   $fromorder = $row['fromorder'];
   $contrast = $row['contrast'];
+  $prosedur = defaultValue($row['prosedur']);
   $approved_at = defaultValueDateTime($row['approved_at']);
   $spendtime = spendTime($study_datetime, $approved_at, $row['status']);
-  $blinking = hour($study_datetime, $row['status'], $priority, $mods_in_study, $contrast, $study_desc_pacsio);
+  $blinking = hour($study_datetime, $row['status'], $priority, $mods_in_study, $contrast, $prosedur);
   $pk_dokter_radiology = $row['pk_dokter_radiology'];
   $kv = $row['kv'];
   $mas = $row['mas'];
@@ -242,24 +245,23 @@ while ($row = mysqli_fetch_array($result)) {
   $level = $_SESSION['level'];
   // ketika login radiology
   if ($level == 'radiology') {
-    if ($username == 'hardian_dokter') {
+    if (!$queryphp) {
+      // kondisi jika login radiology dan link workload.php
       $detail = '<a href="workload-edit.php?uid=' . $study_iuid . '" class="penawaran-a">' . removeCharacter(mb_convert_encoding($pat_name, 'UTF-8', 'ISO-8859-1')) . '</a>';
-      $level =
-        DICOMNEWFIRST . $study_iuid . DICOMNEWLAST .
-        OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
-        CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST . EDITWORKLOADFIRST . $study_iuid . EDITWORKLOADLAST;
+      $editworkload = EDITWORKLOADFIRST . $study_iuid . EDITWORKLOADLAST;
     } else {
-      $detail = '<a href="workload-edit.php?uid=' . $study_iuid . '" class="penawaran-a">' . removeCharacter(mb_convert_encoding($pat_name, 'UTF-8', 'ISO-8859-1')) . '</a>';
-      $level =
-        INOBITECFIRST . $study_iuid . INOBITECLAST .
-        RENDERFIRST . $study_iuid . RENDERLAST .
-        OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
-        CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
-        EDITWORKLOADFIRST . $study_iuid . EDITWORKLOADLAST;
-      // TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST .
-      // TELEGRAMSIGNATUREFIRST . $study_iuid . TELEGRAMSIGNATURELAST;
-      // ketika login radiographer
+      // kondisi jika login radiology dan link query.php
+      $editworkload = "";
     }
+    $level =
+      HOROSFIRST . $study_iuid . HOROSLAST .
+      RADIANTFIRST . $study_iuid . RADIANTLAST .
+      OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
+      CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
+      $editworkload;
+    // TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST .
+    // TELEGRAMSIGNATUREFIRST . $study_iuid . TELEGRAMSIGNATURELAST;
+    // ketika login radiographer
   } else if ($level == 'radiographer') {
     // kondisi ketika xray_workload masuk dari trigger
     if ($status != '-') {
@@ -278,11 +280,9 @@ while ($row = mysqli_fetch_array($result)) {
       } else {
         $level = $level = EDITPASIENFIRST . $study_iuid . EDITPASIENLAST . $icon_edit_pasien . EDITPASIENVERYLAST .
           CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $blinking . CHANGEDOCTORCLASS . $icon_change_doctor . CHANGEDOCTORVERYLAST .
-          DICOMFIRST . $study_iuid . DICOMLAST .
-          RENDERFIRST . $study_iuid . RENDERLAST .
           OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
-          HTMLFIRST . $study_iuid . HTMLLAST 
-           
+          HTMLFIRST . $study_iuid . HTMLLAST
+
           // LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST .
           // COPYUIDFIRST . EXTLINKOHIF . $row['study_iuid'] . EXTLINKOHIF . COPYUIDLAST
           // . SENDDICOMFIRST . $study_iuid . SENDDICOMLAST .
@@ -297,8 +297,8 @@ while ($row = mysqli_fetch_array($result)) {
     }
     // ketika login refferal
   } else if ($level == 'refferal') {
-    $level = DICOMFIRST . $study_iuid . DICOMLAST . HTMLFIRST . $study_iuid . HTMLLAST .
-      LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST;
+    $level = OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
+      HTMLFIRST . $study_iuid . HTMLLAST;
   } else {
     $level = '-';
   }
@@ -343,17 +343,17 @@ while ($row = mysqli_fetch_array($result)) {
   $sub_array[] = $status . '&nbsp;' . $badge;
   $sub_array[] = $detail . '&nbsp;' . $priority_style;
   $sub_array[] = $pat_id;
-  $sub_array[] = $study_datetime;
   $sub_array[] = $no_foto;
   $sub_array[] = $pat_birthdate;
   $sub_array[] = $pat_sex;
-  $sub_array[] = mb_convert_encoding($study_desc_pacsio, 'UTF-8', 'ISO-8859-1');
+  $sub_array[] = mb_convert_encoding($prosedur, 'UTF-8', 'ISO-8859-1');
   $sub_array[] = READMORESERIESFIRST . $study_iuid . READMORESERIESLAST;
   $sub_array[] = $mods_in_study;
   $sub_array[] = mb_convert_encoding($named, 'UTF-8', 'ISO-8859-1');
   $sub_array[] = mb_convert_encoding($name_dep, 'UTF-8', 'ISO-8859-1');
   $sub_array[] = mb_convert_encoding($dokrad_name, 'UTF-8', 'ISO-8859-1');;
   $sub_array[] = READMORERADIOGRAPHERFIRST . $study_iuid . READMORERADIOGRAPHERLAST;
+  $sub_array[] = $study_datetime;
   $sub_array[] = $approved_at;
   $sub_array[] = $spendtime;
   $sub_array[]  = $i++;

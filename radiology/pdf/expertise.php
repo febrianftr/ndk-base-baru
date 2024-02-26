@@ -33,18 +33,23 @@ $pat_sex = $row['pat_sex'];
 $pat_birthdate = $row['pat_birthdate'];
 $age = diffDate($pat_birthdate);
 $study_datetime = defaultValueDateTime($row['study_datetime']);
-$study_desc_one = substr(ucwords(strtolower(defaultValue($row['study_desc_pacsio']))), 0, 32);
-$study_desc_two = substr(ucwords(strtolower(defaultValue($row['study_desc_pacsio']))), 32, 32);
+$updated_time = defaultValueDateTime($row['updated_time']);
+$study_desc_one = substr(ucwords(strtolower(defaultValue($row['prosedur']))), 0, 32);
+$study_desc_two = substr(ucwords(strtolower(defaultValue($row['prosedur']))), 32, 32);
 $pat_id = defaultValue($row['pat_id']);
 $no_foto = defaultValue($row['no_foto']);
 $address = ucwords(strtolower(defaultValue($row['address'])));
 $name_dep = substr(defaultValue($row['name_dep']), 0, 29);
 $named = substr(defaultValue($row['named']), 0, 29);
-$spc_needs_one = substr(defaultValue($row['spc_needs']), 0, 23);
-$spc_needs_two = substr(defaultValue($row['spc_needs']), 23, 23);
+$spc_needs_array = explode("-", $row['spc_needs']);
+$klinis = isset($spc_needs_array[1]) == null ? "-" : $spc_needs_array[1];
+$spc_needs_one = ucfirst(substr(defaultValue($klinis), 0, 34));
+$spc_needs_two = substr(defaultValue($klinis), 34, 34);
 $fill = $row['fill'];
 $signature = $row['signature'];
 $status = $row['status'];
+$create_time = $row['create_time'];
+$approved_at = $row['approved_at'];
 $pk_dokter_radiology = $row['pk_dokter_radiology'];
 
 // kondisi mencari ditabel dokter radiology
@@ -116,9 +121,16 @@ $pdf->SetFont('Arial', '', 10);
 
 $pdf->SetTitle('Hasil expertise');
 
-$pdf->image($kop_surat_image, 10, 3, 195);
-$pdf->MultiCell(0, 24, '', 0, "J", false);
+$pdf->image($kop_surat_image, -3, -3, 213);
+$pdf->MultiCell(0, 18, '', 0, "J", false);
 
+if ($pat_sex == 'M') {
+    $pat_sex_ind = 'L';
+} else if ($pat_sex == 'F') {
+    $pat_sex_ind = 'P';
+} else {
+    $pat_sex_ind = defaultValue($pat_sex);
+}
 
 // ------------------------------------------------------------
 
@@ -126,58 +138,61 @@ $pdf->Cell(28, 5, 'No RM', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
 $pdf->Cell(55, 5, $pat_id, 0, 0, 'L');
 // ------------------
-$pdf->Cell(35, 5, 'No Foto', 0, 0, 'L');
+$pdf->Cell(35, 5, 'Ruangan/Poliklinik', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
-$pdf->Cell(55, 5, $no_foto, 0, 1, 'L');
+$pdf->Cell(65, 5, $name_dep, 0, 1, 'L');
 // -----------------
 $pdf->Cell(28, 5, 'Nama', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
 $pdf->Cell(55, 5, $pat_name, 0, 0, 'L');
 // ------------------
-$pdf->Cell(35, 5, 'Ruang', 0, 0, 'L');
+// $pdf->Cell(35, 5, 'Tanggal Pemeriksaan', 0, 0, 'L');
+// $pdf->Cell(3, 5, ':', 0, 0, 'L');
+// $pdf->Cell(65, 5, defaultValueDate($study_datetime), 0, 1, 'L');
+// ------------------
+$pdf->Cell(35, 5, 'Jam Mulai', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
-$pdf->Cell(65, 5, $name_dep, 0, 1, 'L');
+$pdf->Cell(55, 5, defaultValueTime($updated_time), 0, 1, 'L');
 // -----------------
 $pdf->Cell(28, 5, 'Tgl Lahir', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
 $pdf->Cell(55, 5, defaultValueDate($pat_birthdate), 0, 0, 'L');
-// ------------------
-$pdf->Cell(35, 5, 'Dokter Pengirim', 0, 0, 'L');
-$pdf->Cell(3, 5, ':', 0, 0, 'L');
-$pdf->Cell(65, 5, $named, 0, 1, 'L');
 // -----------------
-$pdf->Cell(28, 5, 'Umur', 0, 0, 'L');
+$pdf->Cell(35, 5, 'Jam Selesai', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
-$pdf->Cell(55, 5, $age, 0, 0, 'L');
+$pdf->Cell(65, 5, defaultValueTime($approved_at), 0, 1, 'L');
 // -----------------
-$pdf->Cell(35, 5, 'Dokter Radiologi', 0, 0, 'L');
-$pdf->Cell(3, 5, ':', 0, 0, 'L');
-$pdf->Cell(65, 5, substr($dokrad_name, 0, 35), 0, 1, 'L');
-//-------------------
 $pdf->Cell(28, 5, 'Jenis Kelamin', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
-$pdf->Cell(55, 5, $pat_sex, 0, 0, 'L');
+$pdf->Cell(55, 5, $pat_sex_ind, 0, 0, 'L');
 // -------------------
-$pdf->Cell(35, 5, 'Tanggal Pemeriksaan', 0, 0, 'L');
+$pdf->Cell(35, 5, 'Waktu Pemeriksaan', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
-$pdf->Cell(65, 5, defaultValueDate($study_datetime), 0, 1, 'L');
-// -----------------
+$pdf->Cell(65, 5, spendTime($updated_time, $approved_at, $status), 0, 1, 'L');
+//-------------------
 $pdf->Cell(28, 5, 'Klinis', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
-$pdf->Cell(55, 5, $spc_needs_one, 0, 0, 'L');
+$pdf->Cell(55, 5, trim($spc_needs_one), 0, 0, 'L');
 // -----------------
-$pdf->Cell(35, 5, 'Jenis Pemeriksaan', 0, 0, 'L');
-$pdf->Cell(3, 5, ':', 0, 0, 'L');
-$pdf->Cell(65, 5, $study_desc_one, 0, 1, 'L');
+$pdf->Cell(35, 5, '', 0, 0, 'L');
+$pdf->Cell(3, 5, '', 0, 0, 'L');
+$pdf->Cell(65, 5, '', 0, 1, 'L');
+// -----------------
 // -----------------
 $pdf->Cell(28, 5, '', 0, 0, 'L');
 $pdf->Cell(3, 5, '', 0, 0, 'L');
 $pdf->Cell(55, 5, $spc_needs_two, 0, 0, 'L');
 // -----------------
+// $pdf->Cell(35, 5, 'Jenis Pemeriksaan', 0, 0, 'L');
+// $pdf->Cell(3, 5, ':', 0, 0, 'L');
+// $pdf->Cell(65, 5, $study_desc_one, 0, 1, 'L');
+// -----------------
+
+// -----------------
 $pdf->Cell(35, 5, '', 0, 0, 'L');
 $pdf->Cell(3, 5, '', 0, 0, 'L');
 $pdf->Cell(65, 5, $study_desc_two, 0, 1, 'L');
-$pdf->Line(16, 78, 198, 78);
+$pdf->Line(16, 73, 198, 73);
 $fill = str_replace("&nbsp;", " ", $fill);
 $fill = str_replace("&ndash;", "-", $fill);
 $fill = str_replace("&agrave;", "->", $fill);
@@ -210,9 +225,9 @@ $pdf->WriteHTML("<br>");
 $pdf->WriteHtml($fill);
 $pdf->WriteHTML("<br>");
 $pdf->WriteHTML("<br>");
-
+$salam = "Jepara, " . defaultValueDate($create_time);
 $pdf->WriteHTML(
-    "<p align='right'>Salam sejawat</p>"
+    "<p align='right'>$salam</p>"
 );
 
 if ($expertise['signature_dokter_radiologi'] == 'qr_code') {
@@ -233,7 +248,7 @@ if ($expertise['qr_code_pasien'] == 1) {
     // jika menggunakan qr code hasil pasien
     $hasilPasien = $pdf->image($qr_code_pasien, $pdf->GetX(), $pdf->GetY(), 25);
     $pdf->Ln(27);
-    $pdf->Cell(0, 0, 'Hasil bisa diakses maximal 30 Hari dari tanggal', 0, 0, 'L');
+    $pdf->Cell(0, 0, 'Hasil bisa diakses maximal 90 Hari dari tanggal', 0, 0, 'L');
     $pdf->Cell(0, 0, $dokrad_name, 0, 1, 'R');
     $pdf->Cell(0, 9, 'dokter radiologi melakukan expertise ', 0, 0, 'L');
     $pdf->Cell(0, 9, $nip, 0, 0, 'R');

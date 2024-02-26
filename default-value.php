@@ -10,9 +10,19 @@ function defaultValueNumber($value)
     return $value ?? 0;
 }
 
+function defaultValueTime($value)
+{
+    return isset($value) ? date('H:i', strtotime($value)) : '-';
+}
+
 function defaultValueDate($value)
 {
     return isset($value) ? date('d-m-Y', strtotime($value)) : '-';
+}
+
+function defaultValueDate2($value)
+{
+    return isset($value) ? date('d F Y', strtotime($value)) : '-';
 }
 
 function defaultValueDateTime($value)
@@ -56,7 +66,7 @@ function spendTime($value_study_datetime, $value_approved_at, $value_status)
     return $spendTime;
 }
 
-function hour($value_study_datetime, $value_status, $value_priority, $value_mods_in_study, $value_contrast, $value_study_desc_pacsio)
+function hour($value_study_datetime, $value_status, $value_priority, $value_mods_in_study, $value_contrast, $value_prosedur)
 {
     date_default_timezone_set('Asia/Jakarta');
     $study_datetime = date("Y-m-d H:i", strtotime($value_study_datetime));
@@ -80,10 +90,10 @@ function hour($value_study_datetime, $value_status, $value_priority, $value_mods
     } else if ($resulthour >= 24 && strtolower($value_priority) == "normal" && $value_contrast == 1 && ($value_mods_in_study == "CT" || $value_mods_in_study == "CT\\SR" || $value_mods_in_study == "DX" || $value_mods_in_study == "CR" || $value_mods_in_study == "DX\\CR")) {
         // jika pasien lebih dari 24 jam && prioritas NORMAL && (modalitas CT || CT\SR || DX || CR || DX\CR) && contrast
         $blinking = "blinking-24-hour ";
-    } else if ($resulthour >= 24 && strtolower($value_priority) == "normal" && $value_mods_in_study == "US" && strtolower($value_study_desc_pacsio) == "usg vasculer") {
+    } else if ($resulthour >= 24 && strtolower($value_priority) == "normal" && $value_mods_in_study == "US" && strtolower($value_prosedur) == "usg vasculer") {
         // jika pasien lebih dari 24 jam && prioritas NORMAL && (modalitas US dan USG VASCULER)
         $blinking = "blinking-24-hour ";
-    } else if ($resulthour >= 3 && strtolower($value_priority) == "normal" && $value_mods_in_study == "US" && strtolower($value_study_desc_pacsio) != "vasculer") {
+    } else if ($resulthour >= 3 && strtolower($value_priority) == "normal" && $value_mods_in_study == "US" && strtolower($value_prosedur) != "vasculer") {
         // jika pasien lebih dari 3 jam && prioritas NORMAL && modalitas US && bukan study vasculer
         $blinking = "blinking-3-hour ";
     } else if ($resulthour >= 1 && strtolower($value_priority) == "cito") {

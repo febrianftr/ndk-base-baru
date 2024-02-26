@@ -15,7 +15,7 @@ $username = $_SESSION['username'];
 $level = $_SESSION['level'];
 
 // kolom untuk order by 
-$columns = array('pk', 'pk', 'pat_name', 'pat_id', 'study_desc_pacsio', 'study_datetime');
+$columns = array('pk', 'pk', 'pat_name', 'pat_id', 'prosedur', 'study_datetime');
 
 $row_dokrad = mysqli_fetch_assoc(mysqli_query(
   $conn,
@@ -33,7 +33,8 @@ $query_base = "SELECT
               pat_name,
               study_iuid,
               study_datetime,
-              study_desc_pacsio,
+              prosedur,
+              prosedur,
               mods_in_study,
               status,
               fromorder,
@@ -73,7 +74,7 @@ if (isset($_POST["search"]["value"])) {
   $query .= '
   (pat_id LIKE "%' . $_POST["search"]["value"] . '%" 
   OR pat_name LIKE "%' . $_POST["search"]["value"] . '%"
-  OR study_desc_pacsio LIKE "%' . $_POST["search"]["value"] . '%"
+  OR prosedur LIKE "%' . $_POST["search"]["value"] . '%"
   OR study.study_datetime LIKE "%' . $_POST["search"]["value"] . '%"
   )';
 }
@@ -146,7 +147,7 @@ while ($row = mysqli_fetch_array($result)) {
   $study_iuid = defaultValue($row['study_iuid']);
   $mods_in_study = defaultValue($row['mods_in_study']);
   $study_datetime = defaultValueDateTime($row['study_datetime']);
-  $study_desc_pacsio = defaultValue($row['study_desc_pacsio']);
+  $prosedur = defaultValue($row['prosedur']);
   $pat_id = defaultValue($row['pat_id']);
   $status = styleStatus('approved', $study_iuid);
   $priority = defaultValue($row['priority']);
@@ -179,7 +180,7 @@ while ($row = mysqli_fetch_array($result)) {
   $sub_array[] = $status . '&nbsp;' . $badge;
   $sub_array[] = $detail . '&nbsp;' . $priority_style;
   $sub_array[] = $pat_id;
-  $sub_array[] = mb_convert_encoding($study_desc_pacsio, 'UTF-8', 'ISO-8859-1');
+  $sub_array[] = mb_convert_encoding($prosedur, 'UTF-8', 'ISO-8859-1');
   $sub_array[] = $mods_in_study;
   $sub_array[] = $study_datetime;
   $sub_array[]  = $i++;

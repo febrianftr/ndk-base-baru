@@ -105,6 +105,8 @@ define('INOBITECFIRST', '<a href="#" class="ahref-edit" onclick="inobitec(');
 define('INOBITECLAST', ')"id="inobitec" data-ip="' . $_SERVER['SERVER_NAME'] . '"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/inobitec.png" data-toggle="tooltip" title="Radiant Viewer" style="width: 72%;"></span></a>');
 
 // HOROS
+
+// Horos://?methodName=retrieve&serverName=PACS&then=open&retrieveOnlyIfNeeded=yes&filterKey=StudyInstanceUID&filterValue=
 $horos = '<a href="Horos://?methodName=displayStudy&StudyInstanceUID=';
 define('HOROSFIRST', "$horos");
 define('HOROSLAST', '"class="ahref-edit" style="text-decoration:none;" target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/horos.png" data-toggle="tooltip" title="Radiant Viewer" style="width: 100%;"></span></a>');
@@ -149,7 +151,7 @@ if ($_SERVER['SERVER_NAME'] == $hostname['ip_publik'] or $_SERVER['SERVER_NAME']
 } else {
     // jika menggunakan ip lokal
     // jika menggunakan ohif lama icon (small)
-    $url = ohifurl(91);
+    $url = ohifurl(92);
     define('OHIFOLDFIRST', '<a href="' . $url . '');
     define('OHIFOLDLAST', "$ohif_small");
 
