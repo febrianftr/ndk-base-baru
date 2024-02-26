@@ -41,8 +41,14 @@ $no_foto = defaultValue($row['no_foto']);
 $address = ucwords(strtolower(defaultValue($row['address'])));
 $name_dep = substr(defaultValue($row['name_dep']), 0, 29);
 $named = substr(defaultValue($row['named']), 0, 29);
-$spc_needs_array = explode("-", $row['spc_needs']);
-$klinis = isset($spc_needs_array[1]) == null ? "-" : $spc_needs_array[1];
+
+if (!strpos($row['spc_needs'], "~~")) {
+    $klinis = str_replace("~~", "", $row['spc_needs']);
+} else {
+    $spc_needs_array = explode("~~", $row['spc_needs']);
+    $klinis = !empty($spc_needs_array[1]) ? $spc_needs_array[1] : "-";
+}
+// var_dump(!empty($spc_needs_array[1]));
 $spc_needs_one = ucfirst(substr(defaultValue($klinis), 0, 34));
 $spc_needs_two = substr(defaultValue($klinis), 34, 34);
 $fill = $row['fill'];
