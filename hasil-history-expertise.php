@@ -3,6 +3,7 @@ require 'koneksi/koneksi.php';
 require 'viewer-all.php';
 require 'default-value.php';
 require 'model/query-base-patient.php';
+require 'model/query-base-order.php';
 require 'model/query-base-study.php';
 require 'model/query-base-series.php';
 require 'model/query-base-workload.php';
@@ -13,12 +14,15 @@ $row = mysqli_fetch_assoc(mysqli_query(
     $conn_pacsio,
     "SELECT $select_patient,
 	$select_study,
+    $select_order,
     $select_workload
 	FROM $table_patient
 	JOIN $table_study
 	ON patient.pk = study.patient_fk 
     JOIN $table_workload
     ON study.study_iuid = xray_workload.uid
+    LEFT JOIN $table_order
+    ON xray_order.uid = study.study_iuid
 	WHERE study_iuid = '$study_iuid'"
 ));
 $approved_at = defaultValueDateTime($row['approved_at']);
@@ -44,7 +48,7 @@ $approved_at = defaultValueDateTime($row['approved_at']);
             <tr>
                 <td><?= $lang['study'] ?></td>
                 <td>&nbsp;: </td>
-                <td align="left" class="font-weight-bold">&nbsp; <?= defaultValue($row['study_desc_pacsio']); ?></td>
+                <td align="left" class="font-weight-bold">&nbsp; <?= defaultValue($row['prosedur']); ?></td>
             </tr>
             <tr>
                 <td>Approve Date</td>

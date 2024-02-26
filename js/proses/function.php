@@ -35,8 +35,8 @@ function expertise($uidInput)
     $pat_birthdate = $row['pat_birthdate'];
     $age = diffDate($pat_birthdate);
     $study_datetime = defaultValueDateTime($row['study_datetime']);
-    $study_desc_one = substr(ucwords(strtolower(defaultValue($row['study_desc_pacsio']))), 0, 32);
-    $study_desc_two = substr(ucwords(strtolower(defaultValue($row['study_desc_pacsio']))), 32, 32);
+    $study_desc_one = substr(ucwords(strtolower(defaultValue($row['prosedur']))), 0, 32);
+    $study_desc_two = substr(ucwords(strtolower(defaultValue($row['prosedur']))), 32, 32);
     $pat_id = defaultValue($row['pat_id']);
     $no_foto = defaultValue($row['no_foto']);
     $address = ucwords(strtolower(defaultValue($row['address'])));

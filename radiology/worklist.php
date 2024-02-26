@@ -30,10 +30,10 @@ $row = mysqli_fetch_assoc(mysqli_query(
     FROM $table_patient
     JOIN $table_study
     ON patient.pk = study.patient_fk
-    LEFT JOIN $table_order
-    ON xray_order.uid = study.study_iuid
-    LEFT JOIN $table_workload
+    JOIN $table_workload
     ON study.study_iuid = xray_workload.uid
+    LEFT JOIN $table_order
+    ON xray_order.uid = xray_workload.uid
 	WHERE study_iuid = '$uid'"
 ));
 $pat_name = defaultValue($row['pat_name']);
@@ -44,6 +44,7 @@ $study_datetime = defaultValueDateTime($row['study_datetime']);
 $accession_no = defaultValue($row['accession_no']);
 $ref_physician = defaultValue($row['ref_physician']);
 $study_desc = defaultValue($row['study_desc']);
+$prosedur = defaultValue($row['prosedur']);
 $mods_in_study = defaultValue($row['mods_in_study']);
 $num_series = defaultValue($row['num_series']);
 $num_instances = defaultValue($row['num_instances']);
@@ -75,12 +76,15 @@ $query_mrn = mysqli_query(
 	$conn,
 	"SELECT $select_patient,
 	$select_study,
+	$select_order,
 	$select_workload
 	FROM $table_patient
 	JOIN $table_study
 	ON patient.pk = study.patient_fk 
-	JOIN $table_workload
+    JOIN $table_workload
     ON study.study_iuid = xray_workload.uid
+    LEFT JOIN $table_order
+    ON xray_order.uid = xray_workload.uid
 	WHERE pat_id = '$row[pat_id]'
 	AND study.study_iuid != '$uid'
 	ORDER BY study.study_datetime DESC"
@@ -251,7 +255,7 @@ if ($_SESSION['level'] == "radiology") {
 																<td><span class="table-left">Procedure</span></td>
 															</tr>
 															<tr>
-																<td><?= $study_desc; ?></td>
+																<td><?= $prosedur; ?></td>
 															</tr>
 															<tr>
 																<td><span class="table-left">Study Date</span></td>
@@ -324,7 +328,7 @@ if ($_SESSION['level'] == "radiology") {
 															<td><span class="table-left">Pemeriksaan</span></td>
 														</tr>
 														<tr>
-															<td><?= defaultValue($mrn['study_desc']); ?></td>
+															<td><?= defaultValue($mrn['prosedur']); ?></td>
 														</tr>
 														<tr>
 															<td><span class="table-left">Waktu Pemeriksaan</span></td>
@@ -358,12 +362,12 @@ if ($_SESSION['level'] == "radiology") {
 													<?php if ($username == "hardian_dokter") {
 														echo
 														DICOMNEWWORKLISTFIRST . $uid . DICOMNEWWORKLISTLAST .
-														RADIANTWORKLISTFIRST . $uid . RADIANTWORKLISTLAST .
+															RADIANTWORKLISTFIRST . $uid . RADIANTWORKLISTLAST .
 															OHIFOLDWORKLISTFIRST . $uid . OHIFOLDWORKLISTLAST;
 													} else {
 														echo
 														HOROSWORKLISTFIRST . $uid . HOROSWORKLISTLAST .
-														RADIANTWORKLISTFIRST . $uid . RADIANTWORKLISTLAST .
+															RADIANTWORKLISTFIRST . $uid . RADIANTWORKLISTLAST .
 															OHIFOLDWORKLISTFIRST . $uid . OHIFOLDWORKLISTLAST;
 													} ?>
 												</div>

@@ -56,12 +56,12 @@ $query = mysqli_query(
     pat_birthdate,
     study_iuid,
     study_datetime,
-    study_desc_pacsio,
     mods_in_study,
     study.updated_time,
     status,
     fill,
     approved_at,
+    prosedur,
     pk_dokter_radiology,
     patientid AS no_foto,
     named,
@@ -89,7 +89,6 @@ while ($row = mysqli_fetch_array($query)) {
     $pat_birthdate = diffDate($row['pat_birthdate']);
     $study_iuid = defaultValue($row['study_iuid']);
     $study_datetime = defaultValueDateTime($row['study_datetime']);
-    $study_desc_pacsio = defaultValue($row['study_desc_pacsio']);
     $mods_in_study = defaultValue($row['mods_in_study']);
     $updated_time = defaultValueDateTime($row['updated_time']);
     $pat_id = defaultValue($row['pat_id']);
@@ -103,6 +102,7 @@ while ($row = mysqli_fetch_array($query)) {
     $fromorder = $row['fromorder'];
     $status = styleStatus($row['status'], $study_iuid);
     $fill = $row['fill'];
+    $prosedur = defaultValue($row['prosedur']);
     $approved_at = defaultValueDateTime($row['approved_at']);
     $spendtime = spendTime($study_datetime, $approved_at, $row['status']);
     $pk_dokter_radiology = $row['pk_dokter_radiology'];
@@ -163,9 +163,9 @@ while ($row = mysqli_fetch_array($query)) {
     } else {
         if ($level == 'refferal') {
             $aksi = PDFFIRST . $study_iuid . PDFLAST .
-                    OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
-                    HTMLFIRST . $study_iuid . HTMLLAST ;
-                // LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST;
+                OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
+                HTMLFIRST . $study_iuid . HTMLLAST;
+            // LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST;
         } elseif ($level == 'radiographer') {
             //viewer login pak hardian
             if ($username == 'hardian') {
@@ -175,9 +175,9 @@ while ($row = mysqli_fetch_array($query)) {
                     LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST;
             } else {
                 $aksi = PDFFIRST . $study_iuid . PDFLAST .
-                OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
-                HTMLFIRST . $study_iuid . HTMLLAST ;
-                    // LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST;
+                    OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
+                    HTMLFIRST . $study_iuid . HTMLLAST;
+                // LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST;
             }
         } else {
             if ($username == 'hardian_dokter') {
@@ -186,9 +186,9 @@ while ($row = mysqli_fetch_array($query)) {
                     DICOMNEWFIRST . $study_iuid . DICOMNEWLAST;
             } else {
                 $aksi = PDFFIRST . $study_iuid . PDFLAST .
-                HOROSFIRST . $study_iuid . HOROSLAST .
-                RADIANTFIRST . $study_iuid . RADIANTLAST .
-                OHIFOLDFIRST . $study_iuid . OHIFOLDLAST;
+                    HOROSFIRST . $study_iuid . HOROSLAST .
+                    RADIANTFIRST . $study_iuid . RADIANTLAST .
+                    OHIFOLDFIRST . $study_iuid . OHIFOLDLAST;
             }
         }
     }
@@ -228,7 +228,7 @@ while ($row = mysqli_fetch_array($query)) {
         "no_foto" => $no_foto,
         "pat_birthdate" => $pat_birthdate,
         "pat_sex" => $pat_sex,
-        "study_desc" => mb_convert_encoding($study_desc_pacsio, 'UTF-8', 'ISO-8859-1'),
+        "study_desc" => mb_convert_encoding($prosedur, 'UTF-8', 'ISO-8859-1'),
         "series_desc" => READMORESERIESFIRST . $study_iuid . READMORESERIESLAST,
         "mods_in_study" => $mods_in_study,
         "named" => mb_convert_encoding($named, 'UTF-8', 'ISO-8859-1'),

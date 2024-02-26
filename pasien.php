@@ -20,7 +20,7 @@ $study_query = mysqli_query($conn, "SELECT
                                     JOIN $table_workload
                                     ON study.study_iuid = xray_workload.uid
                                     WHERE study_iuid = '$uid' 
-                                    AND approved_at > DATE_SUB(NOW(), INTERVAL 30 DAY)");
+                                    AND approved_at > DATE_SUB(NOW(), INTERVAL 90 DAY)");
 $study_count = mysqli_num_rows($study_query);
 $study = mysqli_fetch_assoc($study_query);
 $hostname = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM xray_hostname_publik"));

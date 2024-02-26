@@ -19,7 +19,7 @@ $explode = explode('/', $http_referer);
 $queryphp = in_array("query.php", $explode);
 
 // kolom untuk order by 
-$columns = array('pk', 'pk', 'status', 'pat_name', 'pat_id', 'study_datetime', 'patientid', 'pat_birthdate', 'pat_sex', 'study_desc_pacsio', 'pk', 'mods_in_study', 'named', 'name_dep', 'dokrad_name', 'radiographer_name', 'approved_at', 'pk');
+$columns = array('pk', 'pk', 'status', 'pat_name', 'pat_id', 'study_datetime', 'patientid', 'pat_birthdate', 'pat_sex', 'prosedur', 'pk', 'mods_in_study', 'named', 'name_dep', 'dokrad_name', 'radiographer_name', 'approved_at', 'pk');
 
 $row_dokrad = mysqli_fetch_assoc(mysqli_query(
   $conn,
@@ -40,7 +40,6 @@ $query_base = "SELECT
               pat_birthdate,
               study_iuid,
               study_datetime,
-              study_desc_pacsio,
               mods_in_study,
               study.updated_time,
               status,
@@ -56,6 +55,7 @@ $query_base = "SELECT
               name_dep,
               radiographer_name,
               priority,
+              prosedur,
               contrast,
               fromorder
               FROM $table_patient
@@ -95,7 +95,7 @@ if (isset($_POST["search"]["value"])) {
   OR pat_name LIKE "%' . $_POST["search"]["value"] . '%" 
   OR pat_birthdate LIKE "%' . $_POST["search"]["value"] . '%"
   OR pat_sex LIKE "%' . $_POST["search"]["value"] . '%"
-  OR study_desc_pacsio LIKE "%' . $_POST["search"]["value"] . '%"
+  OR prosedur LIKE "%' . $_POST["search"]["value"] . '%"
   OR mods_in_study LIKE "%' . $_POST["search"]["value"] . '%" 
   OR named LIKE "%' . $_POST["search"]["value"] . '%"
   OR radiographer_name LIKE "%' . $_POST["search"]["value"] . '%"
@@ -172,7 +172,6 @@ while ($row = mysqli_fetch_array($result)) {
   $pat_birthdate = diffDate($row['pat_birthdate']);
   $study_iuid = defaultValue($row['study_iuid']);
   $study_datetime = defaultValueDateTime($row['study_datetime']);
-  $study_desc_pacsio = defaultValue($row['study_desc_pacsio']);
   $mods_in_study = defaultValue($row['mods_in_study']);
   $updated_time = defaultValueDateTime($row['updated_time']);
   $pat_id = defaultValue($row['pat_id']);
@@ -186,9 +185,10 @@ while ($row = mysqli_fetch_array($result)) {
   $status = styleStatus($row['status'], $study_iuid);
   $fromorder = $row['fromorder'];
   $contrast = $row['contrast'];
+  $prosedur = defaultValue($row['prosedur']);
   $approved_at = defaultValueDateTime($row['approved_at']);
   $spendtime = spendTime($study_datetime, $approved_at, $row['status']);
-  $blinking = hour($study_datetime, $row['status'], $priority, $mods_in_study, $contrast, $study_desc_pacsio);
+  $blinking = hour($study_datetime, $row['status'], $priority, $mods_in_study, $contrast, $prosedur);
   $pk_dokter_radiology = $row['pk_dokter_radiology'];
   $kv = $row['kv'];
   $mas = $row['mas'];
@@ -346,7 +346,7 @@ while ($row = mysqli_fetch_array($result)) {
   $sub_array[] = $no_foto;
   $sub_array[] = $pat_birthdate;
   $sub_array[] = $pat_sex;
-  $sub_array[] = mb_convert_encoding($study_desc_pacsio, 'UTF-8', 'ISO-8859-1');
+  $sub_array[] = mb_convert_encoding($prosedur, 'UTF-8', 'ISO-8859-1');
   $sub_array[] = READMORESERIESFIRST . $study_iuid . READMORESERIESLAST;
   $sub_array[] = $mods_in_study;
   $sub_array[] = mb_convert_encoding($named, 'UTF-8', 'ISO-8859-1');
