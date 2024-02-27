@@ -49,7 +49,7 @@ if (!strpos($row['spc_needs'], "~~")) {
     $klinis = !empty($spc_needs_array[1]) ? $spc_needs_array[1] : "-";
 }
 
-$spc_needs_one = ucfirst(substr(defaultValue($klinis), 0, 110));
+$spc_needs_one = ucfirst(substr(defaultValue($klinis), 0, 92));
 // $spc_needs_two = substr(defaultValue($klinis), 34, 34);
 $fill = $row['fill'];
 $signature = $row['signature'];
@@ -178,7 +178,7 @@ $pdf->Cell(65, 5, spendTime($updated_time, $approved_at, $status), 0, 1, 'L');
 //-------------------
 $pdf->Cell(28, 5, 'Klinis', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 1, 'L');
-$pdf->Cell(55, 5, $spc_needs_one, 0, 0, 'L');
+$pdf->Cell(55, 5, trim($spc_needs_one), 0, 0, 'L');
 // -----------------
 // $pdf->Cell(35, 5, '', 0, 0, 'L');
 // $pdf->Cell(3, 5, '', 0, 0, 'L');
