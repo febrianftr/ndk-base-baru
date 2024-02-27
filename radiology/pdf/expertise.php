@@ -231,7 +231,7 @@ $pdf->WriteHTML("<br>");
 $pdf->WriteHtml($fill);
 $pdf->WriteHTML("<br>");
 $pdf->WriteHTML("<br>");
-$salam = "Jepara, " . defaultValueDate($create_time);
+$salam = "Jepara, " . defaultValueDate($create_time)."         ";
 $pdf->WriteHTML(
     "<p align='right'>$salam</p>"
 );
@@ -239,7 +239,7 @@ $pdf->WriteHTML(
 if ($expertise['signature_dokter_radiologi'] == 'qr_code') {
     // jika ttd menggunakan signature QR CODE
     $pdf->Ln(2);
-    $sign = $pdf->image($qr_code_ttd, 170, $pdf->GetY(), 25);
+    $sign = $pdf->image($qr_code_ttd, 157, $pdf->GetY(), 25);
 } else if ($expertise['signature_dokter_radiologi'] == 'signature_scan') {
     // jika ttd menggunakan signature scan image
     $pdf->Ln(2);
@@ -255,7 +255,7 @@ if ($expertise['qr_code_pasien'] == 1) {
     $hasilPasien = $pdf->image($qr_code_pasien, $pdf->GetX(), $pdf->GetY(), 25);
     $pdf->Ln(27);
     $pdf->Cell(0, 0, 'Hasil bisa diakses maximal 90 Hari dari tanggal', 0, 0, 'L');
-    $pdf->Cell(0, 0, $dokrad_name, 0, 1, 'R');
+    $pdf->Cell(-5, 0, $dokrad_name, 0, 1, 'R');
     $pdf->Cell(0, 9, 'dokter radiologi melakukan expertise ', 0, 0, 'L');
     $pdf->Cell(0, 9, $nip, 0, 0, 'R');
 } else {

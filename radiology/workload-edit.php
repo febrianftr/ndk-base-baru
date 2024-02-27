@@ -290,7 +290,8 @@ if ($_SESSION['level'] == "radiology") {
 														<tr>
 															<td>
 																<?= PDFFIRST . $study_iuid . PDFLAST .
-																	INOBITECFIRST . "'$study_iuid'" . INOBITECLAST .
+																	HOROSFIRST . $study_iuid . HOROSLAST .
+																	RADIANTFIRST . $study_iuid . RADIANTLAST . 
 																	OHIFOLDFIRST . $study_iuid . OHIFOLDLAST;
 																?>
 																<a href="#" class="view-history-expertise" data-id="<?= $study_iuid;  ?>">
@@ -310,7 +311,9 @@ if ($_SESSION['level'] == "radiology") {
 												<h4 style="margin: 0px;">Viewer</h4>
 												<hr style="margin: 10px 0px;">
 												<div class="buttons1">
-													<?= INOBITECWORKLISTFIRST . "'$uid'" . INOBITECWORKLISTLAST .
+													<?= 
+														HOROSWORKLISTFIRST . $uid . HOROSWORKLISTLAST .
+														RADIANTWORKLISTFIRST . $uid . RADIANTWORKLISTLAST . 
 														OHIFOLDWORKLISTFIRST . $uid . OHIFOLDWORKLISTLAST; ?>
 												</div>
 											</div>
