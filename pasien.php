@@ -62,7 +62,7 @@ $hostname = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM xray_hostname_
             </table>
             <hr>
             <?php if ($_SERVER['SERVER_NAME'] == $hostname['ip_publik'] or $_SERVER['SERVER_NAME'] == '49.128.176.141') {
-                $port = '92';
+                $port = '20012';
             } else {
                 $port = '91';
             } ?>

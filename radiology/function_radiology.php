@@ -154,7 +154,7 @@ function insert_workload($value)
 	imagepng($QR2, "phpqrcode/ttddokter/$uid.png");
 
 	// untuk hasil pasien (xampp)
-	$hasilPasien = $hostname['ip_publik'] == null ? 'Domain Tidak Ditemukan! Silahkan input domain RS pada aplikasi RIS' : "http://$hostname[ip_publik]:8089/$link[link_simrs_expertise]/pasien.php?uid=$uid";
+	$hasilPasien = $hostname['ip_publik'] == null ? 'Domain Tidak Ditemukan! Silahkan input domain RS pada aplikasi RIS' : "http://$hostname[ip_publik]:20003/$link[link_simrs_expertise]/pasien.php?uid=$uid";
 	QRcode::png($hasilPasien, "phpqrcode/hasil-pasien/$uid.png", "L", 4, 4);
 	$QR = imagecreatefrompng("phpqrcode/hasil-pasien/$uid.png");
 	$logopath = '..\\image\ipi-icon3.png';
@@ -347,7 +347,7 @@ Approved Sign in $signature_datetime",
 	);
 
 	// untuk hasil pasien (xampp)
-	$hasilPasien = $hostname['ip_publik'] == null ? 'Domain Tidak Ditemukan! Silahkan input domain RS pada aplikasi RIS' : "http://$hostname[ip_publik]:8089/$link[link_simrs_expertise]/pasien.php?uid=$uid";
+	$hasilPasien = $hostname['ip_publik'] == null ? 'Domain Tidak Ditemukan! Silahkan input domain RS pada aplikasi RIS' : "http://$hostname[ip_publik]:20003/$link[link_simrs_expertise]/pasien.php?uid=$uid";
 	QRcode::png($hasilPasien, "phpqrcode/hasil-pasien/$uid.png", "L", 4, 4);
 
 	// untuk hasil pasien (laravel)
