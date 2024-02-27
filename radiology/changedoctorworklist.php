@@ -11,7 +11,7 @@ $status = $_GET['status'];
 $query = mysqli_query(
 	$conn,
 	"SELECT $select_dokter_radiology 
-	FROM $table_dokter_radiology WHERE dokradid NOT LIKE '$dokradid' AND username NOT IN ('hardian_dokter', 'sarah')"
+	FROM $table_dokter_radiology WHERE dokradid NOT LIKE '$dokradid' AND username NOT IN ('hardian_dokter', 'sarah', 'drdemo')"
 );
 
 
@@ -218,16 +218,22 @@ if ($_SESSION['level'] == "radiology" || $_SESSION['level'] == "radiographer") {
 					<div class="d-flex justify-content-center align-items-center">
 						<div class="col-md-6 box-change-dokter">
 							<form action="" method="post">
-								<?php while ($row = mysqli_fetch_assoc($query)) { ?>
-									<input type="hidden" name="uid" value="<?= $uid ?>">
-									<input type="hidden" name="status" value="<?= $status ?>">
+								<input type="hidden" name="uid" value="<?= $uid ?>">
+								<input type="hidden" name="status" value="<?= $status ?>">
+								<?php while ($row_changedoctor = mysqli_fetch_assoc($query_changedoctor)) { ?>
 									<div class="radiobtn1">
-										<input type="radio" id="<?php echo $row['dokradid'] ?>" name="dokradid" value="<?= $row['dokradid'] ?>" required>
-										<label for="<?php echo $row['dokradid'] ?>">
-											<?= ucwords($row['dokrad_fullname']); ?>
+										<input type="radio" id="<?php echo $row_changedoctor['dokradid'] ?>" name="dokradid" value="<?= $row_changedoctor['dokradid'] ?>" required>
+										<label for="<?php echo $row_changedoctor['dokradid'] ?>">
+											<?= ucwords($row_changedoctor['dokrad_fullname']); ?>
 										</label>
 									</div>
 								<?php } ?>
+								<div class="radiobtn1">
+									<input type="radio" id="0" name="dokradid" value="0">
+									<label for="0">
+										ALL
+									</label>
+								</div>
 								<button type="submit" class="btn-worklist3 btn-lg" style="margin: 10px 0; float:right;" name="submit"><i class="fas fa-user-friends"></i> Change</button>
 							</form>
 						</div>
