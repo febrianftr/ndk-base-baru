@@ -231,7 +231,7 @@ $pdf->WriteHTML("<br>");
 $pdf->WriteHtml($fill);
 $pdf->WriteHTML("<br>");
 $pdf->WriteHTML("<br>");
-$salam = "Jepara, " . defaultValueDate($create_time);
+$salam = "Jepara, " . defaultValueDate($create_time)."         ";
 $pdf->WriteHTML(
     "<p align='right'>$salam</p>"
 );
@@ -239,7 +239,7 @@ $pdf->WriteHTML(
 if ($expertise['signature_dokter_radiologi'] == 'qr_code') {
     // jika ttd menggunakan signature QR CODE
     $pdf->Ln(2);
-    $sign = $pdf->image($qr_code_ttd, 170, $pdf->GetY(), 25);
+    $sign = $pdf->image($qr_code_ttd, 157, $pdf->GetY(), 25);
 } else if ($expertise['signature_dokter_radiologi'] == 'signature_scan') {
     // jika ttd menggunakan signature scan image
     $pdf->Ln(2);
