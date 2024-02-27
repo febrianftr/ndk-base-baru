@@ -255,7 +255,7 @@ if ($expertise['qr_code_pasien'] == 1) {
     $hasilPasien = $pdf->image($qr_code_pasien, $pdf->GetX(), $pdf->GetY(), 25);
     $pdf->Ln(27);
     $pdf->Cell(0, 0, 'Hasil bisa diakses maximal 90 Hari dari tanggal', 0, 0, 'L');
-    $pdf->Cell(0, 0, $dokrad_name, 0, 1, 'R');
+    $pdf->Cell(-5, 0, $dokrad_name, 0, 1, 'R');
     $pdf->Cell(0, 9, 'dokter radiologi melakukan expertise ', 0, 0, 'L');
     $pdf->Cell(0, 9, $nip, 0, 0, 'R');
 } else {
