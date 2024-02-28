@@ -347,6 +347,7 @@ if ($_SESSION['level'] == "radiology") {
 															<td>
 																<?= PDFFIRST . $study_iuid . PDFLAST .
 																	HOROSFIRST . $study_iuid . HOROSLAST .
+																	RADIANTFIRST . $study_iuid . RADIANTLAST .
 																	OHIFOLDFIRST . $study_iuid . OHIFOLDLAST;
 																?>
 																<a href="#" class="view-history-expertise" data-id="<?= $study_iuid;  ?>">
