@@ -45,6 +45,18 @@ if (isset($_POST['contrast'])) {
     "";
 }
 
+// priority
+if (isset($_POST['priority'])) {
+    // jika priority dipilih all maka query semua priority
+    if (count($_POST['priority']) == 2) {
+        $kondisi_priority = "(priority IN('$priority') OR priority IS NULL)";
+    } else {
+        $kondisi_priority = "priority IN('$priority')";
+    };
+} else {
+    "";
+}
+
 // radiografer
 $radiographerIdArray = [];
 $radiographerNameArray = [];
@@ -131,7 +143,7 @@ if ($dokradId == 'all') {
 // kondisi form
 $kondisi = "study.study_datetime BETWEEN '$fromUpdatedTime' AND '$toUpdatedTime'
             AND mods_in_study IN('$modsInStudy')
-            AND priority IN('$priority')
+            AND $kondisi_priority
             AND $kondisi_contrast
             AND $kondisi_department
             AND $kondisi_radiographer
