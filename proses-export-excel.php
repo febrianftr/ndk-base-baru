@@ -151,7 +151,6 @@ $patient = mysqli_query($conn_pacsio, "SELECT
             payment,
             create_time,
             mods_in_study,
-            study_desc_pacsio,
             contrast,
             contrast_allergies,
             study.updated_time,
@@ -173,6 +172,7 @@ $patient = mysqli_query($conn_pacsio, "SELECT
             priority,
             xray_workload.uid,
             priority_doctor,
+            prosedur,
             status,
             pk_dokter_radiology,
             approved_at,
@@ -223,7 +223,7 @@ $sum = mysqli_fetch_array(mysqli_query(
 $studies = mysqli_query(
     $conn_pacsio,
     "SELECT 
-    UPPER(study_desc_pacsio) AS study_desc_pacsio,
+    UPPER(prosedur) AS prosedur,
     COUNT(*) AS jumlah
     FROM $table_patient
     JOIN $table_study
@@ -237,15 +237,15 @@ $studies = mysqli_query(
     LEFT JOIN (SELECT * FROM $table_workload_radiographers GROUP BY uid) xray_workload_radiographers 
     ON xray_workload.uid = xray_workload_radiographers.uid
     WHERE $kondisi
-    GROUP BY UPPER(study_desc_pacsio)
-    ORDER BY study_desc_pacsio ASC"
+    GROUP BY UPPER(prosedur)
+    ORDER BY prosedur ASC"
 );
 
 // menampilkan total pemeriksaan
 $countStudies = mysqli_fetch_array(mysqli_query(
     $conn_pacsio,
     "SELECT 
-    COUNT(study_desc_pacsio) AS count_studies
+    COUNT(prosedur) AS count_studies
     FROM $table_patient
     JOIN $table_study
     ON patient.pk = study.patient_fk
@@ -470,7 +470,7 @@ while ($status = mysqli_fetch_array($statuses)) {
             while ($study = mysqli_fetch_array($studies)) { ?>
                 <tr>
                     <td align="center"><?= $no ?></td>
-                    <td align="center"><?= $study['study_desc_pacsio']; ?></td>
+                    <td align="center"><?= $study['prosedur']; ?></td>
                     <td align="center"><?= $study['jumlah']; ?></td>
                 </tr>
             <?php
@@ -544,7 +544,6 @@ while ($status = mysqli_fetch_array($statuses)) {
                 $age = strtoupper(diffDate($row['pat_birthdate']));
                 $examed_at = strtoupper(defaultValueDateTime($row['examed_at']));
                 $study_datetime = strtoupper(defaultValueDateTime($row['study_datetime']));
-                $study_desc_pacsio = strtoupper(defaultValue($row['study_desc_pacsio']));
                 $harga_prosedur = strtoupper(defaultValue($row['harga_prosedur']));
                 $mods_in_study = strtoupper(defaultValue($row['mods_in_study']));
                 $updated_time = strtoupper(defaultValueDateTime($row['updated_time']));
@@ -559,6 +558,7 @@ while ($status = mysqli_fetch_array($statuses)) {
                 $payment = strtoupper(defaultValue($row['payment']));
                 $contrast = strtoupper(defaultValue($row['contrast']));
                 $contrast_allergies = strtoupper(defaultValue($row['contrast_allergies']));
+                $prosedur = strtoupper(defaultValue($row['prosedur']));
                 $status = strtoupper(defaultValue($row['status']));
                 $film_small = strtoupper(defaultValue($row['film_small']));
                 $film_medium = strtoupper(defaultValue($row['film_medium']));
@@ -628,7 +628,7 @@ while ($status = mysqli_fetch_array($statuses)) {
                     <td align="center"><?= $name_dep; ?></td>
                     <td align="center"><?= $dokrad_name; ?></td>
                     <td align="center"><?= $mods_in_study; ?></td>
-                    <td align="center"><?= $study_desc_pacsio; ?></td>
+                    <td align="center"><?= $prosedur; ?></td>
                     <td align="center"><?= $harga_prosedur; ?></td>
                     <td align="center"><?= $film_small; ?></td>
                     <td align="center"> <?= $film_medium; ?> </td>
