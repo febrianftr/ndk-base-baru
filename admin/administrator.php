@@ -100,10 +100,11 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 				border-radius: 5px;
 			}
 
-			.btn{
+			.btn {
 				box-shadow: none;
 			}
-			.btn:hover{
+
+			.btn:hover {
 				box-shadow: none;
 			}
 		</style>
@@ -190,7 +191,7 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 								</div>
 							</div>
 						</div>
-						
+
 						<div class="col-md-2">
 							<div class="box-admin1">
 								<div class="box-title-admin">
@@ -215,62 +216,62 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 
 
 						<?php if ($level == 'superadmin') { ?>
-						<!-- ===================superadmin==================	 -->
-						<div class="col-md-2">
-							<div class="box-admin1">
-								<div class="box-title-admin">
-									<h3>Login</h3>
-									<hr style="margin-top: 5px;">
-									<a href="new_login.php" class="btn-add-admin"><i class="fas fa-plus"></i>&nbsp;&nbsp; Add</a>
-									<a href="view_login.php" class="btn-view-admin"><i class="fas fa-table"></i>&nbsp;&nbsp; View</a>
+							<!-- ===================superadmin==================	 -->
+							<div class="col-md-2">
+								<div class="box-admin1">
+									<div class="box-title-admin">
+										<h3>Login</h3>
+										<hr style="margin-top: 5px;">
+										<a href="new_login.php" class="btn-add-admin"><i class="fas fa-plus"></i>&nbsp;&nbsp; Add</a>
+										<a href="view_login.php" class="btn-view-admin"><i class="fas fa-table"></i>&nbsp;&nbsp; View</a>
+									</div>
 								</div>
 							</div>
-						</div>
 
-						<div class="col-md-2">
-							<div class="box-admin1">
-								<div class="box-title-admin">
-									<h3>Template</h3>
-									<hr style="margin-top: 5px;">
-									<a href="new_template.php" class="btn-add-admin"><i class="fas fa-plus"></i>&nbsp;&nbsp; Add</a>
-									<a href="view_template.php" class="btn-view-admin"><i class="fas fa-table"></i>&nbsp;&nbsp; View</a>
+							<div class="col-md-2">
+								<div class="box-admin1">
+									<div class="box-title-admin">
+										<h3>Template</h3>
+										<hr style="margin-top: 5px;">
+										<a href="new_template.php" class="btn-add-admin"><i class="fas fa-plus"></i>&nbsp;&nbsp; Add</a>
+										<a href="view_template.php" class="btn-view-admin"><i class="fas fa-table"></i>&nbsp;&nbsp; View</a>
+									</div>
 								</div>
 							</div>
-						</div>
 
-						<div class="col-md-2">
-							<div class="box-admin1">
-								<div class="box-title-admin">
-									<h3>Worklist</h3>
-									<hr style="margin-top: 5px;">
-									<a href="new_selected_dokter_radiology.php" class="btn-add-admin"><i class="fas fa-plus"></i>&nbsp;&nbsp; Add</a>
-									<a href="view_selected_dokter_radiology.php" class="btn-view-admin"><i class="fas fa-table"></i>&nbsp;&nbsp; View</a>
+							<div class="col-md-2">
+								<div class="box-admin1">
+									<div class="box-title-admin">
+										<h3>Worklist</h3>
+										<hr style="margin-top: 5px;">
+										<a href="new_selected_dokter_radiology.php" class="btn-add-admin"><i class="fas fa-plus"></i>&nbsp;&nbsp; Add</a>
+										<a href="view_selected_dokter_radiology.php" class="btn-view-admin"><i class="fas fa-table"></i>&nbsp;&nbsp; View</a>
+									</div>
 								</div>
 							</div>
-						</div>
 
-						<div class="col-md-2">
-							<div class="box-admin1">
-								<div class="box-title-admin">
-									<h3>IP Public</h3>
-									<hr style="margin-top: 5px;">
-									<a href="new_hostname_publik.php" class="btn-add-admin"><i class="fas fa-plus"></i>&nbsp;&nbsp; Add</a>
-									<a href="view_hostname_publik.php" class="btn-view-admin"><i class="fas fa-table"></i>&nbsp;&nbsp; View</a>
+							<div class="col-md-2">
+								<div class="box-admin1">
+									<div class="box-title-admin">
+										<h3>IP Public</h3>
+										<hr style="margin-top: 5px;">
+										<a href="new_hostname_publik.php" class="btn-add-admin"><i class="fas fa-plus"></i>&nbsp;&nbsp; Add</a>
+										<a href="view_hostname_publik.php" class="btn-view-admin"><i class="fas fa-table"></i>&nbsp;&nbsp; View</a>
+									</div>
 								</div>
 							</div>
-						</div>
 
-						<div class="col-md-2">
-							<div class="box-admin1">
-								<div class="box-title-admin">
-									<h3>Notification Radiologist</h3>
-									<hr style="margin-top: 5px;">
-									<a href="new_notification_radiologist.php" class="btn-add-admin"><i class="fas fa-plus"></i>&nbsp;&nbsp; Add</a>
-									<a href="view_notification_radiologist.php" class="btn-view-admin"><i class="fas fa-table"></i>&nbsp;&nbsp; View</a>
+							<div class="col-md-2">
+								<div class="box-admin1">
+									<div class="box-title-admin">
+										<h3>Notification Radiologist</h3>
+										<hr style="margin-top: 5px;">
+										<a href="new_notification_radiologist.php" class="btn-add-admin"><i class="fas fa-plus"></i>&nbsp;&nbsp; Add</a>
+										<a href="view_notification_radiologist.php" class="btn-view-admin"><i class="fas fa-table"></i>&nbsp;&nbsp; View</a>
+									</div>
 								</div>
 							</div>
-						</div>
-						<!-- ===================superadmin==================	 -->
+							<!-- ===================superadmin==================	 -->
 						<?php } ?>
 
 
@@ -292,7 +293,7 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 									<h3>Kop Surat</h3>
 									<hr style="margin-top: 5px;">
 									<a href="new_kop_surat.php" class="btn-add-admin"><i class="fas fa-plus"></i>&nbsp;&nbsp; Add</a>
-									<a href="http://<?= $_SERVER['SERVER_NAME']; ?>:8000/kop-surat" class="btn-view-admin"><i class="fas fa-table"></i>&nbsp;&nbsp; View</a>
+									<a href="http://<?= $_SERVER['SERVER_NAME']; ?>:20007/kop-surat" class="btn-view-admin"><i class="fas fa-table"></i>&nbsp;&nbsp; View</a>
 								</div>
 							</div>
 						</div>
@@ -307,8 +308,8 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
 								</div>
 							</div>
 						</div>
-						
-						
+
+
 					</div>
 				</div>
 			</div>

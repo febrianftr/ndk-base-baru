@@ -176,7 +176,7 @@ function insert_workload($value)
 	imagepng($QR, "phpqrcode/hasil-pasien/$uid.png");
 
 	// untuk hasil pasien (laravel)
-	// QRcode::png("http://$hostname[ip_publik]:8000/pasien/$uid", "phpqrcode/hasil-pasien/$uid.png", "L", 4, 4);
+	// QRcode::png("http://$hostname[ip_publik]:20007/pasien/$uid", "phpqrcode/hasil-pasien/$uid.png", "L", 4, 4);
 
 	// require '../js/proses/function.php';
 
@@ -351,7 +351,7 @@ Approved Sign in $signature_datetime",
 	QRcode::png($hasilPasien, "phpqrcode/hasil-pasien/$uid.png", "L", 4, 4);
 
 	// untuk hasil pasien (laravel)
-	// QRcode::png("http://$hostname[ip_publik]:8000/pasien/$uid", "phpqrcode/hasil-pasien/$uid.png", "L", 4, 4);
+	// QRcode::png("http://$hostname[ip_publik]:20007/pasien/$uid", "phpqrcode/hasil-pasien/$uid.png", "L", 4, 4);
 
 	// UPDATE XRAY_WORKLOAD_FILL is_default menjadi 0 berdasarkan uid
 	mysqli_query(
