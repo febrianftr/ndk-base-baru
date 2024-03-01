@@ -118,10 +118,10 @@
 <script>
     // untuk menampilkan data popup
     $(function() {
-        $(document).on('click', '.hasil-waiting-morethan24hour', function(e) {
+        $(document).on('click', '.hasil-waiting-morethanusgdoppler2hour', function(e) {
             e.preventDefault();
-            $("#modal-waiting-morethan24hour").modal('show');
-            $.post('../hasil-waiting-morethan24hour.php', {
+            $("#modal-waiting-morethanusgdoppler2hour").modal('show');
+            $.post('../hasil-waiting-morethanusgdoppler2hour.php', {
                     uid: $(this).attr('data-id')
                 },
                 function(html) {
@@ -135,10 +135,10 @@
 <script>
     // untuk menampilkan data popup
     $(function() {
-        $(document).on('click', '.hasil-waiting-morethan12hour', function(e) {
+        $(document).on('click', '.hasil-waiting-morethanusg1hour', function(e) {
             e.preventDefault();
-            $("#modal-waiting-morethan12hour").modal('show');
-            $.post('../hasil-waiting-morethan12hour.php', {
+            $("#modal-waiting-morethanusg1hour").modal('show');
+            $.post('../hasil-waiting-morethanusg1hour.php', {
                     uid: $(this).attr('data-id')
                 },
                 function(html) {
@@ -152,10 +152,27 @@
 <script>
     // untuk menampilkan data popup
     $(function() {
-        $(document).on('click', '.hasil-waiting-morethan6hour', function(e) {
+        $(document).on('click', '.hasil-waiting-morethanct6hour', function(e) {
             e.preventDefault();
-            $("#modal-waiting-morethan6hour").modal('show');
-            $.post('../hasil-waiting-morethan6hour.php', {
+            $("#modal-waiting-morethanct6hour").modal('show');
+            $.post('../hasil-waiting-morethanct6hour.php', {
+                    uid: $(this).attr('data-id')
+                },
+                function(html) {
+                    $(".modal-body").html(html);
+                }
+            );
+        });
+    });
+    // end untuk menampilkan data popup
+</script>
+<script>
+    // untuk menampilkan data popup
+    $(function() {
+        $(document).on('click', '.hasil-waiting-morethancontrast6hour', function(e) {
+            e.preventDefault();
+            $("#modal-waiting-morethancontrast6hour").modal('show');
+            $.post('../hasil-waiting-morethancontrast6hour.php', {
                     uid: $(this).attr('data-id')
                 },
                 function(html) {
@@ -186,10 +203,10 @@
 <script>
     // untuk menampilkan data popup
     $(function() {
-        $(document).on('click', '.hasil-waiting-morethan1hour', function(e) {
+        $(document).on('click', '.hasil-waiting-morethancito1hour', function(e) {
             e.preventDefault();
-            $("#modal-waiting-morethan1hour").modal('show');
-            $.post('../hasil-waiting-morethan1hour.php', {
+            $("#modal-waiting-morethancito1hour").modal('show');
+            $.post('../hasil-waiting-morethancito1hour.php', {
                     uid: $(this).attr('data-id')
                 },
                 function(html) {

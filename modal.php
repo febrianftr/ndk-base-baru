@@ -22,8 +22,8 @@
     </div>
 </div>
 
-<!-- pop up hasil waiting morethan1hour -->
-<div class="modal" id="modal-waiting-morethan1hour">
+<!-- pop up hasil waiting morethancito1hour -->
+<div class="modal" id="modal-waiting-morethancito1hour">
     <div class="modal-dialog modal-dialog-scrollable modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -46,8 +46,8 @@
     </div>
 </div>
 
-<!-- pop up hasil waiting morethan6hour -->
-<div class="modal" id="modal-waiting-morethan6hour">
+<!-- pop up hasil waiting morethancontrast6hour -->
+<div class="modal" id="modal-waiting-morethancontrast6hour">
     <div class="modal-dialog modal-dialog-scrollable modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -58,8 +58,8 @@
     </div>
 </div>
 
-<!-- pop up hasil waiting morethan12hour -->
-<div class="modal" id="modal-waiting-morethan12hour">
+<!-- pop up hasil waiting morethanct6hour -->
+<div class="modal" id="modal-waiting-morethanct6hour">
     <div class="modal-dialog modal-dialog-scrollable modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -70,8 +70,20 @@
     </div>
 </div>
 
-<!-- pop up hasil waiting morethan24hour -->
-<div class="modal" id="modal-waiting-morethan24hour">
+<!-- pop up hasil waiting morethanusg1hour -->
+<div class="modal" id="modal-waiting-morethanusg1hour">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body"></div>
+        </div>
+    </div>
+</div>
+
+<!-- pop up hasil waiting morethanusgdoppler2hour -->
+<div class="modal" id="modal-waiting-morethanusgdoppler2hour">
     <div class="modal-dialog modal-dialog-scrollable modal-lg">
         <div class="modal-content">
             <div class="modal-header">

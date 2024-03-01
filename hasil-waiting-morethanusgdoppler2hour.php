@@ -8,7 +8,7 @@ require 'model/query-base-workload.php';
 require 'model/query-base-order.php';
 require 'bahasa.php';
 
-$waiting3hourReguler = mysqli_query(
+$waitingUSGDoppler2hourReguler = mysqli_query(
 	$conn_pacsio,
 	"SELECT 
 	$select_patient, 
@@ -23,12 +23,11 @@ $waiting3hourReguler = mysqli_query(
 	LEFT JOIN $table_order
 	ON xray_order.uid = xray_workload.uid 
 	WHERE status = 'waiting'
-	AND study.study_datetime < DATE_SUB(NOW(), INTERVAL 3 HOUR)
-	AND priority = 'normal'
+	AND study.study_datetime < DATE_SUB(NOW(), INTERVAL 2 HOUR)
+	AND priority = 'normal' 
 	AND (contrast = 0 || contrast IS NULL)
-	AND mods_in_study IN('CR', 'DX')
-	AND study_desc_pacsio = 'THORAK'
-	AND study.updated_time >= '2023-11-26'
+	AND mods_in_study IN('US') 
+	AND study_desc IN('USG DOPPLER')
 	"
 );
 ?>
@@ -39,7 +38,7 @@ $waiting3hourReguler = mysqli_query(
 </style>
 <div class="fill">
 	<div class="table-responsive-sm">
-		<h5 class="text-center">The patient has not been read for more than 3 hour <p class="font-weight-bold">(thorak)</p>
+		<h5 class="text-center">The patient has not been read for more than 2 hour <p class="font-weight-bold">(USG DOPPLER)</p>
 		</h5>
 	</div>
 	<br>
@@ -58,8 +57,8 @@ $waiting3hourReguler = mysqli_query(
 						<th>Contrast</th>
 					</tr>
 					<?php
-					if (mysqli_num_rows($waiting3hourReguler) > 0) {
-						while ($row1 = mysqli_fetch_assoc($waiting3hourReguler)) {
+					if (mysqli_num_rows($waitingUSGDoppler2hourReguler) > 0) {
+						while ($row1 = mysqli_fetch_assoc($waitingUSGDoppler2hourReguler)) {
 							// kondisi ketika dokter belum ada menggunakan icon berbeda
 							if ($row1["pk_dokter_radiology"] == null && $row1["dokradid"] == null) {
 								$icon_change_doctor = CHANGEDOCTORICONNO;

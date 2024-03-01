@@ -11,28 +11,7 @@ $http_referer = $_SERVER['HTTP_REFERER'] ?? '';
 $explode = explode('/', $http_referer);
 $queryphp = in_array("query.php", $explode);
 
-// $waiting24hourVasculer = mysqli_fetch_assoc(mysqli_query(
-// 	$conn_pacsio,
-// 	"SELECT 
-// 	COUNT(*) AS jumlah
-// 	FROM $table_patient
-// 	JOIN $table_study 
-// 	ON patient.pk = study.patient_fk 
-// 	JOIN $table_workload
-// 	ON study.study_iuid = xray_workload.uid 
-// 	LEFT JOIN $table_order
-// 	ON xray_order.uid = xray_workload.uid 
-// 	WHERE status = 'waiting'
-// 	AND study.study_datetime < DATE_SUB(NOW(), INTERVAL 24 HOUR)
-// 	AND priority = 'normal'
-// 	AND mods_in_study IN('US')
-// 	AND study_desc_pacsio = 'usg vasculer'
-// 	AND study.updated_time >= '2023-11-26'
-// 	"
-// ));
-// $moreThan24hourVasculer = $waiting24hourVasculer["jumlah"];
-
-$waiting1hour = mysqli_fetch_assoc(mysqli_query(
+$waitingCito1hour = mysqli_fetch_assoc(mysqli_query(
 	$conn_pacsio,
 	"SELECT 
 	COUNT(*) AS jumlah
@@ -46,10 +25,11 @@ $waiting1hour = mysqli_fetch_assoc(mysqli_query(
 	WHERE status = 'waiting'
 	AND study.study_datetime < DATE_SUB(NOW(), INTERVAL 1 HOUR)
 	AND priority = 'cito'
+	AND (contrast = 0 || contrast IS NULL)
 	AND study.updated_time >= '2023-11-26'
 	"
 ));
-$moreThan1hour = $waiting1hour["jumlah"];
+$moreThanCito1hour = $waitingCito1hour["jumlah"];
 
 $waiting3hourReguler = mysqli_fetch_assoc(mysqli_query(
 	$conn_pacsio,
@@ -65,14 +45,15 @@ $waiting3hourReguler = mysqli_fetch_assoc(mysqli_query(
 	WHERE status = 'waiting'
 	AND study.study_datetime < DATE_SUB(NOW(), INTERVAL 3 HOUR)
 	AND priority = 'normal'
-	AND mods_in_study IN('US')
-	AND study_desc_pacsio != 'usg vasculer'
+	AND (contrast = 0 || contrast IS NULL)
+	AND mods_in_study IN('CR', 'DX')
+	AND study_desc_pacsio = 'THORAK'
 	AND study.updated_time >= '2023-11-26'
 	"
 ));
 $moreThan3hourReguler = $waiting3hourReguler["jumlah"];
 
-$waiting6hourReguler = mysqli_fetch_assoc(mysqli_query(
+$waiting6hourContrast = mysqli_fetch_assoc(mysqli_query(
 	$conn_pacsio,
 	"SELECT 
 	COUNT(*) AS jumlah
@@ -86,14 +67,13 @@ $waiting6hourReguler = mysqli_fetch_assoc(mysqli_query(
 	WHERE status = 'waiting'
 	AND study.study_datetime < DATE_SUB(NOW(), INTERVAL 6 HOUR)
 	AND priority = 'normal'
-	AND mods_in_study IN('DX', 'CR', 'DX\\\\CR')
-	AND contrast = 0
+	AND contrast = 1
 	AND study.updated_time >= '2023-11-26'
 	"
 ));
-$moreThan6hourReguler = $waiting6hourReguler["jumlah"];
+$moreThan6hourContrast = $waiting6hourContrast["jumlah"];
 
-$waiting12hourReguler = mysqli_fetch_assoc(mysqli_query(
+$waitingCT6hourReguler = mysqli_fetch_assoc(mysqli_query(
 	$conn_pacsio,
 	"SELECT 
 	COUNT(*) AS jumlah
@@ -105,16 +85,16 @@ $waiting12hourReguler = mysqli_fetch_assoc(mysqli_query(
 	LEFT JOIN $table_order
 	ON xray_order.uid = xray_workload.uid 
 	WHERE status = 'waiting'
-	AND study.study_datetime < DATE_SUB(NOW(), INTERVAL 12 HOUR)
+	AND study.study_datetime < DATE_SUB(NOW(), INTERVAL 6 HOUR)
 	AND priority = 'normal'
+	AND (contrast = 0 || contrast IS NULL)
 	AND mods_in_study IN('CT','CT\\\\SR')
-	AND contrast = 0
 	AND study.updated_time >= '2023-11-26'
 	"
 ));
-$moreThan12hourReguler = $waiting12hourReguler["jumlah"];
+$moreThanCT6hourReguler = $waitingCT6hourReguler["jumlah"];
 
-$waiting24hourContrast = mysqli_fetch_assoc(mysqli_query(
+$waitingUSG1hourReguler = mysqli_fetch_assoc(mysqli_query(
 	$conn_pacsio,
 	"SELECT 
 	COUNT(*) AS jumlah
@@ -125,12 +105,38 @@ $waiting24hourContrast = mysqli_fetch_assoc(mysqli_query(
 	ON study.study_iuid = xray_workload.uid 
 	LEFT JOIN $table_order
 	ON xray_order.uid = xray_workload.uid 
-	WHERE study.study_datetime < DATE_SUB(NOW(), INTERVAL 24 HOUR)
-	AND (priority = 'normal' AND status = 'waiting' AND mods_in_study IN('CT','CT\\\\SR', 'DX', 'CR', 'DX\\\\CR') AND contrast = 1 AND study.updated_time >= '2023-11-26')
-	OR (priority = 'normal' AND status = 'waiting' AND mods_in_study IN('US') AND study_desc IN('USG VASCULER') AND study.updated_time >= '2023-11-26')
+	WHERE status = 'waiting'
+	AND study.study_datetime < DATE_SUB(NOW(), INTERVAL 1 HOUR)
+	AND priority = 'normal' 
+	AND (contrast = 0 || contrast IS NULL)
+	AND mods_in_study IN('US') 
+	AND study_desc NOT IN('USG DOPPLER') 
+	AND study.updated_time >= '2023-11-26'
 	"
 ));
-$moreThan24hourContrast = $waiting24hourContrast["jumlah"];
+$moreThanUSG1hourReguler = $waitingUSG1hourReguler["jumlah"];
+
+$waitingUSGDoppler2hourReguler = mysqli_fetch_assoc(mysqli_query(
+	$conn_pacsio,
+	"SELECT 
+	COUNT(*) AS jumlah
+	FROM $table_patient
+	JOIN $table_study 
+	ON patient.pk = study.patient_fk 
+	JOIN $table_workload
+	ON study.study_iuid = xray_workload.uid 
+	LEFT JOIN $table_order
+	ON xray_order.uid = xray_workload.uid 
+	WHERE status = 'waiting'
+	AND study.study_datetime < DATE_SUB(NOW(), INTERVAL 2 HOUR)
+	AND priority = 'normal' 
+	AND (contrast = 0 || contrast IS NULL)
+	AND mods_in_study IN('US') 
+	AND study_desc IN('USG DOPPLER') 
+	AND study.updated_time >= '2023-11-26'
+	"
+));
+$moreThanUSGDoppler2hourReguler = $waitingUSGDoppler2hourReguler["jumlah"];
 ?>
 <div class="col-12" style="padding: 0;">
 	<nav aria-label="breadcrumb">
@@ -148,58 +154,46 @@ $moreThan24hourContrast = $waiting24hourContrast["jumlah"];
 	<?php } ?>
 	<hr>
 	<?php require_once 'formsearch.php'; ?>
-	<table class="table table-borderless">
+	<!-- <table class="table table-borderless">
 		<tr>
-			<!-- <td>
+			<td>
 				waiting 1 hour CITO
 				<div class="notif-blink blinking-cito" style="text-align: center;">
-					
-					<a href="#" class="hasil-waiting-morethan1hour penawaran-a"><?php echo "Waiting CITO ($moreThan1hour) study"; ?></a>
-					
+					<a href="#" class="hasil-waiting-morethancito1hour penawaran-a"><?php echo "Waiting CITO <br /> ($moreThanCito1hour) study"; ?></a>
 				</div>
 			</td>
 			<td>
-				waiting 3 hour reguler
+				waiting 3 hour thorak
 				<div class="notif-blink blinking-3-hour" style="text-align: center;">
-					
-					<a href="#" class="hasil-waiting-morethan3hour penawaran-a"><?php echo "Waiting 3 hour ($moreThan3hourReguler) study"; ?></a>
-					
+					<a href="#" class="hasil-waiting-morethan3hour penawaran-a"><?php echo "Waiting 3 hour <br /> Thorak ($moreThan3hourReguler) study"; ?></a>
 				</div>
 			</td>
 			<td>
-				waiting 6 hour reguler
+				waiting 6 hour contrast
 				<div class="notif-blink blinking-6-hour" style="text-align: center;">
-					
-					<a href="#" class="hasil-waiting-morethan6hour penawaran-a"><?php echo "Waiting 6 hour ($moreThan6hourReguler) study"; ?></a>
-					
+					<a href="#" class="hasil-waiting-morethancontrast6hour penawaran-a"><?php echo "Waiting 6 hour <br /> Contrast ($moreThan6hourContrast) study"; ?></a>
 				</div>
 			</td>
 			<td>
-				waiting 12 hour reguler
-				<div class="notif-blink blinking-12-hour" style="text-align: center;">
-					
-					<a href="#" class="hasil-waiting-morethan12hour penawaran-a"><?php echo "Waiting 12 hour ($moreThan12hourReguler) study"; ?></a>
-					
+				waiting 6 hour CT Scan
+				<div class="notif-blink blinking-6-hour" style="text-align: center;">
+					<a href="#" class="hasil-waiting-morethanct6hour penawaran-a"><?php echo "Waiting 6 hour <br /> CT Scan ($moreThanCT6hourReguler) study"; ?></a>
 				</div>
 			</td>
 			<td>
-				waiting 24 hour contrast
-				<div class="notif-blink blinking-24-hour" style="text-align: center;">
-					
-					<a href="#" class="hasil-waiting-morethan24hour penawaran-a"><?php echo "Waiting 24 hour ($moreThan24hourContrast) study"; ?></a>
-					
+				waiting 1 hour USG
+				<div class="notif-blink blinking-6-hour" style="text-align: center;">
+					<a href="#" class="hasil-waiting-morethanusg1hour penawaran-a"><?php echo "Waiting 1 hour <br /> USG ($moreThanUSG1hourReguler) study"; ?></a>
 				</div>
-			</td> -->
-			<!-- <td> -->
-			<!-- waiting 24 hour vasculer -->
-			<!-- <div class="blinking" style="text-align: center;">
-					<hr>
-					<a href="#" class="hasil-waiting-morethan3hour penawaran-a"><?php echo "Waiting 24 hour <strong>($moreThan24hourVasculer)</strong> study"; ?></a>
-					<hr>
-				</div> -->
-			<!-- </td> -->
+			</td>
+			<td>
+				waiting 2 hour USG Doppler
+				<div class="notif-blink blinking-6-hour" style="text-align: center;">
+					<a href="#" class="hasil-waiting-morethanusgdoppler2hour penawaran-a"><?php echo "Waiting 2 hour <br /> USG Doppler ($moreThanUSGDoppler2hourReguler) study"; ?></a>
+				</div>
+			</td>
 		</tr>
-	</table>
+	</table> -->
 
 	<div class="col-md-12 table-box" style="overflow-x:auto;">
 		<table class="table-dicom" id="purchase_order" style="width: 2400px;" cellpadding="8" cellspacing="0">
