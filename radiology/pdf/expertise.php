@@ -118,7 +118,7 @@ require('html-parser.php');
 $pdf = new PDF('P', 'mm', 'A4');
 
 // membuat halaman baru
-$pdf->SetMargins(15, 23, 15);
+$pdf->SetMargins(15, 23, 45);
 $pdf->SetAutoPageBreak(true, 40);
 $pdf->AddPage();
 // setting jenis font yang akan digunakan
@@ -142,7 +142,7 @@ if ($pat_sex == 'M') {
 
 $pdf->Cell(28, 5, 'No RM', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
-$pdf->Cell(55, 5, $pat_id, 0, 0, 'L');
+$pdf->Cell(45, 5, $pat_id, 0, 0, 'L');
 // ------------------
 $pdf->Cell(35, 5, 'Ruangan/Poliklinik', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
@@ -150,7 +150,7 @@ $pdf->Cell(65, 5, $name_dep, 0, 1, 'L');
 // -----------------
 $pdf->Cell(28, 5, 'Nama', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
-$pdf->Cell(55, 5, $pat_name, 0, 0, 'L');
+$pdf->Cell(45, 5, $pat_name, 0, 0, 'L');
 // ------------------
 // $pdf->Cell(35, 5, 'Tanggal Pemeriksaan', 0, 0, 'L');
 // $pdf->Cell(3, 5, ':', 0, 0, 'L');
@@ -158,11 +158,11 @@ $pdf->Cell(55, 5, $pat_name, 0, 0, 'L');
 // ------------------
 $pdf->Cell(35, 5, 'Jam Mulai', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
-$pdf->Cell(55, 5, defaultValueTime($updated_time), 0, 1, 'L');
+$pdf->Cell(45, 5, defaultValueTime($updated_time), 0, 1, 'L');
 // -----------------
 $pdf->Cell(28, 5, 'Tgl Lahir', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
-$pdf->Cell(55, 5, defaultValueDate($pat_birthdate), 0, 0, 'L');
+$pdf->Cell(45, 5, defaultValueDate($pat_birthdate), 0, 0, 'L');
 // -----------------
 $pdf->Cell(35, 5, 'Jam Selesai', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
@@ -170,7 +170,7 @@ $pdf->Cell(65, 5, defaultValueTime($approved_at), 0, 1, 'L');
 // -----------------
 $pdf->Cell(28, 5, 'Jenis Kelamin', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
-$pdf->Cell(55, 5, $pat_sex_ind, 0, 0, 'L');
+$pdf->Cell(45, 5, $pat_sex_ind, 0, 0, 'L');
 // -------------------
 $pdf->Cell(35, 5, 'Waktu Pemeriksaan', 0, 0, 'L');
 $pdf->Cell(3, 5, ':', 0, 0, 'L');
@@ -239,7 +239,7 @@ $pdf->WriteHTML(
 if ($expertise['signature_dokter_radiologi'] == 'qr_code') {
     // jika ttd menggunakan signature QR CODE
     $pdf->Ln(2);
-    $sign = $pdf->image($qr_code_ttd, 170, $pdf->GetY(), 25);
+    $sign = $pdf->image($qr_code_ttd, 135, $pdf->GetY(), 25);
 } else if ($expertise['signature_dokter_radiologi'] == 'signature_scan') {
     // jika ttd menggunakan signature scan image
     $pdf->Ln(2);
@@ -255,7 +255,7 @@ if ($expertise['qr_code_pasien'] == 1) {
     $hasilPasien = $pdf->image($qr_code_pasien, $pdf->GetX(), $pdf->GetY(), 25);
     $pdf->Ln(27);
     $pdf->Cell(0, 0, 'Hasil bisa diakses maximal 90 Hari dari tanggal', 0, 0, 'L');
-    $pdf->Cell(-2, 0, $dokrad_name, 0, 1, 'R');
+    $pdf->Cell(-5, 0, $dokrad_name, 0, 1, 'R');
     $pdf->Cell(0, 9, 'dokter radiologi melakukan expertise ', 0, 0, 'L');
     $pdf->Cell(0, 9, $nip, 0, 0, 'R');
 } else {
