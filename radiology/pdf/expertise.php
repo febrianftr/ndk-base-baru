@@ -66,6 +66,7 @@ $row_dokrad = mysqli_fetch_assoc(mysqli_query(
     WHERE pk = '$pk_dokter_radiology'"
 ));
 
+$dokradid = defaultValue($row_dokrad['dokradid']);
 $dokrad_name = defaultValue($row_dokrad['dokrad_fullname']);
 $nip = $row_dokrad['nip'];
 $link_dokrad_img = "http://" . $_SERVER['SERVER_NAME'] . ":20007/storage/" . $row_dokrad['dokrad_img'];
@@ -232,9 +233,10 @@ $pdf->WriteHtml($fill);
 $pdf->WriteHTML("<br>");
 $pdf->WriteHTML("<br>");
 $salam = "Jepara, " . defaultValueDate($create_time) . "     ";
-$pdf->WriteHTML(
-    "<p align='right'>$salam</p>"
-);
+// ketika dokter dewa cell 140 else 146
+$cell_salam = $dokradid == "50" ? 140 : 146;
+
+$pdf->Cell($cell_salam, 9, $salam, 0, 1, 'R');
 
 if ($expertise['signature_dokter_radiologi'] == 'qr_code') {
     // jika ttd menggunakan signature QR CODE
