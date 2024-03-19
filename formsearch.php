@@ -26,7 +26,7 @@ $date2 = date('d-m-Y 23:59');
                     <?php
                     $sql = mysqli_query(
                         $conn_pacsio,
-                        "SELECT mods_in_study FROM study GROUP BY mods_in_study LIMIT 30"
+                        "SELECT mods_in_study FROM study GROUP BY mods_in_study"
                     );
                     while ($row = mysqli_fetch_assoc($sql)) { ?>
                         <tr>
