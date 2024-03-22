@@ -19,7 +19,7 @@ $query = mysqli_query(
     LEFT JOIN $table_study
     ON study.study_iuid = xray_order.uid
     WHERE fromorder IN('SIMRS', 'RIS')
-    ORDER BY xray_order.examed_at DESC DESC
+    ORDER BY xray_order.examed_at DESC
     LIMIT 5000"
 );
 
