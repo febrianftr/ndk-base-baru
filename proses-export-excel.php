@@ -236,7 +236,12 @@ $studies = mysqli_query(
     $conn_pacsio,
     "SELECT 
     UPPER(prosedur) AS prosedur,
-    COUNT(*) AS jumlah
+    COUNT(*) AS jumlah,
+    SUM(TIMESTAMPDIFF(MINUTE, DATE_FORMAT(study_datetime, '%Y-%m-%d %H:%i'), DATE_FORMAT(approved_at, '%Y-%m-%d %H:%i'))) AS total_menit,
+    CONCAT(
+        ROUND(((SUM(TIMESTAMPDIFF(MINUTE, DATE_FORMAT(study_datetime, '%Y-%m-%d %H:%i'), DATE_FORMAT(approved_at, '%Y-%m-%d %H:%i'))) / COUNT(*)) * 100)
+        , 0), '%'
+    ) AS persen
     FROM $table_patient
     JOIN $table_study
     ON patient.pk = study.patient_fk
@@ -310,17 +315,16 @@ $totalStatus = mysqli_fetch_array(mysqli_query(
     WHERE $kondisi"
 ));
 
-$approved = mysqli_fetch_array(mysqli_query(
+$approvedLessThan3hour = mysqli_fetch_array(mysqli_query(
     $conn_pacsio,
     "SELECT 
-    SUM((SELECT TIMESTAMPDIFF(MINUTE, study.study_datetime, CONCAT(approved_at)) <= 180)) AS less_than_three_hour,
-    SUM((SELECT TIMESTAMPDIFF(MINUTE, study.study_datetime, CONCAT(approved_at)) > 180)) AS greater_than_three_hour,
-    (SUM((SELECT TIMESTAMPDIFF(MINUTE, study.study_datetime, CONCAT(approved_at)) <= 180)) /
-        ($totalApproved[count_approved_at])
-    ) * 100 AS persentase_less_than_three_hour,
-    (SUM((SELECT TIMESTAMPDIFF(MINUTE, study.study_datetime, CONCAT(approved_at)) > 180)) /
-        ($totalApproved[count_approved_at])
-    ) * 100 AS persentase_greater_than_three_hour
+    COUNT(*) AS less_than_three_hour,
+    (COUNT(*) / ($totalApproved[count_approved_at])) * 100 AS persentase_less_than_three_hour,
+    SUM(TIMESTAMPDIFF(MINUTE, DATE_FORMAT(study_datetime, '%Y-%m-%d %H:%i'), DATE_FORMAT(approved_at, '%Y-%m-%d %H:%i'))) AS minute_less_than_three_hour,
+    CONCAT(
+        ROUND(((SUM(TIMESTAMPDIFF(MINUTE, DATE_FORMAT(study_datetime, '%Y-%m-%d %H:%i'), DATE_FORMAT(approved_at, '%Y-%m-%d %H:%i'))) / COUNT(*)) * 100)
+        , 2), '%'
+    ) AS persentase_minute_less_than_three_hour
     FROM $table_patient
     JOIN $table_study
     ON patient.pk = study.patient_fk
@@ -333,7 +337,34 @@ $approved = mysqli_fetch_array(mysqli_query(
     LEFT JOIN (SELECT * FROM $table_workload_radiographers GROUP BY uid) xray_workload_radiographers 
     ON xray_workload.uid = xray_workload_radiographers.uid
     WHERE $kondisi
-    AND status = 'approved'"
+    AND status = 'approved'
+    AND TIMESTAMPDIFF(MINUTE, DATE_FORMAT(study_datetime, '%Y-%m-%d %H:%i'), DATE_FORMAT(approved_at, '%Y-%m-%d %H:%i')) <= 180"
+));
+
+$approvedGreaterThan3hour = mysqli_fetch_array(mysqli_query(
+    $conn_pacsio,
+    "SELECT 
+    COUNT(*) AS greater_than_three_hour,
+    (COUNT(*) / ($totalApproved[count_approved_at])) * 100 AS persentase_greater_than_three_hour,
+    SUM(TIMESTAMPDIFF(MINUTE, DATE_FORMAT(study_datetime, '%Y-%m-%d %H:%i'), DATE_FORMAT(approved_at, '%Y-%m-%d %H:%i'))) AS minute_greater_than_three_hour,
+    CONCAT(
+        ROUND(((SUM(TIMESTAMPDIFF(MINUTE, DATE_FORMAT(study_datetime, '%Y-%m-%d %H:%i'), DATE_FORMAT(approved_at, '%Y-%m-%d %H:%i'))) / COUNT(*)) * 100)
+        , 2), '%'
+    ) AS persentase_minute_greater_than_three_hour
+    FROM $table_patient
+    JOIN $table_study
+    ON patient.pk = study.patient_fk
+    JOIN $table_workload
+    ON study.study_iuid = xray_workload.uid
+    LEFT JOIN $table_order
+    ON xray_order.uid = xray_workload.uid
+    LEFT JOIN $table_workload_bhp
+    ON xray_workload.uid = xray_workload_bhp.uid
+    LEFT JOIN (SELECT * FROM $table_workload_radiographers GROUP BY uid) xray_workload_radiographers 
+    ON xray_workload.uid = xray_workload_radiographers.uid
+    WHERE $kondisi
+    AND status = 'approved'
+    AND TIMESTAMPDIFF(MINUTE, DATE_FORMAT(study_datetime, '%Y-%m-%d %H:%i'), DATE_FORMAT(approved_at, '%Y-%m-%d %H:%i')) > 180"
 ));
 
 $statuses = mysqli_query(
@@ -430,32 +461,40 @@ while ($status = mysqli_fetch_array($statuses)) {
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
             <tr>
-                <th colspan="6">Waktu Tunggu</th>
+                <th colspan="8">Waktu Tunggu</th>
             </tr>
             <tr>
-                <th colspan="3">Approved</th>
+                <th colspan="5">Approved</th>
                 <th colspan="3">Waiting</th>
             </tr>
             <tr>
                 <th>Status</th>
                 <th>Study</th>
-                <th>Persentase</th>
+                <th>Persentase Study</th>
+                <th>Minute</th>
+                <th>Persentase Waktu</th>
                 <th colspan="3">Study</th>
             </tr>
             <tr>
                 <td align="center">Kurang 3 Jam</td>
-                <td align="center"><?= $approved['less_than_three_hour'] ?? 0; ?></td>
-                <td align="center"><?= round($approved['persentase_less_than_three_hour'], 2); ?>%</td>
+                <td align="center"><?= $approvedLessThan3hour['less_than_three_hour'] ?? 0; ?></td>
+                <td align="center"><?= round($approvedLessThan3hour['persentase_less_than_three_hour'], 2); ?>%</td>
+                <td align="center"><?= $approvedLessThan3hour['minute_less_than_three_hour'] ?? 0; ?></td>
+                <td align="center"><?= $approvedLessThan3hour['persentase_minute_less_than_three_hour'] ?? 0; ?></td>
                 <td align="center" colspan="3" rowspan="2"><?= $sum_waiting ?></td>
             </tr>
             <tr>
                 <td align="center">Lebih 3 Jam</td>
-                <td align="center"><?= $approved['greater_than_three_hour'] ?? 0; ?></td>
-                <td align="center"><?= round($approved['persentase_greater_than_three_hour'], 2); ?>%</td>
+                <td align="center"><?= $approvedGreaterThan3hour['greater_than_three_hour'] ?? 0; ?></td>
+                <td align="center"><?= round($approvedGreaterThan3hour['persentase_greater_than_three_hour'], 2); ?>%</td>
+                <td align="center"><?= $approvedGreaterThan3hour['minute_greater_than_three_hour'] ?? 0; ?></td>
+                <td align="center"><?= $approvedGreaterThan3hour['persentase_minute_greater_than_three_hour'] ?? 0; ?></td>
             </tr>
             <tr>
                 <td align="center">Total Study</td>
                 <td align="center" colspan="1"><?= $sum_approved ?></td>
+                <td align="center" rowspan="2"></td>
+                <td align="center" rowspan="2"></td>
                 <td align="center" rowspan="2"></td>
                 <td align="center" colspan="3"><?= $sum_waiting ?></td>
             </tr>
@@ -474,6 +513,8 @@ while ($status = mysqli_fetch_array($statuses)) {
                 <th>No</th>
                 <th>Pemeriksaan</th>
                 <th>Jumlah</th>
+                <th>Menit</th>
+                <th>Persentase Waktu</th>
             </tr>
         </thead>
         <tbody>
@@ -484,6 +525,8 @@ while ($status = mysqli_fetch_array($statuses)) {
                     <td align="center"><?= $no ?></td>
                     <td align="center"><?= $study['prosedur']; ?></td>
                     <td align="center"><?= $study['jumlah']; ?></td>
+                    <td align="center"><?= $study['total_menit']; ?></td>
+                    <td align="center"><?= $study['persen']; ?></td>
                 </tr>
             <?php
                 $no++;
