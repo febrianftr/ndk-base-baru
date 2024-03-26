@@ -240,7 +240,7 @@ $studies = mysqli_query(
     SUM(TIMESTAMPDIFF(MINUTE, DATE_FORMAT(study_datetime, '%Y-%m-%d %H:%i'), DATE_FORMAT(approved_at, '%Y-%m-%d %H:%i'))) AS total_menit,
     CONCAT(
         ROUND(((SUM(TIMESTAMPDIFF(MINUTE, DATE_FORMAT(study_datetime, '%Y-%m-%d %H:%i'), DATE_FORMAT(approved_at, '%Y-%m-%d %H:%i'))) / COUNT(*)) * 100)
-        , 0), '%'
+        , 2), '%'
     ) AS persen
     FROM $table_patient
     JOIN $table_study
@@ -338,7 +338,7 @@ $approvedLessThan3hour = mysqli_fetch_array(mysqli_query(
     ON xray_workload.uid = xray_workload_radiographers.uid
     WHERE $kondisi
     AND status = 'approved'
-    AND TIMESTAMPDIFF(MINUTE, DATE_FORMAT(study_datetime, '%Y-%m-%d %H:%i'), DATE_FORMAT(approved_at, '%Y-%m-%d %H:%i')) <= 180"
+    AND TIMESTAMPDIFF(MINUTE, study_datetime, approved_at) <= 180"
 ));
 
 $approvedGreaterThan3hour = mysqli_fetch_array(mysqli_query(
@@ -364,7 +364,7 @@ $approvedGreaterThan3hour = mysqli_fetch_array(mysqli_query(
     ON xray_workload.uid = xray_workload_radiographers.uid
     WHERE $kondisi
     AND status = 'approved'
-    AND TIMESTAMPDIFF(MINUTE, DATE_FORMAT(study_datetime, '%Y-%m-%d %H:%i'), DATE_FORMAT(approved_at, '%Y-%m-%d %H:%i')) > 180"
+    AND TIMESTAMPDIFF(MINUTE, study_datetime, approved_at) > 180"
 ));
 
 $statuses = mysqli_query(
