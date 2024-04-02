@@ -44,6 +44,10 @@ define('GETEXPERTISEHREFNO', '" href="#');
 define('GETEXPERTISELAST', '"><span class="btn rgba-stylish-slight darken-1 btn-inti2">');
 define('GETEXPERTISEVERYLAST', '</span></a>');
 
+// Update Exp Date QR
+define('CHANGEEXPDATEFIRST', '<a style="text-decoration: none;" href="change_expdate.php?uid=');
+define('CHANGEEXPDATELAST', '"><span class="btn rgba-stylish-slight darken-1 btn-inti2"></span></a>');
+
 // DELETE
 define('DELETEFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="deleteworkload.php?uid=');
 define('DELETELAST', '"onclick=\'return confirm("Delete data?");\'><span class="btn red lighten-1 btn-intiwid1"><i class="fas fa-trash-alt" data-toggle="tooltip" title="Delete"></i></span></a>');

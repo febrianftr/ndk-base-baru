@@ -952,3 +952,20 @@ function editcomplaint($editcomplaint2)
 
 	return mysqli_affected_rows($conn);
 }
+
+function update_expdate($post_expdate)
+{
+	global $conn;
+	$uid = $post_expdate['study_iuid'];
+	$expdate = $post_expdate['expdate'];
+	$add_date = $post_expdate['add_date'];
+	$qr_expdate = date('Y-m-d', strtotime("+$add_date days", strtotime($expdate)));
+
+	$query = "UPDATE xray_workload SET 
+				qr_expdate = '$qr_expdate'
+				WHERE uid = '$uid'
+	";
+	mysqli_query($conn, $query);
+
+	return mysqli_affected_rows($conn);
+}

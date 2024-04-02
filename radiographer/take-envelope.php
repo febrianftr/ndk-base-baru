@@ -4,7 +4,7 @@ require '../js/proses/function.php';
 require '../default-value.php';
 require '../model/query-base-take-envelope.php';
 require '../model/query-base-study.php';
-require 'model/query-base-order.php';
+require '../model/query-base-order.php';
 require '../model/query-base-patient.php';
 require '../model/query-base-workload.php';
 session_start();

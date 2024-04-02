@@ -64,6 +64,7 @@ function insert_workload($value)
 	$signature = $uid . ".png";
 	$hostname = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM xray_hostname_publik"));
 	$link = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM rename_link"));
+	$expdate = date('Y-m-d', strtotime("+90 days"));
 
 	$dokter_radiologi = mysqli_fetch_assoc(mysqli_query(
 		$conn,
@@ -90,7 +91,8 @@ function insert_workload($value)
 		approved_at = NOW(),
 		priority_doctor = '$priority_doctor',
 		signature = '$signature',
-		signature_datetime = NOW()
+		signature_datetime = NOW(),
+		qr_expdate = '$expdate'
 		WHERE uid = '$uid'
 		"
 	);
