@@ -46,7 +46,7 @@ define('GETEXPERTISEVERYLAST', '</span></a>');
 
 // Update Exp Date QR
 define('CHANGEEXPDATEFIRST', '<a style="text-decoration: none;" href="change_expdate.php?uid=');
-define('CHANGEEXPDATELAST', '"><span class="btn rgba-stylish-slight darken-1 btn-inti2"></span></a>');
+define('CHANGEEXPDATELAST', '"><span class="btn rgba-stylish-slight darken-1 btn-inti2"><img src="../image/time-add.svg" data-toggle="tooltip" title="Edit expired date" style="width: 100%;"></span></a>');
 
 // DELETE
 define('DELETEFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="deleteworkload.php?uid=');
