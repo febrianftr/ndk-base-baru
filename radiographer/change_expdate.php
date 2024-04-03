@@ -88,7 +88,7 @@ if ($_SESSION['level'] == "radiographer") {
 										<div class='alert alert-info' role='alert'>Pasien <?= removeCharacter(defaultValue($row_update_expdate['pat_name'])); ?>, modalitas <?= defaultValue($row_update_expdate['mods_in_study']); ?>, Pemeriksaan <?= defaultValue($row_update_expdate['prosedur']); ?></div>
 										<input type="hidden" id="study_iuid" name="study_iuid" value="<?= $uid; ?>">
 										<label for="qr_expdate">Expired Date</label><br>
-										<input type="text" class="form-control" name="expdate" id="expdate" value="<?= $row_update_expdate['qr_expdate']; ?>" readonly>
+										<input type="text" class="form-control" name="expdate" id="expdate" value="<?= date('d-m-Y', strtotime($row_update_expdate['qr_expdate'])); ?>" readonly>
 										<br>
 										<br>
 										<label for="add_date">Pilih Jangka Waktu Aktif</label><br>
