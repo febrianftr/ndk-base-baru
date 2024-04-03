@@ -338,7 +338,7 @@ $approvedLessThan3hour = mysqli_fetch_array(mysqli_query(
     ON xray_workload.uid = xray_workload_radiographers.uid
     WHERE $kondisi
     AND status = 'approved'
-    AND TIMESTAMPDIFF(MINUTE, study_datetime, approved_at) <= 180"
+    AND TIMESTAMPDIFF(MINUTE, study_datetime, approved_at) <= 360"
 ));
 
 $approvedGreaterThan3hour = mysqli_fetch_array(mysqli_query(
@@ -364,7 +364,7 @@ $approvedGreaterThan3hour = mysqli_fetch_array(mysqli_query(
     ON xray_workload.uid = xray_workload_radiographers.uid
     WHERE $kondisi
     AND status = 'approved'
-    AND TIMESTAMPDIFF(MINUTE, study_datetime, approved_at) > 180"
+    AND TIMESTAMPDIFF(MINUTE, study_datetime, approved_at) > 360"
 ));
 
 $statuses = mysqli_query(
@@ -476,7 +476,7 @@ while ($status = mysqli_fetch_array($statuses)) {
                 <th colspan="3">Study</th>
             </tr>
             <tr>
-                <td align="center">Kurang 3 Jam</td>
+                <td align="center">Kurang 6 Jam</td>
                 <td align="center"><?= $approvedLessThan3hour['less_than_three_hour'] ?? 0; ?></td>
                 <td align="center"><?= round($approvedLessThan3hour['persentase_less_than_three_hour'], 2); ?>%</td>
                 <td align="center"><?= $approvedLessThan3hour['minute_less_than_three_hour'] ?? 0; ?></td>
@@ -484,7 +484,7 @@ while ($status = mysqli_fetch_array($statuses)) {
                 <td align="center" colspan="3" rowspan="2"><?= $sum_waiting ?></td>
             </tr>
             <tr>
-                <td align="center">Lebih 3 Jam</td>
+                <td align="center">Lebih 6 Jam</td>
                 <td align="center"><?= $approvedGreaterThan3hour['greater_than_three_hour'] ?? 0; ?></td>
                 <td align="center"><?= round($approvedGreaterThan3hour['persentase_greater_than_three_hour'], 2); ?>%</td>
                 <td align="center"><?= $approvedGreaterThan3hour['minute_greater_than_three_hour'] ?? 0; ?></td>
