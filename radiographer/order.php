@@ -258,7 +258,7 @@ if ($_SESSION['level'] == "radiographer") {
           <div class="">
             <div class="footer-login col-sm-12"><br>
               <center>
-                <p>&copy; RSUD R.A. Kartini Jepara Official</a>.</p>
+                <p>&copy; RSU Sarila Husada Official</a>.</p>
               </center>
             </div>
           </div>

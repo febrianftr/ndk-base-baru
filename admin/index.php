@@ -34,7 +34,7 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
     <!-- <div class="footerindex">
         
           <div class="footer-login"><br>
-            <center><p style="margin-bottom: 0px;">&copy; RSUD R.A. Kartini Jepara Official</a>.</p></center>
+            <center><p style="margin-bottom: 0px;">&copy; RSU Sarila Husada Official</a>.</p></center>
           </div>
   
       </div> -->
