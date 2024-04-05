@@ -69,13 +69,13 @@ $row_dokrad = mysqli_fetch_assoc(mysqli_query(
 $dokradid = defaultValue($row_dokrad['dokradid']);
 $dokrad_name = defaultValue($row_dokrad['dokrad_fullname']);
 $nip = $row_dokrad['nip'];
-$link_dokrad_img = "http://" . $_SERVER['SERVER_NAME'] . ":20007/storage/" . $row_dokrad['dokrad_img'];
+$link_dokrad_img = "http://" . $_SERVER['SERVER_NAME'] . ":8000/storage/" . $row_dokrad['dokrad_img'];
 // kondisi ketika dokrad_img null & ketika server laravel error
 $dokrad_img =  $row_dokrad['dokrad_img'] == null ? 'scan-ttd-default.PNG' : (@file_get_contents($link_dokrad_img) === false ? 'scan-ttd-default.PNG' : $link_dokrad_img);
 
 // kop surat
 $kopSurat = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM kop_surat LIMIT 1"));
-$link_surat_image = "http://" . $_SERVER['SERVER_NAME'] . ":20007/storage/" . $kopSurat['image'];
+$link_surat_image = "http://" . $_SERVER['SERVER_NAME'] . ":8000/storage/" . $kopSurat['image'];
 // kondisi ketika gambar kop surat null & ketika server laravel error
 $kop_surat_image = $kopSurat['image'] == null ? 'kop-jpr.JPG' : (@file_get_contents($link_surat_image) === false ? 'kop-jpr.JPG' : $link_surat_image);
 

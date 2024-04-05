@@ -29,7 +29,7 @@ $(document).ready(function () {
       $.ajax({
         type: "POST",
         url:
-          `http://${location.hostname}:20007/api/take-envelope/` + study_iuid,
+          `http://${location.hostname}:8000/api/take-envelope/` + study_iuid,
         data: $(form).serialize(),
         beforeSend: function () {
           $(".loading").show();
