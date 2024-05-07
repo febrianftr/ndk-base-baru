@@ -150,7 +150,7 @@ function ohifurl($port)
 if ($_SERVER['SERVER_NAME'] == $hostname['ip_publik'] or $_SERVER['SERVER_NAME'] == '49.128.176.141') {
     // jika menggunakan ip publik
     // jika menggunakan ohif lama icon (small)
-    $url = ohifurl(20012);
+    $url = ohifurl(92);
     define('OHIFOLDFIRST', '<a href="' . $url . '');
     define('OHIFOLDLAST', "$ohif_small");
     // jika menggunakan ohif lama icon(large)
@@ -159,7 +159,7 @@ if ($_SERVER['SERVER_NAME'] == $hostname['ip_publik'] or $_SERVER['SERVER_NAME']
 } else {
     // jika menggunakan ip lokal
     // jika menggunakan ohif lama icon (small)
-    $url = ohifurl(92);
+    $url = ohifurl(91);
     define('OHIFOLDFIRST', '<a href="' . $url . '');
     define('OHIFOLDLAST', "$ohif_small");
 

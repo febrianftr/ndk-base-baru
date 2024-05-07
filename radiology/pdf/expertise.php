@@ -57,6 +57,7 @@ $status = $row['status'];
 $create_time = $row['create_time'];
 $approved_at = $row['approved_at'];
 $pk_dokter_radiology = $row['pk_dokter_radiology'];
+$study_datetime = $row['study_datetime'];
 
 // kondisi mencari ditabel dokter radiology
 $row_dokrad = mysqli_fetch_assoc(mysqli_query(
@@ -128,7 +129,7 @@ $pdf->SetFont('Arial', '', 10);
 
 $pdf->SetTitle('Hasil expertise');
 
-$pdf->image($kop_surat_image, -3, -3, 213);
+$pdf->image($kop_surat_image, 16, 10, 180);
 $pdf->MultiCell(0, 18, '', 0, "J", false);
 
 if ($pat_sex == 'M') {
@@ -232,7 +233,7 @@ $pdf->WriteHTML("<br>");
 $pdf->WriteHtml($fill);
 $pdf->WriteHTML("<br>");
 $pdf->WriteHTML("<br>");
-$salam = "Jepara, " . defaultValueDate($create_time) . "     ";
+$salam = "Jepara, " . defaultValueDate($study_datetime) . "     ";
 // ketika dokter dewa cell 140 else 146
 $cell_salam = $dokradid == "50" ? 140 : 146;
 
