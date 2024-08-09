@@ -68,7 +68,9 @@ $name = $row10['ad_name'] . ' ' . $row10['ad_lastname'];
                   <center><a href="logout.php"><img style="width: 30px;" src="../icon-menubar/new_icon/logout.png"><br><?= $lang['logout'] ?></a></center>
                 </li>
                 <li style="float: right; color: #fff">
-                  <center><bold><br>Administrator</bold></center>
+                  <center>
+                    <bold><br>Administrator</bold>
+                  </center>
                 </li>
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                   <!-- <i class="fa fa-bars"></i> -->
@@ -76,7 +78,6 @@ $name = $row10['ad_name'] . ' ' . $row10['ad_lastname'];
             </div>
             <div class="nav-bg-fostrap">
               <div class="navbar-fostrap"> <span></span> <span></span> <span></span> </div>
-              <a href="" class="title-mobile"><img src="image/intiwid-logo-putih.png" style="width: 115px; margin-top: -5px;"></a>
             </div>
           </div>
         </div>

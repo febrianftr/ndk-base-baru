@@ -199,7 +199,7 @@ $patient = mysqli_query($conn_pacsio, "SELECT
             ON xray_order.uid = xray_workload.uid
             LEFT JOIN $table_workload_bhp
             ON xray_workload.uid = xray_workload_bhp.uid
-            LEFT JOIN (SELECT * FROM $table_workload_radiographers GROUP BY uid) xray_workload_radiographers 
+            LEFT JOIN (SELECT * FROM $table_workload_radiographers WHERE $kondisi_radiographer GROUP BY uid) xray_workload_radiographers 
             ON xray_workload.uid = xray_workload_radiographers.uid 
             WHERE $kondisi
             ORDER BY study.study_datetime DESC");
@@ -226,7 +226,7 @@ $sum = mysqli_fetch_array(mysqli_query(
     ON xray_order.uid = xray_workload.uid
     LEFT JOIN $table_workload_bhp
     ON xray_workload.uid = xray_workload_bhp.uid
-    LEFT JOIN (SELECT * FROM $table_workload_radiographers GROUP BY uid) xray_workload_radiographers 
+    LEFT JOIN (SELECT * FROM $table_workload_radiographers WHERE $kondisi_radiographer GROUP BY uid) xray_workload_radiographers 
     ON xray_workload.uid = xray_workload_radiographers.uid
     WHERE $kondisi"
 ));
@@ -251,7 +251,7 @@ $studies = mysqli_query(
     ON xray_order.uid = xray_workload.uid
     LEFT JOIN $table_workload_bhp
     ON xray_workload.uid = xray_workload_bhp.uid
-    LEFT JOIN (SELECT * FROM $table_workload_radiographers GROUP BY uid) xray_workload_radiographers 
+    LEFT JOIN (SELECT * FROM $table_workload_radiographers WHERE $kondisi_radiographer GROUP BY uid) xray_workload_radiographers 
     ON xray_workload.uid = xray_workload_radiographers.uid
     WHERE $kondisi
     GROUP BY UPPER(prosedur)
@@ -272,7 +272,7 @@ $countStudies = mysqli_fetch_array(mysqli_query(
     ON xray_order.uid = xray_workload.uid
     LEFT JOIN $table_workload_bhp
     ON xray_workload.uid = xray_workload_bhp.uid
-    LEFT JOIN (SELECT * FROM $table_workload_radiographers GROUP BY uid) xray_workload_radiographers 
+    LEFT JOIN (SELECT * FROM $table_workload_radiographers WHERE $kondisi_radiographer GROUP BY uid) xray_workload_radiographers 
     ON xray_workload.uid = xray_workload_radiographers.uid
     WHERE $kondisi"
 ));
@@ -291,7 +291,7 @@ $totalApproved = mysqli_fetch_array(mysqli_query(
     ON xray_order.uid = xray_workload.uid
     LEFT JOIN $table_workload_bhp
     ON xray_workload.uid = xray_workload_bhp.uid
-    LEFT JOIN (SELECT * FROM $table_workload_radiographers GROUP BY uid) xray_workload_radiographers 
+    LEFT JOIN (SELECT * FROM $table_workload_radiographers WHERE $kondisi_radiographer GROUP BY uid) xray_workload_radiographers 
     ON xray_workload.uid = xray_workload_radiographers.uid
     WHERE $kondisi
     AND status = 'approved'"
@@ -310,7 +310,7 @@ $totalStatus = mysqli_fetch_array(mysqli_query(
     ON xray_order.uid = xray_workload.uid
     LEFT JOIN $table_workload_bhp
     ON xray_workload.uid = xray_workload_bhp.uid
-    LEFT JOIN (SELECT * FROM $table_workload_radiographers GROUP BY uid) xray_workload_radiographers 
+    LEFT JOIN (SELECT * FROM $table_workload_radiographers WHERE $kondisi_radiographer GROUP BY uid) xray_workload_radiographers 
     ON xray_workload.uid = xray_workload_radiographers.uid
     WHERE $kondisi"
 ));
@@ -334,7 +334,7 @@ $approvedLessThan3hour = mysqli_fetch_array(mysqli_query(
     ON xray_order.uid = xray_workload.uid
     LEFT JOIN $table_workload_bhp
     ON xray_workload.uid = xray_workload_bhp.uid
-    LEFT JOIN (SELECT * FROM $table_workload_radiographers GROUP BY uid) xray_workload_radiographers 
+    LEFT JOIN (SELECT * FROM $table_workload_radiographers WHERE $kondisi_radiographer GROUP BY uid) xray_workload_radiographers 
     ON xray_workload.uid = xray_workload_radiographers.uid
     WHERE $kondisi
     AND status = 'approved'
@@ -360,7 +360,7 @@ $approvedGreaterThan3hour = mysqli_fetch_array(mysqli_query(
     ON xray_order.uid = xray_workload.uid
     LEFT JOIN $table_workload_bhp
     ON xray_workload.uid = xray_workload_bhp.uid
-    LEFT JOIN (SELECT * FROM $table_workload_radiographers GROUP BY uid) xray_workload_radiographers 
+    LEFT JOIN (SELECT * FROM $table_workload_radiographers WHERE $kondisi_radiographer GROUP BY uid) xray_workload_radiographers 
     ON xray_workload.uid = xray_workload_radiographers.uid
     WHERE $kondisi
     AND status = 'approved'
@@ -383,7 +383,7 @@ $statuses = mysqli_query(
     ON xray_order.uid = xray_workload.uid
     LEFT JOIN $table_workload_bhp
     ON xray_workload.uid = xray_workload_bhp.uid
-    LEFT JOIN (SELECT * FROM $table_workload_radiographers GROUP BY uid) xray_workload_radiographers 
+    LEFT JOIN (SELECT * FROM $table_workload_radiographers WHERE $kondisi_radiographer GROUP BY uid) xray_workload_radiographers 
     ON xray_workload.uid = xray_workload_radiographers.uid
     WHERE $kondisi
     GROUP BY status"

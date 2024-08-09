@@ -5,7 +5,6 @@ include '../contract-service.php';
 <!-- ------loader------ -->
 <div class="disokin">
     <div class="spinner">
-        <div><img src="../image/intiwid-logo-new-putih-2.png" style="width: 201px;margin-left: -75px; margin-bottom: 9px;"></div>
         <div class="back-loader">
             <span class="ball-1"></span>
             <span class="ball-2"></span>
@@ -27,7 +26,6 @@ include '../contract-service.php';
 <?php include "../bahasa.php"; ?>
 <div class="nav-side-menu">
     <div class="brand">
-        <div style="width: 195px; padding: 0 0 0 15px; margin: 7px 0;"><img style="width: 100%;" src="../image/intiwid-logo-new-putih-2.png"></div>
     </div>
     <!-- <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content1"></i> -->
     <div class="toggle-btn">

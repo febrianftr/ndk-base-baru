@@ -44,7 +44,6 @@ $radiographer_name = $row10['radiographer_name'] . ' ' . $row10['radiographer_la
           <div class="header">
             <div class="container-fluid">
               <div id="center2" class="logo-top">
-                <img class="logo" src="../image/intiwid-logo2.png" />
                 <span class="ris-head"><?= $lang['ris'] ?></span>
                 <img class="logo2" src="../image/ipi2.png" />
               </div>
@@ -56,7 +55,6 @@ $radiographer_name = $row10['radiographer_name'] . ' ' . $row10['radiographer_la
         <div class="header">
           <div class="container-fluid">
             <div id="center2" class="logo-top">
-              <img class="logo" src="../image/intiwid-logo2.png" />
               <span class="ris-head"><?= $lang['ris'] ?></span>
               <img class="logo2" src="../image/ipi2.png" />
             </div>
@@ -172,13 +170,11 @@ $radiographer_name = $row10['radiographer_name'] . ' ' . $row10['radiographer_la
         ?>
           <div class="nav-bg-fostrap blinking-bg-resp">
             <div class="navbar-fostrap"> <span></span> <span></span> <span></span> </div>
-            <a href="" class="title-mobile"><img src="image/intiwid-logo-putih.png"></a>
           </div>
         <?php } else {
         ?>
           <div class="nav-bg-fostrap">
             <div class="navbar-fostrap"> <span></span> <span></span> <span></span> </div>
-            <a href="" class="title-mobile"><img src="image/intiwid-logo-putih.png"></a>
           </div>
         <?php } ?>
 

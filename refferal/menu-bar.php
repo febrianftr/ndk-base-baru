@@ -44,7 +44,6 @@ $name = $row10['named'] . ' ' . $row10['lastnamed'];
           <div class="header">
             <div class="container-fluid">
               <div id="center2" class="logo-top">
-                <img class="logo" src="../image/intiwid-logo2.png" />
                 <span class="ris-head"><?= $lang['ris'] ?></span>
                 <img class="logo2" src="../image/ipi2.png" />
               </div>
@@ -56,7 +55,6 @@ $name = $row10['named'] . ' ' . $row10['lastnamed'];
         <div class="header">
           <div class="container-fluid">
             <div id="center2" class="logo-top">
-              <img class="logo" src="../image/intiwid-logo2.png" />
               <span class="ris-head"><?= $lang['ris'] ?></span>
               <img class="logo2" src="../image/ipi2.png" />
             </div>
@@ -100,7 +98,6 @@ $name = $row10['named'] . ' ' . $row10['lastnamed'];
             </div>
             <div class="nav-bg-fostrap">
               <div class="navbar-fostrap"> <span></span> <span></span> <span></span> </div>
-              <a href="" class="title-mobile"><img src="image/intiwid-logo-putih.png" style="width: 115px; margin-top: -5px;"></a>
             </div>
           </div>
         </div>

@@ -67,8 +67,7 @@ if (isset($_POST["login"])) {
             <!-- <div style="padding-left: 65px; margin-top: 100px;" class="col-md-5 col-md-offset-1">
                 <div id="header">
                     <div class="logo">
-                        <img class="img-responsive" src="image/intiwid-logo.png">
-                    </div>
+                       </div>
                     <hr class="hrindex">
 
                     <div class="logo2">

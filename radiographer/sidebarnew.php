@@ -310,7 +310,6 @@
 <!-- ------loader------ -->
 <div class="disokin">
     <div class="spinner">
-        <div><img src="../image/intiwid-logo-new-putih-2.png" style="width: 200px;margin-left: -75px; margin-bottom: 9px;"></div>
         <div class="back-loader">
             <span class="ball-1"></span>
             <span class="ball-2"></span>
@@ -333,7 +332,6 @@
             <!-- <span class="text">Drop Down Sidebarnew</span> -->
         </div>
         <div class="logo_name">
-            <div style="width: 200px; margin-top:6px; margin-left: -5px;"><img style="width: 100%;" src="../image/intiwid-logo-new-putih-2.png"></div>
         </div>
     </div>
     <ul class="nav-links">
