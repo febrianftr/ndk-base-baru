@@ -11,11 +11,28 @@
  Target Server Version : 50649 (5.6.49-log)
  File Encoding         : 65001
 
- Date: 04/04/2024 15:37:23
+ Date: 25/04/2024 13:57:19
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for active_dicom_router
+-- ----------------------------
+DROP TABLE IF EXISTS `active_dicom_router`;
+CREATE TABLE `active_dicom_router`  (
+  `pk` bigint(20) NOT NULL AUTO_INCREMENT,
+  `is_active` tinyint(4) NULL DEFAULT NULL,
+  `created_at` datetime NULL DEFAULT NULL,
+  `updated_at` datetime NULL DEFAULT NULL,
+  PRIMARY KEY (`pk`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = COMPACT;
+
+-- ----------------------------
+-- Records of active_dicom_router
+-- ----------------------------
+INSERT INTO `active_dicom_router` VALUES (1, 1, '2022-12-28 15:08:47', '2022-12-28 15:08:47');
 
 -- ----------------------------
 -- Table structure for active_notification_send_pacs
@@ -69,6 +86,25 @@ CREATE TABLE `active_update_simrs`  (
 -- Records of active_update_simrs
 -- ----------------------------
 INSERT INTO `active_update_simrs` VALUES (1, 1, '2022-12-28 15:08:47', '2022-12-28 15:08:47');
+
+-- ----------------------------
+-- Table structure for dicom_router
+-- ----------------------------
+DROP TABLE IF EXISTS `dicom_router`;
+CREATE TABLE `dicom_router`  (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `uid` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `acc` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `request` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `response` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = COMPACT;
+
+-- ----------------------------
+-- Records of dicom_router
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for failed_jobs
