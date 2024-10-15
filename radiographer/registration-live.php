@@ -130,7 +130,7 @@ if ($_SESSION['level'] == "radiographer") {
                       <select class="selectpicker" data-size="10" data-live-search="true" data-width="100%" name="dokradid" id="dokradid" data-style="btn-info">
                         <option value="null">--pilih--</option>
                         <?php
-                        $query_dokter_radiologi = mysqli_query($conn, "SELECT * FROM xray_dokter_radiology WHERE username NOT IN ('sarah', 'hardian_dokter')");
+                        $query_dokter_radiologi = mysqli_query($conn, "SELECT * FROM xray_dokter_radiology");
                         while ($dokter_radiologi = mysqli_fetch_array($query_dokter_radiologi)) { ?>
                           <option value="<?= $dokter_radiologi['dokradid'] . '|' . $dokter_radiologi['dokrad_name']; ?>"><?= mb_convert_encoding($dokter_radiologi['dokrad_name'], 'UTF-8', 'ISO-8859-1') . ' ' . mb_convert_encoding($dokter_radiologi['dokrad_lastname'], 'UTF-8', 'ISO-8859-1'); ?></option>
                         <?php } ?>

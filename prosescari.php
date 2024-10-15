@@ -281,8 +281,8 @@ while ($row = mysqli_fetch_array($result)) {
         $level = $level = EDITPASIENFIRST . $study_iuid . EDITPASIENLAST . $icon_edit_pasien . EDITPASIENVERYLAST .
           CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $blinking . CHANGEDOCTORCLASS . $icon_change_doctor . CHANGEDOCTORVERYLAST .
           OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
-          HTMLFIRST . $study_iuid . HTMLLAST .
-          CHANGEEXPDATEFIRST . $study_iuid . CHANGEEXPDATELAST;
+          HTMLFIRST . $study_iuid . HTMLLAST ;
+          // CHANGEEXPDATEFIRST . $study_iuid . CHANGEEXPDATELAST;
         // LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST .
         // COPYUIDFIRST . EXTLINKOHIF . $row['study_iuid'] . EXTLINKOHIF . COPYUIDLAST
         // . SENDDICOMFIRST . $study_iuid . SENDDICOMLAST .

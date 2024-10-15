@@ -64,7 +64,6 @@ $dokrad_name = $row['dokrad_name'];
 $pat_state = $row['pat_state'];
 $priority = $row['priority'];
 $spc_needs = $row['spc_needs'];
-$laboratory_support = $row['laboratory_support'];
 $id_payment = $row['id_payment'];
 $payment = $row['payment'];
 $fromorder = $row['fromorder'];
@@ -194,10 +193,6 @@ if ($_SESSION['level'] == "radiographer") {
 												<li>
 													<label for="spc_needs">Klinis</label><br>
 													<textarea rows="4" cols="50" type="text" name="spc_needs" id="spc_needs" value="<?= $spc_needs; ?>"><?= $spc_needs; ?></textarea>
-												</li>
-												<li>
-													<label for="spc_needs">Laboratory Support</label><br>
-													<textarea rows="4" cols="50" type="text" name="laboratory_support" id="laboratory_support" value="<?= $spc_needs; ?>"><?= $laboratory_support; ?></textarea>
 												</li>
 										</div>
 										<div class="form-update-workload col-lg-4">

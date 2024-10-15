@@ -59,7 +59,6 @@ $create_time = defaultValueDateTime($row['create_time']);
 $examed_at = defaultValueDateTime($row['examed_at']);
 $pat_state = defaultValue($row['pat_state']);
 $spc_needs = defaultValue($row['spc_needs']);
-$laboratory_support = defaultValue($row['laboratory_support']);
 $payment = defaultValue($row['payment']);
 $status = styleStatus($row['status'], $study_iuid);
 $approved_at = defaultValueDateTime($row['approved_at']);
@@ -274,11 +273,6 @@ if ($row['status'] == 'waiting' || $row['status'] == '') {
                         <td><?= $lang['spc_needs'] ?></td>
                         <td>&nbsp;: </td>
                         <td align="left">&nbsp; <?= $spc_needs; ?></td>
-                    </tr>
-                    <tr>
-                        <td><?= "Laboratory Support" ?></td>
-                        <td>&nbsp;: </td>
-                        <td align="left">&nbsp; <?= $laboratory_support; ?></td>
                     </tr>
                     <tr>
                         <td><?= $lang['payment'] ?></td>
