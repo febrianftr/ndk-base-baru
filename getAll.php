@@ -9,6 +9,7 @@ require 'model/query-base-study.php';
 require 'model/query-base-patient.php';
 require 'model/query-base-dokter-radiology.php';
 require 'model/query-base-selected-dokter-radiology.php';
+require 'date-time-zone.php';
 session_start();
 
 $username = $_SESSION['username'];
