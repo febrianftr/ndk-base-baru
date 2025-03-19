@@ -78,8 +78,8 @@ function insert_workload($value)
 
 	mysqli_query(
 		$conn,
-		"INSERT INTO xray_order (uid, dokradid, dokrad_name) VALUES ('$uid', '$dokradid', '$dokrad_name')
-		ON DUPLICATE KEY UPDATE dokradid = '$dokradid', dokrad_name = '$dokrad_name'"
+		"INSERT INTO xray_order (uid, dokradid, dokrad_name) VALUES ('$uid', '$dokradid', '$dokrad_fullname')
+		ON DUPLICATE KEY UPDATE dokradid = '$dokradid', dokrad_name = '$dokrad_fullname'"
 	);
 
 	mysqli_query(
