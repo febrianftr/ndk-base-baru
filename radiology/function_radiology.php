@@ -24,7 +24,6 @@ function update_draft($value)
 	global $conn;
 	$uid = $value['uid'];
 	$fill = addslashes($value['fill']);
-
 	$username = $value['username'];
 	$dokter_radiologi = mysqli_fetch_assoc(mysqli_query(
 		$conn,
