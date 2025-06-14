@@ -25,10 +25,28 @@ function update_draft($value)
 	$uid = $value['uid'];
 	$fill = addslashes($value['fill']);
 
+	$username = $value['username'];
+	$dokter_radiologi = mysqli_fetch_assoc(mysqli_query(
+		$conn,
+		"SELECT * FROM xray_dokter_radiology WHERE username = '$username'"
+	));
+	$pk_dokter_radiology = $dokter_radiologi['pk'];
+	$dokradid = $dokter_radiologi['dokradid'];
+	$dokrad_name = $dokter_radiologi['dokrad_name'];
+	$dokrad_lastname = $dokter_radiologi['dokrad_lastname'];
+	$dokrad_fullname = $dokrad_name . ' ' . $dokrad_lastname;
+
+	mysqli_query(
+		$conn,
+		"INSERT INTO xray_order (uid, dokradid, dokrad_name) VALUES ('$uid', '$dokradid', '$dokrad_name')
+		ON DUPLICATE KEY UPDATE dokradid = '$dokradid', dokrad_name = '$dokrad_name'"
+	);
+
 	mysqli_query(
 		$conn,
 		"UPDATE xray_workload SET 
-		fill = '$fill'
+		fill = '$fill',
+		pk_dokter_radiology = '$pk_dokter_radiology'
 		WHERE uid = '$uid'"
 	);
 
