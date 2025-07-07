@@ -140,8 +140,12 @@ if (isset($_POST["save_approve"])) {
 					alert('expertise wajib diisi');
 				</script>";
 	} else {
-		if (insert_workload($_POST)) {
-			echo "<script type='text/javascript'>
+		if (($dokraid_order == $dokradid && $selected_dokter_radiology['is_active'] == 1) or
+			($dokraid_order == $dokradid && $selected_dokter_radiology['is_active'] == 0) or
+			($dokraid_order == null && $selected_dokter_radiology['is_active'] == 0)
+		) {
+			if (insert_workload($_POST)) {
+				echo "<script type='text/javascript'>
 					setTimeout(function () { 
 					swal({
 							title: 'Berhasil expertise!',
@@ -158,8 +162,8 @@ if (isset($_POST["save_approve"])) {
 					win.focus();
 					win.print();
 				</script>";
-		} else {
-			echo "<script type='text/javascript'>
+			} else {
+				echo "<script type='text/javascript'>
 					setTimeout(function () { 
 					swal({
 							title: 'Gagal Expertise!',
@@ -171,6 +175,22 @@ if (isset($_POST["save_approve"])) {
 					},10); 
 					window.setTimeout(function(){ 
 					history.back();
+					} ,1000); 
+				</script>";
+			}
+		} else {
+			echo "<script type='text/javascript'>
+					setTimeout(function () { 
+					swal({
+							title: 'Gagal Expertise! Bukan pasien dokter $dokrad_fullname',
+							text:  '',
+							icon: 'error',
+							timer: 1000,
+							showConfirmButton: true
+						});  
+					},10); 
+					window.setTimeout(function(){ 
+					document.location.href= 'dicom.php';
 					} ,1000); 
 				</script>";
 		}
