@@ -79,6 +79,10 @@ define('READMORESERIESLAST', '">Read More</a>');
 define('READMORERADIOGRAPHERFIRST', '<a href="#" class="hasil-radiographer penawaran-a" data-id="');
 define('READMORERADIOGRAPHERLAST', '">Read More</a>');
 
+//choose series
+define('CHOOSESERIESFIRST', '<a title="" href="view-choose-series.php?uid=');
+define('CHOOSESERIESLAST', '"><span class="btn rgba-stylish-slight darken-1 btn-inti2"><img src="../image/choose-series.svg" data-toggle="tooltip" title="Choose Series" style="width: 100%;"></span></a>');
+
 // integrasi simrs
 define('SIMRS', '<i class="fas fa-exchange-alt text-info" style="font-size:0.5rem;" title="terintegrasi dengan SIMRS"></i>');
 

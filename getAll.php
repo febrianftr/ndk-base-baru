@@ -168,29 +168,15 @@ while ($row = mysqli_fetch_array($query)) {
                 HTMLFIRST . $study_iuid . HTMLLAST;
             // LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST;
         } elseif ($level == 'radiographer') {
-            //viewer login pak hardian
-            if ($username == 'hardian') {
-                $aksi = PDFFIRST . $study_iuid . PDFLAST .
-                    OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
-                    DICOMNEWFIRST . $study_iuid . DICOMNEWLAST .
-                    LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST;
-            } else {
-                $aksi = PDFFIRST . $study_iuid . PDFLAST .
-                    OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
-                    HTMLFIRST . $study_iuid . HTMLLAST;
-                // LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST;
-            }
+            $aksi = PDFFIRST . $study_iuid . PDFLAST .
+                OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
+                HTMLFIRST . $study_iuid . HTMLLAST;
+            // LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST;
         } else {
-            if ($username == 'hardian_dokter') {
-                $aksi = PDFFIRST . $study_iuid . PDFLAST .
-                    OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
-                    DICOMNEWFIRST . $study_iuid . DICOMNEWLAST;
-            } else {
-                $aksi = PDFFIRST . $study_iuid . PDFLAST .
-                    HOROSFIRST . $study_iuid . HOROSLAST .
-                    RADIANTFIRST . $study_iuid . RADIANTLAST .
-                    OHIFOLDFIRST . $study_iuid . OHIFOLDLAST;
-            }
+            $aksi = PDFFIRST . $study_iuid . PDFLAST .
+                HOROSFIRST . $study_iuid . HOROSLAST .
+                RADIANTFIRST . $study_iuid . RADIANTLAST .
+                OHIFOLDFIRST . $study_iuid . OHIFOLDLAST;
         }
     }
 
