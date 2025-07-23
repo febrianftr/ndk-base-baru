@@ -133,7 +133,7 @@ if (isset($_POST['expertise_image_pdf']) || isset($_POST['image_pdf']) || isset(
 
                 $zip->close();
 
-                //Force to download the created zip file
+                //Force to download the created zip file.
                 $name = trim(removeCharacter(preg_replace('/[^a-zA-Z\s]/', '', $pat_name)));
                 header("Content-type: application/zip");
                 header("Content-Disposition: attachment; filename=$name-$pat_id.zip");
