@@ -148,7 +148,12 @@ if ($_SERVER['SERVER_NAME'] == $hostname['ip_publik'] or $_SERVER['SERVER_NAME']
 
 function ohifurl($port)
 {
-    return "http://$_SERVER[SERVER_NAME]:$port/viewer/";
+    if (isset($_SERVER['HTTPS'])) {
+        $serverPort = 'https://';
+    } else {
+        $serverPort = 'http://';
+    }
+    return "$serverPort$_SERVER[SERVER_NAME]:$port/viewer/";
 }
 // OHIF LAMA
 if ($_SERVER['SERVER_NAME'] == $hostname['ip_publik'] or $_SERVER['SERVER_NAME'] == '49.128.176.141') {
