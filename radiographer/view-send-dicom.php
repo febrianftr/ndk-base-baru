@@ -10,6 +10,7 @@ $uid = $_GET['uid'];
 $row = mysqli_fetch_assoc(mysqli_query(
 	$conn_pacsio,
 	"SELECT 
+	study.pk AS pk_study,
 	pat_id,
 	pat_name,
 	pat_sex,
@@ -28,6 +29,7 @@ $pat_sex = styleSex($row['pat_sex']);
 $mods_in_study = defaultValue($row['mods_in_study']);
 $study_desc = defaultValue($row['study_desc']);
 $acc = defaultValue($row['accession_no']);
+$pk_study = defaultValue($row['pk_study']);
 
 if ($_SESSION['level'] == "radiographer") {
 ?>
@@ -56,6 +58,9 @@ if ($_SESSION['level'] == "radiographer") {
 									<form method="POST" id="send-dicom">
 										<input type="hidden" name="uid" value="<?= $uid ?>" id="uid">
 										<input type="hidden" name="acc" value="<?= $acc ?>" id="acc">
+										<input type="hidden" name="pat_id" value="<?= $pat_id ?>" id="pat_id">
+										<input type="hidden" name="pk_study" value="<?= $pk_study ?>" id="pk_study">
+										<input type="hidden" name="validation" value="true" id="validation">
 										<div class="container">
 											<div class="row">
 												<div class="col-md-7">
@@ -193,6 +198,7 @@ if ($_SESSION['level'] == "radiographer") {
 						$(".ubah").show();
 					},
 					success: function(response) {
+						// KETIKA TIDAK ADA PERUBAHAN ACC NUMBER
 						let res = JSON.parse(response);
 						$('#input').html(res.input);
 						$('#output').html(res.output);
@@ -206,11 +212,69 @@ if ($_SESSION['level'] == "radiographer") {
 						// }, 1000);
 					},
 					error: function(xhr, textStatus, error) {
-						swal({
-							title: "error" + ", Hubungi IT",
-							icon: "error",
-							timer: 1500,
-						});
+						// KETIKA ADA PERUBAHAN ACC NUMBER DENGAN KONDISI :
+						let res = JSON.parse(xhr.responseText);
+						// KETIKA BUKAN KODE 500, MENAMPILKAN POP UP KONFIRMASI
+						if (res.status != 500) {
+							swal({
+								title: res.status,
+								text: res.output,
+								icon: "warning",
+								buttons: true,
+								dangerMode: true,
+							}).then((result) => {
+								// KETIKA POP UP KONFIRMASI DIKLIK OK
+								if (result) {
+									$.ajax({
+										type: "POST",
+										url: "../proses-send-dicom.php",
+										// menambahkan validation false, karena untuk proses api ohif
+										data: $(form).serialize() + "&validation=false",
+										beforeSend: function() {
+											$(".loading").show();
+											$(".ubah").hide();
+										},
+										complete: function() {
+											$(".loading").hide();
+											$(".ubah").show();
+										},
+										success: function(response) {
+											// KIRIM KE AET
+											let res = JSON.parse(response);
+											$('#input').html(res.input);
+											$('#output').html(res.output);
+											swal({
+												title: 'check status',
+												icon: "success",
+												timer: 1000,
+											});
+											// setTimeout(function() {
+											// 	window.location.href = "workload.php";
+											// }, 1000);
+										},
+										error: function(xhr, textStatus, error) {
+											let res = JSON.parse(xhr.responseText);
+											swal({
+												title: res.status,
+												text: res.output,
+												icon: "error",
+												timer: 1500,
+											});
+										},
+									});
+								}
+							}).catch(() => {
+
+							});
+						} else {
+							// KETIKA CODE RESPONSE 500, TIDAK ADA VIEWER MOBILE / VIEWER MOBILE REJECTED
+							swal({
+								title: res.status,
+								text: res.output,
+								icon: "error",
+								timer: 1500,
+							});
+						}
 					},
 				});
 			},
