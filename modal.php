@@ -170,3 +170,15 @@
         </div>
     </div>
 </div>
+
+<!-- pop up copy image -->
+<div class="modal" id="modal-copy-image">
+    <div class="modal-dialog modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body"></div>
+        </div>
+    </div>
+</div>

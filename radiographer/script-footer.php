@@ -323,6 +323,27 @@
     });
     // end untuk menampilkan data popup
 </script>
+
+<script>
+    // untuk menampilkan data popup
+    $(function() {
+        $(document).on('click', '.hasil-copy-image', function(e) {
+            e.preventDefault();
+            $("#modal-copy-image").modal('show');
+            $.post('hasil-copy-image.php', {
+                    pk_parent: $(this).attr('data-parent'),
+                    pk_child: $(this).attr('data-child'),
+                    study_iuid_parent: $(this).attr('data-study-iuid-parent'),
+                    is_study_series: $(this).attr('data-is-copy')
+                },
+                function(html) {
+                    $(".modal-body").html(html);
+                }
+            );
+        });
+    });
+    // end untuk menampilkan data popup
+</script>
 <!-- <script>
     document.addEventListener("contextmenu", function(e) {
         e.preventDefault();
