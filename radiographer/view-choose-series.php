@@ -12,13 +12,15 @@ require __DIR__ . '/vendor/autoload.php';
 
 session_start();
 $uid = $_GET['uid'];
+$ipLokal = "127.0.0.1";
+$ipDirect = $_SERVER['SERVER_NAME'];
 
 use GuzzleHttp\Client;
 
 try {
     $client_validation = new Client();
 
-    $link_dicom = "http://" . $_SERVER['SERVER_NAME'] . ":9090/dcm4chee-arc/aets/DCM4CHEE/rs/studies/$uid/series";
+    $link_dicom = "http://$ipLokal:9090/dcm4chee-arc/aets/DCM4CHEE/rs/studies/$uid/series";
     // $link_dicom = "http://118.99.77.50:9090/dcm4chee-arc/aets/DCM4CHEE/rs/studies/1.3.12.2.1107.5.1.7.106949.30000024042307531537400000008/series";
 
     $response_validation = $client_validation->request(
@@ -39,6 +41,8 @@ try {
             window.history.go(-1);
         </script>";
 }
+
+$hostname = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM xray_hostname_publik"));
 
 $row = mysqli_fetch_assoc(mysqli_query(
     $conn_pacsio,
@@ -113,7 +117,7 @@ if (isset($_POST['expertise_image_pdf']) || isset($_POST['image_pdf']) || isset(
 
                     while ($row_series_instance = mysqli_fetch_assoc($series_instance)) {
                         $sop_iuid = $row_series_instance["sop_iuid"];
-                        $link_dicom_jpg = "http://" . $_SERVER['SERVER_NAME'] . ":9090/dcm4chee-arc/aets/DCM4CHEE/wado?requestType=WADO&studyUID=$uid&seriesUID=$series_iuid&objectUID=$sop_iuid";
+                        $link_dicom_jpg = "http://$ipLokal:9090/dcm4chee-arc/aets/DCM4CHEE/wado?requestType=WADO&studyUID=$uid&seriesUID=$series_iuid&objectUID=$sop_iuid";
                         // $link_dicom_jpg = "http://118.99.77.50:9090/dcm4chee-arc/aets/DCM4CHEE/wado?requestType=WADO&studyUID=1.3.12.2.1107.5.1.7.106949.30000024042307531537400000008";
 
                         // $dir = "C:\Users\akses\Downloads\\$pat_name_filter $study_datetime_filter\\$uid\\$series_iuid";
@@ -133,7 +137,7 @@ if (isset($_POST['expertise_image_pdf']) || isset($_POST['image_pdf']) || isset(
 
                 $zip->close();
 
-                //Force to download the created zip file.
+                //Force to download the created zip file .
                 $name = trim(removeCharacter(preg_replace('/[^a-zA-Z\s]/', '', $pat_name)));
                 header("Content-type: application/zip");
                 header("Content-Disposition: attachment; filename=$name-$pat_id.zip");
@@ -159,7 +163,7 @@ if (isset($_POST['expertise_image_pdf']) || isset($_POST['image_pdf']) || isset(
                 $kondisi = "series/" . $series_iuids[0];
             }
 
-            $link_dicom_jpg = "http://" . $_SERVER['SERVER_NAME'] . ":9090/dcm4chee-arc/aets/DCM4CHEE/rs/studies/$uid/$kondisi?accept=application%2Fzip&dicomdir=false";
+            $link_dicom_jpg = "http://$ipDirect:9090/dcm4chee-arc/aets/DCM4CHEE/rs/studies/$uid/$kondisi?accept=application%2Fzip&dicomdir=false";
             // $link_dicom_jpg = "http://118.99.77.50:9090/dcm4chee-arc/aets/DCM4CHEE/rs/studies/1.3.12.2.1107.5.1.7.106949.30000024042307531537400000008?accept=application%2Fzip&dicomdir=false";
             header("location:$link_dicom_jpg");
         }
@@ -247,7 +251,7 @@ if ($_SESSION['level'] == "radiographer") {
                                     while ($row = mysqli_fetch_assoc($sql)) { ?>
                                         <label class="radio-admin">
                                             <input type="checkbox" class="check-series-iuid" name="series_iuid[]" id="series_iuid[]" value="<?= $row['series_iuid']; ?>"><?= $row['series_desc'] . ' / ' . $row['body_part'] . ' / ' . $row['num_instances']; ?>
-                                            <br><img src="http://<?= $_SERVER['SERVER_NAME'] ?>:9090/dcm4chee-arc/aets/DCM4CHEE/wado?requestType=WADO&studyUID=<?= $uid; ?>&seriesUID=<?= $row['series_iuid']; ?>" alt="" width="200">
+                                            <br><img src="http://<?= $ipDirect; ?>:9090/dcm4chee-arc/aets/DCM4CHEE/wado?requestType=WADO&studyUID=<?= $uid; ?>&seriesUID=<?= $row['series_iuid']; ?>" alt="" width="200">
                                             <span class="checkmark"></span>
                                         </label><br><br>
                                     <?php } ?>
