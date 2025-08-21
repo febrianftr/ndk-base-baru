@@ -14,7 +14,8 @@ $row = mysqli_fetch_assoc(mysqli_query(
 	pat_name,
 	pat_sex,
 	study_desc,
-	mods_in_study
+	mods_in_study,
+	accession_no
 	FROM $table_patient
 	JOIN $table_study
 	ON patient.pk = study.patient_fk
@@ -26,6 +27,7 @@ $pat_id = defaultValue($row['pat_id']);
 $pat_sex = styleSex($row['pat_sex']);
 $mods_in_study = defaultValue($row['mods_in_study']);
 $study_desc = defaultValue($row['study_desc']);
+$acc = defaultValue($row['accession_no']);
 
 if ($_SESSION['level'] == "radiographer") {
 ?>
@@ -53,7 +55,7 @@ if ($_SESSION['level'] == "radiographer") {
 
 									<form method="POST" id="send-dicom">
 										<input type="hidden" name="uid" value="<?= $uid ?>" id="uid">
-
+										<input type="hidden" name="acc" value="<?= $acc ?>" id="acc">
 										<div class="container">
 											<div class="row">
 												<div class="col-md-7">
