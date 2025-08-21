@@ -84,6 +84,8 @@ if ($row['status'] == 'waiting' || $row['status'] == '') {
     }
 </style>
 <div class="col justify-content-center text-center">
+    <br />
+    <a href="workload-patient-detail.php?pat_id=<?= $pat_id; ?>" class="btn btn-sm text-center font-weight-bold" style="background-color: #e89e3c; border-radius: 10px; padding: 10px;">Detail Patient</a>
     <div class="row-12">
         <?php
         if ($fromorder == 'SIMRS' || $fromorder == 'simrs') { ?>
@@ -305,6 +307,5 @@ if ($row['status'] == 'waiting' || $row['status'] == '') {
         </table>
     </div>
 </div>
-
 <?php
 mysqli_close($conn);

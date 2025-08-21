@@ -583,7 +583,7 @@ table.dataTable tbody td {
   font-weight: bold;
   /* border-bottom: 1px solid #d0d0d0;
   border-top: 1px solid #d0d0d0;*/
-  padding: 8px; 
+  padding: 8px;
 }
 
 .btn-worklist2 {
@@ -3546,11 +3546,13 @@ table.dataTable > thead .sorting_desc_disabled::after {
   border-color: #309ace;
 }
 
-.input-regist input:focus , .input-icon i {
+.input-regist input:focus,
+.input-icon i {
   color: #173759;
 }
 
-.input-regist input:focus , .input-icon:after {
+.input-regist input:focus,
+.input-icon:after {
   border-right-color: #173759;
 }
 
@@ -3927,7 +3929,6 @@ table.dataTable > thead .sorting_desc_disabled::after {
   box-shadow: none;
 }
 
-
 .breadcrumb-item a {
   color: #f29129;
 }
@@ -3936,7 +3937,8 @@ table.dataTable > thead .sorting_desc_disabled::after {
   color: #c2d1dd;
 }
 
-.modal-header, .modal-body{
+.modal-header,
+.modal-body {
   background-color: #162432;
 }
 
@@ -3944,9 +3946,7 @@ table.dataTable > thead .sorting_desc_disabled::after {
   font-weight: bold;
 }
 
-
-
-.user-sidebar{
+.user-sidebar {
   margin-left: 20px;
   background-color: #14263c;
   padding: 7px 5px;
@@ -3954,8 +3954,6 @@ table.dataTable > thead .sorting_desc_disabled::after {
   width: 205px;
   font-weight: bold;
 }
-
-
 
 @media only screen and (max-width: 800px) {
   .menu-size2 {
@@ -4044,14 +4042,14 @@ table.dataTable > thead .sorting_desc_disabled::after {
   background-color: #1e4edf;
 }
 
-.table .penawaran-a{
+.table .penawaran-a {
   color: #fff;
   font-weight: bold;
 }
 
-.notif-blink{
+.notif-blink {
   padding: 15px 0px;
-border-radius: 5px;
+  border-radius: 5px;
 }
 
 .select2-container--default .select2-results > .select2-results__options {
@@ -4064,8 +4062,9 @@ border-radius: 5px;
   background-color: #2d4966;
 }
 
-
-.select2-container--default .select2-selection--multiple .select2-selection__choice {
+.select2-container--default
+  .select2-selection--multiple
+  .select2-selection__choice {
   background-color: #173759;
   border: 1px solid #162c44;
   border-radius: 4px;
@@ -4076,7 +4075,7 @@ border-radius: 5px;
   padding: 0 5px;
 }
 
-.label-report1{
+.label-report1 {
   font-weight: bold;
 }
 
@@ -4084,13 +4083,12 @@ border-radius: 5px;
   background-color: #173759;
 }
 
-
-.box-filter-chart{
+.box-filter-chart {
   min-height: 140px;
-  padding: 0px; 
-  border: 3px solid #2d4966; 
-  border-radius: 5px; 
-  background: #162c44; 
+  padding: 0px;
+  border: 3px solid #2d4966;
+  border-radius: 5px;
+  background: #162c44;
   margin-bottom: 15px;
 }
 
@@ -4101,4 +4099,41 @@ border-radius: 5px;
   .wrap-search input[type="text"] {
     font-size: 10px;
   }
+}
+
+.card-title-patient-detail {
+  font-size: 20px;
+  font-weight: bold;
+  color: #285d95;
+  padding: 10px 0px;
+}
+
+.card-title-patient-detail-sub {
+  font-size: 12px;
+  font-weight: bold;
+  color: #285d95;
+  padding: 10px 0px;
+  margin-bottom: -10px;
+}
+
+.btn-delete-study {
+  text-decoration: none;
+  background-color: #f05b5b;
+  color: #fff;
+  padding: 10px 12px;
+  box-shadow: none;
+  font-weight: bold;
+  text-transform: none;
+  border-radius: 5px;
+}
+
+.btn-delete-study:hover {
+  text-decoration: none;
+  background-color: #f05b5b;
+  color: #d9d9d9;
+  box-shadow: none;
+}
+
+.btn-delete-study i {
+  color: #fff;
 }

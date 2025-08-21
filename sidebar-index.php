@@ -82,6 +82,12 @@
                         <i class="fa fa-database fa-lg"></i> <?= $lang['storage'] ?>
                     </a>
                 </li>
+
+                <li id="recycle-bin">
+                    <a href="recycle-bin.php">
+                        <i class="fa fa-trash fa-lg"></i> Recycle Bin
+                    </a>
+                </li>
             <?php } ?>
             <!-- =================END OF SIDEBAR RADIOGRAPHER====================== -->
 
