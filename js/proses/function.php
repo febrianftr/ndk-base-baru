@@ -278,7 +278,7 @@ function ubahdokterworklist($post)
         $dokradname1 = $row4['dokrad_name'] . ' ' . $row4['dokrad_lastname'];
         // echo $pk . ' ' . $dokradid1 . ' ' . $dokradname1 . ' ' . $dokradlastname1;
         // die();
-        $queryinsert = " INSERT INTO xray_order (uid, dokradid, dokrad_name) VALUES ('$uid',NULL,NULL)
+        $queryinsert = " INSERT INTO xray_order (uid, dokradid, dokrad_name) VALUES ('$uid','$dokradid1','$dokradname1')
         ON DUPLICATE KEY UPDATE dokradid = '$dokradid1', dokrad_name = '$dokradname1'";
         mysqli_query($conn, $queryinsert);
 
