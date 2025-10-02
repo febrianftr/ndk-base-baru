@@ -72,8 +72,8 @@
                     <li id="workload1"><a href="workload.php"><?= $lang['workload'] ?></a></li>
                     <li id="report1"><a href="report.php"><?= $lang['download_excel'] ?></a></li>
                     <li id="expertise-history"><a href="workload-fill.php">Expertise History</a></li>
-                    <li id="uploadexcel1"><a href="uploadexcel.php"><?= $lang['backup_excel'] ?></a></li>
-                    <li id="downloadexcel1"><a href="downloadexcel.php">Storage Excel</a></li>
+                    <!-- <li id="uploadexcel1"><a href="uploadexcel.php"><?= $lang['backup_excel'] ?></a></li> -->
+                    <!-- <li id="downloadexcel1"><a href="downloadexcel.php">Storage Excel</a></li> -->
                     <li id="chart2"><a href="chart.php"><?= $lang['chart'] ?></a></li>
                 </ul>
 

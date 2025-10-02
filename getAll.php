@@ -164,19 +164,19 @@ while ($row = mysqli_fetch_array($query)) {
     } else {
         if ($level == 'refferal') {
             $aksi = PDFFIRST . $study_iuid . PDFLAST .
-                OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
+                OHIFNEWFIRST . $study_iuid . OHIFNEWLAST .
                 HTMLFIRST . $study_iuid . HTMLLAST;
             // LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST;
         } elseif ($level == 'radiographer') {
             $aksi = PDFFIRST . $study_iuid . PDFLAST .
-                OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
+                OHIFNEWFIRST . $study_iuid . OHIFNEWLAST .
                 HTMLFIRST . $study_iuid . HTMLLAST;
             // LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST;
         } else {
             $aksi = PDFFIRST . $study_iuid . PDFLAST .
                 HOROSFIRST . $study_iuid . HOROSLAST .
                 RADIANTFIRST . $study_iuid . RADIANTLAST .
-                OHIFOLDFIRST . $study_iuid . OHIFOLDLAST;
+                OHIFNEWFIRST . $study_iuid . OHIFNEWLAST;
         }
     }
 

@@ -14,6 +14,9 @@ session_start();
 $uid = $_GET['uid'];
 $username = $_SESSION['username'];
 
+$file_function = explode('\\', __FILE__);
+$file = end($file_function);
+
 // kondisi jika mapping dokter diaktifkan
 $selected_dokter_radiology = mysqli_fetch_assoc(mysqli_query(
 	$conn,
@@ -361,7 +364,7 @@ if ($_SESSION['level'] == "radiology") {
 																<?= PDFFIRST . $study_iuid . PDFLAST .
 																	HOROSFIRST . $study_iuid . HOROSLAST .
 																	RADIANTFIRST . $study_iuid . RADIANTLAST .
-																	OHIFOLDFIRST . $study_iuid . OHIFOLDLAST;
+																	OHIFNEWFIRST . $study_iuid . OHIFNEWLAST;
 																?>
 																<a href="#" class="view-history-expertise" data-id="<?= $study_iuid;  ?>">
 																	<i data-toggle="tooltip" title="View History Expertise" class="fa fa-file-archive-o fa-lg"></i>
@@ -384,12 +387,12 @@ if ($_SESSION['level'] == "radiology") {
 														echo
 														DICOMNEWWORKLISTFIRST . $uid . DICOMNEWWORKLISTLAST .
 															RADIANTWORKLISTFIRST . $uid . RADIANTWORKLISTLAST .
-															OHIFOLDWORKLISTFIRST . $uid . OHIFOLDWORKLISTLAST;
+															OHIFNEWWORKLISTFIRST . $uid . OHIFNEWWORKLISTLAST;
 													} else {
 														echo
 														HOROSWORKLISTFIRST . $uid . HOROSWORKLISTLAST .
 															RADIANTWORKLISTFIRST . $uid . RADIANTWORKLISTLAST .
-															OHIFOLDWORKLISTFIRST . $uid . OHIFOLDWORKLISTLAST;
+															OHIFNEWWORKLISTFIRST . $uid . OHIFNEWWORKLISTLAST;
 													} ?>
 												</div>
 											</div>
@@ -497,7 +500,7 @@ if ($_SESSION['level'] == "radiology") {
 												while ($template = mysqli_fetch_assoc($query_template)) { ?>
 													<thead class="myTable">
 														<td class="td1">
-															<a href="worklist.php?uid=<?= $uid; ?>&template_id=<?= $template['template_id']; ?>"><?= $template['title']; ?></a>
+															<a class="template_name" data-template-id="<?= $template['template_id']; ?>" value="<?= $template['fill']; ?>" href="<?= $file; ?>?uid=<?= $uid; ?>&template_id=<?= $template['template_id']; ?>"><?= $template['title']; ?></a>
 														</td>
 														<td style="text-align: center;">
 															<a href="#" class="view-template" data-id="<?= $template['template_id'];  ?>">
@@ -533,6 +536,21 @@ if ($_SESSION['level'] == "radiology") {
 				});
 			</script>
 			<script>
+				// copy template normal tanpa refresh
+				$(".template_name").off("click").on("click", function(e) {
+					e.preventDefault();
+					let fill = $(this).attr("value");
+					let template_id = $(this).data("template-id");
+
+					CKEDITOR.instances['ckeditor'].setData(fill);
+
+					const currentUrl = new URL(window.location.href);
+
+					const params = currentUrl.searchParams;
+					let newUrl = params.set("template_id", template_id);
+					window.history.pushState(null, null, currentUrl.toString());
+				});
+
 				CKEDITOR.replace('ckeditor', {
 					enterMode: CKEDITOR.ENTER_BR
 				});

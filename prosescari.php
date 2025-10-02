@@ -257,7 +257,7 @@ while ($row = mysqli_fetch_array($result)) {
     $level =
       HOROSFIRST . $study_iuid . HOROSLAST .
       RADIANTFIRST . $study_iuid . RADIANTLAST .
-      OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
+      OHIFNEWFIRST . $study_iuid . OHIFNEWLAST .
       CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORVERYLAST .
       $editworkload;
     // TELEDOKTERPENGIRIMFIRST . $study_iuid . TELEDOKTERPENGIRIMLAST .
@@ -268,7 +268,7 @@ while ($row = mysqli_fetch_array($result)) {
     if ($status != '-') {
       $level = $level = EDITPASIENFIRST . $study_iuid . EDITPASIENLAST . $icon_edit_pasien . EDITPASIENVERYLAST .
         CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $blinking . CHANGEDOCTORCLASS . $icon_change_doctor . CHANGEDOCTORVERYLAST .
-        OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
+        OHIFNEWFIRST . $study_iuid . OHIFNEWLAST .
         HTMLFIRST . $study_iuid . HTMLLAST .
         CHANGEEXPDATEFIRST . $study_iuid . CHANGEEXPDATELAST .
         LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST .
@@ -281,11 +281,11 @@ while ($row = mysqli_fetch_array($result)) {
 
     } else {
       // kondisi ketika xray_workload tidak masuk dari trigger
-      $level = OHIFOLDFIRST . $study_iuid . OHIFOLDLAST;
+      $level = OHIFNEWFIRST . $study_iuid . OHIFNEWLAST;
     }
     // ketika login refferal
   } else if ($level == 'refferal') {
-    $level = OHIFOLDFIRST . $study_iuid . OHIFOLDLAST .
+    $level = OHIFNEWFIRST . $study_iuid . OHIFNEWLAST .
       HTMLFIRST . $study_iuid . HTMLLAST;
   } else {
     $level = '-';

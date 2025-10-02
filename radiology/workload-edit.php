@@ -291,8 +291,8 @@ if ($_SESSION['level'] == "radiology") {
 															<td>
 																<?= PDFFIRST . $study_iuid . PDFLAST .
 																	HOROSFIRST . $study_iuid . HOROSLAST .
-																	RADIANTFIRST . $study_iuid . RADIANTLAST . 
-																	OHIFOLDFIRST . $study_iuid . OHIFOLDLAST;
+																	RADIANTFIRST . $study_iuid . RADIANTLAST .
+																	OHIFNEWFIRST . $study_iuid . OHIFNEWLAST;
 																?>
 																<a href="#" class="view-history-expertise" data-id="<?= $study_iuid;  ?>">
 																	<i data-toggle="tooltip" title="View History Expertise" class="fa fa-file-archive-o fa-lg"></i>
@@ -311,10 +311,10 @@ if ($_SESSION['level'] == "radiology") {
 												<h4 style="margin: 0px;">Viewer</h4>
 												<hr style="margin: 10px 0px;">
 												<div class="buttons1">
-													<?= 
-														HOROSWORKLISTFIRST . $uid . HOROSWORKLISTLAST .
-														RADIANTWORKLISTFIRST . $uid . RADIANTWORKLISTLAST . 
-														OHIFOLDWORKLISTFIRST . $uid . OHIFOLDWORKLISTLAST; ?>
+													<?=
+													HOROSWORKLISTFIRST . $uid . HOROSWORKLISTLAST .
+														RADIANTWORKLISTFIRST . $uid . RADIANTWORKLISTLAST .
+														OHIFNEWWORKLISTFIRST . $uid . OHIFNEWWORKLISTLAST; ?>
 												</div>
 											</div>
 										</div>
@@ -359,7 +359,7 @@ if ($_SESSION['level'] == "radiology") {
 											<br>
 											<!-- menampilkan OHIF 1 halaman -->
 											<!-- <div class="collapse" id="ohif"> -->
-												<iframe src="<?= "$url$uid" ?>" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="600px"></iframe>
+											<iframe src="<?= "$url$uid" ?>" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="600px"></iframe>
 											<!-- </div> -->
 
 											<div class="textarea-ckeditor">
