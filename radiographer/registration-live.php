@@ -22,7 +22,7 @@ if ($_SESSION['level'] == "radiographer") {
 
   <body>
     <?php include('../sidebar-index.php'); ?>
-    <div class="container-fluid" id="main">
+    <div class="container-fluid" id="content2">
       <div class="row">
         <div id="content1">
           <div class="container-fluid">
@@ -161,7 +161,7 @@ if ($_SESSION['level'] == "radiographer") {
                               <!-- kontras -->
                               <label style="font-weight: bold;" for="contrast" style="font-weight: bold;">Contrast</label><br>
                               <label class="radio-admin">
-                                <input type="radio"  name="contrast" id="contrast" value="0" checked="checked"> <?= $lang['not_using_contrast'] ?>
+                                <input type="radio" name="contrast" id="contrast" value="0" checked="checked"> <?= $lang['not_using_contrast'] ?>
                                 <span class="checkmark"></span>
                               </label>
                               <label class="radio-admin">
@@ -216,11 +216,7 @@ if ($_SESSION['level'] == "radiographer") {
       </div>
     </div>
 
-    <div class="footerindex">
-      <div class="">
-        <?php include('footer-itw.php'); ?>
-      </div>
-    </div>
+
     <?php include('script-footer.php'); ?>
     <script src="js/bootstrap-select.min.js"></script>
     <script type="text/javascript" src="js/jquery.datetimepicker.full.js"></script>

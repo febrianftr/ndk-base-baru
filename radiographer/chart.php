@@ -15,14 +15,10 @@ if ($_SESSION['level'] == "radiographer") {
 
 	<body>
 		<?php include('../sidebar-index.php'); ?>
-		<div class="container-fluid" id="main">
+		<div class="container-fluid" id="content2">
 			<?php require '../chart-index.php'; ?>
 		</div>
-		<div class="footerindex">
-			<div>
-				<?php include('footer-itw.php'); ?>
-			</div>
-		</div>
+
 		<?php include('script-footer.php'); ?>
 		<script src="../js/proses/result-chart.js?v=<?= $random; ?>"></script>
 		<script>

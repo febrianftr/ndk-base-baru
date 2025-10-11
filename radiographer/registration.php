@@ -19,7 +19,7 @@ if ($_SESSION['level'] == "radiographer") {
 
 	<body>
 		<?php include('../sidebar-index.php'); ?>
-		<div class="container-fluid" id="main">
+		<div class="container-fluid" id="content2">
 			<div class="row">
 				<div id="content1">
 					<div class="body">
@@ -184,11 +184,7 @@ if ($_SESSION['level'] == "radiographer") {
 				</div>
 			</div>
 		</div>
-		<div class="footerindex">
-			<div class="">
-				<?php include('footer-itw.php'); ?>
-			</div>
-		</div>
+
 		<?php include('script-footer.php'); ?>
 		<script type="text/javascript" src="js/jquery.datetimepicker.full.js"></script>
 		<link rel="stylesheet" type="text/css" media="screen" href="css/jquery.datetimepicker.min.css">

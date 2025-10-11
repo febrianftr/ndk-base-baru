@@ -17,7 +17,7 @@ if ($_SESSION['level'] == "radiographer") {
 
 	<body>
 		<?php include('../sidebar-index.php'); ?>
-		<div class="container-fluid" id="main">
+		<div class="container-fluid" id="content2">
 			<div class="row">
 
 
@@ -84,11 +84,7 @@ if ($_SESSION['level'] == "radiographer") {
 			</div>
 		</div>
 		<!-- End The Modal -->
-		<div class="footerindex">
-			<div class="">
-				<?php include('footer-itw.php'); ?>
-			</div>
-		</div>
+
 		<?php include('script-footer.php'); ?>
 		<script>
 			$(document).ready(function() {

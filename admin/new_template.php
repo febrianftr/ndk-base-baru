@@ -16,7 +16,7 @@ if ($_SESSION['level'] == "superadmin") {
 
   <body>
     <?php include('menu-bar.php'); ?><br><br><br><br><br><br><br>
-    <div class="container-fluid" id="main">
+    <div class="container-fluid" id="content2">
       <?php include('../template-create.php'); ?>
     </div>
     <?php include('script-footer.php'); ?>

@@ -16,7 +16,7 @@ if ($_SESSION['level'] == "refferal") {
   <body>
 
     <?php include('../sidebar-index.php'); ?>
-    <div class="container-fluid" id="main">
+    <div class="container-fluid" id="content2">
       <div class="row">
 
         <!-- //////content home/////////////// -->
@@ -26,11 +26,7 @@ if ($_SESSION['level'] == "refferal") {
       </div>
     </div>
 
-    <div class="footerindex">
-      <div class="">
-        <?php include('footer-itw.php'); ?>
-      </div>
-    </div>
+
     <?php include('script-footer.php'); ?>
     <script>
       $(document).ready(function() {

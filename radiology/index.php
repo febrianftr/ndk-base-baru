@@ -10,31 +10,27 @@ if ($_SESSION['level'] == "radiology") {
   <head>
     <title>Home | Radiology</title>
     <?php include('head.php'); ?>
-    
+
   </head>
 
   <body>
-  <?php include('../sidebar-index.php'); ?>
-    <div class="container-fluid" id="main">
-        <div class="row">
+    <?php include('../sidebar-index.php'); ?>
+    <div class="container-fluid" id="content2">
+      <div class="row">
 
-          <!-- //////content home/////////////// -->
-          <?php include('../home-index.php'); ?>
-          <!-- //////end content home/////////////// -->
+        <!-- //////content home/////////////// -->
+        <?php include('../home-index.php'); ?>
+        <!-- //////end content home/////////////// -->
 
-        </div>       
+      </div>
     </div>
 
-    <div class="footerindex">
-        <div class="">
-          <?php include('footer-itw.php'); ?>
-        </div>
-    </div>
+
     <?php include('script-footer.php'); ?>
     <script>
-      $(document).ready(function(){
-          $("li[data-target='#home1']").addClass("active");
-        });
+      $(document).ready(function() {
+        $("li[data-target='#home1']").addClass("active");
+      });
     </script>
   </body>
 

@@ -151,7 +151,7 @@ if ($_SESSION['level'] == "radiology") {
 		<body>
 			<?php include('../sidebar-index.php');
 			require '../modal.php'; ?>
-			<div class="container-fluid" id="main">
+			<div class="container-fluid" id="content2">
 				<div class="row">
 					<div id="content1">
 						<div class="container-fluid">
@@ -464,11 +464,7 @@ if ($_SESSION['level'] == "radiology") {
 					<!-- Modal -->
 				</div>
 			</div>
-			<div class="footerindex">
-				<div class="">
-					<?php include('footer-itw.php'); ?>
-				</div>
-			</div>
+
 			<!-- SCRIPT -->
 			<?php include('script-footer.php'); ?>
 			<script>

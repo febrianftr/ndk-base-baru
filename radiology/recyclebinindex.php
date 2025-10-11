@@ -6,36 +6,36 @@ session_start();
 
 if ($_SESSION['level'] == "radiology") {
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-	<?php include('head.php'); ?>
-<title>Home | Radiographer</title>
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml">
 
-</head>
+    <head>
+        <?php include('head.php'); ?>
+        <title>Home | Radiographer</title>
 
-<body>
+    </head>
 
-<?php include('../sidebar-index.php'); ?>
-    <div class="container-fluid" id="main">
-        <div class="row">
-    
+    <body>
 
-    <!-- //////content home/////////////// -->
-          <?php include('../recyclebin.php'); ?>
-    <!-- //////end content home/////////////// -->
-    </div>       
-    </div>
+        <?php include('../sidebar-index.php'); ?>
+        <div class="container-fluid" id="content2">
+            <div class="row">
 
-    <div class="footerindex">
-        <div class="">
-          <?php include('footer-itw.php'); ?>
+
+                <!-- //////content home/////////////// -->
+                <?php include('../recyclebin.php'); ?>
+                <!-- //////end content home/////////////// -->
+            </div>
         </div>
-    </div>
+
+
         <?php include('script-footer.php'); ?>
 
-       
-  </body>
-  </html>
-   
-   <?php } else {header("location:../index.php");} ?>
+
+    </body>
+
+    </html>
+
+<?php } else {
+    header("location:../index.php");
+} ?>

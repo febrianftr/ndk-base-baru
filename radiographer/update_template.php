@@ -14,7 +14,7 @@ if ($_SESSION['level'] == "radiographer") {
 
 	<body>
 		<?php include('../sidebar-index.php'); ?>
-		<div class="container-fluid" id="main">
+		<div class="container-fluid" id="content2">
 			<div class="row">
 				<div class="col-12" style="padding: 0;">
 					<nav aria-label="breadcrumb">
@@ -30,11 +30,7 @@ if ($_SESSION['level'] == "radiographer") {
 				</div>
 			</div>
 		</div>
-		<div class="footerindex">
-			<div class="">
-				<?php include('footer-itw.php'); ?>
-			</div>
-		</div>
+
 		<?php include('script-footer.php'); ?>
 	</body>
 

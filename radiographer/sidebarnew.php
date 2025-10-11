@@ -426,7 +426,7 @@
 
 
 
-        <div class="container-fluid" id="main">
+        <div class="container-fluid" id="content2">
             <div class="row">
 
                 <div id="content1">

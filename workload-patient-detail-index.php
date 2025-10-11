@@ -408,12 +408,12 @@ if (isset($_POST["save_copy_series"])) {
                     $fromorder = $row['fromorder'];
                     $pk_dokter_radiology = $row['pk_dokter_radiology'];
             ?>
-                    <div class="card text-dark">
-                        <div class="card-header">
+                    <div class="card text-light">
+                        <div class="card-header card-header-nd">
                             <?= $mods_in_study ?> - <?= $study_datetime ?> - <b><?= $study_desc_pacsio ?></b><br />
                             Study Iuid : <?= $study_iuid ?>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body card-body-nd">
                             <div class="row">
                                 <div class="col" style="display: flex;">
                                     <div>

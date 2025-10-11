@@ -187,7 +187,7 @@ if ($_SESSION['level'] == "radiographer") {
 
     <body style="background-color: #1f69b7;">
         <?php include('../sidebar-index.php'); ?>
-        <div class="container-fluid" id="main">
+        <div class="container-fluid" id="content2">
             <div class="row">
                 <div id="content1">
                     <div class="d-flex justify-content-center align-items-center">
@@ -289,11 +289,7 @@ if ($_SESSION['level'] == "radiographer") {
 				</div>
 			</div> -->
         </div>
-        <div class="footerindex">
-            <div class="">
-                <?php include('footer-itw.php'); ?>
-            </div>
-        </div>
+
         <?php include('script-footer.php'); ?>
     </body>
     <script>

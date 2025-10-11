@@ -114,11 +114,7 @@ if ($_SESSION['level'] == "radiographer") {
             </div>
         </div>
         <!-- End The Modal -->
-        <div class="footerindex" style="z-index: 98; position: fixed;">
-            <div class="">
-                <?php include('footer-itw.php'); ?>
-            </div>
-        </div>
+
         </div>
         <!-- Script -->
         <?php include('script-footer.php'); ?>

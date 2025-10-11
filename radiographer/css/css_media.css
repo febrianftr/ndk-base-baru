@@ -348,7 +348,7 @@
         display: block;
     }
     #main {
-        width:calc(100% - 243px);
+         width:calc(100% - 250px);
         float: right;
     }
     }

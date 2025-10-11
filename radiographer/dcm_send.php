@@ -23,8 +23,8 @@ if ($_SESSION['level'] == "radiographer") {
   </head>
 
   <body class="body-all">
-  <?php include('../sidebar-index.php'); ?>
-    <div class="container-fluid" id="main">
+    <?php include('../sidebar-index.php'); ?>
+    <div class="container-fluid" id="content2">
       <div class="row">
 
         <div id="content1">
@@ -76,21 +76,17 @@ if ($_SESSION['level'] == "radiographer") {
           </div>
         </div>
 
-      </div>       
+      </div>
     </div>
 
-    <div class="footerindex">
-        <div class="">
-          <?php include('footer-itw.php'); ?>
-        </div>
-    </div>
+
 
     <?php include('script-footer.php'); ?>
-        <script>
-            $(document).ready(function(){
-                $("li[id='settings1']").addClass("active");
-            });
-        </script>
+    <script>
+      $(document).ready(function() {
+        $("li[id='settings1']").addClass("active");
+      });
+    </script>
     <script type="text/javascript">
       $(function() {
 

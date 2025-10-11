@@ -16,7 +16,7 @@ if ($_SESSION['level'] == "radiographer") {
     <body>
         <?php include('sidebarnew.php'); ?>
         <section class="home-section">
-            <div class="container-fluid" id="main">
+            <div class="container-fluid" id="content2">
                 <div class="row">
                     <div class="col-12" style="padding: 0;">
                         <nav aria-label="breadcrumb">

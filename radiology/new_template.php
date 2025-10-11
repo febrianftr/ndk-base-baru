@@ -14,14 +14,10 @@ if ($_SESSION['level'] == "radiology") {
 
   <body>
     <?php include('../sidebar-index.php'); ?>
-    <div class="container-fluid" id="main">
+    <div class="container-fluid" id="content2">
       <?php include('../template-create.php'); ?>
     </div>
-    <div class="footerindex">
-      <div class="">
-        <?php include('footer-itw.php'); ?>
-      </div>
-    </div>
+
     <?php include('script-footer.php'); ?>
     <script>
       $(document).ready(function() {

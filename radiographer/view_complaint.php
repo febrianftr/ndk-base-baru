@@ -17,7 +17,7 @@ if ($_SESSION['username'] == 'rafdi') {
   <body>
 
     <?php include('../sidebar-index.php'); ?>
-    <div class="container-fluid" id="main">
+    <div class="container-fluid" id="content2">
       <div class="row">
 
 
@@ -90,11 +90,7 @@ if ($_SESSION['username'] == 'rafdi') {
       </div>
     </div>
 
-    <div class=" footerindex">
-      <div class="">
-        <?php include('footer-itw.php'); ?>
-      </div>
-    </div>
+
 
     <?php include('script-footer.php'); ?>
     <!-- The Modal Problem -->

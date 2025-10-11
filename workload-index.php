@@ -147,55 +147,8 @@ $moreThanUSGDoppler2hourReguler = $waitingUSGDoppler2hourReguler["jumlah"];
 	</nav>
 </div>
 <div class="table-view">
-	<?php if ($level == 'radiology' && $queryphp) { ?>
-		<h3 class="text-center">Expertise Approved</h3>
-	<?php } else { ?>
-		<h3 class="text-center">Workload</h3>
-	<?php } ?>
-	<hr>
-	<?php require_once 'formsearch.php'; ?>
-	<!-- <table class="table table-borderless">
-		<tr>
-			<td>
-				waiting 1 hour CITO
-				<div class="notif-blink blinking-cito" style="text-align: center;">
-					<a href="#" class="hasil-waiting-morethancito1hour penawaran-a"><?php echo "Waiting CITO <br /> ($moreThanCito1hour) study"; ?></a>
-				</div>
-			</td>
-			<td>
-				waiting 3 hour thorak
-				<div class="notif-blink blinking-3-hour" style="text-align: center;">
-					<a href="#" class="hasil-waiting-morethan3hour penawaran-a"><?php echo "Waiting 3 hour <br /> Thorak ($moreThan3hourReguler) study"; ?></a>
-				</div>
-			</td>
-			<td>
-				waiting 6 hour contrast
-				<div class="notif-blink blinking-6-hour" style="text-align: center;">
-					<a href="#" class="hasil-waiting-morethancontrast6hour penawaran-a"><?php echo "Waiting 6 hour <br /> Contrast ($moreThan6hourContrast) study"; ?></a>
-				</div>
-			</td>
-			<td>
-				waiting 6 hour CT Scan
-				<div class="notif-blink blinking-6-hour" style="text-align: center;">
-					<a href="#" class="hasil-waiting-morethanct6hour penawaran-a"><?php echo "Waiting 6 hour <br /> CT Scan ($moreThanCT6hourReguler) study"; ?></a>
-				</div>
-			</td>
-			<td>
-				waiting 1 hour USG
-				<div class="notif-blink blinking-6-hour" style="text-align: center;">
-					<a href="#" class="hasil-waiting-morethanusg1hour penawaran-a"><?php echo "Waiting 1 hour <br /> USG ($moreThanUSG1hourReguler) study"; ?></a>
-				</div>
-			</td>
-			<td>
-				waiting 2 hour USG Doppler
-				<div class="notif-blink blinking-6-hour" style="text-align: center;">
-					<a href="#" class="hasil-waiting-morethanusgdoppler2hour penawaran-a"><?php echo "Waiting 2 hour <br /> USG Doppler ($moreThanUSGDoppler2hourReguler) study"; ?></a>
-				</div>
-			</td>
-		</tr>
-	</table> -->
-
-	<div class="col-md-12 table-box" style="overflow-x:auto;">
+	<div class="col-md-12 table-box" style="overflow-x:auto;  position: relative;  padding-top: 50px;">
+		<?php require_once 'formsearch.php'; ?>
 		<table class="table-dicom" id="purchase_order" style="width: 2400px;" cellpadding="8" cellspacing="0">
 			<thead class="thead1">
 				<?php require 'thead.php'; ?>

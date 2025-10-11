@@ -253,11 +253,7 @@ if ($_SESSION['level'] == "superadmin") {
             </div>
 
 
-            <div class="footerindex">
-                <div class="">
-                    <?php include('footer-itw.php'); ?>
-                </div>
-            </div>
+
         </div>
         <?php include('script-footer.php'); ?>
         <script>
