@@ -268,7 +268,7 @@ while ($row = mysqli_fetch_array($result)) {
     // kondisi ketika xray_workload masuk dari trigger
     if ($status != '-') {
       $level = $level = EDITPASIENFIRST . $study_iuid . EDITPASIENLAST . $icon_edit_pasien . EDITPASIENVERYLAST .
-        CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $blinking . CHANGEDOCTORCLASS . $icon_change_doctor . CHANGEDOCTORVERYLAST .
+        CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORCLASS  . CHANGEDOCTORVERYLAST .
         OHIFNEWFIRST . $study_iuid . OHIFNEWLAST .
         HTMLFIRST . $study_iuid . HTMLLAST .
         CHANGEEXPDATEFIRST . $study_iuid . CHANGEEXPDATELAST .
@@ -326,9 +326,9 @@ while ($row = mysqli_fetch_array($result)) {
 
   $sub_array = array();
   $sub_array[] = $i;
-  $sub_array[] =
-    PDFFIRST . $study_iuid . PDFLAST .
-    $level;
+  $sub_array[] = '<div class="dropdown custom-dropdown1">
+	<button class="btn filter-btn1 dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+Action</button><div class="dropdown-menu dropdown-menu-right dropdown-menu1" aria-labelledby="dropdownMenuButton1">' . PDFFIRST . $study_iuid . PDFLAST . $level . '</div>';
   $sub_array[] = $status . '&nbsp;' . $badge;
   $sub_array[] = $detail . '&nbsp;' . $priority_style;
   $sub_array[] = $pat_id;

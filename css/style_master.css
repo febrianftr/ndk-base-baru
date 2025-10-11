@@ -4069,6 +4069,22 @@ table.dataTable > thead .sorting_desc_disabled::after {
   color: #ff5c8a;
 }
 
+.dropdown-divider {
+  height: 0;
+  margin: 0.5rem 0;
+  overflow: hidden;
+  border-top: 1px solid #363636;
+}
+.dropdown-title1 {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #888;
+  padding: 6px 15px 3px 15px;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
 @media (max-width: 960px) {
   .img3 {
     width: 100%;

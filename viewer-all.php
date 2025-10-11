@@ -3,8 +3,8 @@
 $hostname = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM xray_hostname_publik"));
 
 // PDF
-define('PDFFIRST', '<a style="text-decoration:none;" class="" href="../radiology/pdf/expertise.php?uid=');
-define('PDFLAST', '"target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/new/pdf-new.svg" data-toggle="tooltip" title="PDF" style="width: 100%;"></span></a>');
+define('PDFFIRST', '<a class="dropdown-item dropdown-item1"  href="../radiology/pdf/expertise.php?uid=');
+define('PDFLAST', '"target="_blank"><i class="fas fa-file-alt"></i> PDF Expertise</a>');
 
 // DICOM
 define('DICOMFIRST', '<a style="text-decoration:none;" href="jnlp://' . $_SERVER['SERVER_NAME'] . ':19898/weasis-pacs-connector/DCM_viewer.jnlp?studyUID=');
@@ -27,12 +27,12 @@ define('MOBILEFIRST', '<a style="text-decoration:none;" class="ahref-edit" href=
 define('MOBILELAST', '"target="_blank"><span class="btn btn-warning btn-inti"><i class="fas fa-eye" data-toggle="tooltip" title="Web Viewer"></i></span></a>');
 
 // Change doctor
-define('CHANGEDOCTORICONYES', '<img src="../image/new/user-doctor.svg" data-toggle="tooltip" title="choose Physician" style="width: 100%;">');
-define('CHANGEDOCTORICONNO', '<img src="../image/new/user-doctor-no.svg" data-toggle="tooltip" title="choose Physician" style="width: 100%;">');
-define('CHANGEDOCTORFIRST', '<a style="text-decoration: none;" href="#" onclick="changeDoctorApproved(event, ');
-define('CHANGEDOCTORLAST', ')"><span style="box-shadow: none;" class="');
-define('CHANGEDOCTORCLASS', 'btn rgba-stylish-slight darken-1 btn-inti2">');
-define('CHANGEDOCTORVERYLAST', '</span></a>');
+define('CHANGEDOCTORICONYES', '<i class="fas fa-user-nurse"></i>');
+define('CHANGEDOCTORICONNO', '<i class="fas fa-user-nurse text-danger"></i>');
+define('CHANGEDOCTORFIRST', '<a class="dropdown-item dropdown-item1" href="#" onclick="changeDoctorApproved(event, ');
+define('CHANGEDOCTORLAST', ')">');
+define('CHANGEDOCTORCLASS', 'Choose phycisian');
+define('CHANGEDOCTORVERYLAST', '</a>');
 
 // Ambil hasil expertise
 define('GETEXPERTISEICONYES', '<img src="../image/new/envelop.svg" data-toggle="tooltip" style="width: 100%;">');
@@ -53,11 +53,11 @@ define('DELETEFIRST', '<a style="text-decoration:none;" class="ahref-edit" href=
 define('DELETELAST', '"onclick=\'return confirm("Delete data?");\'><span class="btn red lighten-1 btn-intiwid1"><i class="fas fa-trash-alt" data-toggle="tooltip" title="Delete"></i></span></a>');
 
 // EDIT PASIEN
-define('EDITPASIENICONYES', '<img src="../image/new/update-new.svg" data-toggle="tooltip" title="Update" style="width: 100%;">');
-define('EDITPASIENICONNO', '<img src="../image/new/update-new-yellow.svg" data-toggle="tooltip" title="Update" style="width: 100%;">');
-define('EDITPASIENFIRST', '<a style="box-shadow: none;" href="update-workload.php?uid=');
-define('EDITPASIENLAST', '"<span class="btn text-primary rgba-stylish-slight btn-inti2">');
-define('EDITPASIENVERYLAST', '</span></a>');
+define('EDITPASIENICONYES', '<i class="fas fa-user-check">');
+define('EDITPASIENICONNO', '<i class="fas fa-user-edit"></i>');
+define('EDITPASIENFIRST', '<a class="dropdown-item dropdown-item1" href="update-workload.php?uid=');
+define('EDITPASIENLAST', '">');
+define('EDITPASIENVERYLAST', 'Edit Patient</a>');
 
 // EDIT WORKLOAD
 define('EDITWORKLOADFIRST', '<a href="workload-edit.php?uid=');
