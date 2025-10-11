@@ -114,6 +114,29 @@ $waitingUSG1hourReguler = mysqli_fetch_assoc(mysqli_query(
 	AND study.updated_time >= '2023-11-26'
 	"
 ));
+
+$query = "SELECT COUNT(*) AS total
+FROM $table_study
+JOIN $table_workload
+ON study.study_iuid = xray_workload.uid ";
+
+// total studies
+$total = mysqli_fetch_assoc(mysqli_query(
+	$conn_pacsio,
+	$query . 'WHERE DATE(study_datetime) = CURRENT_DATE()'
+));
+
+// total waiting
+$waiting = mysqli_fetch_assoc(mysqli_query(
+	$conn_pacsio,
+	$query . 'WHERE DATE(study_datetime) = CURRENT_DATE() AND status = "waiting"'
+));
+
+// total approved
+$approved = mysqli_fetch_assoc(mysqli_query(
+	$conn_pacsio,
+	$query . ' WHERE DATE(approved_at) = CURRENT_DATE() AND status = "approved"'
+));
 $moreThanUSG1hourReguler = $waitingUSG1hourReguler["jumlah"];
 
 $waitingUSGDoppler2hourReguler = mysqli_fetch_assoc(mysqli_query(
@@ -141,11 +164,57 @@ $moreThanUSGDoppler2hourReguler = $waitingUSGDoppler2hourReguler["jumlah"];
 <div class="col-12" style="padding: 0;">
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="index.php">Home</a></li>
-			<li class="breadcrumb-item active">Workload</li>
+			<li class="breadcrumb-item active"></li>
 		</ol>
 	</nav>
 </div>
+<div class="container-fluid mb-3">
+	<div class="row">
+		<div class="col-md-4">
+			<div class="card like-card d-flex align-items-center justify-content-between mx-auto">
+				<div class="like-left d-flex align-items-center">
+					<img src="../image/new/users-nd.svg" style="width: 45px;">
+					<span>Today Studies</span>
+				</div>
+				<div class="like-count"> <?= $total['total'] ?></div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="card like-card d-flex align-items-center justify-content-between mx-auto">
+				<div class="like-left d-flex align-items-center">
+					<img src="../image/new/check-nd.svg" style="width: 30px; margin-right: 10px;">
+					<span>Approved</span>
+				</div>
+				<div class="like-count"><?= $approved['total']; ?></div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="card like-card d-flex align-items-center justify-content-between mx-auto">
+				<div class="like-left d-flex align-items-center">
+					<img src="../image/new/clock-nd.svg" style="width: 25px; margin-right: 10px;">
+					<span>Waiting</span>
+				</div>
+				<div class="like-count"><?= $waiting['total']; ?></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="dropdown custom-dropdown1">
+	<button class="btn filter-btn1 dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		Action
+	</button>
+	<div class="dropdown-menu dropdown-menu-right dropdown-menu1" aria-labelledby="dropdownMenuButton1">
+		<a class="dropdown-item dropdown-item1" href="#"><i class="fas fa-file-alt"></i> Details</a>
+		<a class="dropdown-item dropdown-item1" href="#"><i class="fas fa-edit"></i> Edit</a>
+		<a class="dropdown-item dropdown-item1" href="#"><i class="fas fa-clone"></i> Clone</a>
+		<a class="dropdown-item dropdown-item1" href="#"><i class="fas fa-download"></i> Download</a>
+		<div class="dropdown-divider"></div>
+		<a class="dropdown-item dropdown-item1 text-danger" href="#"><i class="fas fa-trash-alt"></i> Remove</a>
+	</div>
+</div>
+
+
 <div class="table-view">
 	<div class="col-md-12 table-box" style="overflow-x:auto;  position: relative;  padding-top: 50px;">
 		<?php require_once 'formsearch.php'; ?>

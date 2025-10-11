@@ -93,7 +93,7 @@ $date2 = date('d-m-Y 23:59');
     .filter-btn1 {
         white-space: nowrap;
         color: #fff;
-        background-color: #4169ed;
+        background-color: #3b57b3;
         border-radius: 3px;
         padding: 9px 33px;
         box-shadow: none;
@@ -310,10 +310,10 @@ $date2 = date('d-m-Y 23:59');
 
 
                 <div class="col-auto" style="padding-right: 0px; padding-left: 0px;">
-                    <button class="btn btn-success text-white btn-fil shadow-none waves-effect waves-light" type="button" name="range" id="range"><i class="fas fa-search"></i></button>
+                    <button class="btn btn-success-nd text-white btn-fil shadow-none waves-effect waves-light" type="button" name="range" id="range"><i class="fas fa-search"></i></button>
                 </div>
                 <div class="col-auto" style="padding-right: 0px; padding-left: 0px;">
-                    <button class="btn btn-danger text-white btn-fil shadow-none waves-effect waves-light" type="reset" name="range" id="range"><i class="fas fa-redo"></i></button>
+                    <button class="btn btn-danger-nd text-white btn-fil shadow-none waves-effect waves-light" type="reset" name="range" id="range"><i class="fas fa-redo"></i></button>
                 </div>
             </div>
             <!-- ==== end of form filter new ===== -->

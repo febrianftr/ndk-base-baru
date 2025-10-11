@@ -408,7 +408,7 @@ if (isset($_POST["save_copy_series"])) {
                     $fromorder = $row['fromorder'];
                     $pk_dokter_radiology = $row['pk_dokter_radiology'];
             ?>
-                    <div class="card text-light">
+                    <div class="card text-light" style="background: unset; box-shadow: none;">
                         <div class="card-header card-header-nd">
                             <?= $mods_in_study ?> - <?= $study_datetime ?> - <b><?= $study_desc_pacsio ?></b><br />
                             Study Iuid : <?= $study_iuid ?>
@@ -427,8 +427,8 @@ if (isset($_POST["save_copy_series"])) {
                                                 <input type="hidden" name="pk" id="pk" value="<?= $pk_study; ?>">
                                                 <input type="hidden" name="methodIndex" id="methodIndex" value="14">
                                                 <input type="hidden" name="study_iuid" id="study_iuid" value="<?= $study_iuid; ?>">
-                                                <button class="ahref-edit btn btn-sm btn-delete-study" style="font-size: 15px;" name="delete_study" style="text-decoration:none;" id="delete_study" onclick="return confirm('Are you sure delete study?');">
-                                                    <span><i class="fas fa-trash-alt" data-toggle="tooltip" title="Delete Study"></i>&nbsp; Delete Study</span>
+                                                <button class="ahref-edit btn btn-danger btn-sm btn-delete-study" style="font-size: 15px;" name="delete_study" style="text-decoration:none;" id="delete_study" onclick="return confirm('Are you sure delete study?');">
+                                                    <span><i class="fas fa-trash-alt btn-light" data-toggle="tooltip" title="Delete Study"></i>&nbsp; Delete Study</span>
                                                 </button>
                                             </form>
                                             <!-- <a href="#" style="background-color: grey; color:white;" class="btn btn-sm btn-gen hasil-move-image" data-parent="<?= $pk_study; ?>" data-child="<?= $pk_study; ?>" data-study-iuid-parent="<?= $study_iuid; ?>" data-is-move="study" title="Detail">MOVE STUDY</a> -->
@@ -465,7 +465,7 @@ if (isset($_POST["save_copy_series"])) {
                                     $updated_time_series = $row1["updated_time"];
                                 ?>
                                     <div class="col mb-4">
-                                        <div class="card" style="border: 2px solid #ddd;border-radius: 5px;box-shadow: none;">
+                                        <div class="card card-nd">
                                             <?php
                                             if ($_SERVER['SERVER_NAME'] == $hostname['ip_publik']) {
                                                 $port = '20001';
@@ -477,8 +477,8 @@ if (isset($_POST["save_copy_series"])) {
                                             <img src="<?= $link_study_image ?>" class="card-img-top" alt="image series">
                                             <div class="card-body">
                                                 <label class="card-title-patient-detail-sub"><?= $series_desc . " - " . $src_aet . " - " . $num_instances ?></label>
-                                                <p class="card-text"><small class="text-muted"><?= defaultValueDateTime($updated_time_series) ?></small></p>
-                                                <p class="card-text">
+                                                <p class="card-text mb-0"><small class="text-muted"><?= defaultValueDateTime($updated_time_series) ?></small></p>
+                                                <p class="card-text mb-0">
                                                     <?php if ($_SESSION['level'] == "radiographer") { ?>
                                                         <!-- form delete by series -->
                                                 <form method="POST" action="#" id="form">
@@ -486,16 +486,16 @@ if (isset($_POST["save_copy_series"])) {
                                                     <input type="hidden" name="methodIndex" value="16">
                                                     <input type="hidden" name="study_iuid" id="study_iuid" value="<?= $study_iuid; ?>">
                                                     <input type="hidden" name="series_iuid" id="series_iuid" value="<?= $series_iuid; ?>">
-                                                    <button class="ahref-edit btn btn-sm btn-delete-study" style="width: 100%;margin: 0;padding: 10px 10px; font-size:15px;background-color: #fff;color: #f05b5b;border: 2px solid #f05b5b;border-radius: 7px;" name="delete_series" style="text-decoration:none;" onclick="return confirm('Are you sure delete series?');">
-                                                        <span><i class="fas fa-trash-alt" style="color: #f05b5b;" data-toggle="tooltip" title="Delete Series"></i> &nbsp; Delete Series</span>
+                                                    <button class="ahref-edit btn btn-warning btn-sm w-100 text-dark btn-delete-study" name="delete_series" style="text-decoration:none;" onclick="return confirm('Are you sure delete series?');">
+                                                        <span data-toggle="tooltip" title="Delete Series"> &nbsp; Delete Series</span>
                                                     </button>
                                                 </form>
                                                 </p>
-                                                <p class="card-text">
-                                                    <a href="#" style="width: 100%;margin: 0;padding: 10px 10px; font-size:15px;background-color: #fff;color: #3443eb;border: 2px solid #3443eb;border-radius: 7px;" class="ahref-edit btn btn-sm btn-delete-study hasil-move-image" data-parent="<?= $pk_study; ?>" data-child="<?= $pk_series; ?>" data-study-iuid-parent="<?= $study_iuid; ?>" data-is-move="series" title="Detail">Move Series</a>
+                                                <p class="card-text mb-0">
+                                                    <a href="#" class="ahref-edit btn btn-sm btn-info w-100 btn-delete-study hasil-move-image" data-parent="<?= $pk_study; ?>" data-child="<?= $pk_series; ?>" data-study-iuid-parent="<?= $study_iuid; ?>" data-is-move="series" title="Move">Move Series</a>
                                                 </p>
-                                                <p class="card-text">
-                                                    <a href="#" style="width: 100%;margin: 0;padding: 10px 10px; font-size:15px;background-color: #fff;color: #3443eb;border: 2px solid #3443eb;border-radius: 7px;" class="ahref-edit btn btn-sm btn-delete-study hasil-copy-image" data-parent="<?= $pk_study; ?>" data-child="<?= $pk_series; ?>" data-study-iuid-parent="<?= $study_iuid; ?>" data-is-copy="series" title="Detail">Copy Series</a>
+                                                <p class="card-text mb-0">
+                                                    <a href="#" class="ahref-edit btn btn-sm btn-info w-100 btn-delete-study hasil-copy-image" data-parent="<?= $pk_study; ?>" data-child="<?= $pk_series; ?>" data-study-iuid-parent="<?= $study_iuid; ?>" data-is-copy="series" title="Copy">Copy Series</a>
                                                 </p>
                                             <?php }
                                             ?>
