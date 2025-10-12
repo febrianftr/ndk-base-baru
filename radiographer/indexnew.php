@@ -21,7 +21,7 @@ if ($_SESSION['level'] == "radiographer") {
                     <div class="col-12" style="padding: 0;">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb" style="margin-bottom: 0; padding-top:0;">
-                                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item active">
                                     <?= $lang['ris'] ?>
                                 </li>

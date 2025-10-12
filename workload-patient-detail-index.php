@@ -358,7 +358,7 @@ if (isset($_POST["save_copy_series"])) {
 <div class="col-12" style="padding: 0;">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
             <li class="breadcrumb-item"><a href="workload.php">Workload</a></li>
             <li class="breadcrumb-item active">Patient Detail</li>
         </ol>
@@ -415,11 +415,11 @@ if (isset($_POST["save_copy_series"])) {
                         </div>
                         <div class="card-body card-body-nd">
                             <div class="row">
-                                <div class="col" style="display: flex;">
-                                    <div>
+                                <div class="col">
+                                    <div style="padding: 0 6px;">
                                         <label class="card-title-patient-detail"><?= $pat_name ?> / <?= $age ?></label>
                                     </div>
-                                    <div style=" margin-left: 15px;">
+                                    <div>
                                         <?php
                                         if ($_SESSION['level'] == "radiographer") { ?>
                                             <!-- form delete by study -->
@@ -428,7 +428,7 @@ if (isset($_POST["save_copy_series"])) {
                                                 <input type="hidden" name="methodIndex" id="methodIndex" value="14">
                                                 <input type="hidden" name="study_iuid" id="study_iuid" value="<?= $study_iuid; ?>">
                                                 <button class="ahref-edit btn btn-danger btn-sm btn-delete-study" style="font-size: 15px;" name="delete_study" style="text-decoration:none;" id="delete_study" onclick="return confirm('Are you sure delete study?');">
-                                                    <span><i class="fas fa-trash-alt btn-light" data-toggle="tooltip" title="Delete Study"></i>&nbsp; Delete Study</span>
+                                                    <span><i class="fas fa-trash-alt" data-toggle="tooltip" title="Delete Study"></i>&nbsp; Delete Study</span>
                                                 </button>
                                             </form>
                                             <!-- <a href="#" style="background-color: grey; color:white;" class="btn btn-sm btn-gen hasil-move-image" data-parent="<?= $pk_study; ?>" data-child="<?= $pk_study; ?>" data-study-iuid-parent="<?= $study_iuid; ?>" data-is-move="study" title="Detail">MOVE STUDY</a> -->

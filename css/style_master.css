@@ -132,7 +132,7 @@ h4 {
 }
 
 .table-dicom tr {
-  background-color: #efefef;
+  background-color: #1a1a1a;
 }
 
 .table-dicom td,
@@ -915,15 +915,17 @@ canvas {
 input[type="number"],
 select {
   width: 100%;
-  padding: 5px 25px;
+  padding: 8px;
   margin: 3px 0;
   display: inline-block;
-  border: 3px solid #cacaca;
+  border: unset;
   border-radius: 4px;
   box-sizing: border-box;
   -webkit-transition: 0.5s;
   transition: 0.5s;
   outline: none;
+  background-color: #1e1e1e;
+  color: #fff !important;
 }
 
 .form-update-workload li {
@@ -931,8 +933,7 @@ select {
 }
 
 .form-update-workload input[type="text"]:focus {
-  border: 3px solid #68b399;
-  background-color: #fff;
+  background-color: #181717;
 }
 
 .form-update-workload select:focus {
@@ -960,15 +961,17 @@ select {
 
 .form-update-workload textarea {
   width: 100%;
-  padding: 5px 25px;
+  padding: 8px;
   margin: 3px 0;
   display: inline-block;
-  border: 3px solid #cacaca;
+  border: unset;
   border-radius: 4px;
   box-sizing: border-box;
   -webkit-transition: 0.5s;
   transition: 0.5s;
   outline: none;
+  background-color: #1e1e1e;
+  color: #fff !important;
 }
 
 .form-update-workload textarea:focus {
@@ -3279,7 +3282,7 @@ button:focus {
 /* =====SIDE NAVBAR=========== */
 
 .back-search {
-  background-color: #f9f9f9;
+  background-color: #3a3a3a;
   padding: 8px;
   border-radius: 5px;
   margin-bottom: 10px;
@@ -3786,7 +3789,7 @@ table.dataTable > thead .sorting_desc_disabled::after {
 
 .card-body i,
 .card-body h4 {
-  color: #2a412f;
+  /* color: #2a412f; */
 }
 
 .table-dicom tbody tr.highlight td {
@@ -4411,6 +4414,42 @@ input.form-control {
   100% {
     transform: rotate(-360deg);
   }
+}
+
+.modal-content {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-color: #2f2f2f;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.3rem;
+  outline: 0;
+  color: #eee;
+}
+
+.modal-header {
+  border-bottom: 1px solid #26282c;
+}
+
+button.close {
+  background-color: #f0f0f0;
+}
+
+.back-search .bootstrap-select .dropdown-menu {
+  color: #eee;
+  background-color: #1e1e1e;
+}
+
+.back-search .bootstrap-select .dropdown-menu .dropdown-item:focus,
+.back-search .bootstrap-select .dropdown-menu .dropdown-item:hover {
+  color: #eee;
+  text-decoration: none;
+  background-color: #2b2a2a;
 }
 
 @media (max-width: 960px) {

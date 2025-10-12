@@ -19,7 +19,7 @@ if ($_SESSION['level'] == "admin" || $_SESSION['level'] == "superadmin") {
         <?php include('menu-bar.php'); ?><br>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb1 breadcrumb">
-                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page">About</li>
             </ol>
         </nav>
