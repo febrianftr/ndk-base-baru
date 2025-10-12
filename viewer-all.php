@@ -16,11 +16,11 @@ define('DICOMNEWLAST', '"><span class="btn rgba-stylish-slight btn-inti2" style=
 
 // HTML
 if ($_SERVER['SERVER_NAME'] == $hostname['ip_publik'] or $_SERVER['SERVER_NAME'] == '49.128.176.141') {
-    define('HTMLFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="http://' . $_SERVER['SERVER_NAME'] . ':20001/holan/viewer.html?studyUID=');
+    define('HTMLFIRST', '<a class="dropdown-item dropdown-item1" href="http://' . $_SERVER['SERVER_NAME'] . ':20001/holan/viewer.html?studyUID=');
 } else {
-    define('HTMLFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="http://' . $_SERVER['SERVER_NAME'] . ':19898/holan/viewer.html?studyUID=');
+    define('HTMLFIRST', '<a class="dropdown-item dropdown-item1" href="http://' . $_SERVER['SERVER_NAME'] . ':19898/holan/viewer.html?studyUID=');
 }
-define('HTMLLAST', '"target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/eyeyellow.svg" data-toggle="tooltip" title="HTML Viewer" style="width: 100%;"></span></a>');
+define('HTMLLAST', '"target="_blank"><i class="fas fa-x-ray"></i>Viewer HTML</a>');
 
 // Mobile
 define('MOBILEFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="http://' . $_SERVER['SERVER_NAME'] . ':19898/dwv-viewer/index.html?type=manifest&input=%2Fweasis-pacs-connector%2Fmanifest%3FseriesUID%3D');
@@ -45,8 +45,8 @@ define('GETEXPERTISELAST', '"><span class="btn rgba-stylish-slight darken-1 btn-
 define('GETEXPERTISEVERYLAST', '</span></a>');
 
 // Update Exp Date QR
-define('CHANGEEXPDATEFIRST', '<a style="text-decoration: none;" href="change_expdate.php?uid=');
-define('CHANGEEXPDATELAST', '"><span class="btn rgba-stylish-slight darken-1 btn-inti2"><img src="../image/time-add.svg" data-toggle="tooltip" title="Edit expired date" style="width: 100%;"></span></a>');
+define('CHANGEEXPDATEFIRST', '<a class="dropdown-item dropdown-item1" href="change_expdate.php?uid=');
+define('CHANGEEXPDATELAST', '"><i class="fas fa-history"></i>Edit Expired Date</a>');
 
 // DELETE
 define('DELETEFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="deleteworkload.php?uid=');
@@ -80,8 +80,8 @@ define('READMORERADIOGRAPHERFIRST', '<a href="#" class="hasil-radiographer penaw
 define('READMORERADIOGRAPHERLAST', '">Read More</a>');
 
 //choose series
-define('CHOOSESERIESFIRST', '<a title="" href="view-choose-series.php?uid=');
-define('CHOOSESERIESLAST', '"><span class="btn rgba-stylish-slight darken-1 btn-inti2"><img src="../image/choose-series.svg" data-toggle="tooltip" title="Choose Series" style="width: 100%;"></span></a>');
+define('CHOOSESERIESFIRST', '<a class="dropdown-item dropdown-item1" href="view-choose-series.php?uid=');
+define('CHOOSESERIESLAST', '"><i class="far fa-list-alt"></i>Choose Series</a>');
 
 // integrasi simrs
 define('SIMRS', '<i class="fas fa-exchange-alt text-info" style="font-size:0.5rem;" title="terintegrasi dengan SIMRS"></i>');
@@ -109,8 +109,8 @@ define('IPIVIEWFIRST', '<a style="text-decoration:none;" class="ahref-edit" href
 define('IPIVIEWLAST', '" target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/eyeyellow.svg" data-toggle="tooltip" title="IPI Viewer" style="width: 100%;"></span></a>');
 
 // send dicom
-define('SENDDICOMFIRST', '<a title="" href="view-send-dicom.php?uid=');
-define('SENDDICOMLAST', '"><span class="btn rgba-stylish-slight darken-1 btn-inti2"><img src="../image/send-dicom.svg" data-toggle="tooltip" title="Send image to" style="width: 100%;"></span></a>');
+define('SENDDICOMFIRST', '<a class="dropdown-item dropdown-item1" href="view-send-dicom.php?uid=');
+define('SENDDICOMLAST', '"><i class="fas fa-share-alt-square"></i>Send Image to..</a>');
 
 // ino  bitec
 define('INOBITECFIRST', '<a href="#" class="ahref-edit" onclick="inobitec(');
@@ -127,18 +127,18 @@ define('HOROSLAST', '"class="ahref-edit" style="text-decoration:none;" target="_
 // untuk icon OHIF LARGE DI WORKLIST
 $ohif_large = '"class="button8 delete1" target="_blank"><img src="../image/web.svg" style="width: 50px;"><br> <span> Web Viewer</span></a>';
 // untuk icon OHIF small DI WORKLIST
-$ohif_small = '"style="text-decoration:none;" class="ahref-edit" target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/eyegreen.svg" data-toggle="tooltip" title="Tab Viewer" style="width: 100%;"></span></a>';
+$ohif_small = '"target="_blank" class="dropdown-item dropdown-item1" href="#"><i class="fas fa-x-ray"></i>Viewer Web</a>';
 
 // OHIF TERBARU
 if ($_SERVER['SERVER_NAME'] == $hostname['ip_publik'] or $_SERVER['SERVER_NAME'] == '49.128.176.141') {
     // jika menggunakan ip publik
-    define('OHIFNEWFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="http://' . $_SERVER['SERVER_NAME'] . ':92/viewer?StudyInstanceUIDs=');
+    define('OHIFNEWFIRST', '<a style="text-decoration:none;" class="dropdown-item dropdown-item1" href="http://' . $_SERVER['SERVER_NAME'] . ':92/viewer?StudyInstanceUIDs=');
     define('OHIFNEWLAST', "$ohif_small");
     // jika menggunakan ohif baru icon(large)
     define('OHIFNEWWORKLISTFIRST', '<a href="http://' . $_SERVER['SERVER_NAME'] . ':92/viewer?StudyInstanceUIDs=');
     define('OHIFNEWWORKLISTLAST', "$ohif_large");
 } else {
-    define('OHIFNEWFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="http://' . $_SERVER['SERVER_NAME'] . ':91/viewer?StudyInstanceUIDs=');
+    define('OHIFNEWFIRST', '<a style="text-decoration:none;" class="dropdown-item dropdown-item1" href="http://' . $_SERVER['SERVER_NAME'] . ':91/viewer?StudyInstanceUIDs=');
     define('OHIFNEWLAST', "$ohif_small");
     // jika menggunakan ohif baru icon(large)
     define('OHIFNEWWORKLISTFIRST', '<a href="http://' . $_SERVER['SERVER_NAME'] . ':91/viewer?StudyInstanceUIDs=');
@@ -206,8 +206,8 @@ define('INOBITECWORKLISTLAST', ')" id="inobitec" data-ip="' . $_SERVER['SERVER_N
 
 
 //copy link ohif
-define('LINKOHIFFIRST', '<button style="box-shadow: none; color: #6eb4ff;" title="Copy Link" class="btn btn-inti2 rgba-stylish-slight" id="my_button" onclick="copyText(event, ');
-define('LINKOHIFLAST', ')"><i class="fas fa-link"></i></button>');
+define('LINKOHIFFIRST', '<button class="dropdown-item dropdown-item1" id="my_button" onclick="copyText(event, ');
+define('LINKOHIFLAST', ')"><i class="fas fa-link"></i>Copy Link</button>');
 define('EXTLINKOHIF', "'");
-define('COPYUIDFIRST', '<button style="box-shadow: none; color: #6eb4ff;" title="Copy UID" class="btn btn-inti2 rgba-stylish-slight" id="my_button" onclick="copyText(event, ');
-define('COPYUIDLAST', ')"><i class="fas fa-copy"></i></button>');
+define('COPYUIDFIRST', '<button sclass="dropdown-item dropdown-item1" id="my_button" onclick="copyText(event, ');
+define('COPYUIDLAST', ')"><i class="fas fa-copy"></i> Copy UID</button>');

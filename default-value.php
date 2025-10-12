@@ -109,13 +109,13 @@ function hour($value_study_datetime, $value_status, $value_priority, $value_mods
 function styleSex($value)
 {
     if ($value == 'M') {
-        $sex = '<i style="font-size: 14px; color: #1ecef7;" class="fas fa-mars"> M</i>';
+        $sex = '<div class="gender-box1 male1"><i class="fas fa-mars"></i><span>Male</span></div>';
     } else if ($value == 'L') {
-        $sex = '<i style="font-size: 14px; color: #1ecef7;" class="fas fa-mars"> L</i>';
+        $sex = '<div class="gender-box1 male1"><i class="fas fa-mars"></i><span>Male</span></div>';
     } else if ($value == 'P') {
-        $sex = '<i style="font-size: 14px; color: #ff9bca;" class="fas fa-venus"> P</i>';
+        $sex = '<div class="gender-box1 female1"><i class="fas fa-venus"></i><span>Female</span></div>';
     } else if ($value == 'F') {
-        $sex = '<i style="font-size: 14px; color: #ff9bca;" class="fas fa-venus"> F</i>';
+        $sex = '<div class="gender-box1 female1"><i class="fas fa-venus"></i><span>Female</span></div>';
     } else if ($value == 'O') {
         $sex = '<i class="fas fa-genderless"> O</i>';
     } else {
@@ -128,9 +128,9 @@ function styleSex($value)
 function styleStatus($value, $study_iuid)
 {
     if ($value == 'WAITING' || $value == 'waiting') {
-        $status =  '<i style="font-size: 14px; color: #FFFB00;" class="fas fa-sync"> Waiting</i>';
+        $status =  '<img src="../image/new/waiting-nd.svg" title="x" style="width: 23px;">';
     } else if ($value == 'APPROVED' || $value == 'approved') {
-        $status =  '<i class="fa fa-history text-success" title="Expertise History" aria-hidden="true"></i> <a href="workload-fill-detail.php?study_iuid=' . $study_iuid . '"><i style="font-size: 14px; color: #25FF7A" class="fas fa-check-square"> Approved</i></a>';
+        $status =  '<img src="../image/new/history-nd.svg" title="Expertise History" style="width: 23px;"> <a href="workload-fill-detail.php?study_iuid=' . $study_iuid . '"><img src="../image/new/approved-nd.svg" title="Expertise Approved" style="width: 23px;"></a>';
     } else if ($value == 'backup') {
         $status =  '<i style="font-size: 14px; color: red" class="fas fa-check-square"> BACK UP</i>';
     } else {

@@ -208,7 +208,7 @@ while ($row = mysqli_fetch_array($query)) {
 
     $data[] = [
         "no" => $i,
-        "report" => $aksi,
+        "report" => '<div class="dropdown custom-dropdown1 dropright"><button class="btn filter-btn2 dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button><div class="dropdown-menu dropdown-menu-right dropdown-menu1" aria-labelledby="dropdownMenuButton1">' . $aksi . '</div>',
         "status" => $status . '&nbsp;' . $badge,
         "pat_name" => $detail . '&nbsp;' . $priority_style,
         "mrn" => $pat_id,

@@ -267,10 +267,12 @@ while ($row = mysqli_fetch_array($result)) {
   } else if ($level == 'radiographer') {
     // kondisi ketika xray_workload masuk dari trigger
     if ($status != '-') {
-      $level = $level = EDITPASIENFIRST . $study_iuid . EDITPASIENLAST . $icon_edit_pasien . EDITPASIENVERYLAST .
-        CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORCLASS  . CHANGEDOCTORVERYLAST .
+      $level = $level = '<h6 class="dropdown-title1">Viewer</h6>' .
         OHIFNEWFIRST . $study_iuid . OHIFNEWLAST .
         HTMLFIRST . $study_iuid . HTMLLAST .
+        '<h6 class="dropdown-title1"> Patient</h6>' .
+        EDITPASIENFIRST . $study_iuid . EDITPASIENLAST . $icon_edit_pasien . EDITPASIENVERYLAST .
+        CHANGEDOCTORFIRST . "'$study_iuid', '$dokradid', '$workload_status'" . CHANGEDOCTORLAST . $icon_change_doctor . CHANGEDOCTORCLASS  . CHANGEDOCTORVERYLAST .
         CHANGEEXPDATEFIRST . $study_iuid . CHANGEEXPDATELAST .
         LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST .
         CHOOSESERIESFIRST . $study_iuid . CHOOSESERIESLAST .
@@ -326,8 +328,8 @@ while ($row = mysqli_fetch_array($result)) {
 
   $sub_array = array();
   $sub_array[] = $i;
-  $sub_array[] = '<div class="dropdown custom-dropdown1">
-	<button class="btn filter-btn1 dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  $sub_array[] = '<div class="dropdown custom-dropdown1 dropright">
+	<button class="btn filter-btn2 dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 Action</button><div class="dropdown-menu dropdown-menu-right dropdown-menu1" aria-labelledby="dropdownMenuButton1">' . PDFFIRST . $study_iuid . PDFLAST . $level . '</div>';
   $sub_array[] = $status . '&nbsp;' . $badge;
   $sub_array[] = $detail . '&nbsp;' . $priority_style;

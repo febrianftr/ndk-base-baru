@@ -1,17 +1,7 @@
 <!-- ------loader------ -->
 <div class="disokin">
     <div class="spinner">
-        <div><img src="../image/intiwid-logo-new-putih-2.png" style="width: 201px;margin-left: -75px; margin-bottom: 9px;"></div>
-        <div class="back-loader">
-            <span class="ball-1"></span>
-            <span class="ball-2"></span>
-            <span class="ball-3"></span>
-            <span class="ball-4"></span>
-            <span class="ball-5"></span>
-            <span class="ball-6"></span>
-            <span class="ball-7"></span>
-            <span class="ball-8"></span>
-        </div>
+        <div class="loader-nd"></div>
     </div>
 </div>
 <!-- ------loader------ -->
@@ -315,18 +305,14 @@
                 </ul>
             </li>
             <li class="menu-item1">
-                <a href="#" class="services"><img class="icon-sidebar" src="../image/new/report-nd.svg"> <?= $lang['report'] ?> <i class="fas fa-chevron-down float-right"></i></a>
+                <a href="#" class="services"><img class="icon-sidebar" src="../image/new/report-nd.svg"> Other <i class="fas fa-chevron-down float-right"></i></a>
                 <ul class="submenu1">
                     <li id="report1"><a href="report.php"><?= $lang['download_excel'] ?></a></li>
                     <li id="expertise-history"><a href="workload-fill.php">Expertise History</a></li>
-                    <li id="downloadexcel1"><a href="downloadexcel.php">Storage Excel</a></li>
+                    <li id="storage"><a href="storage.php">Server Storage</a></li>
                 </ul>
             </li>
-            <div class="menu-item1">
-                <a href="storage.php">
-                    <li><img class="icon-sidebar" src="../image/new/storage-nd.svg"> <?= $lang['storage'] ?></li>
-                </a>
-            </div>
+
             <!-- <div class="menu-item1">
                 <a href="recycle-bin.php">
                     <li> <img class="icon-sidebar" src="../image/new/trash-nd.svg"> Recycle Bin</li>
