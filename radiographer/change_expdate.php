@@ -75,7 +75,7 @@ if ($_SESSION['level'] == "radiographer") {
 		<?php include('head.php'); ?>
 	</head>
 
-	<body style="background-color: #1f69b7;">
+	<body>
 		<?php include('../sidebar-index.php'); ?>
 		<div class="container-fluid" id="content2">
 			<div class="row">
@@ -85,14 +85,14 @@ if ($_SESSION['level'] == "radiographer") {
 							<div class="col-md-6 box-change-dokter table-box">
 								<form method="post" id="take-envelope">
 									<div class="radiobtn1">
-										<div class='alert alert-info' role='alert'>Pasien <?= removeCharacter(defaultValue($row_update_expdate['pat_name'])); ?>, modalitas <?= defaultValue($row_update_expdate['mods_in_study']); ?>, Pemeriksaan <?= defaultValue($row_update_expdate['prosedur']); ?></div>
+										<div class='alert' style="color: #fff; background-color: #018dd3;" role='alert'>Pasien <?= removeCharacter(defaultValue($row_update_expdate['pat_name'])); ?>, modalitas <?= defaultValue($row_update_expdate['mods_in_study']); ?>, Pemeriksaan <?= defaultValue($row_update_expdate['prosedur']); ?></div>
 										<input type="hidden" id="study_iuid" name="study_iuid" value="<?= $uid; ?>">
 										<label for="qr_expdate">Expired Date</label><br>
-										<input type="text" class="form-control" name="expdate" id="expdate" value="<?= date('d-m-Y', strtotime($row_update_expdate['qr_expdate'])); ?>" readonly>
+										<input type="text" class="form-control" name="expdate" style="background-color: #3a3a3a;" id="expdate" value="<?= date('d-m-Y', strtotime($row_update_expdate['qr_expdate'])); ?>" readonly>
 										<br>
 										<br>
 										<label for="add_date">Pilih Jangka Waktu Aktif</label><br>
-										<div style="background-color: black; padding: 12px; border-radius: 4px; border: 1px solid #ced4da;">
+										<div style="background-color: #3a3a3a; padding: 12px; border-radius: 4px; color: #eee;">
 											<label class="radio-admin">
 												<input type="radio" name="add_date" id="add_date" value="30"> 30 Hari
 												<span class="checkmark"></span>

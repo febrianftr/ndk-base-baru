@@ -18,6 +18,111 @@ if ($_SESSION['level'] == "radiographer") {
     <script>
     </script>
     <title>Registration | Radiographer</title>
+
+    <style>
+      /* ===== DARK MODE UNTUK BOOTSTRAP SELECT (selectpicker) ===== */
+      .bootstrap-select .dropdown-toggle,
+      .bootstrap-select .dropdown-menu {
+        background-color: #222 !important;
+        color: #ddd !important;
+        border: 1px solid #444 !important;
+      }
+
+      /* Tombol utama (closed state) */
+      .bootstrap-select .dropdown-toggle {
+        background-color: #222 !important;
+        color: #ddd !important;
+      }
+
+      /* Panah di kanan */
+      .bootstrap-select .filter-option-inner-inner {
+        color: #ddd !important;
+      }
+
+      /* Daftar item dropdown */
+      .bootstrap-select .dropdown-menu li a {
+        color: #ccc !important;
+        background-color: transparent !important;
+      }
+
+      .bootstrap-select .dropdown-menu li a:hover,
+      .bootstrap-select .dropdown-menu li.active a {
+        background-color: #444 !important;
+        color: #fff !important;
+      }
+
+      /* Search bar di dropdown */
+      .bootstrap-select .bs-searchbox input {
+        background-color: #333 !important;
+        color: #eee !important;
+        border: 1px solid #555 !important;
+      }
+
+      /* Scrollbar dark */
+      .bootstrap-select .dropdown-menu.inner {
+        scrollbar-color: #555 #222;
+      }
+
+      /* === DARK MODE UNTUK SELECT2 === */
+
+      /* Wrapper utama */
+      .select2-container--default .select2-selection--single,
+      .select2-container--default .select2-selection--multiple {
+        background-color: #1e1e1e !important;
+        border: 1px solid #444 !important;
+        color: #ddd !important;
+      }
+
+      /* Text di dalam select */
+      .select2-container--default .select2-selection__rendered {
+        color: #ddd !important;
+      }
+
+      /* Placeholder */
+      .select2-container--default .select2-selection__placeholder {
+        color: #888 !important;
+      }
+
+      /* Dropdown list */
+      .select2-container--default .select2-results>.select2-results__options {
+        background-color: #1e1e1e !important;
+        color: #ddd !important;
+      }
+
+      /* Hover di dropdown */
+      .select2-container--default .select2-results__option--highlighted[aria-selected] {
+        background-color: #333 !important;
+        color: #fff !important;
+      }
+
+      /* Selected item (multi-select) */
+      .select2-container--default .select2-selection--multiple .select2-selection__choice {
+        background-color: #333 !important;
+        border: 1px solid #555 !important;
+        color: #ccc !important;
+      }
+
+      /* Tag close button */
+      .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+        color: #999 !important;
+      }
+
+      .select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
+        color: #fff !important;
+      }
+
+      /* Search input di dropdown */
+      .select2-container--default .select2-search--dropdown .select2-search__field {
+        background-color: #2a2a2a !important;
+        color: #eee !important;
+        border: 1px solid #444 !important;
+      }
+
+      /* Border focus */
+      .select2-container--default.select2-container--focus .select2-selection--multiple {
+        border-color: #777 !important;
+      }
+    </style>
   </head>
 
   <body>
@@ -149,11 +254,11 @@ if ($_SESSION['level'] == "radiographer") {
                               <div class="row">
                                 <div class="col-md-6"><br>
                                   <label style="font-weight: bold;" for="schedule_date"><b><?= $lang['exam_date'] ?></b></label>
-                                  <input type="text" name="schedule_date" id="schedule_date" autocomplete="off" style="height: 31px; border: 2px solid #d2c8c8; border-radius: 4px;"></input>
+                                  <input type="text" name="schedule_date" id="schedule_date" autocomplete="off" style="height: 31px; border: 1px solid #222; border-radius: 4px; background-color: #1e1e1e;"></input>
                                 </div>
                                 <div class="col-md-6"><br>
                                   <label style="font-weight: bold;" for="schedule_time"><b><?= $lang['exam_time'] ?></b></label><br>
-                                  <input type="text" name="schedule_time" id="schedule_time" autocomplete="off" style="height: 31px; border: 2px solid #d2c8c8; border-radius: 4px;"></input>
+                                  <input type="text" name="schedule_time" id="schedule_time" autocomplete="off" style="height: 31px; border: 1px solid #222; border-radius: 4px; background-color: #1e1e1e;"></input>
                                 </div>
                               </div>
                             </div>

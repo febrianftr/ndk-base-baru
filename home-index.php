@@ -41,56 +41,33 @@ $approved = mysqli_fetch_assoc(mysqli_query(
 <meta http-equiv="refresh" content="600" />
 <br>
 
-<div class="container-fluid">
-  <div class="box-dashboard1">
-    <div class="row">
-      <div class="col-md-12">
-        <center>
-          <h2>
-            Daily Report
-          </h2>
-        </center>
-      </div>
-      <div class="col-md-4">
-        <div class="info-box" style="background-color: #043971;">
-          <div class="box-icon">
-            <i class="fas fa-users"></i>
-          </div>
-          <div class="box-content">
-            <span class="big">
-              <?= $total['total'] ?>
-            </span>
-            Today studies
-          </div>
+<div class="container-fluid mb-3">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card like-card d-flex align-items-center justify-content-between mx-auto">
+        <div class="like-left d-flex align-items-center">
+          <img src="../image/new/users-nd.svg" style="width: 45px;">
+          <span>Today Studies</span>
         </div>
+        <div class="like-count"> <?= $total['total'] ?></div>
       </div>
-      <div class="col-md-4">
-        <div class="info-box" style="background-color: #02826a;">
-          <div class="box-icon">
-            <i class="fas fa-user-check"></i>
-          </div>
-
-          <div class="box-content">
-            <span class="big">
-              <?= $approved['total']; ?>
-            </span>
-            Approved Reports
-          </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card like-card d-flex align-items-center justify-content-between mx-auto">
+        <div class="like-left d-flex align-items-center">
+          <img src="../image/new/check-nd.svg" style="width: 30px; margin-right: 10px;">
+          <span>Approved</span>
         </div>
+        <div class="like-count"><?= $approved['total']; ?></div>
       </div>
-      <div class="col-md-4">
-        <div class="info-box" style="background-color: #bd5e1a;">
-          <div class="box-icon">
-            <i class="fas fa-user-clock"></i>
-          </div>
-
-          <div class="box-content">
-            <span class="big">
-              <?= $waiting['total']; ?>
-            </span>
-            Waiting Reports
-          </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card like-card d-flex align-items-center justify-content-between mx-auto">
+        <div class="like-left d-flex align-items-center">
+          <img src="../image/new/clock-nd.svg" style="width: 25px; margin-right: 10px;">
+          <span>Waiting</span>
         </div>
+        <div class="like-count"><?= $waiting['total']; ?></div>
       </div>
     </div>
   </div>

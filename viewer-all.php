@@ -32,7 +32,7 @@ define('CHANGEDOCTORICONNO', '<i class="fas fa-user-nurse text-danger"></i>');
 define('CHANGEDOCTORFIRST', '<a class="dropdown-item dropdown-item1" href="#" onclick="changeDoctorApproved(event, ');
 define('CHANGEDOCTORLAST', ')">');
 define('CHANGEDOCTORCLASS', 'Choose phycisian');
-define('CHANGEDOCTORVERYLAST', '</a>');
+define('CHANGEDOCTORVERYLAST', 'Change Radiologist</a>');
 
 // Ambil hasil expertise
 define('GETEXPERTISEICONYES', '<img src="../image/new/envelop.svg" data-toggle="tooltip" style="width: 100%;">');
@@ -60,8 +60,8 @@ define('EDITPASIENLAST', '">');
 define('EDITPASIENVERYLAST', 'Edit Patient</a>');
 
 // EDIT WORKLOAD
-define('EDITWORKLOADFIRST', '<a href="workload-edit.php?uid=');
-define('EDITWORKLOADLAST', '"><span class="btn text-info rgba-stylish-slight btn-inti2"><img src="../image/edit.svg" data-toggle="tooltip" title="Edit Report" style="width: 100%;"></span></a>');
+define('EDITWORKLOADFIRST', '<a class="dropdown-item dropdown-item1" href="workload-edit.php?uid=');
+define('EDITWORKLOADLAST', '"><i class="far fa-edit"></i> Edit Expertise</a>');
 
 // telegram dokter pengirim
 define('TELEDOKTERPENGIRIMFIRST', '<a style="text-decoration: none;" href="../radiology/telenotif.php?uid=');
@@ -101,8 +101,8 @@ define('DRAFTFIRST', '<a href="worklist.php?uid=');
 define('DRAFTLAST', '"><span class="btn btn-warning btn-inti"><i class="fas fa-edit" data-toggle="tooltip" title="Go to expertise"></i></span></a>');
 
 //radiant
-define('RADIANTFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="radiant://?n=paet&v=dcmPACS&n=pstv&v=0020000D&v=%22');
-define('RADIANTLAST', '%22" "target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/radiAnt.png" data-toggle="tooltip" title="Radiant Viewer" style="width: 100%;"></span></a>');
+define('RADIANTFIRST', '<a class="dropdown-item dropdown-item1" href="radiant://?n=paet&v=dcmPACS&n=pstv&v=0020000D&v=%22');
+define('RADIANTLAST', '%22" "target="_blank"><i class="fas fa-x-ray"></i>Viewer Radiant</a>');
 
 //ipiview
 define('IPIVIEWFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="http://192.168.10.144:8089/ipiview/ipiview/html/start.html?StudyInstanceUID=');
@@ -121,7 +121,7 @@ define('INOBITECLAST', ')"id="inobitec" data-ip="' . $_SERVER['SERVER_NAME'] . '
 // Horos://?methodName=retrieve&serverName=PACS&then=open&retrieveOnlyIfNeeded=yes&filterKey=StudyInstanceUID&filterValue=
 $horos = '<a href="Horos://?methodName=displayStudy&StudyInstanceUID=';
 define('HOROSFIRST', "$horos");
-define('HOROSLAST', '"class="ahref-edit" style="text-decoration:none;" target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/horos.png" data-toggle="tooltip" title="Horos Viewer" style="width: 100%;"></span></a>');
+define('HOROSLAST', '" class="dropdown-item dropdown-item1" target="_blank"><i class="fas fa-x-ray"></i>Viewer Horos</a>');
 
 
 // untuk icon OHIF LARGE DI WORKLIST

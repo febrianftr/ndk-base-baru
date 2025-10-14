@@ -107,7 +107,7 @@ if ($_SESSION['level'] == "radiology" || $_SESSION['level'] == "radiographer") {
 
 					<style>
 						.box-change-dokter {
-							background-color: #1862b0;
+							background-color: #3a3a3a;
 							padding: 25px;
 							border-radius: 10px;
 							margin: 10px;
@@ -121,7 +121,7 @@ if ($_SESSION['level'] == "radiology" || $_SESSION['level'] == "radiographer") {
 						.radiobtn1 label {
 							display: block;
 							background: #c3e2fe;
-							color: #1862b0;
+							color: #3a3a3a;
 							border-radius: 5px;
 							padding: 10px 20px;
 							border: 2px solid #91d5fd;
