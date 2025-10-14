@@ -239,58 +239,61 @@ if ($_SESSION['level'] == "radiology") {
 								</div>
 
 
-								<div class="col-lg-4 table-box mb-3">
-									<div class="info-container-nd">
-										<div class="info-row-nd">
-											<div class="info-col-nd">
-												<div class="info-label-nd">Name</div>
-												<div class="info-value-nd"><?= $detail_uid; ?></div>
+								<div class="col-lg-6 mb-3 padding-rl-nd">
+									<div class="table-box">
+										<div class="info-container-nd">
+											<div class="info-row-nd">
+												<div class="info-col-nd">
+													<div class="info-label-nd">Name</div>
+													<div class="info-value-nd"><?= $detail_uid; ?></div>
+												</div>
+												<div class="info-col-nd">
+													<div class="info-label-nd">MRN</div>
+													<div class="info-value-nd"><?= $pat_id; ?></div>
+												</div>
+												<div class="info-col-nd">
+													<div class="info-label-nd">Sex</div>
+													<div class="info-value-nd"><?= $pat_sex; ?></div>
+												</div>
 											</div>
-											<div class="info-col-nd">
-												<div class="info-label-nd">MRN</div>
-												<div class="info-value-nd"><?= $pat_id; ?></div>
-											</div>
-											<div class="info-col-nd">
-												<div class="info-label-nd">Sex</div>
-												<div class="info-value-nd"><?= $pat_sex; ?></div>
-											</div>
-										</div>
 
-										<div class="info-row-nd">
-											<div class="info-col-nd">
-												<div class="info-label-nd">Age</div>
-												<div class="info-value-nd"><?= $pat_birthdate; ?></div>
+											<div class="info-row-nd">
+												<div class="info-col-nd">
+													<div class="info-label-nd">Age</div>
+													<div class="info-value-nd"><?= $pat_birthdate; ?></div>
+												</div>
+												<div class="info-col-nd">
+													<div class="info-label-nd">Special Needs</div>
+													<div class="info-value-nd"><?= $spc_needs; ?></div>
+												</div>
+												<div class="info-col-nd">
+													<div class="info-label-nd">Procedure</div>
+													<div class="info-value-nd"><?= $prosedur; ?></div>
+												</div>
 											</div>
-											<div class="info-col-nd">
-												<div class="info-label-nd">Special Needs</div>
-												<div class="info-value-nd"><?= $spc_needs; ?></div>
-											</div>
-											<div class="info-col-nd">
-												<div class="info-label-nd">Procedure</div>
-												<div class="info-value-nd"><?= $prosedur; ?></div>
-											</div>
-										</div>
 
-										<div class="info-row-nd" style="border-bottom: unset;">
-											<div class="info-col-nd">
-												<div class="info-label-nd">Study Date</div>
-												<div class="info-value-nd"><?= $study_datetime; ?></div>
-											</div>
-											<div class="info-col-nd">
-												<div class="info-label-nd">Departmen</div>
-												<div class="info-value-nd"><?= $name_dep; ?></div>
-											</div>
-											<div class="info-col-nd">
-												<div class="info-label-nd">Refferal Physician</div>
-												<div class="info-value-nd"><?= $named; ?></div>
+											<div class="info-row-nd" style="border-bottom: unset;">
+												<div class="info-col-nd">
+													<div class="info-label-nd">Study Date</div>
+													<div class="info-value-nd"><?= $study_datetime; ?></div>
+												</div>
+												<div class="info-col-nd">
+													<div class="info-label-nd">Departmen</div>
+													<div class="info-value-nd"><?= $name_dep; ?></div>
+												</div>
+												<div class="info-col-nd">
+													<div class="info-label-nd">Refferal Physician</div>
+													<div class="info-value-nd"><?= $named; ?></div>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-								<div class="col-lg-4 table-box mb-3">
-									<div class="container-fluid">
-										<div class="row">
-											<!-- <div class="col-lg-2">
+								<div class="col-lg-4 mb-3 padding-rl-nd">
+									<div class="table-box">
+										<div class="container-fluid">
+											<div class="row">
+												<!-- <div class="col-lg-2">
 													<div class="div-left">
 														<div class="data-patient">
 															<div class="content2-adm li-adm">
@@ -313,224 +316,223 @@ if ($_SESSION['level'] == "radiology") {
 														</div>
 													</div>
 												</div> -->
-											<div class="col-md-12"><label>Viewer :</label></div>
-											<div class="col-sm-6">
-												<a href="#" class="btn-viewer-nd btn-ohif-nd mb-2">
-													<img src="../image/new/horos.png" style="width: 20px">
-													<p class="text-viewer-nd">Horos</p>
-												</a>
-												<a href="#" class="btn-viewer-nd btn-radiant-nd mb-2">
-													<img src="../image/radiAnt.png" style="width: 20px">
-													<p class="text-viewer-nd">Radiant</p>
-												</a>
-												<a href="#" class="btn-viewer-nd btn-ino-nd mb-2">
-													<img src="../image/new/inobitec.png" style="width: 20px">
-													<p class="text-viewer-nd">Inobitech</p>
-												</a>
-											</div>
-											<div class="col-sm-6">
-												<a href="#" class="btn-viewer-nd btn-ohif-nd mb-2">
-													<img src="../image/new/ohif-nd.svg" style="width: 20px">
-													<p class="text-viewer-nd">Web</p>
-												</a>
-												<a href="#" class="btn-viewer-nd btn-html-nd mb-2">
-													<img src="../image/new/html-nd.svg" style="width: 20px">
-													<p class="text-viewer-nd">HTML</p>
-												</a>
-											</div>
-											<div class="col-md-12">
-												<label>Information Patient :</label>
-												<div class="radio-group">
-													<input type="radio" class="radio-input" id="normal" name="priority_doctor" value="normal" checked required>
-													<label class="radio-label-nd" for="normal">
-														<span class="radio-inner-circle"></span>
-														Normal
-													</label>
-
-													<input type="radio" class="radio-input" id="cito" name="priority_doctor" value="cito" required>
-													<label class="radio-label-nd" for="cito">
-														<span class="radio-inner-circle"></span>
-														Cito
-													</label>
+												<div class="col-md-12"><label>Viewer :</label></div>
+												<div class="col-sm-6">
+													<a href="#" class="btn-viewer-nd btn-ohif-nd mb-2">
+														<img src="../image/new/horos.png" style="width: 20px">
+														<p class="text-viewer-nd">Horos</p>
+													</a>
+													<a href="#" class="btn-viewer-nd btn-radiant-nd mb-2">
+														<img src="../image/radiAnt.png" style="width: 20px">
+														<p class="text-viewer-nd">Radiant</p>
+													</a>
+													<a href="#" class="btn-viewer-nd btn-ino-nd mb-2">
+														<img src="../image/new/inobitec.png" style="width: 20px">
+														<p class="text-viewer-nd">Inobitech</p>
+													</a>
+												</div>
+												<div class="col-sm-6">
+													<a href="#" class="btn-viewer-nd btn-ohif-nd mb-2">
+														<img src="../image/new/ohif-nd.svg" style="width: 20px">
+														<p class="text-viewer-nd">Web</p>
+													</a>
+													<a href="#" class="btn-viewer-nd btn-html-nd mb-2">
+														<img src="../image/new/html-nd.svg" style="width: 20px">
+														<p class="text-viewer-nd">HTML</p>
+													</a>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-								<div class="col-lg-4 table-box mb-3">
-									<!-- history pasien berdasarkan mrn pat_iid-->
-									<div class="data-order">
-										<b class="title-history">History Patient</b><br>
-										<?php
-										$i = 1;
-										while ($mrn = mysqli_fetch_assoc($query_mrn)) {
-											$study_iuid = $mrn['study_iuid'];
-											$detail_mrn = '<a href="#" class="hasil-all penawaran-a" data-id="' . $study_iuid . '">' . removeCharacter($pat_name) . '</a>';
-										?>
-											<table>
-												<tbody>
-													<p class="text-center"><?= $i; ?></p>
-													<tr>
-														<td><span class="table-left">Name</span></td>
-													</tr>
-													<tr>
-														<td><?= $detail_mrn . ' ' . styleStatus($mrn['status'], $study_iuid); ?></td>
-													</tr>
-													<tr>
-														<td><span class="table-left">MRN</span></td>
-													</tr>
-													<tr>
-														<td><?= $pat_id; ?></td>
-													</tr>
-													<tr>
-														<td><span class="table-left">Pemeriksaan</span></td>
-													</tr>
-													<tr>
-														<td><?= defaultValue($mrn['prosedur']); ?></td>
-													</tr>
-													<tr>
-														<td><span class="table-left">Waktu Pemeriksaan</span></td>
-													</tr>
-													<tr>
-														<td><strong class="text-dark text-center"><?= defaultValueDateTime($mrn['study_datetime']); ?></strong></td>
-													</tr>
-													<tr>
-														<td>
-															<?= PDFFIRST . $study_iuid . PDFLAST .
-																HOROSFIRST . $study_iuid . HOROSLAST .
-																RADIANTFIRST . $study_iuid . RADIANTLAST .
-																OHIFNEWFIRST . $study_iuid . OHIFNEWLAST;
-															?>
-															<a href="#" class="view-history-expertise" data-id="<?= $study_iuid;  ?>">
-																<i data-toggle="tooltip" title="View History Expertise" class="fa fa-file-archive-o fa-lg"></i>
-															</a>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-											<hr>
-										<?php $i++;
-										} ?>
+								<div class="col-lg-2 mb-3 padding-rl-nd">
+									<div class="table-box">
+										<div class="col-md-12">
+											<label>Information Patient :</label>
+											<div class="radio-group">
+												<input type="radio" class="radio-input" id="normal" name="priority_doctor" value="normal" checked required>
+												<label class="radio-label-nd" for="normal">
+													<span class="radio-inner-circle"></span>
+													Normal
+												</label>
+
+												<input type="radio" class="radio-input" id="cito" name="priority_doctor" value="cito" required>
+												<label class="radio-label-nd" for="cito">
+													<span class="radio-inner-circle"></span>
+													Cito
+												</label>
+											</div>
+										</div>
 									</div>
 								</div>
-								<div class="col-lg-3 table-box mb-3 padding-rl-less">
-									<form action="" method="post">
-										<div class="padding-rl-less">
-											<div class="">
-												<div class="work-patient6">
-													<input type="hidden" name="uid" value="<?= $uid; ?>">
-													<input type="hidden" name="username" value="<?= $username; ?>">
-													<?php
-													@$template_id = $_GET['template_id'];
-													$template = mysqli_fetch_assoc(mysqli_query(
-														$conn,
-														"SELECT $select_template 
+								<div class="col-lg-3 mb-3 padding-rl-nd">
+									<div class="table-box">
+										<form action="" method="post">
+											<div class="padding-rl-less">
+												<div class="container-fluid padding-rl-less mt-2">
+													<div class="row">
+														<div class="col-sm-4 pr-0">
+															<button class="btn btn-worklist-nd btn-apr-nd m-0" id="save_edit" name="save_approve"><i class="fas fa-check-square"></i> Approve</button>
+														</div>
+														<div class="col-sm-4 pr-0">
+															<!-- Button to Open the Modal -->
+															<button class="btn btn-worklist-nd btn-work-nd m-0" type="button" data-toggle="modal" data-target="#modal-insert-template"><i class="fas fa-file-export"></i> Save Template
+															</button>
+														</div>
+														<div class="col-sm-4">
+															<button class="btn btn-worklist-nd btn-work-nd m-0" id="save_draft" name="save_draft" onclick="return confirm('Are you sure save draft?');"><i class="fas fa-save"></i> Save Draft</button>
+														</div>
+													</div>
+												</div>
+												<div class="">
+													<div class="work-patient6">
+														<input type="hidden" name="uid" value="<?= $uid; ?>">
+														<input type="hidden" name="username" value="<?= $username; ?>">
+														<?php
+														@$template_id = $_GET['template_id'];
+														$template = mysqli_fetch_assoc(mysqli_query(
+															$conn,
+															"SELECT $select_template 
 												FROM $table_template
 												WHERE template_id = '$template_id'"
-													));
-													if ($template_id == "") {
-														$fill = $row['fill'];
-													} else {
-														$fill = $template['fill'];
-													}
-													?>
-													<br>
-													<div class="textarea-ckeditor" style="border: none;">
-														<textarea class="ckeditor" name="fill" id="ckeditor">
+														));
+														if ($template_id == "") {
+															$fill = $row['fill'];
+														} else {
+															$fill = $template['fill'];
+														}
+														?>
+														<br>
+														<div class="textarea-ckeditor" style="border: none;">
+															<textarea class="ckeditor" name="fill" id="ckeditor">
 														<?= $fill; ?>
 													</textarea>
-													</div>
-													<div class="kotak">
-														<!---POP UP -->
-														<div class="container">
-															<!-- Modal -->
-															<div class="modal fade" id="modal-insert-template" role="dialog">
-																<div class="modal-dialog">
-																	<div class="modal-content">
-																		<div class="modal-header">
-																			<h4 class="modal-title">Insert Title</h4><br />
-																			<button type="button" class="close" data-dismiss="modal">&times;</button>
-																		</div>
-																		<div class="modal-body-template" style="padding: 10px;">
-																			<input class="form-control" type="text" name="title" value="" placeholder="Insert Tittle">
-																		</div>
-																		<div class="modal-footer">
-																			<button type="button" class="btn btn-close" data-dismiss="modal">Close</button>
-																			<button style="border-radius: 5px; font-weight: bold; margin-bottom:4px;" class=" btn btn-success" id="save_template" name="save_template">Save</button>
+														</div>
+														<div class="kotak">
+															<!---POP UP -->
+															<div class="container">
+																<!-- Modal -->
+																<div class="modal fade" id="modal-insert-template" role="dialog">
+																	<div class="modal-dialog">
+																		<div class="modal-content">
+																			<div class="modal-header">
+																				<h4 class="modal-title">Insert Title</h4><br />
+																				<button type="button" class="close" data-dismiss="modal">&times;</button>
+																			</div>
+																			<div class="modal-body-template" style="padding: 10px;">
+																				<input class="form-control" type="text" name="title" value="" placeholder="Insert Tittle">
+																			</div>
+																			<div class="modal-footer">
+																				<button type="button" class="btn btn-close" data-dismiss="modal">Close</button>
+																				<button style="border-radius: 5px; font-weight: bold; margin-bottom:4px;" class=" btn btn-success" id="save_template" name="save_template">Save</button>
+																			</div>
 																		</div>
 																	</div>
 																</div>
 															</div>
 														</div>
-													</div>
-													<!-- END OF POP UP -->
-
-													<div class="container-fluid padding-rl-less mt-2">
-														<div class="row">
-															<div class="col-sm-4 pr-0">
-																<button class="btn btn-worklist-nd btn-apr-nd m-0" id="save_edit" name="save_approve"><i class="fas fa-check-square"></i> Approve</button>
-															</div>
-															<div class="col-sm-4 pr-0">
-																<!-- Button to Open the Modal -->
-																<button class="btn btn-worklist-nd btn-work-nd m-0" type="button" data-toggle="modal" data-target="#modal-insert-template"><i class="fas fa-file-export"></i> Save Template
-																</button>
-															</div>
-															<div class="col-sm-4">
-																<button class="btn btn-worklist-nd btn-work-nd m-0" id="save_draft" name="save_draft" onclick="return confirm('Are you sure save draft?');"><i class="fas fa-save"></i> Save Draft</button>
-															</div>
-														</div>
+														<!-- END OF POP UP -->
 													</div>
 												</div>
 											</div>
-										</div>
-									</form>
-									<div class="template-normal-nd">
-										<input type="text" class="form-control" placeholder="search by tittle.. " id="myInput" style="margin: 0 0 7px 0; width: 100%;">
-										<div class="template-save" id="container-template">
-											<!-- <div id="content"></div> -->
-											<style>
-												.mytemplate thead {
-													border: 1px solid #1e1f23;
-												}
+										</form>
+										<div class="template-normal-nd">
+											<input type="text" class="form-control" placeholder="search by tittle.. " id="myInput" style="margin: 0 0 7px 0; width: 100%;">
+											<div class="template-save" id="container-template">
+												<!-- <div id="content"></div> -->
 
-												.mytemplate thead td {
-													border: 1px solid #1e1f23;
-												}
-											</style>
-											<table border="1" id="mytemplate" class="type-choice mytemplate" style="width: 100%; background: #363636;">
-												<?php
-												$query_template = mysqli_query(
-													$conn,
-													"SELECT $select_template 
+												<table border="1" id="mytemplate" class="type-choice mytemplate" style="width: 100%; background: #363636;">
+													<?php
+													$query_template = mysqli_query(
+														$conn,
+														"SELECT $select_template 
 												FROM $table_template 
 												WHERE username = '$username'"
-												);
-												while ($template = mysqli_fetch_assoc($query_template)) { ?>
-													<thead class="myTable">
-														<td class="td1">
-															<a class="template_name" data-template-id="<?= $template['template_id']; ?>" value="<?= $template['fill']; ?>" href="<?= $file; ?>?uid=<?= $uid; ?>&template_id=<?= $template['template_id']; ?>"><?= $template['title']; ?></a>
-														</td>
-														<td style="text-align: center;">
-															<a href="#" class="view-template" data-id="<?= $template['template_id'];  ?>">
-																<i data-toggle="tooltip" title="View Template" class="fas fa-eye fa-lg"></i>
-															</a>
-														</td>
-														<td style="text-align: center;">
-															<a href="hapustemplate.php?uid=<?= $uid; ?>&template_id=<?= $template['template_id']; ?>&halaman=worklist" data-id="<?= $template['template_id'];  ?>" onclick="return confirm('Teruskan Menghapus Data?');">
-																<i data-toggle="tooltip" title="Delete Template" class="fas fa-trash fa-lg"></i>
-															</a>
-														</td>
-													<?php } ?>
-													</thead>
-											</table>
+													);
+													while ($template = mysqli_fetch_assoc($query_template)) { ?>
+														<thead class="myTable">
+															<td class="td1">
+																<a class="template_name" data-template-id="<?= $template['template_id']; ?>" value="<?= $template['fill']; ?>" href="<?= $file; ?>?uid=<?= $uid; ?>&template_id=<?= $template['template_id']; ?>"><?= $template['title']; ?></a>
+															</td>
+															<td style="text-align: center;">
+																<a href="#" class="view-template" data-id="<?= $template['template_id'];  ?>">
+																	<i data-toggle="tooltip" title="View Template" class="fas fa-eye fa-lg"></i>
+																</a>
+															</td>
+															<td style="text-align: center;">
+																<a href="hapustemplate.php?uid=<?= $uid; ?>&template_id=<?= $template['template_id']; ?>&halaman=worklist" data-id="<?= $template['template_id'];  ?>" onclick="return confirm('Teruskan Menghapus Data?');">
+																	<i data-toggle="tooltip" title="Delete Template" class="fas fa-trash fa-lg"></i>
+																</a>
+															</td>
+														<?php } ?>
+														</thead>
+												</table>
+											</div>
 										</div>
 									</div>
 								</div>
 
-								<div class="col-md-9 table-box">
-									<!-- <div class="collapse" id="ohif"> -->
-									<iframe src="<?= "$url$uid" ?>" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="600px"></iframe>
-									<!-- </div> -->
+								<div class="col-md-9 padding-rl-nd">
+									<div class="table-box">
+										<!-- <div class="collapse" id="ohif"> -->
+										<iframe src="<?= "$url$uid" ?>" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="670px"></iframe>
+										<!-- </div> -->
+										<br>
+										<!-- history pasien berdasarkan mrn pat_iid-->
+										<div class="data-order">
+											<b class="title-history">History Patient</b><br>
+											<?php
+											$i = 1;
+											while ($mrn = mysqli_fetch_assoc($query_mrn)) {
+												$study_iuid = $mrn['study_iuid'];
+												$detail_mrn = '<a href="#" class="hasil-all penawaran-a" data-id="' . $study_iuid . '">' . removeCharacter($pat_name) . '</a>';
+											?>
+												<table>
+													<tbody>
+														<p class="text-center"><?= $i; ?></p>
+														<tr>
+															<td><span class="table-left">Name</span></td>
+														</tr>
+														<tr>
+															<td><?= $detail_mrn . ' ' . styleStatus($mrn['status'], $study_iuid); ?></td>
+														</tr>
+														<tr>
+															<td><span class="table-left">MRN</span></td>
+														</tr>
+														<tr>
+															<td><?= $pat_id; ?></td>
+														</tr>
+														<tr>
+															<td><span class="table-left">Pemeriksaan</span></td>
+														</tr>
+														<tr>
+															<td><?= defaultValue($mrn['prosedur']); ?></td>
+														</tr>
+														<tr>
+															<td><span class="table-left">Waktu Pemeriksaan</span></td>
+														</tr>
+														<tr>
+															<td><strong class="text-dark text-center"><?= defaultValueDateTime($mrn['study_datetime']); ?></strong></td>
+														</tr>
+														<tr>
+															<td>
+																<?= PDFFIRST . $study_iuid . PDFLAST .
+																	HOROSFIRST . $study_iuid . HOROSLAST .
+																	RADIANTFIRST . $study_iuid . RADIANTLAST .
+																	OHIFNEWFIRST . $study_iuid . OHIFNEWLAST;
+																?>
+																<a href="#" class="view-history-expertise" data-id="<?= $study_iuid;  ?>">
+																	<i data-toggle="tooltip" title="View History Expertise" class="fa fa-file-archive-o fa-lg"></i>
+																</a>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+												<hr>
+											<?php $i++;
+											} ?>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
