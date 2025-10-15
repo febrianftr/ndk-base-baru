@@ -252,8 +252,8 @@ if ($_SESSION['level'] == "radiology") {
 													<div class="info-value-nd"><?= $pat_id; ?></div>
 												</div>
 												<div class="info-col-nd">
-													<div class="info-label-nd">Sex</div>
-													<div class="info-value-nd"><?= $pat_sex; ?></div>
+													<div class="info-label-nd">Departmen</div>
+													<div class="info-value-nd"><?= $name_dep; ?></div>
 												</div>
 											</div>
 
@@ -278,12 +278,12 @@ if ($_SESSION['level'] == "radiology") {
 													<div class="info-value-nd"><?= $study_datetime; ?></div>
 												</div>
 												<div class="info-col-nd">
-													<div class="info-label-nd">Departmen</div>
-													<div class="info-value-nd"><?= $name_dep; ?></div>
-												</div>
-												<div class="info-col-nd">
 													<div class="info-label-nd">Refferal Physician</div>
 													<div class="info-value-nd"><?= $named; ?></div>
+												</div>
+												<div class="info-col-nd">
+													<div class="info-label-nd">Sex</div>
+													<div class="info-value-nd"><?= $pat_sex; ?></div>
 												</div>
 											</div>
 										</div>
