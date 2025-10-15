@@ -881,7 +881,7 @@ canvas {
 
 .about-inti {
   padding: 0px 0px;
-  background-color: #f4f4f4;
+  /* background-color: #f4f4f4; */
 }
 
 /* //////////////////about//////////////////////////// */
@@ -3700,9 +3700,8 @@ table.dataTable > thead .sorting_desc_disabled::after {
 .cont-regist {
   padding: 1em 3em 2em 3em;
   margin: 0em auto;
-  background-color: #fff;
+  background-color: #26282c;
   border-radius: 4.2px;
-  box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
 }
 
 .regist-live tr td {

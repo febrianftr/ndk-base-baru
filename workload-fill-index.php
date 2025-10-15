@@ -12,8 +12,9 @@ $level = $_SESSION['level'];
 <div class="table-view">
 	<h3 class="text-center">Expertise History</h3>
 	<hr>
-	<?php require_once 'formsearch.php'; ?>
+
 	<div class="col-md-12 table-box" style="overflow-x:auto;">
+		<?php require_once 'formsearch.php'; ?>
 		<table class="table-dicom" id="purchase_order" cellpadding="8" cellspacing="0">
 			<thead class="thead1">
 				<tr>
