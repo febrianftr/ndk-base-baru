@@ -6,6 +6,9 @@ $hostname = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM xray_hostname_
 define('PDFFIRST', '<a class="dropdown-item dropdown-item1"  href="../radiology/pdf/expertise.php?uid=');
 define('PDFLAST', '"target="_blank"><i class="fas fa-file-alt"></i> PDF Expertise</a>');
 
+define('LINKPDFFIRST', '../radiology/pdf/expertise.php?uid=');
+define('LINKPDFLAST', '"target="_blank');
+
 // DICOM
 define('DICOMFIRST', '<a style="text-decoration:none;" href="jnlp://' . $_SERVER['SERVER_NAME'] . ':19898/weasis-pacs-connector/DCM_viewer.jnlp?studyUID=');
 define('DICOMLAST', '"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/eyered.svg" data-toggle="tooltip" title="Dicom Viewer" style="width: 100%;"></span></a>');
@@ -17,10 +20,13 @@ define('DICOMNEWLAST', '"><span class="btn rgba-stylish-slight btn-inti2" style=
 // HTML
 if ($_SERVER['SERVER_NAME'] == $hostname['ip_publik'] or $_SERVER['SERVER_NAME'] == '49.128.176.141') {
     define('HTMLFIRST', '<a class="dropdown-item dropdown-item1" href="http://' . $_SERVER['SERVER_NAME'] . ':20001/holan/viewer.html?studyUID=');
+    define('LINKHTMLFIRST', 'http://' . $_SERVER['SERVER_NAME'] . ':20001/holan/viewer.html?studyUID=');
 } else {
     define('HTMLFIRST', '<a class="dropdown-item dropdown-item1" href="http://' . $_SERVER['SERVER_NAME'] . ':19898/holan/viewer.html?studyUID=');
+    define('LINKHTMLFIRST', 'http://' . $_SERVER['SERVER_NAME'] . ':19898/holan/viewer.html?studyUID=');
 }
 define('HTMLLAST', '"target="_blank"><i class="fas fa-x-ray"></i>Viewer HTML</a>');
+define('LINKHTMLLAST', '"target="_blank');
 
 // Mobile
 define('MOBILEFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="http://' . $_SERVER['SERVER_NAME'] . ':19898/dwv-viewer/index.html?type=manifest&input=%2Fweasis-pacs-connector%2Fmanifest%3FseriesUID%3D');
@@ -119,7 +125,9 @@ define('SENDDICOMLAST', '"><i class="fas fa-share-alt-square"></i>Send Image to.
 
 // ino  bitec
 define('INOBITECFIRST', '<a href="#" class="ahref-edit" onclick="inobitec(');
+define('LINKINOBITECFIRST', 'inobitec(');
 define('INOBITECLAST', ')"id="inobitec" data-ip="' . $_SERVER['SERVER_NAME'] . '"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/inobitec.png" data-toggle="tooltip" title="Radiant Viewer" style="width: 72%;"></span></a>');
+define('LINKINOBITECLAST', ')"id="inobitec" data-ip="' . $_SERVER['SERVER_NAME'] . '');
 
 // HOROS
 
@@ -127,6 +135,10 @@ define('INOBITECLAST', ')"id="inobitec" data-ip="' . $_SERVER['SERVER_NAME'] . '
 $horos = '<a href="Horos://?methodName=displayStudy&StudyInstanceUID=';
 define('HOROSFIRST', "$horos");
 define('HOROSLAST', '" class="dropdown-item dropdown-item1" target="_blank"><i class="fas fa-x-ray"></i>Viewer Horos</a>');
+
+// LINK HOROS 
+define('LINKHOROSFIRST', 'Horos://?methodName=displayStudy&StudyInstanceUID=');
+define('LINKHOROSLAST', '"');
 
 
 // untuk icon OHIF LARGE DI WORKLIST
@@ -138,13 +150,17 @@ $ohif_small = '"target="_blank" class="dropdown-item dropdown-item1" href="#"><i
 if ($_SERVER['SERVER_NAME'] == $hostname['ip_publik'] or $_SERVER['SERVER_NAME'] == '49.128.176.141') {
     // jika menggunakan ip publik
     define('OHIFNEWFIRST', '<a style="text-decoration:none;" class="dropdown-item dropdown-item1" href="http://' . $_SERVER['SERVER_NAME'] . ':92/viewer?StudyInstanceUIDs=');
+    define('LINKOHIFNEWFIRST', 'http://' . $_SERVER['SERVER_NAME'] . ':92/viewer?StudyInstanceUIDs=');
     define('OHIFNEWLAST', "$ohif_small");
+    define('LINKOHIFNEWLAST', '"target="_blank');
     // jika menggunakan ohif baru icon(large)
     define('OHIFNEWWORKLISTFIRST', '<a href="http://' . $_SERVER['SERVER_NAME'] . ':92/viewer?StudyInstanceUIDs=');
     define('OHIFNEWWORKLISTLAST', "$ohif_large");
 } else {
     define('OHIFNEWFIRST', '<a style="text-decoration:none;" class="dropdown-item dropdown-item1" href="http://' . $_SERVER['SERVER_NAME'] . ':91/viewer?StudyInstanceUIDs=');
+    define('LINKOHIFNEWFIRST', 'http://' . $_SERVER['SERVER_NAME'] . ':91/viewer?StudyInstanceUIDs=');
     define('OHIFNEWLAST', "$ohif_small");
+    define('LINKOHIFNEWLAST', '"target="_blank');
     // jika menggunakan ohif baru icon(large)
     define('OHIFNEWWORKLISTFIRST', '<a href="http://' . $_SERVER['SERVER_NAME'] . ':91/viewer?StudyInstanceUIDs=');
     define('OHIFNEWWORKLISTLAST', "$ohif_large");
