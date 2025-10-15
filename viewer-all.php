@@ -99,12 +99,12 @@ define('PRIORITYNORMAL', '<i style="color: #2d2; font-size:0.4rem;" class="fas f
 define('PRIORITYCITO', '<i style="color: red; font-size:0.4rem;" class="fas fa-circle"></i>');
 
 // WORKLIST DOKTER BELUM DIBACA
-define('WORKLISTFIRST', '<a href="worklist.php?uid=');
-define('WORKLISTLAST', '"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/write2.svg" data-toggle="tooltip" title="Go to Expertise" style="width: 110%;"></span></a>');
+define('WORKLISTFIRST', '<a class="dropdown-item dropdown-item1" href="worklist.php?uid=');
+define('WORKLISTLAST', '"><i class="fas fa-user-edit"></i> Go to Expertise</a>');
 
 // DRAFT DOKTER 
-define('DRAFTFIRST', '<a href="worklist.php?uid=');
-define('DRAFTLAST', '"><span class="btn btn-warning btn-inti"><i class="fas fa-edit" data-toggle="tooltip" title="Go to expertise"></i></span></a>');
+define('DRAFTFIRST', '<a class="dropdown-item dropdown-item1" href="worklist.php?uid=');
+define('DRAFTLAST', '"><i style="color: yellow;" class="fas fa-user-edit"></i> Draft Expertise</a>');
 
 
 //radiant
