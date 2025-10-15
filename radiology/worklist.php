@@ -479,15 +479,100 @@ if ($_SESSION['level'] == "radiology") {
 										<!-- </div> -->
 										<br>
 										<!-- history pasien berdasarkan mrn pat_iid-->
+										<b class="title-history">History Patient</b><br>
 										<div class="data-order">
-											<b class="title-history">History Patient</b><br>
+											<style>
+												.card-custom {
+													background-color: #2a2a2a;
+													border: 1px solid #3a3a3a;
+													border-radius: 10px;
+													padding: 20px;
+													box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+													max-width: 340px;
+													margin: 5px;
+												}
+
+												.card-header-custom {
+													font-size: 16px;
+													font-weight: 600;
+													color: #ffffff;
+													border-bottom: 1px solid #3a3a3a;
+													padding-bottom: 10px;
+													margin-bottom: 15px;
+												}
+
+												.info-item {
+													margin-bottom: 8px;
+													font-size: 13px;
+												}
+
+												.info-label {
+													color: #aaa;
+													font-weight: 500;
+													margin-right: 8px;
+												}
+
+												.btn-group-custom .btn {
+													border-radius: 6px;
+													min-width: 140px;
+													font-size: 13px;
+													padding: 10px;
+												}
+
+												.btn-pdf {
+													background-color: #007bff;
+													color: #fff;
+
+												}
+
+												.btn-pdf:hover {
+													background-color: #0069d9;
+												}
+
+												.btn-image {
+													background-color: #28a745;
+													color: #fff;
+												}
+
+												.btn-image:hover {
+													background-color: #218838;
+												}
+											</style>
+
 											<?php
 											$i = 1;
 											while ($mrn = mysqli_fetch_assoc($query_mrn)) {
 												$study_iuid = $mrn['study_iuid'];
 												$detail_mrn = '<a href="#" class="hasil-all penawaran-a" data-id="' . $study_iuid . '">' . removeCharacter($pat_name) . '</a>';
 											?>
-												<table>
+												<div class="card-custom">
+													<div class="card-header-custom">
+														<?= defaultValue($mrn['prosedur']); ?>
+													</div>
+
+													<div class="info-item">
+														<span class="info-label">Date:</span> <?= defaultValueDateTime($mrn['study_datetime']); ?>
+													</div>
+													<div class="info-item">
+														<span class="info-label">Name:</span> <?= $detail_mrn . ' ' . styleStatus($mrn['status'], $study_iuid); ?>
+													</div>
+													<div class="info-item">
+														<span class="info-label">MRN:</span> <?= $pat_id; ?>
+													</div>
+
+													<hr style="border-color: #3a3a3a;">
+
+													<div class="btn-group-custom d-flex justify-content-between">
+														<button class="btn btn-pdf">
+															<i class="fas fa-file-pdf"></i> Expertise
+														</button>
+														<button class="btn btn-image">
+															<i class="fas fa-image"></i> Web Viewer
+														</button>
+													</div>
+												</div>
+
+												<!-- <table>
 													<tbody>
 														<p class="text-center"><?= $i; ?></p>
 														<tr>
@@ -512,7 +597,7 @@ if ($_SESSION['level'] == "radiology") {
 															<td><span class="table-left">Waktu Pemeriksaan</span></td>
 														</tr>
 														<tr>
-															<td><strong class="text-dark text-center"><?= defaultValueDateTime($mrn['study_datetime']); ?></strong></td>
+															<td><strong class="text-center"><?= defaultValueDateTime($mrn['study_datetime']); ?></strong></td>
 														</tr>
 														<tr>
 															<td>
@@ -527,8 +612,7 @@ if ($_SESSION['level'] == "radiology") {
 															</td>
 														</tr>
 													</tbody>
-												</table>
-												<hr>
+												</table> -->
 											<?php $i++;
 											} ?>
 										</div>

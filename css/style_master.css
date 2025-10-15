@@ -2696,6 +2696,8 @@ input[type="submit"] {
   /* border: 2px solid #1f69b7; */
   overflow: auto;
   /* height: 169px; */
+  display: flex;
+  overflow: auto;
 }
 
 .data-patient {
@@ -3466,12 +3468,14 @@ table.dataTable > thead .sorting_desc_disabled::after {
 }
 
 .title-history {
-  color: #68b399;
+  color: #eee;
   font-style: initial;
   width: 100%;
-  display: inline-block;
-  text-align: center;
-  margin-bottom: 3px;
+  /* display: inline-block;
+  text-align: center; */
+  margin-bottom: 4px;
+  font-size: 15px;
+  font-weight: bold;
 }
 
 .table-left {
