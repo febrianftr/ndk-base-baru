@@ -100,9 +100,14 @@ define('WORKLISTLAST', '"><span class="btn rgba-stylish-slight btn-inti2" style=
 define('DRAFTFIRST', '<a href="worklist.php?uid=');
 define('DRAFTLAST', '"><span class="btn btn-warning btn-inti"><i class="fas fa-edit" data-toggle="tooltip" title="Go to expertise"></i></span></a>');
 
+
 //radiant
 define('RADIANTFIRST', '<a class="dropdown-item dropdown-item1" href="radiant://?n=paet&v=dcmPACS&n=pstv&v=0020000D&v=%22');
 define('RADIANTLAST', '%22" "target="_blank"><i class="fas fa-x-ray"></i>Viewer Radiant</a>');
+
+//LINK RAADIANT
+define('LINKRADIANTFIRST', 'radiant://?n=paet&v=dcmPACS&n=pstv&v=0020000D&v=%22');
+define('LINKRADIANTLAST', '%22');
 
 //ipiview
 define('IPIVIEWFIRST', '<a style="text-decoration:none;" class="ahref-edit" href="http://192.168.10.144:8089/ipiview/ipiview/html/start.html?StudyInstanceUID=');

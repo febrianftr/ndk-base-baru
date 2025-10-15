@@ -322,7 +322,8 @@ if ($_SESSION['level'] == "radiology") {
 														<img src="../image/new/horos.png" style="width: 20px">
 														<p class="text-viewer-nd">Horos</p>
 													</a>
-													<a href="#" class="btn-viewer-nd btn-radiant-nd mb-2">
+													<a href="<?= LINKRADIANTFIRST . $study_iuid . LINKRADIANTLAST;
+																?>" target="_blank" class="btn-viewer-nd btn-radiant-nd mb-2">
 														<img src="../image/radiAnt.png" style="width: 20px">
 														<p class="text-viewer-nd">Radiant</p>
 													</a>
