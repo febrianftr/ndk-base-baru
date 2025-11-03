@@ -122,20 +122,41 @@ if (isset($_POST["save_template"])) {
 
 // untuk tombol save draft
 if (isset($_POST["save_draft"])) {
-	if (update_draft($_POST)) {
-		echo "
+	if (($dokraid_order == $dokradid && $selected_dokter_radiology['is_active'] == 1) or
+		($dokraid_order == $dokradid && $selected_dokter_radiology['is_active'] == 0) or
+		($dokraid_order == null && $selected_dokter_radiology['is_active'] == 0)
+	) {
+		if (update_draft($_POST)) {
+			echo "
 			<script>
 				alert('Report Telah Di Simpan ke Draft');
 				document.location.href= 'dicom.php';
 			</script>";
-	} else {
-		echo "
+		} else {
+			echo "
 			<script>
 				alert('Report Gagal Di Simpan ke Draft');
 				history.back();
 			</script>";
+		}
+	} else {
+		echo "<script type='text/javascript'>
+					setTimeout(function () { 
+					swal({
+							title: 'Gagal save draft! Bukan pasien dokter $dokrad_fullname',
+							text:  '',
+							icon: 'error',
+							timer: 1000,
+							showConfirmButton: true
+						});  
+					},10); 
+					window.setTimeout(function(){ 
+					document.location.href= 'dicom.php';
+					} ,1000); 
+				</script>";
 	}
 }
+
 // untuk tombol approved
 if (isset($_POST["save_approve"])) {
 	if ($_POST['fill'] == null) {
