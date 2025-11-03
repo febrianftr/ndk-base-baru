@@ -98,6 +98,10 @@ define('PRIORITYNORMAL', '<i style="color: #2d2; font-size:0.4rem;" class="fas f
 // PIORITY CITO
 define('PRIORITYCITO', '<i style="color: red; font-size:0.4rem;" class="fas fa-circle"></i>');
 
+// PUSH NOTIFICATION send WA
+define('PUSHNOTIFICATIONFIRST', '<a title="" href="view-push-notification.php?uid=');
+define('PUSHNOTIFICATIONLAST', '"><span class="btn rgba-stylish-slight darken-1 btn-inti2"><img src="../image/wa.svg" data-toggle="tooltip" title="Push Notification" style="width: 100%;"></span></a>');
+
 // WORKLIST DOKTER BELUM DIBACA
 define('WORKLISTFIRST', '<a class="dropdown-item dropdown-item1" href="worklist.php?uid=');
 define('WORKLISTLAST', '"><i class="fas fa-user-edit"></i> Go to Expertise</a>');

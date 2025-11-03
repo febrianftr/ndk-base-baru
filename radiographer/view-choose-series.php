@@ -12,8 +12,9 @@ require __DIR__ . '/vendor/autoload.php';
 
 session_start();
 $uid = $_GET['uid'];
-$ipLokal = "127.0.0.1";
+$ipLokal = $_SERVER['SERVER_ADDR'];
 $ipDirect = $_SERVER['SERVER_NAME'];
+$level = $_SESSION['level'];
 
 use GuzzleHttp\Client;
 
@@ -47,18 +48,18 @@ $hostname = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM xray_hostname_
 $row = mysqli_fetch_assoc(mysqli_query(
     $conn_pacsio,
     "SELECT 
-	pat_id,
-	pat_name,
-	pat_sex,
-	study_desc,
-	mods_in_study,
-	accession_no,
+    pat_id,
+    pat_name,
+    pat_sex,
+    study_desc,
+    mods_in_study,
+    accession_no,
     study.num_series,
-	study.pk as pk_study
-	FROM $table_patient
-	JOIN $table_study
-	ON patient.pk = study.patient_fk
-	WHERE study_iuid = '$uid'"
+    study.pk as pk_study
+    FROM $table_patient
+    JOIN $table_study
+    ON patient.pk = study.patient_fk
+    WHERE study_iuid = '$uid'"
 ));
 
 $pat_name = defaultValue($row['pat_name']);
@@ -71,14 +72,18 @@ $acc = defaultValue($row['accession_no']);
 $pk_study = defaultValue($row['pk_study']);
 $server_name = $_SERVER['SERVER_NAME'];
 
-if (isset($_POST['expertise_image_pdf']) || isset($_POST['image_pdf']) || isset($_POST['image_jpg']) || isset($_POST['image_dicom'])) {
+if (isset($_POST['expertise_image_pdf_save']) || isset($_POST['image_pdf_save']) || isset($_POST['expertise_image_pdf']) || isset($_POST['image_pdf']) || isset($_POST['image_jpg']) || isset($_POST['image_dicom'])) {
     $series_iuids = isset($_POST["series_iuid"]) ? $_POST["series_iuid"] : [];
     $uid = $_POST["uid"];
     $series_iuid = implode(",", $series_iuids);
     if ($series_iuid == "" || $series_iuid == NULL) {
         echo "<script>alert('Pilih salah satu series')</script>";
     } else {
-        if (isset($_POST['expertise_image_pdf'])) {
+        if (isset($_POST['expertise_image_pdf_save'])) {
+            header("location:../radiology/pdf/pdf-expertise-image-sharing-folder.php?uid=$uid&series_iuid=$series_iuid&level=$level");
+        } else if (isset($_POST['image_pdf_save'])) {
+            header("location:../radiology/pdf/pdf-image-sharing-folder.php?uid=$uid&series_iuid=$series_iuid&level=$level");
+        } else if (isset($_POST['expertise_image_pdf'])) {
             header("location:../radiology/pdf/pdf-expertise-image.php?uid=$uid&series_iuid=$series_iuid");
         } else if (isset($_POST['image_pdf'])) {
             header("location:../radiology/pdf/pdf-image.php?uid=$uid&series_iuid=$series_iuid");
@@ -168,6 +173,18 @@ if (isset($_POST['expertise_image_pdf']) || isset($_POST['image_pdf']) || isset(
             header("location:$link_dicom_jpg");
         }
     }
+}
+
+if (is_file("../radiology/pdf/expertise-image-share/$uid.pdf")) {
+    $expertiseImageShare = '<a href="../radiology/pdf/expertise-image-share/' . $uid . '.pdf" target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/file.svg" data-toggle="tooltip" title="saved file (expertise & image)" style="width: 100%;"></span></a>';
+} else {
+    $expertiseImageShare = '';
+}
+
+if (is_file("../radiology/pdf/image-share/$uid.pdf")) {
+    $imageShare = '<a href="../radiology/pdf/image-share/' . $uid . '.pdf" target="_blank"><span class="btn rgba-stylish-slight btn-inti2" style="box-shadow: none;"><img src="../image/file.svg" data-toggle="tooltip" title="saved file (image)" style="width: 100%;"></span></a>';
+} else {
+    $imageShare = '';
 }
 
 
@@ -269,6 +286,16 @@ if ($_SESSION['level'] == "radiographer") {
                                     <button class="btn btn-info btn-md" type="submit" id="image_dicom" name="image_dicom" style="border-radius: 5px; box-shadow:none">
                                         IMAGE (DICOM)
                                     </button>
+                                    <br /><br />
+                                    <p style="margin-bottom: 0;">Simpan file dilokal server (tersimpan hanya 1 hari), kemudian kirim notifikasi ke pasien</p>
+                                    <button class="btn btn-info btn-md" type="submit" id="expertise_image_pdf_save" name="expertise_image_pdf_save" style="border-radius: 5px; box-shadow:none">
+                                        IMAGE & EXPERTISE (PDF)
+                                    </button>
+                                    <?= $expertiseImageShare; ?>
+                                    <button class="btn btn-info btn-md" type="submit" id="image_pdf_save" name="image_pdf_save" style="border-radius: 5px; box-shadow:none">
+                                        IMAGE (PDF)
+                                    </button>
+                                    <?= $imageShare; ?>
                                 </form>
                                 <hr>
                             </div>
@@ -295,6 +322,8 @@ if ($_SESSION['level'] == "radiographer") {
     <script>
         let allSeries = $('#check-all').data("num-series");
         $("#expertise_image_pdf").prop("disabled", true);
+        $("#expertise_image_pdf_save").prop("disabled", true);
+        $("#image_pdf_save").prop("disabled", true);
         $("#image_pdf").prop("disabled", true);
         $("#image_jpg").prop("disabled", true);
         $("#image_dicom").prop("disabled", true);
@@ -304,12 +333,16 @@ if ($_SESSION['level'] == "radiographer") {
             // jika true total series 
             if (this.checked === true) {
                 $("#expertise_image_pdf").prop("disabled", false);
+                $("#expertise_image_pdf_save").prop("disabled", false);
+                $("#image_pdf_save").prop("disabled", false);
                 $("#image_pdf").prop("disabled", false);
                 $("#image_jpg").prop("disabled", false);
                 $("#image_dicom").prop("disabled", false)
             } else {
                 // jika false total 0
                 $("#expertise_image_pdf").prop("disabled", true);
+                $("#expertise_image_pdf_save").prop("disabled", true);
+                $("#image_pdf_save").prop("disabled", true);
                 $("#image_pdf").prop("disabled", true);
                 $("#image_jpg").prop("disabled", true);
                 $("#image_dicom").prop("disabled", true)
@@ -322,6 +355,8 @@ if ($_SESSION['level'] == "radiographer") {
             // ketika yang diplih 1 series atau semua series maka tombol aktif semua
             if (checkedSeries == 1 || checkedSeries >= allSeries) {
                 $("#expertise_image_pdf").prop("disabled", false);
+                $("#expertise_image_pdf_save").prop("disabled", false);
+                $("#image_pdf_save").prop("disabled", false);
                 $("#image_pdf").prop("disabled", false);
                 $("#image_jpg").prop("disabled", false);
                 $("#image_dicom").prop("disabled", false)
