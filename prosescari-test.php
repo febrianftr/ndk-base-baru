@@ -276,6 +276,7 @@ while ($row = mysqli_fetch_array($result)) {
         CHANGEEXPDATEFIRST . $study_iuid . CHANGEEXPDATELAST .
         LINKOHIFFIRST . EXTLINKOHIF . $addonlinkohif . $row['study_iuid'] . EXTLINKOHIF . LINKOHIFLAST .
         CHOOSESERIESFIRST . $study_iuid . CHOOSESERIESLAST .
+        PUSHNOTIFICATIONFIRST . $study_iuid . PUSHNOTIFICATIONLAST .
         // COPYUIDFIRST . EXTLINKOHIF . $row['study_iuid'] . EXTLINKOHIF . COPYUIDLAST
         SENDDICOMFIRST . $study_iuid . SENDDICOMLAST;
       // GETEXPERTISEFIRST . $name_envelope . ' ' . defaultValueDateTime($created_at_envelope) . $href_get_expertise . GETEXPERTISELAST . $icon_get_expertise . GETEXPERTISEVERYLAST;

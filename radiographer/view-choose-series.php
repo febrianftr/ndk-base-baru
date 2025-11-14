@@ -202,7 +202,7 @@ if ($_SESSION['level'] == "radiographer") {
         <?php include('head.php'); ?>
     </head>
 
-    <body style="background-color: #1f69b7;">
+    <body>
         <?php include('../sidebar-index.php'); ?>
         <div class="container-fluid" id="content2">
             <div class="row">

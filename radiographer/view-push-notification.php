@@ -16,7 +16,7 @@ if ($_SESSION['level'] == "radiographer") {
         <meta http-equiv="refresh" content="500" />
     </head>
 
-    <body style="background-color: #1f69b7;">
+    <body>
         <?php include('../sidebar-index.php'); ?>
         <div class="container-fluid" id="main">
             <div class="row">
